@@ -135,7 +135,7 @@ end
 ---If no track ID is specified for this tile, the function will return `nil`.
 ---@return TrackState?
 function Tile:getTrackState()
-	return self.trackID and _Obj.getTrackState(self.trackID, 99999999)
+	return self.trackID and _Obj.getTrackState(self.trackID)
 end
 
 ---Returns whether this tile's track is occupied, or `nil` if no track is specified for this tile.
@@ -156,14 +156,14 @@ end
 ---@param suffix "ab"|"cd"? Used for double switches, where the suffix determines which subswitch state should be returned.
 ---@return boolean?
 function Tile:getSwitchState(suffix)
-	local state = self.switchID and _Obj.getSwitchState(self.switchID .. (suffix or ""), 99999999)
+	local state = self.switchID and _Obj.getSwitchState(self.switchID .. (suffix or ""))
 	return state and state.state
 end
 
 ---Returns this tile's semaphore image, or `nil` if no semaphore is specified for this tile.
 ---@return string?
 function Tile:getSemaphoreState()
-	local state = self.semaphoreID and _Obj.getSemaphoreState(self.semaphoreID, 99999999)
+	local state = self.semaphoreID and _Obj.getSemaphoreState(self.semaphoreID)
 	return state and state.image
 end
 
@@ -177,17 +177,38 @@ function Tile:flipSwitchSuffix(suffix)
 	return suffix == "ab" and "cd" or "ab"
 end
 
+---Sends a command to the server to change the state of this tile's track.
+---@param state "free"|"busy"|"res" The new state for this track to be set.
+function Tile:sendTrackState(state)
+	if self.trackID then
+		_Com.sendCommand("t " .. self.trackID .. " " .. state)
+	end
+end
+
 ---Sends a command to the server to change this tile's switch state.
 ---@param state boolean `false` is the "-" position, `true` is the "+" position.
 ---@param suffix "ab"|"cd"? Used for double switches, where the suffix determines which subswitch state should be changed.
 function Tile:sendSwitchState(state, suffix)
-	_Com.sendCommand("j " .. self.switchID .. (suffix or "") .. " " .. (state and "+" or "-"))
+	if self.switchID then
+		_Com.sendCommand("j " .. self.switchID .. (suffix or "") .. " " .. (state and "+" or "-"))
+	end
+end
+
+---Sends a command to the server to set the speeds on this tile's semaphore.
+---@param this integer The current speed to be displayed.
+---@param next integer? The next speed to be displayed.
+function Tile:sendSemaphoreState(this, next)
+	if self.semaphoreID then
+		_Com.sendCommand("s " .. self.semaphoreID .. " " .. this .. (next and (" " .. next) or ""))
+	end
 end
 
 ---Sends a command to the server to dispatch an itinerary from this tile's semaphore.
 ---@param name string The itinerary name to be dispatched.
 function Tile:sendItinerary(name)
-	_Com.sendCommand("i " .. self.semaphoreID .. " " .. name)
+	if self.semaphoreID then
+		_Com.sendCommand("i " .. self.semaphoreID .. " " .. name)
+	end
 end
 
 ---Draws this Tile at the specified position.

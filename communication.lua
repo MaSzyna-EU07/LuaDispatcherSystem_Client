@@ -199,7 +199,7 @@ function com.readByte(b)
 		com_version[com_readData.byteCounter] = bv
 		-- end once 4 bytes were read
 		if com_readData.byteCounter == 4 then
-			_LogWrite("[COMMUNICATION] Server version: " .. tostring(com_version[1]) .. "." .. tostring(com_version[2]) .. "." .. tostring(com_version[3]) .. "/" .. tostring(com_version[4]), 1, 1)
+			_LogWrite(string.format("[COMMUNICATION] Server version: %s.%s.%s/%s", com_version[1], com_version[2], com_version[3], com_version[4]), 1, 1)
 			com_readData.step = "function"
 		end
 	elseif com_readData.step == "function" then
@@ -282,27 +282,27 @@ function com.readCall(name, params)
 	elseif name == "initTrack" then
 		local station = com_ids.stations[params.stationID]
 		com.initObject(com_ids.tracks, "track", params.trackN, params.stationID)
-		_Obj.initTrack(station.name .. "_" .. params.trackN)
+		_Obj.initTrack(params.trackN)
 	elseif name == "initSwitch" then
 		local station = com_ids.stations[params.stationID]
 		com.initObject(com_ids.switches, "switch", params.switchN, params.stationID)
-		_Obj.initSwitch(station.name .. "_" .. params.switchN)
+		_Obj.initSwitch(params.switchN)
 	elseif name == "initSemaphore" then
 		local station = com_ids.stations[params.stationID]
 		com.initObject(com_ids.semaphores, "semaphore", params.semaphoreN, params.stationID)
-		_Obj.initSemaphore(station.name .. "_" .. params.semaphoreN, params.type)
+		_Obj.initSemaphore(params.semaphoreN, params.type)
 	elseif name == "setTrack" then
 		local track = com_ids.tracks[params.trackID]
 		local station = com_ids.stations[track.sid]
-		_Obj.setTrackState(station.name .. "_" .. track.name, timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
+		_Obj.setTrackState(track.name, timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
 	elseif name == "setSwitch" then
 		local switch = com_ids.switches[params.switchID]
 		local station = com_ids.stations[switch.sid]
-		_Obj.setSwitchState(station.name .. "_" .. switch.name, timeTicks, _Utils.getBit(params.state, 1))
+		_Obj.setSwitchState(switch.name, timeTicks, _Utils.getBit(params.state, 1))
 	elseif name == "setSemaphore" then
 		local semaphore = com_ids.semaphores[params.semaphoreID]
 		local station = com_ids.stations[semaphore.sid]
-		_Obj.setSemaphoreState(station.name .. "_" .. semaphore.name, timeTicks, COM_IMAGES[params.state])
+		_Obj.setSemaphoreState(semaphore.name, timeTicks, COM_IMAGES[params.state])
 	end
 end
 

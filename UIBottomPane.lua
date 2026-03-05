@@ -45,22 +45,14 @@ end
 function UIBottomPane:sendToCurrentSemaphore(this, next)
 	local station = _Project:getCurrentStation()
 	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		local semID = tile:getSemaphoreID()
-		if semID then
-			_Com.sendCommand("s " .. semID .. " " .. this .. (next and (" " .. next) or ""))
-		end
+		assert(station:getTile(coords.x, coords.y)):sendSemaphoreState(this, next)
 	end
 end
 
 function UIBottomPane:sendToCurrentTrack(command)
 	local station = _Project:getCurrentStation()
 	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		local trackID = tile:getTrackID()
-		if trackID then
-			_Com.sendCommand("t " .. trackID .. " " .. command)
-		end
+		assert(station:getTile(coords.x, coords.y)):sendTrackState(command)
 	end
 end
 

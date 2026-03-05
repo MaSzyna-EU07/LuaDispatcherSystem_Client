@@ -1,5 +1,6 @@
 local class = require "class"
 local Tile = require("Tile")
+local Pathfinder = require("Pathfinder")
 
 ---@class Station : Class
 ---@overload fun(name, shortcut): Station
@@ -239,6 +240,7 @@ function Station:deleteRow(y)
 end
 
 ---Handles the left click action.
+---@private
 function Station:handleLeftClick()
 	-- Left click: action dependant on the current mode
 	if self.hoverX and self.hoverY then
@@ -275,6 +277,7 @@ function Station:handleLeftClick()
 end
 
 ---Handles the right click action.
+---@private
 function Station:handleRightClick()
 	-- Right click: remove a tile, flip selection or switch a switch
 	if self.hoverX and self.hoverY then
@@ -308,6 +311,7 @@ function Station:handleRightClick()
 end
 
 ---Handles the middle click action.
+---@private
 function Station:handleMiddleClick()
 	-- Middle click: tile pick
 	if self.hoverX and self.hoverY then
@@ -329,6 +333,14 @@ function Station:keypressed(key)
 		self:moveSingleSelection(0, -1)
 	elseif key == "down" then
 		self:moveSingleSelection(0, 1)
+	elseif key == "t" then
+		-- Pathfinder test
+		local pathfinder = Pathfinder()
+		--pathfinder:setStart(...)
+		--pathfinder:setEnd(...)
+		--pathfinder:calculatePath()
+		pathfinder:reserveTracks()
+		pathfinder.tiles[1]:sendSemaphoreState(1, 1)
 	end
 end
 
