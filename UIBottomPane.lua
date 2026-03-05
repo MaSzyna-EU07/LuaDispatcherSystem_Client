@@ -1,0 +1,120 @@
+local Class = require("class")
+
+---@class UIBottomPane : Class
+---@overload fun(ui): UIBottomPane
+local UIBottomPane = Class:derive("UIBottomPane")
+
+---Constructs the UI bottom pane.
+---@param ui UI UI which owns this pane.
+function UIBottomPane:new(ui)
+    self.ui = ui
+
+	self.ui:addPane(nil, "bottom", nil, 0, _WHEIGHT / self.ui.U - 1, (_WWIDTH - 320) / self.ui.U, 1)
+	self.ui:addLabel("bottom", nil, "Komunikacja:", 0, 0, 5, 1)
+	self.ui:addLabel("bottom", "bottom_comStatus", "Łączenie...", 5, 0, 7, 1)
+	self.ui:addButton("bottom", nil, "Reset", 12, 0, 3, 1, self, self.comReset)
+	self.ui:addButton("bottom", nil, "S1", 17, 0, 2, 1, self, self.sendS1)
+	self.ui:addButton("bottom", nil, "S2", 19, 0, 2, 1, self, self.sendS2)
+	self.ui:addButton("bottom", nil, "S4", 21, 0, 2, 1, self, self.sendS4)
+	self.ui:addButton("bottom", nil, "S5", 23, 0, 2, 1, self, self.sendS5)
+	self.ui:addButton("bottom", nil, "S10", 25, 0, 2, 1, self, self.sendS10)
+	self.ui:addButton("bottom", nil, "S12", 27, 0, 2, 1, self, self.sendS12)
+	self.ui:addButton("bottom", nil, "S13", 29, 0, 2, 1, self, self.sendS13)
+	self.ui:addButton("bottom", nil, "Sz", 31, 0, 2, 1, self, self.sendSz)
+	self.ui:addButton("bottom", nil, "Ms1", 33, 0, 2, 1, self, self.sendMs1)
+	self.ui:addButton("bottom", nil, "Ms2", 35, 0, 2, 1, self, self.sendMs2)
+	self.ui:addButton("bottom", nil, "Free", 38, 0, 2, 1, self, self.sendFree)
+	self.ui:addLabel("bottom", nil, "Komenda:", 41, 0, 4, 1)
+	self.ui:addInput("bottom", "bottom_command", 45, 0, 7, 1, self, nil, self.sendCommand)
+end
+
+---Sets the displayed communication status on the bottom UI pane.
+---@param text string The text to be displayed.
+---@param color [number, number, number] The text color.
+---@param tooltip string? What should appear when the status text is hovered.
+function UIBottomPane:setStatus(text, color, tooltip)
+	self.ui.elements.bottom_comStatus.label = text
+	self.ui.elements.bottom_comStatus.tip = tooltip or ""
+	self.ui.elements.bottom_comStatus.style.fg = color
+end
+
+function UIBottomPane:comReset()
+	_Com.init(_SIM_PATH, true)
+end
+
+function UIBottomPane:sendToCurrentSemaphore(this, next)
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = assert(station:getTile(coords.x, coords.y))
+		local semID = tile:getSemaphoreID()
+		if semID then
+			_Com.sendCommand("s " .. semID .. " " .. this .. (next and (" " .. next) or ""))
+		end
+	end
+end
+
+function UIBottomPane:sendToCurrentTrack(command)
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = assert(station:getTile(coords.x, coords.y))
+		local trackID = tile:getTrackID()
+		if trackID then
+			_Com.sendCommand("t " .. trackID .. " " .. command)
+		end
+	end
+end
+
+function UIBottomPane:sendS1()
+	self:sendToCurrentSemaphore(0)
+end
+
+function UIBottomPane:sendS2()
+	self:sendToCurrentSemaphore(1, 1)
+end
+
+function UIBottomPane:sendS4()
+	self:sendToCurrentSemaphore(1, 2)
+end
+
+function UIBottomPane:sendS5()
+	self:sendToCurrentSemaphore(1, 0)
+end
+
+function UIBottomPane:sendS10()
+	self:sendToCurrentSemaphore(2, 1)
+end
+
+function UIBottomPane:sendS12()
+	self:sendToCurrentSemaphore(2, 2)
+end
+
+function UIBottomPane:sendS13()
+	self:sendToCurrentSemaphore(2, 0)
+end
+
+function UIBottomPane:sendSz()
+	self:sendToCurrentSemaphore(7)
+end
+
+function UIBottomPane:sendMs1()
+	self:sendToCurrentSemaphore(5)
+end
+
+function UIBottomPane:sendMs2()
+	self:sendToCurrentSemaphore(6)
+end
+
+function UIBottomPane:sendS1a()
+	self:sendToCurrentSemaphore(8)
+end
+
+function UIBottomPane:sendFree()
+	self:sendToCurrentTrack("free")
+end
+
+function UIBottomPane:sendCommand(input)
+	_Com.sendCommand(input.value)
+	input.value = ""
+end
+
+return UIBottomPane

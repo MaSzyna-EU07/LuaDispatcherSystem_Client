@@ -1,0 +1,42 @@
+- Jak zaimplementować tory postojowe w metrze?
+        Stosujemy grupy torów. Łączymy tory postojowe w grupę i ustawiamy zasadę "koniec biegu -> zjedź na [naszą grupę torów postojowych]" dla wszystkich pociągów.
+        Podobnie ustawiamy zasadę "początek biegu -> podstaw najwcześniej odstawiony pociąg z [naszej grupy torów postojowych]" dla wszystkich pociągów.
+- Co z "LCS-ami" (wiele postojów na jednej stacji logicznej)?
+        Każdy pociąg ma listę punktów, które musi odwiedzić. Jeżeli jest to dopuszczalne, może wybrać inny najbliższy tor z tej samej grupy ("wyjątkowa zmiana peronu").
+        Jeżeli między oboma punktami jest dużo semaforów z przebiegami, stosowany będzie algorytm pathfindingu, gdzie węzłami są poszczególne tory, a ich połączeniami - przebiegi z semaforów do tych torów należących.
+        Liczenie kosztu dla każdego przebiegu opiera się na następującym wzorze:
+        max((prędkość rozkładowa pociągu / prędkość przebiegu), 1) * ilość kafelków na które składa się przebieg na planie stacyjnym
+        Potencjalny koszt trasy do pokonania w algorytmie A*:
+        (ilość kafelków do punktu docelowego w poziomie + ilość kafelków do punktu docelowego w pionie) * 2
+- Przemanewrowanie z jednego toru na drugi?
+        Szukamy punktu zejścia obu torów po odpowiedniej stronie (czasem musimy podjechać z określonej strony, jeżeli nie - szukamy obu i wybieramy to z niższym "kosztem", albo preferujemy dotyhczasowy kierunek).
+        Za nim szukamy najbliższego punktu gdzie dopuszczalna jest zmiana kierunku jazdy.
+- Podział na klient/serwer - co gdzie, żeby była jasność?
+        Klient jest nieobowiązkowy a więc zawiera elementy, które pozwalają komunikować się z serwerem, ale może go też nie być.
+        Tylko kod serwera jest uruchamiany w MaSzynie. Serwer powinien być również możliwy do uruchomienia oddzielnie w LOVE2D (patrz poprzedni serwer), wówczas będzie emulował funkcje jak wypis do logu.
+        Klient powinien zawierać funkcje jak: podgląd stacji, edytor projektów czy możliwość komunikacji z serwerem w celu odczytu aktualnego stanu/dokonania akcji (np. zwolnienie przebiegu, wygaszenie semafora, itp.).
+        Projekty mogą być podzielone na dwie części: część dla serwera zawierająca listę stacji wraz z ich komponentami, listę tras oraz dodatki służące do pewnych funkcji (generowanie przebiegów, nadawanie rozkładów, itp.)
+        oraz część dla klienta zawierająca np. graficzny układ stacji.
+        Ale tak szczerze to i tak najlepiej zostawić to jako jeden plik, bo wtedy edytujemy zawsze to samo, a i graficzny układ stacji może być zestawem danych przydatnym do generowania przebiegów.
+        Tak, dispatcher v3 nie będzie zawierał przebiegów przypisanych do semaforów jak v1 czy v2. Zamiast tego, użyty będzie algorytm na bazie A*, a liczyć się będzie tylko punkt początkowy i końcowy.
+        Aczkolwiek dla uproszczenia na początku przebiegi BĘDĄ przypisywane do semaforów, aby nie iść od razu w głębiny pathfindingu.
+- Bocznice: tor z rozjazdem w środku?
+        Jeżeli chodzi o manewry, będzie istnieć możliwość ustawienia punktu docelowego złożonego z kilku izolacji obok siebie. Maksymalna długość pociągu na takiej bocznicy będzie równa sumie długości tych odcinków,
+        więc nie powinno być problemu przy odpowiednim podziale izolacji.
+        Inne pociągi z kolei mogą w tym samym miejscu mieć preferowane zatrzymanie konkretnie za lub przed rozjazdem, jeżeli jest to odpowiednio krótki pociąg.
+        To w sumie oznacza, że te ikonki torów towarowych to w sumie tylko ozdoba i nie będzie to miało kompletnie żadnego znaczenia.
+- Szlaki: to jak robimy SBL?
+        Każdy szlak posiada określoną ilość torów, a każdy tor jest podzielony na odcinki.
+        Ponieważ szlaki nie posiadają rozjazdów między torami (w przeciwnym razie mówimy o stacji), odcinki te można ułożyć w odpowiedniej kolejności.
+        Następnie definiujemy listę semaforów (te będą domyślnie SBL) i odcinki, które osłania.
+        Te semafory będą domyślnie wskazywać na siebie (podane w kolejności), a ostatni semafor przypisany będzie miał semafor wjazdowy raczej nie automatycznie, ale wystarczy go wpisać.
+        Podział na więcej niż jeden odcinek między dwoma semaforami SBL przydaje się w przypadku implementacji przejazdów kolejowych (w tym SSP).
+...
+- A może jednak nie?
+		Mamy jeszcze bocznice szlakowe.
+		Proces wygląda tak: wyjazd na sygnał pociągowy na odpowiedni tor szlaku. Dwutorowe szlaki z SBL pod prąd -> zmiana kierunku blokady.
+		Cały tor szlakowy musi być oczywiście czysty.
+		Dojazd do rozjazdu naszej bocznicy szlakowej działać powinien na w4unvis, albo na ukryty semafor (domyślnie wygaszony!!!)
+		Wówczas rozjazd się przestawia, a pociąg zmienia tryb na manewrowy i podawany jest odpowiedni sygnał.
+		Po zwolnieniu izolacji z rozjazdem (szlak jest teraz czysty) -> rozjazd przestawiany jest spowrotem, ewentualny ukryty semafor jest wygaszany i szlak wraca do normalnego stanu.
+		Wyjazd z bocznicy przechodzi analogicznie: sprawdzamy czy szlak jest czysty, przestawiamy rozjazd, rezerwujemy go i skład wyjeżdża. Po zwolnieniu szlaku rozjazd przestawiany jest spowrotem i szlak wraca do normalnego stanu.
