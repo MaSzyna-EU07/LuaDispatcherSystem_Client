@@ -19,7 +19,7 @@
 		"scope": "lua",
 		"prefix": "!class",
 		"body": [
-			"local Class = require(\"com.class\")",
+			"local Class = require(\"class\")",
 			"",
 			"---@class ${TM_FILENAME_BASE} : Class",
 			"---@overload fun(${1:params}): ${TM_FILENAME_BASE}",
@@ -37,7 +37,7 @@
 		"scope": "lua",
 		"prefix": "!classn",
 		"body": [
-			"local Class = require(\"com.class\")",
+			"local Class = require(\"class\")",
 			"",
 			"---@class ${1:${TM_FILENAME_BASE}} : Class",
 			"---@overload fun(${2:params}): ${1:${TM_FILENAME_BASE}}",
@@ -55,7 +55,7 @@
 		"scope": "lua",
 		"prefix": "!classns",
 		"body": [
-			"local ${2:Class} = require(\"${3:com.class}\")",
+			"local ${2:Class} = require(\"${3:class}\")",
 			"",
 			"---@class ${1:${TM_FILENAME_BASE}} : ${2:Class}",
 			"---@overload fun(${4:params}): ${1:${TM_FILENAME_BASE}}",

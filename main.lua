@@ -1,6 +1,6 @@
 _Utils = require("utils")
 _Com = require("communication")
-_Obj = require("objects")
+local Objects = require("Objects")
 local UI = require("UI")
 local Tileset = require("Tileset")
 local Project = require("Project")
@@ -15,6 +15,7 @@ _SIM_PATH = "/run/media/jakub/LaCie/(Pliki)/Gry i programy/Symulatory/MaSzyna/SV
 -- tory nie powinny sie niektore podswietlac jezeli rozjazd nie jest ustawiony w ta strone
 -- definiowanie maksymalnych predkosci na rozjazdach
 
+_Obj = Objects()
 _UI = UI()
 _Tracks = Tileset("data/tracks.png", 15, 7, 14, 14)
 _Buttons = Tileset("data/buttons.png", 5, 2, 21, 14)
@@ -33,6 +34,24 @@ _DIRS = {
 	{x = -1, y = -1}
 }
 
+---@enum Speed
+Speed = {
+	STOP = 0,
+	VMAX = 1,
+	["40"] = 2,
+	["60"] = 3,
+	["100"] = 4,
+	MS1 = 5,
+	MS2 = 6,
+	SZ = 7
+}
+
+---@enum SemaphoreType
+SemaphoreType = {
+	SEM = 0,
+	TM = 1
+}
+
 ---Inverts the provided direction, 1 becomes 5, 2 becomes 6, 7 becomes 3, and so on.
 ---@param dir integer The direction to invert.
 ---@return integer
@@ -42,18 +61,18 @@ end
 
 ---Turns speed in km/h into speed to be displayed on the semaphore.
 ---@param speed number? Desired speed.
----@return integer
+---@return Speed
 function _SpeedToID(speed)
 	if not speed then
-		return 1
+		return Speed.VMAX
 	end
 	if speed >= 100 then
-		return 4
+		return Speed["100"]
 	elseif speed >= 60 then
-		return 3
+		return Speed["60"]
 	end
 	-- TODO: What about less than 40 km/h?
-	return 2
+	return Speed["40"]
 end
 
 local TRACK_COLORS = {

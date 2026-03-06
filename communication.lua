@@ -103,7 +103,7 @@ local com_ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}}
 local com_counters = {}
 
 function com.init(path, findRecent)
-	_Obj.clear()
+	_Obj:clear()
 	com.fail = false
 	if findRecent then
 		com.path = com.findMostRecentLogFile(path)
@@ -121,10 +121,6 @@ function com.init(path, findRecent)
 	end
 	com.readBytes()
 	_UI:onComInit()
-
-	--for i = 0, 10 do
-	--	print(i, _Obj.getTrack("StA", "It1", false, i).reserved)
-	--end
 end
 
 function com.update(dt)
@@ -277,34 +273,34 @@ function com.readCall(name, params)
 		com.nextTimeTick()
 	elseif name == "initStation" then
 		com.initObject(com_ids.stations, "station", params.stationN, nil)
-		_Obj.initStation(params.stationN)
+		_Obj:initStation(params.stationN)
 	elseif name == "initRoute" then
 		com.initObject(com_ids.stations, "station", params.routeN, nil)
-		_Obj.initStation(params.routeN)
+		_Obj:initStation(params.routeN)
 	elseif name == "initTrack" then
 		local station = com_ids.stations[params.stationID]
 		com.initObject(com_ids.tracks, "track", params.trackN, params.stationID)
-		_Obj.initTrack(params.trackN)
+		_Obj:initTrack(params.trackN)
 	elseif name == "initSwitch" then
 		local station = com_ids.stations[params.stationID]
 		com.initObject(com_ids.switches, "switch", params.switchN, params.stationID)
-		_Obj.initSwitch(params.switchN)
+		_Obj:initSwitch(params.switchN)
 	elseif name == "initSemaphore" then
 		local station = com_ids.stations[params.stationID]
 		com.initObject(com_ids.semaphores, "semaphore", params.semaphoreN, params.stationID)
-		_Obj.initSemaphore(params.semaphoreN, params.type)
+		_Obj:initSemaphore(params.semaphoreN, params.type)
 	elseif name == "setTrack" then
 		local track = com_ids.tracks[params.trackID]
 		local station = com_ids.stations[track.sid]
-		_Obj.setTrackState(track.name, timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
+		_Obj:setTrackState(track.name, timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
 	elseif name == "setSwitch" then
 		local switch = com_ids.switches[params.switchID]
 		local station = com_ids.stations[switch.sid]
-		_Obj.setSwitchState(switch.name, timeTicks, _Utils.getBit(params.state, 1))
+		_Obj:setSwitchState(switch.name, timeTicks, _Utils.getBit(params.state, 1))
 	elseif name == "setSemaphore" then
 		local semaphore = com_ids.semaphores[params.semaphoreID]
 		local station = com_ids.stations[semaphore.sid]
-		_Obj.setSemaphoreState(semaphore.name, timeTicks, params.speed, params.nextSpeed, COM_IMAGES[params.state])
+		_Obj:setSemaphoreState(semaphore.name, timeTicks, params.speed, params.nextSpeed, COM_IMAGES[params.state])
 	end
 end
 

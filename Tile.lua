@@ -174,7 +174,7 @@ end
 ---If no track ID is specified for this tile, the function will return `nil`.
 ---@return TrackState?
 function Tile:getTrackState()
-	return self.trackID and _Obj.getTrackState(self.trackID)
+	return self.trackID and _Obj:getTrackState(self.trackID)
 end
 
 ---Returns whether this tile's track is occupied, or `nil` if no track is specified for this tile.
@@ -195,14 +195,14 @@ end
 ---@param suffix "ab"|"cd"? Used for double switches, where the suffix determines which subswitch state should be returned.
 ---@return boolean?
 function Tile:getSwitchState(suffix)
-	local state = self.switchID and _Obj.getSwitchState(self.switchID .. (suffix or ""))
+	local state = self.switchID and _Obj:getSwitchState(self.switchID .. (suffix or ""))
 	return state and state.state
 end
 
 ---Returns this tile's semaphore state, or `nil` if no semaphore is specified for this tile.
 ---@return SemaphoreState?
 function Tile:getSemaphoreState()
-	return self.semaphoreID and _Obj.getSemaphoreState(self.semaphoreID)
+	return self.semaphoreID and _Obj:getSemaphoreState(self.semaphoreID)
 end
 
 ---Returns the current maximum speed on this Tile, or `nil` if there is no speed limit.
@@ -282,8 +282,8 @@ function Tile:sendSwitchState(state, suffix)
 end
 
 ---Sends a command to the server to set the speeds on this tile's semaphore.
----@param this integer The current speed to be displayed.
----@param next integer? The next speed to be displayed.
+---@param this Speed The current speed to be displayed.
+---@param next Speed? The next speed to be displayed.
 function Tile:sendSemaphoreState(this, next)
 	if self.semaphoreID then
 		_Com.sendCommand("s " .. self.semaphoreID .. " " .. this .. (next and (" " .. next) or ""))
