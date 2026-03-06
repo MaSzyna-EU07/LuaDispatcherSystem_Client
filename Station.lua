@@ -17,13 +17,14 @@ function Station:new(name, shortcut)
 		self.name = name
 		self.shortcut = shortcut
 		self.w, self.h = 25, 10
+		---@type Tile[][]
 		self.tiles = {}
 
 		-- Populate the station with empty tiles.
-		for i = 1, self.w do
-			self.tiles[i] = {}
-			for j = 1, self.h do
-				self.tiles[i][j] = Tile()
+		for x = 1, self.w do
+			self.tiles[x] = {}
+			for y = 1, self.h do
+				self.tiles[x][y] = Tile(self, x, y)
 			end
 		end
 	end
@@ -111,7 +112,21 @@ end
 ---@param y integer Y coordinate of the tile.
 ---@param tile Tile? The tile to be set at position. If not specified, an empty Tile will be placed instead.
 function Station:setTile(x, y, tile)
-	self.tiles[x][y] = tile or Tile(0)
+	self.tiles[x][y] = tile or Tile(self, x, y)
+	if tile then
+		tile.x, tile.y = x, y
+	end
+end
+
+---Recalculates tiles' internal X and Y coordinates to make sure they align with the station's layout.
+---@private
+function Station:recalculateTilePositions()
+	for x = 1, self.w do
+		for y = 1, self.h do
+			local tile = self.tiles[x][y]
+			tile.x, tile.y = x, y
+		end
+	end
 end
 
 ---Returns the currently hovered tile, if any.
@@ -195,8 +210,9 @@ function Station:addColumn(x)
 	x = x or self.w
 	table.insert(self.tiles, x, {})
 	for y = 1, self.h do
-		self.tiles[x][y] = Tile()
+		self.tiles[x][y] = Tile(self, x, y)
 	end
+	self:recalculateTilePositions()
 	self:generateCanvas()
 end
 
@@ -206,8 +222,9 @@ function Station:addRow(y)
 	self.h = self.h + 1
 	y = y or self.h
 	for x = 1, self.w do
-		table.insert(self.tiles[x], y, Tile())
+		table.insert(self.tiles[x], y, Tile(self, x, y))
 	end
+	self:recalculateTilePositions()
 	self:generateCanvas()
 end
 
@@ -221,6 +238,7 @@ function Station:deleteColumn(x)
 	x = x or self.w
 	table.remove(self.tiles, x)
 	self.w = self.w - 1
+	self:recalculateTilePositions()
 	self:generateCanvas()
 end
 
@@ -236,6 +254,7 @@ function Station:deleteRow(y)
 		table.remove(self.tiles[x], y)
 	end
 	self.h = self.h - 1
+	self:recalculateTilePositions()
 	self:generateCanvas()
 end
 
@@ -245,7 +264,7 @@ function Station:handleLeftClick()
 	-- Left click: action dependant on the current mode
 	if self.hoverX and self.hoverY then
 		if type(_Picker.selection) == "number" then
-			local tile = Tile(_Picker.selection, _Picker.electrified)
+			local tile = Tile(self, self.hoverX, self.hoverY, _Picker.selection, _Picker.electrified)
 			self:setTile(self.hoverX, self.hoverY, tile)
 		elseif _Picker.selection == "addColumn" then
 			-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
@@ -302,7 +321,9 @@ function Station:handleRightClick()
 			elseif self.activeX and self.activeY then
 				local itineraryEndID = tile:getItineraryEndID()
 				if itineraryEndID then
-					self:getTile(self.activeX, self.activeY):sendItinerary(itineraryEndID)
+					local pathfinder = Pathfinder(assert(self:getTile(self.activeX, self.activeY)), tile)
+					pathfinder:calculatePath()
+					pathfinder:sendPath()
 				end
 				self.activeX, self.activeY = nil, nil
 			end
@@ -333,15 +354,6 @@ function Station:keypressed(key)
 		self:moveSingleSelection(0, -1)
 	elseif key == "down" then
 		self:moveSingleSelection(0, 1)
-	elseif key == "t" then
-		-- Pathfinder test
-		local pathfinder = Pathfinder()
-		--pathfinder:setStart(...)
-		--pathfinder:setEnd(...)
-		pathfinder:calculatePath()
-		pathfinder:switchSwitches()
-		pathfinder:reserveTracks()
-		pathfinder:setSemaphore()
 	end
 end
 
@@ -390,7 +402,7 @@ function Station:deserialize(t)
 	for x = 1, self.w do
 		self.tiles[x] = {}
 		for y = 1, self.h do
-			self.tiles[x][y] = Tile(t.tiles[tostring(x) .. "," .. tostring(y)])
+			self.tiles[x][y] = Tile(self, x, y, t.tiles[tostring(x) .. "," .. tostring(y)])
 		end
 	end
 end
@@ -418,8 +430,7 @@ end
 function Station:drawBackground()
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
-			local x, y = self:coordsToCanvasPos(i, j)
-			tile:drawBackground(x, y)
+			tile:drawBackground()
 		end
 	end
 end
@@ -429,8 +440,7 @@ end
 function Station:drawTracks()
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
-			local x, y = self:coordsToCanvasPos(i, j)
-			tile:draw(x, y)
+			tile:draw()
 		end
 	end
 end
@@ -443,7 +453,7 @@ function Station:drawHover()
 	end
 	if type(_Picker.selection) == "number" then
 		local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
-		self:getHoveredTile():drawHover(x, y)
+		self:getHoveredTile():drawHover()
 		-- Draw tile ghost.
 		_DrawTile(x, y, _Picker.selection, _Picker.electrified, false, false, 0, "s1", 1, 0.5)
 	elseif _Picker.selection == "addColumn" then
@@ -485,8 +495,7 @@ end
 ---@private
 function Station:drawSelection()
 	for i, coords in ipairs(self.selectedTiles) do
-		local x, y = self:coordsToCanvasPos(coords.x, coords.y)
-		self:getTile(coords.x, coords.y):drawSelection(x, y)
+		self:getTile(coords.x, coords.y):drawSelection()
 	end
 end
 
@@ -496,8 +505,7 @@ function Station:drawActive()
 	if not self.activeX or not self.activeY then
 		return
 	end
-	local x, y = self:coordsToCanvasPos(self.activeX, self.activeY)
-	self:getTile(self.activeX, self.activeY):drawActive(x, y)
+	self:getTile(self.activeX, self.activeY):drawActive()
 end
 
 ---Draws the clickable tile frames.
@@ -509,8 +517,7 @@ function Station:drawClickable()
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
 			if tile:getItineraryEndID() then
-				local x, y = self:coordsToCanvasPos(i, j)
-				tile:drawClickable(x, y)
+				tile:drawClickable()
 			end
 		end
 	end

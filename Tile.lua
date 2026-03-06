@@ -1,10 +1,18 @@
 local class = require "class"
 
 ---@class Tile : Class
----@overload fun(id, electrified): Tile
+---@overload fun(station: Station, x: integer, y: integer, id: integer|table?, electrified: boolean?): Tile
 local Tile = class:derive("Tile")
 
-function Tile:new(id, electrified)
+---Creates a new Tile.
+---@param station Station The station this Tile is a part of.
+---@param x integer The X coordinate of this tile.
+---@param y integer The Y coordinate of this tile.
+---@param id integer|table? ID of this tile (0 by default) or data to be deserialized.
+---@param electrified boolean? Whether this tile is electrified.
+function Tile:new(station, x, y, id, electrified)
+	self.station = station
+	self.x, self.y = x, y
 	id = id or 0
 
 	self.size = 14
@@ -170,6 +178,56 @@ function Tile:setMaxSpeedMinus(speed)
 	self.maxSpeedMinus = speed
 end
 
+--######################################--
+---------------- L O G I C ---------------
+--######################################--
+
+---Returns `true` if this Tile has a track in that direction.
+---@param dir integer The direction for the track to be looked for.
+---@return boolean
+function Tile:hasTrackInDirection(dir)
+	local track = _TileDB.tiles[self.id]
+	return track and track.tracks and _Utils.getBit(track.tracks, dir) or false
+end
+
+---Returns the neighbor tile in the provided direction, or `nil` if we're out of bounds.
+---@param dir integer The direction for which the tile should be returned.
+function Tile:getNeighbor(dir)
+	return self.station:getTile(self.x + _DIRS[dir].x, self.y + _DIRS[dir].y)
+end
+
+---Returns a list of directions for pathfinders to be able to go towards, starting from this tile.
+---@return integer[]
+function Tile:getTrackDirections()
+	local results = {}
+	for i = 1, 8 do
+		if self:hasTrackInDirection(i) then
+			table.insert(results, i)
+		end
+	end
+	return results
+end
+
+---Returns a list of 0 to 3 directions for pathfinders to be able to go towards, when going from the specified direction.
+---@param sourceDir integer The direction from which we are going from.
+---@return integer[]
+function Tile:getPossibleTrackDirections(sourceDir)
+	local straight = _InvertDir(sourceDir)
+	local left = (straight - 2) % 8 + 1
+	local right = straight % 8 + 1
+	local results = {}
+	if self:hasTrackInDirection(straight) then
+		table.insert(results, straight)
+	end
+	if self:hasTrackInDirection(left) then
+		table.insert(results, left)
+	end
+	if self:hasTrackInDirection(right) then
+		table.insert(results, right)
+	end
+	return results
+end
+
 ---Returns the current track state in the simulation.
 ---If no track ID is specified for this tile, the function will return `nil`.
 ---@return TrackState?
@@ -231,9 +289,17 @@ function Tile:getSpeedForSwitchStates(states)
 	return speed
 end
 
+---Returns the maximum speed on this Tile when going from dir1 to dir2, or `nil` if no speed limit exists for that relation.
+---@param dir1 integer? First direction.
+---@param dir2 integer? Second direction.
+---@return number?
+function Tile:getSpeedForDirections(dir1, dir2)
+	return self:getSpeedForSwitchStates(self:getSwitchStatesForDirections(dir1, dir2))
+end
+
 ---Given two directions, if this Tile is a switch tile, returns a table mapping switch suffixes to their states for this Tile.
----@param dir1 integer First direction.
----@param dir2 integer Second direction.
+---@param dir1 integer? First direction.
+---@param dir2 integer? Second direction.
 ---@return table<""|"ab"|"cd", boolean?>
 function Tile:getSwitchStatesForDirections(dir1, dir2)
 	local switchStates = {}
@@ -241,28 +307,36 @@ function Tile:getSwitchStatesForDirections(dir1, dir2)
 	if not track or not track.dirs then
 		return switchStates
 	end
-	local dirData1 = track.dirs[dir1]
-	if dirData1 then
-		local state = (dirData1:sub(#dirData1) == "+") ~= self.switchFlip
-		switchStates[dirData1:sub(1, dirData1:len() - 1)] = state
+	if dir1 then
+		local dirData1 = track.dirs[dir1]
+		if dirData1 then
+			local state = (dirData1:sub(#dirData1) == "+") ~= self.switchFlip
+			switchStates[self:flipSwitchSuffix(dirData1:sub(1, dirData1:len() - 1))] = state
+		end
 	end
-	local dirData2 = track.dirs[dir2]
-	if dirData2 then
-		local state = (dirData2:sub(#dirData2) == "+") ~= self.switchFlip
-		switchStates[dirData2:sub(1, dirData2:len() - 1)] = state
+	if dir2 then
+		local dirData2 = track.dirs[dir2]
+		if dirData2 then
+			local state = (dirData2:sub(#dirData2) == "+") ~= self.switchFlip
+			switchStates[self:flipSwitchSuffix(dirData2:sub(1, dirData2:len() - 1))] = state
+		end
 	end
 	return switchStates
 end
 
 ---Returns a flipped double switch suffix if the `switchFlipABCD` property is set on this tile.
----@param suffix "ab"|"cd"? The switch suffix to be flipped.
+---@param suffix ""|"ab"|"cd"? The switch suffix to be flipped.
 ---@return string?
 function Tile:flipSwitchSuffix(suffix)
-	if not suffix or not self.switchFlipABCD then
+	if not suffix or suffix == "" or not self.switchFlipABCD then
 		return suffix
 	end
 	return suffix == "ab" and "cd" or "ab"
 end
+
+--################################################--
+---------------- S I M U L A T I O N ---------------
+--################################################--
 
 ---Sends a command to the server to change the state of this tile's track.
 ---@param state "free"|"busy"|"res" The new state for this track to be set.
@@ -298,14 +372,23 @@ function Tile:sendItinerary(name)
 	end
 end
 
+--##########################################--
+---------------- D R A W I N G ---------------
+--##########################################--
+
+---Returns the position of the top left corner of this tile on the station canvas.
+---@return number, number
+function Tile:getPos()
+	return self.station:coordsToCanvasPos(self.x, self.y)
+end
+
 ---Draws this Tile at the specified position.
----@param x number The X coordinate of the top left corner of this tile's position.
----@param y number The Y coordinate of the top left corner of this tile's position.
-function Tile:draw(x, y)
+function Tile:draw()
 	local track = _TileDB.tiles[self.id]
 	if not track then
 		return
 	end
+	local x, y = self:getPos()
 	-- Calculate switch dim bits
 	local switchDimBits = 0
 	if track.tracks then
@@ -328,9 +411,8 @@ function Tile:draw(x, y)
 end
 
 ---Draws this Tile's background at the specified position.
----@param x number The X coordinate of the top left corner of this tile's position.
----@param y number The Y coordinate of the top left corner of this tile's position.
-function Tile:drawBackground(x, y)
+function Tile:drawBackground()
+	local x, y = self:getPos()
 	local green = _Picker.selection == "properties" and self.trackID
 	if green then
 		love.graphics.setColor(0.2, 0.8, 0.2)
@@ -356,10 +438,9 @@ local FRAME_COLORS = {
 
 ---Draws this Tile's frame at the specified position.
 ---@private
----@param x number The X coordinate of the top left corner of this tile's position.
----@param y number The Y coordinate of the top left corner of this tile's position.
 ---@param color [number, number, number] The frame color.
-function Tile:drawFrame(x, y, color)
+function Tile:drawFrame(color)
+	local x, y = self:getPos()
 	love.graphics.setColor(color[1], color[2], color[3], 0.2)
 	love.graphics.rectangle("fill", x, y, self.size, self.size)
 	love.graphics.setColor(color)
@@ -368,32 +449,28 @@ function Tile:drawFrame(x, y, color)
 end
 
 ---Draws this Tile's hover frame at the specified position.
----@param x number The X coordinate of the top left corner of this tile's position.
----@param y number The Y coordinate of the top left corner of this tile's position.
-function Tile:drawHover(x, y)
-	self:drawFrame(x, y, FRAME_COLORS.hover)
+function Tile:drawHover()
+	self:drawFrame(FRAME_COLORS.hover)
 end
 
 ---Draws this Tile's selection frame at the specified position.
----@param x number The X coordinate of the top left corner of this tile's position.
----@param y number The Y coordinate of the top left corner of this tile's position.
-function Tile:drawSelection(x, y)
-	self:drawFrame(x, y, FRAME_COLORS.selection)
+function Tile:drawSelection()
+	self:drawFrame(FRAME_COLORS.selection)
 end
 
 ---Draws this Tile's active frame at the specified position.
----@param x number The X coordinate of the top left corner of this tile's position.
----@param y number The Y coordinate of the top left corner of this tile's position.
-function Tile:drawActive(x, y)
-	self:drawFrame(x, y, FRAME_COLORS.active)
+function Tile:drawActive()
+	self:drawFrame(FRAME_COLORS.active)
 end
 
 ---Draws this Tile's clickable frame at the specified position.
----@param x number The X coordinate of the top left corner of this tile's position.
----@param y number The Y coordinate of the top left corner of this tile's position.
-function Tile:drawClickable(x, y)
-	self:drawFrame(x, y, FRAME_COLORS.clickable)
+function Tile:drawClickable()
+	self:drawFrame(FRAME_COLORS.clickable)
 end
+
+--####################################--
+---------------- D A T A ---------------
+--####################################--
 
 ---Serializes this Tile's data to be saved. If this Tile is empty, `nil` is returned to save space.
 ---@return table?

@@ -2379,13 +2379,11 @@
 				},
 				"50,12": {
 					"electrified": true,
-					"id": 1,
-					"trackID": "Eb_ItW"
+					"id": 1
 				},
 				"50,13": {
 					"electrified": true,
-					"id": 1,
-					"trackID": "Eb_ItSzn1"
+					"id": 1
 				},
 				"50,14": {
 					"electrified": true,
@@ -2398,11 +2396,13 @@
 				"51,12": {
 					"electrified": true,
 					"id": 69,
+					"itineraryEndID": "Bcz_N",
 					"trackID": "Eb_ItW"
 				},
 				"51,13": {
 					"electrified": true,
 					"id": 70,
+					"itineraryEndID": "Bcz",
 					"trackID": "Eb_ItSzn1"
 				},
 				"51,14": {
@@ -3121,6 +3121,367 @@
 				}
 			},
 			"w": 35
+		},
+		{
+			"h": 7,
+			"name": "Bogaczewo",
+			"shortcut": "Bcz",
+			"tiles": {
+				"10,2": {
+					"electrified": true,
+					"id": 1
+				},
+				"10,3": {
+					"electrified": true,
+					"id": 1
+				},
+				"10,4": {
+					"electrified": true,
+					"id": 1
+				},
+				"10,5": {
+					"electrified": true,
+					"id": 1
+				},
+				"10,6": {
+					"electrified": true,
+					"id": 62,
+					"semaphoreID": "Bcz_C"
+				},
+				"11,2": {
+					"electrified": true,
+					"id": 1
+				},
+				"11,3": {
+					"electrified": true,
+					"id": 1
+				},
+				"11,4": {
+					"electrified": true,
+					"id": 4
+				},
+				"11,5": {
+					"electrified": true,
+					"id": 4
+				},
+				"11,6": {
+					"electrified": true,
+					"id": 4
+				},
+				"12,2": {
+					"electrified": true,
+					"id": 57
+				},
+				"12,3": {
+					"electrified": true,
+					"id": 1
+				},
+				"12,4": {
+					"electrified": true,
+					"id": 4
+				},
+				"12,5": {
+					"electrified": true,
+					"id": 4
+				},
+				"12,6": {
+					"electrified": true,
+					"id": 4
+				},
+				"13,2": {
+					"electrified": true,
+					"id": 11
+				},
+				"13,3": {
+					"electrified": true,
+					"id": 1
+				},
+				"13,4": {
+					"electrified": true,
+					"id": 4
+				},
+				"13,5": {
+					"electrified": true,
+					"id": 4
+				},
+				"13,6": {
+					"electrified": true,
+					"id": 4
+				},
+				"14,3": {
+					"electrified": true,
+					"id": 18,
+					"switchID": "Bcz_20"
+				},
+				"14,4": {
+					"electrified": true,
+					"id": 1
+				},
+				"14,5": {
+					"electrified": true,
+					"id": 1
+				},
+				"14,6": {
+					"electrified": true,
+					"id": 1
+				},
+				"15,3": {
+					"electrified": true,
+					"id": 1
+				},
+				"15,4": {
+					"electrified": true,
+					"id": 1
+				},
+				"15,5": {
+					"electrified": true,
+					"id": 1
+				},
+				"15,6": {
+					"electrified": true,
+					"id": 1
+				},
+				"16,3": {
+					"electrified": true,
+					"id": 61,
+					"semaphoreID": "Bcz_K"
+				},
+				"16,4": {
+					"electrified": true,
+					"id": 61,
+					"semaphoreID": "Bcz_L"
+				},
+				"16,5": {
+					"electrified": true,
+					"id": 1
+				},
+				"16,6": {
+					"electrified": true,
+					"id": 1
+				},
+				"17,3": {
+					"electrified": true,
+					"id": 11
+				},
+				"17,4": {
+					"electrified": true,
+					"id": 1
+				},
+				"17,5": {
+					"electrified": true,
+					"id": 61,
+					"semaphoreID": "Bcz_M"
+				},
+				"17,6": {
+					"electrified": true,
+					"id": 1
+				},
+				"18,4": {
+					"electrified": true,
+					"id": 26,
+					"switchID": "Bcz_23"
+				},
+				"18,5": {
+					"electrified": true,
+					"id": 1
+				},
+				"18,6": {
+					"electrified": true,
+					"id": 61,
+					"semaphoreID": "Bcz_N"
+				},
+				"19,4": {
+					"electrified": true,
+					"id": 1
+				},
+				"19,5": {
+					"electrified": true,
+					"id": 18,
+					"switchID": "Bcz_24"
+				},
+				"19,6": {
+					"electrified": true,
+					"id": 1
+				},
+				"2,4": {
+					"electrified": true,
+					"id": 69
+				},
+				"2,5": {
+					"electrified": true,
+					"id": 70
+				},
+				"20,4": {
+					"electrified": true,
+					"id": 53
+				},
+				"20,5": {
+					"electrified": true,
+					"id": 19,
+					"switchID": "Bcz_27"
+				},
+				"20,6": {
+					"electrified": true,
+					"id": 1
+				},
+				"21,5": {
+					"electrified": true,
+					"id": 1
+				},
+				"21,6": {
+					"electrified": true,
+					"id": 18,
+					"switchID": "Bcz_28"
+				},
+				"22,5": {
+					"electrified": true,
+					"id": 1
+				},
+				"22,6": {
+					"electrified": true,
+					"id": 1
+				},
+				"23,5": {
+					"electrified": true,
+					"id": 62,
+					"semaphoreID": "Bcz_P"
+				},
+				"23,6": {
+					"electrified": true,
+					"id": 62,
+					"semaphoreID": "Bcz_O"
+				},
+				"24,5": {
+					"electrified": true,
+					"id": 1
+				},
+				"24,6": {
+					"electrified": true,
+					"id": 1
+				},
+				"25,5": {
+					"electrified": true,
+					"id": 71
+				},
+				"25,6": {
+					"electrified": true,
+					"id": 71
+				},
+				"3,4": {
+					"electrified": true,
+					"id": 1
+				},
+				"3,5": {
+					"electrified": true,
+					"id": 1
+				},
+				"4,4": {
+					"electrified": true,
+					"id": 61,
+					"semaphoreID": "Bcz_Szn2"
+				},
+				"4,5": {
+					"electrified": true,
+					"id": 61,
+					"semaphoreID": "Bcz_B"
+				},
+				"5,4": {
+					"electrified": true,
+					"id": 1
+				},
+				"5,5": {
+					"electrified": true,
+					"id": 1
+				},
+				"6,2": {
+					"electrified": true,
+					"id": 54
+				},
+				"6,3": {
+					"electrified": true,
+					"id": 54
+				},
+				"6,4": {
+					"electrified": true,
+					"id": 19,
+					"switchID": "Bcz_2"
+				},
+				"6,5": {
+					"electrified": true,
+					"id": 20,
+					"switchID": "Bcz_1"
+				},
+				"7,2": {
+					"electrified": true,
+					"id": 1
+				},
+				"7,3": {
+					"electrified": true,
+					"id": 1
+				},
+				"7,4": {
+					"electrified": true,
+					"id": 25,
+					"switchID": "Bcz_4"
+				},
+				"7,5": {
+					"electrified": true,
+					"id": 18,
+					"switchID": "Bcz_3"
+				},
+				"7,6": {
+					"electrified": true,
+					"id": 54
+				},
+				"8,2": {
+					"electrified": true,
+					"id": 57
+				},
+				"8,3": {
+					"electrified": true,
+					"id": 25,
+					"switchID": "Bcz_5"
+				},
+				"8,4": {
+					"electrified": true,
+					"id": 1
+				},
+				"8,5": {
+					"electrified": true,
+					"id": 19,
+					"switchID": "Bcz_9"
+				},
+				"8,6": {
+					"electrified": true,
+					"id": 1
+				},
+				"9,2": {
+					"electrified": true,
+					"id": 17,
+					"switchID": "Bcz_8"
+				},
+				"9,3": {
+					"electrified": true,
+					"id": 62,
+					"semaphoreID": "Bcz_F"
+				},
+				"9,4": {
+					"electrified": true,
+					"id": 62,
+					"semaphoreID": "Bcz_E"
+				},
+				"9,5": {
+					"electrified": true,
+					"id": 62,
+					"semaphoreID": "Bcz_D"
+				},
+				"9,6": {
+					"electrified": true,
+					"id": 18,
+					"switchID": "Bcz_10"
+				}
+			},
+			"w": 26
 		}
 	]
 }
