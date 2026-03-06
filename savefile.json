@@ -865,6 +865,8 @@
 				"21,12": {
 					"electrified": true,
 					"id": 25,
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_28",
 					"trackID": "Eb_Iz28"
 				},
@@ -2465,12 +2467,14 @@
 				"9,11": {
 					"electrified": true,
 					"id": 19,
+					"maxSpeed": 40,
 					"switchID": "Eb_7",
 					"trackID": "Eb_Iz7"
 				},
 				"9,12": {
 					"electrified": true,
 					"id": 1,
+					"maxSpeed": 40,
 					"trackID": "Eb_Iz8"
 				}
 			},
@@ -2563,6 +2567,7 @@
 				"5,2": {
 					"electrified": true,
 					"id": 19,
+					"maxSpeedPlus": 40,
 					"switchFlip": true,
 					"switchID": "Tp_6",
 					"trackID": "Tp_Iz6"
@@ -2585,6 +2590,7 @@
 				"6,3": {
 					"electrified": true,
 					"id": 18,
+					"maxSpeedPlus": 40,
 					"switchID": "Tp_7",
 					"trackID": "Tp_Iz7"
 				},
@@ -2596,6 +2602,7 @@
 				"7,3": {
 					"electrified": true,
 					"id": 19,
+					"maxSpeedPlus": 40,
 					"switchID": "Tp_8",
 					"trackID": "Tp_Iz8"
 				},
@@ -2612,6 +2619,7 @@
 				"8,4": {
 					"electrified": true,
 					"id": 18,
+					"maxSpeedPlus": 40,
 					"switchID": "Tp_9",
 					"trackID": "Tp_Iz9"
 				},

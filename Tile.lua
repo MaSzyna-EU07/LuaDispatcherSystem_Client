@@ -39,6 +39,9 @@ function Tile:new(id, electrified)
 	self.switchFlipABCD = false
 	self.semaphoreID = nil
 	self.itineraryEndID = nil
+	self.maxSpeed = nil
+	self.maxSpeedPlus = nil
+	self.maxSpeedMinus = nil
 end
 
 ---Returns whether this Tile is a switch, regardless of its type.
@@ -131,6 +134,42 @@ function Tile:setItineraryEndID(itineraryEndID)
 	self.itineraryEndID = itineraryEndID ~= "" and itineraryEndID or nil
 end
 
+---Returns the maximum speed for this Tile. Returns `nil` if no limit is specified.
+---@return number?
+function Tile:getMaxSpeed()
+	return self.maxSpeed
+end
+
+---Sets a new maximum speed for this Tile, or clears it if `nil` is provided.
+---@param speed number? New speed.
+function Tile:setMaxSpeed(speed)
+	self.maxSpeed = speed
+end
+
+---Returns the maximum speed for this Tile when the switch on this Tile is set to `true` ("+"). Returns `nil` if no limit is specified.
+---@return number?
+function Tile:getMaxSpeedPlus()
+	return self.maxSpeedPlus
+end
+
+---Sets a new maximum speed for this Tile when the switch on this Tile is set to `true` ("+"), or clears it if `nil` is provided.
+---@param speed number? New speed.
+function Tile:setMaxSpeedPlus(speed)
+	self.maxSpeedPlus = speed
+end
+
+---Returns the maximum speed for this Tile when the switch on this Tile is set to `false` ("-"). Returns `nil` if no limit is specified.
+---@return number?
+function Tile:getMaxSpeedMinus()
+	return self.maxSpeedMinus
+end
+
+---Sets a new maximum speed for this Tile when the switch on this Tile is set to `false` ("-"), or clears it if `nil` is provided.
+---@param speed number? New speed.
+function Tile:setMaxSpeedMinus(speed)
+	self.maxSpeedMinus = speed
+end
+
 ---Returns the current track state in the simulation.
 ---If no track ID is specified for this tile, the function will return `nil`.
 ---@return TrackState?
@@ -160,11 +199,59 @@ function Tile:getSwitchState(suffix)
 	return state and state.state
 end
 
----Returns this tile's semaphore image, or `nil` if no semaphore is specified for this tile.
----@return string?
+---Returns this tile's semaphore state, or `nil` if no semaphore is specified for this tile.
+---@return SemaphoreState?
 function Tile:getSemaphoreState()
-	local state = self.semaphoreID and _Obj.getSemaphoreState(self.semaphoreID)
-	return state and state.image
+	return self.semaphoreID and _Obj.getSemaphoreState(self.semaphoreID)
+end
+
+---Returns the current maximum speed on this Tile, or `nil` if there is no speed limit.
+---@return number?
+function Tile:getSpeed()
+	return self:getSpeedForSwitchStates({[""] = self:getSwitchState(), ab = self:getSwitchState("ab"), cd = self:getSwitchState("cd")})
+end
+
+---Returns the maximum speed on this Tile were the switches in the specified states, or `nil` if there is no speed limit.
+---@param states table<""|"ab"|"cd", boolean?>
+---@return number?
+function Tile:getSpeedForSwitchStates(states)
+	local speed = self.maxSpeed
+	if self:isSwitch() then
+		local switchSpeed
+		if self:isDoubleSwitch() then
+			-- Straight = "-", curve = "+"
+			switchSpeed = states["ab"] ~= states["cd"] and self.maxSpeedPlus or self.maxSpeedMinus
+		else
+			switchSpeed = states[""] and self.maxSpeedPlus or self.maxSpeedMinus
+		end
+		if switchSpeed then
+			speed = speed and math.min(speed, switchSpeed) or switchSpeed
+		end
+	end
+	return speed
+end
+
+---Given two directions, if this Tile is a switch tile, returns a table mapping switch suffixes to their states for this Tile.
+---@param dir1 integer First direction.
+---@param dir2 integer Second direction.
+---@return table<""|"ab"|"cd", boolean?>
+function Tile:getSwitchStatesForDirections(dir1, dir2)
+	local switchStates = {}
+	local track = _TileDB.tiles[self.id]
+	if not track or not track.dirs then
+		return switchStates
+	end
+	local dirData1 = track.dirs[dir1]
+	if dirData1 then
+		local state = (dirData1:sub(#dirData1) == "+") ~= self.switchFlip
+		switchStates[dirData1:sub(1, dirData1:len() - 1)] = state
+	end
+	local dirData2 = track.dirs[dir2]
+	if dirData2 then
+		local state = (dirData2:sub(#dirData2) == "+") ~= self.switchFlip
+		switchStates[dirData2:sub(1, dirData2:len() - 1)] = state
+	end
+	return switchStates
 end
 
 ---Returns a flipped double switch suffix if the `switchFlipABCD` property is set on this tile.
@@ -322,7 +409,10 @@ function Tile:serialize()
 		switchFlip = self.switchFlip or nil,
 		switchFlipABCD = self.switchFlipABCD or nil,
 		semaphoreID = self.semaphoreID,
-		itineraryEndID = self.itineraryEndID
+		itineraryEndID = self.itineraryEndID,
+		maxSpeed = self.maxSpeed,
+		maxSpeedPlus = self.maxSpeedPlus,
+		maxSpeedMinus = self.maxSpeedMinus
 	}
 end
 
@@ -337,6 +427,9 @@ function Tile:deserialize(t)
 	self.switchFlipABCD = t.switchFlipABCD == true
 	self.semaphoreID = t.semaphoreID
 	self.itineraryEndID = t.itineraryEndID
+	self.maxSpeed = t.maxSpeed
+	self.maxSpeedPlus = t.maxSpeedPlus
+	self.maxSpeedMinus = t.maxSpeedMinus
 end
 
 return Tile

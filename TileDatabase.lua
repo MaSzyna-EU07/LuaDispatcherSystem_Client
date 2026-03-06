@@ -7,11 +7,11 @@ local TileDatabase = Class:derive("TileDatabase")
 function TileDatabase:new()
     -- Tracks:
     --[[
-    128  1   2
-       \ | /
-    64 - * -  4
-       / | \
-    32  16   8
+    128  1   2        8  1  2
+       \ | /           \ | /
+    64 - * -  4      7 - * - 3
+       / | \           / | \
+    32  16   8        6  5  4
     ]]
 
     -- Properties for each tile:
@@ -24,6 +24,7 @@ function TileDatabase:new()
     -- derailer - Sprite (n, 7) rendered on top of the tracks.
     -- semaphore - Sprites (n, 4), (n, 5) and (n, 6) used as semaphore body, first and second lamps respectively.
 
+    ---@type {tracks: integer?, background: integer?, foreground: integer?, dirs: table<integer, "-"|"+"|"ab-"|"ab+"|"cd-"|"cd+">?, buffer: integer?, derailer: integer?, semaphore: integer?}[]
     self.tiles = {
         {tracks = 68}, {tracks = 17}, {tracks = 85}, {tracks = 68, background = 9},
         {tracks = 34}, {tracks = 136}, {tracks = 170}, {tracks = 68, background = 10},

@@ -2,7 +2,7 @@
 
 ---@alias TrackState {occupied: boolean, reserved: boolean}
 ---@alias SwitchState {state: boolean}
----@alias SemaphoreState {image: string}
+---@alias SemaphoreState {speed: integer, nextSpeed: integer, image: string}
 
 ---@type {
 --- stations: table<string, {}>,
@@ -49,9 +49,9 @@ function obj.setSwitchState(switchID, tick, state)
     print(string.format("[t=%s] %s : state=%s", tick, switchID, state))
 end
 
-function obj.setSemaphoreState(semaphoreID, tick, image)
-	obj.semaphores[semaphoreID][tick] = {image = image}
-    print(string.format("[t=%s] %s : image=%s", tick, semaphoreID, image))
+function obj.setSemaphoreState(semaphoreID, tick, speed, nextSpeed, image)
+	obj.semaphores[semaphoreID][tick] = {speed = speed, nextSpeed = nextSpeed, image = image}
+    print(string.format("[t=%s] %s : speed=%s nextSpeed=%s image=%s", tick, semaphoreID, speed, nextSpeed, image))
 end
 
 

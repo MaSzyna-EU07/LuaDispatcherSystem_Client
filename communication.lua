@@ -21,6 +21,8 @@ local COM_FUNCTIONS = {
 		name = "setSemaphore",
 		params = {
 			{name = "semaphoreID", type = "int", bytes = 2},
+			{name = "speed", type = "int", bytes = 1},
+			{name = "nextSpeed", type = "int", bytes = 1},
 			{name = "state", type = "int", bytes = 1}
 		}
 	},
@@ -302,7 +304,7 @@ function com.readCall(name, params)
 	elseif name == "setSemaphore" then
 		local semaphore = com_ids.semaphores[params.semaphoreID]
 		local station = com_ids.stations[semaphore.sid]
-		_Obj.setSemaphoreState(semaphore.name, timeTicks, COM_IMAGES[params.state])
+		_Obj.setSemaphoreState(semaphore.name, timeTicks, params.speed, params.nextSpeed, COM_IMAGES[params.state])
 	end
 end
 

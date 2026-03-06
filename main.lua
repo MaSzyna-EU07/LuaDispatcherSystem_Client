@@ -22,6 +22,40 @@ _Project = Project()
 _Picker = Picker()
 _TileDB = TileDatabase()
 
+_DIRS = {
+	{x = 0, y = -1},
+	{x = 1, y = -1},
+	{x = 1, y = 0},
+	{x = 1, y = 1},
+	{x = 0, y = 1},
+	{x = -1, y = 1},
+	{x = -1, y = 0},
+	{x = -1, y = -1}
+}
+
+---Inverts the provided direction, 1 becomes 5, 2 becomes 6, 7 becomes 3, and so on.
+---@param dir integer The direction to invert.
+---@return integer
+function _InvertDir(dir)
+	return (dir + 3) % 8 + 1
+end
+
+---Turns speed in km/h into speed to be displayed on the semaphore.
+---@param speed number? Desired speed.
+---@return integer
+function _SpeedToID(speed)
+	if not speed then
+		return 1
+	end
+	if speed >= 100 then
+		return 4
+	elseif speed >= 60 then
+		return 3
+	end
+	-- TODO: What about less than 40 km/h?
+	return 2
+end
+
 local TRACK_COLORS = {
 	base = {0, 1, 0},
 	electrified = {1, 1, 0},
@@ -99,7 +133,7 @@ function _DrawTile(x, y, id, electrified, occupied, reserved, switchDimBits, sem
 	-- Semaphore
 	if track.semaphore then
 		_Tracks:drawTile(track.semaphore, 4, x, y, scale)
-		local image = semaphoreState and SEM_IMAGES[semaphoreState]
+		local image = semaphoreState and SEM_IMAGES[semaphoreState.image]
 		if image then
 			if image.color1 and (not image.blink1 or _Time % 1 < 0.5) then
 				local color = SEM_COLORS[image.color1]
@@ -137,10 +171,14 @@ function love.draw()
 	_UI:draw()
 	-- Debug
 	local station = _Project:getCurrentStation()
+	local tile = station:getHoveredTile()
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.print("Hovered ID: " .. tostring(_Picker.hover), 0, 700)
 	love.graphics.print("Hovered Tile: " .. tostring(station.hoverX) .. ", " .. tostring(station.hoverY), 0, 720)
 	love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 0, 740)
+	if tile then
+		love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 0, 760)
+	end
 end
 
 function love.keypressed(key)

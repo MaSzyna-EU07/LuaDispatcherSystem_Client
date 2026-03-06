@@ -240,6 +240,9 @@ function UI:onTileSelected(tile)
 	self.elements.picker_switchFlipABCD.value = tile and tile:getSwitchFlipABCD() or false
 	self.elements.picker_semaphoreID.value = tile and tile:getSemaphoreID() or ""
 	self.elements.picker_itineraryEndID.value = tile and tile:getItineraryEndID() or ""
+	self.elements.picker_speed.value = tile and tile:getMaxSpeed() and tostring(tile:getMaxSpeed()) or ""
+	self.elements.picker_speedPlus.value = tile and tile:getMaxSpeedPlus() and tostring(tile:getMaxSpeedPlus()) or ""
+	self.elements.picker_speedMinus.value = tile and tile:getMaxSpeedMinus() and tostring(tile:getMaxSpeedMinus()) or ""
 end
 
 ---Executed when a log file is loaded.

@@ -338,9 +338,10 @@ function Station:keypressed(key)
 		local pathfinder = Pathfinder()
 		--pathfinder:setStart(...)
 		--pathfinder:setEnd(...)
-		--pathfinder:calculatePath()
+		pathfinder:calculatePath()
+		pathfinder:switchSwitches()
 		pathfinder:reserveTracks()
-		pathfinder.tiles[1]:sendSemaphoreState(1, 1)
+		pathfinder:setSemaphore()
 	end
 end
 
