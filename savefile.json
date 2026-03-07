@@ -603,31 +603,26 @@
 				"14,10": {
 					"electrified": true,
 					"id": 4,
-					"itineraryEndID": "6",
 					"trackID": "Eb_It6"
 				},
 				"14,11": {
 					"electrified": true,
 					"id": 4,
-					"itineraryEndID": "4",
 					"trackID": "Eb_It4"
 				},
 				"14,12": {
 					"electrified": true,
 					"id": 4,
-					"itineraryEndID": "2",
 					"trackID": "Eb_It2"
 				},
 				"14,13": {
 					"electrified": true,
 					"id": 4,
-					"itineraryEndID": "1",
 					"trackID": "Eb_It1"
 				},
 				"14,14": {
 					"electrified": true,
 					"id": 4,
-					"itineraryEndID": "3",
 					"trackID": "Eb_It3"
 				},
 				"15,10": {

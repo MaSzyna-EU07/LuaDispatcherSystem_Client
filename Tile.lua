@@ -283,6 +283,13 @@ function Tile:isTrackReserved()
 	return state and state.reserved
 end
 
+---Returns whether this tile's track is neither occupied nor reserved, or `nil` if no track is specified for this tile.
+---@return boolean?
+function Tile:isTrackClear()
+	local state = self:getTrackState()
+	return state and not (state.occupied or state.reserved)
+end
+
 ---Returns the state for this tile's switch, or `nil` if no switch is specified for this tile.
 ---@param suffix "ab"|"cd"? Used for double switches, where the suffix determines which subswitch state should be returned.
 ---@return boolean?
@@ -398,10 +405,17 @@ end
 
 ---Sends a command to the server to set the speeds on this tile's semaphore.
 ---@param this Speed The current speed to be displayed.
----@param next Speed? The next speed to be displayed.
+---@param next Speed|string? The next speed or the next semaphore ID to be displayed.
 function Tile:sendSemaphoreState(this, next)
 	if self.semaphoreID then
 		_Com.sendCommand("s " .. self.semaphoreID .. " " .. this .. (next and (" " .. next) or ""))
+	end
+end
+
+---Sends a command to the server to cancel this tile's semaphore's itinerary.
+function Tile:sendSemaphoreUnreserve()
+	if self.semaphoreID then
+		_Com.sendCommand("su " .. self.semaphoreID)
 	end
 end
 

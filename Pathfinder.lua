@@ -152,7 +152,7 @@ function Pathfinder:reserveTracks()
         local track = node.tile:getTrackID()
         if track and not usedTracks[track] then
             usedTracks[track] = true
-            _Com.sendCommand("t " .. track .. " res")
+            _Com.sendCommand("tr " .. track .. " " .. self.winner.path[1].tile:getSemaphoreID())
         end
     end
 end
@@ -172,42 +172,36 @@ end
 ---Sets the semaphore at the beginning of this path to display a clear signal.
 ---@private
 function Pathfinder:setSemaphore()
+    ---@type string|Speed?
     local nextSpeed = 1
     local lastTile = self.winner.path[#self.winner.path].tile
     if lastTile:isSemaphore() then
-        nextSpeed = lastTile:getSemaphoreState().speed
+        nextSpeed = lastTile:getSemaphoreID()
     end
     self.winner.path[1].tile:sendSemaphoreState(_SpeedToID(self.winner.speed), nextSpeed)
 end
 
----Refreshes the previous semaphore state if it is still displaying a clear signal.
----@private
-function Pathfinder:setPreviousSemaphore()
-    -- Get the first tile from the path...
-    local tile = self.winner.path[1].tile
-    local direction = assert(self.winner.path[1].dir2)
-    -- and travel backwards until we hit a semaphore (in the right direction).
-    local n = 0
-    repeat
-        local nextDirection = tile:getNextTrackDirection(direction)
-        if not nextDirection then
-            -- We hit a dead end. Abort.
-            return
+---Returns whether this path can be dispatched.
+---@return boolean
+function Pathfinder:canBeDispatched()
+    -- All tracks must be clear.
+    for i = 1, #self.winner.path - 1 do
+        local node = self.winner.path[i]
+        if node.tile:isTrackClear() == false then
+            return false
         end
-        tile = tile:getNeighbor(nextDirection)
-        direction = _InvertDir(nextDirection)
-        n = n + 1
-        assert(n < 10000, "Infinite loop")
-    until tile:isSemaphore() and tile:getSemaphoreDirection() == direction
-    tile:sendSemaphoreState(tile:getSemaphoreState().speed, _SpeedToID(self.winner.speed))
+    end
+    return true
 end
 
 ---Reserves all tracks, sets all switches and displays a clear signal on the semaphore.
-function Pathfinder:sendPath()
+function Pathfinder:dispatch()
+    if not self:canBeDispatched() then
+        return
+    end
     self:reserveTracks()
     self:switchSwitches()
     self:setSemaphore()
-    self:setPreviousSemaphore()
 end
 
 return Pathfinder

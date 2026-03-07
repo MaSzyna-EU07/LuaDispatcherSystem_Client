@@ -323,7 +323,7 @@ function Station:handleRightClick()
 				if itineraryEndID then
 					local pathfinder = Pathfinder(assert(self:getTile(self.activeX, self.activeY)), tile)
 					pathfinder:calculatePath()
-					pathfinder:sendPath()
+					pathfinder:dispatch()
 				end
 				self.activeX, self.activeY = nil, nil
 			end

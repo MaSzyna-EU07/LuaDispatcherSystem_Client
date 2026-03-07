@@ -15,15 +15,14 @@ function UIBottomPane:new(ui)
 	self.ui:addButton("bottom", nil, "Reset", 12, 0, 3, 1, self, self.comReset)
 	self.ui:addButton("bottom", nil, "S1", 17, 0, 2, 1, self, self.sendS1)
 	self.ui:addButton("bottom", nil, "S2", 19, 0, 2, 1, self, self.sendS2)
-	self.ui:addButton("bottom", nil, "S4", 21, 0, 2, 1, self, self.sendS4)
-	self.ui:addButton("bottom", nil, "S5", 23, 0, 2, 1, self, self.sendS5)
-	self.ui:addButton("bottom", nil, "S10", 25, 0, 2, 1, self, self.sendS10)
-	self.ui:addButton("bottom", nil, "S12", 27, 0, 2, 1, self, self.sendS12)
-	self.ui:addButton("bottom", nil, "S13", 29, 0, 2, 1, self, self.sendS13)
-	self.ui:addButton("bottom", nil, "Sz", 31, 0, 2, 1, self, self.sendSz)
-	self.ui:addButton("bottom", nil, "Ms1", 33, 0, 2, 1, self, self.sendMs1)
-	self.ui:addButton("bottom", nil, "Ms2", 35, 0, 2, 1, self, self.sendMs2)
-	self.ui:addButton("bottom", nil, "Free", 38, 0, 2, 1, self, self.sendFree)
+	self.ui:addButton("bottom", nil, "S5", 21, 0, 2, 1, self, self.sendS5)
+	self.ui:addButton("bottom", nil, "S10", 23, 0, 2, 1, self, self.sendS10)
+	self.ui:addButton("bottom", nil, "S13", 25, 0, 2, 1, self, self.sendS13)
+	self.ui:addButton("bottom", nil, "Sz", 27, 0, 2, 1, self, self.sendSz)
+	self.ui:addButton("bottom", nil, "Ms1", 29, 0, 2, 1, self, self.sendMs1)
+	self.ui:addButton("bottom", nil, "Ms2", 31, 0, 2, 1, self, self.sendMs2)
+	self.ui:addButton("bottom", nil, "Free", 34, 0, 2, 1, self, self.sendFree)
+	self.ui:addButton("bottom", nil, "Ures", 36, 0, 2, 1, self, self.sendUnres)
 	self.ui:addLabel("bottom", nil, "Komenda:", 41, 0, 4, 1)
 	self.ui:addInput("bottom", "bottom_command", 45, 0, 7, 1, self, nil, self.sendCommand)
 end
@@ -46,6 +45,13 @@ function UIBottomPane:sendToCurrentSemaphore(this, next)
 	local station = _Project:getCurrentStation()
 	for i, coords in ipairs(station.selectedTiles) do
 		assert(station:getTile(coords.x, coords.y)):sendSemaphoreState(this, next)
+	end
+end
+
+function UIBottomPane:sendToCurrentSemaphoreUnreserve()
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		assert(station:getTile(coords.x, coords.y)):sendSemaphoreUnreserve()
 	end
 end
 
@@ -102,6 +108,10 @@ end
 
 function UIBottomPane:sendFree()
 	self:sendToCurrentTrack("free")
+end
+
+function UIBottomPane:sendUnres()
+	self:sendToCurrentSemaphoreUnreserve()
 end
 
 function UIBottomPane:sendCommand(input)
