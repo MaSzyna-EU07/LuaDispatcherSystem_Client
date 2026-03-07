@@ -748,6 +748,7 @@
 				"18,14": {
 					"electrified": true,
 					"id": 20,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_22",
 					"trackID": "Eb_Iz22"
 				},
@@ -764,6 +765,7 @@
 				"19,11": {
 					"electrified": true,
 					"id": 20,
+					"maxSpeedPlus": 40,
 					"switchFlip": true,
 					"switchID": "Eb_24",
 					"trackID": "Eb_Iz24"
@@ -776,6 +778,7 @@
 				"19,13": {
 					"electrified": true,
 					"id": 17,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_25",
 					"trackID": "Eb_Iz25"
 				},
@@ -792,6 +795,7 @@
 				"19,9": {
 					"electrified": true,
 					"id": 17,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_38",
 					"trackID": "Eb_Iz38"
 				},
@@ -829,6 +833,7 @@
 				"20,13": {
 					"electrified": true,
 					"id": 20,
+					"maxSpeedPlus": 40,
 					"switchFlip": true,
 					"switchID": "Eb_23",
 					"trackID": "Eb_Iz23"
@@ -859,6 +864,7 @@
 				"21,11": {
 					"electrified": true,
 					"id": 19,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_27",
 					"trackID": "Eb_Iz27"
 				},
@@ -911,12 +917,15 @@
 				"22,11": {
 					"electrified": true,
 					"id": 25,
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_36",
 					"trackID": "Eb_Iz36"
 				},
 				"22,12": {
 					"electrified": true,
 					"id": 18,
+					"maxSpeedPlus": 40,
 					"switchFlip": true,
 					"switchID": "Eb_40",
 					"trackID": "Eb_Iz40"
@@ -959,6 +968,8 @@
 				"23,10": {
 					"electrified": true,
 					"id": 25,
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_43",
 					"trackID": "Eb_Iz43"
 				},
@@ -1034,6 +1045,7 @@
 				"24,12": {
 					"electrified": true,
 					"id": 19,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_41",
 					"trackID": "Eb_Iz41"
 				},
@@ -1079,6 +1091,7 @@
 				"24,9": {
 					"electrified": true,
 					"id": 17,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_47",
 					"trackID": "Eb_Iz47"
 				},
@@ -1100,6 +1113,7 @@
 				"25,13": {
 					"electrified": true,
 					"id": 18,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_42",
 					"trackID": "Eb_Iz42"
 				},
@@ -1209,6 +1223,7 @@
 				"27,13": {
 					"electrified": true,
 					"id": 19,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_54",
 					"trackID": "Eb_Iz54"
 				},
@@ -2103,6 +2118,7 @@
 				"40,14": {
 					"electrified": true,
 					"id": 20,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_86",
 					"trackID": "Eb_Iz86"
 				},
@@ -2141,6 +2157,7 @@
 				"41,13": {
 					"electrified": true,
 					"id": 17,
+					"maxSpeedPlus": 40,
 					"switchID": "Eb_95",
 					"trackID": "Eb_Iz95"
 				},
@@ -2201,6 +2218,7 @@
 				"43,12": {
 					"electrified": true,
 					"id": 26,
+					"maxSpeedPlus": 40,
 					"switchFlip": true,
 					"switchID": "Eb_98",
 					"trackID": "Eb_Iz98"
@@ -2229,6 +2247,7 @@
 				"44,13": {
 					"electrified": true,
 					"id": 26,
+					"maxSpeedPlus": 40,
 					"switchFlip": true,
 					"switchID": "Eb_99",
 					"trackID": "Eb_Iz99"
@@ -2396,14 +2415,12 @@
 				"51,12": {
 					"electrified": true,
 					"id": 69,
-					"itineraryEndID": "Bcz_N",
-					"trackID": "Eb_ItW"
+					"itineraryEndID": "Bcz_N"
 				},
 				"51,13": {
 					"electrified": true,
 					"id": 70,
-					"itineraryEndID": "Bcz",
-					"trackID": "Eb_ItSzn1"
+					"itineraryEndID": "Bcz"
 				},
 				"51,14": {
 					"electrified": true,

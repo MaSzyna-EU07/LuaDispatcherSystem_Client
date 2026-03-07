@@ -197,6 +197,7 @@ function love.draw()
 	love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 0, 740)
 	if tile then
 		love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 0, 760)
+		love.graphics.print("Semaphore pointing: " .. tostring(tile:getSemaphoreDirection()), 0, 780)
 	end
 end
 

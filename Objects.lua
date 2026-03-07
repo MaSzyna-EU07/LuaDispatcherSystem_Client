@@ -50,7 +50,7 @@ end
 ---@param type SemaphoreType The semaphore type.
 function Objects:initSemaphore(name, type)
     local startingImage = type == SemaphoreType.TM and "ms1" or "s1"
-	self.semaphores[name] = {[0] = {image = startingImage}}
+	self.semaphores[name] = {[0] = {speed = Speed.STOP, nextSpeed = Speed.STOP, image = startingImage}}
 end
 
 ---Sets a new state for the specified track.

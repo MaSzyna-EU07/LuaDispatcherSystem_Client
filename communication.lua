@@ -104,6 +104,9 @@ local com_counters = {}
 
 function com.init(path, findRecent)
 	_Obj:clear()
+	com_pos = 0
+	com_ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}}
+	com_counters = {}
 	com.fail = false
 	if findRecent then
 		com.path = com.findMostRecentLogFile(path)

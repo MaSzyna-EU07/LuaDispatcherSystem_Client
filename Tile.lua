@@ -182,6 +182,12 @@ end
 ---------------- L O G I C ---------------
 --######################################--
 
+---Returns the neighbor tile in the provided direction, or `nil` if we're out of bounds.
+---@param dir integer The direction for which the tile should be returned.
+function Tile:getNeighbor(dir)
+	return self.station:getTile(self.x + _DIRS[dir].x, self.y + _DIRS[dir].y)
+end
+
 ---Returns `true` if this Tile has a track in that direction.
 ---@param dir integer The direction for the track to be looked for.
 ---@return boolean
@@ -190,10 +196,26 @@ function Tile:hasTrackInDirection(dir)
 	return track and track.tracks and _Utils.getBit(track.tracks, dir) or false
 end
 
----Returns the neighbor tile in the provided direction, or `nil` if we're out of bounds.
----@param dir integer The direction for which the tile should be returned.
-function Tile:getNeighbor(dir)
-	return self.station:getTile(self.x + _DIRS[dir].x, self.y + _DIRS[dir].y)
+---Returns `true` if this Tile has a track in the specified direction, taking the switch state into account.
+---@param dir integer The direction for the track to be looked for.
+---@return boolean
+function Tile:hasTraversibleTrackInDirection(dir)
+	if not self:hasTrackInDirection(dir) then
+		return false
+	end
+	local track = _TileDB.tiles[self.id]
+	if not track.dirs then
+		-- No switch.
+		return true
+	end
+	local dirData = track.dirs[dir]
+	if not dirData then
+		-- This direction is not governed by the switch.
+		return true
+	end
+	local switchState = self:getSwitchState(self:flipSwitchSuffix(dirData:sub(1, #dirData - 1)))
+	local expectedState = dirData:sub(#dirData) == "+"
+	return switchState == nil or (switchState ~= self.switchFlip) == expectedState
 end
 
 ---Returns a list of directions for pathfinders to be able to go towards, starting from this tile.
@@ -228,6 +250,18 @@ function Tile:getPossibleTrackDirections(sourceDir)
 	return results
 end
 
+---Returns a direction for pathfinders to go towards, when going from the specified direction, depending on the switch states.
+---Returns `nil` if we hit a dead end.
+---@param sourceDir integer The direction from which we are going from.
+---@return integer?
+function Tile:getNextTrackDirection(sourceDir)
+	for i = 1, 8 do
+		if i ~= sourceDir and self:hasTraversibleTrackInDirection(i) then
+			return i
+		end
+	end
+end
+
 ---Returns the current track state in the simulation.
 ---If no track ID is specified for this tile, the function will return `nil`.
 ---@return TrackState?
@@ -255,6 +289,13 @@ end
 function Tile:getSwitchState(suffix)
 	local state = self.switchID and _Obj:getSwitchState(self.switchID .. (suffix or ""))
 	return state and state.state
+end
+
+---Returns the direction towards which this tile's semaphore is pointing, or `nil` if there's no semaphore.
+---@return integer?
+function Tile:getSemaphoreDirection()
+	local track = _TileDB.tiles[self.id]
+	return track and track.semaphore and (3 - track.semaphore) % 8 + 1
 end
 
 ---Returns this tile's semaphore state, or `nil` if no semaphore is specified for this tile.
@@ -393,16 +434,7 @@ function Tile:draw()
 	local switchDimBits = 0
 	if track.tracks then
 		for i = 1, 8 do
-			local dim = false
-			if track.dirs then
-				local dirData = track.dirs[i]
-				if dirData then
-					local switchState = self:getSwitchState(self:flipSwitchSuffix(dirData:sub(1, #dirData - 1)))
-					local expectedState = dirData:sub(#dirData) == "+"
-					dim = switchState ~= nil and (switchState ~= self.switchFlip) ~= expectedState
-				end
-			end
-			if dim then
+			if not self:hasTraversibleTrackInDirection(i) then
 				switchDimBits = switchDimBits + 2 ^ (i - 1)
 			end
 		end

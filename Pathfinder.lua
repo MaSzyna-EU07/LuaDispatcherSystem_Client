@@ -15,15 +15,10 @@ function Pathfinder:new(start, target)
     ---@alias TraversalPossibility {tile: Tile, direction: integer, prevDirection: integer?, path: {tile: Tile, dir1: integer?, dir2: integer?}[], speed: number?, cost: number}
     ---@type TraversalPossibility[]
     self.possibilities = {} -- List of traversal possibilities
-    ---@type TraversalPossibility
+    ---@type TraversalPossibility?
     self.winner = nil -- The possiblity which is the first found path.
 
     self.possibilitySortFn = function(a, b) return a.cost < b.cost end
-
-    ---@type table<string, true>
-    self.tracks = {} -- Set of track IDs to be reserved
-    ---@type table<string, boolean>
-    self.switches = {} -- Maps switch IDs to their states
 end
 
 ---Calculates the path based on the provided start and end point of this Pathfinder.
@@ -35,10 +30,8 @@ function Pathfinder:calculatePath()
         table.sort(self.possibilities, self.possibilitySortFn)
         local possibility = table.remove(self.possibilities, 1)
         if self:isWinningPossibility(possibility) then
+            self:finalizePossibility(possibility)
             self.winner = possibility
-            -- HACK: Manually add the last tile to have a complete path.
-            -- TODO: Extend the route to the nearest semaphore.
-            table.insert(self.winner.path, {tile = self.target, dir1 = _InvertDir(self.winner.path[#self.winner.path].dir2)})
             break
         end
         self:evaluatePossibility(possibility)
@@ -52,16 +45,6 @@ function Pathfinder:calculatePath()
     print("Path found:")
     for i, node in ipairs(self.winner.path) do
         print(node.tile.x, node.tile.y, node.dir1, node.dir2)
-        -- Add a track to the list.
-        local track = node.tile:getTrackID()
-        if track then
-            self.tracks[track] = true
-        end
-        -- Check if we have to consider a switch state on this tile.
-        local switchStates = node.tile:getSwitchStatesForDirections(node.dir1, node.dir2)
-        for suffix, state in pairs(switchStates) do
-            self.switches[node.tile:getSwitchID() .. suffix] = state
-        end
     end
 end
 
@@ -138,19 +121,51 @@ function Pathfinder:isWinningPossibility(possibility)
     return possibility.tile:getNeighbor(possibility.direction) == self.target
 end
 
+---Finalizes a traversal possibility by adding additional tiles to the path until a semaphore or a dead end is found.
+---@private
+---@param possibility TraversalPossibility The traversal possibility to be finalized.
+function Pathfinder:finalizePossibility(possibility)
+    local n = 0
+    while not possibility.tile:isSemaphore() do
+        local tile = possibility.tile:getNeighbor(possibility.direction)
+        local directions = tile:getPossibleTrackDirections(_InvertDir(possibility.direction))
+        local direction = directions[1]
+        table.insert(possibility.path, {tile = tile, dir1 = _InvertDir(possibility.direction), dir2 = direction})
+        if not direction then
+            -- Dead end.
+            break
+        end
+        possibility.tile = tile
+        possibility.prevDirection = possibility.direction
+        possibility.direction = direction
+        n = n + 1
+        assert(n < 10000, "Infinite loop")
+    end
+end
+
 ---Reserves all tracks which have been traversed by this Pathfinder, with the exception of the last tile.
 ---@private
 function Pathfinder:reserveTracks()
-    for id, _ in pairs(self.tracks) do
-        _Com.sendCommand("t " .. id .. " res")
+    local usedTracks = {}
+    for i = 1, #self.winner.path - 1 do
+        local node = self.winner.path[i]
+        local track = node.tile:getTrackID()
+        if track and not usedTracks[track] then
+            usedTracks[track] = true
+            _Com.sendCommand("t " .. track .. " res")
+        end
     end
 end
 
 ---Switches all switches this Pathfinder has found to their desired states.
 ---@private
 function Pathfinder:switchSwitches()
-    for id, state in pairs(self.switches) do
-		_Com.sendCommand("j " .. id .. " " .. (state and "+" or "-"))
+    for i, node in ipairs(self.winner.path) do
+        -- Check if we have to consider a switch state on this tile.
+        local switchStates = node.tile:getSwitchStatesForDirections(node.dir1, node.dir2)
+        for suffix, state in pairs(switchStates) do
+		    _Com.sendCommand("j " .. node.tile:getSwitchID() .. suffix .. " " .. (state and "+" or "-"))
+        end
     end
 end
 
@@ -159,11 +174,32 @@ end
 function Pathfinder:setSemaphore()
     local nextSpeed = 1
     local lastTile = self.winner.path[#self.winner.path].tile
-    print("Last tile", lastTile.semaphoreID, lastTile.trackID)
     if lastTile:isSemaphore() then
         nextSpeed = lastTile:getSemaphoreState().speed
     end
     self.winner.path[1].tile:sendSemaphoreState(_SpeedToID(self.winner.speed), nextSpeed)
+end
+
+---Refreshes the previous semaphore state if it is still displaying a clear signal.
+---@private
+function Pathfinder:setPreviousSemaphore()
+    -- Get the first tile from the path...
+    local tile = self.winner.path[1].tile
+    local direction = assert(self.winner.path[1].dir2)
+    -- and travel backwards until we hit a semaphore (in the right direction).
+    local n = 0
+    repeat
+        local nextDirection = tile:getNextTrackDirection(direction)
+        if not nextDirection then
+            -- We hit a dead end. Abort.
+            return
+        end
+        tile = tile:getNeighbor(nextDirection)
+        direction = _InvertDir(nextDirection)
+        n = n + 1
+        assert(n < 10000, "Infinite loop")
+    until tile:isSemaphore() and tile:getSemaphoreDirection() == direction
+    tile:sendSemaphoreState(tile:getSemaphoreState().speed, _SpeedToID(self.winner.speed))
 end
 
 ---Reserves all tracks, sets all switches and displays a clear signal on the semaphore.
@@ -171,6 +207,7 @@ function Pathfinder:sendPath()
     self:reserveTracks()
     self:switchSwitches()
     self:setSemaphore()
+    self:setPreviousSemaphore()
 end
 
 return Pathfinder
