@@ -11,7 +11,7 @@ function Objects:new()
 	---@alias TrackState {occupied: boolean, reserved: boolean}
 	---@type table<string, table<integer, TrackState>>
 	self.tracks = {}
-	---@alias SwitchState {state: boolean}
+	---@alias SwitchState {state: boolean, forced: boolean}
 	---@type table<string, table<integer, SwitchState>>
 	self.switches = {}
 	---@alias SemaphoreState {speed: Speed, nextSpeed: Speed, image: string}
@@ -67,9 +67,10 @@ end
 ---@param switchID string The full switch ID.
 ---@param tick integer The tick on which this state is set. This state is valid until the next change.
 ---@param state boolean If `true`, "+", otherwise - "-".
-function Objects:setSwitchState(switchID, tick, state)
-	self.switches[switchID][tick] = {state = state}
-    print(string.format("[t=%s] %s : state=%s", tick, switchID, state))
+---@param forced boolean Whether the switch has been forcefully switched ("rozprucie rozjazdu").
+function Objects:setSwitchState(switchID, tick, state, forced)
+	self.switches[switchID][tick] = {state = state, forced = forced}
+    print(string.format("[t=%s] %s : state=%s forced=%s", tick, switchID, state, forced))
 end
 
 ---Sets a new state for the specified semaphore.

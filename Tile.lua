@@ -46,10 +46,14 @@ function Tile:new(station, x, y, id, electrified)
 	self.switchFlip = false
 	self.switchFlipABCD = false
 	self.semaphoreID = nil
-	self.itineraryEndID = nil
+	self.itineraryEndID = nil -- TODO: Later on, check whether we need this. The only reason we would need this is for dispatcher algorithms.
 	self.maxSpeed = nil
 	self.maxSpeedPlus = nil
 	self.maxSpeedMinus = nil
+	self.trainTarget = false
+	self.shuntTarget = false
+	self.forbidTrain = false
+	self.forbidShunt = false
 end
 
 ---Returns whether this Tile is a switch, regardless of its type.
@@ -178,6 +182,54 @@ function Tile:setMaxSpeedMinus(speed)
 	self.maxSpeedMinus = speed
 end
 
+---Returns whether this Tile can be used as a target for train paths.
+---@return boolean
+function Tile:isTrainTarget()
+	return self.trainTarget
+end
+
+---Sets whether this Tile can be used as a target for train paths.
+---@param trainTarget boolean Whether this Tile can be used as a target for train paths.
+function Tile:setTrainTarget(trainTarget)
+	self.trainTarget = trainTarget
+end
+
+---Returns whether this Tile can be used as a target for shunting paths.
+---@return boolean
+function Tile:isShuntTarget()
+	return self.shuntTarget
+end
+
+---Sets whether this Tile can be used as a target for shunting paths.
+---@param shuntTarget boolean Whether this Tile can be used as a target for shunting paths.
+function Tile:setShuntTarget(shuntTarget)
+	self.shuntTarget = shuntTarget
+end
+
+---Returns whether this Tile is excluded from pathfinding train signals.
+---@return boolean
+function Tile:isTrainForbidden()
+	return self.forbidTrain
+end
+
+---Sets whether this Tile is excluded from pathfinding train signals.
+---@param forbidTrain boolean Whether to exclude trains.
+function Tile:setForbidTrain(forbidTrain)
+	self.forbidTrain = forbidTrain
+end
+
+---Returns whether this Tile is excluded from pathfinding shunting signals.
+---@return boolean
+function Tile:isShuntForbidden()
+	return self.forbidShunt
+end
+
+---Sets whether this Tile is excluded from pathfinding shunting signals.
+---@param forbidShunt boolean Whether to exclude shunting trains.
+function Tile:setForbidShunt(forbidShunt)
+	self.forbidShunt = forbidShunt
+end
+
 --######################################--
 ---------------- L O G I C ---------------
 --######################################--
@@ -215,7 +267,7 @@ function Tile:hasTraversibleTrackInDirection(dir)
 	end
 	local switchState = self:getSwitchState(self:flipSwitchSuffix(dirData:sub(1, #dirData - 1)))
 	local expectedState = dirData:sub(#dirData) == "+"
-	return switchState == nil or (switchState ~= self.switchFlip) == expectedState
+	return switchState == nil or (switchState.state ~= self.switchFlip) == expectedState
 end
 
 ---Returns a list of directions for pathfinders to be able to go towards, starting from this tile.
@@ -262,6 +314,30 @@ function Tile:getNextTrackDirection(sourceDir)
 	end
 end
 
+---Returns whether this Tile is a target for the specified path mode.
+---@param mode PathMode The path mode to be checked against.
+---@return boolean
+function Tile:isTargetForMode(mode)
+	if mode == PathMode.TRAIN then
+		return self:isTrainTarget()
+	elseif mode == PathMode.SHUNT then
+		return self:isShuntTarget()
+	end
+	return false
+end
+
+---Returns whether this Tile is traversible by the specified path mode.
+---@param mode PathMode The path mode to be checked against.
+---@return boolean
+function Tile:isPathModeAllowed(mode)
+	if mode == PathMode.TRAIN then
+		return not self:isTrainForbidden()
+	elseif mode == PathMode.SHUNT then
+		return not self:isShuntForbidden()
+	end
+	return true
+end
+
 ---Returns the current track state in the simulation.
 ---If no track ID is specified for this tile, the function will return `nil`.
 ---@return TrackState?
@@ -292,10 +368,18 @@ end
 
 ---Returns the state for this tile's switch, or `nil` if no switch is specified for this tile.
 ---@param suffix "ab"|"cd"? Used for double switches, where the suffix determines which subswitch state should be returned.
----@return boolean?
+---@return SwitchState?
 function Tile:getSwitchState(suffix)
-	local state = self.switchID and _Obj:getSwitchState(self.switchID .. (suffix or ""))
-	return state and state.state
+	return self.switchID and _Obj:getSwitchState(self.switchID .. (suffix or ""))
+end
+
+---Returns whether this tile's switch has been forcefully switched, or `nil` if no switch is specified for this tile.
+---@return boolean?
+function Tile:isSwitchForced()
+	local main = self:getSwitchState()
+	local ab = self:getSwitchState("ab")
+	local cd = self:getSwitchState("cd")
+	return (main and main.forced) or (ab and ab.forced) or (cd and cd.forced)
 end
 
 ---Returns the direction towards which this tile's semaphore is pointing, or `nil` if there's no semaphore.
@@ -314,7 +398,10 @@ end
 ---Returns the current maximum speed on this Tile, or `nil` if there is no speed limit.
 ---@return number?
 function Tile:getSpeed()
-	return self:getSpeedForSwitchStates({[""] = self:getSwitchState(), ab = self:getSwitchState("ab"), cd = self:getSwitchState("cd")})
+	local main = self:getSwitchState()
+	local ab = self:getSwitchState("ab")
+	local cd = self:getSwitchState("cd")
+	return self:getSpeedForSwitchStates({[""] = main and main.state, ab = ab and ab.state, cd = cd and cd.state})
 end
 
 ---Returns the maximum speed on this Tile were the switches in the specified states, or `nil` if there is no speed limit.
@@ -453,7 +540,7 @@ function Tile:draw()
 			end
 		end
 	end
-	_DrawTile(x + self.offset, y + self.offset, self.id, self.electrified, self:isTrackOccupied(), self:isTrackReserved(), switchDimBits, self:getSemaphoreState())
+	_DrawTile(x + self.offset, y + self.offset, self.id, self.electrified, self:isTrackOccupied(), self:isTrackReserved(), self:isSwitchForced(), switchDimBits, self:getSemaphoreState())
 end
 
 ---Draws this Tile's background at the specified position.
@@ -535,7 +622,11 @@ function Tile:serialize()
 		itineraryEndID = self.itineraryEndID,
 		maxSpeed = self.maxSpeed,
 		maxSpeedPlus = self.maxSpeedPlus,
-		maxSpeedMinus = self.maxSpeedMinus
+		maxSpeedMinus = self.maxSpeedMinus,
+		trainTarget = self.trainTarget or nil,
+		shuntTarget = self.shuntTarget or nil,
+		forbidTrain = self.forbidTrain or nil,
+		forbidShunt = self.forbidShunt or nil
 	}
 end
 
@@ -553,6 +644,10 @@ function Tile:deserialize(t)
 	self.maxSpeed = t.maxSpeed
 	self.maxSpeedPlus = t.maxSpeedPlus
 	self.maxSpeedMinus = t.maxSpeedMinus
+	self.trainTarget = t.trainTarget == true
+	self.shuntTarget = t.shuntTarget == true
+	self.forbidTrain = t.forbidTrain == true
+	self.forbidShunt = t.forbidShunt == true
 end
 
 return Tile

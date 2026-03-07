@@ -132,7 +132,7 @@ function Picker:draw()
 			love.graphics.setLineWidth(2)
 			love.graphics.rectangle("line", tx, ty, size, size)
 		else
-			_DrawTile(x + self.tileMargin, y + self.tileMargin, self.tiles[i], _Picker.electrified, false, false, 0, "s1", self.tileScale)
+			_DrawTile(x + self.tileMargin, y + self.tileMargin, self.tiles[i], _Picker.electrified, false, false, false, 0, "s1", self.tileScale)
 		end
 	end
 

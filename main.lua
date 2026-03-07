@@ -1,3 +1,4 @@
+require("main_enums")
 _Utils = require("utils")
 _Com = require("communication")
 local Objects = require("Objects")
@@ -18,7 +19,7 @@ _SIM_PATH = "/run/media/jakub/LaCie/(Pliki)/Gry i programy/Symulatory/MaSzyna/SV
 _Obj = Objects()
 _UI = UI()
 _Tracks = Tileset("data/tracks.png", 15, 7, 14, 14)
-_Buttons = Tileset("data/buttons.png", 5, 2, 21, 14)
+_Buttons = Tileset("data/buttons.png", 11, 2, 21, 14)
 _Project = Project()
 _Picker = Picker()
 _TileDB = TileDatabase()
@@ -32,24 +33,6 @@ _DIRS = {
 	{x = -1, y = 1},
 	{x = -1, y = 0},
 	{x = -1, y = -1}
-}
-
----@enum Speed
-Speed = {
-	STOP = 0,
-	VMAX = 1,
-	["40"] = 2,
-	["60"] = 3,
-	["100"] = 4,
-	MS1 = 5,
-	MS2 = 6,
-	SZ = 7
-}
-
----@enum SemaphoreType
-SemaphoreType = {
-	SEM = 0,
-	TM = 1
 }
 
 ---Inverts the provided direction, 1 becomes 5, 2 becomes 6, 7 becomes 3, and so on.
@@ -82,8 +65,8 @@ local TRACK_COLORS = {
 	reserved = {0, 0, 1}
 }
 
-function _GetTrackColor(electrified, occupied, reserved)
-	if occupied then
+function _GetTrackColor(electrified, occupied, reserved, alarm)
+	if alarm or occupied then
 		return TRACK_COLORS.occupied
 	elseif reserved then
 		return TRACK_COLORS.reserved
@@ -110,7 +93,7 @@ local SEM_IMAGES = {
 	sz = {color1 = 1, color2 = 4, blink2 = true}
 }
 
-function _DrawTile(x, y, id, electrified, occupied, reserved, switchDimBits, semaphoreState, scale, opacity)
+function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBits, semaphoreState, scale, opacity)
 	local track = _TileDB.tiles[id]
 	if not track then
 		return
@@ -131,12 +114,12 @@ function _DrawTile(x, y, id, electrified, occupied, reserved, switchDimBits, sem
 		_Tracks:drawTile(track.buffer, 3, x, y, scale)
 	end
 	-- Track
-	local color = _GetTrackColor(electrified, occupied, reserved)
+	local color = _GetTrackColor(electrified, occupied, reserved, alarm)
 	love.graphics.setColor(color[1], color[2], color[3], opacity)
 	if track.tracks then
 		for i = 1, 8 do
 			local dim = _Utils.getBit(switchDimBits, i)
-			if _Utils.getBit(track.tracks, i) and not dim then
+			if _Utils.getBit(track.tracks, i) and not dim and (not alarm or _Time % 0.4 < 0.2) then
 				_Tracks:drawTile(i, 2, x, y, scale)
 			end
 		end

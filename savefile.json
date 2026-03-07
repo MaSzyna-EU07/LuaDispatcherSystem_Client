@@ -506,7 +506,10 @@
 			"tiles": {
 				"10,10": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 8,
+					"itineraryEndID": "6a",
+					"shuntTarget": true,
 					"trackID": "Eb_It6a"
 				},
 				"10,11": {
@@ -629,31 +632,41 @@
 					"electrified": true,
 					"id": 4,
 					"itineraryEndID": "6",
-					"trackID": "Eb_It6"
+					"shuntTarget": true,
+					"trackID": "Eb_It6",
+					"trainTarget": true
 				},
 				"15,11": {
 					"electrified": true,
 					"id": 4,
 					"itineraryEndID": "4",
-					"trackID": "Eb_It4"
+					"shuntTarget": true,
+					"trackID": "Eb_It4",
+					"trainTarget": true
 				},
 				"15,12": {
 					"electrified": true,
 					"id": 4,
 					"itineraryEndID": "2",
-					"trackID": "Eb_It2"
+					"shuntTarget": true,
+					"trackID": "Eb_It2",
+					"trainTarget": true
 				},
 				"15,13": {
 					"electrified": true,
 					"id": 4,
 					"itineraryEndID": "1",
-					"trackID": "Eb_It1"
+					"shuntTarget": true,
+					"trackID": "Eb_It1",
+					"trainTarget": true
 				},
 				"15,14": {
 					"electrified": true,
 					"id": 4,
 					"itineraryEndID": "3",
-					"trackID": "Eb_It3"
+					"shuntTarget": true,
+					"trackID": "Eb_It3",
+					"trainTarget": true
 				},
 				"16,10": {
 					"electrified": true,
@@ -717,7 +730,10 @@
 				},
 				"17,9": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 8,
+					"itineraryEndID": "8",
+					"shuntTarget": true,
 					"trackID": "Eb_It8"
 				},
 				"18,10": {
@@ -784,7 +800,10 @@
 				},
 				"19,17": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 8,
+					"itineraryEndID": "11",
+					"shuntTarget": true,
 					"trackID": "Eb_It11"
 				},
 				"19,9": {
@@ -796,23 +815,31 @@
 				},
 				"2,10": {
 					"electrified": true,
-					"id": 71
+					"forbidTrain": true,
+					"id": 71,
+					"itineraryEndID": "B1",
+					"shuntTarget": true
 				},
 				"2,11": {
 					"electrified": true,
+					"forbidShunt": true,
 					"id": 69,
 					"itineraryEndID": "Tp",
-					"trackID": "Tp2-Eb2@LK204.2"
+					"trackID": "Tp2-Eb2@LK204.2",
+					"trainTarget": true
 				},
 				"2,12": {
 					"electrified": true,
+					"forbidShunt": true,
 					"id": 70,
 					"itineraryEndID": "Tp_N",
-					"trackID": "Tp1-Eb1@LK204.1"
+					"trackID": "Tp1-Eb1@LK204.1",
+					"trainTarget": true
 				},
 				"20,10": {
 					"electrified": true,
 					"id": 9,
+					"maxSpeed": 40,
 					"trackID": "Eb_Iz24"
 				},
 				"20,11": {
@@ -854,6 +881,8 @@
 				"21,10": {
 					"electrified": true,
 					"id": 8,
+					"itineraryEndID": "24_43",
+					"shuntTarget": true,
 					"trackID": "Eb_Iz43"
 				},
 				"21,11": {
@@ -1051,20 +1080,26 @@
 				},
 				"24,15": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 4,
 					"itineraryEndID": "61",
+					"shuntTarget": true,
 					"trackID": "Eb_It61"
 				},
 				"24,16": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 4,
 					"itineraryEndID": "63",
+					"shuntTarget": true,
 					"trackID": "Eb_It63"
 				},
 				"24,17": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 4,
 					"itineraryEndID": "319",
+					"shuntTarget": true,
 					"trackID": "Eb_It319"
 				},
 				"24,3": {
@@ -1633,48 +1668,64 @@
 					"electrified": true,
 					"id": 8,
 					"itineraryEndID": "54",
-					"trackID": "Eb_It54"
+					"shuntTarget": true,
+					"trackID": "Eb_It54",
+					"trainTarget": true
 				},
 				"33,11": {
 					"electrified": true,
 					"id": 8,
 					"itineraryEndID": "52",
-					"trackID": "Eb_It52"
+					"shuntTarget": true,
+					"trackID": "Eb_It52",
+					"trainTarget": true
 				},
 				"33,12": {
 					"electrified": true,
 					"id": 8,
 					"itineraryEndID": "102",
-					"trackID": "Eb_It102"
+					"shuntTarget": true,
+					"trackID": "Eb_It102",
+					"trainTarget": true
 				},
 				"33,13": {
 					"electrified": true,
 					"id": 8,
 					"itineraryEndID": "101",
-					"trackID": "Eb_It101"
+					"shuntTarget": true,
+					"trackID": "Eb_It101",
+					"trainTarget": true
 				},
 				"33,14": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 8,
 					"itineraryEndID": "321",
+					"shuntTarget": true,
 					"trackID": "Eb_It321"
 				},
 				"33,15": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 4,
 					"itineraryEndID": "323",
+					"shuntTarget": true,
 					"trackID": "Eb_It323"
 				},
 				"33,16": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 4,
 					"itineraryEndID": "325",
+					"shuntTarget": true,
 					"trackID": "Eb_It325"
 				},
 				"33,17": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 4,
 					"itineraryEndID": "327",
+					"shuntTarget": true,
 					"trackID": "Eb_It327"
 				},
 				"33,2": {
@@ -1689,31 +1740,41 @@
 					"electrified": true,
 					"id": 8,
 					"itineraryEndID": "64",
-					"trackID": "Eb_It64"
+					"shuntTarget": true,
+					"trackID": "Eb_It64",
+					"trainTarget": true
 				},
 				"33,6": {
 					"electrified": true,
 					"id": 8,
 					"itineraryEndID": "62",
-					"trackID": "Eb_It62"
+					"shuntTarget": true,
+					"trackID": "Eb_It62",
+					"trainTarget": true
 				},
 				"33,7": {
 					"electrified": true,
 					"id": 8,
 					"itineraryEndID": "60",
-					"trackID": "Eb_It60"
+					"shuntTarget": true,
+					"trackID": "Eb_It60",
+					"trainTarget": true
 				},
 				"33,8": {
 					"electrified": true,
 					"id": 8,
 					"itineraryEndID": "58",
-					"trackID": "Eb_It58"
+					"shuntTarget": true,
+					"trackID": "Eb_It58",
+					"trainTarget": true
 				},
 				"33,9": {
 					"electrified": true,
 					"id": 8,
 					"itineraryEndID": "56",
-					"trackID": "Eb_It56"
+					"shuntTarget": true,
+					"trackID": "Eb_It56",
+					"trainTarget": true
 				},
 				"34,10": {
 					"electrified": true,
@@ -1934,8 +1995,9 @@
 				},
 				"37,14": {
 					"electrified": true,
-					"id": 1,
-					"trackID": "Eb_It321"
+					"id": 61,
+					"semaphoreID": "Eb_Tm32",
+					"trackID": "Eb_Iz74"
 				},
 				"37,15": {
 					"electrified": true,
@@ -2114,6 +2176,7 @@
 					"electrified": true,
 					"id": 20,
 					"maxSpeedPlus": 40,
+					"switchFlip": true,
 					"switchID": "Eb_86",
 					"trackID": "Eb_Iz86"
 				},
@@ -2158,7 +2221,10 @@
 				},
 				"41,14": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 8,
+					"itineraryEndID": "329",
+					"shuntTarget": true,
 					"trackID": "Eb_It329"
 				},
 				"41,6": {
@@ -2249,12 +2315,17 @@
 				},
 				"44,14": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 8,
+					"itineraryEndID": "93",
+					"shuntTarget": true,
 					"trackID": "Eb_It93"
 				},
 				"45,11": {
 					"electrified": true,
-					"id": 8
+					"forbidTrain": true,
+					"id": 8,
+					"shuntTarget": true
 				},
 				"45,12": {
 					"electrified": true,
@@ -2310,7 +2381,10 @@
 				},
 				"46,18": {
 					"electrified": true,
-					"id": 71
+					"forbidTrain": true,
+					"id": 71,
+					"itineraryEndID": "B4",
+					"shuntTarget": true
 				},
 				"47,12": {
 					"electrified": true,
@@ -2409,21 +2483,31 @@
 				},
 				"51,12": {
 					"electrified": true,
+					"forbidShunt": true,
 					"id": 69,
-					"itineraryEndID": "Bcz_N"
+					"itineraryEndID": "Bcz_N",
+					"trainTarget": true
 				},
 				"51,13": {
 					"electrified": true,
+					"forbidShunt": true,
 					"id": 70,
-					"itineraryEndID": "Bcz"
+					"itineraryEndID": "Bcz",
+					"trainTarget": true
 				},
 				"51,14": {
 					"electrified": true,
-					"id": 71
+					"forbidTrain": true,
+					"id": 71,
+					"itineraryEndID": "B2",
+					"shuntTarget": true
 				},
 				"51,15": {
 					"electrified": true,
-					"id": 71
+					"forbidTrain": true,
+					"id": 71,
+					"itineraryEndID": "B3",
+					"shuntTarget": true
 				},
 				"6,10": {
 					"electrified": true,

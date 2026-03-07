@@ -10,7 +10,8 @@ local Pathfinder = Class:derive("Pathfinder")
 function Pathfinder:new(start, target)
     self.start = start
     self.target = target
-    self.targetSpeed = 160
+    self.speed = 160
+    self.mode = PathMode.TRAIN
 
     ---@alias TraversalPossibility {tile: Tile, direction: integer, prevDirection: integer?, path: {tile: Tile, dir1: integer?, dir2: integer?}[], speed: number?, cost: number}
     ---@type TraversalPossibility[]
@@ -19,6 +20,12 @@ function Pathfinder:new(start, target)
     self.winner = nil -- The possiblity which is the first found path.
 
     self.possibilitySortFn = function(a, b) return a.cost < b.cost end
+end
+
+---Sets the dispatching mode for this Pathfinder. This affects the possible paths and the displayed signal.
+---@param mode PathMode The mode to be set.
+function Pathfinder:setMode(mode)
+    self.mode = mode
 end
 
 ---Calculates the path based on the provided start and end point of this Pathfinder.
@@ -71,19 +78,23 @@ function Pathfinder:evaluatePossibility(possibility)
     local directions = tile:getPossibleTrackDirections(_InvertDir(possibility.direction))
     -- Each direction is a single possibility.
     for i, direction in ipairs(directions) do
-        -- Copy the paths and add our new tile to it.
-        local path = _Utils.copyTable(possibility.path)
-        table.insert(path, {tile = tile, dir1 = _InvertDir(possibility.direction), dir2 = direction})
-        -- Check if we need to lower the speed.
-        local speed = possibility.speed
-        local prevTileSpeed = possibility.tile:getSpeedForDirections(possibility.prevDirection and _InvertDir(possibility.prevDirection), possibility.direction)
-        if prevTileSpeed then
-            speed = speed and math.min(speed, prevTileSpeed) or prevTileSpeed
+        -- Check if we can go there in the first place.
+        local nextTile = tile:getNeighbor(direction)
+        if nextTile:isPathModeAllowed(self.mode) then
+            -- Copy the paths and add our new tile to it.
+            local path = _Utils.copyTable(possibility.path)
+            table.insert(path, {tile = tile, dir1 = _InvertDir(possibility.direction), dir2 = direction})
+            -- Check if we need to lower the speed.
+            local speed = possibility.speed
+            local prevTileSpeed = possibility.tile:getSpeedForDirections(possibility.prevDirection and _InvertDir(possibility.prevDirection), possibility.direction)
+            if prevTileSpeed then
+                speed = speed and math.min(speed, prevTileSpeed) or prevTileSpeed
+            end
+            -- Assemble the possiblity and add it to the list.
+            local newPossibility = {tile = tile, direction = direction, prevDirection = possibility.direction, path = path, speed = speed}
+            newPossibility.cost = self:calculateCost(newPossibility)
+            table.insert(self.possibilities, newPossibility)
         end
-        -- Assemble the possiblity and add it to the list.
-        local newPossibility = {tile = tile, direction = direction, prevDirection = possibility.direction, path = path, speed = speed}
-        newPossibility.cost = self:calculateCost(newPossibility)
-        table.insert(self.possibilities, newPossibility)
     end
 end
 
@@ -103,7 +114,7 @@ function Pathfinder:calculateCost(possibility)
             cost = cost + 1
         end
     end
-    local speedPenaltyMult = possibility.speed and math.max(self.targetSpeed / possibility.speed, 1) or 1
+    local speedPenaltyMult = possibility.speed and math.max(self.speed / possibility.speed, 1) or 1
     cost = cost * speedPenaltyMult
     -- Calculate the heuristic (estimate cost to go).
     local tile = possibility.tile:getNeighbor(possibility.direction)
@@ -172,18 +183,26 @@ end
 ---Sets the semaphore at the beginning of this path to display a clear signal.
 ---@private
 function Pathfinder:setSemaphore()
-    ---@type string|Speed?
-    local nextSpeed = 1
-    local lastTile = self.winner.path[#self.winner.path].tile
-    if lastTile:isSemaphore() then
-        nextSpeed = lastTile:getSemaphoreID()
+    if self.mode == PathMode.TRAIN then
+        ---@type string|Speed?
+        local nextSpeed = 1
+        local lastTile = self.winner.path[#self.winner.path].tile
+        if lastTile:isSemaphore() then
+            nextSpeed = lastTile:getSemaphoreID()
+        end
+        self.winner.path[1].tile:sendSemaphoreState(_SpeedToID(self.winner.speed), nextSpeed)
+    elseif self.mode == PathMode.SHUNT then
+        self.winner.path[1].tile:sendSemaphoreState(Speed.MS2)
     end
-    self.winner.path[1].tile:sendSemaphoreState(_SpeedToID(self.winner.speed), nextSpeed)
 end
 
 ---Returns whether this path can be dispatched.
 ---@return boolean
 function Pathfinder:canBeDispatched()
+    -- The path must exist.
+    if not self.winner then
+        return false
+    end
     -- All tracks must be clear.
     for i = 1, #self.winner.path - 1 do
         local node = self.winner.path[i]

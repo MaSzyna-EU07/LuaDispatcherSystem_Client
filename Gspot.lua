@@ -910,7 +910,7 @@ Gspot.checkbox = {
 		end
 		if this.label then
 			setColor(this.style.labelfg or this.style.fg)
-			lgprint(this.label, pos.x + pos.w + (this.style.unit / 2), pos.y + ((this.pos.h - this.style.font:getHeight()) / 2))
+			lgprint(this.label, pos.x + pos.w + (this.style.unit / 4), pos.y + ((this.pos.h - this.style.font:getHeight()) / 2))
 		end
 	end,
 }

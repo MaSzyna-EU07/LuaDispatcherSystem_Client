@@ -299,7 +299,7 @@ function com.readCall(name, params)
 	elseif name == "setSwitch" then
 		local switch = com_ids.switches[params.switchID]
 		local station = com_ids.stations[switch.sid]
-		_Obj:setSwitchState(switch.name, timeTicks, _Utils.getBit(params.state, 1))
+		_Obj:setSwitchState(switch.name, timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 5))
 	elseif name == "setSemaphore" then
 		local semaphore = com_ids.semaphores[params.semaphoreID]
 		local station = com_ids.stations[semaphore.sid]

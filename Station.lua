@@ -34,6 +34,7 @@ function Station:new(name, shortcut)
 	---@type {x: integer, y: integer}[]
 	self.selectedTiles = {}
 	self.activeX, self.activeY = nil, nil
+	self.activeMode = PathMode.TRAIN
 
 	self.canvas = nil
 	self:generateCanvas()
@@ -299,6 +300,7 @@ end
 ---@private
 function Station:handleRightClick()
 	-- Right click: remove a tile, flip selection or switch a switch
+	local shift = love.keyboard.isDown("lshift") or love.keyboard.isDown("rshift")
 	if self.hoverX and self.hoverY then
 		if type(_Picker.selection) == "number" then
 			local tile = assert(self:getHoveredTile())
@@ -312,16 +314,16 @@ function Station:handleRightClick()
 			if tile:isSwitch() then
 				local suffix = nil
 				if tile:isDoubleSwitch() then
-					local shift = love.keyboard.isDown("lshift") or love.keyboard.isDown("rshift")
 					suffix = shift and "cd" or "ab"
 				end
-				tile:sendSwitchState(not tile:getSwitchState(suffix), suffix)
+				tile:sendSwitchState(not tile:getSwitchState(suffix).state, suffix)
 			elseif tile:isSemaphore() then
 				self.activeX, self.activeY = self.hoverX, self.hoverY
+				self.activeMode = shift and PathMode.SHUNT or PathMode.TRAIN
 			elseif self.activeX and self.activeY then
-				local itineraryEndID = tile:getItineraryEndID()
-				if itineraryEndID then
+				if tile:isTargetForMode(self.activeMode) then
 					local pathfinder = Pathfinder(assert(self:getTile(self.activeX, self.activeY)), tile)
+					pathfinder:setMode(self.activeMode)
 					pathfinder:calculatePath()
 					pathfinder:dispatch()
 				end
@@ -455,7 +457,7 @@ function Station:drawHover()
 		local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
 		self:getHoveredTile():drawHover()
 		-- Draw tile ghost.
-		_DrawTile(x, y, _Picker.selection, _Picker.electrified, false, false, 0, "s1", 1, 0.5)
+		_DrawTile(x, y, _Picker.selection, _Picker.electrified, false, false, false, 0, "s1", 1, 0.5)
 	elseif _Picker.selection == "addColumn" then
 		-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
 		local hx = self.hoverX + math.floor(self.hoverPartX * 2)
@@ -516,7 +518,7 @@ function Station:drawClickable()
 	end
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
-			if tile:getItineraryEndID() then
+			if tile:isTargetForMode(self.activeMode) then
 				tile:drawClickable()
 			end
 		end
