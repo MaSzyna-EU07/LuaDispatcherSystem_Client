@@ -33,8 +33,10 @@ function Station:new(name, shortcut)
 	self.hoverPartX, self.hoverPartY = nil, nil
 	---@type {x: integer, y: integer}[]
 	self.selectedTiles = {}
+	self.dragX, self.dragY = nil, nil
 	self.activeX, self.activeY = nil, nil
 	self.activeMode = PathMode.TRAIN
+	self.activeW24 = true
 
 	self.canvas = nil
 	self:generateCanvas()
@@ -280,7 +282,7 @@ function Station:handleLeftClick()
 		elseif _Picker.selection == "delRow" then
 			self:deleteRow(self.hoverY)
 		elseif _Picker.selection == "properties" then
-			if not love.keyboard.isDown("lshift") and not love.keyboard.isDown("rshift") then
+			if not _Utils.isShiftPressed() and not _Utils.isCtrlPressed() then
 				self:unselectAllTiles()
 			end
 			if not self:isTileSelected(self.hoverX, self.hoverY) then
@@ -288,6 +290,7 @@ function Station:handleLeftClick()
 			else
 				self:unselectTile(self.hoverX, self.hoverY)
 			end
+			self.dragX, self.dragY = self.hoverX, self.hoverY
 		end
 	else
 		if _Picker.selection == "properties" then
@@ -296,11 +299,31 @@ function Station:handleLeftClick()
 	end
 end
 
+---Handles the left click release action.
+---@private
+function Station:handleLeftUnclick()
+	if _Picker.selection == "properties" then
+		if self.dragX and self.dragY then
+			if self.hoverX and self.hoverY then
+				for x = math.min(self.dragX, self.hoverX), math.max(self.dragX, self.hoverX) do
+					for y = math.min(self.dragY, self.hoverY), math.max(self.dragY, self.hoverY) do
+						if _Utils.isCtrlPressed() then
+							self:unselectTile(x, y)
+						else
+							self:selectTile(x, y)
+						end
+					end
+				end
+			end
+			self.dragX, self.dragY = nil, nil
+		end
+	end
+end
+
 ---Handles the right click action.
 ---@private
 function Station:handleRightClick()
 	-- Right click: remove a tile, flip selection or switch a switch
-	local shift = love.keyboard.isDown("lshift") or love.keyboard.isDown("rshift")
 	if self.hoverX and self.hoverY then
 		if type(_Picker.selection) == "number" then
 			local tile = assert(self:getHoveredTile())
@@ -312,16 +335,25 @@ function Station:handleRightClick()
 		elseif _Picker.selection == "properties" then
 			local tile = assert(self:getHoveredTile())
 			if tile:isSwitch() then
-				local suffix = nil
-				if tile:isDoubleSwitch() then
-					suffix = shift and "cd" or "ab"
+				if tile:isSwitchForced() then
+					tile:sendSwitchUnforce()
+				else
+					local suffix = nil
+					if tile:isDoubleSwitch() then
+						suffix = _Utils.isShiftPressed() and "cd" or "ab"
+					end
+					tile:sendSwitchState(not tile:getSwitchState(suffix).state, suffix)
 				end
-				tile:sendSwitchState(not tile:getSwitchState(suffix).state, suffix)
 			elseif tile:isSemaphore() then
-				self.activeX, self.activeY = self.hoverX, self.hoverY
-				self.activeMode = shift and PathMode.SHUNT or PathMode.TRAIN
+				if tile:isSemaphoreStop() then
+					self.activeX, self.activeY = self.hoverX, self.hoverY
+					self.activeMode = _Utils.isShiftPressed() and PathMode.SHUNT or PathMode.TRAIN
+					self.activeW24 = not tile:getSemaphoreNoW24()
+				else
+					tile:sendSemaphoreUnreserve()
+				end
 			elseif self.activeX and self.activeY then
-				if tile:isTargetForMode(self.activeMode) then
+				if tile:isTargetForMode(self.activeMode) and tile:isTargetForW24(self.activeW24) then
 					local pathfinder = Pathfinder(assert(self:getTile(self.activeX, self.activeY)), tile)
 					pathfinder:setMode(self.activeMode)
 					pathfinder:calculatePath()
@@ -329,6 +361,10 @@ function Station:handleRightClick()
 				end
 				self.activeX, self.activeY = nil, nil
 			end
+		end
+	else
+		if _Picker.selection == "properties" then
+			self.activeX, self.activeY = nil, nil
 		end
 	end
 end
@@ -374,6 +410,24 @@ function Station:mousepressed(x, y, button)
 	elseif button == 3 then
 		self:handleMiddleClick()
 	end
+end
+
+---Executed when a mouse button is released.
+---@param x integer The X coordinate of mouse position.
+---@param y integer The Y coordinate of mouse position.
+---@param button integer The mouse button.
+function Station:mousereleased(x, y, button)
+	if button == 1 then
+		self:handleLeftUnclick()
+	end
+end
+
+---Executed when the mouse cursor is moved.
+---@param x integer The X coordinate of mouse position.
+---@param y integer The Y coordinate of mouse position.
+---@param dx integer The X movement, in pixels.
+---@param dy integer The Y movement, in pixels.
+function Station:mousemoved(x, y, dx, dy)
 end
 
 ---Serializes the Station's data to be saved as a file.
@@ -422,6 +476,7 @@ function Station:draw()
 	self:drawSelection()
 	self:drawActive()
 	self:drawClickable()
+	self:drawRectSelection()
 	love.graphics.setCanvas()
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.draw(self.canvas, self.x + 0.5, self.y + 0.5, 0, self.SCALE)
@@ -518,9 +573,27 @@ function Station:drawClickable()
 	end
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
-			if tile:isTargetForMode(self.activeMode) then
+			if tile:isTargetForMode(self.activeMode) and tile:isTargetForW24(self.activeW24) then
 				tile:drawClickable()
 			end
+		end
+	end
+end
+
+---Draws the rectangular selection frame.
+---@private
+function Station:drawRectSelection()
+	if not self.dragX or not self.dragY or not self.hoverX or not self.hoverY then
+		return
+	end
+	-- Do not display the frame if we are not selecting more than one tile.
+	if self.hoverX == self.dragX and self.hoverY == self.dragY then
+		return
+	end
+	for x = math.min(self.dragX, self.hoverX), math.max(self.dragX, self.hoverX) do
+		for y = math.min(self.dragY, self.hoverY), math.max(self.dragY, self.hoverY) do
+			local tile = assert(self:getTile(x, y))
+			tile:drawRectSelection()
 		end
 	end
 end

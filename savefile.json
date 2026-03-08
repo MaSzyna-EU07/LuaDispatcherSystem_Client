@@ -505,7 +505,7 @@
 			"shortcut": "Eb",
 			"tiles": {
 				"10,10": {
-					"electrified": true,
+					"electrified": false,
 					"forbidTrain": true,
 					"id": 8,
 					"itineraryEndID": "6a",
@@ -694,7 +694,7 @@
 					"trackID": "Eb_It3"
 				},
 				"16,9": {
-					"electrified": true,
+					"electrified": false,
 					"id": 54,
 					"trackID": "Eb_It8"
 				},
@@ -729,7 +729,7 @@
 					"trackID": "Eb_Iz22"
 				},
 				"17,9": {
-					"electrified": true,
+					"electrified": false,
 					"forbidTrain": true,
 					"id": 8,
 					"itineraryEndID": "8",
@@ -764,12 +764,12 @@
 					"trackID": "Eb_Iz22"
 				},
 				"18,17": {
-					"electrified": true,
+					"electrified": false,
 					"id": 54,
 					"trackID": "Eb_It11"
 				},
 				"18,9": {
-					"electrified": true,
+					"electrified": false,
 					"id": 57,
 					"trackID": "Eb_It8"
 				},
@@ -799,7 +799,7 @@
 					"trackID": "Eb_Iz26"
 				},
 				"19,17": {
-					"electrified": true,
+					"electrified": false,
 					"forbidTrain": true,
 					"id": 8,
 					"itineraryEndID": "11",
@@ -814,7 +814,7 @@
 					"trackID": "Eb_Iz38"
 				},
 				"2,10": {
-					"electrified": true,
+					"electrified": false,
 					"forbidTrain": true,
 					"id": 71,
 					"itineraryEndID": "B1",
@@ -833,6 +833,7 @@
 					"forbidShunt": true,
 					"id": 70,
 					"itineraryEndID": "Tp_N",
+					"targetW24": true,
 					"trackID": "Tp1-Eb1@LK204.1",
 					"trainTarget": true
 				},
@@ -868,7 +869,7 @@
 					"trackID": "Eb_Iz26"
 				},
 				"20,17": {
-					"electrified": true,
+					"electrified": false,
 					"id": 61,
 					"semaphoreID": "Eb_Tm14",
 					"trackID": "Eb_Iz19"
@@ -918,13 +919,13 @@
 					"trackID": "Eb_Iz30"
 				},
 				"21,17": {
-					"electrified": true,
+					"electrified": false,
 					"id": 19,
 					"switchID": "Eb_19",
 					"trackID": "Eb_Iz19"
 				},
 				"21,18": {
-					"electrified": true,
+					"electrified": false,
 					"id": 54,
 					"trackID": "Eb_Iz20"
 				},
@@ -979,7 +980,7 @@
 					"trackID": "Eb_Iz32"
 				},
 				"22,18": {
-					"electrified": true,
+					"electrified": false,
 					"id": 34,
 					"switchID": "Eb_20",
 					"trackID": "Eb_Iz20"
@@ -1030,25 +1031,25 @@
 					"trackID": "Eb_Iz32"
 				},
 				"23,18": {
-					"electrified": true,
+					"electrified": false,
 					"id": 68,
 					"semaphoreID": "Eb_Tm15",
 					"trackID": "Eb_Iz32"
 				},
 				"23,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 54
 				},
 				"23,4": {
-					"electrified": true,
+					"electrified": false,
 					"id": 54
 				},
 				"23,5": {
-					"electrified": true,
+					"electrified": false,
 					"id": 54
 				},
 				"23,6": {
-					"electrified": true,
+					"electrified": false,
 					"id": 54
 				},
 				"23,9": {
@@ -1103,19 +1104,19 @@
 					"trackID": "Eb_It319"
 				},
 				"24,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 4
 				},
 				"24,4": {
-					"electrified": true,
+					"electrified": false,
 					"id": 4
 				},
 				"24,5": {
-					"electrified": true,
+					"electrified": false,
 					"id": 4
 				},
 				"24,6": {
-					"electrified": true,
+					"electrified": false,
 					"id": 4
 				},
 				"24,9": {
@@ -1164,19 +1165,19 @@
 					"trackID": "Eb_Iz55"
 				},
 				"25,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 1
 				},
 				"25,4": {
-					"electrified": true,
+					"electrified": false,
 					"id": 1
 				},
 				"25,5": {
-					"electrified": true,
+					"electrified": false,
 					"id": 12
 				},
 				"25,6": {
-					"electrified": true,
+					"electrified": false,
 					"id": 12
 				},
 				"25,9": {
@@ -1217,15 +1218,15 @@
 					"trackID": "Eb_Iz55"
 				},
 				"26,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 1
 				},
 				"26,4": {
-					"electrified": true,
+					"electrified": false,
 					"id": 29
 				},
 				"26,5": {
-					"electrified": true,
+					"electrified": false,
 					"id": 5
 				},
 				"26,8": {
@@ -1271,11 +1272,11 @@
 					"trackID": "Eb_Iz55"
 				},
 				"27,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 17
 				},
 				"27,4": {
-					"electrified": true,
+					"electrified": false,
 					"id": 5
 				},
 				"27,7": {
@@ -1329,7 +1330,7 @@
 					"trackID": "Eb_Iz56"
 				},
 				"28,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 17
 				},
 				"28,6": {
@@ -1390,7 +1391,7 @@
 					"trackID": "Eb_Iz59"
 				},
 				"29,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 1
 				},
 				"29,5": {
@@ -1422,7 +1423,7 @@
 					"trackID": "Eb_It56"
 				},
 				"3,10": {
-					"electrified": true,
+					"electrified": false,
 					"id": 1
 				},
 				"3,11": {
@@ -1475,13 +1476,13 @@
 					"trackID": "Eb_Iz60"
 				},
 				"30,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 61,
 					"semaphoreID": "Eb_Tm26",
 					"trackID": "Eb_Iz51"
 				},
 				"30,4": {
-					"electrified": true,
+					"electrified": false,
 					"id": 5,
 					"trackID": "Eb_Iz51"
 				},
@@ -1554,11 +1555,11 @@
 					"trackID": "Eb_Iz60"
 				},
 				"31,2": {
-					"electrified": true,
+					"electrified": false,
 					"id": 54
 				},
 				"31,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 17,
 					"switchID": "Eb_51",
 					"trackID": "Eb_Iz51"
@@ -1630,11 +1631,11 @@
 					"trackID": "Eb_Iz60"
 				},
 				"32,2": {
-					"electrified": true,
+					"electrified": false,
 					"id": 8
 				},
 				"32,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 62,
 					"semaphoreID": "Eb_Tm28",
 					"trackID": "Eb_Iz51"
@@ -1729,11 +1730,11 @@
 					"trackID": "Eb_It327"
 				},
 				"33,2": {
-					"electrified": true,
+					"electrified": false,
 					"id": 8
 				},
 				"33,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 1
 				},
 				"33,5": {
@@ -1817,11 +1818,11 @@
 					"trackID": "Eb_It327"
 				},
 				"34,2": {
-					"electrified": true,
+					"electrified": false,
 					"id": 8
 				},
 				"34,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 1
 				},
 				"34,5": {
@@ -1875,16 +1876,16 @@
 					"trackID": "Eb_It321"
 				},
 				"35,15": {
-					"electrified": true,
+					"electrified": false,
 					"id": 54,
 					"trackID": "Eb_Iz74"
 				},
 				"35,2": {
-					"electrified": true,
+					"electrified": false,
 					"id": 1
 				},
 				"35,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 12
 				},
 				"35,5": {
@@ -1938,12 +1939,12 @@
 					"trackID": "Eb_It321"
 				},
 				"36,15": {
-					"electrified": true,
+					"electrified": false,
 					"id": 57,
 					"trackID": "Eb_Iz74"
 				},
 				"36,2": {
-					"electrified": true,
+					"electrified": false,
 					"id": 17
 				},
 				"36,5": {
@@ -2000,12 +2001,12 @@
 					"trackID": "Eb_Iz74"
 				},
 				"37,15": {
-					"electrified": true,
+					"electrified": false,
 					"id": 12,
 					"trackID": "Eb_Iz74"
 				},
 				"37,2": {
-					"electrified": true,
+					"electrified": false,
 					"id": 11
 				},
 				"37,5": {
@@ -2062,7 +2063,7 @@
 					"trackID": "Eb_Iz74"
 				},
 				"38,3": {
-					"electrified": true,
+					"electrified": false,
 					"id": 6
 				},
 				"38,6": {
@@ -2118,7 +2119,7 @@
 					"trackID": "Eb_Iz86"
 				},
 				"39,4": {
-					"electrified": true,
+					"electrified": false,
 					"id": 6
 				},
 				"39,7": {
@@ -2138,7 +2139,7 @@
 					"trackID": "Eb_Iz81"
 				},
 				"4,10": {
-					"electrified": true,
+					"electrified": false,
 					"id": 1
 				},
 				"4,11": {
@@ -2181,7 +2182,7 @@
 					"trackID": "Eb_Iz86"
 				},
 				"40,5": {
-					"electrified": true,
+					"electrified": false,
 					"id": 6
 				},
 				"40,8": {
@@ -2220,7 +2221,7 @@
 					"trackID": "Eb_Iz95"
 				},
 				"41,14": {
-					"electrified": true,
+					"electrified": false,
 					"forbidTrain": true,
 					"id": 8,
 					"itineraryEndID": "329",
@@ -2228,17 +2229,17 @@
 					"trackID": "Eb_It329"
 				},
 				"41,6": {
-					"electrified": true,
+					"electrified": false,
 					"id": 14
 				},
 				"41,7": {
-					"electrified": true,
+					"electrified": false,
 					"id": 63,
 					"semaphoreID": "Eb_Tm51",
 					"trackID": "Eb_Iz90"
 				},
 				"41,8": {
-					"electrified": true,
+					"electrified": false,
 					"id": 59,
 					"trackID": "Eb_Iz90"
 				},
@@ -2267,12 +2268,12 @@
 					"trackID": "Eb_Iz95"
 				},
 				"42,14": {
-					"electrified": true,
+					"electrified": false,
 					"id": 53,
 					"trackID": "Eb_It329"
 				},
 				"43,11": {
-					"electrified": true,
+					"electrified": false,
 					"id": 58,
 					"trackID": "Eb_Iz92"
 				},
@@ -2290,12 +2291,12 @@
 					"trackID": "Eb_Iz99"
 				},
 				"43,14": {
-					"electrified": true,
+					"electrified": false,
 					"id": 54,
 					"trackID": "Eb_It93"
 				},
 				"44,11": {
-					"electrified": true,
+					"electrified": false,
 					"id": 62,
 					"semaphoreID": "Eb_Tm41",
 					"trackID": "Eb_Iz92"
@@ -2314,7 +2315,7 @@
 					"trackID": "Eb_Iz99"
 				},
 				"44,14": {
-					"electrified": true,
+					"electrified": false,
 					"forbidTrain": true,
 					"id": 8,
 					"itineraryEndID": "93",
@@ -2322,7 +2323,7 @@
 					"trackID": "Eb_It93"
 				},
 				"45,11": {
-					"electrified": true,
+					"electrified": false,
 					"forbidTrain": true,
 					"id": 8,
 					"shuntTarget": true
@@ -2338,7 +2339,7 @@
 					"trackID": "Eb_ItSzn1"
 				},
 				"45,14": {
-					"electrified": true,
+					"electrified": false,
 					"id": 26,
 					"switchFlip": true,
 					"switchFlipABCD": true,
@@ -2346,7 +2347,7 @@
 					"trackID": "Eb_Iz100"
 				},
 				"46,11": {
-					"electrified": true,
+					"electrified": false,
 					"id": 53
 				},
 				"46,12": {
@@ -2360,27 +2361,27 @@
 					"trackID": "Eb_ItSzn1"
 				},
 				"46,14": {
-					"electrified": true,
+					"electrified": false,
 					"id": 19,
 					"switchID": "Eb_103",
 					"trackID": "Eb_Iz103"
 				},
 				"46,15": {
-					"electrified": true,
+					"electrified": false,
 					"id": 14,
 					"trackID": "Eb_Iz100"
 				},
 				"46,16": {
-					"electrified": true,
+					"electrified": false,
 					"id": 60,
 					"trackID": "Eb_Iz100"
 				},
 				"46,17": {
-					"electrified": true,
+					"electrified": false,
 					"id": 2
 				},
 				"46,18": {
-					"electrified": true,
+					"electrified": false,
 					"forbidTrain": true,
 					"id": 71,
 					"itineraryEndID": "B4",
@@ -2397,12 +2398,12 @@
 					"trackID": "Eb_ItSzn1"
 				},
 				"47,14": {
-					"electrified": true,
+					"electrified": false,
 					"id": 58,
 					"trackID": "Eb_Iz103"
 				},
 				"47,15": {
-					"electrified": true,
+					"electrified": false,
 					"id": 10,
 					"trackID": "Eb_Iz103"
 				},
@@ -2417,13 +2418,13 @@
 					"trackID": "Eb_ItSzn1"
 				},
 				"48,14": {
-					"electrified": true,
+					"electrified": false,
 					"id": 62,
 					"semaphoreID": "Eb_Tm46",
 					"trackID": "Eb_Iz103"
 				},
 				"48,15": {
-					"electrified": true,
+					"electrified": false,
 					"id": 58,
 					"trackID": "Eb_Iz103"
 				},
@@ -2440,17 +2441,17 @@
 					"trackID": "Eb_ItSzn1"
 				},
 				"49,14": {
-					"electrified": true,
+					"electrified": false,
 					"id": 1
 				},
 				"49,15": {
-					"electrified": true,
+					"electrified": false,
 					"id": 62,
 					"semaphoreID": "Eb_Tm45",
 					"trackID": "Eb_Iz103"
 				},
 				"5,10": {
-					"electrified": true,
+					"electrified": false,
 					"id": 61,
 					"semaphoreID": "Eb_Tm4",
 					"trackID": "Eb_Iz1"
@@ -2467,18 +2468,20 @@
 				},
 				"50,12": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "Eb102-Bc2@LK204.2"
 				},
 				"50,13": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "Eb101-Bc1@LK204.1"
 				},
 				"50,14": {
-					"electrified": true,
+					"electrified": false,
 					"id": 1
 				},
 				"50,15": {
-					"electrified": true,
+					"electrified": false,
 					"id": 1
 				},
 				"51,12": {
@@ -2486,6 +2489,8 @@
 					"forbidShunt": true,
 					"id": 69,
 					"itineraryEndID": "Bcz_N",
+					"targetW24": true,
+					"trackID": "Eb102-Bc2@LK204.2",
 					"trainTarget": true
 				},
 				"51,13": {
@@ -2493,24 +2498,25 @@
 					"forbidShunt": true,
 					"id": 70,
 					"itineraryEndID": "Bcz",
+					"trackID": "Eb101-Bc1@LK204.1",
 					"trainTarget": true
 				},
 				"51,14": {
-					"electrified": true,
+					"electrified": false,
 					"forbidTrain": true,
 					"id": 71,
 					"itineraryEndID": "B2",
 					"shuntTarget": true
 				},
 				"51,15": {
-					"electrified": true,
+					"electrified": false,
 					"forbidTrain": true,
 					"id": 71,
 					"itineraryEndID": "B3",
 					"shuntTarget": true
 				},
 				"6,10": {
-					"electrified": true,
+					"electrified": false,
 					"id": 19,
 					"switchID": "Eb_1",
 					"trackID": "Eb_Iz1"
@@ -2525,10 +2531,11 @@
 					"electrified": true,
 					"id": 61,
 					"semaphoreID": "Eb_A",
+					"semaphoreNoW24": false,
 					"trackID": "Eb_ItA"
 				},
 				"7,10": {
-					"electrified": true,
+					"electrified": false,
 					"id": 53,
 					"trackID": "Eb_Iz1"
 				},
@@ -2556,7 +2563,7 @@
 					"trackID": "Eb_Iz3"
 				},
 				"9,10": {
-					"electrified": true,
+					"electrified": false,
 					"id": 54,
 					"trackID": "Eb_It6a"
 				},
@@ -2585,6 +2592,7 @@
 					"electrified": true,
 					"id": 62,
 					"semaphoreID": "Tp_L",
+					"semaphoreNoW24": true,
 					"trackID": "Tp_ItL"
 				},
 				"10,4": {
@@ -2607,32 +2615,41 @@
 					"electrified": true,
 					"id": 69,
 					"itineraryEndID": "Eb_N",
-					"trackID": "Tp2-Eb2@LK204.2"
+					"targetW24": true,
+					"trackID": "Tp2-Eb2@LK204.2",
+					"trainTarget": true
 				},
 				"12,4": {
 					"electrified": true,
 					"id": 70,
 					"itineraryEndID": "Eb",
-					"trackID": "Tp1-Eb1@LK204.1"
+					"trackID": "Tp1-Eb1@LK204.1",
+					"trainTarget": true
 				},
 				"2,2": {
 					"electrified": true,
 					"id": 71,
-					"itineraryEndID": "EZ"
+					"itineraryEndID": "EZ",
+					"trackID": "Tp1-EZ1@LK254",
+					"trainTarget": true
 				},
 				"2,3": {
 					"electrified": true,
 					"id": 69,
-					"itineraryEndID": "GE"
+					"itineraryEndID": "GE",
+					"trainTarget": true
 				},
 				"2,4": {
 					"electrified": true,
 					"id": 70,
-					"itineraryEndID": "GE_N"
+					"itineraryEndID": "GE_N",
+					"targetW24": true,
+					"trainTarget": true
 				},
 				"3,2": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "Tp1-EZ1@LK254"
 				},
 				"3,3": {
 					"electrified": true,
@@ -2658,6 +2675,7 @@
 					"electrified": true,
 					"id": 61,
 					"semaphoreID": "Tp_J",
+					"semaphoreNoW24": true,
 					"trackID": "Tp_ItJ"
 				},
 				"5,2": {
@@ -2796,7 +2814,8 @@
 				},
 				"13,6": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It2a"
 				},
 				"14,4": {
 					"electrified": true,
@@ -2805,11 +2824,13 @@
 				},
 				"14,5": {
 					"electrified": true,
-					"id": 8
+					"id": 8,
+					"trackID": "EZ_It1"
 				},
 				"14,6": {
 					"electrified": true,
-					"id": 8
+					"id": 8,
+					"trackID": "EZ_It2a"
 				},
 				"15,4": {
 					"electrified": true,
@@ -2818,11 +2839,13 @@
 				},
 				"15,5": {
 					"electrified": true,
-					"id": 8
+					"id": 8,
+					"trackID": "EZ_It1"
 				},
 				"15,6": {
 					"electrified": true,
-					"id": 8
+					"id": 8,
+					"trackID": "EZ_It2a"
 				},
 				"16,4": {
 					"electrified": true,
@@ -2831,11 +2854,13 @@
 				},
 				"16,5": {
 					"electrified": true,
-					"id": 8
+					"id": 8,
+					"trackID": "EZ_It1"
 				},
 				"16,6": {
 					"electrified": true,
-					"id": 8
+					"id": 8,
+					"trackID": "EZ_It2a"
 				},
 				"17,4": {
 					"electrified": true,
@@ -2844,16 +2869,19 @@
 				},
 				"17,5": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It1"
 				},
 				"17,6": {
 					"electrified": true,
 					"id": 61,
-					"semaphoreID": "EZ_Tm15"
+					"semaphoreID": "EZ_Tm15",
+					"trackID": "EZ_Iz16"
 				},
 				"17,7": {
 					"electrified": true,
-					"id": 54
+					"id": 54,
+					"trackID": "EZ_It9"
 				},
 				"18,4": {
 					"electrified": true,
@@ -2862,15 +2890,19 @@
 				},
 				"18,5": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It1"
 				},
 				"18,6": {
 					"electrified": true,
-					"id": 19
+					"id": 19,
+					"switchID": "EZ_16",
+					"trackID": "EZ_Iz16"
 				},
 				"18,7": {
 					"electrified": true,
-					"id": 8
+					"id": 8,
+					"trackID": "EZ_It9"
 				},
 				"19,4": {
 					"electrified": true,
@@ -2879,15 +2911,20 @@
 				},
 				"19,5": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It1"
 				},
 				"19,6": {
 					"electrified": true,
-					"id": 19
+					"id": 19,
+					"switchID": "EZ_17",
+					"trackID": "EZ_Iz17"
 				},
 				"19,7": {
 					"electrified": true,
-					"id": 34
+					"id": 34,
+					"switchID": "EZ_18",
+					"trackID": "EZ_Iz18"
 				},
 				"2,2": {
 					"electrified": true,
@@ -2903,7 +2940,8 @@
 				},
 				"2,5": {
 					"electrified": true,
-					"id": 71
+					"id": 71,
+					"trackID": "Tp1-EZ1@LK254"
 				},
 				"20,4": {
 					"electrified": true,
@@ -2912,20 +2950,25 @@
 				},
 				"20,5": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It1"
 				},
 				"20,6": {
 					"electrified": true,
-					"id": 62
+					"id": 62,
+					"semaphoreID": "EZ_Tm18",
+					"trackID": "EZ_Iz17"
 				},
 				"20,7": {
 					"electrified": true,
-					"id": 58
+					"id": 58,
+					"trackID": "EZ_Iz17"
 				},
 				"20,8": {
 					"electrified": true,
 					"id": 68,
-					"semaphoreID": "EZ_Tm16"
+					"semaphoreID": "EZ_Tm16",
+					"trackID": "EZ_Iz18"
 				},
 				"21,4": {
 					"electrified": true,
@@ -2934,15 +2977,18 @@
 				},
 				"21,5": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It1"
 				},
 				"21,6": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It2b"
 				},
 				"21,8": {
 					"electrified": true,
-					"id": 10
+					"id": 10,
+					"trackID": "EZ_Iz17"
 				},
 				"22,4": {
 					"electrified": true,
@@ -2951,11 +2997,13 @@
 				},
 				"22,5": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It1"
 				},
 				"22,6": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It2b"
 				},
 				"22,7": {
 					"electrified": true,
@@ -2963,7 +3011,9 @@
 				},
 				"22,8": {
 					"electrified": true,
-					"id": 62
+					"id": 62,
+					"semaphoreID": "EZ_Tm17",
+					"trackID": "EZ_Iz17"
 				},
 				"23,4": {
 					"electrified": true,
@@ -2972,11 +3022,13 @@
 				},
 				"23,5": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It1"
 				},
 				"23,6": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It2b"
 				},
 				"23,7": {
 					"electrified": true,
@@ -2984,7 +3036,8 @@
 				},
 				"23,8": {
 					"electrified": true,
-					"id": 4
+					"id": 4,
+					"trackID": "EZ_It10"
 				},
 				"24,4": {
 					"electrified": true,
@@ -2993,11 +3046,13 @@
 				},
 				"24,5": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It1"
 				},
 				"24,6": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_It2b"
 				},
 				"24,7": {
 					"electrified": true,
@@ -3005,7 +3060,8 @@
 				},
 				"24,8": {
 					"electrified": true,
-					"id": 53
+					"id": 53,
+					"trackID": "EZ_It10"
 				},
 				"25,4": {
 					"electrified": true,
@@ -3069,7 +3125,8 @@
 				},
 				"3,2": {
 					"electrified": true,
-					"id": 20
+					"id": 20,
+					"switchID": "EZ_402"
 				},
 				"3,3": {
 					"electrified": true,
@@ -3081,7 +3138,8 @@
 				},
 				"3,5": {
 					"electrified": true,
-					"id": 4
+					"id": 4,
+					"trackID": "Tp1-EZ1@LK254"
 				},
 				"30,5": {
 					"electrified": true,
@@ -3138,11 +3196,15 @@
 				},
 				"4,2": {
 					"electrified": true,
-					"id": 61
+					"id": 61,
+					"semaphoreID": "EZ_Tm1",
+					"trackID": "EZ_Iz2"
 				},
 				"4,3": {
 					"electrified": true,
-					"id": 61
+					"id": 61,
+					"semaphoreID": "EZ_Tm2",
+					"trackID": "EZ_Iz2"
 				},
 				"4,4": {
 					"electrified": true,
@@ -3150,15 +3212,18 @@
 				},
 				"4,5": {
 					"electrified": true,
-					"id": 4
+					"id": 4,
+					"trackID": "Tp1-EZ1@LK254"
 				},
 				"5,2": {
 					"electrified": true,
-					"id": 11
+					"id": 11,
+					"trackID": "EZ_Iz2"
 				},
 				"5,3": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "EZ_Iz2"
 				},
 				"5,4": {
 					"electrified": true,
@@ -3166,20 +3231,25 @@
 				},
 				"5,5": {
 					"electrified": true,
-					"id": 4
+					"id": 4,
+					"trackID": "Tp1-EZ1@LK254"
 				},
 				"6,3": {
 					"electrified": true,
-					"id": 34
+					"id": 34,
+					"switchID": "EZ_2",
+					"trackID": "EZ_Iz2"
 				},
 				"6,4": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreID": "EZ_Tm3",
 					"trackID": "EZ_Iz3"
 				},
 				"6,5": {
 					"electrified": true,
-					"id": 1
+					"id": 1,
+					"trackID": "Tp1-EZ1@LK254"
 				},
 				"7,4": {
 					"electrified": true,
@@ -3207,7 +3277,8 @@
 				},
 				"9,4": {
 					"electrified": true,
-					"id": 4
+					"id": 4,
+					"trackID": "EZ_It30"
 				},
 				"9,5": {
 					"electrified": true,

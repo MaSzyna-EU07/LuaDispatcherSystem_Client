@@ -22,9 +22,12 @@ function UIPickerPane:new(ui)
 	-- Second column
 	self.ui:addLabel("picker", nil, "Pkt końc izol.", 10, 0, 5, 1)
 	self.ui:addInput("picker", "picker_itineraryEndID", 15, 0, 5, 1, self, self.updateItineraryEndID)
+	self.ui:addCheckbox("picker", "picker_electrified2", "Elektr.", 10, 1, 1, 1, self, self.updateElectrified2)
+	self.ui:addCheckbox("picker", "picker_targetW24", "W24", 15, 1, 1, 1, self, self.updateTargetW24)
 	self.ui:addLabel("picker", nil, "Zamień", 10, 2, 4, 1)
 	self.ui:addCheckbox("picker", "picker_switchFlip", "+/-", 13, 2, 1, 1, self, self.updateSwitchFlip)
 	self.ui:addCheckbox("picker", "picker_switchFlipABCD", "ab/cd", 16, 2, 1, 1, self, self.updateSwitchFlipABCD)
+	self.ui:addCheckbox("picker", "picker_semaphoreNoW24", "Brak W24", 10, 3, 1, 1, self, self.updateSemaphoreNoW24)
 	-- Third column
 	self.ui:addLabel("picker", nil, "Pkt końc.:", 20, 0, 5, 1)
 	self.ui:addCheckbox("picker", "picker_trainTarget", "poc.", 24, 0, 1, 1, self, self.updateTrainTarget)
@@ -76,6 +79,22 @@ function UIPickerPane:updateItineraryEndID(input)
 	end
 end
 
+function UIPickerPane:updateElectrified2(checkbox)
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = assert(station:getTile(coords.x, coords.y))
+		tile:setElectrified(checkbox.value)
+	end
+end
+
+function UIPickerPane:updateTargetW24(checkbox)
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = assert(station:getTile(coords.x, coords.y))
+		tile:setTargetW24(checkbox.value)
+	end
+end
+
 function UIPickerPane:updateSwitchFlip(checkbox)
 	local station = _Project:getCurrentStation()
 	for i, coords in ipairs(station.selectedTiles) do
@@ -89,6 +108,14 @@ function UIPickerPane:updateSwitchFlipABCD(checkbox)
 	for i, coords in ipairs(station.selectedTiles) do
 		local tile = assert(station:getTile(coords.x, coords.y))
 		tile:setSwitchFlipABCD(checkbox.value)
+	end
+end
+
+function UIPickerPane:updateSemaphoreNoW24(checkbox)
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = assert(station:getTile(coords.x, coords.y))
+		tile:setSemaphoreNoW24(checkbox.value)
 	end
 end
 

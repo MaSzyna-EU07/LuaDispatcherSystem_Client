@@ -43,7 +43,9 @@ function Picker:new()
 		{x = 65, y = 655, tileX = 2, action = "delRow"},
 		{x = 110, y = 655, tileX = 3, action = "addColumn"},
 		{x = 155, y = 655, tileX = 4, action = "delColumn"},
-		{x = 200, y = 655, tileX = 5, action = "properties"}
+		{x = 200, y = 655, tileX = 5, action = "properties"},
+		--{x = 245, y = 655, tileX = 8, action = "electrify"},
+		--{x = 290, y = 655, tileX = 9, action = "deelectrify"}
 	}
 
     self.selection = 0

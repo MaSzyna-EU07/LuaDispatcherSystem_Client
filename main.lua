@@ -201,6 +201,7 @@ function love.mousepressed(x, y, button)
 end
 
 function love.mousereleased(x, y, button)
+	_Project:mousereleased(x, y, button)
 	_UI:mousereleased(x, y, button)
 end
 

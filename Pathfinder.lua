@@ -12,6 +12,7 @@ function Pathfinder:new(start, target)
     self.target = target
     self.speed = 160
     self.mode = PathMode.TRAIN
+    self.electrified = true
 
     ---@alias TraversalPossibility {tile: Tile, direction: integer, prevDirection: integer?, path: {tile: Tile, dir1: integer?, dir2: integer?}[], speed: number?, cost: number}
     ---@type TraversalPossibility[]
@@ -26,6 +27,12 @@ end
 ---@param mode PathMode The mode to be set.
 function Pathfinder:setMode(mode)
     self.mode = mode
+end
+
+---Sets whether this Pathfinder is for an electric train. If so, it will not pathfind through non-electrified tiles.
+---@param electrified boolean The electrification mode to be set.
+function Pathfinder:setElectrified(electrified)
+    self.electrified = electrified
 end
 
 ---Calculates the path based on the provided start and end point of this Pathfinder.
@@ -80,7 +87,7 @@ function Pathfinder:evaluatePossibility(possibility)
     for i, direction in ipairs(directions) do
         -- Check if we can go there in the first place.
         local nextTile = tile:getNeighbor(direction)
-        if nextTile:isPathModeAllowed(self.mode) then
+        if nextTile:isPathModeAllowed(self.mode) and not (self.electrified and not nextTile:isElectrified()) then
             -- Copy the paths and add our new tile to it.
             local path = _Utils.copyTable(possibility.path)
             table.insert(path, {tile = tile, dir1 = _InvertDir(possibility.direction), dir2 = direction})
@@ -190,7 +197,7 @@ function Pathfinder:setSemaphore()
         if lastTile:isSemaphore() then
             nextSpeed = lastTile:getSemaphoreID()
         end
-        self.winner.path[1].tile:sendSemaphoreState(_SpeedToID(self.winner.speed), nextSpeed)
+        self.winner.path[1].tile:sendSemaphoreState(_SpeedToID(self.winner.speed), nextSpeed, lastTile:isTargetW24() and "w24" or nil)
     elseif self.mode == PathMode.SHUNT then
         self.winner.path[1].tile:sendSemaphoreState(Speed.MS2)
     end

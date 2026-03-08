@@ -46,12 +46,14 @@ function Tile:new(station, x, y, id, electrified)
 	self.switchFlip = false
 	self.switchFlipABCD = false
 	self.semaphoreID = nil
+	self.semaphoreNoW24 = false
 	self.itineraryEndID = nil -- TODO: Later on, check whether we need this. The only reason we would need this is for dispatcher algorithms.
 	self.maxSpeed = nil
 	self.maxSpeedPlus = nil
 	self.maxSpeedMinus = nil
 	self.trainTarget = false
 	self.shuntTarget = false
+	self.targetW24 = false
 	self.forbidTrain = false
 	self.forbidShunt = false
 end
@@ -72,6 +74,18 @@ end
 ---@return boolean
 function Tile:isSemaphore()
 	return self.id >= 61 and self.id <= 68
+end
+
+---Returns whether this Tile is electrified.
+---@return boolean
+function Tile:isElectrified()
+	return self.electrified
+end
+
+---Sets whether this Tile is electrified.
+---@param electrified boolean Whether this Tile should be electrified.
+function Tile:setElectrified(electrified)
+	self.electrified = electrified
 end
 
 ---Returns the track ID for this Tile. Returns `nil` if no track ID has been specified for this tile.
@@ -132,6 +146,18 @@ end
 ---@param semaphoreID string? The new semaphore ID.
 function Tile:setSemaphoreID(semaphoreID)
 	self.semaphoreID = semaphoreID ~= "" and semaphoreID or nil
+end
+
+---Returns whether this tile's semaphore has NO W24 sign.
+---@return boolean
+function Tile:getSemaphoreNoW24()
+	return self.semaphoreNoW24
+end
+
+---Sets whether this tile's semaphore has NO W24 sign.
+---@param semaphoreNoW24 boolean Whether this tile's semaphore has NO W24 sign.
+function Tile:setSemaphoreNoW24(semaphoreNoW24)
+	self.semaphoreNoW24 = semaphoreNoW24
 end
 
 ---Returns the itinerary end ID for this Tile. Returns `nil` if no such ID is specified.
@@ -204,6 +230,18 @@ end
 ---@param shuntTarget boolean Whether this Tile can be used as a target for shunting paths.
 function Tile:setShuntTarget(shuntTarget)
 	self.shuntTarget = shuntTarget
+end
+
+---Returns whether this Tile's target will make its pathfinding semaphore display a W24 signal.
+---@return boolean
+function Tile:isTargetW24()
+	return self.targetW24
+end
+
+---Sets whether this Tile's target will make its pathfinding semaphore display a W24 signal.
+---@param targetW24 boolean Whether this Tile's target will make its pathfinding semaphore display a W24 signal.
+function Tile:setTargetW24(targetW24)
+	self.targetW24 = targetW24
 end
 
 ---Returns whether this Tile is excluded from pathfinding train signals.
@@ -326,6 +364,13 @@ function Tile:isTargetForMode(mode)
 	return false
 end
 
+---Returns whether this Tile is a valid target for whether the semaphore pathfinding to it has a W24 signal.
+---@param w24 boolean Whether the initial semaphore can display the W24 signal.
+---@return boolean
+function Tile:isTargetForW24(w24)
+	return w24 or not self:isTargetW24()
+end
+
 ---Returns whether this Tile is traversible by the specified path mode.
 ---@param mode PathMode The path mode to be checked against.
 ---@return boolean
@@ -393,6 +438,13 @@ end
 ---@return SemaphoreState?
 function Tile:getSemaphoreState()
 	return self.semaphoreID and _Obj:getSemaphoreState(self.semaphoreID)
+end
+
+---Returns whether this tile's semaphore is displaying a stop signal (S1 or Ms1), or `nil` if there's no semaphore.
+---@return boolean?
+function Tile:isSemaphoreStop()
+	local state = self:getSemaphoreState()
+	return state and (state.speed == Speed.STOP or state.speed == Speed.MS1)
 end
 
 ---Returns the current maximum speed on this Tile, or `nil` if there is no speed limit.
@@ -490,12 +542,22 @@ function Tile:sendSwitchState(state, suffix)
 	end
 end
 
+---Sends a command to the server to unforce tile's switch. ("kasowanie rozprucia rozjazdu")
+function Tile:sendSwitchUnforce()
+	if self.switchID then
+		_Com.sendCommand("ju " .. self.switchID)
+		_Com.sendCommand("ju " .. self.switchID .. "ab")
+		_Com.sendCommand("ju " .. self.switchID .. "cd")
+	end
+end
+
 ---Sends a command to the server to set the speeds on this tile's semaphore.
 ---@param this Speed The current speed to be displayed.
 ---@param next Speed|string? The next speed or the next semaphore ID to be displayed.
-function Tile:sendSemaphoreState(this, next)
+---@param extras "w24"? An additional token to be sent, for example to show W24.
+function Tile:sendSemaphoreState(this, next, extras)
 	if self.semaphoreID then
-		_Com.sendCommand("s " .. self.semaphoreID .. " " .. this .. (next and (" " .. next) or ""))
+		_Com.sendCommand("s " .. self.semaphoreID .. " " .. this .. (next and (" " .. next) or "") .. (extras and (" " .. extras) or ""))
 	end
 end
 
@@ -566,7 +628,8 @@ local FRAME_COLORS = {
 	hover = {0, 1, 1},
 	selection = {0, 1, 0},
 	active = {1, 0, 1},
-	clickable = {1, 1, 0}
+	clickable = {1, 1, 0},
+	rectSelection = {0, 1, 1}
 }
 
 ---Draws this Tile's frame at the specified position.
@@ -601,6 +664,11 @@ function Tile:drawClickable()
 	self:drawFrame(FRAME_COLORS.clickable)
 end
 
+---Draws this Tile's rectangular selection frame at the specified position.
+function Tile:drawRectSelection()
+	self:drawFrame(FRAME_COLORS.rectSelection)
+end
+
 --####################################--
 ---------------- D A T A ---------------
 --####################################--
@@ -619,12 +687,14 @@ function Tile:serialize()
 		switchFlip = self.switchFlip or nil,
 		switchFlipABCD = self.switchFlipABCD or nil,
 		semaphoreID = self.semaphoreID,
+		semaphoreNoW24 = self.semaphoreNoW24,
 		itineraryEndID = self.itineraryEndID,
 		maxSpeed = self.maxSpeed,
 		maxSpeedPlus = self.maxSpeedPlus,
 		maxSpeedMinus = self.maxSpeedMinus,
 		trainTarget = self.trainTarget or nil,
 		shuntTarget = self.shuntTarget or nil,
+		targetW24 = self.targetW24 or nil,
 		forbidTrain = self.forbidTrain or nil,
 		forbidShunt = self.forbidShunt or nil
 	}
@@ -640,12 +710,14 @@ function Tile:deserialize(t)
 	self.switchFlip = t.switchFlip == true
 	self.switchFlipABCD = t.switchFlipABCD == true
 	self.semaphoreID = t.semaphoreID
+	self.semaphoreNoW24 = t.semaphoreNoW24
 	self.itineraryEndID = t.itineraryEndID
 	self.maxSpeed = t.maxSpeed
 	self.maxSpeedPlus = t.maxSpeedPlus
 	self.maxSpeedMinus = t.maxSpeedMinus
 	self.trainTarget = t.trainTarget == true
 	self.shuntTarget = t.shuntTarget == true
+	self.targetW24 = t.targetW24 == true
 	self.forbidTrain = t.forbidTrain == true
 	self.forbidShunt = t.forbidShunt == true
 end

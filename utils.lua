@@ -1147,4 +1147,20 @@ function utils.prettifyTable(tbl, indent, usedTables)
 	return result
 end
 
+--##########################################################--
+---------------- L O V E 2 D - S P E C I F I C ---------------
+--##########################################################--
+
+---Returns whether the Shift key is pressed.
+---@return boolean
+function utils.isShiftPressed()
+	return love.keyboard.isDown("lshift") or love.keyboard.isDown("rshift")
+end
+
+---Returns whether the Ctrl key is pressed.
+---@return boolean
+function utils.isCtrlPressed()
+	return love.keyboard.isDown("lctrl") or love.keyboard.isDown("rctrl")
+end
+
 return utils

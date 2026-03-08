@@ -81,6 +81,10 @@ function Project:mousepressed(x, y, button)
 	self:getCurrentStation():mousepressed(x, y, button)
 end
 
+function Project:mousereleased(x, y, button)
+	self:getCurrentStation():mousereleased(x, y, button)
+end
+
 function Project:save()
 	_Utils.saveJson("savefile.json", self:serialize())
 end

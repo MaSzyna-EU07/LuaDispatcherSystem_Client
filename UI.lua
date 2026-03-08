@@ -238,8 +238,11 @@ function UI:onTileSelected(tile)
 	self.elements.picker_switchID.value = tile and tile:getSwitchID() or ""
 	self.elements.picker_switchFlip.value = tile and tile:getSwitchFlip() or false
 	self.elements.picker_switchFlipABCD.value = tile and tile:getSwitchFlipABCD() or false
+	self.elements.picker_semaphoreNoW24.value = tile and tile:getSemaphoreNoW24() or false
 	self.elements.picker_semaphoreID.value = tile and tile:getSemaphoreID() or ""
 	self.elements.picker_itineraryEndID.value = tile and tile:getItineraryEndID() or ""
+	self.elements.picker_electrified2.value = tile and tile:isElectrified() or false
+	self.elements.picker_targetW24.value = tile and tile:isTargetW24() or false
 	self.elements.picker_trainTarget.value = tile and tile:isTrainTarget() or false
 	self.elements.picker_shuntTarget.value = tile and tile:isShuntTarget() or false
 	self.elements.picker_forbidTrain.value = tile and tile:isTrainForbidden() or false
