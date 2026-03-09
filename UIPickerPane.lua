@@ -9,10 +9,10 @@ local UIPickerPane = Class:derive("UIPickerPane")
 function UIPickerPane:new(ui)
     self.ui = ui
 
-	self.ui:addPane(nil, "picker", nil, 0, 23, 30, 4)
+	self.ui:addPane(nil, "picker", nil, 0, 23, 40, 4)
+	-- First column
 	self.ui:addCheckbox("picker", "picker_electrified", "Tory zelektryfikowane", 0, 0, 1, 1, self, self.updateElectrified)
 	self.ui.elements.picker_electrified.value = true
-	-- First column
 	self.ui:addLabel("picker", nil, "Nazwa toru", 0, 1, 5, 1)
 	self.ui:addInput("picker", "picker_trackID", 5, 1, 5, 1, self, self.updateTrackID)
 	self.ui:addLabel("picker", nil, "Nazwa zwr.", 0, 2, 5, 1)
@@ -27,7 +27,9 @@ function UIPickerPane:new(ui)
 	self.ui:addLabel("picker", nil, "Zamień", 10, 2, 4, 1)
 	self.ui:addCheckbox("picker", "picker_switchFlip", "+/-", 13, 2, 1, 1, self, self.updateSwitchFlip)
 	self.ui:addCheckbox("picker", "picker_switchFlipABCD", "ab/cd", 16, 2, 1, 1, self, self.updateSwitchFlipABCD)
-	self.ui:addCheckbox("picker", "picker_semaphoreNoW24", "Brak W24", 10, 3, 1, 1, self, self.updateSemaphoreNoW24)
+	self.ui:addLabel("picker", nil, "Typ", 10, 3, 2, 1)
+	self.ui:addInput("picker", "picker_semaphoreType", 12, 3, 3, 1, self, self.updateSemaphoreType)
+	self.ui:addCheckbox("picker", "picker_semaphoreNoW24", "Brak W24", 15, 3, 1, 1, self, self.updateSemaphoreNoW24)
 	-- Third column
 	self.ui:addLabel("picker", nil, "Pkt końc.:", 20, 0, 5, 1)
 	self.ui:addCheckbox("picker", "picker_trainTarget", "poc.", 24, 0, 1, 1, self, self.updateTrainTarget)
@@ -41,6 +43,11 @@ function UIPickerPane:new(ui)
 	self.ui:addInput("picker", "picker_speedPlus", 22, 3, 3, 1, self, self.updateMaxSpeedPlus)
 	self.ui:addLabel("picker", nil, "V-", 25, 3, 2, 1)
 	self.ui:addInput("picker", "picker_speedMinus", 27, 3, 3, 1, self, self.updateMaxSpeedMinus)
+	-- Fourth column
+	self.ui:addLabel("picker", nil, "Możliwość podania:", 30, 0, 10, 1)
+	self.ui:addCheckbox("picker", "picker_semaphoreAllowTrain", "poc.", 31, 1, 1, 1, self, self.updateSemaphoreAllowTrain)
+	self.ui:addCheckbox("picker", "picker_semaphoreAllowShunt", "man.", 34, 1, 1, 1, self, self.updateSemaphoreAllowShunt)
+	self.ui:addCheckbox("picker", "picker_semaphoreAllowSz", "Sz", 37, 1, 1, 1, self, self.updateSemaphoreAllowSz)
 end
 
 function UIPickerPane:updateElectrified(checkbox)
@@ -111,6 +118,14 @@ function UIPickerPane:updateSwitchFlipABCD(checkbox)
 	end
 end
 
+function UIPickerPane:updateSemaphoreType(input)
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = assert(station:getTile(coords.x, coords.y))
+		tile:setSemaphoreType(tonumber(input.value))
+	end
+end
+
 function UIPickerPane:updateSemaphoreNoW24(checkbox)
 	local station = _Project:getCurrentStation()
 	for i, coords in ipairs(station.selectedTiles) do
@@ -172,6 +187,30 @@ function UIPickerPane:updateForbidShunt(checkbox)
 	for i, coords in ipairs(station.selectedTiles) do
 		local tile = assert(station:getTile(coords.x, coords.y))
 		tile:setForbidShunt(checkbox.value)
+	end
+end
+
+function UIPickerPane:updateSemaphoreAllowTrain(checkbox)
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = assert(station:getTile(coords.x, coords.y))
+		tile:setSemaphoreAllowTrain(checkbox.value)
+	end
+end
+
+function UIPickerPane:updateSemaphoreAllowShunt(checkbox)
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = assert(station:getTile(coords.x, coords.y))
+		tile:setSemaphoreAllowShunt(checkbox.value)
+	end
+end
+
+function UIPickerPane:updateSemaphoreAllowSz(checkbox)
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = assert(station:getTile(coords.x, coords.y))
+		tile:setSemaphoreAllowSz(checkbox.value)
 	end
 end
 

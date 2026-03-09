@@ -551,12 +551,18 @@
 				"12,10": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_D6",
 					"trackID": "Eb_Iz15"
 				},
 				"12,11": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_D4",
 					"trackID": "Eb_Iz13"
 				},
@@ -588,18 +594,27 @@
 				"13,12": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_D2",
 					"trackID": "Eb_Iz13"
 				},
 				"13,13": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_D1",
 					"trackID": "Eb_Iz8"
 				},
 				"13,14": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_D3",
 					"trackID": "Eb_Iz8"
 				},
@@ -701,30 +716,43 @@
 				"17,10": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_E6",
 					"trackID": "Eb_Iz38"
 				},
 				"17,11": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_E4",
 					"trackID": "Eb_Iz24"
 				},
 				"17,12": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_E2",
 					"trackID": "Eb_Iz28"
 				},
 				"17,13": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_E1",
 					"trackID": "Eb_Iz25"
 				},
 				"17,14": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_E3",
 					"trackID": "Eb_Iz22"
 				},
@@ -870,8 +898,11 @@
 				},
 				"20,17": {
 					"electrified": false,
+					"forbidTrain": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm14",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz19"
 				},
 				"20,9": {
@@ -962,8 +993,11 @@
 				},
 				"22,15": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm19",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz26"
 				},
 				"22,16": {
@@ -1020,20 +1054,29 @@
 				},
 				"23,16": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm18",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz30"
 				},
 				"23,17": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm16",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz32"
 				},
 				"23,18": {
 					"electrified": false,
+					"forbidTrain": true,
 					"id": 68,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm15",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz32"
 				},
 				"23,3": {
@@ -1160,8 +1203,11 @@
 				},
 				"25,17": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm23",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz55"
 				},
 				"25,3": {
@@ -1208,8 +1254,11 @@
 				},
 				"26,16": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm22",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz55"
 				},
 				"26,17": {
@@ -1248,6 +1297,9 @@
 				"27,12": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_L102",
 					"trackID": "Eb_Iz41"
 				},
@@ -1260,8 +1312,11 @@
 				},
 				"27,15": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm21",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz56"
 				},
 				"27,16": {
@@ -1298,6 +1353,9 @@
 				"28,10": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_L54",
 					"trackID": "Eb_Iz44"
 				},
@@ -1352,6 +1410,9 @@
 				"28,9": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_L56",
 					"trackID": "Eb_Iz45"
 				},
@@ -1363,6 +1424,9 @@
 				"29,11": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_L52",
 					"trackID": "Eb_Iz44"
 				},
@@ -1374,6 +1438,9 @@
 				"29,13": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_L101",
 					"trackID": "Eb_Iz54"
 				},
@@ -1408,12 +1475,18 @@
 				"29,7": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_L60",
 					"trackID": "Eb_Iz46"
 				},
 				"29,8": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_L58",
 					"trackID": "Eb_Iz45"
 				},
@@ -1458,14 +1531,20 @@
 				},
 				"30,14": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm24",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz58"
 				},
 				"30,15": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm29",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz59"
 				},
 				"30,16": {
@@ -1477,8 +1556,11 @@
 				},
 				"30,3": {
 					"electrified": false,
+					"forbidTrain": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm26",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz51"
 				},
 				"30,4": {
@@ -1489,12 +1571,18 @@
 				"30,5": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_L64",
 					"trackID": "Eb_Iz48"
 				},
 				"30,6": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_L62",
 					"trackID": "Eb_Iz46"
 				},
@@ -1545,8 +1633,11 @@
 				},
 				"31,16": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm30",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz60"
 				},
 				"31,17": {
@@ -1626,8 +1717,11 @@
 				},
 				"32,17": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm31",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz60"
 				},
 				"32,2": {
@@ -1636,8 +1730,11 @@
 				},
 				"32,3": {
 					"electrified": false,
+					"forbidTrain": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm28",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz51"
 				},
 				"32,5": {
@@ -1950,12 +2047,18 @@
 				"36,5": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_M64",
 					"trackID": "Eb_Iz90"
 				},
 				"36,6": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_M62",
 					"trackID": "Eb_Iz83"
 				},
@@ -1996,8 +2099,11 @@
 				},
 				"37,14": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm32",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz74"
 				},
 				"37,15": {
@@ -2022,6 +2128,9 @@
 				"37,7": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_M60",
 					"trackID": "Eb_Iz83"
 				},
@@ -2038,6 +2147,9 @@
 				"38,10": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_M54",
 					"trackID": "Eb_Iz80"
 				},
@@ -2080,12 +2192,18 @@
 				"38,8": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_M58",
 					"trackID": "Eb_Iz89"
 				},
 				"38,9": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_M56",
 					"trackID": "Eb_Iz81"
 				},
@@ -2097,25 +2215,36 @@
 				"39,11": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_M52",
 					"trackID": "Eb_Iz80"
 				},
 				"39,12": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_M102",
 					"trackID": "Eb_Iz98"
 				},
 				"39,13": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_M101",
 					"trackID": "Eb_Iz95"
 				},
 				"39,14": {
 					"electrified": true,
+					"forbidTrain": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm33",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz86"
 				},
 				"39,4": {
@@ -2234,8 +2363,11 @@
 				},
 				"41,7": {
 					"electrified": false,
+					"forbidTrain": true,
 					"id": 63,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm51",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz90"
 				},
 				"41,8": {
@@ -2297,8 +2429,11 @@
 				},
 				"44,11": {
 					"electrified": false,
+					"forbidTrain": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm41",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz92"
 				},
 				"44,12": {
@@ -2419,8 +2554,11 @@
 				},
 				"48,14": {
 					"electrified": false,
+					"forbidTrain": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm46",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz103"
 				},
 				"48,15": {
@@ -2430,13 +2568,17 @@
 				},
 				"49,12": {
 					"electrified": true,
+					"forbidShunt": true,
 					"id": 62,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_W",
 					"trackID": "Eb_ItW"
 				},
 				"49,13": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowSz": true,
 					"semaphoreID": "Eb_Szn1",
 					"trackID": "Eb_ItSzn1"
 				},
@@ -2446,14 +2588,20 @@
 				},
 				"49,15": {
 					"electrified": false,
+					"forbidTrain": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm45",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz103"
 				},
 				"5,10": {
 					"electrified": false,
+					"forbidTrain": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_Tm4",
+					"semaphoreType": 1,
 					"trackID": "Eb_Iz1"
 				},
 				"5,11": {
@@ -2524,14 +2672,17 @@
 				"6,11": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_B",
 					"trackID": "Eb_ItB"
 				},
 				"6,12": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Eb_A",
-					"semaphoreNoW24": false,
 					"trackID": "Eb_ItA"
 				},
 				"7,10": {
@@ -2591,6 +2742,8 @@
 				"10,3": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Tp_L",
 					"semaphoreNoW24": true,
 					"trackID": "Tp_ItL"
@@ -2598,6 +2751,8 @@
 				"10,4": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Tp_K",
 					"trackID": "Tp_ItK"
 				},
@@ -2662,18 +2817,24 @@
 				"4,2": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Tp_G",
 					"trackID": "Tp_ItG"
 				},
 				"4,3": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Tp_H",
 					"trackID": "Tp_ItH"
 				},
 				"4,4": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "Tp_J",
 					"semaphoreNoW24": true,
 					"trackID": "Tp_ItJ"
@@ -2759,6 +2920,7 @@
 					"electrified": true,
 					"id": 61,
 					"semaphoreID": "EZ_Tm7",
+					"semaphoreType": 1,
 					"trackID": "EZ_Iz12"
 				},
 				"10,5": {
@@ -2876,6 +3038,7 @@
 					"electrified": true,
 					"id": 61,
 					"semaphoreID": "EZ_Tm15",
+					"semaphoreType": 1,
 					"trackID": "EZ_Iz16"
 				},
 				"17,7": {
@@ -2957,6 +3120,7 @@
 					"electrified": true,
 					"id": 62,
 					"semaphoreID": "EZ_Tm18",
+					"semaphoreType": 1,
 					"trackID": "EZ_Iz17"
 				},
 				"20,7": {
@@ -2968,6 +3132,7 @@
 					"electrified": true,
 					"id": 68,
 					"semaphoreID": "EZ_Tm16",
+					"semaphoreType": 1,
 					"trackID": "EZ_Iz18"
 				},
 				"21,4": {
@@ -3013,6 +3178,7 @@
 					"electrified": true,
 					"id": 62,
 					"semaphoreID": "EZ_Tm17",
+					"semaphoreType": 1,
 					"trackID": "EZ_Iz17"
 				},
 				"23,4": {
@@ -3056,7 +3222,8 @@
 				},
 				"24,7": {
 					"electrified": true,
-					"id": 61
+					"id": 61,
+					"semaphoreType": 1
 				},
 				"24,8": {
 					"electrified": true,
@@ -3143,11 +3310,13 @@
 				},
 				"30,5": {
 					"electrified": true,
-					"id": 62
+					"id": 62,
+					"semaphoreType": 1
 				},
 				"30,6": {
 					"electrified": true,
-					"id": 62
+					"id": 62,
+					"semaphoreType": 1
 				},
 				"31,5": {
 					"electrified": true,
@@ -3198,12 +3367,14 @@
 					"electrified": true,
 					"id": 61,
 					"semaphoreID": "EZ_Tm1",
+					"semaphoreType": 1,
 					"trackID": "EZ_Iz2"
 				},
 				"4,3": {
 					"electrified": true,
 					"id": 61,
 					"semaphoreID": "EZ_Tm2",
+					"semaphoreType": 1,
 					"trackID": "EZ_Iz2"
 				},
 				"4,4": {
@@ -3244,6 +3415,7 @@
 					"electrified": true,
 					"id": 61,
 					"semaphoreID": "EZ_Tm3",
+					"semaphoreType": 1,
 					"trackID": "EZ_Iz3"
 				},
 				"6,5": {
@@ -3267,6 +3439,7 @@
 					"electrified": true,
 					"id": 62,
 					"semaphoreID": "EZ_Tm5",
+					"semaphoreType": 1,
 					"trackID": "EZ_Iz3"
 				},
 				"8,5": {
@@ -3284,6 +3457,7 @@
 					"electrified": true,
 					"id": 61,
 					"semaphoreID": "EZ_Tm6",
+					"semaphoreType": 1,
 					"trackID": "EZ_Iz10"
 				}
 			},

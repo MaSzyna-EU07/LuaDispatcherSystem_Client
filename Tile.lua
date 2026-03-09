@@ -46,6 +46,10 @@ function Tile:new(station, x, y, id, electrified)
 	self.switchFlip = false
 	self.switchFlipABCD = false
 	self.semaphoreID = nil
+	self.semaphoreType = nil
+	self.semaphoreAllowTrain = false
+	self.semaphoreAllowShunt = false
+	self.semaphoreAllowSz = false
 	self.semaphoreNoW24 = false
 	self.itineraryEndID = nil -- TODO: Later on, check whether we need this. The only reason we would need this is for dispatcher algorithms.
 	self.maxSpeed = nil
@@ -146,6 +150,54 @@ end
 ---@param semaphoreID string? The new semaphore ID.
 function Tile:setSemaphoreID(semaphoreID)
 	self.semaphoreID = semaphoreID ~= "" and semaphoreID or nil
+end
+
+---Returns the semaphore type assigned for this Tile.
+---@return SemaphoreType
+function Tile:getSemaphoreType()
+	return self.semaphoreType or SemaphoreType.SEM
+end
+
+---Sets a new semaphore type for this Tile.
+---@param semaphoreType SemaphoreType? The new semaphore type to be assigned.
+function Tile:setSemaphoreType(semaphoreType)
+	self.semaphoreType = semaphoreType
+end
+
+---Returns whether this tile's semaphore can display a train signal.
+---@return boolean
+function Tile:getSemaphoreAllowTrain()
+	return self.semaphoreAllowTrain
+end
+
+---Sets whether this tile's semaphore can display a train signal.
+---@param semaphoreAllowTrain boolean Whether this tile's semaphore can display a train signal.
+function Tile:setSemaphoreAllowTrain(semaphoreAllowTrain)
+	self.semaphoreAllowTrain = semaphoreAllowTrain
+end
+
+---Returns whether this tile's semaphore can display a shunting signal.
+---@return boolean
+function Tile:getSemaphoreAllowShunt()
+	return self.semaphoreAllowShunt
+end
+
+---Sets whether this tile's semaphore can display a shunting signal.
+---@param semaphoreAllowShunt boolean Whether this tile's semaphore can display a Shunt signal.
+function Tile:setSemaphoreAllowShunt(semaphoreAllowShunt)
+	self.semaphoreAllowShunt = semaphoreAllowShunt
+end
+
+---Returns whether this tile's semaphore can display an Sz signal.
+---@return boolean
+function Tile:getSemaphoreAllowSz()
+	return self.semaphoreAllowSz
+end
+
+---Sets whether this tile's semaphore can display an Sz signal.
+---@param semaphoreAllowSz boolean Whether this tile's semaphore can display an Sz signal.
+function Tile:setSemaphoreAllowSz(semaphoreAllowSz)
+	self.semaphoreAllowSz = semaphoreAllowSz
 end
 
 ---Returns whether this tile's semaphore has NO W24 sign.
@@ -687,7 +739,11 @@ function Tile:serialize()
 		switchFlip = self.switchFlip or nil,
 		switchFlipABCD = self.switchFlipABCD or nil,
 		semaphoreID = self.semaphoreID,
-		semaphoreNoW24 = self.semaphoreNoW24,
+		semaphoreType = self.semaphoreType,
+		semaphoreAllowTrain = self.semaphoreAllowTrain or nil,
+		semaphoreAllowShunt = self.semaphoreAllowShunt or nil,
+		semaphoreAllowSz = self.semaphoreAllowSz or nil,
+		semaphoreNoW24 = self.semaphoreNoW24 or nil,
 		itineraryEndID = self.itineraryEndID,
 		maxSpeed = self.maxSpeed,
 		maxSpeedPlus = self.maxSpeedPlus,
@@ -710,7 +766,11 @@ function Tile:deserialize(t)
 	self.switchFlip = t.switchFlip == true
 	self.switchFlipABCD = t.switchFlipABCD == true
 	self.semaphoreID = t.semaphoreID
-	self.semaphoreNoW24 = t.semaphoreNoW24
+	self.semaphoreType = t.semaphoreType
+	self.semaphoreAllowTrain = t.semaphoreAllowTrain == true
+	self.semaphoreAllowShunt = t.semaphoreAllowShunt == true
+	self.semaphoreAllowSz = t.semaphoreAllowSz == true
+	self.semaphoreNoW24 = t.semaphoreNoW24 == true
 	self.itineraryEndID = t.itineraryEndID
 	self.maxSpeed = t.maxSpeed
 	self.maxSpeedPlus = t.maxSpeedPlus

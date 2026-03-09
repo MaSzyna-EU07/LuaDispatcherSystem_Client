@@ -44,6 +44,7 @@ end
 
 ---Generates a new canvas for all of the tiles to be drawn on.
 ---This should be called each time the station size changes.
+---@private
 function Station:generateCanvas()
 	self.canvas = love.graphics.newCanvas(self.TILE_SIZE * self.w + 2, self.TILE_SIZE * self.h + 2)
 end
@@ -206,6 +207,12 @@ function Station:moveSingleSelection(dx, dy)
 	end
 end
 
+---Returns whether just a single tile is selected in the current rectangle selection.
+---@return boolean
+function Station:rectSelectIsSingleTile()
+	return self.dragX and self.dragY and self.hoverX == self.dragX and self.hoverY == self.dragY or false
+end
+
 ---Adds a new column at the specified position and fills it with empty tiles.
 ---@param x integer? The column index at which the new column will be placed. If not specified, a new column will be created on the right side.
 function Station:addColumn(x)
@@ -304,7 +311,7 @@ end
 function Station:handleLeftUnclick()
 	if _Picker.selection == "properties" then
 		if self.dragX and self.dragY then
-			if self.hoverX and self.hoverY then
+			if self.hoverX and self.hoverY and not self:rectSelectIsSingleTile() then
 				for x = math.min(self.dragX, self.hoverX), math.max(self.dragX, self.hoverX) do
 					for y = math.min(self.dragY, self.hoverY), math.max(self.dragY, self.hoverY) do
 						if _Utils.isCtrlPressed() then
@@ -346,9 +353,17 @@ function Station:handleRightClick()
 				end
 			elseif tile:isSemaphore() then
 				if tile:isSemaphoreStop() then
-					self.activeX, self.activeY = self.hoverX, self.hoverY
-					self.activeMode = _Utils.isShiftPressed() and PathMode.SHUNT or PathMode.TRAIN
-					self.activeW24 = not tile:getSemaphoreNoW24()
+					local allowTrain = tile:getSemaphoreAllowTrain() or tile:getSemaphoreAllowSz()
+					local allowShunt = tile:getSemaphoreAllowShunt()
+					if allowTrain or allowShunt then
+						self.activeX, self.activeY = self.hoverX, self.hoverY
+						-- If only one mode is available, select it. Otherwise, Shift will force shunting mode.
+						self.activeMode = PathMode.TRAIN
+						if not allowTrain or (allowShunt and _Utils.isShiftPressed()) then
+							self.activeMode = PathMode.SHUNT
+						end
+						self.activeW24 = not tile:getSemaphoreNoW24()
+					end
 				else
 					tile:sendSemaphoreUnreserve()
 				end
@@ -428,39 +443,6 @@ end
 ---@param dx integer The X movement, in pixels.
 ---@param dy integer The Y movement, in pixels.
 function Station:mousemoved(x, y, dx, dy)
-end
-
----Serializes the Station's data to be saved as a file.
----@return table
-function Station:serialize()
-	local t = {
-		name = self.name,
-		shortcut = self.shortcut,
-		w = self.w,
-		h = self.h,
-		tiles = {}
-	}
-	for x, column in ipairs(self.tiles) do
-		for y, tile in ipairs(column) do
-			t.tiles[tostring(x) .. "," .. tostring(y)] = tile:serialize()
-		end
-	end
-	return t
-end
-
----Deserializes the Station's data to be restored from a file.
----@param t table The saved data.
-function Station:deserialize(t)
-	self.name = t.name
-	self.shortcut = t.shortcut
-	self.w, self.h = t.w, t.h
-	self.tiles = {}
-	for x = 1, self.w do
-		self.tiles[x] = {}
-		for y = 1, self.h do
-			self.tiles[x][y] = Tile(self, x, y, t.tiles[tostring(x) .. "," .. tostring(y)])
-		end
-	end
 end
 
 --##########################################--
@@ -587,13 +569,50 @@ function Station:drawRectSelection()
 		return
 	end
 	-- Do not display the frame if we are not selecting more than one tile.
-	if self.hoverX == self.dragX and self.hoverY == self.dragY then
+	if self:rectSelectIsSingleTile() then
 		return
 	end
 	for x = math.min(self.dragX, self.hoverX), math.max(self.dragX, self.hoverX) do
 		for y = math.min(self.dragY, self.hoverY), math.max(self.dragY, self.hoverY) do
 			local tile = assert(self:getTile(x, y))
 			tile:drawRectSelection()
+		end
+	end
+end
+
+--####################################--
+---------------- D A T A ---------------
+--####################################--
+
+---Serializes the Station's data to be saved as a file.
+---@return table
+function Station:serialize()
+	local t = {
+		name = self.name,
+		shortcut = self.shortcut,
+		w = self.w,
+		h = self.h,
+		tiles = {}
+	}
+	for x, column in ipairs(self.tiles) do
+		for y, tile in ipairs(column) do
+			t.tiles[tostring(x) .. "," .. tostring(y)] = tile:serialize()
+		end
+	end
+	return t
+end
+
+---Deserializes the Station's data to be restored from a file.
+---@param t table The saved data.
+function Station:deserialize(t)
+	self.name = t.name
+	self.shortcut = t.shortcut
+	self.w, self.h = t.w, t.h
+	self.tiles = {}
+	for x = 1, self.w do
+		self.tiles[x] = {}
+		for y = 1, self.h do
+			self.tiles[x][y] = Tile(self, x, y, t.tiles[tostring(x) .. "," .. tostring(y)])
 		end
 	end
 end

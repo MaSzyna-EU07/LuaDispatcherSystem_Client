@@ -190,6 +190,7 @@ end
 ---Sets the semaphore at the beginning of this path to display a clear signal.
 ---@private
 function Pathfinder:setSemaphore()
+    local tile = self.winner.path[1].tile
     if self.mode == PathMode.TRAIN then
         ---@type string|Speed?
         local nextSpeed = 1
@@ -197,9 +198,9 @@ function Pathfinder:setSemaphore()
         if lastTile:isSemaphore() then
             nextSpeed = lastTile:getSemaphoreID()
         end
-        self.winner.path[1].tile:sendSemaphoreState(_SpeedToID(self.winner.speed), nextSpeed, lastTile:isTargetW24() and "w24" or nil)
+        tile:sendSemaphoreState(tile:getSemaphoreAllowTrain() and _SpeedToID(self.winner.speed) or Speed.SZ, nextSpeed, lastTile:isTargetW24() and "w24" or nil)
     elseif self.mode == PathMode.SHUNT then
-        self.winner.path[1].tile:sendSemaphoreState(Speed.MS2)
+        tile:sendSemaphoreState(Speed.MS2)
     end
 end
 

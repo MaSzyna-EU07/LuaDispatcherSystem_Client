@@ -238,6 +238,7 @@ function UI:onTileSelected(tile)
 	self.elements.picker_switchID.value = tile and tile:getSwitchID() or ""
 	self.elements.picker_switchFlip.value = tile and tile:getSwitchFlip() or false
 	self.elements.picker_switchFlipABCD.value = tile and tile:getSwitchFlipABCD() or false
+	self.elements.picker_semaphoreType.value = tile and tile:isSemaphore() and tostring(tile:getSemaphoreType()) or ""
 	self.elements.picker_semaphoreNoW24.value = tile and tile:getSemaphoreNoW24() or false
 	self.elements.picker_semaphoreID.value = tile and tile:getSemaphoreID() or ""
 	self.elements.picker_itineraryEndID.value = tile and tile:getItineraryEndID() or ""
@@ -250,6 +251,9 @@ function UI:onTileSelected(tile)
 	self.elements.picker_speed.value = tile and tile:getMaxSpeed() and tostring(tile:getMaxSpeed()) or ""
 	self.elements.picker_speedPlus.value = tile and tile:getMaxSpeedPlus() and tostring(tile:getMaxSpeedPlus()) or ""
 	self.elements.picker_speedMinus.value = tile and tile:getMaxSpeedMinus() and tostring(tile:getMaxSpeedMinus()) or ""
+	self.elements.picker_semaphoreAllowTrain.value = tile and tile:getSemaphoreAllowTrain() or false
+	self.elements.picker_semaphoreAllowShunt.value = tile and tile:getSemaphoreAllowShunt() or false
+	self.elements.picker_semaphoreAllowSz.value = tile and tile:getSemaphoreAllowSz() or false
 end
 
 ---Executed when a log file is loaded.
