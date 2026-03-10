@@ -46,7 +46,7 @@ end
 ---@param speed number? Desired speed.
 ---@return Speed
 function _SpeedToID(speed)
-	if not speed then
+	if not speed or speed == math.huge then
 		return Speed.VMAX
 	end
 	if speed >= 100 then

@@ -15,7 +15,7 @@ function Pathfinder:new(start, target)
     self.mode = PathMode.TRAIN
     self.electrified = true
 
-    ---@alias TraversalPossibility {tile: Tile, direction: integer, prevDirection: integer?, path: {tile: Tile, dir1: integer?, dir2: integer?}[], speed: number?, cost: number}
+    ---@alias TraversalPossibility {tile: Tile, direction: integer, prevDirection: integer?, path: {tile: Tile, dir1: integer?, dir2: integer?}[], speed: number, cost: number}
     ---@type TraversalPossibility[]
     self.possibilities = {} -- List of traversal possibilities
     ---@type Itinerary[]
@@ -72,7 +72,8 @@ function Pathfinder:createInitialPossibilities()
     local directions = self.start:getTrackDirections()
     -- Each direction is a single possibility.
     for i, direction in ipairs(directions) do
-        local newPossibility = {tile = self.start, direction = direction, path = {{tile = self.start, dir2 = direction}}, directions = {direction}, cost = 0}
+        ---@type TraversalPossibility
+        local newPossibility = {tile = self.start, direction = direction, path = {{tile = self.start, dir2 = direction}}, speed = math.huge, cost = 0}
         table.insert(self.possibilities, newPossibility)
     end
 end
@@ -95,11 +96,8 @@ function Pathfinder:evaluatePossibility(possibility)
             local path = _Utils.copyTable(possibility.path)
             table.insert(path, {tile = tile, dir1 = _InvertDir(possibility.direction), dir2 = direction})
             -- Check if we need to lower the speed.
-            local speed = possibility.speed
             local prevTileSpeed = possibility.tile:getSpeedForDirections(possibility.prevDirection and _InvertDir(possibility.prevDirection), possibility.direction)
-            if prevTileSpeed then
-                speed = speed and math.min(speed, prevTileSpeed) or prevTileSpeed
-            end
+            local speed = math.min(possibility.speed, prevTileSpeed)
             -- Assemble the possiblity and add it to the list.
             local newPossibility = {tile = tile, direction = direction, prevDirection = possibility.direction, path = path, speed = speed}
             newPossibility.cost = self:calculateCost(newPossibility)
@@ -182,6 +180,12 @@ function Pathfinder:generateItineraries(possibility)
     -- Iterate through all segments and generate an itinerary for each one.
     for i, startIndex in ipairs(splitPlaces) do
         local endIndex = splitPlaces[i + 1] or #possibility.path
+        -- Calculate a speed for this segment.
+        local speed = math.huge
+        for j = startIndex, endIndex do
+            local node = possibility.path[j]
+            speed = math.min(speed, node.tile:getSpeedForDirections(node.dir1, node.dir2))
+        end
         -- Prepare a new itinerary for this segment.
         local itinerary = Itinerary()
         for j = startIndex, endIndex do
@@ -202,7 +206,7 @@ function Pathfinder:generateItineraries(possibility)
             if j == startIndex then
                 itinerary:setSemaphore(assert(node.tile:getSemaphoreID(), "Missing semaphore on starting tile!"))
                 if self.mode == PathMode.TRAIN then
-                    itinerary:setSpeed(node.tile:getSemaphoreAllowTrain() and _SpeedToID(possibility.speed) or Speed.SZ)
+                    itinerary:setSpeed(node.tile:getSemaphoreAllowTrain() and _SpeedToID(speed) or Speed.SZ)
                 elseif self.mode == PathMode.SHUNT then
                     itinerary:setSpeed(Speed.MS2)
                 end

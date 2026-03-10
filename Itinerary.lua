@@ -64,8 +64,11 @@ function Itinerary:canBeDispatched()
     -- All tracks must be clear.
     for track, _ in pairs(self.tracks) do
         local state = _Obj:getTrackState(track)
-        if state.occupied or state.reserved then
+        if state and (state.occupied or state.reserved) then
             return false
+        end
+        if not state then
+            print("WARNING: Track `" .. track .. "` not controlled!")
         end
     end
     return true

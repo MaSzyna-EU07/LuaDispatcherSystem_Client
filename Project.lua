@@ -59,6 +59,9 @@ function Project:renameStation(shortcut, newName, newShortcut)
 	local station = self:getStation(shortcut)
 	station.name = newName
 	station.shortcut = newShortcut
+	if self.currentStationID == shortcut then
+		self.currentStationID = newShortcut
+	end
 	self:updateStationLists()
 end
 

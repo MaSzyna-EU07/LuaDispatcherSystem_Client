@@ -248,9 +248,9 @@ function UI:onTileSelected(tile)
 	self.elements.picker_shuntTarget.value = tile and tile:isShuntTarget() or false
 	self.elements.picker_forbidTrain.value = tile and tile:isTrainForbidden() or false
 	self.elements.picker_forbidShunt.value = tile and tile:isShuntForbidden() or false
-	self.elements.picker_speed.value = tile and tile:getMaxSpeed() and tostring(tile:getMaxSpeed()) or ""
-	self.elements.picker_speedPlus.value = tile and tile:getMaxSpeedPlus() and tostring(tile:getMaxSpeedPlus()) or ""
-	self.elements.picker_speedMinus.value = tile and tile:getMaxSpeedMinus() and tostring(tile:getMaxSpeedMinus()) or ""
+	self.elements.picker_speed.value = tile and tile:getMaxSpeed() ~= math.huge and tostring(tile:getMaxSpeed()) or ""
+	self.elements.picker_speedPlus.value = tile and tile:getMaxSpeedPlus() ~= math.huge and tostring(tile:getMaxSpeedPlus()) or ""
+	self.elements.picker_speedMinus.value = tile and tile:getMaxSpeedMinus() ~= math.huge and tostring(tile:getMaxSpeedMinus()) or ""
 	self.elements.picker_semaphoreAllowTrain.value = tile and tile:getSemaphoreAllowTrain() or false
 	self.elements.picker_semaphoreAllowShunt.value = tile and tile:getSemaphoreAllowShunt() or false
 	self.elements.picker_semaphoreAllowSz.value = tile and tile:getSemaphoreAllowSz() or false

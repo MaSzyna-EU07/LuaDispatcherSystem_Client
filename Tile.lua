@@ -52,9 +52,9 @@ function Tile:new(station, x, y, id, electrified)
 	self.semaphoreAllowSz = false
 	self.semaphoreNoW24 = false
 	self.itineraryEndID = nil -- TODO: Later on, check whether we need this. The only reason we would need this is for dispatcher algorithms.
-	self.maxSpeed = nil
-	self.maxSpeedPlus = nil
-	self.maxSpeedMinus = nil
+	self.maxSpeed = math.huge
+	self.maxSpeedPlus = math.huge
+	self.maxSpeedMinus = math.huge
 	self.trainTarget = false
 	self.shuntTarget = false
 	self.targetW24 = false
@@ -224,8 +224,8 @@ function Tile:setItineraryEndID(itineraryEndID)
 	self.itineraryEndID = itineraryEndID ~= "" and itineraryEndID or nil
 end
 
----Returns the maximum speed for this Tile. Returns `nil` if no limit is specified.
----@return number?
+---Returns the maximum speed for this Tile. Returns `math.huge` if no limit is specified.
+---@return number
 function Tile:getMaxSpeed()
 	return self.maxSpeed
 end
@@ -233,11 +233,11 @@ end
 ---Sets a new maximum speed for this Tile, or clears it if `nil` is provided.
 ---@param speed number? New speed.
 function Tile:setMaxSpeed(speed)
-	self.maxSpeed = speed
+	self.maxSpeed = speed or math.huge
 end
 
----Returns the maximum speed for this Tile when the switch on this Tile is set to `true` ("+"). Returns `nil` if no limit is specified.
----@return number?
+---Returns the maximum speed for this Tile when the switch on this Tile is set to `true` ("+"). Returns `math.huge` if no limit is specified.
+---@return number
 function Tile:getMaxSpeedPlus()
 	return self.maxSpeedPlus
 end
@@ -245,11 +245,11 @@ end
 ---Sets a new maximum speed for this Tile when the switch on this Tile is set to `true` ("+"), or clears it if `nil` is provided.
 ---@param speed number? New speed.
 function Tile:setMaxSpeedPlus(speed)
-	self.maxSpeedPlus = speed
+	self.maxSpeedPlus = speed or math.huge
 end
 
----Returns the maximum speed for this Tile when the switch on this Tile is set to `false` ("-"). Returns `nil` if no limit is specified.
----@return number?
+---Returns the maximum speed for this Tile when the switch on this Tile is set to `false` ("-"). Returns `math.huge` if no limit is specified.
+---@return number
 function Tile:getMaxSpeedMinus()
 	return self.maxSpeedMinus
 end
@@ -257,7 +257,7 @@ end
 ---Sets a new maximum speed for this Tile when the switch on this Tile is set to `false` ("-"), or clears it if `nil` is provided.
 ---@param speed number? New speed.
 function Tile:setMaxSpeedMinus(speed)
-	self.maxSpeedMinus = speed
+	self.maxSpeedMinus = speed or math.huge
 end
 
 ---Returns whether this Tile can be used as a target for train paths.
@@ -500,7 +500,7 @@ function Tile:isSemaphoreStop()
 end
 
 ---Returns the current maximum speed on this Tile, or `nil` if there is no speed limit.
----@return number?
+---@return number
 function Tile:getSpeed()
 	local main = self:getSwitchState()
 	local ab = self:getSwitchState("ab")
@@ -510,7 +510,7 @@ end
 
 ---Returns the maximum speed on this Tile were the switches in the specified states, or `nil` if there is no speed limit.
 ---@param states table<""|"ab"|"cd", boolean?>
----@return number?
+---@return number
 function Tile:getSpeedForSwitchStates(states)
 	local speed = self.maxSpeed
 	if self:isSwitch() then
@@ -521,9 +521,7 @@ function Tile:getSpeedForSwitchStates(states)
 		else
 			switchSpeed = states[""] and self.maxSpeedPlus or self.maxSpeedMinus
 		end
-		if switchSpeed then
-			speed = speed and math.min(speed, switchSpeed) or switchSpeed
-		end
+		speed = math.min(speed, switchSpeed)
 	end
 	return speed
 end
@@ -531,7 +529,7 @@ end
 ---Returns the maximum speed on this Tile when going from dir1 to dir2, or `nil` if no speed limit exists for that relation.
 ---@param dir1 integer? First direction.
 ---@param dir2 integer? Second direction.
----@return number?
+---@return number
 function Tile:getSpeedForDirections(dir1, dir2)
 	return self:getSpeedForSwitchStates(self:getSwitchStatesForDirections(dir1, dir2))
 end
@@ -737,9 +735,9 @@ function Tile:serialize()
 		semaphoreAllowSz = self.semaphoreAllowSz or nil,
 		semaphoreNoW24 = self.semaphoreNoW24 or nil,
 		itineraryEndID = self.itineraryEndID,
-		maxSpeed = self.maxSpeed,
-		maxSpeedPlus = self.maxSpeedPlus,
-		maxSpeedMinus = self.maxSpeedMinus,
+		maxSpeed = self.maxSpeed ~= math.huge and self.maxSpeed or nil,
+		maxSpeedPlus = self.maxSpeedPlus ~= math.huge and self.maxSpeedPlus or nil,
+		maxSpeedMinus = self.maxSpeedMinus ~= math.huge and self.maxSpeedMinus or nil,
 		trainTarget = self.trainTarget or nil,
 		shuntTarget = self.shuntTarget or nil,
 		targetW24 = self.targetW24 or nil,
@@ -764,9 +762,9 @@ function Tile:deserialize(t)
 	self.semaphoreAllowSz = t.semaphoreAllowSz == true
 	self.semaphoreNoW24 = t.semaphoreNoW24 == true
 	self.itineraryEndID = t.itineraryEndID
-	self.maxSpeed = t.maxSpeed
-	self.maxSpeedPlus = t.maxSpeedPlus
-	self.maxSpeedMinus = t.maxSpeedMinus
+	self.maxSpeed = t.maxSpeed or math.huge
+	self.maxSpeedPlus = t.maxSpeedPlus or math.huge
+	self.maxSpeedMinus = t.maxSpeedMinus or math.huge
 	self.trainTarget = t.trainTarget == true
 	self.shuntTarget = t.shuntTarget == true
 	self.targetW24 = t.targetW24 == true
