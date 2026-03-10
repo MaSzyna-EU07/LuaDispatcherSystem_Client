@@ -2412,7 +2412,7 @@
 				"43,12": {
 					"electrified": true,
 					"id": 26,
-					"maxSpeedPlus": 40,
+					"maxSpeed": 40,
 					"switchFlip": true,
 					"switchID": "Eb_98",
 					"trackID": "Eb_Iz98"
@@ -2919,6 +2919,7 @@
 				"10,4": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm7",
 					"semaphoreType": 1,
 					"trackID": "EZ_Iz12"
@@ -2959,18 +2960,27 @@
 				"12,6": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "EZ_D",
 					"trackID": "EZ_Iz10"
 				},
 				"13,4": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "EZ_F",
 					"trackID": "EZ_Iz12"
 				},
 				"13,5": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "EZ_E",
 					"trackID": "EZ_Iz11"
 				},
@@ -3037,6 +3047,7 @@
 				"17,6": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm15",
 					"semaphoreType": 1,
 					"trackID": "EZ_Iz16"
@@ -3119,6 +3130,7 @@
 				"20,6": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm18",
 					"semaphoreType": 1,
 					"trackID": "EZ_Iz17"
@@ -3131,6 +3143,7 @@
 				"20,8": {
 					"electrified": true,
 					"id": 68,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm16",
 					"semaphoreType": 1,
 					"trackID": "EZ_Iz18"
@@ -3177,6 +3190,7 @@
 				"22,8": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm17",
 					"semaphoreType": 1,
 					"trackID": "EZ_Iz17"
@@ -3366,6 +3380,7 @@
 				"4,2": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm1",
 					"semaphoreType": 1,
 					"trackID": "EZ_Iz2"
@@ -3373,6 +3388,7 @@
 				"4,3": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm2",
 					"semaphoreType": 1,
 					"trackID": "EZ_Iz2"
@@ -3414,6 +3430,7 @@
 				"6,4": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm3",
 					"semaphoreType": 1,
 					"trackID": "EZ_Iz3"
@@ -3432,12 +3449,15 @@
 				"7,5": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "EZ_A",
 					"trackID": "EZ_ItA"
 				},
 				"8,4": {
 					"electrified": true,
 					"id": 62,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm5",
 					"semaphoreType": 1,
 					"trackID": "EZ_Iz3"
@@ -3456,6 +3476,7 @@
 				"9,5": {
 					"electrified": true,
 					"id": 61,
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm6",
 					"semaphoreType": 1,
 					"trackID": "EZ_Iz10"

@@ -168,35 +168,54 @@ end
 ---@private
 ---@param possibility TraversalPossibility The traversal possibility to be the basis for generated itineraries.
 function Pathfinder:generateItineraries(possibility)
-    local itinerary = Itinerary()
-    -- Determine which tracks should be reserved.
+    -- Determine the semaphores the route goes through.
+    local splitPlaces = {} -- Indices of `possibility.path` which determine semaphores. One per itinerary.
     for i = 1, #possibility.path - 1 do
-        local track = possibility.path[i].tile:getTrackID()
-        if track then
-            itinerary:addTrack(track)
+        local node = possibility.path[i]
+        -- Check whether we've got a semaphore which will split our itinerary.
+        -- TODO: Ignore shunting-only semaphores in train mode.
+        if node.tile:isSemaphore() and node.tile:getSemaphoreDirection() == node.dir2 then
+            print("Semaphore found", node.tile.x, node.tile.y)
+            table.insert(splitPlaces, i)
         end
     end
-    -- Determine which switches should be switched.
-    for i, node in ipairs(possibility.path) do
-        -- Check if we have to consider a switch state on this tile.
-        local switchStates = node.tile:getSwitchStatesForDirections(node.dir1, node.dir2)
-        for suffix, state in pairs(switchStates) do
-            itinerary:addSwitch(node.tile:getSwitchID() .. suffix, state)
+    -- Iterate through all segments and generate an itinerary for each one.
+    for i, startIndex in ipairs(splitPlaces) do
+        local endIndex = splitPlaces[i + 1] or #possibility.path
+        -- Prepare a new itinerary for this segment.
+        local itinerary = Itinerary()
+        for j = startIndex, endIndex do
+            local node = possibility.path[j]
+            -- Determine which tracks should be reserved. Last tile is exempt.
+            if j < endIndex then
+                local track = node.tile:getTrackID()
+                if track then
+                    itinerary:addTrack(track)
+                end
+            end
+            -- Check if we have to consider a switch state on this tile.
+            local switchStates = node.tile:getSwitchStatesForDirections(node.dir1, node.dir2)
+            for suffix, state in pairs(switchStates) do
+                itinerary:addSwitch(node.tile:getSwitchID() .. suffix, state)
+            end
+            -- First tile determines the semaphore.
+            if j == startIndex then
+                itinerary:setSemaphore(assert(node.tile:getSemaphoreID(), "Missing semaphore on starting tile!"))
+                if self.mode == PathMode.TRAIN then
+                    itinerary:setSpeed(node.tile:getSemaphoreAllowTrain() and _SpeedToID(possibility.speed) or Speed.SZ)
+                elseif self.mode == PathMode.SHUNT then
+                    itinerary:setSpeed(Speed.MS2)
+                end
+            end
+            -- Last tile determines the next semaphore, if it exists, and also determines whether W24 will be displayed.
+            if j == endIndex then
+                itinerary:setNext(node.tile:getSemaphoreID() or 1)
+                itinerary:setW24(node.tile:isTargetW24())
+            end
         end
+        -- Add the itinerary to the list.
+        table.insert(self.itineraries, itinerary)
     end
-    -- Determine the semaphore, next semaphore and speed.
-    local tile = possibility.path[1].tile
-    itinerary:setSemaphore(assert(tile:getSemaphoreID(), "Missing semaphore on starting tile!"))
-    if self.mode == PathMode.TRAIN then
-        itinerary:setSpeed(tile:getSemaphoreAllowTrain() and _SpeedToID(possibility.speed) or Speed.SZ)
-        local lastTile = possibility.path[#possibility.path].tile
-        itinerary:setNext(lastTile:getSemaphoreID() or 1)
-        itinerary:setW24(lastTile:isTargetW24())
-    elseif self.mode == PathMode.SHUNT then
-        itinerary:setSpeed(Speed.MS2)
-    end
-    -- Currently it's always going to be just that one itinerary.
-    table.insert(self.itineraries, itinerary)
 end
 
 ---Reserves all tracks, sets all switches and displays a clear signal on the semaphore.

@@ -620,14 +620,6 @@ function Tile:sendSemaphoreUnreserve()
 	end
 end
 
----Sends a command to the server to dispatch an itinerary from this tile's semaphore.
----@param name string The itinerary name to be dispatched.
-function Tile:sendItinerary(name)
-	if self.semaphoreID then
-		_Com.sendCommand("i " .. self.semaphoreID .. " " .. name)
-	end
-end
-
 --##########################################--
 ---------------- D R A W I N G ---------------
 --##########################################--
