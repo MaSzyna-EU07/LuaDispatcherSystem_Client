@@ -1,26 +1,18 @@
 local class = require "class"
 
 ---@class Tile : Class
----@overload fun(station: Station, x: integer, y: integer, id: integer|table?, electrified: boolean?): Tile
+---@overload fun(station: Station, x: integer, y: integer): Tile
 local Tile = class:derive("Tile")
 
 ---Creates a new Tile.
 ---@param station Station The station this Tile is a part of.
 ---@param x integer The X coordinate of this tile.
 ---@param y integer The Y coordinate of this tile.
----@param id integer|table? ID of this tile (0 by default) or data to be deserialized.
----@param electrified boolean? Whether this tile is electrified.
-function Tile:new(station, x, y, id, electrified)
+function Tile:new(station, x, y)
 	self.station = station
 	self.x, self.y = x, y
-	id = id or 0
-
 	self.size = 14
 	self.offset = 0
-	if type(id) == "table" then
-		self:deserialize(id)
-		return
-	end
 
 	-- Tile IDs:
 	-- 0 - blank/decoration
@@ -38,9 +30,8 @@ function Tile:new(station, x, y, id, electrified)
 	-- 72 - depo
 	-- 73 - tory postojowe
 
-	self.id = id
-	self.electrified = electrified ~= false
-
+	self.id = 0
+	self.electrified = false
 	self.trackID = nil
 	self.switchID = nil
 	self.switchFlip = false
@@ -50,6 +41,7 @@ function Tile:new(station, x, y, id, electrified)
 	self.semaphoreAllowTrain = false
 	self.semaphoreAllowShunt = false
 	self.semaphoreAllowSz = false
+	self.semaphoreShape = false
 	self.semaphoreNoW24 = false
 	self.itineraryEndID = nil -- TODO: Later on, check whether we need this. The only reason we would need this is for dispatcher algorithms.
 	self.maxSpeed = math.huge
@@ -60,6 +52,7 @@ function Tile:new(station, x, y, id, electrified)
 	self.targetW24 = false
 	self.forbidTrain = false
 	self.forbidShunt = false
+	self.warp = nil
 end
 
 ---Returns whether this Tile is a switch, regardless of its type.
@@ -78,6 +71,12 @@ end
 ---@return boolean
 function Tile:isSemaphore()
 	return self.id >= 61 and self.id <= 68
+end
+
+---Sets a new tile ID for this tile.
+---@param id integer The new ID.
+function Tile:setID(id)
+	self.id = id
 end
 
 ---Returns whether this Tile is electrified.
@@ -200,6 +199,18 @@ function Tile:setSemaphoreAllowSz(semaphoreAllowSz)
 	self.semaphoreAllowSz = semaphoreAllowSz
 end
 
+---Returns whether this tile's semaphore is a shape semaphore.
+---@return boolean
+function Tile:getSemaphoreShape()
+	return self.semaphoreShape
+end
+
+---Sets whether this tile's semaphore is a shape semaphore.
+---@param semaphoreShape boolean Whether this tile's semaphore is a shape semaphore.
+function Tile:setSemaphoreShape(semaphoreShape)
+	self.semaphoreShape = semaphoreShape
+end
+
 ---Returns whether this tile's semaphore has NO W24 sign.
 ---@return boolean
 function Tile:getSemaphoreNoW24()
@@ -318,6 +329,18 @@ end
 ---@param forbidShunt boolean Whether to exclude shunting trains.
 function Tile:setForbidShunt(forbidShunt)
 	self.forbidShunt = forbidShunt
+end
+
+---Returns an index (shortcut) of the station to jump to when this tile is clicked, if any.
+---@return string?
+function Tile:getWarp()
+	return self.warp
+end
+
+---Sets an index (shortcut) of the station to jump to when this tile is clicked.
+---@param warp string? A new station. Pass `nil` to remove warp.
+function Tile:setWarp(warp)
+	self.warp = warp
 end
 
 --######################################--
@@ -733,6 +756,7 @@ function Tile:serialize()
 		semaphoreAllowTrain = self.semaphoreAllowTrain or nil,
 		semaphoreAllowShunt = self.semaphoreAllowShunt or nil,
 		semaphoreAllowSz = self.semaphoreAllowSz or nil,
+		semaphoreShape = self.semaphoreShape or nil,
 		semaphoreNoW24 = self.semaphoreNoW24 or nil,
 		itineraryEndID = self.itineraryEndID,
 		maxSpeed = self.maxSpeed ~= math.huge and self.maxSpeed or nil,
@@ -742,13 +766,17 @@ function Tile:serialize()
 		shuntTarget = self.shuntTarget or nil,
 		targetW24 = self.targetW24 or nil,
 		forbidTrain = self.forbidTrain or nil,
-		forbidShunt = self.forbidShunt or nil
+		forbidShunt = self.forbidShunt or nil,
+		warp = self.warp
 	}
 end
 
 ---Deserializes previously saved Tile's data and loads it into this tile.
----@param t table Data to be deserialized. `nil` is not permitted even though it can be returned by `:serialize()`.
+---@param t table? Data to be deserialized. `nil` will make nothing happen.
 function Tile:deserialize(t)
+	if not t then
+		return
+	end
 	self.id = t.id or 0
 	self.electrified = t.electrified
 	self.trackID = t.trackID
@@ -760,6 +788,7 @@ function Tile:deserialize(t)
 	self.semaphoreAllowTrain = t.semaphoreAllowTrain == true
 	self.semaphoreAllowShunt = t.semaphoreAllowShunt == true
 	self.semaphoreAllowSz = t.semaphoreAllowSz == true
+	self.semaphoreShape = t.semaphoreShape == true
 	self.semaphoreNoW24 = t.semaphoreNoW24 == true
 	self.itineraryEndID = t.itineraryEndID
 	self.maxSpeed = t.maxSpeed or math.huge
@@ -770,6 +799,7 @@ function Tile:deserialize(t)
 	self.targetW24 = t.targetW24 == true
 	self.forbidTrain = t.forbidTrain == true
 	self.forbidShunt = t.forbidShunt == true
+	self.warp = t.warp
 end
 
 return Tile

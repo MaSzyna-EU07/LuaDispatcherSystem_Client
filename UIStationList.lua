@@ -73,7 +73,6 @@ end
 function UIStationList:goToStation()
 	_Project:setCurrentStation(self.ui.elements.sl_stations.value)
 	self.ui.elements.sl:hide()
-	self.ui.rightPane:update()
 end
 
 return UIStationList

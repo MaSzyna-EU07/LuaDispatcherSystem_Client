@@ -32,6 +32,7 @@ end
 
 function Project:setCurrentStation(shortcut)
 	self.currentStationID = shortcut
+	_UI.rightPane:update()
 end
 
 function Project:getStationNames()

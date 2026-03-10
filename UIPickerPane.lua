@@ -48,6 +48,9 @@ function UIPickerPane:new(ui)
 	self.ui:addCheckbox("picker", "picker_semaphoreAllowTrain", "poc.", 31, 1, 1, 1, self, self.updateSemaphoreAllowTrain)
 	self.ui:addCheckbox("picker", "picker_semaphoreAllowShunt", "man.", 34, 1, 1, 1, self, self.updateSemaphoreAllowShunt)
 	self.ui:addCheckbox("picker", "picker_semaphoreAllowSz", "Sz", 37, 1, 1, 1, self, self.updateSemaphoreAllowSz)
+	self.ui:addCheckbox("picker", "picker_semaphoreShape", "Semafor kształtowy", 30, 2, 1, 1, self, self.updateSemaphoreShape)
+	self.ui:addLabel("picker", nil, "Sąsiednia st.:", 30, 3, 5, 1)
+	self.ui:addInput("picker", "picker_warp", 35, 3, 5, 1, self, self.updateWarp)
 end
 
 function UIPickerPane:updateElectrified(checkbox)
@@ -211,6 +214,22 @@ function UIPickerPane:updateSemaphoreAllowSz(checkbox)
 	for i, coords in ipairs(station.selectedTiles) do
 		local tile = assert(station:getTile(coords.x, coords.y))
 		tile:setSemaphoreAllowSz(checkbox.value)
+	end
+end
+
+function UIPickerPane:updateSemaphoreShape(checkbox)
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = assert(station:getTile(coords.x, coords.y))
+		tile:setSemaphoreShape(checkbox.value)
+	end
+end
+
+function UIPickerPane:updateWarp(input)
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = assert(station:getTile(coords.x, coords.y))
+		tile:setWarp(input.value)
 	end
 end
 

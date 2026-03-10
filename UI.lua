@@ -254,6 +254,8 @@ function UI:onTileSelected(tile)
 	self.elements.picker_semaphoreAllowTrain.value = tile and tile:getSemaphoreAllowTrain() or false
 	self.elements.picker_semaphoreAllowShunt.value = tile and tile:getSemaphoreAllowShunt() or false
 	self.elements.picker_semaphoreAllowSz.value = tile and tile:getSemaphoreAllowSz() or false
+	self.elements.picker_semaphoreShape.value = tile and tile:getSemaphoreShape() or false
+	self.elements.picker_warp.value = tile and tile:getWarp() or ""
 end
 
 ---Executed when a log file is loaded.

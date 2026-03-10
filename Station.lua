@@ -274,7 +274,9 @@ function Station:handleLeftClick()
 	-- Left click: action dependant on the current mode
 	if self.hoverX and self.hoverY then
 		if type(_Picker.selection) == "number" then
-			local tile = Tile(self, self.hoverX, self.hoverY, _Picker.selection, _Picker.electrified)
+			local tile = Tile(self, self.hoverX, self.hoverY)
+			tile:setID(_Picker.selection)
+			tile:setElectrified(_Picker.electrified)
 			self:setTile(self.hoverX, self.hoverY, tile)
 		elseif _Picker.selection == "addColumn" then
 			-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
@@ -366,6 +368,11 @@ function Station:handleRightClick()
 					end
 				else
 					tile:sendSemaphoreUnreserve()
+				end
+			elseif tile:getWarp() then
+				local destination = tile:getWarp()
+				if _Project:getStation(destination) then
+					_Project:setCurrentStation(destination)
 				end
 			elseif self.activeX and self.activeY then
 				if tile:isTargetForMode(self.activeMode) and tile:isTargetForW24(self.activeW24) then
@@ -612,7 +619,9 @@ function Station:deserialize(t)
 	for x = 1, self.w do
 		self.tiles[x] = {}
 		for y = 1, self.h do
-			self.tiles[x][y] = Tile(self, x, y, t.tiles[tostring(x) .. "," .. tostring(y)])
+			local tile = Tile(self, x, y)
+			tile:deserialize(t.tiles[tostring(x) .. "," .. tostring(y)])
+			self.tiles[x][y] = tile
 		end
 	end
 end

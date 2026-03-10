@@ -854,7 +854,8 @@
 					"id": 69,
 					"itineraryEndID": "Tp",
 					"trackID": "Tp2-Eb2@LK204.2",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Tp"
 				},
 				"2,12": {
 					"electrified": true,
@@ -863,7 +864,8 @@
 					"itineraryEndID": "Tp_N",
 					"targetW24": true,
 					"trackID": "Tp1-Eb1@LK204.1",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Tp"
 				},
 				"20,10": {
 					"electrified": true,
@@ -2639,7 +2641,8 @@
 					"itineraryEndID": "Bc_N",
 					"targetW24": true,
 					"trackID": "Eb102-Bc2@LK204.2",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Bc"
 				},
 				"51,13": {
 					"electrified": true,
@@ -2647,7 +2650,8 @@
 					"id": 70,
 					"itineraryEndID": "Bc",
 					"trackID": "Eb101-Bc1@LK204.1",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Bc"
 				},
 				"51,14": {
 					"electrified": false,
@@ -2772,21 +2776,24 @@
 					"itineraryEndID": "Eb_N",
 					"targetW24": true,
 					"trackID": "Tp2-Eb2@LK204.2",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Eb"
 				},
 				"12,4": {
 					"electrified": true,
 					"id": 70,
 					"itineraryEndID": "Eb",
 					"trackID": "Tp1-Eb1@LK204.1",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Eb"
 				},
 				"2,2": {
 					"electrified": true,
 					"id": 71,
 					"itineraryEndID": "EZ",
 					"trackID": "Tp1-EZ1@LK254",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "EZ"
 				},
 				"2,3": {
 					"electrified": true,
@@ -3115,7 +3122,8 @@
 				"2,5": {
 					"electrified": true,
 					"id": 71,
-					"trackID": "Tp1-EZ1@LK254"
+					"trackID": "Tp1-EZ1@LK254",
+					"warp": "Tp"
 				},
 				"20,4": {
 					"electrified": true,
@@ -3514,6 +3522,7 @@
 					"id": 62,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_C",
+					"semaphoreShape": true,
 					"trackID": "Bc_Iz10"
 				},
 				"11,2": {
@@ -3641,6 +3650,7 @@
 					"id": 61,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_K",
+					"semaphoreShape": true,
 					"trackID": "Bc_Iz23"
 				},
 				"16,4": {
@@ -3648,6 +3658,7 @@
 					"id": 61,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_L",
+					"semaphoreShape": true,
 					"trackID": "Bc_Iz23"
 				},
 				"16,5": {
@@ -3675,6 +3686,7 @@
 					"id": 61,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_M",
+					"semaphoreShape": true,
 					"trackID": "Bc_Iz24"
 				},
 				"17,6": {
@@ -3699,6 +3711,7 @@
 					"id": 61,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_N",
+					"semaphoreShape": true,
 					"trackID": "Bc_Iz28"
 				},
 				"19,4": {
@@ -3723,7 +3736,8 @@
 					"id": 69,
 					"itineraryEndID": "Eb",
 					"trackID": "Eb102-Bc2@LK204.2",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Eb"
 				},
 				"2,5": {
 					"electrified": true,
@@ -3731,7 +3745,8 @@
 					"itineraryEndID": "Eb_N",
 					"targetW24": true,
 					"trackID": "Eb101-Bc1@LK204.1",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Eb"
 				},
 				"20,4": {
 					"electrified": false,
@@ -3778,6 +3793,7 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_P",
+					"semaphoreShape": true,
 					"trackID": "Bc_ItP"
 				},
 				"23,6": {
@@ -3786,6 +3802,7 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_O",
+					"semaphoreShape": true,
 					"trackID": "Bc_ItO"
 				},
 				"24,5": {
@@ -3937,6 +3954,7 @@
 					"id": 62,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_F",
+					"semaphoreShape": true,
 					"trackID": "Bc_Iz5"
 				},
 				"9,4": {
@@ -3944,6 +3962,7 @@
 					"id": 62,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_E",
+					"semaphoreShape": true,
 					"trackID": "Bc_Iz4"
 				},
 				"9,5": {
@@ -3951,6 +3970,7 @@
 					"id": 62,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_D",
+					"semaphoreShape": true,
 					"trackID": "Bc_Iz9"
 				},
 				"9,6": {
