@@ -1,4 +1,5 @@
 local Class = require("class")
+local Itinerary = require("Itinerary")
 
 ---@class Pathfinder : Class
 ---@overload fun(start: Tile, target: Tile): Pathfinder
@@ -17,8 +18,8 @@ function Pathfinder:new(start, target)
     ---@alias TraversalPossibility {tile: Tile, direction: integer, prevDirection: integer?, path: {tile: Tile, dir1: integer?, dir2: integer?}[], speed: number?, cost: number}
     ---@type TraversalPossibility[]
     self.possibilities = {} -- List of traversal possibilities
-    ---@type TraversalPossibility?
-    self.winner = nil -- The possiblity which is the first found path.
+    ---@type Itinerary[]
+    self.itineraries = {} -- The list of itineraries corresponding to the winning path.
 
     self.possibilitySortFn = function(a, b) return a.cost < b.cost end
 end
@@ -39,27 +40,29 @@ end
 ---Currently this is hacked together and the list of tiles is hardcoded. Yay!
 function Pathfinder:calculatePath()
     self:createInitialPossibilities()
+    local winner = nil
     while #self.possibilities > 0 do
         -- Get the possibility which has the lowest cost.
         table.sort(self.possibilities, self.possibilitySortFn)
         local possibility = table.remove(self.possibilities, 1)
         if self:isWinningPossibility(possibility) then
             self:finalizePossibility(possibility)
-            self.winner = possibility
+            winner = possibility
             break
         end
         self:evaluatePossibility(possibility)
     end
 
-    if not self.winner then
+    if not winner then
         print("We did not find a path :(")
         return
     end
 
     print("Path found:")
-    for i, node in ipairs(self.winner.path) do
-        print(node.tile.x, node.tile.y, node.dir1, node.dir2)
+    for i, node in ipairs(winner.path) do
+        print(string.format("    %s: pos=%s,%s dirs=%s,%s", i, node.tile.x, node.tile.y, node.dir1, node.dir2))
     end
+    self:generateItineraries(winner)
 end
 
 ---Creates the initial possibilities starting from this Pathfinder's first tile.
@@ -161,74 +164,46 @@ function Pathfinder:finalizePossibility(possibility)
     end
 end
 
----Reserves all tracks which have been traversed by this Pathfinder, with the exception of the last tile.
+---Generates itineraries based on the specified possibility.
 ---@private
-function Pathfinder:reserveTracks()
-    local usedTracks = {}
-    for i = 1, #self.winner.path - 1 do
-        local node = self.winner.path[i]
-        local track = node.tile:getTrackID()
-        if track and not usedTracks[track] then
-            usedTracks[track] = true
-            _Com.sendCommand("tr " .. track .. " " .. self.winner.path[1].tile:getSemaphoreID())
+---@param possibility TraversalPossibility The traversal possibility to be the basis for generated itineraries.
+function Pathfinder:generateItineraries(possibility)
+    local itinerary = Itinerary()
+    -- Determine which tracks should be reserved.
+    for i = 1, #possibility.path - 1 do
+        local track = possibility.path[i].tile:getTrackID()
+        if track then
+            itinerary:addTrack(track)
         end
     end
-end
-
----Switches all switches this Pathfinder has found to their desired states.
----@private
-function Pathfinder:switchSwitches()
-    for i, node in ipairs(self.winner.path) do
+    -- Determine which switches should be switched.
+    for i, node in ipairs(possibility.path) do
         -- Check if we have to consider a switch state on this tile.
         local switchStates = node.tile:getSwitchStatesForDirections(node.dir1, node.dir2)
         for suffix, state in pairs(switchStates) do
-		    _Com.sendCommand("j " .. node.tile:getSwitchID() .. suffix .. " " .. (state and "+" or "-"))
+            itinerary:addSwitch(node.tile:getSwitchID() .. suffix, state)
         end
     end
-end
-
----Sets the semaphore at the beginning of this path to display a clear signal.
----@private
-function Pathfinder:setSemaphore()
-    local tile = self.winner.path[1].tile
+    -- Determine the semaphore, next semaphore and speed.
+    local tile = possibility.path[1].tile
+    itinerary:setSemaphore(assert(tile:getSemaphoreID(), "Missing semaphore on starting tile!"))
     if self.mode == PathMode.TRAIN then
-        ---@type string|Speed?
-        local nextSpeed = 1
-        local lastTile = self.winner.path[#self.winner.path].tile
-        if lastTile:isSemaphore() then
-            nextSpeed = lastTile:getSemaphoreID()
-        end
-        tile:sendSemaphoreState(tile:getSemaphoreAllowTrain() and _SpeedToID(self.winner.speed) or Speed.SZ, nextSpeed, lastTile:isTargetW24() and "w24" or nil)
+        itinerary:setSpeed(tile:getSemaphoreAllowTrain() and _SpeedToID(possibility.speed) or Speed.SZ)
+        local lastTile = possibility.path[#possibility.path].tile
+        itinerary:setNext(lastTile:getSemaphoreID() or 1)
+        itinerary:setW24(lastTile:isTargetW24())
     elseif self.mode == PathMode.SHUNT then
-        tile:sendSemaphoreState(Speed.MS2)
+        itinerary:setSpeed(Speed.MS2)
     end
-end
-
----Returns whether this path can be dispatched.
----@return boolean
-function Pathfinder:canBeDispatched()
-    -- The path must exist.
-    if not self.winner then
-        return false
-    end
-    -- All tracks must be clear.
-    for i = 1, #self.winner.path - 1 do
-        local node = self.winner.path[i]
-        if node.tile:isTrackClear() == false then
-            return false
-        end
-    end
-    return true
+    -- Currently it's always going to be just that one itinerary.
+    table.insert(self.itineraries, itinerary)
 end
 
 ---Reserves all tracks, sets all switches and displays a clear signal on the semaphore.
 function Pathfinder:dispatch()
-    if not self:canBeDispatched() then
-        return
+    for i, itinerary in ipairs(self.itineraries) do
+        itinerary:dispatch()
     end
-    self:reserveTracks()
-    self:switchSwitches()
-    self:setSemaphore()
 end
 
 return Pathfinder
