@@ -3698,6 +3698,7 @@
 					"electrified": true,
 					"id": 26,
 					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
 					"switchID": "Bc_23",
 					"trackID": "Bc_Iz23"
 				},

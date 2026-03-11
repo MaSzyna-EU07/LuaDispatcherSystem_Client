@@ -369,11 +369,6 @@ function Station:handleRightClick()
 				else
 					tile:sendSemaphoreUnreserve()
 				end
-			elseif tile:getWarp() then
-				local destination = tile:getWarp()
-				if _Project:getStation(destination) then
-					_Project:setCurrentStation(destination)
-				end
 			elseif self.activeX and self.activeY then
 				if tile:isTargetForMode(self.activeMode) and tile:isTargetForW24(self.activeW24) then
 					local pathfinder = Pathfinder(assert(self:getTile(self.activeX, self.activeY)), tile)
@@ -382,6 +377,11 @@ function Station:handleRightClick()
 					pathfinder:dispatch()
 				end
 				self.activeX, self.activeY = nil, nil
+			elseif tile:getWarp() then
+				local destination = tile:getWarp()
+				if _Project:getStation(destination) then
+					_Project:setCurrentStation(destination)
+				end
 			end
 		end
 	else

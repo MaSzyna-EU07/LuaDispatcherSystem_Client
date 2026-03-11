@@ -60,7 +60,7 @@ end
 ---@param reserved boolean Whether this track is reserved.
 function Objects:setTrackState(trackID, tick, occupied, reserved)
 	self.tracks[trackID][tick] = {occupied = occupied, reserved = reserved}
-    print(string.format("[t=%s] %s : occupied=%s reserved=%s", tick, trackID, occupied, reserved))
+    _Notifications:post(string.format("[t=%s] %s : occupied=%s reserved=%s", tick, trackID, occupied, reserved), NotificationColor.GREEN)
 end
 
 ---Sets a new state for the specified switch.
@@ -70,7 +70,7 @@ end
 ---@param forced boolean Whether the switch has been forcefully switched ("rozprucie rozjazdu").
 function Objects:setSwitchState(switchID, tick, state, forced)
 	self.switches[switchID][tick] = {state = state, forced = forced}
-    print(string.format("[t=%s] %s : state=%s forced=%s", tick, switchID, state, forced))
+    _Notifications:post(string.format("[t=%s] %s : state=%s forced=%s", tick, switchID, state, forced), NotificationColor.GREEN)
 end
 
 ---Sets a new state for the specified semaphore.
@@ -81,7 +81,7 @@ end
 ---@param image string The image on the semaphore.
 function Objects:setSemaphoreState(semaphoreID, tick, speed, nextSpeed, image)
 	self.semaphores[semaphoreID][tick] = {speed = speed, nextSpeed = nextSpeed, image = image}
-    print(string.format("[t=%s] %s : speed=%s nextSpeed=%s image=%s", tick, semaphoreID, speed, nextSpeed, image))
+    _Notifications:post(string.format("[t=%s] %s : speed=%s nextSpeed=%s image=%s", tick, semaphoreID, speed, nextSpeed, image), NotificationColor.GREEN)
 end
 
 ---Returns the track state at the given tick.

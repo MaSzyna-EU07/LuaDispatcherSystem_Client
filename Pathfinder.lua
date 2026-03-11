@@ -54,7 +54,7 @@ function Pathfinder:calculatePath()
     end
 
     if not winner then
-        print("We did not find a path :(")
+        _Notifications:post("Pathfinding failed! :(", NotificationColor.RED)
         return
     end
 
@@ -91,7 +91,7 @@ function Pathfinder:evaluatePossibility(possibility)
     for i, direction in ipairs(directions) do
         -- Check if we can go there in the first place.
         local nextTile = tile:getNeighbor(direction)
-        if nextTile:isPathModeAllowed(self.mode) and not (self.electrified and not nextTile:isElectrified()) then
+        if (nextTile:isTrackClear() or not nextTile:getTrackID()) and nextTile:isPathModeAllowed(self.mode) and not (self.electrified and not nextTile:isElectrified()) then
             -- Copy the paths and add our new tile to it.
             local path = _Utils.copyTable(possibility.path)
             table.insert(path, {tile = tile, dir1 = _InvertDir(possibility.direction), dir2 = direction})
@@ -115,7 +115,7 @@ function Pathfinder:calculateCost(possibility)
     local cost = 0
     for i, node in ipairs(possibility.path) do
         if node.tile:isDoubleSwitch() then
-            cost = cost + 8
+            cost = cost + 4
         elseif node.tile:isSwitch() then
             cost = cost + 4
         else

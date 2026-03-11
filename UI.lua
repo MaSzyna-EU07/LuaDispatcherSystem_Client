@@ -187,7 +187,7 @@ end
 --######################################--
 
 function UI:setup()
-	gui.style.font = love.graphics.newFont("data/dejavusans.ttf", 16)
+	gui.style.font = _Font
 	gui.style.unit = self.U
 
 	self.stationList = UIStationList(self)

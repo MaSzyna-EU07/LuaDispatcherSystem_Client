@@ -3,6 +3,7 @@ _Utils = require("utils")
 _Com = require("communication")
 local Objects = require("Objects")
 local UI = require("UI")
+local Notifications = require("Notifications")
 local Tileset = require("Tileset")
 local Project = require("Project")
 local Picker = require("Picker")
@@ -12,12 +13,11 @@ _WWIDTH, _WHEIGHT = 1600, 900
 _MouseX, _MouseY = 0, 0
 _Time = 0
 _SIM_PATH = "/run/media/jakub/LaCie/(Pliki)/Gry i programy/Symulatory/MaSzyna/SVN working/"
-
--- tory nie powinny sie niektore podswietlac jezeli rozjazd nie jest ustawiony w ta strone
--- definiowanie maksymalnych predkosci na rozjazdach
+_Font = love.graphics.newFont("data/dejavusans.ttf", 16)
 
 _Obj = Objects()
 _UI = UI()
+_Notifications = Notifications()
 _Tracks = Tileset("data/tracks.png", 15, 7, 14, 14)
 _Buttons = Tileset("data/buttons.png", 11, 2, 21, 14)
 _Project = Project()
@@ -58,41 +58,35 @@ function _SpeedToID(speed)
 	return Speed["40"]
 end
 
-local TRACK_COLORS = {
-	base = {0, 1, 0},
-	electrified = {1, 1, 0},
-	occupied = {1, 0, 0},
-	reserved = {0, 0, 1}
-}
-
+---Turns the track flags into the track color to be displayed on the tile.
+---@param electrified boolean? Whether the track is electrified.
+---@param occupied boolean? Whether the track is occupied.
+---@param reserved boolean? Whether the track is reserved.
+---@param alarm boolean? Whether the track should flash red (for example when a switch is forced).
+---@return TrackColor
 function _GetTrackColor(electrified, occupied, reserved, alarm)
 	if alarm or occupied then
-		return TRACK_COLORS.occupied
+		return TrackColor.OCCUPIED
 	elseif reserved then
-		return TRACK_COLORS.reserved
+		return TrackColor.RESERVED
 	elseif electrified then
-		return TRACK_COLORS.electrified
+		return TrackColor.ELECTRIFIED
 	end
-	return TRACK_COLORS.base
+	return TrackColor.BASE
 end
 
-local SEM_COLORS = {
-	{1, 0, 0},  -- 1: red
-	{0, 1, 0},  -- 2: green
-	{1, 0.5, 0},-- 3: orange
-	{1, 1, 1},  -- 4: white
-	{0.2, 0.4, 1}   -- 5: blue
-}
-local SEM_IMAGES = {
-	s1 = {color1 = 1}, s1a = {color1 = 1, color2 = 1, blink2 = true},
-	s2 = {color1 = 2}, s3 = {color1 = 2, blink1 = true}, s4 = {color1 = 3, blink1 = true}, s5 = {color1 = 3},
-	s6 = {color1 = 2, color2 = 3, bar = 2}, s7 = {color1 = 2, blink1 = true, color2 = 3, bar = 2}, s8 = {color1 = 3, blink1 = true, color2 = 3, bar = 2}, s9 = {color1 = 3, color2 = 3, bar = 2},
-	s10 = {color1 = 2, color2 = 3}, s11 = {color1 = 2, blink1 = true, color2 = 3}, s12 = {color1 = 3, blink1 = true, color2 = 3}, s13 = {color1 = 3, color2 = 3},
-	s10a = {color1 = 2, color2 = 3, bar = 3}, s11a = {color1 = 2, blink1 = true, color2 = 3, bar = 3}, s12a = {color1 = 3, blink1 = true, color2 = 3, bar = 3}, s13a = {color1 = 3, color2 = 3, bar = 3},
-	ms1 = {color1 = 5}, ms2 = {color2 = 4},
-	sz = {color1 = 1, color2 = 4, blink2 = true}
-}
-
+---Draws tile graphics.
+---@param x number Top left corner X screen coordinate.
+---@param y number Top left corner Y screen coordinate.
+---@param id integer Tile ID in the database.
+---@param electrified boolean? Whether the track is electrified.
+---@param occupied boolean? Whether the track is occupied.
+---@param reserved boolean? Whether the track is reserved.
+---@param alarm boolean? Whether the track should flash red (for example when a switch is forced).
+---@param switchDimBits integer Bitmask of directions which should be dark on track tiles.
+---@param semaphoreState SemaphoreState|string? State of the semaphore, or its image directly.
+---@param scale number? Tile scale.
+---@param opacity number? Tile opacity, from 0 to 1.
 function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBits, semaphoreState, scale, opacity)
 	local track = _TileDB.tiles[id]
 	if not track then
@@ -135,16 +129,14 @@ function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBi
 	-- Semaphore
 	if track.semaphore then
 		_Tracks:drawTile(track.semaphore, 4, x, y, scale)
-		local image = semaphoreState and SEM_IMAGES[semaphoreState.image]
+		local image = semaphoreState and SemaphoreImage[type(semaphoreState) == "string" and semaphoreState or semaphoreState.image]
 		if image then
 			if image.color1 and (not image.blink1 or _Time % 1 < 0.5) then
-				local color = SEM_COLORS[image.color1]
-				love.graphics.setColor(color[1], color[2], color[3], opacity)
+				love.graphics.setColor(image.color1[1], image.color1[2], image.color1[3], opacity)
 				_Tracks:drawTile(track.semaphore, 5, x, y, scale)
 			end
 			if image.color2 and (not image.blink2 or _Time % 1 < 0.5) then
-				local color = SEM_COLORS[image.color2]
-				love.graphics.setColor(color[1], color[2], color[3], opacity)
+				love.graphics.setColor(image.color2[1], image.color2[2], image.color2[3], opacity)
 				_Tracks:drawTile(track.semaphore, 6, x, y, scale)
 			end
 		end
@@ -171,6 +163,7 @@ function love.draw()
 	_Picker:draw()
 	_Project:draw()
 	_UI:draw()
+	_Notifications:draw()
 	-- Debug
 	local station = _Project:getCurrentStation()
 	local tile = station:getHoveredTile()
@@ -218,10 +211,6 @@ function _LogWrite(text, severity, weight)
 	if verboseValue >= weight then
 		print("[" .. severityTable[severity] .. "] " .. text)
 	end
-end
-
-function _Ternary(v, a, b)
-	if v then return a else return b end
 end
 
 function _GetMaxLessThan(l, v)
