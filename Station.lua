@@ -370,7 +370,7 @@ function Station:handleRightClick()
 					tile:sendSemaphoreUnreserve()
 				end
 			elseif self.activeX and self.activeY then
-				if tile:isTargetForMode(self.activeMode) and tile:isTargetForW24(self.activeW24) then
+				if tile:isTargetForMode(self.activeMode) then
 					local pathfinder = Pathfinder(assert(self:getTile(self.activeX, self.activeY)), tile)
 					pathfinder:setMode(self.activeMode)
 					pathfinder:calculatePath()
@@ -562,7 +562,7 @@ function Station:drawClickable()
 	end
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
-			if tile:isTargetForMode(self.activeMode) and tile:isTargetForW24(self.activeW24) then
+			if tile:isTargetForMode(self.activeMode) then
 				tile:drawClickable()
 			end
 		end

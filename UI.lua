@@ -240,6 +240,7 @@ function UI:onTileSelected(tile)
 	self.elements.picker_switchFlipABCD.value = tile and tile:getSwitchFlipABCD() or false
 	self.elements.picker_semaphoreType.value = tile and tile:isSemaphore() and tostring(tile:getSemaphoreType()) or ""
 	self.elements.picker_semaphoreNoW24.value = tile and tile:getSemaphoreNoW24() or false
+	self.elements.picker_semaphoreNoDanger.value = tile and tile:getSemaphoreNoDanger() or false
 	self.elements.picker_semaphoreID.value = tile and tile:getSemaphoreID() or ""
 	self.elements.picker_itineraryEndID.value = tile and tile:getItineraryEndID() or ""
 	self.elements.picker_electrified2.value = tile and tile:isElectrified() or false

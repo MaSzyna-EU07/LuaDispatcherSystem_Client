@@ -43,6 +43,7 @@ function Tile:new(station, x, y)
 	self.semaphoreAllowSz = false
 	self.semaphoreShape = false
 	self.semaphoreNoW24 = false
+	self.semaphoreNoDanger = false
 	self.itineraryEndID = nil -- TODO: Later on, check whether we need this. The only reason we would need this is for dispatcher algorithms.
 	self.maxSpeed = math.huge
 	self.maxSpeedPlus = math.huge
@@ -170,7 +171,7 @@ function Tile:getSemaphoreAllowTrain()
 end
 
 ---Sets whether this tile's semaphore can display a train signal.
----@param semaphoreAllowTrain boolean Whether this tile's semaphore can display a train signal.
+---@param semaphoreAllowTrain boolean
 function Tile:setSemaphoreAllowTrain(semaphoreAllowTrain)
 	self.semaphoreAllowTrain = semaphoreAllowTrain
 end
@@ -182,7 +183,7 @@ function Tile:getSemaphoreAllowShunt()
 end
 
 ---Sets whether this tile's semaphore can display a shunting signal.
----@param semaphoreAllowShunt boolean Whether this tile's semaphore can display a Shunt signal.
+---@param semaphoreAllowShunt boolean
 function Tile:setSemaphoreAllowShunt(semaphoreAllowShunt)
 	self.semaphoreAllowShunt = semaphoreAllowShunt
 end
@@ -194,7 +195,7 @@ function Tile:getSemaphoreAllowSz()
 end
 
 ---Sets whether this tile's semaphore can display an Sz signal.
----@param semaphoreAllowSz boolean Whether this tile's semaphore can display an Sz signal.
+---@param semaphoreAllowSz boolean
 function Tile:setSemaphoreAllowSz(semaphoreAllowSz)
 	self.semaphoreAllowSz = semaphoreAllowSz
 end
@@ -206,7 +207,7 @@ function Tile:getSemaphoreShape()
 end
 
 ---Sets whether this tile's semaphore is a shape semaphore.
----@param semaphoreShape boolean Whether this tile's semaphore is a shape semaphore.
+---@param semaphoreShape boolean
 function Tile:setSemaphoreShape(semaphoreShape)
 	self.semaphoreShape = semaphoreShape
 end
@@ -218,9 +219,21 @@ function Tile:getSemaphoreNoW24()
 end
 
 ---Sets whether this tile's semaphore has NO W24 sign.
----@param semaphoreNoW24 boolean Whether this tile's semaphore has NO W24 sign.
+---@param semaphoreNoW24 boolean
 function Tile:setSemaphoreNoW24(semaphoreNoW24)
 	self.semaphoreNoW24 = semaphoreNoW24
+end
+
+---Returns whether this tile's semaphore has no danger (next semaphore must be displaying a >=100 speed).
+---@return boolean
+function Tile:getSemaphoreNoDanger()
+	return self.semaphoreNoDanger
+end
+
+---Sets whether this tile's semaphore has no danger (next semaphore must be displaying a >=100 speed).
+---@param semaphoreNoDanger boolean
+function Tile:setSemaphoreNoDanger(semaphoreNoDanger)
+	self.semaphoreNoDanger = semaphoreNoDanger
 end
 
 ---Returns the itinerary end ID for this Tile. Returns `nil` if no such ID is specified.
@@ -290,7 +303,7 @@ function Tile:isShuntTarget()
 end
 
 ---Sets whether this Tile can be used as a target for shunting paths.
----@param shuntTarget boolean Whether this Tile can be used as a target for shunting paths.
+---@param shuntTarget boolean
 function Tile:setShuntTarget(shuntTarget)
 	self.shuntTarget = shuntTarget
 end
@@ -302,7 +315,7 @@ function Tile:isTargetW24()
 end
 
 ---Sets whether this Tile's target will make its pathfinding semaphore display a W24 signal.
----@param targetW24 boolean Whether this Tile's target will make its pathfinding semaphore display a W24 signal.
+---@param targetW24 boolean
 function Tile:setTargetW24(targetW24)
 	self.targetW24 = targetW24
 end
@@ -758,6 +771,7 @@ function Tile:serialize()
 		semaphoreAllowSz = self.semaphoreAllowSz or nil,
 		semaphoreShape = self.semaphoreShape or nil,
 		semaphoreNoW24 = self.semaphoreNoW24 or nil,
+		semaphoreNoDanger = self.semaphoreNoDanger or nil,
 		itineraryEndID = self.itineraryEndID,
 		maxSpeed = self.maxSpeed ~= math.huge and self.maxSpeed or nil,
 		maxSpeedPlus = self.maxSpeedPlus ~= math.huge and self.maxSpeedPlus or nil,
@@ -790,6 +804,7 @@ function Tile:deserialize(t)
 	self.semaphoreAllowSz = t.semaphoreAllowSz == true
 	self.semaphoreShape = t.semaphoreShape == true
 	self.semaphoreNoW24 = t.semaphoreNoW24 == true
+	self.semaphoreNoDanger = t.semaphoreNoDanger == true
 	self.itineraryEndID = t.itineraryEndID
 	self.maxSpeed = t.maxSpeed or math.huge
 	self.maxSpeedPlus = t.maxSpeedPlus or math.huge

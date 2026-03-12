@@ -46,9 +46,15 @@ function UIPickerPane:new(ui)
 	-- Fourth column
 	self.ui:addLabel("picker", nil, "Możliwość podania:", 30, 0, 10, 1)
 	self.ui:addCheckbox("picker", "picker_semaphoreAllowTrain", "poc.", 31, 1, 1, 1, self, self.updateSemaphoreAllowTrain)
+	--self.ui.elements.picker_semaphoreAllowTrain.tip = "Oznacza możliwość wyświetlenia sygnału zezwalającego na jazdę na tym semaforze (np. S2, S5, S13).\nNależy zaznaczyć dla sygnalizatorów półsamoczynnych i sygnalizatorów SBL.\nNie należy zaznaczać dla tarcz manewrowych, semaforów zaporowych i sygnalizatorów Sz."
 	self.ui:addCheckbox("picker", "picker_semaphoreAllowShunt", "man.", 34, 1, 1, 1, self, self.updateSemaphoreAllowShunt)
+	--self.ui.elements.picker_semaphoreAllowShunt.tip = "Oznacza możliwość wyświetlenia sygnału zezwalającego na manewry na tym semaforze (Ms2).\nNależy zaznaczyć dla większości semaforów, tarcz manewrowych i tarcz zaporowych.\nNie należy zaznaczać dla semaforów wjazdowych, semaforów bez indeksu \"m\", sygnalizatorów SBL i Sz."
 	self.ui:addCheckbox("picker", "picker_semaphoreAllowSz", "Sz", 37, 1, 1, 1, self, self.updateSemaphoreAllowSz)
-	self.ui:addCheckbox("picker", "picker_semaphoreShape", "Semafor kształtowy", 30, 2, 1, 1, self, self.updateSemaphoreShape)
+	--self.ui.elements.picker_semaphoreAllowSz.tip = "Oznacza możliwość wyświetlenia sygnału zastępczego na tym semaforze (Sz).\nNależy zaznaczyć dla większości semaforów i sygnalizatorów Sz.\nNie należy zaznaczać dla tarcz manewrowych i semaforów nieposiadających fizycznie komory białej (na posterunkach odstępowych, SBL)."
+	self.ui:addCheckbox("picker", "picker_semaphoreShape", "Kształ.", 30, 2, 1, 1, self, self.updateSemaphoreShape)
+	--self.ui.elements.picker_semaphoreShape.tip = "Oznacza semafor jako kształtowy.\nSemafory kształtowe nie mają uzależnienia od następnego semafora i potrafią wyświetlić tylko sygnały Sr1, Sr2 i Sr3.\nW chwili obecnej nie wpływa to na wygląd semafora na schemacie."
+	self.ui:addCheckbox("picker", "picker_semaphoreNoDanger", "Brak pom.g.k.", 34, 2, 1, 1, self, self.updateSemaphoreNoDanger)
+	self.ui.elements.picker_semaphoreNoDanger.tip = "Oznacza semafor jako nieposiadający górnej pomarańczowej komory.\nOznacza to, że pathfinder nie będzie w stanie wyświetlić sygnału zezwalającego na jazdę\njeżeli kolejny semafor nie zezwala na jazdę z prędkością 100km/h lub Vmax."
 	self.ui:addLabel("picker", nil, "Sąsiednia st.:", 30, 3, 5, 1)
 	self.ui:addInput("picker", "picker_warp", 35, 3, 5, 1, self, self.updateWarp)
 end
@@ -134,6 +140,14 @@ function UIPickerPane:updateSemaphoreNoW24(checkbox)
 	for i, coords in ipairs(station.selectedTiles) do
 		local tile = assert(station:getTile(coords.x, coords.y))
 		tile:setSemaphoreNoW24(checkbox.value)
+	end
+end
+
+function UIPickerPane:updateSemaphoreNoDanger(checkbox)
+	local station = _Project:getCurrentStation()
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = assert(station:getTile(coords.x, coords.y))
+		tile:setSemaphoreNoDanger(checkbox.value)
 	end
 end
 

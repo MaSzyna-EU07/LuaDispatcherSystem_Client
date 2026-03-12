@@ -16,9 +16,9 @@ end
 
 ---Posts a new notification.
 ---@param text string The notification text.
----@param color NotificationColor The notification color.
+---@param color NotificationColor? The notification color, green by default.
 function Notifications:post(text, color)
-    table.insert(self.notifications, {text = text, color = color, time = _Time})
+    table.insert(self.notifications, {text = text, color = color or NotificationColor.GREEN, time = _Time})
 end
 
 ---Draws the notifications on the screen.
