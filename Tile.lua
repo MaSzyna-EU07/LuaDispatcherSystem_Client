@@ -654,6 +654,16 @@ function Tile:sendSemaphoreUnreserve()
 	end
 end
 
+---Sends a command to the server to send a command to the train on this tile's track.
+---@param str string The command string.
+---@param num1 number? The first number.
+---@param num2 number? The second number.
+function Tile:sendTrainCommand(str, num1, num2)
+	if self.trackID then
+		_Com.sendCommand("tc " .. self.trackID .. " " .. str .. (num1 and (" " .. num1) or "") .. (num2 and (" " .. num2) or ""))
+	end
+end
+
 --##########################################--
 ---------------- D R A W I N G ---------------
 --##########################################--

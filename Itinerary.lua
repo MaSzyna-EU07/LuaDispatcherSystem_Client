@@ -62,6 +62,9 @@ end
 ---@return boolean
 function Itinerary:canBeDispatched()
     -- All tracks must be clear.
+    if self.speed == Speed.MS2 then
+        return true
+    end
     for track, _ in pairs(self.tracks) do
         local state = _Obj:getTrackState(track)
         if state and (state.occupied or state.reserved) then

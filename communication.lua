@@ -3,6 +3,12 @@ local com = {}
 local COM_READ_DELAY = 1
 local COM_VALIDATION_KEY = {0x70, 0xA0, 0xE0, 0x07}
 local COM_FUNCTIONS = {
+	[0x01] = {
+		name = "debugPrint",
+		params = {
+			{name = "message", type = "string"}
+		}
+	},
 	[0x12] = {
 		name = "setTrack",
 		params = {
@@ -277,6 +283,8 @@ function com.readCall(name, params)
 
 	if name == "nextTick" then
 		com.nextTimeTick()
+	elseif name == "debugPrint" then
+		_Notifications:post("[LOG] " .. params.message, NotificationColor.GREEN)
 	elseif name == "initStation" then
 		com.initObject(com_ids.stations, "station", params.stationN, nil)
 		_Obj:initStation(params.stationN)

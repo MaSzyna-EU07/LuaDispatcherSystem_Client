@@ -4,6 +4,7 @@ local UIStationList = require("UIStationList")
 local UITopPane = require "UITopPane"
 local UIRightPane = require("UIRightPane")
 local UIPickerPane = require("UIPickerPane")
+local UITrainPane = require("UITrainPane")
 local UIBottomPane = require("UIBottomPane")
 
 ---@class UI : Class
@@ -194,6 +195,7 @@ function UI:setup()
 	self.topPane = UITopPane(self)
 	self.rightPane = UIRightPane(self)
 	self.pickerPane = UIPickerPane(self)
+	self.trainPane = UITrainPane(self)
 	self.bottomPane = UIBottomPane(self)
 end
 

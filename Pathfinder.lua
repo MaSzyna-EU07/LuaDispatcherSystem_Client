@@ -13,7 +13,7 @@ function Pathfinder:new(start, target)
     self.target = target
     self.speed = 160
     self.mode = PathMode.TRAIN
-    self.electrified = true
+    self.electrified = false
 
     ---@alias TraversalPossibility {tile: Tile, direction: integer, prevDirection: integer?, path: {tile: Tile, dir1: integer?, dir2: integer?}[], speed: number, cost: number, lastSemaphore: Tile?, segments: {start: integer, speed: number}[]}
     ---@type TraversalPossibility[]
@@ -91,7 +91,8 @@ function Pathfinder:evaluatePossibility(possibility)
     for i, direction in ipairs(directions) do
         -- Check if we can go there in the first place.
         local nextTile = tile:getNeighbor(direction)
-        if (nextTile:isTrackClear() or not nextTile:getTrackID()) and nextTile:isPathModeAllowed(self.mode) and not (self.electrified and not nextTile:isElectrified()) then
+        -- The track must be clear (unless we are in shunting mode), must not prohibit our path mode and must be electrified if we are pathfinding for an electric vehicle.
+        if (nextTile:isTrackClear() or not nextTile:getTrackState() or self.mode == PathMode.SHUNT) and nextTile:isPathModeAllowed(self.mode) and not (self.electrified and not nextTile:isElectrified()) then
             -- Copy the paths and add our new tile to it.
             local path = _Utils.copyTable(possibility.path)
             table.insert(path, {tile = tile, dir1 = _InvertDir(possibility.direction), dir2 = direction})
