@@ -166,14 +166,16 @@ function love.draw()
 	_Notifications:draw()
 	-- Debug
 	local station = _Project:getCurrentStation()
-	local tile = station:getHoveredTile()
-	love.graphics.setColor(1, 1, 1)
-	love.graphics.print("Hovered ID: " .. tostring(_Picker.hover), 0, 700)
-	love.graphics.print("Hovered Tile: " .. tostring(station.hoverX) .. ", " .. tostring(station.hoverY), 0, 720)
-	love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 0, 740)
-	if tile then
-		love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 0, 760)
-		love.graphics.print("Semaphore pointing: " .. tostring(tile:getSemaphoreDirection()), 0, 780)
+	if station then
+		local tile = station:getHoveredTile()
+		love.graphics.setColor(1, 1, 1)
+		love.graphics.print("Hovered ID: " .. tostring(_Picker.hover), 0, 700)
+		love.graphics.print("Hovered Tile: " .. tostring(station.hoverX) .. ", " .. tostring(station.hoverY), 0, 720)
+		love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 0, 740)
+		if tile then
+			love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 0, 760)
+			love.graphics.print("Semaphore pointing: " .. tostring(tile:getSemaphoreDirection()), 0, 780)
+		end
 	end
 end
 

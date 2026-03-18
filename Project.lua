@@ -7,25 +7,36 @@ local Project = class:derive("Project")
 local Station = require("Station")
 
 function Project:new()
-	self.stations = {
-		Station("Pruszcz Gdański", "PrG")
-	}
+	self.stations = {}
 	---@type table<string, Station>
 	self.stationsByID = {}
-	self.currentStationID = "PrG"
+	self.currentStationID = nil
 
 	self:updateStationLists()
 end
 
+---Updates the project.
+---@param dt number Time delta in seconds.
 function Project:update(dt)
 	-- Maybe we need updating all stations?
-	self:getCurrentStation():update(dt)
+	local station = self:getCurrentStation()
+	if station then
+		station:update(dt)
+	end
 end
 
+---Returns the current station, or `nil` if it doesn't exist or isn't selected.
+---@param shortcut string? The station shortcut.
+---@return Station?
 function Project:getStation(shortcut)
+	if not shortcut then
+		return
+	end
 	return self.stationsByID[shortcut]
 end
 
+---Returns the currently selected station, or `nil` if no station is selected.
+---@return Station?
 function Project:getCurrentStation()
 	return self:getStation(self.currentStationID)
 end
@@ -74,23 +85,36 @@ function Project:updateStationLists()
 end
 
 function Project:draw()
-	self:getCurrentStation():draw()
+	local station = self:getCurrentStation()
+	if station then
+		station:draw()
+	end
 end
 
 function Project:keypressed(key)
-	self:getCurrentStation():keypressed(key)
+	local station = self:getCurrentStation()
+	if station then
+		station:keypressed(key)
+	end
 end
 
 function Project:mousepressed(x, y, button)
-	self:getCurrentStation():mousepressed(x, y, button)
+	local station = self:getCurrentStation()
+	if station then
+		station:mousepressed(x, y, button)
+	end
 end
 
 function Project:mousereleased(x, y, button)
-	self:getCurrentStation():mousereleased(x, y, button)
+	local station = self:getCurrentStation()
+	if station then
+		station:mousereleased(x, y, button)
+	end
 end
 
 function Project:save()
 	_Utils.saveJson("savefile.json", self:serialize())
+	_Notifications:post("Zapisano projekt!")
 end
 
 function Project:load()

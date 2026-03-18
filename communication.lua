@@ -327,8 +327,15 @@ function com.initObject(idTable, counter, name, stationID)
 	idTable[com_counters[counter]] = {name = name, sid = stationID}
 end
 
+function com.isConnected()
+	return com.path ~= nil
+end
+
 function com.sendCommand(command)
-	assert(com.path, "Call `com.init()` first.")
+	if not com.isConnected() then
+		--_Notifications:post("Command not sent - initialize connection first!", NotificationColor.RED)
+		return
+	end
 	_LogWrite("[COMMUNICATION] Command: " .. command, 1, 3)
 	local spl = _Utils.strSplit(com.path, "/")
 	spl[#spl] = nil

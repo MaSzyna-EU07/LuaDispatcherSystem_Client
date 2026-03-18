@@ -351,7 +351,10 @@ function Station:handleRightClick()
 					if tile:isDoubleSwitch() then
 						suffix = _Utils.isShiftPressed() and "cd" or "ab"
 					end
-					tile:sendSwitchState(not tile:getSwitchState(suffix).state, suffix)
+					local state = tile:getSwitchState(suffix)
+					if state then
+						tile:sendSwitchState(not state.state, suffix)
+					end
 				end
 			elseif tile:isSemaphore() then
 				if tile:isSemaphoreStop() then

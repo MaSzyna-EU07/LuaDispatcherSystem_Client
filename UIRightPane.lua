@@ -38,7 +38,8 @@ function UIRightPane:new(ui)
 end
 
 function UIRightPane:update()
-	self.ui.elements.right_header.label = string.format("Stacja: %s", _Project:getCurrentStation():getFullName())
+	local station = _Project:getCurrentStation()
+	self.ui.elements.right_header.label = string.format("Stacja: %s", station and station:getFullName() or "(brak)")
 end
 
 return UIRightPane

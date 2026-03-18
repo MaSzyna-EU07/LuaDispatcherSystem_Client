@@ -52,8 +52,9 @@ function UIStationList:update()
 end
 
 function UIStationList:onEntrySelected(shortcut)
-	self.ui.elements.sl_name.value = _Project:getStation(shortcut).name
-	self.ui.elements.sl_id.value = shortcut
+	local station = _Project:getStation(shortcut)
+	self.ui.elements.sl_name.value = station and station.name or ""
+	self.ui.elements.sl_id.value = shortcut or ""
 end
 
 function UIStationList:addStation()
