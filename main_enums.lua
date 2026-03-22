@@ -1,5 +1,6 @@
 ---@enum Speed
 Speed = {
+    DIM = -1,
 	STOP = 0,
 	VMAX = 1,
 	["40"] = 2,
@@ -41,6 +42,7 @@ SemaphoreColor = {
 
 ---@enum SemaphoreImage
 SemaphoreImage = {
+	uszk = {},
 	s1 = {color1 = SemaphoreColor.RED},
 	s1a = {color1 = SemaphoreColor.RED, color2 = SemaphoreColor.RED, blink2 = true},
 	s2 = {color1 = SemaphoreColor.GREEN},

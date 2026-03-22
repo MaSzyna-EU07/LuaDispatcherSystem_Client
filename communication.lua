@@ -72,6 +72,7 @@ local COM_FUNCTIONS = {
 	}
 }
 local COM_IMAGES = {
+	[0x00] = "uszk",
 	[0x01] = "s1",
 	[0x02] = "s2",
 	[0x03] = "s3",
