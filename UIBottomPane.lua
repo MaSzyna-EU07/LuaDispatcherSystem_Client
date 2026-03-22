@@ -21,8 +21,9 @@ function UIBottomPane:new(ui)
 	self.ui:addButton("bottom", nil, "Sz", 27, 0, 2, 1, self, self.sendSz)
 	self.ui:addButton("bottom", nil, "Ms1", 29, 0, 2, 1, self, self.sendMs1)
 	self.ui:addButton("bottom", nil, "Ms2", 31, 0, 2, 1, self, self.sendMs2)
-	self.ui:addButton("bottom", nil, "Free", 34, 0, 2, 1, self, self.sendFree)
-	self.ui:addButton("bottom", nil, "Ures", 36, 0, 2, 1, self, self.sendUnres)
+	self.ui:addButton("bottom", nil, "Uszk", 33, 0, 2, 1, self, self.sendUszk)
+	self.ui:addButton("bottom", nil, "Free", 36, 0, 2, 1, self, self.sendFree)
+	self.ui:addButton("bottom", nil, "Ures", 38, 0, 2, 1, self, self.sendUnres)
 	self.ui:addLabel("bottom", nil, "Komenda:", 41, 0, 4, 1)
 	self.ui:addInput("bottom", "bottom_command", 45, 0, 7, 1, self, nil, self.sendCommand)
 end
@@ -43,6 +44,9 @@ end
 
 function UIBottomPane:sendToCurrentSemaphore(this, next)
 	local station = _Project:getCurrentStation()
+	if not station then
+		return
+	end
 	for i, coords in ipairs(station.selectedTiles) do
 		assert(station:getTile(coords.x, coords.y)):sendSemaphoreState(this, next)
 	end
@@ -50,6 +54,9 @@ end
 
 function UIBottomPane:sendToCurrentSemaphoreUnreserve()
 	local station = _Project:getCurrentStation()
+	if not station then
+		return
+	end
 	for i, coords in ipairs(station.selectedTiles) do
 		assert(station:getTile(coords.x, coords.y)):sendSemaphoreUnreserve()
 	end
@@ -57,6 +64,9 @@ end
 
 function UIBottomPane:sendToCurrentTrack(command)
 	local station = _Project:getCurrentStation()
+	if not station then
+		return
+	end
 	for i, coords in ipairs(station.selectedTiles) do
 		assert(station:getTile(coords.x, coords.y)):sendTrackState(command)
 	end
@@ -104,6 +114,10 @@ end
 
 function UIBottomPane:sendS1a()
 	self:sendToCurrentSemaphore(8)
+end
+
+function UIBottomPane:sendUszk()
+	self:sendToCurrentSemaphore(-1)
 end
 
 function UIBottomPane:sendFree()

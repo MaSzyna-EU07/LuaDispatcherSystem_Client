@@ -1,4 +1,5 @@
 local class = require "class"
+local json = require("json")
 local Tile = require("Tile")
 local Pathfinder = require("Pathfinder")
 
@@ -268,6 +269,35 @@ function Station:deleteRow(y)
 	self:generateCanvas()
 end
 
+---Copies the server-side data of this station to be easily pasted into the server's .json file.
+---TODO: At some point, the client and server's files will be shared, removing the need for this function.
+function Station:copyServerData()
+	local data = {name = self.name, tracks = {}, switches = {}, semaphores = {}}
+	for x = 1, self.w do
+		for y = 1, self.h do
+			local tile = assert(self:getTile(x, y))
+			local trackID = tile:getTrackID()
+			if trackID and not _Utils.isValueInTable(data.tracks, trackID) then
+				table.insert(data.tracks, trackID)
+			end
+			local switchID = tile:getSwitchID()
+			if switchID then
+				table.insert(data.switches, switchID)
+			end
+			local semaphoreID = tile:getSemaphoreID()
+			if semaphoreID then
+				local type = tile:getSemaphoreType()
+				local shape = tile:getSemaphoreShape()
+				local semaphoreData = {type = type ~= 0 and type or nil, shape = shape ~= false and shape or nil}
+				data.semaphores[semaphoreID] = semaphoreData
+			end
+		end
+	end
+	local result = _Utils.jsonBeautify(json.encode(data))
+	love.system.setClipboardText(result)
+	_Notifications:post("Copied server data to clipboard!")
+end
+
 ---Handles the left click action.
 ---@private
 function Station:handleLeftClick()
@@ -357,7 +387,9 @@ function Station:handleRightClick()
 					end
 				end
 			elseif tile:isSemaphore() then
-				if tile:isSemaphoreStop() then
+				if tile:isTrackReserved() then
+					tile:sendSemaphoreUnreserve()
+				else
 					local allowTrain = tile:getSemaphoreAllowTrain() or tile:getSemaphoreAllowSz()
 					local allowShunt = tile:getSemaphoreAllowShunt()
 					if allowTrain or allowShunt then
@@ -369,8 +401,6 @@ function Station:handleRightClick()
 						end
 						self.activeW24 = not tile:getSemaphoreNoW24()
 					end
-				else
-					tile:sendSemaphoreUnreserve()
 				end
 			elseif self.activeX and self.activeY then
 				if tile:isTargetForMode(self.activeMode) then
@@ -417,6 +447,8 @@ function Station:keypressed(key)
 		self:moveSingleSelection(0, -1)
 	elseif key == "down" then
 		self:moveSingleSelection(0, 1)
+	elseif key == "f2" then
+		self:copyServerData()
 	end
 end
 
