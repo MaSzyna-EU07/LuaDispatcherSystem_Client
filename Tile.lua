@@ -583,7 +583,7 @@ end
 ---@return integer?
 function Tile:getSemaphoreDirection()
 	local data = self:getData()
-	return data.semaphore and (3 - data.semaphore) % 8 + 1
+	return data.semaphore
 end
 
 ---Returns this tile's semaphore state, or `nil` if no semaphore is specified for this tile.

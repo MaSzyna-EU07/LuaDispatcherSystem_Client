@@ -89,22 +89,22 @@ function TileDatabase:new()
         ["buffer6"] = {tracks = 32, buffer = 6},
         ["buffer7"] = {tracks = 64, buffer = 7},
         ["buffer8"] = {tracks = 128, buffer = 8},
-        ["derailer1"] = {tracks = 17, derailer = 7},
-        ["derailer2"] = {tracks = 34, derailer = 8},
-        ["derailer3"] = {tracks = 68, derailer = 1},
-        ["derailer4"] = {tracks = 136, derailer = 2},
-        ["derailer5"] = {tracks = 17, derailer = 3},
-        ["derailer6"] = {tracks = 34, derailer = 4},
-        ["derailer7"] = {tracks = 68, derailer = 5},
-        ["derailer8"] = {tracks = 136, derailer = 6},
-        ["semaphore1"] = {tracks = 17, semaphore = 3},
+        ["derailer1"] = {tracks = 17, derailer = 1},
+        ["derailer2"] = {tracks = 34, derailer = 2},
+        ["derailer3"] = {tracks = 68, derailer = 3},
+        ["derailer4"] = {tracks = 136, derailer = 4},
+        ["derailer5"] = {tracks = 17, derailer = 5},
+        ["derailer6"] = {tracks = 34, derailer = 6},
+        ["derailer7"] = {tracks = 68, derailer = 7},
+        ["derailer8"] = {tracks = 136, derailer = 8},
+        ["semaphore1"] = {tracks = 17, semaphore = 1},
         ["semaphore2"] = {tracks = 34, semaphore = 2},
-        ["semaphore3"] = {tracks = 68, semaphore = 1},
-        ["semaphore4"] = {tracks = 136, semaphore = 8},
-        ["semaphore5"] = {tracks = 17, semaphore = 7},
+        ["semaphore3"] = {tracks = 68, semaphore = 3},
+        ["semaphore4"] = {tracks = 136, semaphore = 4},
+        ["semaphore5"] = {tracks = 17, semaphore = 5},
         ["semaphore6"] = {tracks = 34, semaphore = 6},
-        ["semaphore7"] = {tracks = 68, semaphore = 5},
-        ["semaphore8"] = {tracks = 136, semaphore = 4},
+        ["semaphore7"] = {tracks = 68, semaphore = 7},
+        ["semaphore8"] = {tracks = 136, semaphore = 8},
         ["arrow3"] = {background = 12, foreground = 12},
         ["arrow7"] = {background = 11, foreground = 11},
         ["arrow-"] = {background = 13, foreground = 13},
@@ -186,7 +186,7 @@ function TileDatabase:new()
     }
 end
 
----Returns the data of the specified tile, or `nil` if it doesn't exist.
+---Returns the data of the specified tile, or throws an error if it doesn't exist.
 ---@param id integer|string The tile ID.
 ---@return TileData
 function TileDatabase:getTile(id)
