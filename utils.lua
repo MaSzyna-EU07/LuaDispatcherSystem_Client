@@ -654,6 +654,7 @@ function utils.jsonBeautify(s)
 	local ret = "" -- returned string
 	local ln = "" -- current line
 	local strMode = false -- if we're inside a string chain (")
+	local strEscape = false -- if we are going to escape the following character
 
 	for i = 1, s:len() do
 		local pc = s:sub(i-1, i-1) -- previous character
@@ -667,9 +668,17 @@ function utils.jsonBeautify(s)
 		end
 		if strMode then -- strings are not JSON syntax, so they omit the formatting rules
 			ln = ln .. c
-			if not strModePrev and c == "\"" and pc ~= "\\" then
-                strMode = false
-            end
+			if strEscape then
+				strEscape = false
+			else
+				if c == "\\" then
+					strEscape = true
+				else
+					if not strModePrev and c == "\"" then
+						strMode = false
+					end
+				end
+			end
 		else
 			if (c == "]" or c == "}") and not (pc == "[" or pc == "{") then
 				indent = indent - 1

@@ -78,7 +78,7 @@ end
 ---Draws tile graphics.
 ---@param x number Top left corner X screen coordinate.
 ---@param y number Top left corner Y screen coordinate.
----@param id integer Tile ID in the database.
+---@param id string Tile ID in the database.
 ---@param electrified boolean? Whether the track is electrified.
 ---@param occupied boolean? Whether the track is occupied.
 ---@param reserved boolean? Whether the track is reserved.
@@ -88,7 +88,7 @@ end
 ---@param scale number? Tile scale.
 ---@param opacity number? Tile opacity, from 0 to 1.
 function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBits, semaphoreState, scale, opacity)
-	local track = _TileDB.tiles[id]
+	local track = _TileDB:getTile(id)
 	if not track then
 		return
 	end
@@ -170,9 +170,9 @@ function love.draw()
 		local tile = station:getHoveredTile()
 		love.graphics.setColor(1, 1, 1)
 		love.graphics.print("Hovered ID: " .. tostring(_Picker.hover), 0, 700)
-		love.graphics.print("Hovered Tile: " .. tostring(station.hoverX) .. ", " .. tostring(station.hoverY), 0, 720)
-		love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 0, 740)
+		love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 0, 720)
 		if tile then
+			love.graphics.print(string.format("Hovered Tile: %s, %s (%s)", tile.x, tile.y, tile.id), 0, 740)
 			love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 0, 760)
 			love.graphics.print("Semaphore pointing: " .. tostring(tile:getSemaphoreDirection()), 0, 780)
 		end

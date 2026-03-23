@@ -303,24 +303,24 @@ end
 function Station:handleLeftClick()
 	-- Left click: action dependant on the current mode
 	if self.hoverX and self.hoverY then
-		if type(_Picker.selection) == "number" then
+		if not _Picker.mode then
 			local tile = Tile(self, self.hoverX, self.hoverY)
 			tile:setID(_Picker.selection)
 			tile:setElectrified(_Picker.electrified)
 			self:setTile(self.hoverX, self.hoverY, tile)
-		elseif _Picker.selection == "addColumn" then
+		elseif _Picker.mode == "addColumn" then
 			-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
 			local hx = self.hoverX + math.floor(self.hoverPartX * 2)
 			self:addColumn(hx)
-		elseif _Picker.selection == "addRow" then
+		elseif _Picker.mode == "addRow" then
 			-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
 			local hy = self.hoverY + math.floor(self.hoverPartY * 2)
 			self:addRow(hy)
-		elseif _Picker.selection == "delColumn" then
+		elseif _Picker.mode == "delColumn" then
 			self:deleteColumn(self.hoverX)
-		elseif _Picker.selection == "delRow" then
+		elseif _Picker.mode == "delRow" then
 			self:deleteRow(self.hoverY)
-		elseif _Picker.selection == "properties" then
+		elseif _Picker.mode == "properties" then
 			if not _Utils.isShiftPressed() and not _Utils.isCtrlPressed() then
 				self:unselectAllTiles()
 			end
@@ -332,7 +332,7 @@ function Station:handleLeftClick()
 			self.dragX, self.dragY = self.hoverX, self.hoverY
 		end
 	else
-		if _Picker.selection == "properties" then
+		if _Picker.mode == "properties" then
 			self:unselectAllTiles()
 		end
 	end
@@ -341,7 +341,7 @@ end
 ---Handles the left click release action.
 ---@private
 function Station:handleLeftUnclick()
-	if _Picker.selection == "properties" then
+	if _Picker.mode == "properties" then
 		if self.dragX and self.dragY then
 			if self.hoverX and self.hoverY and not self:rectSelectIsSingleTile() then
 				for x = math.min(self.dragX, self.hoverX), math.max(self.dragX, self.hoverX) do
@@ -364,14 +364,14 @@ end
 function Station:handleRightClick()
 	-- Right click: remove a tile, flip selection or switch a switch
 	if self.hoverX and self.hoverY then
-		if type(_Picker.selection) == "number" then
+		if not _Picker.mode then
 			local tile = assert(self:getHoveredTile())
 			if tile.id == 0 then
 				_Picker:flipSelection()
 			else
 				self:setTile(self.hoverX, self.hoverY)
 			end
-		elseif _Picker.selection == "properties" then
+		elseif _Picker.mode == "properties" then
 			local tile = assert(self:getHoveredTile())
 			if tile:isSwitch() then
 				if tile:isSwitchForced() then
@@ -418,7 +418,7 @@ function Station:handleRightClick()
 			end
 		end
 	else
-		if _Picker.selection == "properties" then
+		if _Picker.mode == "properties" then
 			self.activeX, self.activeY = nil, nil
 		end
 	end
@@ -429,6 +429,7 @@ end
 function Station:handleMiddleClick()
 	-- Middle click: tile pick
 	if self.hoverX and self.hoverY then
+		_Picker.mode = nil
 		_Picker.selection = self:getHoveredTile().id
 	end
 end
@@ -532,12 +533,12 @@ function Station:drawHover()
 	if not self.hoverX or not self.hoverY then
 		return
 	end
-	if type(_Picker.selection) == "number" then
+	if not _Picker.mode then
 		local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
 		self:getHoveredTile():drawHover()
 		-- Draw tile ghost.
 		_DrawTile(x, y, _Picker.selection, _Picker.electrified, false, false, false, 0, "s1", 1, 0.5)
-	elseif _Picker.selection == "addColumn" then
+	elseif _Picker.mode == "addColumn" then
 		-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
 		local hx = self.hoverX + math.floor(self.hoverPartX * 2)
 		local x1, y1 = self:coordsToCanvasPos(hx, 1)
@@ -545,7 +546,7 @@ function Station:drawHover()
 		love.graphics.setColor(0, 1, 0)
 		love.graphics.setLineWidth(2)
 		love.graphics.line(x1, y1, x2, y2)
-	elseif _Picker.selection == "addRow" then
+	elseif _Picker.mode == "addRow" then
 		-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
 		local hy = self.hoverY + math.floor(self.hoverPartY * 2)
 		local x1, y1 = self:coordsToCanvasPos(1, hy)
@@ -553,7 +554,7 @@ function Station:drawHover()
 		love.graphics.setColor(0, 1, 0)
 		love.graphics.setLineWidth(2)
 		love.graphics.line(x1, y1, x2, y2)
-	elseif _Picker.selection == "delColumn" then
+	elseif _Picker.mode == "delColumn" then
 		local x, y = self:coordsToCanvasPos(self.hoverX, 1)
 		local w, h = self.TILE_SIZE, self.TILE_SIZE * self.h
 		love.graphics.setColor(1, 0, 0, 0.5)
@@ -561,7 +562,7 @@ function Station:drawHover()
 		love.graphics.setColor(1, 0, 0)
 		love.graphics.setLineWidth(2)
 		love.graphics.rectangle("line", x, y, w, h)
-	elseif _Picker.selection == "delRow" then
+	elseif _Picker.mode == "delRow" then
 		local x, y = self:coordsToCanvasPos(1, self.hoverY)
 		local w, h = self.TILE_SIZE * self.w, self.TILE_SIZE
 		love.graphics.setColor(1, 0, 0, 0.5)

@@ -30,7 +30,7 @@ function Tile:new(station, x, y)
 	-- 72 - depo
 	-- 73 - tory postojowe
 
-	self.id = 0
+	self.id = ""
 	self.electrified = false
 	self.trackID = nil
 	self.switchID = nil
@@ -59,23 +59,23 @@ end
 ---Returns whether this Tile is a switch, regardless of its type.
 ---@return boolean
 function Tile:isSwitch()
-	return self.id >= 17 and self.id <= 48
+	return self:getData().dirs ~= nil
 end
 
 ---Returns whether this Tile is a double switch ("rozjazd krzyżowy").
 ---@return boolean
 function Tile:isDoubleSwitch()
-	return self.id >= 25 and self.id <= 28
+	return self:getData().doubleSwitch
 end
 
 ---Returns whether this Tile is a semaphore.
 ---@return boolean
 function Tile:isSemaphore()
-	return self.id >= 61 and self.id <= 68
+	return self:getData().semaphore ~= nil
 end
 
 ---Sets a new tile ID for this tile.
----@param id integer The new ID.
+---@param id string The new ID.
 function Tile:setID(id)
 	self.id = id
 end
@@ -360,6 +360,12 @@ end
 ---------------- L O G I C ---------------
 --######################################--
 
+---Returns tile data coming from its ID, or `nil` if nothing is there.
+---@return TileData
+function Tile:getData()
+	return _TileDB:getTile(self.id)
+end
+
 ---Returns the neighbor tile in the provided direction, or `nil` if we're out of bounds.
 ---@param dir integer The direction for which the tile should be returned.
 function Tile:getNeighbor(dir)
@@ -370,8 +376,8 @@ end
 ---@param dir integer The direction for the track to be looked for.
 ---@return boolean
 function Tile:hasTrackInDirection(dir)
-	local track = _TileDB.tiles[self.id]
-	return track and track.tracks and _Utils.getBit(track.tracks, dir) or false
+	local data = self:getData()
+	return data.tracks and _Utils.getBit(data.tracks, dir) or false
 end
 
 ---Returns `true` if this Tile has a track in the specified direction, taking the switch state into account.
@@ -381,12 +387,12 @@ function Tile:hasTraversibleTrackInDirection(dir)
 	if not self:hasTrackInDirection(dir) then
 		return false
 	end
-	local track = _TileDB.tiles[self.id]
-	if not track.dirs then
+	local data = self:getData()
+	if not data.dirs then
 		-- No switch.
 		return true
 	end
-	local dirData = track.dirs[dir]
+	local dirData = data.dirs[dir]
 	if not dirData then
 		-- This direction is not governed by the switch.
 		return true
@@ -518,8 +524,8 @@ end
 ---Returns the direction towards which this tile's semaphore is pointing, or `nil` if there's no semaphore.
 ---@return integer?
 function Tile:getSemaphoreDirection()
-	local track = _TileDB.tiles[self.id]
-	return track and track.semaphore and (3 - track.semaphore) % 8 + 1
+	local data = self:getData()
+	return data.semaphore and (3 - data.semaphore) % 8 + 1
 end
 
 ---Returns this tile's semaphore state, or `nil` if no semaphore is specified for this tile.
@@ -576,19 +582,19 @@ end
 ---@return table<""|"ab"|"cd", boolean?>
 function Tile:getSwitchStatesForDirections(dir1, dir2)
 	local switchStates = {}
-	local track = _TileDB.tiles[self.id]
-	if not track or not track.dirs then
+	local data = self:getData()
+	if not data.dirs then
 		return switchStates
 	end
 	if dir1 then
-		local dirData1 = track.dirs[dir1]
+		local dirData1 = data.dirs[dir1]
 		if dirData1 then
 			local state = (dirData1:sub(#dirData1) == "+") ~= self.switchFlip
 			switchStates[self:flipSwitchSuffix(dirData1:sub(1, dirData1:len() - 1))] = state
 		end
 	end
 	if dir2 then
-		local dirData2 = track.dirs[dir2]
+		local dirData2 = data.dirs[dir2]
 		if dirData2 then
 			local state = (dirData2:sub(#dirData2) == "+") ~= self.switchFlip
 			switchStates[self:flipSwitchSuffix(dirData2:sub(1, dirData2:len() - 1))] = state
@@ -676,14 +682,11 @@ end
 
 ---Draws this Tile at the specified position.
 function Tile:draw()
-	local track = _TileDB.tiles[self.id]
-	if not track then
-		return
-	end
+	local data = self:getData()
 	local x, y = self:getPos()
 	-- Calculate switch dim bits
 	local switchDimBits = 0
-	if track.tracks then
+	if data.tracks then
 		for i = 1, 8 do
 			if not self:hasTraversibleTrackInDirection(i) then
 				switchDimBits = switchDimBits + 2 ^ (i - 1)
@@ -696,7 +699,7 @@ end
 ---Draws this Tile's background at the specified position.
 function Tile:drawBackground()
 	local x, y = self:getPos()
-	local green = _Picker.selection == "properties" and self.trackID
+	local green = _Picker.mode == "properties" and self.trackID
 	if green then
 		love.graphics.setColor(0.2, 0.8, 0.2)
 	else
@@ -764,11 +767,11 @@ end
 ---Serializes this Tile's data to be saved. If this Tile is empty, `nil` is returned to save space.
 ---@return table?
 function Tile:serialize()
-	if self.id == 0 then
+	if self.id == "" then
 		return nil
 	end
 	return {
-		id = self.id,
+		id = _TileDB:idToString(self.id),
 		electrified = self.electrified,
 		trackID = self.trackID,
 		switchID = self.switchID,
@@ -801,7 +804,7 @@ function Tile:deserialize(t)
 	if not t then
 		return
 	end
-	self.id = t.id or 0
+	self.id = t.id or ""
 	self.electrified = t.electrified
 	self.trackID = t.trackID
 	self.switchID = t.switchID

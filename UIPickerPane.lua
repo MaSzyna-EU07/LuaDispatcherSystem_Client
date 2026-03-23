@@ -24,12 +24,15 @@ function UIPickerPane:new(ui)
 	self.ui:addInput("picker", "picker_itineraryEndID", 15, 0, 5, 1, self, self.updateItineraryEndID)
 	self.ui:addCheckbox("picker", "picker_electrified2", "Elektr.", 10, 1, 1, 1, self, self.updateElectrified2)
 	self.ui:addCheckbox("picker", "picker_targetW24", "W24", 15, 1, 1, 1, self, self.updateTargetW24)
+	self.ui.elements.picker_targetW24.tip = "Odnosi się do punktu docelowego.\nJeżeli przebieg kończy się na tym punkcie, to na semaforze wyświetlony zostanie wskaźnik W24."
 	self.ui:addLabel("picker", nil, "Zamień", 10, 2, 4, 1)
 	self.ui:addCheckbox("picker", "picker_switchFlip", "+/-", 13, 2, 1, 1, self, self.updateSwitchFlip)
 	self.ui:addCheckbox("picker", "picker_switchFlipABCD", "ab/cd", 16, 2, 1, 1, self, self.updateSwitchFlipABCD)
 	self.ui:addLabel("picker", nil, "Typ", 10, 3, 2, 1)
 	self.ui:addInput("picker", "picker_semaphoreType", 12, 3, 3, 1, self, self.updateSemaphoreType)
+	self.ui.elements.picker_semaphoreType.tip = "Typ semafora:\n0 = semafor\n1 = tarcza manewrowa"
 	self.ui:addCheckbox("picker", "picker_semaphoreNoW24", "Brak W24", 15, 3, 1, 1, self, self.updateSemaphoreNoW24)
+	self.ui.elements.picker_semaphoreNoW24.tip = "Odnosi się do semafora.\nOznacza, że dany semafor NIE posiada wskaźnika W24.\nTaki semafor nie może podać przebiegu wymagającego wyświetlenia tego wskaźnika."
 	-- Third column
 	self.ui:addLabel("picker", nil, "Pkt końc.:", 20, 0, 5, 1)
 	self.ui:addCheckbox("picker", "picker_trainTarget", "poc.", 24, 0, 1, 1, self, self.updateTrainTarget)
