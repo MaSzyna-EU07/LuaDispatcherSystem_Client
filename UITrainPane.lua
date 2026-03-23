@@ -51,8 +51,11 @@ end
 ---@param num2 number? The second number.
 function UITrainPane:sendToCurrentTrain(str, num1, num2)
 	local station = _Project:getCurrentStation()
+	if not station then
+		return
+	end
 	for i, coords in ipairs(station.selectedTiles) do
-		assert(station:getTile(coords.x, coords.y)):sendTrainCommand(str, num1, num2)
+		station:assertGetTile(coords.x, coords.y):sendTrainCommand(str, num1, num2)
 	end
 end
 

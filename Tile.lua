@@ -44,6 +44,9 @@ function Tile:new(station, x, y)
 	self.semaphoreShape = false
 	self.semaphoreNoW24 = false
 	self.semaphoreNoDanger = false
+	self.semaphoreShortSpeed = nil
+	self.semaphoreFourPhase = false
+	self.semaphoreNext = nil -- Cannot be a speed identifier, only a semaphore identifier.
 	self.itineraryEndID = nil -- TODO: Later on, check whether we need this. The only reason we would need this is for dispatcher algorithms.
 	self.maxSpeed = math.huge
 	self.maxSpeedPlus = math.huge
@@ -54,6 +57,7 @@ function Tile:new(station, x, y)
 	self.forbidTrain = false
 	self.forbidShunt = false
 	self.warp = nil
+	self.command = nil
 end
 
 ---Returns whether this Tile is a switch, regardless of its type.
@@ -224,16 +228,58 @@ function Tile:setSemaphoreNoW24(semaphoreNoW24)
 	self.semaphoreNoW24 = semaphoreNoW24
 end
 
----Returns whether this tile's semaphore has no danger (next semaphore must be displaying a >=100 speed).
+---Returns whether this tile's semaphore has no danger light (next semaphore must be displaying a >=100 speed).
 ---@return boolean
 function Tile:getSemaphoreNoDanger()
 	return self.semaphoreNoDanger
 end
 
----Sets whether this tile's semaphore has no danger (next semaphore must be displaying a >=100 speed).
+---Sets whether this tile's semaphore has no danger light (next semaphore must be displaying a >=100 speed).
 ---@param semaphoreNoDanger boolean
 function Tile:setSemaphoreNoDanger(semaphoreNoDanger)
 	self.semaphoreNoDanger = semaphoreNoDanger
+end
+
+---Returns this tile's short speed (when the next semaphore is S1, this one will display a reduced speed).
+---This behavior is controlled by the server.
+---@return Speed?
+function Tile:getSemaphoreShortSpeed()
+	return self.semaphoreShortSpeed
+end
+
+---Sets this tile's short speed (when the next semaphore is S1, this one will display a reduced speed).
+---This behavior is controlled by the server.
+---@param semaphoreShortSpeed Speed?
+function Tile:setSemaphoreShortSpeed(semaphoreShortSpeed)
+	self.semaphoreShortSpeed = semaphoreShortSpeed
+end
+
+---Returns whether this tile's semaphore is four phase (when two semaphores ahead are S1, this one will display a fake reduced speed next).
+---This behavior is controlled by the server.
+---@return boolean
+function Tile:getSemaphoreFourPhase()
+	return self.semaphoreFourPhase
+end
+
+---Sets whether this tile's semaphore is four phase (when two semaphores ahead are S1, this one will display a fake reduced speed next).
+---This behavior is controlled by the server.
+---@param semaphoreFourPhase boolean
+function Tile:setSemaphoreFourPhase(semaphoreFourPhase)
+	self.semaphoreFourPhase = semaphoreFourPhase
+end
+
+---Returns the next semaphore, if any.
+---This behavior is controlled by the server.
+---@return string?
+function Tile:getSemaphoreNext()
+	return self.semaphoreNext
+end
+
+---Sets the next semaphore or removes it.
+---This behavior is controlled by the server.
+---@param semaphoreNext string?
+function Tile:setSemaphoreNext(semaphoreNext)
+	self.semaphoreNext = semaphoreNext
 end
 
 ---Returns the itinerary end ID for this Tile. Returns `nil` if no such ID is specified.
@@ -354,6 +400,18 @@ end
 ---@param warp string? A new station. Pass `nil` to remove warp.
 function Tile:setWarp(warp)
 	self.warp = warp
+end
+
+---Returns a command to be sent to the server when this tile is right clicked, if any.
+---@return string?
+function Tile:getCommand()
+	return self.command
+end
+
+---Sets a command to be sent to the server when this tile is right clicked.
+---@param command string? A new command. Pass `nil` to remove the command.
+function Tile:setCommand(command)
+	self.command = command
 end
 
 --######################################--
@@ -670,6 +728,13 @@ function Tile:sendTrainCommand(str, num1, num2)
 	end
 end
 
+---Sends a custom specified command to the server.
+function Tile:sendCustomCommand()
+	if self.command then
+		_Com.sendCommand(self.command)
+	end
+end
+
 --##########################################--
 ---------------- D R A W I N G ---------------
 --##########################################--
@@ -770,9 +835,9 @@ function Tile:serialize()
 	if self.id == "" then
 		return nil
 	end
-	return {
+	local t =  {
 		id = _TileDB:idToString(self.id),
-		electrified = self.electrified,
+		--electrified = self.electrified,
 		trackID = self.trackID,
 		switchID = self.switchID,
 		switchFlip = self.switchFlip or nil,
@@ -785,6 +850,9 @@ function Tile:serialize()
 		semaphoreShape = self.semaphoreShape or nil,
 		semaphoreNoW24 = self.semaphoreNoW24 or nil,
 		semaphoreNoDanger = self.semaphoreNoDanger or nil,
+		semaphoreShortSpeed = self.semaphoreShortSpeed or nil,
+		semaphoreFourPhase = self.semaphoreFourPhase or nil,
+		semaphoreNext = self.semaphoreNext,
 		itineraryEndID = self.itineraryEndID,
 		maxSpeed = self.maxSpeed ~= math.huge and self.maxSpeed or nil,
 		maxSpeedPlus = self.maxSpeedPlus ~= math.huge and self.maxSpeedPlus or nil,
@@ -794,8 +862,14 @@ function Tile:serialize()
 		targetW24 = self.targetW24 or nil,
 		forbidTrain = self.forbidTrain or nil,
 		forbidShunt = self.forbidShunt or nil,
-		warp = self.warp
+		warp = self.warp,
+		command = self.command
 	}
+	if not self.electrified then
+		-- TODO: Figure out a way how to convert (true, false) into (nil, false) in a single expression.
+		t.electrified = false
+	end
+	return t
 end
 
 ---Deserializes previously saved Tile's data and loads it into this tile.
@@ -805,7 +879,7 @@ function Tile:deserialize(t)
 		return
 	end
 	self.id = t.id or ""
-	self.electrified = t.electrified
+	self.electrified = t.electrified ~= false
 	self.trackID = t.trackID
 	self.switchID = t.switchID
 	self.switchFlip = t.switchFlip == true
@@ -818,6 +892,9 @@ function Tile:deserialize(t)
 	self.semaphoreShape = t.semaphoreShape == true
 	self.semaphoreNoW24 = t.semaphoreNoW24 == true
 	self.semaphoreNoDanger = t.semaphoreNoDanger == true
+	self.semaphoreShortSpeed = t.semaphoreShortSpeed
+	self.semaphoreFourPhase = t.semaphoreFourPhase == true
+	self.semaphoreNext = t.semaphoreNext
 	self.itineraryEndID = t.itineraryEndID
 	self.maxSpeed = t.maxSpeed or math.huge
 	self.maxSpeedPlus = t.maxSpeedPlus or math.huge
@@ -828,6 +905,7 @@ function Tile:deserialize(t)
 	self.forbidTrain = t.forbidTrain == true
 	self.forbidShunt = t.forbidShunt == true
 	self.warp = t.warp
+	self.command = t.command
 end
 
 return Tile

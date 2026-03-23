@@ -236,29 +236,12 @@ end
 ---Executed when in the Station a tile is selected.
 ---@param tile Tile The tile that has just been selected.
 function UI:onTileSelected(tile)
-	self.elements.picker_trackID.value = tile and tile:getTrackID() or ""
-	self.elements.picker_switchID.value = tile and tile:getSwitchID() or ""
-	self.elements.picker_switchFlip.value = tile and tile:getSwitchFlip() or false
-	self.elements.picker_switchFlipABCD.value = tile and tile:getSwitchFlipABCD() or false
-	self.elements.picker_semaphoreType.value = tile and tile:isSemaphore() and tostring(tile:getSemaphoreType()) or ""
-	self.elements.picker_semaphoreNoW24.value = tile and tile:getSemaphoreNoW24() or false
-	self.elements.picker_semaphoreNoDanger.value = tile and tile:getSemaphoreNoDanger() or false
-	self.elements.picker_semaphoreID.value = tile and tile:getSemaphoreID() or ""
-	self.elements.picker_itineraryEndID.value = tile and tile:getItineraryEndID() or ""
-	self.elements.picker_electrified2.value = tile and tile:isElectrified() or false
-	self.elements.picker_targetW24.value = tile and tile:isTargetW24() or false
-	self.elements.picker_trainTarget.value = tile and tile:isTrainTarget() or false
-	self.elements.picker_shuntTarget.value = tile and tile:isShuntTarget() or false
-	self.elements.picker_forbidTrain.value = tile and tile:isTrainForbidden() or false
-	self.elements.picker_forbidShunt.value = tile and tile:isShuntForbidden() or false
-	self.elements.picker_speed.value = tile and tile:getMaxSpeed() ~= math.huge and tostring(tile:getMaxSpeed()) or ""
-	self.elements.picker_speedPlus.value = tile and tile:getMaxSpeedPlus() ~= math.huge and tostring(tile:getMaxSpeedPlus()) or ""
-	self.elements.picker_speedMinus.value = tile and tile:getMaxSpeedMinus() ~= math.huge and tostring(tile:getMaxSpeedMinus()) or ""
-	self.elements.picker_semaphoreAllowTrain.value = tile and tile:getSemaphoreAllowTrain() or false
-	self.elements.picker_semaphoreAllowShunt.value = tile and tile:getSemaphoreAllowShunt() or false
-	self.elements.picker_semaphoreAllowSz.value = tile and tile:getSemaphoreAllowSz() or false
-	self.elements.picker_semaphoreShape.value = tile and tile:getSemaphoreShape() or false
-	self.elements.picker_warp.value = tile and tile:getWarp() or ""
+	self.pickerPane:setValuesForTile(tile)
+end
+
+---Executed when all tiles in the Station are unselected.
+function UI:onAllTilesUnselected()
+	self.pickerPane:resetValues()
 end
 
 ---Executed when a log file is loaded.

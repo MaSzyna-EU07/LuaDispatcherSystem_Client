@@ -17,13 +17,15 @@ function TileDatabase:new()
     -- Properties for each tile:
     -- tracks - Bitmask of tracks rendered on this tile (see above for values per direction)
     -- background - Sprite (n, 1) rendered as the tile background.
+    -- backgroundXY - Sprite (x, y) rendered as the tile background.
     -- foreground - Sprite (n, 2) rendered on top of the background. Colored based on track color.
     -- dirs - Table of direction -> state associations.
     --        Use "-" and "+" for states in single switches and "ab-", "ab+", "cd-" and "cd+" for states in double switches.
     -- buffer - Sprite (n, 3) rendered alongside tracks.
     -- derailer - Sprite (n, 7) rendered on top of the tracks.
     -- semaphore - Sprites (n, 4), (n, 5) and (n, 6) used as semaphore body, first and second lamps respectively.
-    ---@alias TileData {tracks: integer?, background: integer?, foreground: integer?, dirs: table<integer, "-"|"+"|"ab-"|"ab+"|"cd-"|"cd+">?, buffer: integer?, derailer: integer?, semaphore: integer?, doubleSwitch: boolean?}
+    -- doubleSwitch - Whether the tile is a double switch.
+    ---@alias TileData {tracks: integer?, background: integer?, backgroundXY: [integer, integer]?, foreground: integer?, dirs: table<integer, "-"|"+"|"ab-"|"ab+"|"cd-"|"cd+">?, buffer: integer?, derailer: integer?, semaphore: integer?, doubleSwitch: boolean?}
     ---@type table<string, TileData>
     self.tiles = {
         [""] = {},
@@ -108,6 +110,52 @@ function TileDatabase:new()
         ["arrow-"] = {background = 13, foreground = 13},
         ["loco"] = {background = 14, foreground = 14},
         ["square"] = {background = 15, foreground = 15},
+        ["letter1"] = {backgroundXY = {9, 3}},
+        ["letter2"] = {backgroundXY = {10, 3}},
+        ["letter3"] = {backgroundXY = {11, 3}},
+        ["letter4"] = {backgroundXY = {12, 3}},
+        ["letter5"] = {backgroundXY = {13, 3}},
+        ["letter6"] = {backgroundXY = {14, 3}},
+        ["letter7"] = {backgroundXY = {15, 3}},
+        ["letter8"] = {backgroundXY = {16, 3}},
+        ["letter9"] = {backgroundXY = {17, 3}},
+        ["letterA"] = {backgroundXY = {9, 4}},
+        ["letterĄ"] = {backgroundXY = {10, 4}},
+        ["letterB"] = {backgroundXY = {11, 4}},
+        ["letterC"] = {backgroundXY = {12, 4}},
+        ["letterĆ"] = {backgroundXY = {13, 4}},
+        ["letterD"] = {backgroundXY = {14, 4}},
+        ["letterE"] = {backgroundXY = {15, 4}},
+        ["letterĘ"] = {backgroundXY = {16, 4}},
+        ["letterF"] = {backgroundXY = {17, 4}},
+        ["letterG"] = {backgroundXY = {9, 5}},
+        ["letterH"] = {backgroundXY = {10, 5}},
+        ["letterI"] = {backgroundXY = {11, 5}},
+        ["letterJ"] = {backgroundXY = {12, 5}},
+        ["letterK"] = {backgroundXY = {13, 5}},
+        ["letterL"] = {backgroundXY = {14, 5}},
+        ["letterŁ"] = {backgroundXY = {15, 5}},
+        ["letterM"] = {backgroundXY = {16, 5}},
+        ["letterN"] = {backgroundXY = {17, 5}},
+        ["letterŃ"] = {backgroundXY = {9, 6}},
+        ["letterO"] = {backgroundXY = {10, 6}},
+        ["letterÓ"] = {backgroundXY = {11, 6}},
+        ["letterP"] = {backgroundXY = {12, 6}},
+        ["letterQ"] = {backgroundXY = {13, 6}},
+        ["letterR"] = {backgroundXY = {14, 6}},
+        ["letterS"] = {backgroundXY = {15, 6}},
+        ["letterŚ"] = {backgroundXY = {16, 6}},
+        ["letterT"] = {backgroundXY = {17, 6}},
+        ["letterU"] = {backgroundXY = {9, 7}},
+        ["letterV"] = {backgroundXY = {10, 7}},
+        ["letterW"] = {backgroundXY = {11, 7}},
+        ["letterX"] = {backgroundXY = {12, 7}},
+        ["letterY"] = {backgroundXY = {13, 7}},
+        ["letterZ"] = {backgroundXY = {14, 7}},
+        ["letterŹ"] = {backgroundXY = {15, 7}},
+        ["letterŻ"] = {backgroundXY = {16, 7}},
+        ["tower"] = {backgroundXY = {17, 7}},
+        ["crane"] = {backgroundXY = {9, 8}},
     }
 
     -- Name convention:

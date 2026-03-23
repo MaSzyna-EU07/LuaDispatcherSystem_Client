@@ -18,7 +18,7 @@ _Font = love.graphics.newFont("data/dejavusans.ttf", 16)
 _Obj = Objects()
 _UI = UI()
 _Notifications = Notifications()
-_Tracks = Tileset("data/tracks.png", 15, 7, 14, 14)
+_Tracks = Tileset("data/tracks.png", 17, 8, 14, 14)
 _Buttons = Tileset("data/buttons.png", 11, 2, 21, 14)
 _Project = Project()
 _Picker = Picker()
@@ -89,13 +89,13 @@ end
 ---@param opacity number? Tile opacity, from 0 to 1.
 function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBits, semaphoreState, scale, opacity)
 	local track = _TileDB:getTile(id)
-	if not track then
-		return
-	end
 	-- Background
 	love.graphics.setColor(1, 1, 1, opacity)
 	if track.background then
 		_Tracks:drawTile(track.background, 1, x, y, scale)
+	end
+	if track.backgroundXY then
+		_Tracks:drawTile(track.backgroundXY[1], track.backgroundXY[2], x, y, scale)
 	end
 	if track.tracks then
 		for i = 1, 8 do
@@ -169,12 +169,12 @@ function love.draw()
 	if station then
 		local tile = station:getHoveredTile()
 		love.graphics.setColor(1, 1, 1)
-		love.graphics.print("Hovered ID: " .. tostring(_Picker.hover), 0, 700)
-		love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 0, 720)
+		love.graphics.print("Hovered ID: " .. tostring(_Picker.hover), 0, 740)
+		love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 0, 760)
 		if tile then
-			love.graphics.print(string.format("Hovered Tile: %s, %s (%s)", tile.x, tile.y, tile.id), 0, 740)
-			love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 0, 760)
-			love.graphics.print("Semaphore pointing: " .. tostring(tile:getSemaphoreDirection()), 0, 780)
+			love.graphics.print(string.format("Hovered Tile: %s, %s (%s)", tile.x, tile.y, tile.id), 0, 780)
+			love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 0, 800)
+			love.graphics.print("Semaphore pointing: " .. tostring(tile:getSemaphoreDirection()), 0, 820)
 		end
 	end
 end

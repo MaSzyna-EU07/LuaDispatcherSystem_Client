@@ -112,6 +112,14 @@ function Station:getTile(x, y)
 	return self.tiles[x] and self.tiles[x][y]
 end
 
+---Returns a tile from this station based on coordinates, or throws an error if no tile lies at that location.
+---@param x integer X coordinate of the tile.
+---@param y integer Y coordinate of the tile.
+---@return Tile
+function Station:assertGetTile(x, y)
+	return assert(self:getTile(x, y), string.format("There is no tile at (%s, %s)", x, y))
+end
+
 ---Sets a tile at provided coordinates.
 ---@param x integer X coordinate of the tile.
 ---@param y integer Y coordinate of the tile.
@@ -138,6 +146,12 @@ end
 ---@return Tile?
 function Station:getHoveredTile()
 	return self:getTile(self.hoverX, self.hoverY)
+end
+
+---Returns the currently hovered tile, or throws an error if no tile is hovered.
+---@return Tile
+function Station:assertGetHoveredTile()
+	return self:assertGetTile(self.hoverX, self.hoverY)
 end
 
 ---Returns whether the tile at provided coordinates is currently selected.
@@ -173,7 +187,7 @@ function Station:selectTile(x, y)
 		return
 	end
 	table.insert(self.selectedTiles, {x = x, y = y})
-	_UI:onTileSelected(assert(self:getTile(x, y), "There is no tile at (" .. x .. ", " .. y .. ")"))
+	_UI:onTileSelected(self:assertGetTile(x, y))
 end
 
 ---Unselects a tile at provided coordinates, if it is currently selected.
@@ -186,11 +200,15 @@ function Station:unselectTile(x, y)
 			return
 		end
 	end
+	if #self.selectedTiles == 0 then
+		_UI:onAllTilesUnselected()
+	end
 end
 
 ---Unselects all tiles.
 function Station:unselectAllTiles()
 	_Utils.emptyTable(self.selectedTiles)
+	_UI:onAllTilesUnselected()
 end
 
 ---Moves a single tile selection by provided amount of tiles.
@@ -275,7 +293,7 @@ function Station:copyServerData()
 	local data = {name = self.name, tracks = {}, switches = {}, semaphores = {}}
 	for x = 1, self.w do
 		for y = 1, self.h do
-			local tile = assert(self:getTile(x, y))
+			local tile = self:assertGetTile(x, y)
 			local trackID = tile:getTrackID()
 			if trackID and not _Utils.isValueInTable(data.tracks, trackID) then
 				table.insert(data.tracks, trackID)
@@ -365,14 +383,14 @@ function Station:handleRightClick()
 	-- Right click: remove a tile, flip selection or switch a switch
 	if self.hoverX and self.hoverY then
 		if not _Picker.mode then
-			local tile = assert(self:getHoveredTile())
+			local tile = self:assertGetHoveredTile()
 			if tile.id == 0 then
 				_Picker:flipSelection()
 			else
 				self:setTile(self.hoverX, self.hoverY)
 			end
 		elseif _Picker.mode == "properties" then
-			local tile = assert(self:getHoveredTile())
+			local tile = self:assertGetHoveredTile()
 			if tile:isSwitch() then
 				if tile:isSwitchForced() then
 					tile:sendSwitchUnforce()
@@ -404,7 +422,7 @@ function Station:handleRightClick()
 				end
 			elseif self.activeX and self.activeY then
 				if tile:isTargetForMode(self.activeMode) then
-					local pathfinder = Pathfinder(assert(self:getTile(self.activeX, self.activeY)), tile)
+					local pathfinder = Pathfinder(self:assertGetTile(self.activeX, self.activeY), tile)
 					pathfinder:setMode(self.activeMode)
 					pathfinder:calculatePath()
 					pathfinder:dispatch()
@@ -415,6 +433,8 @@ function Station:handleRightClick()
 				if _Project:getStation(destination) then
 					_Project:setCurrentStation(destination)
 				end
+			elseif tile:getCommand() then
+				tile:sendCustomCommand()
 			end
 		end
 	else
@@ -617,8 +637,7 @@ function Station:drawRectSelection()
 	end
 	for x = math.min(self.dragX, self.hoverX), math.max(self.dragX, self.hoverX) do
 		for y = math.min(self.dragY, self.hoverY), math.max(self.dragY, self.hoverY) do
-			local tile = assert(self:getTile(x, y))
-			tile:drawRectSelection()
+			self:assertGetTile(x, y):drawRectSelection()
 		end
 	end
 end

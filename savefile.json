@@ -6,226 +6,184 @@
 			"shortcut": "K",
 			"tiles": {
 				"10,3": {
-					"electrified": true,
 					"id": "switchL7",
 					"switchID": "szl10k_zwr6",
 					"trackID": "k_roz"
 				},
 				"10,4": {
-					"electrified": true,
 					"id": "switchR7",
 					"switchID": "szl10k_zwr5",
 					"trackID": "k_roz"
 				},
 				"11,2": {
-					"electrified": true,
 					"id": "curve6",
 					"trackID": "k_roz"
 				},
 				"11,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "tm3",
 					"trackID": "k_roz"
 				},
 				"11,4": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "tm4",
 					"trackID": "k_roz"
 				},
 				"11,5": {
-					"electrified": true,
 					"id": "curve3",
 					"trackID": "k_roz"
 				},
 				"12,2": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "tm6",
 					"trackID": "k_roz"
 				},
 				"12,3": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "k_p"
 				},
 				"12,4": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "k_l"
 				},
 				"12,5": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "tm5",
 					"trackID": "k_roz"
 				},
 				"13,2": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"13,3": {
-					"electrified": true,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "k_p"
 				},
 				"13,4": {
-					"electrified": true,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "k_l"
 				},
 				"13,5": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"14,2": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"14,3": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "k_p"
 				},
 				"14,4": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "k_l"
 				},
 				"14,5": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"15,2": {
-					"electrified": true,
 					"id": "curve7"
 				},
 				"15,3": {
-					"electrified": true,
 					"id": "buffer7",
 					"trackID": "k_p"
 				},
 				"15,4": {
-					"electrified": true,
 					"id": "buffer7",
 					"trackID": "k_l"
 				},
 				"15,5": {
-					"electrified": true,
 					"id": "curve2"
 				},
 				"16,3": {
-					"electrified": true,
 					"id": "curve3"
 				},
 				"16,4": {
-					"electrified": true,
 					"id": "curve6"
 				},
 				"17,3": {
-					"electrified": true,
 					"id": "arrow7",
 					"shuntTarget": true
 				},
 				"17,4": {
-					"electrified": true,
 					"id": "arrow3",
 					"shuntTarget": true
 				},
 				"2,3": {
-					"electrified": true,
 					"id": "arrow7",
 					"trackID": "torl_9",
 					"trainTarget": true,
 					"warp": "K-NS"
 				},
 				"2,4": {
-					"electrified": true,
 					"id": "arrow3",
 					"trackID": "torp_9",
 					"warp": "K-NS"
 				},
 				"3,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreID": "sem_b10",
 					"trackID": "torl_9"
 				},
 				"3,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "torp_9"
 				},
 				"4,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_10"
 				},
 				"4,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_9"
 				},
 				"5,3": {
-					"electrified": true,
 					"id": "platformP",
 					"shuntTarget": true,
 					"trackID": "torl_10"
 				},
 				"5,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_9"
 				},
 				"6,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_10"
 				},
 				"6,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_9"
 				},
 				"7,3": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "k_roz"
 				},
 				"7,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "sem_a10",
 					"trackID": "k_roz"
 				},
 				"8,3": {
-					"electrified": true,
 					"id": "switchR7",
 					"switchID": "kom10k_zwr1",
 					"trackID": "k_roz"
 				},
 				"8,4": {
-					"electrified": true,
 					"id": "switchL7",
 					"switchID": "kom10k_zwr2",
 					"trackID": "k_roz"
 				},
 				"9,3": {
-					"electrified": true,
 					"id": "switchL3",
 					"switchID": "kom10k_zwr4",
 					"trackID": "k_roz"
 				},
 				"9,4": {
-					"electrified": true,
 					"id": "switchR3",
 					"switchID": "kom10k_zwr3",
 					"trackID": "k_roz"
@@ -274,283 +232,213 @@
 			"shortcut": "Gr",
 			"tiles": {
 				"10,2": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"10,3": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"10,4": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"10,5": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"10,6": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"11,2": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"11,3": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"11,4": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"11,5": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"11,6": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"12,2": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"12,3": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"12,4": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"12,5": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"12,6": {
-					"electrified": true,
 					"id": "platformF"
 				},
 				"13,2": {
-					"electrified": true,
 					"id": "semaphore3"
 				},
 				"13,3": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"13,4": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"13,5": {
-					"electrified": true,
 					"id": "semaphore3"
 				},
 				"13,6": {
-					"electrified": true,
 					"id": "semaphore3"
 				},
 				"14,2": {
-					"electrified": true,
 					"id": "curve7"
 				},
 				"14,3": {
-					"electrified": true,
 					"id": "semaphore3"
 				},
 				"14,4": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"14,5": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"14,6": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"15,3": {
-					"electrified": true,
 					"id": "switchD3"
 				},
 				"15,4": {
-					"electrified": true,
 					"id": "semaphore3"
 				},
 				"15,5": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"15,6": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"16,3": {
-					"electrified": true,
 					"id": "semaphore7"
 				},
 				"16,4": {
-					"electrified": true,
 					"id": "switchR3"
 				},
 				"16,5": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"16,6": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"17,3": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"17,4": {
-					"electrified": true,
 					"id": "semaphore7"
 				},
 				"17,5": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"17,6": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"18,3": {
-					"electrified": true,
 					"id": "arrow7"
 				},
 				"18,4": {
-					"electrified": true,
 					"id": "arrow3"
 				},
 				"18,5": {
-					"electrified": true,
 					"id": "arrow7"
 				},
 				"18,6": {
-					"electrified": true,
 					"id": "arrow3"
 				},
 				"2,5": {
-					"electrified": true,
 					"id": "arrow7"
 				},
 				"2,6": {
-					"electrified": true,
 					"id": "arrow3"
 				},
 				"3,4": {
-					"electrified": true,
 					"id": "buffer3"
 				},
 				"3,5": {
-					"electrified": true,
 					"id": "semaphore3"
 				},
 				"3,6": {
-					"electrified": true,
 					"id": "semaphore3"
 				},
 				"4,4": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"4,5": {
-					"electrified": true,
 					"id": "switchL7"
 				},
 				"4,6": {
-					"electrified": true,
 					"id": "switchL7"
 				},
 				"5,4": {
-					"electrified": true,
 					"id": "switchR2"
 				},
 				"5,5": {
-					"electrified": true,
 					"id": "switchL3"
 				},
 				"5,6": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"6,3": {
-					"electrified": true,
 					"id": "switchR6"
 				},
 				"6,5": {
-					"electrified": true,
 					"id": "switchL7"
 				},
 				"6,6": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"7,2": {
-					"electrified": true,
 					"id": "curve6"
 				},
 				"7,3": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"7,4": {
-					"electrified": true,
 					"id": "switchR6"
 				},
 				"7,5": {
-					"electrified": true,
 					"id": "switchR7"
 				},
 				"7,6": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"8,2": {
-					"electrified": true,
 					"id": "semaphore7"
 				},
 				"8,3": {
-					"electrified": true,
 					"id": "switchL3"
 				},
 				"8,4": {
-					"electrified": true,
 					"id": "semaphore7"
 				},
 				"8,5": {
-					"electrified": true,
 					"id": "semaphore7"
 				},
 				"8,6": {
-					"electrified": true,
 					"id": "switchR3"
 				},
 				"9,2": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"9,3": {
-					"electrified": true,
 					"id": "semaphore7"
 				},
 				"9,4": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"9,5": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"9,6": {
-					"electrified": true,
 					"id": "semaphore7"
 				}
 			},
@@ -570,13 +458,11 @@
 					"trackID": "Eb_It6a"
 				},
 				"10,11": {
-					"electrified": true,
 					"id": "switchL7",
 					"switchID": "Eb_14",
 					"trackID": "Eb_Iz14"
 				},
 				"10,12": {
-					"electrified": true,
 					"id": "switchD3",
 					"switchFlip": true,
 					"switchFlipABCD": true,
@@ -584,29 +470,24 @@
 					"trackID": "Eb_Iz8"
 				},
 				"11,10": {
-					"electrified": true,
 					"id": "switchL3",
 					"switchID": "Eb_15",
 					"trackID": "Eb_Iz15"
 				},
 				"11,11": {
-					"electrified": true,
 					"id": "switchR7",
 					"switchID": "Eb_13",
 					"trackID": "Eb_Iz13"
 				},
 				"11,12": {
-					"electrified": true,
 					"id": "curve7",
 					"trackID": "Eb_Iz8"
 				},
 				"11,13": {
-					"electrified": true,
 					"id": "track\\",
 					"trackID": "Eb_Iz8"
 				},
 				"12,10": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -615,7 +496,6 @@
 					"trackID": "Eb_Iz15"
 				},
 				"12,11": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -624,32 +504,26 @@
 					"trackID": "Eb_Iz13"
 				},
 				"12,12": {
-					"electrified": true,
 					"id": "curve3",
 					"trackID": "Eb_Iz13"
 				},
 				"12,13": {
-					"electrified": true,
 					"id": "curve3",
 					"trackID": "Eb_Iz8"
 				},
 				"12,14": {
-					"electrified": true,
 					"id": "curve3",
 					"trackID": "Eb_Iz8"
 				},
 				"13,10": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It6"
 				},
 				"13,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It4"
 				},
 				"13,12": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -658,7 +532,6 @@
 					"trackID": "Eb_Iz13"
 				},
 				"13,13": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -667,7 +540,6 @@
 					"trackID": "Eb_Iz8"
 				},
 				"13,14": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -676,32 +548,26 @@
 					"trackID": "Eb_Iz8"
 				},
 				"14,10": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Eb_It6"
 				},
 				"14,11": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Eb_It4"
 				},
 				"14,12": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Eb_It2"
 				},
 				"14,13": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Eb_It1"
 				},
 				"14,14": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Eb_It3"
 				},
 				"15,10": {
-					"electrified": true,
 					"id": "platformP",
 					"itineraryEndID": "6",
 					"shuntTarget": true,
@@ -709,7 +575,6 @@
 					"trainTarget": true
 				},
 				"15,11": {
-					"electrified": true,
 					"id": "platformP",
 					"itineraryEndID": "4",
 					"shuntTarget": true,
@@ -717,7 +582,6 @@
 					"trainTarget": true
 				},
 				"15,12": {
-					"electrified": true,
 					"id": "platformP",
 					"itineraryEndID": "2",
 					"shuntTarget": true,
@@ -725,7 +589,6 @@
 					"trainTarget": true
 				},
 				"15,13": {
-					"electrified": true,
 					"id": "platformP",
 					"itineraryEndID": "1",
 					"shuntTarget": true,
@@ -733,7 +596,6 @@
 					"trainTarget": true
 				},
 				"15,14": {
-					"electrified": true,
 					"id": "platformP",
 					"itineraryEndID": "3",
 					"shuntTarget": true,
@@ -741,27 +603,22 @@
 					"trainTarget": true
 				},
 				"16,10": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Eb_It6"
 				},
 				"16,11": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Eb_It4"
 				},
 				"16,12": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Eb_It2"
 				},
 				"16,13": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Eb_It1"
 				},
 				"16,14": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Eb_It3"
 				},
@@ -771,7 +628,6 @@
 					"trackID": "Eb_It8"
 				},
 				"17,10": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Eb_E6",
@@ -779,7 +635,6 @@
 					"trackID": "Eb_Iz38"
 				},
 				"17,11": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -789,7 +644,6 @@
 					"trackID": "Eb_Iz24"
 				},
 				"17,12": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -800,7 +654,6 @@
 					"trackID": "Eb_Iz28"
 				},
 				"17,13": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -810,7 +663,6 @@
 					"trackID": "Eb_Iz25"
 				},
 				"17,14": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -828,27 +680,22 @@
 					"trackID": "Eb_It8"
 				},
 				"18,10": {
-					"electrified": true,
 					"id": "curve2",
 					"trackID": "Eb_Iz38"
 				},
 				"18,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz24"
 				},
 				"18,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz28"
 				},
 				"18,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz25"
 				},
 				"18,14": {
-					"electrified": true,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "Eb_22",
@@ -865,7 +712,6 @@
 					"trackID": "Eb_It8"
 				},
 				"19,11": {
-					"electrified": true,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
@@ -873,19 +719,16 @@
 					"trackID": "Eb_Iz24"
 				},
 				"19,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz28"
 				},
 				"19,13": {
-					"electrified": true,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Eb_25",
 					"trackID": "Eb_Iz25"
 				},
 				"19,14": {
-					"electrified": true,
 					"id": "curve7",
 					"trackID": "Eb_Iz26"
 				},
@@ -898,7 +741,6 @@
 					"trackID": "Eb_It11"
 				},
 				"19,9": {
-					"electrified": true,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Eb_38",
@@ -912,7 +754,6 @@
 					"shuntTarget": true
 				},
 				"2,11": {
-					"electrified": true,
 					"forbidShunt": true,
 					"id": "arrow7",
 					"itineraryEndID": "Tp",
@@ -921,7 +762,6 @@
 					"warp": "Tp"
 				},
 				"2,12": {
-					"electrified": true,
 					"forbidShunt": true,
 					"id": "arrow3",
 					"itineraryEndID": "Tp_N",
@@ -931,23 +771,19 @@
 					"warp": "Tp"
 				},
 				"20,10": {
-					"electrified": true,
 					"id": "curve6",
 					"maxSpeed": 40,
 					"trackID": "Eb_Iz24"
 				},
 				"20,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz24"
 				},
 				"20,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz28"
 				},
 				"20,13": {
-					"electrified": true,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
@@ -955,7 +791,6 @@
 					"trackID": "Eb_Iz23"
 				},
 				"20,15": {
-					"electrified": true,
 					"id": "switchL8",
 					"switchFlip": true,
 					"switchID": "Eb_26",
@@ -971,26 +806,22 @@
 					"trackID": "Eb_Iz19"
 				},
 				"20,9": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz38"
 				},
 				"21,10": {
-					"electrified": true,
 					"id": "platformF",
 					"itineraryEndID": "24_43",
 					"shuntTarget": true,
 					"trackID": "Eb_Iz43"
 				},
 				"21,11": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Eb_27",
 					"trackID": "Eb_Iz27"
 				},
 				"21,12": {
-					"electrified": true,
 					"id": "switchD2",
 					"maxSpeedMinus": 100,
 					"maxSpeedPlus": 40,
@@ -998,17 +829,14 @@
 					"trackID": "Eb_Iz28"
 				},
 				"21,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz23"
 				},
 				"21,15": {
-					"electrified": true,
 					"id": "derailer7",
 					"trackID": "Eb_Iz26"
 				},
 				"21,16": {
-					"electrified": true,
 					"id": "switchL8",
 					"switchFlip": true,
 					"switchID": "Eb_30",
@@ -1026,17 +854,14 @@
 					"trackID": "Eb_Iz20"
 				},
 				"21,9": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz38"
 				},
 				"22,10": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz43"
 				},
 				"22,11": {
-					"electrified": true,
 					"id": "switchD2",
 					"maxSpeedMinus": 100,
 					"maxSpeedPlus": 40,
@@ -1044,7 +869,6 @@
 					"trackID": "Eb_Iz36"
 				},
 				"22,12": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
@@ -1052,12 +876,10 @@
 					"trackID": "Eb_Iz40"
 				},
 				"22,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz23"
 				},
 				"22,15": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
@@ -1066,12 +888,10 @@
 					"trackID": "Eb_Iz26"
 				},
 				"22,16": {
-					"electrified": true,
 					"id": "derailer7",
 					"trackID": "Eb_Iz30"
 				},
 				"22,17": {
-					"electrified": true,
 					"id": "switchD3",
 					"switchFlip": true,
 					"switchFlipABCD": true,
@@ -1085,12 +905,10 @@
 					"trackID": "Eb_Iz20"
 				},
 				"22,9": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz47"
 				},
 				"23,10": {
-					"electrified": true,
 					"id": "switchD2",
 					"maxSpeedMinus": 100,
 					"maxSpeedPlus": 40,
@@ -1098,27 +916,22 @@
 					"trackID": "Eb_Iz43"
 				},
 				"23,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz36"
 				},
 				"23,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz40"
 				},
 				"23,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz42"
 				},
 				"23,15": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It61"
 				},
 				"23,16": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
@@ -1127,7 +940,6 @@
 					"trackID": "Eb_Iz30"
 				},
 				"23,17": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
@@ -1161,34 +973,28 @@
 					"id": "buffer3"
 				},
 				"23,9": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz47"
 				},
 				"24,10": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz43"
 				},
 				"24,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz36"
 				},
 				"24,12": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Eb_41",
 					"trackID": "Eb_Iz41"
 				},
 				"24,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz42"
 				},
 				"24,15": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "platformP",
 					"itineraryEndID": "61",
@@ -1196,7 +1002,6 @@
 					"trackID": "Eb_It61"
 				},
 				"24,16": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "platformP",
 					"itineraryEndID": "63",
@@ -1204,7 +1009,6 @@
 					"trackID": "Eb_It63"
 				},
 				"24,17": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "platformP",
 					"itineraryEndID": "319",
@@ -1228,46 +1032,38 @@
 					"id": "platformP"
 				},
 				"24,9": {
-					"electrified": true,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Eb_47",
 					"trackID": "Eb_Iz47"
 				},
 				"25,10": {
-					"electrified": true,
 					"id": "curve2",
 					"trackID": "Eb_Iz43"
 				},
 				"25,11": {
-					"electrified": true,
 					"id": "curve2",
 					"trackID": "Eb_Iz37"
 				},
 				"25,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz41"
 				},
 				"25,13": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Eb_42",
 					"trackID": "Eb_Iz42"
 				},
 				"25,15": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It61"
 				},
 				"25,16": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It63"
 				},
 				"25,17": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
@@ -1292,33 +1088,27 @@
 					"id": "curve2"
 				},
 				"25,9": {
-					"electrified": true,
 					"id": "curve2",
 					"trackID": "Eb_Iz47"
 				},
 				"26,10": {
-					"electrified": true,
 					"id": "switchR6",
 					"switchID": "Eb_37",
 					"trackID": "Eb_Iz37"
 				},
 				"26,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz41"
 				},
 				"26,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz42"
 				},
 				"26,15": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It61"
 				},
 				"26,16": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
@@ -1327,7 +1117,6 @@
 					"trackID": "Eb_Iz55"
 				},
 				"26,17": {
-					"electrified": true,
 					"id": "curve2",
 					"trackID": "Eb_Iz55"
 				},
@@ -1344,23 +1133,19 @@
 					"id": "track/"
 				},
 				"26,8": {
-					"electrified": true,
 					"id": "track/",
 					"trackID": "Eb_Iz47"
 				},
 				"26,9": {
-					"electrified": true,
 					"id": "track/",
 					"trackID": "Eb_Iz46"
 				},
 				"27,10": {
-					"electrified": true,
 					"id": "switchR7",
 					"switchID": "Eb_44",
 					"trackID": "Eb_Iz44"
 				},
 				"27,12": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -1370,14 +1155,12 @@
 					"trackID": "Eb_Iz41"
 				},
 				"27,13": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Eb_54",
 					"trackID": "Eb_Iz54"
 				},
 				"27,15": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
@@ -1386,7 +1169,6 @@
 					"trackID": "Eb_Iz56"
 				},
 				"27,16": {
-					"electrified": true,
 					"id": "switchR2",
 					"switchFlip": true,
 					"switchID": "Eb_55",
@@ -1401,23 +1183,19 @@
 					"id": "track/"
 				},
 				"27,7": {
-					"electrified": true,
 					"id": "track/",
 					"trackID": "Eb_Iz48"
 				},
 				"27,8": {
-					"electrified": true,
 					"id": "track/",
 					"trackID": "Eb_Iz46"
 				},
 				"27,9": {
-					"electrified": true,
 					"id": "switchR6",
 					"switchID": "Eb_45",
 					"trackID": "Eb_Iz45"
 				},
 				"28,10": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -1427,29 +1205,24 @@
 					"trackID": "Eb_Iz44"
 				},
 				"28,11": {
-					"electrified": true,
 					"id": "curve3",
 					"trackID": "Eb_Iz44"
 				},
 				"28,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It102"
 				},
 				"28,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz54"
 				},
 				"28,14": {
-					"electrified": true,
 					"id": "switchL8",
 					"switchFlip": true,
 					"switchID": "Eb_57",
 					"trackID": "Eb_Iz57"
 				},
 				"28,15": {
-					"electrified": true,
 					"id": "switchD2",
 					"switchID": "Eb_56",
 					"trackID": "Eb_Iz56"
@@ -1459,23 +1232,19 @@
 					"id": "switchL3"
 				},
 				"28,6": {
-					"electrified": true,
 					"id": "track/",
 					"trackID": "Eb_Iz48"
 				},
 				"28,7": {
-					"electrified": true,
 					"id": "switchR6",
 					"switchID": "Eb_46",
 					"trackID": "Eb_Iz46"
 				},
 				"28,8": {
-					"electrified": true,
 					"id": "curve6",
 					"trackID": "Eb_Iz45"
 				},
 				"28,9": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -1485,12 +1254,10 @@
 					"trackID": "Eb_Iz45"
 				},
 				"29,10": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It54"
 				},
 				"29,11": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -1500,12 +1267,10 @@
 					"trackID": "Eb_Iz44"
 				},
 				"29,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It102"
 				},
 				"29,13": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -1515,13 +1280,11 @@
 					"trackID": "Eb_Iz54"
 				},
 				"29,14": {
-					"electrified": true,
 					"id": "switchL3",
 					"switchID": "Eb_58",
 					"trackID": "Eb_Iz58"
 				},
 				"29,15": {
-					"electrified": true,
 					"id": "switchD3",
 					"switchFlip": true,
 					"switchID": "Eb_59",
@@ -1532,18 +1295,15 @@
 					"id": "track-"
 				},
 				"29,5": {
-					"electrified": true,
 					"id": "switchR6",
 					"switchID": "Eb_48",
 					"trackID": "Eb_Iz48"
 				},
 				"29,6": {
-					"electrified": true,
 					"id": "curve6",
 					"trackID": "Eb_Iz46"
 				},
 				"29,7": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -1553,7 +1313,6 @@
 					"trackID": "Eb_Iz46"
 				},
 				"29,8": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -1563,7 +1322,6 @@
 					"trackID": "Eb_Iz45"
 				},
 				"29,9": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It56"
 				},
@@ -1572,37 +1330,30 @@
 					"id": "track-"
 				},
 				"3,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp2-Eb2@LK204.2"
 				},
 				"3,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp1-Eb1@LK204.1"
 				},
 				"30,10": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It54"
 				},
 				"30,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It52"
 				},
 				"30,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It102"
 				},
 				"30,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It101"
 				},
 				"30,14": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
@@ -1611,7 +1362,6 @@
 					"trackID": "Eb_Iz58"
 				},
 				"30,15": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
@@ -1620,7 +1370,6 @@
 					"trackID": "Eb_Iz59"
 				},
 				"30,16": {
-					"electrified": true,
 					"id": "switchL8",
 					"switchFlip": true,
 					"switchID": "Eb_60",
@@ -1641,7 +1390,6 @@
 					"trackID": "Eb_Iz51"
 				},
 				"30,5": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -1651,7 +1399,6 @@
 					"trackID": "Eb_Iz48"
 				},
 				"30,6": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -1661,52 +1408,42 @@
 					"trackID": "Eb_Iz46"
 				},
 				"30,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It60"
 				},
 				"30,8": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It58"
 				},
 				"30,9": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It56"
 				},
 				"31,10": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It54"
 				},
 				"31,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It52"
 				},
 				"31,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It102"
 				},
 				"31,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It101"
 				},
 				"31,14": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It321"
 				},
 				"31,15": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It323"
 				},
 				"31,16": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
@@ -1715,7 +1452,6 @@
 					"trackID": "Eb_Iz60"
 				},
 				"31,17": {
-					"electrified": true,
 					"id": "curve3",
 					"trackID": "Eb_Iz60"
 				},
@@ -1730,67 +1466,54 @@
 					"trackID": "Eb_Iz51"
 				},
 				"31,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It64"
 				},
 				"31,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It62"
 				},
 				"31,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It60"
 				},
 				"31,8": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It58"
 				},
 				"31,9": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It56"
 				},
 				"32,10": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It54"
 				},
 				"32,11": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It52"
 				},
 				"32,12": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It102"
 				},
 				"32,13": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It101"
 				},
 				"32,14": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It321"
 				},
 				"32,15": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It323"
 				},
 				"32,16": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It325"
 				},
 				"32,17": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
@@ -1812,32 +1535,26 @@
 					"trackID": "Eb_Iz51"
 				},
 				"32,5": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It64"
 				},
 				"32,6": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It62"
 				},
 				"32,7": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It60"
 				},
 				"32,8": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It58"
 				},
 				"32,9": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It56"
 				},
 				"33,10": {
-					"electrified": true,
 					"id": "platformF",
 					"itineraryEndID": "54",
 					"shuntTarget": true,
@@ -1845,7 +1562,6 @@
 					"trainTarget": true
 				},
 				"33,11": {
-					"electrified": true,
 					"id": "platformF",
 					"itineraryEndID": "52",
 					"shuntTarget": true,
@@ -1853,7 +1569,6 @@
 					"trainTarget": true
 				},
 				"33,12": {
-					"electrified": true,
 					"id": "platformF",
 					"itineraryEndID": "102",
 					"shuntTarget": true,
@@ -1861,7 +1576,6 @@
 					"trainTarget": true
 				},
 				"33,13": {
-					"electrified": true,
 					"id": "platformF",
 					"itineraryEndID": "101",
 					"shuntTarget": true,
@@ -1869,7 +1583,6 @@
 					"trainTarget": true
 				},
 				"33,14": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "platformF",
 					"itineraryEndID": "321",
@@ -1877,7 +1590,6 @@
 					"trackID": "Eb_It321"
 				},
 				"33,15": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "platformP",
 					"itineraryEndID": "323",
@@ -1885,7 +1597,6 @@
 					"trackID": "Eb_It323"
 				},
 				"33,16": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "platformP",
 					"itineraryEndID": "325",
@@ -1893,7 +1604,6 @@
 					"trackID": "Eb_It325"
 				},
 				"33,17": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "platformP",
 					"itineraryEndID": "327",
@@ -1909,7 +1619,6 @@
 					"id": "track-"
 				},
 				"33,5": {
-					"electrified": true,
 					"id": "platformF",
 					"itineraryEndID": "64",
 					"shuntTarget": true,
@@ -1917,7 +1626,6 @@
 					"trainTarget": true
 				},
 				"33,6": {
-					"electrified": true,
 					"id": "platformF",
 					"itineraryEndID": "62",
 					"shuntTarget": true,
@@ -1925,7 +1633,6 @@
 					"trainTarget": true
 				},
 				"33,7": {
-					"electrified": true,
 					"id": "platformF",
 					"itineraryEndID": "60",
 					"shuntTarget": true,
@@ -1933,7 +1640,6 @@
 					"trainTarget": true
 				},
 				"33,8": {
-					"electrified": true,
 					"id": "platformF",
 					"itineraryEndID": "58",
 					"shuntTarget": true,
@@ -1941,7 +1647,6 @@
 					"trainTarget": true
 				},
 				"33,9": {
-					"electrified": true,
 					"id": "platformF",
 					"itineraryEndID": "56",
 					"shuntTarget": true,
@@ -1949,42 +1654,34 @@
 					"trainTarget": true
 				},
 				"34,10": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It54"
 				},
 				"34,11": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It52"
 				},
 				"34,12": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It102"
 				},
 				"34,13": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It101"
 				},
 				"34,14": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It321"
 				},
 				"34,15": {
-					"electrified": true,
 					"id": "buffer7",
 					"trackID": "Eb_It323"
 				},
 				"34,16": {
-					"electrified": true,
 					"id": "buffer7",
 					"trackID": "Eb_It325"
 				},
 				"34,17": {
-					"electrified": true,
 					"id": "buffer7",
 					"trackID": "Eb_It327"
 				},
@@ -1997,52 +1694,42 @@
 					"id": "track-"
 				},
 				"34,5": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It64"
 				},
 				"34,6": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It62"
 				},
 				"34,7": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It60"
 				},
 				"34,8": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It58"
 				},
 				"34,9": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Eb_It56"
 				},
 				"35,10": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It54"
 				},
 				"35,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It52"
 				},
 				"35,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It102"
 				},
 				"35,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It101"
 				},
 				"35,14": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It321"
 				},
@@ -2060,52 +1747,42 @@
 					"id": "curve2"
 				},
 				"35,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It64"
 				},
 				"35,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It62"
 				},
 				"35,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It60"
 				},
 				"35,8": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It58"
 				},
 				"35,9": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It56"
 				},
 				"36,10": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It54"
 				},
 				"36,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It52"
 				},
 				"36,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It102"
 				},
 				"36,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It101"
 				},
 				"36,14": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It321"
 				},
@@ -2119,7 +1796,6 @@
 					"id": "switchL3"
 				},
 				"36,5": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -2129,7 +1805,6 @@
 					"trackID": "Eb_Iz90"
 				},
 				"36,6": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -2139,42 +1814,34 @@
 					"trackID": "Eb_Iz83"
 				},
 				"36,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It60"
 				},
 				"36,8": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It58"
 				},
 				"36,9": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It56"
 				},
 				"37,10": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It54"
 				},
 				"37,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It52"
 				},
 				"37,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It102"
 				},
 				"37,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It101"
 				},
 				"37,14": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
@@ -2192,17 +1859,14 @@
 					"id": "curve7"
 				},
 				"37,5": {
-					"electrified": true,
 					"id": "curve7",
 					"trackID": "Eb_Iz90"
 				},
 				"37,6": {
-					"electrified": true,
 					"id": "curve7",
 					"trackID": "Eb_Iz83"
 				},
 				"37,7": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -2212,17 +1876,14 @@
 					"trackID": "Eb_Iz83"
 				},
 				"37,8": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It58"
 				},
 				"37,9": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It56"
 				},
 				"38,10": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -2232,22 +1893,18 @@
 					"trackID": "Eb_Iz80"
 				},
 				"38,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It52"
 				},
 				"38,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It102"
 				},
 				"38,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_It101"
 				},
 				"38,14": {
-					"electrified": true,
 					"id": "switchL3",
 					"switchID": "Eb_74",
 					"trackID": "Eb_Iz74"
@@ -2257,18 +1914,15 @@
 					"id": "track\\"
 				},
 				"38,6": {
-					"electrified": true,
 					"id": "track\\",
 					"trackID": "Eb_Iz90"
 				},
 				"38,7": {
-					"electrified": true,
 					"id": "switchL4",
 					"switchID": "Eb_83",
 					"trackID": "Eb_Iz83"
 				},
 				"38,8": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -2278,7 +1932,6 @@
 					"trackID": "Eb_Iz89"
 				},
 				"38,9": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -2288,12 +1941,10 @@
 					"trackID": "Eb_Iz81"
 				},
 				"39,10": {
-					"electrified": true,
 					"id": "curve7",
 					"trackID": "Eb_Iz80"
 				},
 				"39,11": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -2303,7 +1954,6 @@
 					"trackID": "Eb_Iz80"
 				},
 				"39,12": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -2313,7 +1963,6 @@
 					"trackID": "Eb_Iz98"
 				},
 				"39,13": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -2322,7 +1971,6 @@
 					"trackID": "Eb_Iz95"
 				},
 				"39,14": {
-					"electrified": true,
 					"forbidTrain": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
@@ -2335,18 +1983,15 @@
 					"id": "track\\"
 				},
 				"39,7": {
-					"electrified": true,
 					"id": "track\\",
 					"trackID": "Eb_Iz90"
 				},
 				"39,8": {
-					"electrified": true,
 					"id": "switchL4",
 					"switchID": "Eb_89",
 					"trackID": "Eb_Iz89"
 				},
 				"39,9": {
-					"electrified": true,
 					"id": "curve7",
 					"trackID": "Eb_Iz81"
 				},
@@ -2355,38 +2000,31 @@
 					"id": "track-"
 				},
 				"4,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp2-Eb2@LK204.2"
 				},
 				"4,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp1-Eb1@LK204.1"
 				},
 				"40,10": {
-					"electrified": true,
 					"id": "track\\",
 					"trackID": "Eb_Iz81"
 				},
 				"40,11": {
-					"electrified": true,
 					"id": "switchR3",
 					"switchID": "Eb_80",
 					"trackID": "Eb_Iz80"
 				},
 				"40,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz98"
 				},
 				"40,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz95"
 				},
 				"40,14": {
-					"electrified": true,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
@@ -2398,35 +2036,29 @@
 					"id": "track\\"
 				},
 				"40,8": {
-					"electrified": true,
 					"id": "track\\",
 					"trackID": "Eb_Iz90"
 				},
 				"40,9": {
-					"electrified": true,
 					"id": "track\\",
 					"trackID": "Eb_Iz91"
 				},
 				"41,10": {
-					"electrified": true,
 					"id": "switchR4",
 					"switchID": "Eb_91",
 					"trackID": "Eb_Iz91"
 				},
 				"41,11": {
-					"electrified": true,
 					"id": "switchR3",
 					"switchFlip": true,
 					"switchID": "Eb_81",
 					"trackID": "Eb_Iz81"
 				},
 				"41,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz98"
 				},
 				"41,13": {
-					"electrified": true,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Eb_95",
@@ -2459,26 +2091,22 @@
 					"trackID": "Eb_Iz90"
 				},
 				"41,9": {
-					"electrified": true,
 					"id": "switchL5",
 					"switchFlip": true,
 					"switchID": "Eb_90",
 					"trackID": "Eb_Iz90"
 				},
 				"42,11": {
-					"electrified": true,
 					"id": "switchD3",
 					"switchFlip": true,
 					"switchID": "Eb_92",
 					"trackID": "Eb_Iz92"
 				},
 				"42,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz98"
 				},
 				"42,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz95"
 				},
@@ -2493,7 +2121,6 @@
 					"trackID": "Eb_Iz92"
 				},
 				"43,12": {
-					"electrified": true,
 					"id": "switchD3",
 					"maxSpeed": 40,
 					"switchFlip": true,
@@ -2501,7 +2128,6 @@
 					"trackID": "Eb_Iz98"
 				},
 				"43,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz99"
 				},
@@ -2520,12 +2146,10 @@
 					"trackID": "Eb_Iz92"
 				},
 				"44,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_ItW"
 				},
 				"44,13": {
-					"electrified": true,
 					"id": "switchD3",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
@@ -2547,12 +2171,10 @@
 					"shuntTarget": true
 				},
 				"45,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_ItW"
 				},
 				"45,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_ItSzn1"
 				},
@@ -2569,12 +2191,10 @@
 					"id": "buffer7"
 				},
 				"46,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_ItW"
 				},
 				"46,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_ItSzn1"
 				},
@@ -2606,12 +2226,10 @@
 					"shuntTarget": true
 				},
 				"47,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_ItW"
 				},
 				"47,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_ItSzn1"
 				},
@@ -2626,12 +2244,10 @@
 					"trackID": "Eb_Iz103"
 				},
 				"48,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_ItW"
 				},
 				"48,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_ItSzn1"
 				},
@@ -2650,7 +2266,6 @@
 					"trackID": "Eb_Iz103"
 				},
 				"49,12": {
-					"electrified": true,
 					"forbidShunt": true,
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
@@ -2660,7 +2275,6 @@
 					"trackID": "Eb_ItW"
 				},
 				"49,13": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreID": "Eb_Szn1",
@@ -2690,22 +2304,18 @@
 					"trackID": "Eb_Iz1"
 				},
 				"5,11": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp2-Eb2@LK204.2"
 				},
 				"5,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp1-Eb1@LK204.1"
 				},
 				"50,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb102-Bc2@LK204.2"
 				},
 				"50,13": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb101-Bc1@LK204.1"
 				},
@@ -2718,7 +2328,6 @@
 					"id": "track-"
 				},
 				"51,12": {
-					"electrified": true,
 					"forbidShunt": true,
 					"id": "arrow7",
 					"itineraryEndID": "Bc_N",
@@ -2728,7 +2337,6 @@
 					"warp": "Bc"
 				},
 				"51,13": {
-					"electrified": true,
 					"forbidShunt": true,
 					"id": "arrow3",
 					"itineraryEndID": "Bc",
@@ -2757,7 +2365,6 @@
 					"trackID": "Eb_Iz1"
 				},
 				"6,11": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -2766,7 +2373,6 @@
 					"trackID": "Eb_ItB"
 				},
 				"6,12": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -2780,25 +2386,21 @@
 					"trackID": "Eb_Iz1"
 				},
 				"7,11": {
-					"electrified": true,
 					"id": "switchR3",
 					"switchID": "Eb_2",
 					"trackID": "Eb_Iz2"
 				},
 				"7,12": {
-					"electrified": true,
 					"id": "switchL7",
 					"switchID": "Eb_3",
 					"trackID": "Eb_Iz3"
 				},
 				"8,11": {
-					"electrified": true,
 					"id": "switchL3",
 					"switchID": "Eb_4",
 					"trackID": "Eb_Iz4"
 				},
 				"8,12": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb_Iz3"
 				},
@@ -2808,14 +2410,12 @@
 					"trackID": "Eb_It6a"
 				},
 				"9,11": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeed": 40,
 					"switchID": "Eb_7",
 					"trackID": "Eb_Iz7"
 				},
 				"9,12": {
-					"electrified": true,
 					"id": "track-",
 					"maxSpeed": 40,
 					"trackID": "Eb_Iz8"
@@ -2829,7 +2429,6 @@
 			"shortcut": "Tp",
 			"tiles": {
 				"10,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -2838,7 +2437,6 @@
 					"trackID": "Tp_ItL"
 				},
 				"10,4": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -2846,17 +2444,14 @@
 					"trackID": "Tp_ItK"
 				},
 				"11,3": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp2-Eb2@LK204.2"
 				},
 				"11,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp1-Eb1@LK204.1"
 				},
 				"12,3": {
-					"electrified": true,
 					"id": "arrow7",
 					"itineraryEndID": "Eb_N",
 					"targetW24": true,
@@ -2865,7 +2460,6 @@
 					"warp": "Eb"
 				},
 				"12,4": {
-					"electrified": true,
 					"id": "arrow3",
 					"itineraryEndID": "Eb",
 					"trackID": "Tp1-Eb1@LK204.1",
@@ -2873,7 +2467,6 @@
 					"warp": "Eb"
 				},
 				"2,2": {
-					"electrified": true,
 					"id": "arrow-",
 					"itineraryEndID": "EZ",
 					"trackID": "Tp1-EZ1@LK254",
@@ -2881,33 +2474,27 @@
 					"warp": "EZ"
 				},
 				"2,3": {
-					"electrified": true,
 					"id": "arrow7",
 					"itineraryEndID": "GE",
 					"trainTarget": true
 				},
 				"2,4": {
-					"electrified": true,
 					"id": "arrow3",
 					"itineraryEndID": "GE_N",
 					"targetW24": true,
 					"trainTarget": true
 				},
 				"3,2": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp1-EZ1@LK254"
 				},
 				"3,3": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"3,4": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"4,2": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -2915,7 +2502,6 @@
 					"trackID": "Tp_ItG"
 				},
 				"4,3": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -2923,7 +2509,6 @@
 					"trackID": "Tp_ItH"
 				},
 				"4,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -2932,7 +2517,6 @@
 					"trackID": "Tp_ItJ"
 				},
 				"5,2": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
@@ -2940,63 +2524,52 @@
 					"trackID": "Tp_Iz6"
 				},
 				"5,3": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp_Iz7"
 				},
 				"5,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp_Iz9"
 				},
 				"6,2": {
-					"electrified": true,
 					"id": "buffer7",
 					"trackID": "Tp_Iz6"
 				},
 				"6,3": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Tp_7",
 					"trackID": "Tp_Iz7"
 				},
 				"6,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp_Iz9"
 				},
 				"7,3": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Tp_8",
 					"trackID": "Tp_Iz8"
 				},
 				"7,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp_Iz9"
 				},
 				"8,3": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp_Iz8"
 				},
 				"8,4": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Tp_9",
 					"trackID": "Tp_Iz9"
 				},
 				"9,3": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp_Iz8"
 				},
 				"9,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp_Iz9"
 				}
@@ -3009,12 +2582,10 @@
 			"shortcut": "EZ",
 			"tiles": {
 				"10,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It30"
 				},
 				"10,5": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm6",
@@ -3022,7 +2593,6 @@
 					"trackID": "EZ_Iz10"
 				},
 				"11,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm7",
@@ -3030,43 +2600,36 @@
 					"trackID": "EZ_Iz12"
 				},
 				"11,5": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_10",
 					"trackID": "EZ_Iz10"
 				},
 				"12,4": {
-					"electrified": true,
 					"id": "derailer3",
 					"trackID": "EZ_Iz12"
 				},
 				"12,5": {
-					"electrified": true,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_11",
 					"trackID": "EZ_Iz11"
 				},
 				"12,6": {
-					"electrified": true,
 					"id": "curve3",
 					"trackID": "EZ_Iz10"
 				},
 				"13,4": {
-					"electrified": true,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_12",
 					"trackID": "EZ_Iz12"
 				},
 				"13,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_Iz11"
 				},
 				"13,6": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -3075,7 +2638,6 @@
 					"trackID": "EZ_Iz10"
 				},
 				"14,4": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -3084,7 +2646,6 @@
 					"trackID": "EZ_Iz12"
 				},
 				"14,5": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -3093,73 +2654,60 @@
 					"trackID": "EZ_Iz11"
 				},
 				"14,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It2a"
 				},
 				"15,4": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "EZ_It3"
 				},
 				"15,5": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "EZ_It1"
 				},
 				"15,6": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "EZ_It2a"
 				},
 				"16,4": {
-					"electrified": true,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "EZ_It3",
 					"trainTarget": true
 				},
 				"16,5": {
-					"electrified": true,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "EZ_It1",
 					"trainTarget": true
 				},
 				"16,6": {
-					"electrified": true,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "EZ_It2a",
 					"trainTarget": true
 				},
 				"17,4": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "EZ_It3"
 				},
 				"17,5": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "EZ_It1"
 				},
 				"17,6": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "EZ_It2a"
 				},
 				"18,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It3"
 				},
 				"18,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It1"
 				},
 				"18,6": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm15",
@@ -3167,88 +2715,72 @@
 					"trackID": "EZ_Iz16"
 				},
 				"18,7": {
-					"electrified": true,
 					"id": "buffer3",
 					"trackID": "EZ_It9"
 				},
 				"19,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It3"
 				},
 				"19,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It1"
 				},
 				"19,6": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_16",
 					"trackID": "EZ_Iz16"
 				},
 				"19,7": {
-					"electrified": true,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "EZ_It9"
 				},
 				"2,2": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"2,3": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"2,4": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"2,5": {
-					"electrified": true,
 					"id": "arrow-",
 					"trackID": "Tp1-EZ1@LK254",
 					"trainTarget": true,
 					"warp": "Tp"
 				},
 				"20,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It3"
 				},
 				"20,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It1"
 				},
 				"20,6": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_17",
 					"trackID": "EZ_Iz17"
 				},
 				"20,7": {
-					"electrified": true,
 					"id": "switchL4",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_18",
 					"trackID": "EZ_Iz18"
 				},
 				"21,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It3"
 				},
 				"21,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It1"
 				},
 				"21,6": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm18",
@@ -3256,12 +2788,10 @@
 					"trackID": "EZ_Iz17"
 				},
 				"21,7": {
-					"electrified": true,
 					"id": "derailer7",
 					"trackID": "EZ_Iz17"
 				},
 				"21,8": {
-					"electrified": true,
 					"id": "semaphore8",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm16",
@@ -3269,47 +2799,38 @@
 					"trackID": "EZ_Iz18"
 				},
 				"22,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It3"
 				},
 				"22,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It1"
 				},
 				"22,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It2b"
 				},
 				"22,8": {
-					"electrified": true,
 					"id": "curve3",
 					"trackID": "EZ_Iz17"
 				},
 				"23,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It3"
 				},
 				"23,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It1"
 				},
 				"23,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It2b"
 				},
 				"23,7": {
-					"electrified": true,
 					"id": "buffer3",
 					"trackID": "EZ_It11"
 				},
 				"23,8": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm17",
@@ -3317,50 +2838,41 @@
 					"trackID": "EZ_Iz17"
 				},
 				"24,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It3"
 				},
 				"24,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It1"
 				},
 				"24,6": {
-					"electrified": true,
 					"id": "track-",
 					"shuntTarget": true,
 					"trackID": "EZ_It2b"
 				},
 				"24,7": {
-					"electrified": true,
 					"id": "platformP",
 					"shuntTarget": true,
 					"trackID": "EZ_It11"
 				},
 				"24,8": {
-					"electrified": true,
 					"id": "platformP",
 					"shuntTarget": true,
 					"trackID": "EZ_It10"
 				},
 				"25,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It3"
 				},
 				"25,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It1"
 				},
 				"25,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_It2b"
 				},
 				"25,7": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm19",
@@ -3368,12 +2880,10 @@
 					"trackID": "EZ_Iz25"
 				},
 				"25,8": {
-					"electrified": true,
 					"id": "buffer7",
 					"trackID": "EZ_It10"
 				},
 				"26,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -3382,7 +2892,6 @@
 					"trackID": "EZ_Iz24"
 				},
 				"26,5": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -3391,7 +2900,6 @@
 					"trackID": "EZ_Iz24"
 				},
 				"26,6": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -3400,88 +2908,72 @@
 					"trackID": "EZ_Iz25"
 				},
 				"26,7": {
-					"electrified": true,
 					"id": "derailer3",
 					"trackID": "EZ_Iz25"
 				},
 				"27,4": {
-					"electrified": true,
 					"id": "curve7",
 					"trackID": "EZ_Iz24"
 				},
 				"27,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_Iz24"
 				},
 				"27,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_Iz25"
 				},
 				"27,7": {
-					"electrified": true,
 					"id": "curve2",
 					"trackID": "EZ_Iz25"
 				},
 				"28,5": {
-					"electrified": true,
 					"id": "switchD3",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_24",
 					"trackID": "EZ_Iz24"
 				},
 				"28,6": {
-					"electrified": true,
 					"id": "switchD2",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_25",
 					"trackID": "EZ_Iz25"
 				},
 				"29,5": {
-					"electrified": true,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_26",
 					"trackID": "EZ_Iz26"
 				},
 				"29,6": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_27",
 					"trackID": "EZ_Iz27"
 				},
 				"3,2": {
-					"electrified": true,
 					"id": "switchL7",
 					"switchID": "EZ_402"
 				},
 				"3,3": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"3,4": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"3,5": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Tp1-EZ1@LK254"
 				},
 				"30,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_Iz26"
 				},
 				"30,6": {
-					"electrified": true,
 					"id": "derailer7",
 					"trackID": "EZ_Iz27"
 				},
 				"31,5": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm21",
@@ -3489,7 +2981,6 @@
 					"trackID": "EZ_Iz26"
 				},
 				"31,6": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm20",
@@ -3497,31 +2988,26 @@
 					"trackID": "EZ_Iz27"
 				},
 				"32,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_ItP"
 				},
 				"32,6": {
-					"electrified": true,
 					"id": "platformP",
 					"shuntTarget": true,
 					"trackID": "EZ_It40"
 				},
 				"33,5": {
-					"electrified": true,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "EZ_ItP"
 				},
 				"33,6": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_30",
 					"trackID": "EZ_Iz30"
 				},
 				"34,5": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -3530,44 +3016,35 @@
 					"trackID": "EZ_ItP"
 				},
 				"34,6": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"34,7": {
-					"electrified": true,
 					"id": "curve3"
 				},
 				"35,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ1-Br1@LK254"
 				},
 				"35,6": {
-					"electrified": true,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"35,7": {
-					"electrified": true,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"36,5": {
-					"electrified": true,
 					"id": "arrow-",
 					"trackID": "EZ1-Br1@LK254",
 					"trainTarget": true
 				},
 				"36,6": {
-					"electrified": true,
 					"id": "buffer7"
 				},
 				"36,7": {
-					"electrified": true,
 					"id": "buffer7"
 				},
 				"4,2": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm1",
@@ -3575,7 +3052,6 @@
 					"trackID": "EZ_Iz2"
 				},
 				"4,3": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm2",
@@ -3583,42 +3059,34 @@
 					"trackID": "EZ_Iz2"
 				},
 				"4,4": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"4,5": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Tp1-EZ1@LK254"
 				},
 				"5,2": {
-					"electrified": true,
 					"id": "curve7",
 					"trackID": "EZ_Iz2"
 				},
 				"5,3": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "EZ_Iz2"
 				},
 				"5,4": {
-					"electrified": true,
 					"id": "track-"
 				},
 				"5,5": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Tp1-EZ1@LK254"
 				},
 				"6,3": {
-					"electrified": true,
 					"id": "switchL4",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_2",
 					"trackID": "EZ_Iz2"
 				},
 				"6,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm3",
@@ -3626,19 +3094,16 @@
 					"trackID": "EZ_Iz3"
 				},
 				"6,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Tp1-EZ1@LK254"
 				},
 				"7,4": {
-					"electrified": true,
 					"id": "switchD3",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_3",
 					"trackID": "EZ_Iz3"
 				},
 				"7,5": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -3646,7 +3111,6 @@
 					"trackID": "EZ_ItA"
 				},
 				"8,4": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "EZ_Tm5",
@@ -3654,20 +3118,17 @@
 					"trackID": "EZ_Iz3"
 				},
 				"8,5": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "EZ_4",
 					"trackID": "EZ_Iz4"
 				},
 				"9,4": {
-					"electrified": true,
 					"id": "platformP",
 					"shuntTarget": true,
 					"trackID": "EZ_It30"
 				},
 				"9,5": {
-					"electrified": true,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "EZ_It1a"
@@ -3691,17 +3152,14 @@
 					"trackID": "Bc_It4b"
 				},
 				"10,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_It2"
 				},
 				"10,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_It1"
 				},
 				"10,6": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_C",
@@ -3719,17 +3177,14 @@
 					"trackID": "Bc_It4b"
 				},
 				"11,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Bc_It2"
 				},
 				"11,5": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Bc_It1"
 				},
 				"11,6": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Bc_It3"
 				},
@@ -3744,19 +3199,16 @@
 					"trackID": "Bc_It4b"
 				},
 				"12,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Bc_It2",
 					"trainTarget": true
 				},
 				"12,5": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Bc_It1",
 					"trainTarget": true
 				},
 				"12,6": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Bc_It3",
 					"trainTarget": true
@@ -3772,17 +3224,14 @@
 					"trackID": "Bc_It4b"
 				},
 				"13,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Bc_It2"
 				},
 				"13,5": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Bc_It1"
 				},
 				"13,6": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Bc_It3"
 				},
@@ -3794,17 +3243,14 @@
 					"trackID": "Bc_Iz20"
 				},
 				"14,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_It2"
 				},
 				"14,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_It1"
 				},
 				"14,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_It3"
 				},
@@ -3814,17 +3260,14 @@
 					"trackID": "Bc_It4c"
 				},
 				"15,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_It2"
 				},
 				"15,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_It1"
 				},
 				"15,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_It3"
 				},
@@ -3837,7 +3280,6 @@
 					"trackID": "Bc_Iz23"
 				},
 				"16,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_L",
@@ -3845,12 +3287,10 @@
 					"trackID": "Bc_Iz23"
 				},
 				"16,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_It1"
 				},
 				"16,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_It3"
 				},
@@ -3860,12 +3300,10 @@
 					"trackID": "Bc_Iz23"
 				},
 				"17,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_Iz23"
 				},
 				"17,5": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_M",
@@ -3873,12 +3311,10 @@
 					"trackID": "Bc_Iz24"
 				},
 				"17,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_It3"
 				},
 				"18,4": {
-					"electrified": true,
 					"id": "switchD3",
 					"maxSpeedPlus": 40,
 					"switchFlipABCD": true,
@@ -3886,12 +3322,10 @@
 					"trackID": "Bc_Iz23"
 				},
 				"18,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_Iz24"
 				},
 				"18,6": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_N",
@@ -3904,19 +3338,16 @@
 					"trackID": "Bc_It2a"
 				},
 				"19,5": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Bc_24",
 					"trackID": "Bc_Iz24"
 				},
 				"19,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_Iz28"
 				},
 				"2,4": {
-					"electrified": true,
 					"id": "arrow7",
 					"itineraryEndID": "Eb",
 					"trackID": "Eb102-Bc2@LK204.2",
@@ -3924,7 +3355,6 @@
 					"warp": "Eb"
 				},
 				"2,5": {
-					"electrified": true,
 					"id": "arrow3",
 					"itineraryEndID": "Eb_N",
 					"targetW24": true,
@@ -3938,41 +3368,34 @@
 					"trackID": "Bc_It2a"
 				},
 				"20,5": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Bc_27",
 					"trackID": "Bc_Iz27"
 				},
 				"20,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_Iz28"
 				},
 				"21,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_ItP"
 				},
 				"21,6": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Bc_28",
 					"trackID": "Bc_Iz28"
 				},
 				"22,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_ItP"
 				},
 				"22,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_ItO"
 				},
 				"23,5": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -3981,7 +3404,6 @@
 					"trackID": "Bc_ItP"
 				},
 				"23,6": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -3990,46 +3412,38 @@
 					"trackID": "Bc_ItO"
 				},
 				"24,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc1-Mn1@LK204"
 				},
 				"24,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Ps1-Bc3@LK220"
 				},
 				"25,5": {
-					"electrified": true,
 					"id": "arrow-",
 					"trackID": "Bc1-Mn1@LK204",
 					"trainTarget": true
 				},
 				"25,6": {
-					"electrified": true,
 					"id": "arrow-",
 					"trackID": "Ps1-Bc3@LK220",
 					"trainTarget": true
 				},
 				"3,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb102-Bc2@LK204.2"
 				},
 				"3,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Eb101-Bc1@LK204.1"
 				},
 				"4,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreID": "Bc_Szn2",
 					"trackID": "Bc_ItSzn2"
 				},
 				"4,5": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -4037,12 +3451,10 @@
 					"trackID": "Bc_ItB"
 				},
 				"5,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_ItSzn2"
 				},
 				"5,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_ItB"
 				},
@@ -4056,14 +3468,12 @@
 					"trackID": "Bc_It4a"
 				},
 				"6,4": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Bc_2",
 					"trackID": "Bc_Iz2"
 				},
 				"6,5": {
-					"electrified": true,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "Bc_1",
@@ -4079,14 +3489,12 @@
 					"trackID": "Bc_It4a"
 				},
 				"7,4": {
-					"electrified": true,
 					"id": "switchD2",
 					"maxSpeedPlus": 40,
 					"switchID": "Bc_4",
 					"trackID": "Bc_Iz4"
 				},
 				"7,5": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Bc_3",
@@ -4110,12 +3518,10 @@
 					"trackID": "Bc_Iz5"
 				},
 				"8,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Bc_Iz4"
 				},
 				"8,5": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Bc_9",
@@ -4142,7 +3548,6 @@
 					"trackID": "Bc_Iz5"
 				},
 				"9,4": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_E",
@@ -4150,7 +3555,6 @@
 					"trackID": "Bc_Iz4"
 				},
 				"9,5": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Bc_D",
@@ -4158,7 +3562,6 @@
 					"trackID": "Bc_Iz9"
 				},
 				"9,6": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Bc_10",
@@ -4173,149 +3576,123 @@
 			"shortcut": "NS",
 			"tiles": {
 				"10,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_1"
 				},
 				"10,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_0"
 				},
 				"11,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_1"
 				},
 				"11,4": {
-					"electrified": true,
 					"id": "platformP",
 					"shuntTarget": true,
 					"trackID": "torp_0"
 				},
 				"12,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_1"
 				},
 				"12,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_0"
 				},
 				"13,3": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "torl_1"
 				},
 				"13,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreID": "sem_a1",
 					"trackID": "torp_1"
 				},
 				"14,3": {
-					"electrified": true,
 					"id": "arrow7",
 					"trackID": "torl_1",
 					"warp": "K-NS"
 				},
 				"14,4": {
-					"electrified": true,
 					"id": "arrow3",
 					"trackID": "torp_1",
 					"trainTarget": true,
 					"warp": "K-NS"
 				},
 				"2,3": {
-					"electrified": true,
 					"id": "buffer3",
 					"trackID": "ns_l"
 				},
 				"2,4": {
-					"electrified": true,
 					"id": "buffer3",
 					"trackID": "ns_p"
 				},
 				"3,3": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "ns_l"
 				},
 				"3,4": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "ns_p"
 				},
 				"4,3": {
-					"electrified": true,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "ns_l"
 				},
 				"4,4": {
-					"electrified": true,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "ns_p"
 				},
 				"5,3": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "ns_l"
 				},
 				"5,4": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "ns_p"
 				},
 				"6,3": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "tm2",
 					"trackID": "ns_roz"
 				},
 				"6,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "tm1",
 					"trackID": "ns_roz"
 				},
 				"7,3": {
-					"electrified": true,
 					"id": "switchR7",
 					"switchID": "kom1k_zwr3",
 					"trackID": "ns_roz"
 				},
 				"7,4": {
-					"electrified": true,
 					"id": "switchL7",
 					"switchID": "kom1k_zwr4",
 					"trackID": "ns_roz"
 				},
 				"8,3": {
-					"electrified": true,
 					"id": "switchL3",
 					"switchID": "kom1k_zwr2",
 					"trackID": "ns_roz"
 				},
 				"8,4": {
-					"electrified": true,
 					"id": "switchR3",
 					"switchID": "kom1k_zwr1",
 					"trackID": "ns_roz"
 				},
 				"9,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "sem_b1",
 					"trackID": "ns_roz"
 				},
 				"9,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "ns_roz"
 				}
@@ -4328,213 +3705,175 @@
 			"shortcut": "K-NS",
 			"tiles": {
 				"10,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_5"
 				},
 				"10,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_4"
 				},
 				"11,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreID": "sem_b6",
 					"trackID": "torl_5"
 				},
 				"11,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreID": "sem_a5",
 					"trackID": "torp_5"
 				},
 				"12,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_6"
 				},
 				"12,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_5"
 				},
 				"13,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreID": "sem_b7",
 					"trackID": "torl_6"
 				},
 				"13,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreID": "sem_a6",
 					"trackID": "torp_6"
 				},
 				"14,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_7"
 				},
 				"14,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_6"
 				},
 				"15,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreID": "sem_b8",
 					"trackID": "torl_7"
 				},
 				"15,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreID": "sem_a7",
 					"trackID": "torp_7"
 				},
 				"16,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_8"
 				},
 				"16,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_7"
 				},
 				"17,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreID": "sem_b9",
 					"trackID": "torl_8"
 				},
 				"17,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreID": "sem_a8",
 					"trackID": "torp_8"
 				},
 				"18,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_9"
 				},
 				"18,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_8"
 				},
 				"19,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreID": "sem_b10",
 					"trackID": "torl_9"
 				},
 				"19,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreID": "sem_a9",
 					"trackID": "torp_9"
 				},
 				"2,3": {
-					"electrified": true,
 					"id": "arrow7",
 					"trackID": "torl_1",
 					"warp": "NS"
 				},
 				"2,4": {
-					"electrified": true,
 					"id": "arrow3",
 					"trackID": "torp_0",
 					"warp": "NS"
 				},
 				"20,3": {
-					"electrified": true,
 					"id": "arrow7",
 					"trackID": "torl_10",
 					"warp": "K"
 				},
 				"20,4": {
-					"electrified": true,
 					"id": "arrow3",
 					"trackID": "torp_9",
 					"warp": "K"
 				},
 				"3,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreID": "sem_b2",
 					"trackID": "torl_1"
 				},
 				"3,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreID": "sem_a1",
 					"trackID": "torp_1"
 				},
 				"4,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_2"
 				},
 				"4,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_1"
 				},
 				"5,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreID": "sem_b3",
 					"trackID": "torl_2"
 				},
 				"5,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreID": "sem_a2",
 					"trackID": "torp_2"
 				},
 				"6,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_3"
 				},
 				"6,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_2"
 				},
 				"7,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreID": "sem_b4",
 					"trackID": "torl_3"
 				},
 				"7,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreID": "sem_a3",
 					"trackID": "torp_3"
 				},
 				"8,3": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torl_4"
 				},
 				"8,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "torp_3"
 				},
 				"9,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreID": "sem_b5",
 					"trackID": "torl_4"
 				},
 				"9,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreID": "sem_a4",
 					"trackID": "torp_4"
@@ -4543,202 +3882,196 @@
 			"w": 21
 		},
 		{
-			"h": 6,
+			"h": 8,
 			"name": "Mińsk Maz-Mienia",
 			"shortcut": "MMz-Mia",
 			"tiles": {
-				"10,3": {
-					"electrified": true,
+				"10,2": {
+					"command": "b MMz-Mia 1 p",
+					"id": "square"
+				},
+				"10,4": {
 					"id": "track-",
 					"trackID": "4442-4602@LK2.2"
 				},
-				"10,4": {
-					"electrified": true,
+				"10,5": {
 					"id": "track-",
 					"trackID": "4451-4611@LK2.1"
 				},
-				"11,3": {
-					"electrified": true,
+				"10,7": {
+					"command": "b MMz-Mrz 1 n",
+					"id": "square"
+				},
+				"11,2": {
+					"command": "b MMz-Mia 1 n",
+					"id": "square"
+				},
+				"11,4": {
 					"id": "semaphore7",
 					"semaphoreID": "460",
 					"trackID": "4442-4602@LK2.2"
 				},
-				"11,4": {
-					"electrified": true,
+				"11,5": {
 					"id": "semaphore7",
 					"semaphoreID": "461N",
 					"trackID": "4451-4611@LK2.1"
 				},
-				"12,3": {
-					"electrified": true,
+				"11,7": {
+					"command": "b MMz-Mrz 1 p",
+					"id": "square"
+				},
+				"12,2": {
+					"id": "letterN"
+				},
+				"12,4": {
 					"id": "semaphore3",
 					"semaphoreID": "460N",
 					"trackID": "4602-4802@LK2.2"
 				},
-				"12,4": {
-					"electrified": true,
+				"12,5": {
 					"id": "semaphore3",
 					"semaphoreID": "461",
 					"trackID": "4611-4811@LK2.1"
 				},
-				"13,3": {
-					"electrified": true,
+				"12,7": {
+					"id": "letterP"
+				},
+				"13,4": {
 					"id": "track-",
 					"trackID": "4602-4802@LK2.2"
 				},
-				"13,4": {
-					"electrified": true,
+				"13,5": {
 					"id": "track-",
 					"trackID": "4611-4811@LK2.1"
 				},
-				"14,3": {
-					"electrified": true,
+				"14,4": {
 					"id": "semaphore7",
 					"semaphoreID": "480",
 					"trackID": "4602-4802@LK2.2"
 				},
-				"14,4": {
-					"electrified": true,
+				"14,5": {
 					"id": "semaphore7",
 					"semaphoreID": "481N",
 					"trackID": "4611-4811@LK2.1"
 				},
-				"15,3": {
-					"electrified": true,
+				"15,4": {
 					"id": "semaphore3",
 					"semaphoreID": "480N",
 					"trackID": "4802-Y2@LK2.2"
 				},
-				"15,4": {
-					"electrified": true,
+				"15,5": {
 					"id": "semaphore3",
 					"semaphoreID": "481",
 					"trackID": "4811-4931@LK2.1"
 				},
-				"16,3": {
-					"electrified": true,
+				"16,4": {
 					"id": "track-",
 					"trackID": "4802-Y2@LK2.2"
 				},
-				"16,4": {
-					"electrified": true,
+				"16,5": {
 					"id": "track-",
 					"trackID": "4811-4931@LK2.1"
 				},
-				"17,3": {
-					"electrified": true,
+				"17,4": {
 					"id": "semaphore3",
 					"semaphoreID": "Mia_Y",
 					"trackID": "Mia_ItY"
 				},
-				"17,4": {
-					"electrified": true,
+				"17,5": {
 					"id": "track-",
 					"trackID": "4811-4931@LK2.1"
 				},
-				"18,3": {
-					"electrified": true,
+				"18,4": {
 					"id": "arrow7",
 					"trackID": "Mia_ItY",
 					"warp": "Mia"
 				},
-				"18,4": {
-					"electrified": true,
+				"18,5": {
 					"id": "arrow3",
 					"trackID": "4811-4931@LK2.1",
 					"warp": "Mia"
 				},
-				"2,3": {
-					"electrified": true,
+				"2,4": {
 					"id": "arrow7",
 					"trackID": "MMz_ItZ",
 					"warp": "MMz"
 				},
-				"2,4": {
-					"electrified": true,
+				"2,5": {
 					"id": "arrow3",
 					"trackID": "MMz_ItY",
 					"warp": "MMz"
 				},
-				"3,3": {
-					"electrified": true,
+				"3,4": {
 					"id": "semaphore7",
 					"semaphoreID": "MMz_Z",
 					"trackID": "MMz_ItZ"
 				},
-				"3,4": {
-					"electrified": true,
+				"3,5": {
 					"id": "semaphore7",
 					"semaphoreID": "MMz_Y",
 					"trackID": "MMz_ItY"
 				},
-				"4,3": {
-					"electrified": true,
+				"4,4": {
 					"id": "track-",
 					"trackID": "Z2-4302@LK2.2"
 				},
-				"4,4": {
-					"electrified": true,
+				"4,5": {
 					"id": "track-",
 					"trackID": "Y1-4311@LK2.1"
 				},
-				"5,3": {
-					"electrified": true,
+				"5,4": {
 					"id": "semaphore7",
 					"semaphoreID": "430",
 					"trackID": "Z2-4302@LK2.2"
 				},
-				"5,4": {
-					"electrified": true,
+				"5,5": {
 					"id": "semaphore7",
 					"semaphoreID": "431N",
 					"trackID": "Y1-4311@LK2.1"
 				},
-				"6,3": {
-					"electrified": true,
+				"6,4": {
 					"id": "semaphore3",
 					"semaphoreID": "430N",
 					"trackID": "4302-4442@LK2.2"
 				},
-				"6,4": {
-					"electrified": true,
+				"6,5": {
 					"id": "semaphore3",
 					"semaphoreID": "431",
 					"trackID": "4311-4451@LK2.1"
 				},
-				"7,3": {
-					"electrified": true,
+				"7,4": {
 					"id": "track-",
 					"trackID": "4302-4442@LK2.2"
 				},
-				"7,4": {
-					"electrified": true,
+				"7,5": {
 					"id": "track-",
 					"trackID": "4311-4451@LK2.1"
 				},
-				"8,3": {
-					"electrified": true,
+				"8,4": {
 					"id": "semaphore7",
 					"semaphoreID": "444",
 					"trackID": "4302-4442@LK2.2"
 				},
-				"8,4": {
-					"electrified": true,
+				"8,5": {
 					"id": "semaphore7",
 					"semaphoreID": "445N",
 					"trackID": "4311-4451@LK2.1"
 				},
-				"9,3": {
-					"electrified": true,
+				"9,2": {
+					"id": "letterP"
+				},
+				"9,4": {
 					"id": "semaphore3",
 					"semaphoreID": "444N",
 					"trackID": "4442-4602@LK2.2"
 				},
-				"9,4": {
-					"electrified": true,
+				"9,5": {
 					"id": "semaphore3",
 					"semaphoreID": "445",
 					"trackID": "4451-4611@LK2.1"
+				},
+				"9,7": {
+					"id": "letterN"
 				}
 			},
 			"w": 19
@@ -4749,12 +4082,10 @@
 			"shortcut": "MMz",
 			"tiles": {
 				"22,5": {
-					"electrified": true,
 					"id": "arrow7",
 					"warp": "MMz-Mia"
 				},
 				"22,6": {
-					"electrified": true,
 					"id": "arrow3",
 					"warp": "MMz-Mia"
 				}
@@ -4767,43 +4098,36 @@
 			"shortcut": "Mrz",
 			"tiles": {
 				"10,4": {
-					"electrified": true,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_6",
 					"trackID": "Mrz_Iz6"
 				},
 				"10,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz4"
 				},
 				"10,6": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_7",
 					"trackID": "Mrz_Iz7"
 				},
 				"10,7": {
-					"electrified": true,
 					"id": "buffer3",
 					"trackID": "Mrz_It3a"
 				},
 				"11,3": {
-					"electrified": true,
 					"id": "switchR6",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_9",
 					"trackID": "Mrz_Iz9"
 				},
 				"11,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz6"
 				},
 				"11,5": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -4811,14 +4135,12 @@
 					"trackID": "Mrz_Iz4"
 				},
 				"11,6": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_8",
 					"trackID": "Mrz_Iz8"
 				},
 				"11,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It3a"
 				},
@@ -4828,12 +4150,10 @@
 					"trackID": "Mrz_Iz9"
 				},
 				"12,3": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz9"
 				},
 				"12,4": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -4842,17 +4162,14 @@
 					"trackID": "Mrz_Iz6"
 				},
 				"12,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It2"
 				},
 				"12,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz8"
 				},
 				"12,7": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_10",
@@ -4864,7 +4181,6 @@
 					"trackID": "Mrz_Iz9"
 				},
 				"13,3": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -4873,17 +4189,14 @@
 					"trackID": "Mrz_Iz9"
 				},
 				"13,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It6"
 				},
 				"13,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It2"
 				},
 				"13,6": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -4891,7 +4204,6 @@
 					"trackID": "Mrz_Iz8"
 				},
 				"13,7": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -4907,27 +4219,22 @@
 					"trackID": "Mrz_Iz9"
 				},
 				"14,3": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It8"
 				},
 				"14,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It6"
 				},
 				"14,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It2"
 				},
 				"14,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It1"
 				},
 				"14,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It3"
 				},
@@ -4937,27 +4244,22 @@
 					"trackID": "Mrz_It10"
 				},
 				"15,3": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It8"
 				},
 				"15,4": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It6"
 				},
 				"15,5": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It2"
 				},
 				"15,6": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It1"
 				},
 				"15,7": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It3"
 				},
@@ -4969,33 +4271,28 @@
 					"trackID": "Mrz_It10"
 				},
 				"16,3": {
-					"electrified": true,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "Mrz_It8",
 					"trainTarget": true
 				},
 				"16,4": {
-					"electrified": true,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "Mrz_It6",
 					"trainTarget": true
 				},
 				"16,5": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It2",
 					"trainTarget": true
 				},
 				"16,6": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It1",
 					"trainTarget": true
 				},
 				"16,7": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It3",
 					"trainTarget": true
@@ -5006,27 +4303,22 @@
 					"trackID": "Mrz_It10"
 				},
 				"17,3": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It8"
 				},
 				"17,4": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It6"
 				},
 				"17,5": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It2"
 				},
 				"17,6": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It1"
 				},
 				"17,7": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It3"
 				},
@@ -5039,12 +4331,10 @@
 					"trackID": "Mrz_Iz22"
 				},
 				"18,3": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It8"
 				},
 				"18,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -5054,7 +4344,6 @@
 					"trackID": "Mrz_Iz23"
 				},
 				"18,5": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -5063,12 +4352,10 @@
 					"trackID": "Mrz_Iz21"
 				},
 				"18,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It1"
 				},
 				"18,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It3"
 				},
@@ -5078,7 +4365,6 @@
 					"trackID": "Mrz_Iz22"
 				},
 				"19,3": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -5088,27 +4374,22 @@
 					"trackID": "Mrz_Iz22"
 				},
 				"19,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz23"
 				},
 				"19,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz21"
 				},
 				"19,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It1"
 				},
 				"19,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It3"
 				},
 				"2,5": {
-					"electrified": true,
 					"id": "arrow7",
 					"semaphoreID": "558",
 					"trackID": "5582-A2@LK2.2",
@@ -5116,7 +4397,6 @@
 					"warp": "Mia-Mrz"
 				},
 				"2,6": {
-					"electrified": true,
 					"id": "arrow3",
 					"semaphoreID": "557N",
 					"targetW24": true,
@@ -5130,85 +4410,74 @@
 					"trackID": "Mrz_Iz22"
 				},
 				"20,3": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz22"
 				},
 				"20,4": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz23"
 				},
 				"20,5": {
-					"electrified": true,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_21",
 					"trackID": "Mrz_Iz21"
 				},
 				"20,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It1"
 				},
 				"20,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It3"
 				},
 				"21,3": {
-					"electrified": true,
 					"id": "switchL4",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_22",
 					"trackID": "Mrz_Iz22"
 				},
 				"21,4": {
-					"electrified": true,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_23",
 					"trackID": "Mrz_Iz23"
 				},
 				"21,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It2a"
 				},
 				"21,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It1"
 				},
 				"21,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It3"
 				},
 				"22,4": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_24",
 					"trackID": "Mrz_Iz24"
 				},
 				"22,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It2a"
 				},
 				"22,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It1"
 				},
 				"22,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It3"
 				},
+				"23,2": {
+					"electrified": false,
+					"id": "letterM"
+				},
 				"23,4": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -5218,87 +4487,87 @@
 					"trackID": "Mrz_Iz24"
 				},
 				"23,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It2a"
 				},
 				"23,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It1"
 				},
 				"23,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_It3"
 				},
+				"24,2": {
+					"electrified": false,
+					"id": "letterR"
+				},
 				"24,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Mrz_It4"
 				},
 				"24,5": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It2a"
 				},
 				"24,6": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Mrz_It1"
 				},
 				"24,7": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Mrz_It3"
 				},
+				"25,2": {
+					"electrified": false,
+					"id": "letterO"
+				},
 				"25,4": {
-					"electrified": true,
 					"id": "platformP",
 					"shuntTarget": true,
 					"trackID": "Mrz_It4",
 					"trainTarget": true
 				},
 				"25,5": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It2a",
 					"trainTarget": true
 				},
 				"25,6": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Mrz_It1",
 					"trainTarget": true
 				},
 				"25,7": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Mrz_It3",
 					"trainTarget": true
 				},
+				"26,2": {
+					"electrified": false,
+					"id": "letterZ"
+				},
 				"26,4": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Mrz_It4"
 				},
 				"26,5": {
-					"electrified": true,
 					"id": "platformF",
 					"trackID": "Mrz_It2a"
 				},
 				"26,6": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Mrz_It1"
 				},
 				"26,7": {
-					"electrified": true,
 					"id": "platformP",
 					"trackID": "Mrz_It3"
 				},
+				"27,2": {
+					"electrified": false,
+					"id": "letterY"
+				},
 				"27,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -5306,7 +4575,6 @@
 					"trackID": "Mrz_Iz26"
 				},
 				"27,5": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -5314,7 +4582,6 @@
 					"trackID": "Mrz_Iz27"
 				},
 				"27,6": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -5322,7 +4589,6 @@
 					"trackID": "Mrz_Iz29"
 				},
 				"27,7": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -5330,138 +4596,114 @@
 					"trackID": "Mrz_Iz25"
 				},
 				"28,4": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_26",
 					"trackID": "Mrz_Iz26"
 				},
 				"28,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz27"
 				},
 				"28,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz29"
 				},
 				"28,7": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz25"
 				},
 				"29,4": {
-					"electrified": true,
 					"id": "buffer7",
 					"trackID": "Mrz_It4a"
 				},
 				"29,5": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_27",
 					"trackID": "Mrz_Iz27"
 				},
 				"29,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz29"
 				},
 				"29,7": {
-					"electrified": true,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_25",
 					"trackID": "Mrz_Iz25"
 				},
 				"3,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "5582-A2@LK2.2"
 				},
 				"3,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "5571-B1@LK2.1"
 				},
 				"30,5": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_28",
 					"trackID": "Mrz_Iz28"
 				},
 				"30,6": {
-					"electrified": true,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_29",
 					"trackID": "Mrz_Iz29"
 				},
 				"30,7": {
-					"electrified": true,
 					"id": "buffer7",
 					"trackID": "Mrz_It3b"
 				},
 				"31,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz28"
 				},
 				"31,6": {
-					"electrified": true,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_30",
 					"trackID": "Mrz_Iz30"
 				},
 				"32,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz28"
 				},
 				"32,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz30"
 				},
 				"33,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz32"
 				},
 				"33,6": {
-					"electrified": true,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_31",
 					"trackID": "Mrz_Iz31"
 				},
 				"34,5": {
-					"electrified": true,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_32",
 					"trackID": "Mrz_Iz32"
 				},
 				"34,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_ItU"
 				},
 				"35,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_ItW"
 				},
 				"35,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_ItU"
 				},
 				"36,5": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -5470,7 +4712,6 @@
 					"trackID": "Mrz_ItW"
 				},
 				"36,6": {
-					"electrified": true,
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -5479,30 +4720,25 @@
 					"trackID": "Mrz_ItU"
 				},
 				"37,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "W2-6122@LK2.2"
 				},
 				"37,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "U1-6111@LK2.1"
 				},
 				"38,5": {
-					"electrified": true,
 					"id": "arrow7",
 					"targetW24": true,
 					"trackID": "W2-6122@LK2.2",
 					"trainTarget": true
 				},
 				"38,6": {
-					"electrified": true,
 					"id": "arrow3",
 					"trackID": "U1-6111@LK2.1",
 					"trainTarget": true
 				},
 				"4,5": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -5511,7 +4747,6 @@
 					"trackID": "Mrz_ItA"
 				},
 				"4,6": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -5520,52 +4755,43 @@
 					"trackID": "Mrz_ItB"
 				},
 				"5,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_ItA"
 				},
 				"5,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_ItB"
 				},
 				"6,4": {
-					"electrified": true,
 					"id": "buffer3",
 					"trackID": "Mrz_It12"
 				},
 				"6,5": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_ItA"
 				},
 				"6,6": {
-					"electrified": true,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_1",
 					"trackID": "Mrz_Iz1"
 				},
 				"7,4": {
-					"electrified": true,
 					"id": "platformP",
 					"shuntTarget": true,
 					"trackID": "Mrz_It12"
 				},
 				"7,5": {
-					"electrified": true,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_2",
 					"trackID": "Mrz_Iz2"
 				},
 				"7,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz1"
 				},
 				"8,4": {
-					"electrified": true,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Mrz_Tm1",
@@ -5573,33 +4799,28 @@
 					"trackID": "Mrz_Iz5"
 				},
 				"8,5": {
-					"electrified": true,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_3",
 					"trackID": "Mrz_Iz3"
 				},
 				"8,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz7"
 				},
 				"9,4": {
-					"electrified": true,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_5",
 					"trackID": "Mrz_Iz5"
 				},
 				"9,5": {
-					"electrified": true,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Mrz_4",
 					"trackID": "Mrz_Iz4"
 				},
 				"9,6": {
-					"electrified": true,
 					"id": "track-",
 					"trackID": "Mrz_Iz7"
 				}
@@ -5607,12 +4828,11 @@
 			"w": 39
 		},
 		{
-			"h": 6,
+			"h": 8,
 			"name": "Mienia",
 			"shortcut": "Mia",
 			"tiles": {
-				"10,3": {
-					"electrified": true,
+				"10,4": {
 					"id": "arrow7",
 					"semaphoreID": "522",
 					"targetW24": true,
@@ -5620,135 +4840,113 @@
 					"trainTarget": true,
 					"warp": "Mia-Mrz"
 				},
-				"10,4": {
-					"electrified": true,
+				"10,5": {
 					"id": "arrow3",
 					"trackID": "5071-5231@LK2.1",
 					"warp": "Mia-Mrz"
 				},
-				"2,2": {
-					"electrified": true,
+				"2,3": {
 					"id": "arrow-",
 					"trainTarget": true
 				},
-				"2,3": {
-					"electrified": true,
+				"2,4": {
 					"id": "arrow7",
 					"semaphoreID": "480",
 					"trackID": "4802-Y2@LK2.2",
 					"trainTarget": true,
 					"warp": "MMz-Mia"
 				},
-				"2,4": {
-					"electrified": true,
+				"2,5": {
 					"id": "arrow3",
 					"trackID": "4811-4931@LK2.1",
 					"warp": "MMz-Mia"
 				},
-				"3,2": {
-					"electrified": true,
+				"3,3": {
 					"id": "track-"
 				},
-				"3,3": {
-					"electrified": true,
+				"3,4": {
 					"id": "track-",
 					"trackID": "4802-Y2@LK2.2"
 				},
-				"3,4": {
-					"electrified": true,
+				"3,5": {
 					"id": "track-",
 					"trackID": "4811-4931@LK2.1"
 				},
-				"4,2": {
-					"electrified": true,
+				"4,3": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Mia_X",
 					"trackID": "Mia_ItX"
 				},
-				"4,3": {
-					"electrified": true,
+				"4,4": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Mia_Y",
 					"trackID": "Mia_ItY"
 				},
-				"4,4": {
-					"electrified": true,
+				"4,5": {
 					"id": "semaphore7",
 					"semaphoreID": "493N",
 					"trackID": "4811-4931@LK2.1"
 				},
-				"5,2": {
-					"electrified": true,
+				"5,3": {
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
 					"switchID": "Mia_41",
 					"trackID": "Mia_Iz41"
 				},
-				"5,3": {
-					"electrified": true,
+				"5,4": {
 					"id": "track-",
 					"trackID": "Mia_ItY"
 				},
-				"5,4": {
-					"electrified": true,
+				"5,5": {
 					"id": "semaphore3",
 					"semaphoreID": "493",
 					"trackID": "4931-5071@LK2.1"
 				},
-				"6,2": {
-					"electrified": true,
+				"6,3": {
 					"id": "buffer7",
 					"trackID": "Mia_Iz41"
 				},
-				"6,3": {
-					"electrified": true,
+				"6,4": {
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Mia_42",
 					"trackID": "Mia_Iz42"
 				},
-				"6,4": {
-					"electrified": true,
+				"6,5": {
 					"id": "track-",
 					"trackID": "4931-5071@LK2.1"
 				},
-				"7,3": {
-					"electrified": true,
+				"7,4": {
 					"id": "track-",
 					"trackID": "Mia_ItZ"
 				},
-				"7,4": {
-					"electrified": true,
+				"7,5": {
 					"id": "semaphore7",
 					"semaphoreID": "507N",
 					"trackID": "4931-5071@LK2.1"
 				},
-				"8,3": {
-					"electrified": true,
+				"8,4": {
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Mia_Z",
 					"trackID": "Mia_ItZ"
 				},
-				"8,4": {
-					"electrified": true,
+				"8,5": {
 					"id": "semaphore3",
 					"semaphoreID": "507",
 					"trackID": "5071-5231@LK2.1"
 				},
-				"9,3": {
-					"electrified": true,
+				"9,4": {
 					"id": "track-",
 					"trackID": "Z2-5222@LK2.2"
 				},
-				"9,4": {
-					"electrified": true,
+				"9,5": {
 					"id": "track-",
 					"trackID": "5071-5231@LK2.1"
 				}
@@ -5756,168 +4954,168 @@
 			"w": 11
 		},
 		{
-			"h": 6,
+			"h": 8,
 			"name": "Mienia-Mrozy",
 			"shortcut": "Mia-Mrz",
 			"tiles": {
-				"10,3": {
-					"electrified": true,
+				"10,2": {
+					"id": "letterN"
+				},
+				"10,4": {
 					"id": "track-",
 					"trackID": "5422-5582@LK2.2"
 				},
-				"10,4": {
-					"electrified": true,
+				"10,5": {
 					"id": "track-",
 					"trackID": "5431-5571@LK2.1"
 				},
-				"11,3": {
-					"electrified": true,
+				"10,7": {
+					"id": "letterP"
+				},
+				"11,4": {
 					"id": "semaphore7",
 					"semaphoreID": "558",
 					"trackID": "5422-5582@LK2.2"
 				},
-				"11,4": {
-					"electrified": true,
+				"11,5": {
 					"id": "semaphore7",
 					"semaphoreID": "557N",
 					"trackID": "5431-5571@LK2.1"
 				},
-				"12,3": {
-					"electrified": true,
+				"12,4": {
 					"id": "semaphore3",
 					"semaphoreID": "558N",
 					"trackID": "5582-A2@LK2.2"
 				},
-				"12,4": {
-					"electrified": true,
+				"12,5": {
 					"id": "semaphore3",
 					"semaphoreID": "557",
 					"trackID": "5571-B1@LK2.1"
 				},
-				"13,3": {
-					"electrified": true,
+				"13,4": {
 					"id": "track-",
 					"trackID": "5582-A2@LK2.2"
 				},
-				"13,4": {
-					"electrified": true,
+				"13,5": {
 					"id": "track-",
 					"trackID": "5571-B1@LK2.1"
 				},
-				"14,3": {
-					"electrified": true,
+				"14,4": {
 					"id": "semaphore3",
 					"semaphoreID": "Mrz_A",
 					"trackID": "Mrz_ItA"
 				},
-				"14,4": {
-					"electrified": true,
+				"14,5": {
 					"id": "semaphore3",
 					"semaphoreID": "Mrz_B",
 					"trackID": "Mrz_ItB"
 				},
-				"15,3": {
-					"electrified": true,
+				"15,4": {
 					"id": "arrow7",
 					"trackID": "Mrz_ItA",
 					"warp": "Mrz"
 				},
-				"15,4": {
-					"electrified": true,
+				"15,5": {
 					"id": "arrow3",
 					"trackID": "Mrz_ItB",
 					"warp": "Mrz"
 				},
-				"2,3": {
-					"electrified": true,
+				"2,4": {
 					"id": "arrow7",
 					"trackID": "Mia_ItZ",
 					"warp": "Mia"
 				},
-				"2,4": {
-					"electrified": true,
+				"2,5": {
 					"id": "arrow3",
 					"trackID": "5071-5231@LK2.1",
 					"warp": "Mia"
 				},
-				"3,3": {
-					"electrified": true,
+				"3,4": {
 					"id": "semaphore7",
 					"semaphoreID": "Mia_Z",
 					"trackID": "Mia_ItZ"
 				},
-				"3,4": {
-					"electrified": true,
+				"3,5": {
 					"id": "track-",
 					"trackID": "5071-5231@LK2.1"
 				},
-				"4,3": {
-					"electrified": true,
+				"4,4": {
 					"id": "track-",
 					"trackID": "Z2-5222@LK2.2"
 				},
-				"4,4": {
-					"electrified": true,
+				"4,5": {
 					"id": "track-",
 					"trackID": "5071-5231@LK2.1"
 				},
-				"5,3": {
-					"electrified": true,
+				"5,4": {
 					"id": "semaphore7",
 					"semaphoreID": "522",
 					"trackID": "Z2-5222@LK2.2"
 				},
-				"5,4": {
-					"electrified": true,
+				"5,5": {
 					"id": "semaphore7",
 					"semaphoreID": "523N",
 					"trackID": "5071-5231@LK2.1"
 				},
-				"6,3": {
-					"electrified": true,
+				"6,4": {
 					"id": "semaphore3",
 					"semaphoreID": "522N",
 					"trackID": "5222-5422@LK2.2"
 				},
-				"6,4": {
-					"electrified": true,
+				"6,5": {
 					"id": "semaphore3",
 					"semaphoreID": "523",
 					"trackID": "5231-5431@LK2.1"
 				},
-				"7,3": {
-					"electrified": true,
+				"7,2": {
+					"id": "letterP"
+				},
+				"7,4": {
 					"id": "track-",
 					"trackID": "5222-5422@LK2.2"
 				},
-				"7,4": {
-					"electrified": true,
+				"7,5": {
 					"id": "track-",
 					"trackID": "5231-5431@LK2.1"
 				},
-				"8,3": {
-					"electrified": true,
+				"7,7": {
+					"id": "letterN"
+				},
+				"8,2": {
+					"command": "b Mia-Mrz 1 p",
+					"id": "square"
+				},
+				"8,4": {
 					"id": "semaphore7",
 					"semaphoreID": "542",
 					"trackID": "5222-5422@LK2.2"
 				},
-				"8,4": {
-					"electrified": true,
+				"8,5": {
 					"id": "semaphore7",
 					"semaphoreID": "543N",
 					"trackID": "5231-5431@LK2.1"
 				},
-				"9,3": {
-					"electrified": true,
+				"8,7": {
+					"command": "b MMz-Mrz 1 n",
+					"id": "square"
+				},
+				"9,2": {
+					"command": "b Mia-Mrz 1 n",
+					"id": "square"
+				},
+				"9,4": {
 					"id": "semaphore3",
 					"semaphoreID": "542N",
 					"trackID": "5422-5582@LK2.2"
 				},
-				"9,4": {
-					"electrified": true,
+				"9,5": {
 					"id": "semaphore3",
 					"semaphoreID": "543",
 					"trackID": "5431-5571@LK2.1"
+				},
+				"9,7": {
+					"command": "b MMz-Mrz 1 p",
+					"id": "square"
 				}
 			},
 			"w": 16

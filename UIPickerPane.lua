@@ -9,7 +9,7 @@ local UIPickerPane = Class:derive("UIPickerPane")
 function UIPickerPane:new(ui)
     self.ui = ui
 
-	self.ui:addPane(nil, "picker", nil, 0, 23, 40, 4)
+	self.ui:addPane(nil, "picker", nil, 0, 23, 40, 6)
 	-- First column
 	self.ui:addCheckbox("picker", "picker_electrified", "Tory zelektryfikowane", 0, 0, 1, 1, self, self.updateElectrified)
 	self.ui.elements.picker_electrified.value = true
@@ -19,12 +19,12 @@ function UIPickerPane:new(ui)
 	self.ui:addInput("picker", "picker_switchID", 5, 2, 5, 1, self, self.updateSwitchID)
 	self.ui:addLabel("picker", nil, "Nazwa sem.", 0, 3, 5, 1)
 	self.ui:addInput("picker", "picker_semaphoreID", 5, 3, 5, 1, self, self.updateSemaphoreID)
+	self.ui:addLabel("picker", nil, "Punkt końc.", 0, 4, 5, 1)
+	self.ui:addInput("picker", "picker_itineraryEndID", 5, 4, 5, 1, self, self.updateItineraryEndID)
+	self.ui:addLabel("picker", nil, "Sąsiednia st.:", 0, 5, 5, 1)
+	self.ui:addInput("picker", "picker_warp", 5, 5, 5, 1, self, self.updateWarp)
 	-- Second column
-	self.ui:addLabel("picker", nil, "Pkt końc izol.", 10, 0, 5, 1)
-	self.ui:addInput("picker", "picker_itineraryEndID", 15, 0, 5, 1, self, self.updateItineraryEndID)
 	self.ui:addCheckbox("picker", "picker_electrified2", "Elektr.", 10, 1, 1, 1, self, self.updateElectrified2)
-	self.ui:addCheckbox("picker", "picker_targetW24", "W24", 15, 1, 1, 1, self, self.updateTargetW24)
-	self.ui.elements.picker_targetW24.tip = "Odnosi się do punktu docelowego.\nJeżeli przebieg kończy się na tym punkcie, to na semaforze wyświetlony zostanie wskaźnik W24."
 	self.ui:addLabel("picker", nil, "Zamień", 10, 2, 4, 1)
 	self.ui:addCheckbox("picker", "picker_switchFlip", "+/-", 13, 2, 1, 1, self, self.updateSwitchFlip)
 	self.ui:addCheckbox("picker", "picker_switchFlipABCD", "ab/cd", 16, 2, 1, 1, self, self.updateSwitchFlipABCD)
@@ -33,10 +33,13 @@ function UIPickerPane:new(ui)
 	self.ui.elements.picker_semaphoreType.tip = "Typ semafora:\n0 = semafor\n1 = tarcza manewrowa"
 	self.ui:addCheckbox("picker", "picker_semaphoreNoW24", "Brak W24", 15, 3, 1, 1, self, self.updateSemaphoreNoW24)
 	self.ui.elements.picker_semaphoreNoW24.tip = "Odnosi się do semafora.\nOznacza, że dany semafor NIE posiada wskaźnika W24.\nTaki semafor nie może podać przebiegu wymagającego wyświetlenia tego wskaźnika."
+	self.ui:addCheckbox("picker", "picker_trainTarget", "poc.", 10, 4, 1, 1, self, self.updateTrainTarget)
+	self.ui:addCheckbox("picker", "picker_shuntTarget", "man.", 13, 4, 1, 1, self, self.updateShuntTarget)
+	self.ui:addCheckbox("picker", "picker_targetW24", "W24", 16, 4, 1, 1, self, self.updateTargetW24)
+	self.ui.elements.picker_targetW24.tip = "Odnosi się do punktu docelowego.\nJeżeli przebieg kończy się na tym punkcie, to na semaforze wyświetlony zostanie wskaźnik W24."
+	self.ui:addLabel("picker", nil, "Komenda:", 10, 5, 4, 1)
+	self.ui:addInput("picker", "picker_command", 14, 5, 6, 1, self, self.updateCommand)
 	-- Third column
-	self.ui:addLabel("picker", nil, "Pkt końc.:", 20, 0, 5, 1)
-	self.ui:addCheckbox("picker", "picker_trainTarget", "poc.", 24, 0, 1, 1, self, self.updateTrainTarget)
-	self.ui:addCheckbox("picker", "picker_shuntTarget", "man.", 27, 0, 1, 1, self, self.updateShuntTarget)
 	self.ui:addLabel("picker", nil, "Zakaz jaz.:", 20, 1, 5, 1)
 	self.ui:addCheckbox("picker", "picker_forbidTrain", "poc.", 24, 1, 1, 1, self, self.updateForbidTrain)
 	self.ui:addCheckbox("picker", "picker_forbidShunt", "man.", 27, 1, 1, 1, self, self.updateForbidShunt)
@@ -46,6 +49,11 @@ function UIPickerPane:new(ui)
 	self.ui:addInput("picker", "picker_speedPlus", 22, 3, 3, 1, self, self.updateMaxSpeedPlus)
 	self.ui:addLabel("picker", nil, "V-", 25, 3, 2, 1)
 	self.ui:addInput("picker", "picker_speedMinus", 27, 3, 3, 1, self, self.updateMaxSpeedMinus)
+	self.ui:addLabel("picker", nil, "Vskr", 20, 4, 2, 1)
+	self.ui:addInput("picker", "picker_semaphoreShortSpeed", 22, 4, 3, 1, self, self.updateSemaphoreShortSpeed)
+	self.ui.elements.picker_semaphoreShortSpeed.tip = "Prędkość dla skróconej drogi hamowania.\nWpisać identyfikator prędkości, nie samą prędkość!\n2 = 40 km/h\n3 = 60 km/h\n4 = 100 km/h"
+	self.ui:addCheckbox("picker", "picker_semaphoreFourPhase", "4-stawny", 25, 4, 1, 1, self, self.updateSemaphoreFourPhase)
+	self.ui.elements.picker_semaphoreFourPhase.tip = "Gdy zaznaczony i za dwa semafory jest S1, to zamiast S2 wyświetlony zostanie S3, zamiast S10 - S11, itp."
 	-- Fourth column
 	self.ui:addLabel("picker", nil, "Możliwość podania:", 30, 0, 10, 1)
 	self.ui:addCheckbox("picker", "picker_semaphoreAllowTrain", "poc.", 31, 1, 1, 1, self, self.updateSemaphoreAllowTrain)
@@ -58,196 +66,186 @@ function UIPickerPane:new(ui)
 	--self.ui.elements.picker_semaphoreShape.tip = "Oznacza semafor jako kształtowy.\nSemafory kształtowe nie mają uzależnienia od następnego semafora i potrafią wyświetlić tylko sygnały Sr1, Sr2 i Sr3.\nW chwili obecnej nie wpływa to na wygląd semafora na schemacie."
 	self.ui:addCheckbox("picker", "picker_semaphoreNoDanger", "Brak pom.g.k.", 34, 2, 1, 1, self, self.updateSemaphoreNoDanger)
 	self.ui.elements.picker_semaphoreNoDanger.tip = "Oznacza semafor jako nieposiadający górnej pomarańczowej komory.\nOznacza to, że pathfinder nie będzie w stanie wyświetlić sygnału zezwalającego na jazdę\njeżeli kolejny semafor nie zezwala na jazdę z prędkością 100km/h lub Vmax."
-	self.ui:addLabel("picker", nil, "Sąsiednia st.:", 30, 3, 5, 1)
-	self.ui:addInput("picker", "picker_warp", 35, 3, 5, 1, self, self.updateWarp)
+end
+
+---Resets all property inputs to their default values.
+function UIPickerPane:resetValues()
+	self.ui.elements.picker_trackID.value = ""
+	self.ui.elements.picker_switchID.value = ""
+	self.ui.elements.picker_switchFlip.value = false
+	self.ui.elements.picker_switchFlipABCD.value = false
+	self.ui.elements.picker_semaphoreType.value = ""
+	self.ui.elements.picker_semaphoreNoW24.value = false
+	self.ui.elements.picker_semaphoreNoDanger.value = false
+	self.ui.elements.picker_semaphoreID.value = ""
+	self.ui.elements.picker_itineraryEndID.value = ""
+	self.ui.elements.picker_electrified2.value = false
+	self.ui.elements.picker_targetW24.value = false
+	self.ui.elements.picker_trainTarget.value = false
+	self.ui.elements.picker_shuntTarget.value = false
+	self.ui.elements.picker_forbidTrain.value = false
+	self.ui.elements.picker_forbidShunt.value = false
+	self.ui.elements.picker_speed.value = ""
+	self.ui.elements.picker_speedPlus.value = ""
+	self.ui.elements.picker_speedMinus.value = ""
+	self.ui.elements.picker_semaphoreAllowTrain.value = false
+	self.ui.elements.picker_semaphoreAllowShunt.value = false
+	self.ui.elements.picker_semaphoreAllowSz.value = false
+	self.ui.elements.picker_semaphoreShape.value = false
+	self.ui.elements.picker_semaphoreShortSpeed.value = ""
+	self.ui.elements.picker_semaphoreFourPhase.value = false
+	self.ui.elements.picker_warp.value = ""
+	self.ui.elements.picker_command.value = ""
+end
+
+---Sets all property inputs to values from the specified tile.
+---@param tile Tile The tile for which to set the input values.
+function UIPickerPane:setValuesForTile(tile)
+	self.ui.elements.picker_trackID.value = tile:getTrackID() or ""
+	self.ui.elements.picker_switchID.value = tile:getSwitchID() or ""
+	self.ui.elements.picker_switchFlip.value = tile:getSwitchFlip()
+	self.ui.elements.picker_switchFlipABCD.value = tile:getSwitchFlipABCD()
+	self.ui.elements.picker_semaphoreType.value = tile:isSemaphore() and tostring(tile:getSemaphoreType()) or ""
+	self.ui.elements.picker_semaphoreNoW24.value = tile:getSemaphoreNoW24()
+	self.ui.elements.picker_semaphoreNoDanger.value = tile:getSemaphoreNoDanger()
+	self.ui.elements.picker_semaphoreID.value = tile:getSemaphoreID() or ""
+	self.ui.elements.picker_itineraryEndID.value = tile:getItineraryEndID() or ""
+	self.ui.elements.picker_electrified2.value = tile:isElectrified()
+	self.ui.elements.picker_targetW24.value = tile:isTargetW24()
+	self.ui.elements.picker_trainTarget.value = tile:isTrainTarget()
+	self.ui.elements.picker_shuntTarget.value = tile:isShuntTarget()
+	self.ui.elements.picker_forbidTrain.value = tile:isTrainForbidden()
+	self.ui.elements.picker_forbidShunt.value = tile:isShuntForbidden()
+	self.ui.elements.picker_speed.value = tile:getMaxSpeed() ~= math.huge and tostring(tile:getMaxSpeed()) or ""
+	self.ui.elements.picker_speedPlus.value = tile:getMaxSpeedPlus() ~= math.huge and tostring(tile:getMaxSpeedPlus()) or ""
+	self.ui.elements.picker_speedMinus.value = tile:getMaxSpeedMinus() ~= math.huge and tostring(tile:getMaxSpeedMinus()) or ""
+	self.ui.elements.picker_semaphoreAllowTrain.value = tile:getSemaphoreAllowTrain()
+	self.ui.elements.picker_semaphoreAllowShunt.value = tile:getSemaphoreAllowShunt()
+	self.ui.elements.picker_semaphoreAllowSz.value = tile:getSemaphoreAllowSz()
+	self.ui.elements.picker_semaphoreShape.value = tile:getSemaphoreShape()
+	self.ui.elements.picker_semaphoreShortSpeed.value = tile:getSemaphoreShortSpeed() and tostring(tile:getSemaphoreShortSpeed()) or ""
+	self.ui.elements.picker_semaphoreFourPhase.value = tile:getSemaphoreFourPhase()
+	self.ui.elements.picker_warp.value = tile:getWarp() or ""
+	self.ui.elements.picker_command.value = tile:getCommand() or ""
 end
 
 function UIPickerPane:updateElectrified(checkbox)
 	_Picker.electrified = checkbox.value
 end
 
-function UIPickerPane:updateTrackID(input)
+function UIPickerPane:forEachTile(f)
 	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setTrackID(input.value)
+	if not station then
+		return
 	end
+	for i, coords in ipairs(station.selectedTiles) do
+		local tile = station:assertGetTile(coords.x, coords.y)
+		f(tile)
+	end
+end
+
+function UIPickerPane:updateTrackID(input)
+	self:forEachTile(function(tile) tile:setTrackID(input.value) end)
 end
 
 function UIPickerPane:updateSwitchID(input)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setSwitchID(input.value)
-	end
+	self:forEachTile(function(tile) tile:setSwitchID(input.value) end)
 end
 
 function UIPickerPane:updateSemaphoreID(input)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setSemaphoreID(input.value)
-	end
+	self:forEachTile(function(tile) tile:setSemaphoreID(input.value) end)
 end
 
 function UIPickerPane:updateItineraryEndID(input)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setItineraryEndID(input.value)
-	end
+	self:forEachTile(function(tile) tile:setItineraryEndID(input.value) end)
 end
 
 function UIPickerPane:updateElectrified2(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setElectrified(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setElectrified(checkbox.value) end)
 end
 
 function UIPickerPane:updateTargetW24(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setTargetW24(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setTargetW24(checkbox.value) end)
 end
 
 function UIPickerPane:updateSwitchFlip(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setSwitchFlip(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setSwitchFlip(checkbox.value) end)
 end
 
 function UIPickerPane:updateSwitchFlipABCD(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setSwitchFlipABCD(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setSwitchFlipABCD(checkbox.value) end)
 end
 
 function UIPickerPane:updateSemaphoreType(input)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setSemaphoreType(tonumber(input.value))
-	end
+	self:forEachTile(function(tile) tile:setSemaphoreType(tonumber(input.value)) end)
 end
 
 function UIPickerPane:updateSemaphoreNoW24(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setSemaphoreNoW24(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setSemaphoreNoW24(checkbox.value) end)
 end
 
 function UIPickerPane:updateSemaphoreNoDanger(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setSemaphoreNoDanger(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setSemaphoreNoDanger(checkbox.value) end)
 end
 
 function UIPickerPane:updateMaxSpeed(input)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setMaxSpeed(tonumber(input.value))
-	end
+	self:forEachTile(function(tile) tile:setMaxSpeed(tonumber(input.value)) end)
 end
 
 function UIPickerPane:updateMaxSpeedPlus(input)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setMaxSpeedPlus(tonumber(input.value))
-	end
+	self:forEachTile(function(tile) tile:setMaxSpeedPlus(tonumber(input.value)) end)
 end
 
 function UIPickerPane:updateMaxSpeedMinus(input)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setMaxSpeedMinus(tonumber(input.value))
-	end
+	self:forEachTile(function(tile) tile:setMaxSpeedMinus(tonumber(input.value)) end)
 end
 
 function UIPickerPane:updateTrainTarget(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setTrainTarget(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setTrainTarget(checkbox.value) end)
 end
 
 function UIPickerPane:updateShuntTarget(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setShuntTarget(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setShuntTarget(checkbox.value) end)
 end
 
 function UIPickerPane:updateForbidTrain(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setForbidTrain(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setForbidTrain(checkbox.value) end)
 end
 
 function UIPickerPane:updateForbidShunt(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setForbidShunt(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setForbidShunt(checkbox.value) end)
 end
 
 function UIPickerPane:updateSemaphoreAllowTrain(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setSemaphoreAllowTrain(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setSemaphoreAllowTrain(checkbox.value) end)
 end
 
 function UIPickerPane:updateSemaphoreAllowShunt(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setSemaphoreAllowShunt(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setSemaphoreAllowShunt(checkbox.value) end)
 end
 
 function UIPickerPane:updateSemaphoreAllowSz(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setSemaphoreAllowSz(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setSemaphoreAllowSz(checkbox.value) end)
 end
 
 function UIPickerPane:updateSemaphoreShape(checkbox)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setSemaphoreShape(checkbox.value)
-	end
+	self:forEachTile(function(tile) tile:setSemaphoreShape(checkbox.value) end)
+end
+
+function UIPickerPane:updateSemaphoreShortSpeed(input)
+	self:forEachTile(function(tile) tile:setSemaphoreShortSpeed(tonumber(input.value)) end)
+end
+
+function UIPickerPane:updateSemaphoreFourPhase(checkbox)
+	self:forEachTile(function(tile) tile:setSemaphoreFourPhase(checkbox.value) end)
 end
 
 function UIPickerPane:updateWarp(input)
-	local station = _Project:getCurrentStation()
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = assert(station:getTile(coords.x, coords.y))
-		tile:setWarp(input.value)
-	end
+	self:forEachTile(function(tile) tile:setWarp(input.value) end)
+end
+
+function UIPickerPane:updateCommand(input)
+	self:forEachTile(function(tile) tile:setCommand(input.value) end)
 end
 
 return UIPickerPane

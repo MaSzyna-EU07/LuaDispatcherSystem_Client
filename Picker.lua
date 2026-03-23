@@ -7,7 +7,7 @@ local Picker = Class:derive("Picker")
 function Picker:new()
     self.x, self.y = 20, 500
     self.margin = 10
-	self.tiles = {"", "track-", "track+", "platformP", "platformF", "curve3", "switchL3", "switchR3", "switchD2", "switchW6", "switchT6", "buffer7", "derailer3", "semaphore3", "arrow7", "arrow3", "arrow-", "loco", "square"}
+	self.tiles = {"", "track-", "track+", "platformP", "platformF", "curve3", "switchL3", "switchR3", "switchD2", "switchW6", "switchT6", "buffer7", "derailer3", "semaphore3", "arrow7", "arrow3", "arrow-", "loco", "square", "letterA"}
     self.tileScale = 2
     self.tileMargin = 2
 
@@ -26,7 +26,8 @@ function Picker:new()
 		{"buffer1", "buffer2", "buffer3", "buffer4", "buffer5", "buffer6", "buffer7", "buffer8"},
 		{"derailer1", "derailer2", "derailer3", "derailer4", "derailer5", "derailer6", "derailer7", "derailer8"},
 		{"semaphore1", "semaphore2", "semaphore3", "semaphore4", "semaphore5", "semaphore6", "semaphore7", "semaphore8"},
-		{"arrow3", "arrow7", "arrow-"}
+		{"arrow3", "arrow7", "arrow-"},
+		{"letterA", "letterĄ", "letterB", "letterC", "letterĆ", "letterD", "letterE", "letterĘ", "letterF", "letterG", "letterH", "letterI", "letterJ", "letterK", "letterL", "letterŁ", "letterM", "letterN", "letterŃ", "letterO", "letterÓ", "letterP", "letterQ", "letterR", "letterS", "letterŚ", "letterT", "letterU", "letterV", "letterW", "letterX", "letterY", "letterZ", "letterŹ", "letterŻ"}
 	}
 	self.tmpFlip = {
 		["switchL1"] = "switchR1", ["switchR1"] = "switchL1",
@@ -41,13 +42,13 @@ function Picker:new()
 	}
 
 	self.buttons = {
-		{x = 20, y = 655, tileX = 1, action = "addRow"},
-		{x = 65, y = 655, tileX = 2, action = "delRow"},
-		{x = 110, y = 655, tileX = 3, action = "addColumn"},
-		{x = 155, y = 655, tileX = 4, action = "delColumn"},
-		{x = 200, y = 655, tileX = 5, action = "properties"},
-		--{x = 245, y = 655, tileX = 8, action = "electrify"},
-		--{x = 290, y = 655, tileX = 9, action = "deelectrify"}
+		{x = 20, y = 700, tileX = 1, action = "addRow"},
+		{x = 65, y = 700, tileX = 2, action = "delRow"},
+		{x = 110, y = 700, tileX = 3, action = "addColumn"},
+		{x = 155, y = 700, tileX = 4, action = "delColumn"},
+		{x = 200, y = 700, tileX = 5, action = "properties"},
+		--{x = 245, y = 700, tileX = 8, action = "electrify"},
+		--{x = 290, y = 700, tileX = 9, action = "deelectrify"}
 	}
 
 	self.mode = nil
@@ -132,7 +133,7 @@ function Picker:draw()
 			love.graphics.setColor(0, 1, 1)
 			love.graphics.rectangle("fill", x, y, self.tileSize, self.tileSize)
 		end
-		if self.tiles[i] == 0 then
+		if self.tiles[i] == "" then
 			local tx, ty = x + self.tileMargin * self.tileScale, y + self.tileMargin * self.tileScale
 			local size = self.tileSize - self.tileMargin * self.tileScale * 2
 			love.graphics.setColor(0.4, 0.4, 0.4)
@@ -183,6 +184,7 @@ function Picker:mousepressed(x, y, button)
 			self.selectionV = self.hoverV
 		elseif self.modeHover then
 			self.mode = self.modeHover
+			self.selectionV = nil
 		end
 	end
 end
