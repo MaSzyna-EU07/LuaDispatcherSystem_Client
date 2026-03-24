@@ -502,6 +502,7 @@ local pos = {
 }
 Gspot.pos = setmetatable(pos, {__call = pos.load})
 
+---@class Gspot.util
 Gspot.util = {
 	setshape = function(this, shape)
 		assert(shape == 'circle' or shape == 'rect' or not shape, 'shape must be "rect" or "circle" or nil')
@@ -717,15 +718,16 @@ Gspot.util = {
 	end,
 }
 
----@class Gspot.element
 Gspot.element = {
+	---@return Gspot.element
 	load = function(this, Gspot, elementtype, label, pos, parent)
 		assert(Gspot[elementtype], 'invalid element constructor argument : element.elementtype must be an existing element type')
 		assert(type(label) == 'string' or type(label) == 'number' or not label, 'invalid element constructor argument : element.label must be of type string or number')
 		assert(type(pos) == 'table' or not pos, 'invalid element constructor argument : element.pos must be of type table or nil')
 		assert((type(parent) == 'table' and parent:type():sub(1, 13) == 'Gspot.element') or not parent, 'invalid element constructor argument : element.parent must be of type element or nil')
 		local pos, circ = Gspot:pos(pos)
-		local element = {elementtype = elementtype, label = label, pos = pos, display = true, dt = 0, parent = parent, children = {}, Gspot = Gspot}
+		---@class Gspot.element : Gspot.util
+		local element = {elementtype = elementtype, label = label, pos = pos, display = true, tip = nil, dt = 0, parent = parent, children = {}, Gspot = Gspot}
 		if circ then element.shape = 'circle' else element.shape = 'rect' end
 		if parent then element.style = setmetatable({}, {__index = parent.style})
 		else element.style = setmetatable({}, {__index = Gspot.style}) end
@@ -746,10 +748,12 @@ end
 
 -- elements
 
----@class Gspot.group : Gspot.element
 Gspot.group = {
+	---@return Gspot.group
 	load = function(this, Gspot, label, pos, parent)
-		return Gspot:add(Gspot:element('group', label, pos, parent))
+		---@class Gspot.group : Gspot.element
+		local element = Gspot:element('group', label, pos, parent)
+		return Gspot:add(element)
 	end,
 	draw = function(this, pos)
 		setColor(this.style.bg)
@@ -762,9 +766,10 @@ Gspot.group = {
 }
 setmetatable(Gspot.group, {__index = Gspot.util, __call = Gspot.group.load})
 
----@class Gspot.collapsegroup : Gspot.element
 Gspot.collapsegroup = {
+	---@return Gspot.collapsegroup
 	load = function(this, Gspot, label, pos, parent)
+		---@class Gspot.collapsegroup : Gspot.group
 		local element = Gspot:group(label, pos, parent)
 		element.view = true
 		element.orig = Gspot:clone(element.pos)
@@ -787,9 +792,10 @@ Gspot.collapsegroup = {
 }
 setmetatable(Gspot.collapsegroup, {__index = Gspot.util, __call = Gspot.collapsegroup.load})
 
----@class Gspot.text : Gspot.element
 Gspot.text = {
+	---@return Gspot.text
 	load = function(this, Gspot, label, pos, parent, autosize)
+		---@class Gspot.text : Gspot.element
 		local element = Gspot:element('text', label, pos, parent)
 		if autosize then
 			element.pos.w = element.style.font:getWidth(label) + (element.style.unit / 2)
@@ -815,9 +821,10 @@ Gspot.text = {
 }
 setmetatable(Gspot.text, {__index = Gspot.util, __call = Gspot.text.load})
 
----@class Gspot.typetext : Gspot.element
 Gspot.typetext = {
+	---@return Gspot.typetext
 	load = function(this, Gspot, label, pos, parent, autosize)
+		---@class Gspot.typetext : Gspot.text
 		local element = Gspot:text('', pos, parent, autosize)
 		element.values = {text = label, cursor = 1}
 		element.updateinterval = 0.1
@@ -830,9 +837,10 @@ Gspot.typetext = {
 }
 setmetatable(Gspot.typetext, {__index = Gspot.util, __call = Gspot.typetext.load})
 
----@class Gspot.image : Gspot.element
 Gspot.image = {
+	---@return Gspot.image
 	load = function(this, Gspot, label, pos, parent, img)
+		---@class Gspot.image : Gspot.element
 		local element = Gspot:element('image', label, pos, parent)
 		element:setimage(img)
 		return Gspot:add(element)
@@ -856,11 +864,13 @@ Gspot.image = {
 }
 setmetatable(Gspot.image, {__index = Gspot.util, __call = Gspot.image.load})
 
----@class Gspot.button : Gspot.element
 Gspot.button = {
+	---@return Gspot.button
 	load = function(this, Gspot, label, pos, parent, autosize)
+		---@class Gspot.button : Gspot.element
+		local element = Gspot:element('button', label, pos, parent)
 		if autosize then this.autosize = autosize end
-		return Gspot:add(Gspot:element('button', label, pos, parent))
+		return Gspot:add(element)
 	end,
 	draw = function(this, pos)
 		if this.parent and this.value == this.parent.value then
@@ -883,9 +893,10 @@ Gspot.button = {
 }
 setmetatable(Gspot.button, {__index = Gspot.util, __call = Gspot.button.load})
 
----@class Gspot.imgbutton : Gspot.element
 Gspot.imgbutton = {
+	---@return Gspot.imgbutton
 	load = function(this, Gspot, label, pos, parent, img)
+		---@class Gspot.imgbutton : Gspot.button
 		local element = Gspot:button(label, pos, parent)
 		element:setimage(img)
 		return Gspot:add(element)
@@ -893,9 +904,10 @@ Gspot.imgbutton = {
 }
 setmetatable(Gspot.imgbutton, {__index = Gspot.util, __call = Gspot.imgbutton.load})
 
----@class Gspot.option : Gspot.element
 Gspot.option = {
+	---@return Gspot.option
 	load = function(this, Gspot, label, pos, parent, value)
+		---@class Gspot.option : Gspot.button
 		local element = Gspot:button(label, pos, parent)
 		element.value = value
 		element.click = function(this) this.parent.value = this.value end
@@ -904,9 +916,10 @@ Gspot.option = {
 }
 setmetatable(Gspot.option, {__index = Gspot.util, __call = Gspot.option.load})
 
----@class Gspot.checkbox : Gspot.element
 Gspot.checkbox = {
+	---@return Gspot.checkbox
 	load = function(this, Gspot, label, pos, parent, value)
+		---@class Gspot.checkbox : Gspot.element
 		local element = Gspot:element('checkbox', label, pos, parent)
 		element.value = value
 		return Gspot:add(element)
@@ -928,9 +941,10 @@ Gspot.checkbox = {
 }
 setmetatable(Gspot.checkbox, {__index = Gspot.util, __call = Gspot.checkbox.load})
 
----@class Gspot.input : Gspot.element
 Gspot.input = {
+	---@return Gspot.input
 	load = function(this, Gspot, label, pos, parent, value, ispassword, passwordchar)
+		---@class Gspot.input : Gspot.element
 		local element = Gspot:element('input', label, pos, parent)
 		element.value = (value and tostring(value)) or ''
 		element.cursor = element.value:len()
@@ -1035,9 +1049,10 @@ Gspot.input = {
 }
 setmetatable(Gspot.input, {__index = Gspot.util, __call = Gspot.input.load})
 
----@class Gspot.scroll : Gspot.element
 Gspot.scroll = {
+	---@return Gspot.scroll
 	load = function(this, Gspot, label, pos, parent, values)
+		---@class Gspot.scroll : Gspot.element
 		local element = Gspot:element('scroll', label, pos, parent)
 		element.values = Gspot:scrollvalues(values)
 		return Gspot:add(element)
@@ -1119,12 +1134,14 @@ Gspot.scroll = {
 Gspot.scroll.rdrag = Gspot.scroll.drag
 setmetatable(Gspot.scroll, {__index = Gspot.util, __call = Gspot.scroll.load})
 
----@class Gspot.scrollgroup : Gspot.element
 Gspot.scrollgroup = {
+	---@return Gspot.scrollgroup
 	load = function(this, Gspot, label, pos, parent, axis)
 		axis = axis or 'both'
+		---@class Gspot.scrollgroup : Gspot.element
 		local element = Gspot:element('scrollgroup', label, pos, parent)
 		element.maxh = 0
+		element.value = nil
 		element = Gspot:add(element)
 		if axis ~= 'horizontal' then element.scrollv = Gspot:scroll(nil, {x = element.pos.w, y = 0, w = element.style.unit, h = element.pos.h}, element, {0, 0, 0, element.style.unit, 'vertical'}) end
 		if axis ~= 'vertical' then element.scrollh = Gspot:scroll(nil, {x = 0, y = element.pos.h, w = element.pos.w, h = element.style.unit}, element, {0, 0, 0, element.style.unit, 'horizontal'}) end
@@ -1141,10 +1158,12 @@ Gspot.scrollgroup = {
 }
 setmetatable(Gspot.scrollgroup, {__index = Gspot.util, __call = Gspot.scrollgroup.load})
 
----@class Gspot.hidden : Gspot.element
 Gspot.hidden = {
+	---@return Gspot.hidden
 	load = function(this, Gspot, label, pos, parent)
-		return Gspot:add(Gspot:element('hidden', label, pos, parent))
+		---@class Gspot.hidden : Gspot.element
+		local element = Gspot:element('hidden', label, pos, parent)
+		return Gspot:add(element)
 	end,
 	draw = function(this, pos)
 		--
@@ -1152,10 +1171,12 @@ Gspot.hidden = {
 }
 setmetatable(Gspot.hidden, {__index = Gspot.util, __call = Gspot.hidden.load})
 
----@class Gspot.radius : Gspot.element
 Gspot.radius = {
+	---@return Gspot.radius
 	load = function(this, Gspot, label, pos, parent)
-		return Gspot:add(Gspot:element('radius', label, pos, parent))
+		---@class Gspot.radius : Gspot.element
+		local element = Gspot:element('radius', label, pos, parent)
+		return Gspot:add(element)
 	end,
 	draw = function(this, pos)
 		--
@@ -1163,8 +1184,8 @@ Gspot.radius = {
 }
 setmetatable(Gspot.radius, {__index = Gspot.util, __call = Gspot.radius.load})
 
----@class Gspot.feedback : Gspot.element
 Gspot.feedback = {
+	---@return Gspot.feedback
 	load = function(this, Gspot, label, pos, parent, autopos)
 		pos = pos or {}
 		autopos = (autopos == nil and true) or autopos
@@ -1177,7 +1198,9 @@ Gspot.feedback = {
 		pos.y = pos.y or pos[2] or 0
 		pos.w = 0
 		pos.h = 0
-		local element = Gspot:add(Gspot:element('feedback', label, pos, parent))
+		---@class Gspot.feedback : Gspot.element
+		local element = Gspot:element('feedback', label, pos, parent)
+		element = Gspot:add(element)
 		element.style.fg = {255, 255, 255, 255}
 		element.alpha = 255
 		element.life = 5
@@ -1200,10 +1223,12 @@ Gspot.feedback = {
 }
 setmetatable(Gspot.feedback, {__index = Gspot.util, __call = Gspot.feedback.load})
 
----@class Gspot.progress : Gspot.element
 Gspot.progress = {
+	---@return Gspot.progress
 	load = function(this, Gspot, label, pos, parent)
-		local element = Gspot:add(Gspot:element('progress', label, pos, parent))
+		---@class Gspot.progress : Gspot.element
+		local element = Gspot:element('progress', label, pos, parent)
+		element = Gspot:add(element)
 		element.loaders = {}
 		element.values = Gspot.scrollvalues(element, {0, 0, 0, 1})
 		return element

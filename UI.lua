@@ -14,7 +14,7 @@ local UI = class:derive("UI")
 
 function UI:new()
 	self.U = 24
-	---@type table<string, table>
+	---@type table<Gspot.element, table>
 	self.elements = {}
 end
 
@@ -45,12 +45,14 @@ end
 ---@param title string The title of the window.
 ---@param tw number Window width in tiles.
 ---@param th number Window height in tiles.
+---@return Gspot.group
 function UI:createCenteredWindow(id, title, tw, th)
 	local window = gui:group(title, self:getCenteredWindowDimensions(tw * self.U, th * self.U))
 	window.drag = true
 	local x = gui:button("X", {x = window.pos.w - self.U, y = 0, w = self.U, h = self.U}, window)
 	x.click = function(this) this.parent:hide() end
 	self.elements[id] = window
+	return window
 end
 
 ---Adds a pane to the element list.
@@ -61,6 +63,7 @@ end
 ---@param ty number Y coordinate of the top left corner of the element.
 ---@param tw number Width of the element in tiles.
 ---@param th number Height of the element in tiles.
+---@return Gspot.group
 function UI:addPane(parent, id, title, tx, ty, tw, th)
 	local pos = self:tilesToPos(tx, ty, tw, th)
 	local pane = gui:group(title, pos, parent and self.elements[parent])
@@ -68,6 +71,7 @@ function UI:addPane(parent, id, title, tx, ty, tw, th)
 	if id then
 		self:addElement(parent, id, pane)
 	end
+	return pane
 end
 
 ---Adds a label to the element list.
@@ -78,12 +82,14 @@ end
 ---@param ty number Y coordinate of the top left corner of the element.
 ---@param tw number Width of the element in tiles.
 ---@param th number Height of the element in tiles.
+---@return Gspot.text
 function UI:addLabel(parent, id, text, tx, ty, tw, th)
 	local pos = self:tilesToPos(tx, ty, tw, th)
 	local label = gui:text(text, pos, parent and self.elements[parent])
 	if id then
 		self:addElement(parent, id, label)
 	end
+	return label
 end
 
 ---Adds a button to the element list.
@@ -96,6 +102,7 @@ end
 ---@param th number Height of the element in tiles.
 ---@param executor any Class instance which will execute the subsequent functions.
 ---@param onClick function? If specified, this function will be executed when the button is clicked.
+---@return Gspot.button
 function UI:addButton(parent, id, text, tx, ty, tw, th, executor, onClick)
 	local pos = self:tilesToPos(tx, ty, tw, th, 1)
 	local button = gui:button(text, pos, parent and self.elements[parent])
@@ -107,6 +114,7 @@ function UI:addButton(parent, id, text, tx, ty, tw, th, executor, onClick)
 			onClick(executor, this)
 		end
 	end
+	return button
 end
 
 ---Adds a checkbox to the element list.
@@ -119,6 +127,7 @@ end
 ---@param th number Height of the element in tiles. This should be always 1.
 ---@param executor any Class instance which will execute the subsequent functions.
 ---@param onClick function? If specified, this function will be executed when the checkbox is clicked.
+---@return Gspot.checkbox
 function UI:addCheckbox(parent, id, text, tx, ty, tw, th, executor, onClick)
 	local pos = self:tilesToPos(tx, ty, tw, th, 1)
 	local checkbox = gui:checkbox(text, pos, parent and self.elements[parent])
@@ -131,6 +140,7 @@ function UI:addCheckbox(parent, id, text, tx, ty, tw, th, executor, onClick)
 			onClick(executor, this)
 		end
 	end
+	return checkbox
 end
 
 ---Adds an input box to the element list.
@@ -143,6 +153,7 @@ end
 ---@param executor any Class instance which will execute the subsequent functions.
 ---@param onChange function? If specified, this function will be executed when the text has changed.
 ---@param onSubmit function? If specified, this function will be executed when Enter is pressed while typing in this text box.
+---@return Gspot.input
 function UI:addInput(parent, id, tx, ty, tw, th, executor, onChange, onSubmit)
 	local pos = self:tilesToPos(tx, ty, tw, th, 1)
 	local input = gui:input(nil, pos, parent and self.elements[parent])
@@ -164,6 +175,7 @@ function UI:addInput(parent, id, tx, ty, tw, th, executor, onChange, onSubmit)
 			onSubmit(executor, this)
 		end
 	end
+	return input
 end
 
 ---Adds a combo box to the element list.
@@ -173,6 +185,7 @@ end
 ---@param ty number Y coordinate of the top left corner of the element.
 ---@param tw number Width of the element in tiles.
 ---@param th number Height of the element in tiles.
+---@return Gspot.scrollgroup
 function UI:addComboBox(parent, id, tx, ty, tw, th)
 	local pos = self:tilesToPos(tx, ty, tw - 1, th)
 	local box = gui:scrollgroup(nil, pos, parent and self.elements[parent])
@@ -180,6 +193,7 @@ function UI:addComboBox(parent, id, tx, ty, tw, th)
 	if id then
 		self:addElement(parent, id, box)
 	end
+	return box
 end
 
 ---Returns the focused Gspot element, if any.
@@ -216,10 +230,7 @@ end
 --######################################--
 
 function UI:showStationList()
-	self.elements.sl:show()
-	self.elements.sl:setlevel()
-	self.elements["sl/stations"].scrollh:hide()
-	self.stationList:update()
+	self.stationList:show()
 end
 
 function UI:isMouseInUI()
@@ -258,12 +269,10 @@ end
 
 ---Executed when a log file is loaded.
 function UI:onComInit()
-	self.elements["bottom/comStatus"].value = "Załadowano log z pliku"
 end
 
 ---Executed each time a log file is read by the communication module.
 function UI:onComUpdated()
-	self.elements["bottom/comStatus"].value = "Komunikacja aktywnie z pliku: " .. _Com.path
 end
 
 --##############################################--

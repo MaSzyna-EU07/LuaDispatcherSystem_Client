@@ -10,16 +10,15 @@ function UIRightPane:new(ui)
     self.ui = ui
     local gui = ui:getGUI()
 
-	self.ui:addPane(nil, "right", "Informacje o stacji", _WWIDTH / self.ui.U - 14, 0, 14, _WHEIGHT / self.ui.U)
-	--group.tip = "You hovered at me!"
+	self.pane = self.ui:addPane(nil, "right", "Informacje o stacji", _WWIDTH / self.ui.U - 14, 0, 14, _WHEIGHT / self.ui.U)
 
 	-- Station name and list button
-	self.ui:addLabel("right", "header", "", 0, 1, 11, 1)
+	self.header = self.ui:addLabel("right", "header", "", 0, 1, 11, 1)
 	self.ui:addButton("right", "bStationList", "Lista", 11, 1, 3, 1, self.ui, self.ui.showStationList)
 
 	-- List all stuff
-    local h = self.ui.elements.right:getmaxh()
-	local rightPaneContents = gui:scrollgroup(nil, {y = h, w = 350 - self.ui.U, h = _WHEIGHT - h}, self.ui.elements.right)
+    local h = self.pane:getmaxh()
+	local rightPaneContents = gui:scrollgroup(nil, {y = h, w = 350 - self.ui.U, h = _WHEIGHT - h}, self.pane)
 	rightPaneContents.scrollh:hide()
 	rightPaneContents:addchild(gui:text("Semafory:", {x = 8}, nil, true), "vertical")
 	local semTest = {"A", "B", "C", "E3", "E1", "E2", "E4", "F", "X", "Y", "Z", "A", "B", "C", "E3", "E1", "E2", "E4", "F", "X", "Y", "Z", "A", "B", "C", "E3", "E1", "E2", "E4", "F", "X", "Y", "Z"}
@@ -39,7 +38,7 @@ end
 
 function UIRightPane:update()
 	local station = _Project:getCurrentStation()
-	self.ui.elements["right/header"].label = string.format("Stacja: %s", station and station:getFullName() or "(brak)")
+	self.header.label = string.format("Stacja: %s", station and station:getFullName() or "(brak)")
 end
 
 return UIRightPane
