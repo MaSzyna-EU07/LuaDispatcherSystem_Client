@@ -1,4 +1,5 @@
 local class = require "class"
+---@type Gspot
 local gui = require("Gspot")
 local UIStationList = require("UIStationList")
 local UITopPane = require "UITopPane"
@@ -13,6 +14,7 @@ local UI = class:derive("UI")
 
 function UI:new()
 	self.U = 24
+	---@type table<string, table>
 	self.elements = {}
 end
 
@@ -23,6 +25,18 @@ end
 function UI:tilesToPos(tx, ty, tw, th, margin)
 	margin = margin or 0
 	return {x = tx * self.U + margin, y = ty * self.U + margin, w = tw * self.U - margin * 2, h = th * self.U - margin * 2}
+end
+
+---Adds an element to the `elements` table.
+---@private
+---@param parent string? The parent element ID.
+---@param id string? The ID of the element. If not specified, the element will not be added.
+---@param element table The Gspot element itself.
+function UI:addElement(parent, id, element)
+	if id then
+		id = parent and parent .. "/" .. id or id
+		self.elements[id] = element
+	end
 end
 
 ---Creates a new centered window.
@@ -52,7 +66,7 @@ function UI:addPane(parent, id, title, tx, ty, tw, th)
 	local pane = gui:group(title, pos, parent and self.elements[parent])
 	pane.style.bg = {0.2, 0.2, 0.2}
 	if id then
-		self.elements[id] = pane
+		self:addElement(parent, id, pane)
 	end
 end
 
@@ -68,7 +82,7 @@ function UI:addLabel(parent, id, text, tx, ty, tw, th)
 	local pos = self:tilesToPos(tx, ty, tw, th)
 	local label = gui:text(text, pos, parent and self.elements[parent])
 	if id then
-		self.elements[id] = label
+		self:addElement(parent, id, label)
 	end
 end
 
@@ -86,11 +100,9 @@ function UI:addButton(parent, id, text, tx, ty, tw, th, executor, onClick)
 	local pos = self:tilesToPos(tx, ty, tw, th, 1)
 	local button = gui:button(text, pos, parent and self.elements[parent])
 	if id then
-		self.elements[id] = button
+		self:addElement(parent, id, button)
 	end
 	if onClick then
-		-- example:
-		--self.elements.top_bLoad.click = function(this) self:loadProject() end
 		button.click = function(this)
 			onClick(executor, this)
 		end
@@ -111,7 +123,7 @@ function UI:addCheckbox(parent, id, text, tx, ty, tw, th, executor, onClick)
 	local pos = self:tilesToPos(tx, ty, tw, th, 1)
 	local checkbox = gui:checkbox(text, pos, parent and self.elements[parent])
 	if id then
-		self.elements[id] = checkbox
+		self:addElement(parent, id, checkbox)
 	end
 	if onClick then
 		checkbox.click = function(this)
@@ -135,7 +147,7 @@ function UI:addInput(parent, id, tx, ty, tw, th, executor, onChange, onSubmit)
 	local pos = self:tilesToPos(tx, ty, tw, th, 1)
 	local input = gui:input(nil, pos, parent and self.elements[parent])
 	if id then
-		self.elements[id] = input
+		self:addElement(parent, id, input)
 	end
 	if onChange then
 		input.keypress = function(this, key)
@@ -166,7 +178,7 @@ function UI:addComboBox(parent, id, tx, ty, tw, th)
 	local box = gui:scrollgroup(nil, pos, parent and self.elements[parent])
 	box.style.bg = {0.2, 0.2, 0.2}
 	if id then
-		self.elements[id] = box
+		self:addElement(parent, id, box)
 	end
 end
 
@@ -206,7 +218,7 @@ end
 function UI:showStationList()
 	self.elements.sl:show()
 	self.elements.sl:setlevel()
-	self.elements.sl_stations.scrollh:hide()
+	self.elements["sl/stations"].scrollh:hide()
 	self.stationList:update()
 end
 
@@ -246,12 +258,12 @@ end
 
 ---Executed when a log file is loaded.
 function UI:onComInit()
-	self.elements.bottom_comStatus.value = "Załadowano log z pliku"
+	self.elements["bottom/comStatus"].value = "Załadowano log z pliku"
 end
 
 ---Executed each time a log file is read by the communication module.
 function UI:onComUpdated()
-	self.elements.bottom_comStatus.value = "Komunikacja aktywnie z pliku: " .. _Com.path
+	self.elements["bottom/comStatus"].value = "Komunikacja aktywnie z pliku: " .. _Com.path
 end
 
 --##############################################--

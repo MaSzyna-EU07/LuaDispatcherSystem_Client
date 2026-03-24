@@ -11,7 +11,7 @@ function UIBottomPane:new(ui)
 
 	self.ui:addPane(nil, "bottom", nil, 0, _WHEIGHT / self.ui.U - 1, (_WWIDTH - 320) / self.ui.U, 1)
 	self.ui:addLabel("bottom", nil, "Komunikacja:", 0, 0, 5, 1)
-	self.ui:addLabel("bottom", "bottom_comStatus", "Łączenie...", 5, 0, 7, 1)
+	self.ui:addLabel("bottom", "comStatus", "Łączenie...", 5, 0, 7, 1)
 	self.ui:addButton("bottom", nil, "Reset", 12, 0, 3, 1, self, self.comReset)
 	self.ui:addButton("bottom", nil, "S1", 17, 0, 2, 1, self, self.sendS1)
 	self.ui:addButton("bottom", nil, "S2", 19, 0, 2, 1, self, self.sendS2)
@@ -25,7 +25,7 @@ function UIBottomPane:new(ui)
 	self.ui:addButton("bottom", nil, "Free", 36, 0, 2, 1, self, self.sendFree)
 	self.ui:addButton("bottom", nil, "Ures", 38, 0, 2, 1, self, self.sendUnres)
 	self.ui:addLabel("bottom", nil, "Komenda:", 41, 0, 4, 1)
-	self.ui:addInput("bottom", "bottom_command", 45, 0, 7, 1, self, nil, self.sendCommand)
+	self.ui:addInput("bottom", "command", 45, 0, 7, 1, self, nil, self.sendCommand)
 end
 
 ---Sets the displayed communication status on the bottom UI pane.
@@ -33,9 +33,9 @@ end
 ---@param color [number, number, number] The text color.
 ---@param tooltip string? What should appear when the status text is hovered.
 function UIBottomPane:setStatus(text, color, tooltip)
-	self.ui.elements.bottom_comStatus.label = text
-	self.ui.elements.bottom_comStatus.tip = tooltip or ""
-	self.ui.elements.bottom_comStatus.style.fg = color
+	self.ui.elements["bottom/comStatus"].label = text
+	self.ui.elements["bottom/comStatus"].tip = tooltip or ""
+	self.ui.elements["bottom/comStatus"].style.fg = color
 end
 
 function UIBottomPane:comReset()

@@ -10,8 +10,8 @@ function UITopPane:new(ui)
     self.ui = ui
 
 	self.ui:addPane(nil, "top", nil, 0, 0, (_WWIDTH - 320) / self.ui.U, 1)
-	self.ui:addButton("top", "top_bSave", "Zapisz", 0, 0, 4, 1, self, self.saveProject)
-	self.ui:addButton("top", "top_bLoad", "Wczytaj", 4, 0, 4, 1, self, self.loadProject)
+	self.ui:addButton("top", "bSave", "Zapisz", 0, 0, 4, 1, self, self.saveProject)
+	self.ui:addButton("top", "bLoad", "Wczytaj", 4, 0, 4, 1, self, self.loadProject)
 end
 
 function UITopPane:saveProject()

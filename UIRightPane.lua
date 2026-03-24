@@ -14,8 +14,8 @@ function UIRightPane:new(ui)
 	--group.tip = "You hovered at me!"
 
 	-- Station name and list button
-	self.ui:addLabel("right", "right_header", "", 0, 1, 11, 1)
-	self.ui:addButton("right", "right_bStationList", "Lista", 11, 1, 3, 1, self.ui, self.ui.showStationList)
+	self.ui:addLabel("right", "header", "", 0, 1, 11, 1)
+	self.ui:addButton("right", "bStationList", "Lista", 11, 1, 3, 1, self.ui, self.ui.showStationList)
 
 	-- List all stuff
     local h = self.ui.elements.right:getmaxh()
@@ -39,7 +39,7 @@ end
 
 function UIRightPane:update()
 	local station = _Project:getCurrentStation()
-	self.ui.elements.right_header.label = string.format("Stacja: %s", station and station:getFullName() or "(brak)")
+	self.ui.elements["right/header"].label = string.format("Stacja: %s", station and station:getFullName() or "(brak)")
 end
 
 return UIRightPane
