@@ -19,6 +19,7 @@ end
 ---@param color NotificationColor? The notification color, green by default.
 function Notifications:post(text, color)
     table.insert(self.notifications, {text = text, color = color or NotificationColor.GREEN, time = _Time})
+    print("[NOTIFICATION] " .. text)
 end
 
 ---Draws the notifications on the screen.

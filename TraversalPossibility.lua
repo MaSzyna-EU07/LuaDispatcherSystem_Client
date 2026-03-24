@@ -16,7 +16,6 @@ function TraversalPossibility:new(pathfinder, tile, direction)
     self.pathfinder = pathfinder
     self.tile = tile
     self.direction = direction
-    self.prevDirection = nil
     ---@type {tile: Tile, dir1: integer?, dir2: integer?}[]
     self.path = {{tile = tile, dir2 = direction}}
     self.speed = math.huge
@@ -31,7 +30,6 @@ end
 ---@return TraversalPossibility
 function TraversalPossibility:copy()
     local copy = TraversalPossibility(self.pathfinder, self.tile, self.direction)
-    copy.prevDirection = self.prevDirection
     copy.path = _Utils.copyTable(self.path)
     copy.speed = self.speed
     copy.cost = self.cost
@@ -46,6 +44,10 @@ end
 ---Evaluates this traversal possibility and returns a list of new possibilities if any are discovered, with updated statistics.
 ---@return TraversalPossibility[]
 function TraversalPossibility:evaluate()
+    -- Abort if this possibility is dead.
+    if self:isDead() then
+        return {}
+    end
     -- This is the list of newly found possibilities.
     local found = {}
     -- This is the tile we are stepping on.
@@ -54,36 +56,31 @@ function TraversalPossibility:evaluate()
     local directions = tile:getPossibleTrackDirections(_InvertDir(self.direction))
     -- Each direction is a single possibility.
     for i, direction in ipairs(directions) do
-        -- Check if we can go there in the first place.
-        local nextTile = tile:getNeighbor(direction)
-        -- The track must be clear, must not prohibit our path mode and must be electrified if we are pathfinding for an electric vehicle.
-        if (nextTile:isTrackClear() or not nextTile:getTrackState() or self.pathfinder.mode == PathMode.SHUNT) and nextTile:isPathModeAllowed(self.pathfinder.mode) and not (self.pathfinder.electrified and not nextTile:isElectrified()) then
-            -- Create a new copy of this possibility.
-            local newPossibility = self:copy()
-            newPossibility.tile = tile
-            newPossibility.direction = direction
-            -- Add the new tile.
-            table.insert(newPossibility.path, {tile = tile, dir1 = _InvertDir(self.direction), dir2 = direction})
-            -- A segment splits occurs on a semaphore tile. The semaphore must be faced in our direction. We ignore shunting-only semaphores in train mode.
-            if tile:isSemaphore() and tile:getSemaphoreDirection() == direction and (self.pathfinder.mode == PathMode.SHUNT or tile:getSemaphoreType() ~= SemaphoreType.TM) then
-                newPossibility.lastSemaphore = tile
-                table.insert(newPossibility.segments, {start = #newPossibility.path, speed = math.huge})
-            end
-            -- Check if we need to lower the speed, globally and for this segment.
-            local prevTileSpeed = self.tile:getSpeedForDirections(self.prevDirection and _InvertDir(self.prevDirection), self.direction)
-            newPossibility.speed = math.min(self.speed, prevTileSpeed)
-            newPossibility.segments[#newPossibility.segments].speed = math.min(newPossibility.segments[#newPossibility.segments].speed, prevTileSpeed)
-            -- If the segment we're on mandates speeds less than 100 km/h, and the previous semaphore does not allow that, this entire possibility will not pass.
-            local valid = true
-            local segmentSpeed = _SpeedToID(newPossibility.segments[#newPossibility.segments].speed)
-            if #newPossibility.segments >= 2 and segmentSpeed ~= Speed.VMAX and segmentSpeed ~= Speed["100"] and newPossibility.path[newPossibility.segments[#newPossibility.segments - 1].start].tile:getSemaphoreNoDanger() then
-                valid = false
-            end
-            -- Assemble the possiblity and add it to the list.
-            if valid then
-                newPossibility.cost = newPossibility:calculateCost()
-                table.insert(found, newPossibility)
-            end
+        -- Create a new copy of this possibility.
+        local newPossibility = self:copy()
+        newPossibility.tile = tile
+        newPossibility.direction = direction
+        -- Add the new tile.
+        table.insert(newPossibility.path, {tile = tile, dir1 = _InvertDir(self.direction), dir2 = direction})
+        -- A segment splits occurs on a semaphore tile. The semaphore must be faced in our direction. We ignore shunting-only semaphores in train mode.
+        if tile:isSemaphore() and tile:getSemaphoreDirection() == direction and (self.pathfinder.mode == PathMode.SHUNT or tile:getSemaphoreType() ~= SemaphoreType.TM) then
+            newPossibility.lastSemaphore = tile
+            table.insert(newPossibility.segments, {start = #newPossibility.path, speed = math.huge})
+        end
+        -- Check if we need to lower the speed, globally and for this segment.
+        local prevTileSpeed = self.tile:getSpeedForDirections(nil, self.direction)
+        newPossibility.speed = math.min(self.speed, prevTileSpeed)
+        newPossibility.segments[#newPossibility.segments].speed = math.min(newPossibility.segments[#newPossibility.segments].speed, prevTileSpeed)
+        -- If the segment we're on mandates speeds less than 100 km/h, and the previous semaphore does not allow that, this entire possibility will not pass.
+        local valid = true
+        local segmentSpeed = _SpeedToID(newPossibility.segments[#newPossibility.segments].speed)
+        if #newPossibility.segments >= 2 and segmentSpeed ~= Speed.VMAX and segmentSpeed ~= Speed["100"] and newPossibility.path[newPossibility.segments[#newPossibility.segments - 1].start].tile:getSemaphoreNoDanger() then
+            valid = false
+        end
+        -- Assemble the possiblity and add it to the list.
+        if valid then
+            newPossibility.cost = newPossibility:calculateCost()
+            table.insert(found, newPossibility)
         end
     end
     return found
@@ -113,6 +110,27 @@ function TraversalPossibility:calculateCost()
     return cost + heuristic
 end
 
+---Returns `true` if this possibility does not satisfy some of its pathfinder's conditions and cannot be recovered from that.
+---@return boolean
+function TraversalPossibility:isDead()
+    if self.tile:getTrackState() and not self.tile:isTrackClear() and self.pathfinder.mode ~= PathMode.SHUNT then
+        -- The track is for sure occupied when not in shunting mode.
+        _Notifications:post(string.format("After %s tiles at (%s, %s): Track occupied!", #self.path, self.tile.x, self.tile.y), NotificationColor.GRAY)
+        return true
+    end
+    if not self.tile:isPathModeAllowed(self.pathfinder.mode) then
+        -- The track is not allowing this dispatching mode (i.e. forbids shunting or trains)
+        _Notifications:post(string.format("After %s tiles at (%s, %s): Mode forbidden!", #self.path, self.tile.x, self.tile.y), NotificationColor.GRAY)
+        return true
+    end
+    if self.pathfinder.electrified and not self.tile:isElectrified() then
+        -- The track is not electrified while pathfinding for an electric train.
+        _Notifications:post(string.format("After %s tiles at (%s, %s): Not electrified!", #self.path, self.tile.x, self.tile.y), NotificationColor.GRAY)
+        return true
+    end
+    return false
+end
+
 ---Returns `true` if this possibility is a winner (points to the target tile with conditions such as W24 being present on the last semaphore).
 ---@return boolean
 function TraversalPossibility:isWinning()
@@ -132,7 +150,6 @@ function TraversalPossibility:finalize()
             break
         end
         self.tile = tile
-        self.prevDirection = self.direction
         self.direction = direction
         n = n + 1
         assert(n < 10000, "Infinite loop")

@@ -68,7 +68,8 @@ local COM_FUNCTIONS = {
 	},
 	[0xFF] = {
 		name = "nextTick",
-		params = {}
+		params = {},
+		silent = true
 	}
 }
 local COM_IMAGES = {
@@ -227,7 +228,7 @@ function com.readByte(b)
 			com_readData.paramCounter = 1
 			com_readData.byteCounter = 0
 		else
-			com.readCall(func.name, {})
+			com.readCall(func.name, {}, func.silent)
 		end
 	elseif com_readData.step == "param" then
 		local func = COM_FUNCTIONS[com_readData.funcID]
@@ -263,7 +264,7 @@ function com.readByte(b)
 				for i, param in ipairs(func.params) do
 					params[param.name] = com_readData.params[i]
 				end
-				com.readCall(func.name, params)
+				com.readCall(func.name, params, func.silent)
 			else
 				com_readData.paramCounter = com_readData.paramCounter + 1
 				com_readData.byteCounter = 0
@@ -272,7 +273,7 @@ function com.readByte(b)
 	end
 end
 
-function com.readCall(name, params)
+function com.readCall(name, params, silent)
 	local t = ""
 	for paramN, param in pairs(params) do
 		if t ~= "" then
@@ -280,7 +281,9 @@ function com.readCall(name, params)
 		end
 		t = t .. paramN .. "=" .. tostring(param)
 	end
-	_LogWrite("[COMMUNICATION] Called function: " .. name .. "(" .. t .. ")", 1, 3)
+	if not silent then
+		_LogWrite("[COMMUNICATION] Called function: " .. name .. "(" .. t .. ")", 1, 3)
+	end
 
 	if name == "nextTick" then
 		com.nextTimeTick()

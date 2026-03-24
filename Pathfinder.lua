@@ -38,7 +38,7 @@ end
 ---Calculates the path based on the provided start and end point of this Pathfinder.
 ---Currently this is hacked together and the list of tiles is hardcoded. Yay!
 function Pathfinder:calculatePath()
-    self:createInitialPossibilities()
+    self:createInitialPossibility()
     local winner = nil
     while #self.possibilities > 0 do
         -- Get the possibility which has the lowest cost.
@@ -66,15 +66,15 @@ function Pathfinder:calculatePath()
     _Utils.tableAddInplace(self.itineraries, winner:generateItineraries())
 end
 
----Creates the initial possibilities starting from this Pathfinder's first tile.
+---Creates the initial possibility starting from this Pathfinder's first tile.
 ---@private
-function Pathfinder:createInitialPossibilities()
-    -- See which directions we can go towards.
-    local directions = self.start:getTrackDirections()
-    -- Each direction is a single possibility.
-    for i, direction in ipairs(directions) do
-        table.insert(self.possibilities, TraversalPossibility(self, self.start, direction))
+function Pathfinder:createInitialPossibility()
+    local direction = self.start:getSemaphoreDirection()
+    if not direction then
+        -- The first tile is not a semaphore. This is currently a requirement.
+        return
     end
+    table.insert(self.possibilities, TraversalPossibility(self, self.start, direction))
 end
 
 ---Reserves all tracks, sets all switches and displays a clear signal on the semaphore.
