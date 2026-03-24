@@ -35,7 +35,7 @@ TrackColor = {
 SemaphoreColor = {
 	RED = {1, 0, 0},
 	GREEN = {0, 1, 0},
-	ORANGE = {1, 0.5, 0},
+	ORANGE = {1, 0.7, 0},
 	WHITE = {1, 1, 1},
 	BLUE = {0.2, 0.4, 1}
 }
@@ -68,6 +68,7 @@ SemaphoreImage = {
 
 ---@enum NotificationColor
 NotificationColor = {
-	GREEN = {0.1, 0.6, 0.2},
-	RED = {1, 0, 0}
+	GREEN = {0.15, 0.6, 0.05},
+	RED = {0.9, 0.1, 0},
+	GRAY = {0.4, 0.4, 0.4}
 }

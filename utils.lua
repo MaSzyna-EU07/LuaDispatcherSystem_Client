@@ -400,6 +400,7 @@ end
 ---@param t table The table to be copied.
 ---@return table
 function utils.copyTable(t)
+	-- TODO: Add a new parameter which is the copy depth
 	local new = {}
 	for k, v in pairs(t) do
 		new[k] = v

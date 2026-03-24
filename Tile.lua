@@ -418,7 +418,7 @@ end
 ---------------- L O G I C ---------------
 --######################################--
 
----Returns tile data coming from its ID, or `nil` if nothing is there.
+---Returns tile data coming from its ID.
 ---@return TileData
 function Tile:getData()
 	return _TileDB:getTile(self.id)
@@ -582,8 +582,7 @@ end
 ---Returns the direction towards which this tile's semaphore is pointing, or `nil` if there's no semaphore.
 ---@return integer?
 function Tile:getSemaphoreDirection()
-	local data = self:getData()
-	return data.semaphore
+	return self:getData().semaphore
 end
 
 ---Returns this tile's semaphore state, or `nil` if no semaphore is specified for this tile.
