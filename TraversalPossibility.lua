@@ -68,20 +68,12 @@ function TraversalPossibility:evaluate()
             table.insert(newPossibility.segments, {start = #newPossibility.path, speed = math.huge})
         end
         -- Check if we need to lower the speed, globally and for this segment.
-        local prevTileSpeed = self.tile:getSpeedForDirections(nil, self.direction)
+        local prevTileSpeed = self.tile:getSpeedForDirections(newPossibility.path[#newPossibility.path - 1].dir1, self.direction)
         newPossibility.speed = math.min(self.speed, prevTileSpeed)
         newPossibility.segments[#newPossibility.segments].speed = math.min(newPossibility.segments[#newPossibility.segments].speed, prevTileSpeed)
-        -- If the segment we're on mandates speeds less than 100 km/h, and the previous semaphore does not allow that, this entire possibility will not pass.
-        local valid = true
-        local segmentSpeed = _SpeedToID(newPossibility.segments[#newPossibility.segments].speed)
-        if #newPossibility.segments >= 2 and segmentSpeed ~= Speed.VMAX and segmentSpeed ~= Speed["100"] and newPossibility.path[newPossibility.segments[#newPossibility.segments - 1].start].tile:getSemaphoreNoDanger() then
-            valid = false
-        end
         -- Assemble the possiblity and add it to the list.
-        if valid then
-            newPossibility.cost = newPossibility:calculateCost()
-            table.insert(found, newPossibility)
-        end
+        newPossibility.cost = newPossibility:calculateCost()
+        table.insert(found, newPossibility)
     end
     return found
 end
@@ -126,6 +118,11 @@ function TraversalPossibility:isDead()
     if self.pathfinder.electrified and not self.tile:isElectrified() then
         -- The track is not electrified while pathfinding for an electric train.
         _Notifications:post(string.format("After %s tiles at (%s, %s): Not electrified!", #self.path, self.tile.x, self.tile.y), NotificationColor.GRAY)
+        return true
+    end
+    local segmentSpeed = _SpeedToID(self.segments[#self.segments].speed)
+    if #self.segments >= 2 and segmentSpeed ~= Speed.VMAX and segmentSpeed ~= Speed["100"] and self.path[self.segments[#self.segments - 1].start].tile:getSemaphoreNoDanger() then
+        -- If the segment we're on mandates speeds less than 100 km/h, and the previous semaphore does not allow that, this entire possibility will not pass.
         return true
     end
     return false
