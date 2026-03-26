@@ -101,38 +101,40 @@ end
 ---Sets all property inputs to values from the specified tile.
 ---@param tile Tile The tile for which to set the input values.
 function UIPickerPane:setValuesForTile(tile)
-	self.trackID.value = tile:getTrackID() or ""
-	self.switchID.value = tile:getSwitchID() or ""
-	self.switchFlip.value = tile:getSwitchFlip()
-	self.switchFlipABCD.value = tile:getSwitchFlipABCD()
-	self.semaphoreType.value = tile:isSemaphore() and tostring(tile:getSemaphoreType()) or ""
-	self.semaphoreNoW24.value = tile:getSemaphoreNoW24()
-	self.semaphoreNoDanger.value = tile:getSemaphoreNoDanger()
-	self.semaphoreID.value = tile:getSemaphoreID() or ""
-	self.itineraryEndID.value = tile:getItineraryEndID() or ""
-	self.electrified2.value = tile:isElectrified()
-	self.targetW24.value = tile:isTargetW24()
-	self.trainTarget.value = tile:isTrainTarget()
-	self.shuntTarget.value = tile:isShuntTarget()
-	self.forbidTrain.value = tile:isTrainForbidden()
-	self.forbidShunt.value = tile:isShuntForbidden()
-	self.speed.value = tile:getMaxSpeed() ~= math.huge and tostring(tile:getMaxSpeed()) or ""
-	self.speedPlus.value = tile:getMaxSpeedPlus() ~= math.huge and tostring(tile:getMaxSpeedPlus()) or ""
-	self.speedMinus.value = tile:getMaxSpeedMinus() ~= math.huge and tostring(tile:getMaxSpeedMinus()) or ""
-	self.semaphoreAllowTrain.value = tile:getSemaphoreAllowTrain()
-	self.semaphoreAllowShunt.value = tile:getSemaphoreAllowShunt()
-	self.semaphoreAllowSz.value = tile:getSemaphoreAllowSz()
-	self.semaphoreShape.value = tile:getSemaphoreShape()
-	self.semaphoreShortSpeed.value = tile:getSemaphoreShortSpeed() and tostring(tile:getSemaphoreShortSpeed()) or ""
-	self.semaphoreFourPhase.value = tile:getSemaphoreFourPhase()
-	self.warp.value = tile:getWarp() or ""
-	self.command.value = tile:getCommand() or ""
+	self.trackID.value = tile.trackID or ""
+	self.switchID.value = tile.switchID or ""
+	self.switchFlip.value = tile.switchFlip
+	self.switchFlipABCD.value = tile.switchFlipABCD
+	self.semaphoreType.value = tile:isSemaphore() and tostring(tile.semaphoreType) or ""
+	self.semaphoreNoW24.value = tile.semaphoreNoW24
+	self.semaphoreNoDanger.value = tile.semaphoreNoDanger
+	self.semaphoreID.value = tile.semaphoreID or ""
+	self.itineraryEndID.value = tile.itineraryEndID or ""
+	self.electrified2.value = tile.electrified
+	self.targetW24.value = tile.targetW24
+	self.trainTarget.value = tile.trainTarget
+	self.shuntTarget.value = tile.shuntTarget
+	self.forbidTrain.value = tile.forbidTrain
+	self.forbidShunt.value = tile.forbidShunt
+	self.speed.value = tile.maxSpeed ~= math.huge and tostring(tile.maxSpeed) or ""
+	self.speedPlus.value = tile.maxSpeedPlus ~= math.huge and tostring(tile.maxSpeedPlus) or ""
+	self.speedMinus.value = tile.maxSpeedMinus ~= math.huge and tostring(tile.maxSpeedMinus) or ""
+	self.semaphoreAllowTrain.value = tile.semaphoreAllowTrain
+	self.semaphoreAllowShunt.value = tile.semaphoreAllowShunt
+	self.semaphoreAllowSz.value = tile.semaphoreAllowSz
+	self.semaphoreShape.value = tile.semaphoreShape
+	self.semaphoreShortSpeed.value = tile.semaphoreShortSpeed and tostring(tile.semaphoreShortSpeed) or ""
+	self.semaphoreFourPhase.value = tile.semaphoreFourPhase
+	self.warp.value = tile.warp or ""
+	self.command.value = tile.command or ""
 end
 
 function UIPickerPane:updateElectrified(checkbox)
 	_Picker.electrified = checkbox.value
 end
 
+---Executes a function for each selected tile.
+---@param f fun(tile: Tile) The function to be executed.
 function UIPickerPane:forEachTile(f)
 	local station = _Project:getCurrentStation()
 	if not station then
@@ -145,107 +147,107 @@ function UIPickerPane:forEachTile(f)
 end
 
 function UIPickerPane:updateTrackID(input)
-	self:forEachTile(function(tile) tile:setTrackID(input.value) end)
+	self:forEachTile(function(tile) tile.trackID = input.value ~= "" and input.value or nil end)
 end
 
 function UIPickerPane:updateSwitchID(input)
-	self:forEachTile(function(tile) tile:setSwitchID(input.value) end)
+	self:forEachTile(function(tile) tile.switchID = input.value ~= "" and input.value or nil end)
 end
 
 function UIPickerPane:updateSemaphoreID(input)
-	self:forEachTile(function(tile) tile:setSemaphoreID(input.value) end)
+	self:forEachTile(function(tile) tile.semaphoreID = input.value ~= "" and input.value or nil end)
 end
 
 function UIPickerPane:updateItineraryEndID(input)
-	self:forEachTile(function(tile) tile:setItineraryEndID(input.value) end)
+	self:forEachTile(function(tile) tile.itineraryEndID = input.value ~= "" and input.value or nil end)
 end
 
 function UIPickerPane:updateElectrified2(checkbox)
-	self:forEachTile(function(tile) tile:setElectrified(checkbox.value) end)
+	self:forEachTile(function(tile) tile.electrified = checkbox.value end)
 end
 
 function UIPickerPane:updateTargetW24(checkbox)
-	self:forEachTile(function(tile) tile:setTargetW24(checkbox.value) end)
+	self:forEachTile(function(tile) tile.targetW24 = checkbox.value end)
 end
 
 function UIPickerPane:updateSwitchFlip(checkbox)
-	self:forEachTile(function(tile) tile:setSwitchFlip(checkbox.value) end)
+	self:forEachTile(function(tile) tile.switchFlip = checkbox.value end)
 end
 
 function UIPickerPane:updateSwitchFlipABCD(checkbox)
-	self:forEachTile(function(tile) tile:setSwitchFlipABCD(checkbox.value) end)
+	self:forEachTile(function(tile) tile.switchFlipABCD = checkbox.value end)
 end
 
 function UIPickerPane:updateSemaphoreType(input)
-	self:forEachTile(function(tile) tile:setSemaphoreType(tonumber(input.value)) end)
+	self:forEachTile(function(tile) tile.semaphoreType = tonumber(input.value) end)
 end
 
 function UIPickerPane:updateSemaphoreNoW24(checkbox)
-	self:forEachTile(function(tile) tile:setSemaphoreNoW24(checkbox.value) end)
+	self:forEachTile(function(tile) tile.semaphoreNoW24 = checkbox.value end)
 end
 
 function UIPickerPane:updateSemaphoreNoDanger(checkbox)
-	self:forEachTile(function(tile) tile:setSemaphoreNoDanger(checkbox.value) end)
+	self:forEachTile(function(tile) tile.semaphoreNoDanger = checkbox.value end)
 end
 
 function UIPickerPane:updateMaxSpeed(input)
-	self:forEachTile(function(tile) tile:setMaxSpeed(tonumber(input.value)) end)
+	self:forEachTile(function(tile) tile.maxSpeed = tonumber(input.value) or math.huge end)
 end
 
 function UIPickerPane:updateMaxSpeedPlus(input)
-	self:forEachTile(function(tile) tile:setMaxSpeedPlus(tonumber(input.value)) end)
+	self:forEachTile(function(tile) tile.maxSpeedPlus = tonumber(input.value) or math.huge end)
 end
 
 function UIPickerPane:updateMaxSpeedMinus(input)
-	self:forEachTile(function(tile) tile:setMaxSpeedMinus(tonumber(input.value)) end)
+	self:forEachTile(function(tile) tile.maxSpeedMinus = tonumber(input.value) or math.huge end)
 end
 
 function UIPickerPane:updateTrainTarget(checkbox)
-	self:forEachTile(function(tile) tile:setTrainTarget(checkbox.value) end)
+	self:forEachTile(function(tile) tile.trainTarget = checkbox.value end)
 end
 
 function UIPickerPane:updateShuntTarget(checkbox)
-	self:forEachTile(function(tile) tile:setShuntTarget(checkbox.value) end)
+	self:forEachTile(function(tile) tile.shuntTarget = checkbox.value end)
 end
 
 function UIPickerPane:updateForbidTrain(checkbox)
-	self:forEachTile(function(tile) tile:setForbidTrain(checkbox.value) end)
+	self:forEachTile(function(tile) tile.forbidTrain = checkbox.value end)
 end
 
 function UIPickerPane:updateForbidShunt(checkbox)
-	self:forEachTile(function(tile) tile:setForbidShunt(checkbox.value) end)
+	self:forEachTile(function(tile) tile.forbidShunt = checkbox.value end)
 end
 
 function UIPickerPane:updateSemaphoreAllowTrain(checkbox)
-	self:forEachTile(function(tile) tile:setSemaphoreAllowTrain(checkbox.value) end)
+	self:forEachTile(function(tile) tile.semaphoreAllowTrain = checkbox.value end)
 end
 
 function UIPickerPane:updateSemaphoreAllowShunt(checkbox)
-	self:forEachTile(function(tile) tile:setSemaphoreAllowShunt(checkbox.value) end)
+	self:forEachTile(function(tile) tile.semaphoreAllowShunt = checkbox.value end)
 end
 
 function UIPickerPane:updateSemaphoreAllowSz(checkbox)
-	self:forEachTile(function(tile) tile:setSemaphoreAllowSz(checkbox.value) end)
+	self:forEachTile(function(tile) tile.semaphoreAllowSz = checkbox.value end)
 end
 
 function UIPickerPane:updateSemaphoreShape(checkbox)
-	self:forEachTile(function(tile) tile:setSemaphoreShape(checkbox.value) end)
+	self:forEachTile(function(tile) tile.semaphoreShape = checkbox.value end)
 end
 
 function UIPickerPane:updateSemaphoreShortSpeed(input)
-	self:forEachTile(function(tile) tile:setSemaphoreShortSpeed(tonumber(input.value)) end)
+	self:forEachTile(function(tile) tile.semaphoreShortSpeed = tonumber(input.value) end)
 end
 
 function UIPickerPane:updateSemaphoreFourPhase(checkbox)
-	self:forEachTile(function(tile) tile:setSemaphoreFourPhase(checkbox.value) end)
+	self:forEachTile(function(tile) tile.semaphoreFourPhase = checkbox.value end)
 end
 
 function UIPickerPane:updateWarp(input)
-	self:forEachTile(function(tile) tile:setWarp(input.value) end)
+	self:forEachTile(function(tile) tile.warp = input.value end)
 end
 
 function UIPickerPane:updateCommand(input)
-	self:forEachTile(function(tile) tile:setCommand(input.value) end)
+	self:forEachTile(function(tile) tile.command = input.value end)
 end
 
 return UIPickerPane

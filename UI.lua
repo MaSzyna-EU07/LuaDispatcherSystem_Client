@@ -19,10 +19,21 @@ function UI:new()
 	self.elements = {}
 end
 
+---Returns the Gspot position for a centered window with size in tiles.
+---@param w number Window width in tiles.
+---@param h number Window height in tiles.
+---@return Gspot.pos
 function UI:getCenteredWindowDimensions(w, h)
 	return {(_WWIDTH - w) / 2, (_WHEIGHT - h) / 2, w, h}
 end
 
+---Returns the Gspot position for the specified metrics in tiles.
+---@param tx number X coordinate of the top left corner of the element.
+---@param ty number Y coordinate of the top left corner of the element.
+---@param tw number Width of the element in tiles.
+---@param th number Height of the element in tiles.
+---@param margin number? Margin of the element in pixels. Positive values will shrink the element, negative values will inflate it.
+---@return Gspot.pos
 function UI:tilesToPos(tx, ty, tw, th, margin)
 	margin = margin or 0
 	return {x = tx * self.U + margin, y = ty * self.U + margin, w = tw * self.U - margin * 2, h = th * self.U - margin * 2}
@@ -94,6 +105,7 @@ function UI:addLabel(parent, id, text, tx, ty, tw, th)
 end
 
 ---Adds a button to the element list.
+---@generic T
 ---@param parent string? The parent element ID.
 ---@param id string? The ID of the element. If not specified, the element will be inaccessible.
 ---@param text string Text to be written on the button.
@@ -101,8 +113,8 @@ end
 ---@param ty number Y coordinate of the top left corner of the element.
 ---@param tw number Width of the element in tiles.
 ---@param th number Height of the element in tiles.
----@param executor any Class instance which will execute the subsequent functions.
----@param onClick function? If specified, this function will be executed when the button is clicked.
+---@param executor T Class instance which will execute the subsequent functions.
+---@param onClick fun(executor: T, this: Gspot.button)? If specified, this function will be executed when the button is clicked.
 ---@return Gspot.button
 function UI:addButton(parent, id, text, tx, ty, tw, th, executor, onClick)
 	local pos = self:tilesToPos(tx, ty, tw, th, 1)
@@ -119,6 +131,7 @@ function UI:addButton(parent, id, text, tx, ty, tw, th, executor, onClick)
 end
 
 ---Adds a checkbox to the element list.
+---@generic T
 ---@param parent string? The parent element ID.
 ---@param id string? The ID of the element. If not specified, the element will be inaccessible.
 ---@param text string Text to be written on the checkbox.
@@ -126,8 +139,8 @@ end
 ---@param ty number Y coordinate of the top left corner of the element.
 ---@param tw number Width of the element in tiles. This should be always 1.
 ---@param th number Height of the element in tiles. This should be always 1.
----@param executor any Class instance which will execute the subsequent functions.
----@param onClick function? If specified, this function will be executed when the checkbox is clicked.
+---@param executor T Class instance which will execute the subsequent functions.
+---@param onClick fun(executor: T, this: Gspot.checkbox)? If specified, this function will be executed when the checkbox is clicked.
 ---@return Gspot.checkbox
 function UI:addCheckbox(parent, id, text, tx, ty, tw, th, executor, onClick)
 	local pos = self:tilesToPos(tx, ty, tw, th, 1)
@@ -145,15 +158,16 @@ function UI:addCheckbox(parent, id, text, tx, ty, tw, th, executor, onClick)
 end
 
 ---Adds an input box to the element list.
+---@generic T
 ---@param parent string? The parent element ID.
 ---@param id string? The ID of the element. If not specified, the element will be inaccessible.
 ---@param tx number X coordinate of the top left corner of the element.
 ---@param ty number Y coordinate of the top left corner of the element.
 ---@param tw number Width of the element in tiles.
 ---@param th number Height of the element in tiles.
----@param executor any Class instance which will execute the subsequent functions.
----@param onChange function? If specified, this function will be executed when the text has changed.
----@param onSubmit function? If specified, this function will be executed when Enter is pressed while typing in this text box.
+---@param executor T Class instance which will execute the subsequent functions.
+---@param onChange fun(executor: T, this: Gspot.input)? If specified, this function will be executed when the text has changed.
+---@param onSubmit fun(executor: T, this: Gspot.input)? If specified, this function will be executed when Enter is pressed while typing in this text box.
 ---@return Gspot.input
 function UI:addInput(parent, id, tx, ty, tw, th, executor, onChange, onSubmit)
 	local pos = self:tilesToPos(tx, ty, tw, th, 1)
@@ -198,6 +212,7 @@ function UI:addComboBox(parent, id, tx, ty, tw, th)
 end
 
 ---Adds an entry to the combo box.
+---@generic T
 ---@param parent string The parent element ID.
 ---@param id string The value identifying this entry.
 ---@param text string The text to be written on this entry.
@@ -205,9 +220,9 @@ end
 ---@param ty number Y coordinate of the top left corner of the element.
 ---@param tw number Width of the element in tiles.
 ---@param th number Height of the element in tiles.
----@param executor any Class instance which will execute the subsequent functions.
----@param onClick function? If specified, this function will be executed when the entry is clicked.
----@param onDoubleClick function? If specified, this function will be executed when the entry is double clicked.
+---@param executor T Class instance which will execute the subsequent functions.
+---@param onClick fun(executor: T, this: Gspot.option)? If specified, this function will be executed when the entry is clicked.
+---@param onDoubleClick fun(executor: T, this: Gspot.option)? If specified, this function will be executed when the entry is double clicked.
 ---@return Gspot.option
 function UI:addEntry(parent, id, text, tx, ty, tw, th, executor, onClick, onDoubleClick)
 	local pos = self:tilesToPos(tx, ty, tw, th)

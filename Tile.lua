@@ -14,50 +14,44 @@ function Tile:new(station, x, y)
 	self.size = 14
 	self.offset = 0
 
-	-- Tile IDs:
-	-- 0 - blank/decoration
-	-- 1, 2, 5, 6 - straight tracks
-	-- 3, 7 - crossings
-	-- 4, 8 - platforms/tracks inside station
-	-- 9-16 - curves
-	-- 17-24, 29-40. 49-52 - simple junctions
-	-- 25-28 - double junctions "anglik"
-	-- 41-48 - 3-way junctions
-	-- 53-56 - buffers
-	-- 57-60 - derailers
-	-- 61-68 - signals/semaphores
-	-- 69-71 - entrances/exits
-	-- 72 - depo
-	-- 73 - tory postojowe
-
-	self.id = ""
-	self.electrified = false
-	self.trackID = nil
-	self.switchID = nil
-	self.switchFlip = false
-	self.switchFlipABCD = false
-	self.semaphoreID = nil
-	self.semaphoreType = nil
-	self.semaphoreAllowTrain = false
-	self.semaphoreAllowShunt = false
-	self.semaphoreAllowSz = false
-	self.semaphoreShape = false
-	self.semaphoreNoW24 = false
-	self.semaphoreNoDanger = false
-	self.semaphoreShortSpeed = nil
-	self.semaphoreFourPhase = false
-	self.semaphoreNext = nil -- Cannot be a speed identifier, only a semaphore identifier.
-	self.itineraryEndID = nil -- TODO: Later on, check whether we need this. The only reason we would need this is for dispatcher algorithms.
-	self.maxSpeed = math.huge
-	self.maxSpeedPlus = math.huge
-	self.maxSpeedMinus = math.huge
-	self.trainTarget = false
-	self.shuntTarget = false
-	self.targetW24 = false
-	self.forbidTrain = false
-	self.forbidShunt = false
-	self.warp = nil
-	self.command = nil
+	---@type string
+	self.id = "" -- Tile ID, which determines its appearance and some logic.
+	self.electrified = true -- Whether the track on this tile is electrified.
+	---@type string?
+	self.trackID = nil -- Track ID for this tile.
+	---@type string?
+	self.switchID = nil -- Switch ID for this tile.
+	self.switchFlip = false -- Whether the switch's sides are flipped ("+" means straight, "-" means left/right).
+	self.switchFlipABCD = false -- Whether the double switch's sides are flipped (`ab` is on the right side, `cd` is on the left side).
+	---@type string?
+	self.semaphoreID = nil -- Semaphore ID for this tile.
+	---@type SemaphoreType?
+	self.semaphoreType = nil -- Semaphore type for this tile.
+	self.semaphoreAllowTrain = false -- Whether this tile's semaphore can display a clear signal for non-shunting trains.
+	self.semaphoreAllowShunt = false -- Whether this tile's semaphore can display a shunting signal.
+	self.semaphoreAllowSz = false -- Whether this tile's semaphore can display an Sz signal.
+	self.semaphoreShape = false -- Whether this tile's semaphore is a shape semaphore.
+	self.semaphoreNoW24 = false -- Whether this tile's semaphore is UNABLE to display the W24 sign.
+	self.semaphoreNoDanger = false -- Whether this tile's semaphore has no danger light (next semaphore must be displaying a >=100 speed).
+	---@type Speed?
+	self.semaphoreShortSpeed = nil -- The tile's short speed (when the next semaphore is S1, this one will display a reduced speed).
+	self.semaphoreFourPhase = false -- Whether this tile's semaphore is four phase (when two semaphores ahead are S1, this one will display a fake reduced speed next).
+	---@type string?
+	self.semaphoreNext = nil -- The default next semaphore when the pathfinder doesn't specify one. Cannot be a speed identifier, only a semaphore identifier.
+	---@type string?
+	self.itineraryEndID = nil -- Itinerary end ID for this Tile. TODO: Later on, check whether we need this. The only reason we would need this is for dispatcher algorithms.
+	self.maxSpeed = math.huge -- The maximum speed for this Tile. Is `math.huge` if no limit is specified.
+	self.maxSpeedPlus = math.huge -- Maximum speed for this Tile when the switch on this Tile is set to `true` ("+"). Is `math.huge` if no limit is specified.
+	self.maxSpeedMinus = math.huge -- Maximum speed for this Tile when the switch on this Tile is set to `false` ("-"). Is `math.huge` if no limit is specified.
+	self.trainTarget = false -- Whether this Tile can be used as a target for train paths.
+	self.shuntTarget = false -- Whether this Tile can be used as a target for shunting paths.
+	self.targetW24 = false -- Whether this Tile's target will make its pathfinding semaphore display a W24 signal.
+	self.forbidTrain = false -- Whether this Tile is excluded from pathfinding train signals.
+	self.forbidShunt = false -- Whether this Tile is excluded from pathfinding shunting signals.
+	---@type string?
+	self.warp = nil -- An index (shortcut) of the station to jump to when this tile is clicked.
+	---@type string?
+	self.command = nil -- A command to be sent to the server when this tile is right clicked.
 end
 
 ---Returns whether this Tile is a switch, regardless of its type.
@@ -76,342 +70,6 @@ end
 ---@return boolean
 function Tile:isSemaphore()
 	return self:getData().semaphore ~= nil
-end
-
----Sets a new tile ID for this tile.
----@param id string The new ID.
-function Tile:setID(id)
-	self.id = id
-end
-
----Returns whether this Tile is electrified.
----@return boolean
-function Tile:isElectrified()
-	return self.electrified
-end
-
----Sets whether this Tile is electrified.
----@param electrified boolean Whether this Tile should be electrified.
-function Tile:setElectrified(electrified)
-	self.electrified = electrified
-end
-
----Returns the track ID for this Tile. Returns `nil` if no track ID has been specified for this tile.
----@return string?
-function Tile:getTrackID()
-	return self.trackID
-end
-
----Sets a new track ID for this Tile. Passing `nil` or an empty string will clear the track ID from this tile.
----@param trackID string? The new track ID.
-function Tile:setTrackID(trackID)
-	self.trackID = trackID ~= "" and trackID or nil
-end
-
----Returns the switch ID for this Tile. Returns `nil` if no switch ID has been specified for this tile.
----@return string?
-function Tile:getSwitchID()
-	return self.switchID
-end
-
----Sets a new switch ID for this Tile. Passing `nil` or an empty string will clear the switch ID from this tile.
----@param switchID string? The new switch ID.
-function Tile:setSwitchID(switchID)
-	self.switchID = switchID ~= "" and switchID or nil
-end
-
----Returns whether the switch's sides are flipped ("+" means straight, "-" means left/right).
----@return boolean
-function Tile:getSwitchFlip()
-	return self.switchFlip
-end
-
----Sets whether the switch's sides are flipped ("+" means straight, "-" means left/right).
----@param switchFlip boolean The new flip state.
-function Tile:setSwitchFlip(switchFlip)
-	self.switchFlip = switchFlip
-end
-
----Returns whether the double switch's sides are flipped (`ab` is on the right side, `cd` is on the left side).
----@return boolean
-function Tile:getSwitchFlipABCD()
-	return self.switchFlipABCD
-end
-
----Sets whether the double switch's sides are flipped (`ab` is on the right side, `cd` is on the left side).
----@param switchFlipABCD boolean The new flip state.
-function Tile:setSwitchFlipABCD(switchFlipABCD)
-	self.switchFlipABCD = switchFlipABCD
-end
-
----Returns the semaphore ID for this Tile. Returns `nil` if no semaphore ID has been specified for this tile.
----@return string?
-function Tile:getSemaphoreID()
-	return self.semaphoreID
-end
-
----Sets a new semaphore ID for this Tile. Passing `nil` or an empty string will clear the semaphore ID from this tile.
----@param semaphoreID string? The new semaphore ID.
-function Tile:setSemaphoreID(semaphoreID)
-	self.semaphoreID = semaphoreID ~= "" and semaphoreID or nil
-end
-
----Returns the semaphore type assigned for this Tile.
----@return SemaphoreType
-function Tile:getSemaphoreType()
-	return self.semaphoreType or SemaphoreType.SEM
-end
-
----Sets a new semaphore type for this Tile.
----@param semaphoreType SemaphoreType? The new semaphore type to be assigned.
-function Tile:setSemaphoreType(semaphoreType)
-	self.semaphoreType = semaphoreType
-end
-
----Returns whether this tile's semaphore can display a train signal.
----@return boolean
-function Tile:getSemaphoreAllowTrain()
-	return self.semaphoreAllowTrain
-end
-
----Sets whether this tile's semaphore can display a train signal.
----@param semaphoreAllowTrain boolean
-function Tile:setSemaphoreAllowTrain(semaphoreAllowTrain)
-	self.semaphoreAllowTrain = semaphoreAllowTrain
-end
-
----Returns whether this tile's semaphore can display a shunting signal.
----@return boolean
-function Tile:getSemaphoreAllowShunt()
-	return self.semaphoreAllowShunt
-end
-
----Sets whether this tile's semaphore can display a shunting signal.
----@param semaphoreAllowShunt boolean
-function Tile:setSemaphoreAllowShunt(semaphoreAllowShunt)
-	self.semaphoreAllowShunt = semaphoreAllowShunt
-end
-
----Returns whether this tile's semaphore can display an Sz signal.
----@return boolean
-function Tile:getSemaphoreAllowSz()
-	return self.semaphoreAllowSz
-end
-
----Sets whether this tile's semaphore can display an Sz signal.
----@param semaphoreAllowSz boolean
-function Tile:setSemaphoreAllowSz(semaphoreAllowSz)
-	self.semaphoreAllowSz = semaphoreAllowSz
-end
-
----Returns whether this tile's semaphore is a shape semaphore.
----@return boolean
-function Tile:getSemaphoreShape()
-	return self.semaphoreShape
-end
-
----Sets whether this tile's semaphore is a shape semaphore.
----@param semaphoreShape boolean
-function Tile:setSemaphoreShape(semaphoreShape)
-	self.semaphoreShape = semaphoreShape
-end
-
----Returns whether this tile's semaphore has NO W24 sign.
----@return boolean
-function Tile:getSemaphoreNoW24()
-	return self.semaphoreNoW24
-end
-
----Sets whether this tile's semaphore has NO W24 sign.
----@param semaphoreNoW24 boolean
-function Tile:setSemaphoreNoW24(semaphoreNoW24)
-	self.semaphoreNoW24 = semaphoreNoW24
-end
-
----Returns whether this tile's semaphore has no danger light (next semaphore must be displaying a >=100 speed).
----@return boolean
-function Tile:getSemaphoreNoDanger()
-	return self.semaphoreNoDanger
-end
-
----Sets whether this tile's semaphore has no danger light (next semaphore must be displaying a >=100 speed).
----@param semaphoreNoDanger boolean
-function Tile:setSemaphoreNoDanger(semaphoreNoDanger)
-	self.semaphoreNoDanger = semaphoreNoDanger
-end
-
----Returns this tile's short speed (when the next semaphore is S1, this one will display a reduced speed).
----This behavior is controlled by the server.
----@return Speed?
-function Tile:getSemaphoreShortSpeed()
-	return self.semaphoreShortSpeed
-end
-
----Sets this tile's short speed (when the next semaphore is S1, this one will display a reduced speed).
----This behavior is controlled by the server.
----@param semaphoreShortSpeed Speed?
-function Tile:setSemaphoreShortSpeed(semaphoreShortSpeed)
-	self.semaphoreShortSpeed = semaphoreShortSpeed
-end
-
----Returns whether this tile's semaphore is four phase (when two semaphores ahead are S1, this one will display a fake reduced speed next).
----This behavior is controlled by the server.
----@return boolean
-function Tile:getSemaphoreFourPhase()
-	return self.semaphoreFourPhase
-end
-
----Sets whether this tile's semaphore is four phase (when two semaphores ahead are S1, this one will display a fake reduced speed next).
----This behavior is controlled by the server.
----@param semaphoreFourPhase boolean
-function Tile:setSemaphoreFourPhase(semaphoreFourPhase)
-	self.semaphoreFourPhase = semaphoreFourPhase
-end
-
----Returns the next semaphore, if any.
----This behavior is controlled by the server.
----@return string?
-function Tile:getSemaphoreNext()
-	return self.semaphoreNext
-end
-
----Sets the next semaphore or removes it.
----This behavior is controlled by the server.
----@param semaphoreNext string?
-function Tile:setSemaphoreNext(semaphoreNext)
-	self.semaphoreNext = semaphoreNext
-end
-
----Returns the itinerary end ID for this Tile. Returns `nil` if no such ID is specified.
----@return string?
-function Tile:getItineraryEndID()
-	return self.itineraryEndID
-end
-
----Sets a new itinerary end ID for this Tile. Passing `nil` or an empty string will clear this ID from this tile.
----@param itineraryEndID string? The new itinerary end ID.
-function Tile:setItineraryEndID(itineraryEndID)
-	self.itineraryEndID = itineraryEndID ~= "" and itineraryEndID or nil
-end
-
----Returns the maximum speed for this Tile. Returns `math.huge` if no limit is specified.
----@return number
-function Tile:getMaxSpeed()
-	return self.maxSpeed
-end
-
----Sets a new maximum speed for this Tile, or clears it if `nil` is provided.
----@param speed number? New speed.
-function Tile:setMaxSpeed(speed)
-	self.maxSpeed = speed or math.huge
-end
-
----Returns the maximum speed for this Tile when the switch on this Tile is set to `true` ("+"). Returns `math.huge` if no limit is specified.
----@return number
-function Tile:getMaxSpeedPlus()
-	return self.maxSpeedPlus
-end
-
----Sets a new maximum speed for this Tile when the switch on this Tile is set to `true` ("+"), or clears it if `nil` is provided.
----@param speed number? New speed.
-function Tile:setMaxSpeedPlus(speed)
-	self.maxSpeedPlus = speed or math.huge
-end
-
----Returns the maximum speed for this Tile when the switch on this Tile is set to `false` ("-"). Returns `math.huge` if no limit is specified.
----@return number
-function Tile:getMaxSpeedMinus()
-	return self.maxSpeedMinus
-end
-
----Sets a new maximum speed for this Tile when the switch on this Tile is set to `false` ("-"), or clears it if `nil` is provided.
----@param speed number? New speed.
-function Tile:setMaxSpeedMinus(speed)
-	self.maxSpeedMinus = speed or math.huge
-end
-
----Returns whether this Tile can be used as a target for train paths.
----@return boolean
-function Tile:isTrainTarget()
-	return self.trainTarget
-end
-
----Sets whether this Tile can be used as a target for train paths.
----@param trainTarget boolean Whether this Tile can be used as a target for train paths.
-function Tile:setTrainTarget(trainTarget)
-	self.trainTarget = trainTarget
-end
-
----Returns whether this Tile can be used as a target for shunting paths.
----@return boolean
-function Tile:isShuntTarget()
-	return self.shuntTarget
-end
-
----Sets whether this Tile can be used as a target for shunting paths.
----@param shuntTarget boolean
-function Tile:setShuntTarget(shuntTarget)
-	self.shuntTarget = shuntTarget
-end
-
----Returns whether this Tile's target will make its pathfinding semaphore display a W24 signal.
----@return boolean
-function Tile:isTargetW24()
-	return self.targetW24
-end
-
----Sets whether this Tile's target will make its pathfinding semaphore display a W24 signal.
----@param targetW24 boolean
-function Tile:setTargetW24(targetW24)
-	self.targetW24 = targetW24
-end
-
----Returns whether this Tile is excluded from pathfinding train signals.
----@return boolean
-function Tile:isTrainForbidden()
-	return self.forbidTrain
-end
-
----Sets whether this Tile is excluded from pathfinding train signals.
----@param forbidTrain boolean Whether to exclude trains.
-function Tile:setForbidTrain(forbidTrain)
-	self.forbidTrain = forbidTrain
-end
-
----Returns whether this Tile is excluded from pathfinding shunting signals.
----@return boolean
-function Tile:isShuntForbidden()
-	return self.forbidShunt
-end
-
----Sets whether this Tile is excluded from pathfinding shunting signals.
----@param forbidShunt boolean Whether to exclude shunting trains.
-function Tile:setForbidShunt(forbidShunt)
-	self.forbidShunt = forbidShunt
-end
-
----Returns an index (shortcut) of the station to jump to when this tile is clicked, if any.
----@return string?
-function Tile:getWarp()
-	return self.warp
-end
-
----Sets an index (shortcut) of the station to jump to when this tile is clicked.
----@param warp string? A new station. Pass `nil` to remove warp.
-function Tile:setWarp(warp)
-	self.warp = warp
-end
-
----Returns a command to be sent to the server when this tile is right clicked, if any.
----@return string?
-function Tile:getCommand()
-	return self.command
-end
-
----Sets a command to be sent to the server when this tile is right clicked.
----@param command string? A new command. Pass `nil` to remove the command.
-function Tile:setCommand(command)
-	self.command = command
 end
 
 --######################################--
@@ -509,9 +167,9 @@ end
 ---@return boolean
 function Tile:isTargetForMode(mode)
 	if mode == PathMode.TRAIN then
-		return self:isTrainTarget()
+		return self.trainTarget
 	elseif mode == PathMode.SHUNT then
-		return self:isShuntTarget()
+		return self.shuntTarget
 	end
 	return false
 end
@@ -520,7 +178,7 @@ end
 ---@param w24 boolean Whether the initial semaphore can display the W24 signal.
 ---@return boolean
 function Tile:isTargetForW24(w24)
-	return w24 or not self:isTargetW24()
+	return w24 or not self.targetW24
 end
 
 ---Returns whether this Tile is traversible by the specified path mode.
@@ -528,9 +186,9 @@ end
 ---@return boolean
 function Tile:isPathModeAllowed(mode)
 	if mode == PathMode.TRAIN then
-		return not self:isTrainForbidden()
+		return not self.forbidTrain
 	elseif mode == PathMode.SHUNT then
-		return not self:isShuntForbidden()
+		return not self.forbidShunt
 	end
 	return true
 end

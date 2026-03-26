@@ -63,7 +63,7 @@ function TraversalPossibility:evaluate()
         -- Add the new tile.
         table.insert(newPossibility.path, {tile = tile, dir1 = _InvertDir(self.direction), dir2 = direction})
         -- A segment splits occurs on a semaphore tile. The semaphore must be faced in our direction. We ignore shunting-only semaphores in train mode.
-        if tile:isSemaphore() and tile:getSemaphoreDirection() == direction and (self.pathfinder.mode == PathMode.SHUNT or tile:getSemaphoreType() ~= SemaphoreType.TM) then
+        if tile:isSemaphore() and tile:getSemaphoreDirection() == direction and (self.pathfinder.mode == PathMode.SHUNT or tile.semaphoreType ~= SemaphoreType.TM) then
             newPossibility.lastSemaphore = tile
             table.insert(newPossibility.segments, {start = #newPossibility.path, speed = math.huge})
         end
@@ -119,13 +119,13 @@ function TraversalPossibility:isDead()
         --_Notifications:post(string.format("After %s tiles at (%s, %s): Mode forbidden!", #self.path, self.tile.x, self.tile.y), NotificationColor.GRAY)
         return true
     end
-    if self.pathfinder.electrified and not self.tile:isElectrified() then
+    if self.pathfinder.electrified and not self.tile.electrified then
         -- The track is not electrified while pathfinding for an electric train.
         --_Notifications:post(string.format("After %s tiles at (%s, %s): Not electrified!", #self.path, self.tile.x, self.tile.y), NotificationColor.GRAY)
         return true
     end
     local segmentSpeed = _SpeedToID(self.segments[#self.segments].speed)
-    if #self.segments >= 2 and segmentSpeed ~= Speed.VMAX and segmentSpeed ~= Speed["100"] and self.path[self.segments[#self.segments - 1].start].tile:getSemaphoreNoDanger() then
+    if #self.segments >= 2 and segmentSpeed ~= Speed.VMAX and segmentSpeed ~= Speed["100"] and self.path[self.segments[#self.segments - 1].start].tile.semaphoreNoDanger then
         -- If the segment we're on mandates speeds less than 100 km/h, and the previous semaphore does not allow that, this entire possibility will not pass.
         return true
     end
@@ -135,7 +135,7 @@ end
 ---Returns `true` if this possibility is a winner (points to the target tile with conditions such as W24 being present on the last semaphore).
 ---@return boolean
 function TraversalPossibility:isWinning()
-    return self.tile:getNeighbor(self.direction) == self.pathfinder.target and self.pathfinder.target:isTargetForW24(not self.lastSemaphore:getSemaphoreNoW24())
+    return self.tile:getNeighbor(self.direction) == self.pathfinder.target and self.pathfinder.target:isTargetForW24(not self.lastSemaphore.semaphoreNoW24)
 end
 
 ---Finalizes this possibility by extending its path until a semaphore or a dead end is found.
@@ -181,7 +181,7 @@ function TraversalPossibility:generateItineraries()
             local node = self.path[j]
             -- Determine which tracks should be reserved. Last tile is exempt.
             if j < endIndex then
-                local track = node.tile:getTrackID()
+                local track = node.tile.trackID
                 if track then
                     itinerary:addTrack(track)
                 end
@@ -189,21 +189,21 @@ function TraversalPossibility:generateItineraries()
             -- Check if we have to consider a switch state on this tile.
             local switchStates = node.tile:getSwitchStatesForDirections(node.dir1, node.dir2)
             for suffix, state in pairs(switchStates) do
-                itinerary:addSwitch(node.tile:getSwitchID() .. suffix, state)
+                itinerary:addSwitch(node.tile.switchID .. suffix, state)
             end
             -- First tile determines the semaphore.
             if j == startIndex then
-                itinerary:setSemaphore(assert(node.tile:getSemaphoreID(), "Missing semaphore on starting tile!"))
+                itinerary:setSemaphore(assert(node.tile.semaphoreID, "Missing semaphore on starting tile!"))
                 if self.pathfinder.mode == PathMode.TRAIN then
-                    itinerary:setSpeed(node.tile:getSemaphoreAllowTrain() and _SpeedToID(segment.speed) or Speed.SZ)
+                    itinerary:setSpeed(node.tile.semaphoreAllowTrain and _SpeedToID(segment.speed) or Speed.SZ)
                 elseif self.pathfinder.mode == PathMode.SHUNT then
                     itinerary:setSpeed(Speed.MS2)
                 end
             end
             -- Last tile determines the next semaphore, if it exists, and also determines whether W24 will be displayed.
             if j == endIndex then
-                itinerary:setNext(node.tile:getSemaphoreID() or 1)
-                itinerary:setW24(node.tile:isTargetW24())
+                itinerary:setNext(node.tile.semaphoreID or 1)
+                itinerary:setW24(node.tile.targetW24)
             end
         end
         -- Add the itinerary to the list.

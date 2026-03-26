@@ -294,20 +294,17 @@ function Station:copyServerData()
 	for x = 1, self.w do
 		for y = 1, self.h do
 			local tile = self:assertGetTile(x, y)
-			local trackID = tile:getTrackID()
-			if trackID and not _Utils.isValueInTable(data.tracks, trackID) then
-				table.insert(data.tracks, trackID)
+			if tile.trackID and not _Utils.isValueInTable(data.tracks, tile.trackID) then
+				table.insert(data.tracks, tile.trackID)
 			end
-			local switchID = tile:getSwitchID()
-			if switchID then
-				table.insert(data.switches, switchID)
+			if tile.switchID then
+				table.insert(data.switches, tile.switchID)
 			end
-			local semaphoreID = tile:getSemaphoreID()
-			if semaphoreID then
-				local type = tile:getSemaphoreType()
-				local shape = tile:getSemaphoreShape()
+			if tile.semaphoreID then
+				local type = tile.semaphoreType
+				local shape = tile.semaphoreShape
 				local semaphoreData = {type = type ~= 0 and type or nil, shape = shape ~= false and shape or nil}
-				data.semaphores[semaphoreID] = semaphoreData
+				data.semaphores[tile.semaphoreID] = semaphoreData
 			end
 		end
 	end
@@ -323,8 +320,8 @@ function Station:handleLeftClick()
 	if self.hoverX and self.hoverY then
 		if not _Picker.mode then
 			local tile = Tile(self, self.hoverX, self.hoverY)
-			tile:setID(_Picker.selection)
-			tile:setElectrified(_Picker.electrified)
+			tile.id = _Picker.selection
+			tile.electrified = _Picker.electrified
 			self:setTile(self.hoverX, self.hoverY, tile)
 		elseif _Picker.mode == "addColumn" then
 			-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
@@ -408,8 +405,8 @@ function Station:handleRightClick()
 				if tile:isTrackReserved() then
 					tile:sendSemaphoreUnreserve()
 				else
-					local allowTrain = tile:getSemaphoreAllowTrain() or tile:getSemaphoreAllowSz()
-					local allowShunt = tile:getSemaphoreAllowShunt()
+					local allowTrain = tile.semaphoreAllowTrain or tile.semaphoreAllowSz
+					local allowShunt = tile.semaphoreAllowShunt
 					if allowTrain or allowShunt then
 						self.activeX, self.activeY = self.hoverX, self.hoverY
 						-- If only one mode is available, select it. Otherwise, Shift will force shunting mode.
@@ -417,7 +414,7 @@ function Station:handleRightClick()
 						if not allowTrain or (allowShunt and _Utils.isShiftPressed()) then
 							self.activeMode = PathMode.SHUNT
 						end
-						self.activeW24 = not tile:getSemaphoreNoW24()
+						self.activeW24 = not tile.semaphoreNoW24
 					end
 				end
 			elseif self.activeX and self.activeY then
@@ -428,12 +425,11 @@ function Station:handleRightClick()
 					pathfinder:dispatch()
 				end
 				self.activeX, self.activeY = nil, nil
-			elseif tile:getWarp() then
-				local destination = tile:getWarp()
-				if _Project:getStation(destination) then
-					_Project:setCurrentStation(destination)
+			elseif tile.warp then
+				if _Project:getStation(tile.warp) then
+					_Project:setCurrentStation(tile.warp)
 				end
-			elseif tile:getCommand() then
+			elseif tile.command then
 				tile:sendCustomCommand()
 			end
 		end

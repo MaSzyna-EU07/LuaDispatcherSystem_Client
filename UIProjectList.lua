@@ -9,10 +9,10 @@ local UIProjectList = Class:derive("UIProjectList")
 function UIProjectList:new(ui)
     self.ui = ui
 
-    self.window = self.ui:createCenteredWindow("pl", "Lista projektów", 12, 20)
+    self.window = self.ui:createCenteredWindow("pl", "Lista projektów", 12, 15)
 	self.ui:addLabel("pl", nil, "Projekty", 0, 1, 12, 1)
-	self.projects = self.ui:addComboBox("pl", "projects", 0, 2, 12, 17)
-	self.ui:addButton("pl", "bGo", "Wczytaj", 0, 19, 12, 1, self, self.loadProject)
+	self.projects = self.ui:addComboBox("pl", "projects", 0, 2, 12, 12)
+	self.ui:addButton("pl", "bGo", "Wczytaj", 0, 14, 12, 1, self, self.loadProject)
 end
 
 ---Shows this window.
@@ -34,7 +34,7 @@ function UIProjectList:updateList()
 	for i, project in ipairs(_ProjectManager:getProjectList()) do
 		self.ui:addEntry("pl/projects", project, project, 0, i - 1, 11, 1, self, self.onEntrySelected, self.loadProject)
 	end
-	-- Automatically select the current station.
+	-- Automatically select the current project.
 	self:select(_Project.name)
 end
 
