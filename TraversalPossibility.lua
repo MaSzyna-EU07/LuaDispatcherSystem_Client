@@ -105,19 +105,23 @@ end
 ---Returns `true` if this possibility does not satisfy some of its pathfinder's conditions and cannot be recovered from that.
 ---@return boolean
 function TraversalPossibility:isDead()
-    if self.tile:getTrackState() and not self.tile:isTrackClear() and self.pathfinder.mode ~= PathMode.SHUNT then
-        -- The track is for sure occupied when not in shunting mode.
-        _Notifications:post(string.format("After %s tiles at (%s, %s): Track occupied!", #self.path, self.tile.x, self.tile.y), NotificationColor.GRAY)
+    local prevTile = self:getPreviousTile()
+    if self.pathfinder.mode == PathMode.TRAIN and self.tile:isTrackClear() == false then
+        -- The track is for sure occupied when in train mode.
+        --_Notifications:post(string.format("After %s tiles at (%s, %s): Track occupied!", #self.path, self.tile.x, self.tile.y), NotificationColor.GRAY)
+        return true
+    elseif self.pathfinder.mode == PathMode.SHUNT and self.tile:isTrackClear() and prevTile and prevTile:isTrackClear() == false then
+        -- We went past the occupied segment when shunting. Unfortunately current technology doesn't permit us to jump over a train...
         return true
     end
     if not self.tile:isPathModeAllowed(self.pathfinder.mode) then
         -- The track is not allowing this dispatching mode (i.e. forbids shunting or trains)
-        _Notifications:post(string.format("After %s tiles at (%s, %s): Mode forbidden!", #self.path, self.tile.x, self.tile.y), NotificationColor.GRAY)
+        --_Notifications:post(string.format("After %s tiles at (%s, %s): Mode forbidden!", #self.path, self.tile.x, self.tile.y), NotificationColor.GRAY)
         return true
     end
     if self.pathfinder.electrified and not self.tile:isElectrified() then
         -- The track is not electrified while pathfinding for an electric train.
-        _Notifications:post(string.format("After %s tiles at (%s, %s): Not electrified!", #self.path, self.tile.x, self.tile.y), NotificationColor.GRAY)
+        --_Notifications:post(string.format("After %s tiles at (%s, %s): Not electrified!", #self.path, self.tile.x, self.tile.y), NotificationColor.GRAY)
         return true
     end
     local segmentSpeed = _SpeedToID(self.segments[#self.segments].speed)
@@ -206,6 +210,12 @@ function TraversalPossibility:generateItineraries()
         table.insert(itineraries, 1, itinerary)
     end
     return itineraries
+end
+
+---Returns the penultimate tile of this possibility's path, or `nil` if the possibility's path consists of just one tile.
+---@return Tile?
+function TraversalPossibility:getPreviousTile()
+    return self.path[#self.path - 1] and self.path[#self.path - 1].tile
 end
 
 return TraversalPossibility

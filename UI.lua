@@ -204,7 +204,7 @@ end
 
 ---Returns the whole GUI class. This is a temporary function as all GUI interactions should happen through this class.
 ---@deprecated
----@return table
+---@return Gspot
 function UI:getGUI()
 	return gui
 end

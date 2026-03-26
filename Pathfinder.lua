@@ -36,8 +36,8 @@ function Pathfinder:setElectrified(electrified)
 end
 
 ---Calculates the path based on the provided start and end point of this Pathfinder.
----Currently this is hacked together and the list of tiles is hardcoded. Yay!
 function Pathfinder:calculatePath()
+    local t = love.timer.getTime()
     self:createInitialPossibility()
     local winner = nil
     while #self.possibilities > 0 do
@@ -64,6 +64,8 @@ function Pathfinder:calculatePath()
         print(string.format("    %s: pos=%s,%s dirs=%s,%s", i, node.tile.x, node.tile.y, node.dir1, node.dir2))
     end
     _Utils.tableAddInplace(self.itineraries, winner:generateItineraries())
+    t = love.timer.getTime() - t
+    _Notifications:post(string.format("Pathfinding took %.1fms", t * 1000), NotificationColor.GREEN)
 end
 
 ---Creates the initial possibility starting from this Pathfinder's first tile.

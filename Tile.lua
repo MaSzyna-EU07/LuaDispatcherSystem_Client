@@ -779,17 +779,8 @@ function Tile:drawBackground()
 	love.graphics.rectangle("line", x, y, self.size, self.size)
 end
 
-local FRAME_COLORS = {
-	hover = {0, 1, 1},
-	selection = {0, 1, 0},
-	active = {1, 0, 1},
-	clickable = {1, 1, 0},
-	rectSelection = {0, 1, 1}
-}
-
 ---Draws this Tile's frame at the specified position.
----@private
----@param color [number, number, number] The frame color.
+---@param color TileFrameColor The frame color.
 function Tile:drawFrame(color)
 	local x, y = self:getPos()
 	love.graphics.setColor(color[1], color[2], color[3], 0.2)
@@ -797,31 +788,6 @@ function Tile:drawFrame(color)
 	love.graphics.setColor(color)
 	love.graphics.setLineWidth(2)
 	love.graphics.rectangle("line", x, y, self.size, self.size)
-end
-
----Draws this Tile's hover frame at the specified position.
-function Tile:drawHover()
-	self:drawFrame(FRAME_COLORS.hover)
-end
-
----Draws this Tile's selection frame at the specified position.
-function Tile:drawSelection()
-	self:drawFrame(FRAME_COLORS.selection)
-end
-
----Draws this Tile's active frame at the specified position.
-function Tile:drawActive()
-	self:drawFrame(FRAME_COLORS.active)
-end
-
----Draws this Tile's clickable frame at the specified position.
-function Tile:drawClickable()
-	self:drawFrame(FRAME_COLORS.clickable)
-end
-
----Draws this Tile's rectangular selection frame at the specified position.
-function Tile:drawRectSelection()
-	self:drawFrame(FRAME_COLORS.rectSelection)
 end
 
 --####################################--

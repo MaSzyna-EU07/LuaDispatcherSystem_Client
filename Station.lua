@@ -555,7 +555,7 @@ function Station:drawHover()
 	end
 	if not _Picker.mode then
 		local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
-		self:getHoveredTile():drawHover()
+		self:getHoveredTile():drawFrame(TileFrameColor.HOVER)
 		-- Draw tile ghost.
 		_DrawTile(x, y, _Picker.selection, _Picker.electrified, false, false, false, 0, "s1", 1, 0.5)
 	elseif _Picker.mode == "addColumn" then
@@ -597,7 +597,7 @@ end
 ---@private
 function Station:drawSelection()
 	for i, coords in ipairs(self.selectedTiles) do
-		self:getTile(coords.x, coords.y):drawSelection()
+		self:getTile(coords.x, coords.y):drawFrame(TileFrameColor.SELECTION)
 	end
 end
 
@@ -607,7 +607,8 @@ function Station:drawActive()
 	if not self.activeX or not self.activeY then
 		return
 	end
-	self:getTile(self.activeX, self.activeY):drawActive()
+	local color = self.activeMode == PathMode.SHUNT and TileFrameColor.ACTIVE_SHUNT or TileFrameColor.ACTIVE
+	self:getTile(self.activeX, self.activeY):drawFrame(color)
 end
 
 ---Draws the clickable tile frames.
@@ -619,7 +620,7 @@ function Station:drawClickable()
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
 			if tile:isTargetForMode(self.activeMode) then
-				tile:drawClickable()
+				tile:drawFrame(TileFrameColor.CLICKABLE)
 			end
 		end
 	end
@@ -637,7 +638,7 @@ function Station:drawRectSelection()
 	end
 	for x = math.min(self.dragX, self.hoverX), math.max(self.dragX, self.hoverX) do
 		for y = math.min(self.dragY, self.hoverY), math.max(self.dragY, self.hoverY) do
-			self:assertGetTile(x, y):drawRectSelection()
+			self:assertGetTile(x, y):drawFrame(TileFrameColor.RECT_SELECTION)
 		end
 	end
 end

@@ -35,7 +35,7 @@ TrackColor = {
 SemaphoreColor = {
 	RED = {1, 0, 0},
 	GREEN = {0, 1, 0},
-	ORANGE = {1, 0.7, 0},
+	ORANGE = {1, 0.6, 0},
 	WHITE = {1, 1, 1},
 	BLUE = {0.2, 0.4, 1}
 }
@@ -64,6 +64,16 @@ SemaphoreImage = {
 	ms1 = {color1 = SemaphoreColor.BLUE},
 	ms2 = {color2 = SemaphoreColor.WHITE},
 	sz = {color1 = SemaphoreColor.RED, color2 = SemaphoreColor.WHITE, blink2 = true}
+}
+
+---@enum TileFrameColor
+TileFrameColor = {
+	HOVER = {0, 1, 1},
+	SELECTION = {0, 1, 0},
+	ACTIVE = {1, 0, 1},
+	ACTIVE_SHUNT = {1, 1, 1},
+	CLICKABLE = {1, 1, 0},
+	RECT_SELECTION = {0, 1, 1}
 }
 
 ---@enum NotificationColor

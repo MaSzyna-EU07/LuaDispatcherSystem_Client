@@ -11,19 +11,20 @@ function UIBottomPane:new(ui)
 
 	self.ui:addPane(nil, "bottom", nil, 0, _WHEIGHT / self.ui.U - 1, (_WWIDTH - 320) / self.ui.U, 1)
 	self.ui:addLabel("bottom", nil, "Komunikacja:", 0, 0, 5, 1)
-	self.comStatus = self.ui:addLabel("bottom", "comStatus", "Łączenie...", 5, 0, 7, 1)
-	self.ui:addButton("bottom", nil, "Reset", 12, 0, 3, 1, self, self.comReset)
-	self.ui:addButton("bottom", nil, "S1", 17, 0, 2, 1, self, self.sendS1)
-	self.ui:addButton("bottom", nil, "S2", 19, 0, 2, 1, self, self.sendS2)
-	self.ui:addButton("bottom", nil, "S5", 21, 0, 2, 1, self, self.sendS5)
-	self.ui:addButton("bottom", nil, "S10", 23, 0, 2, 1, self, self.sendS10)
-	self.ui:addButton("bottom", nil, "S13", 25, 0, 2, 1, self, self.sendS13)
-	self.ui:addButton("bottom", nil, "Sz", 27, 0, 2, 1, self, self.sendSz)
-	self.ui:addButton("bottom", nil, "Ms1", 29, 0, 2, 1, self, self.sendMs1)
-	self.ui:addButton("bottom", nil, "Ms2", 31, 0, 2, 1, self, self.sendMs2)
-	self.ui:addButton("bottom", nil, "Uszk", 33, 0, 2, 1, self, self.sendUszk)
+	self.comStatus = self.ui:addLabel("bottom", "comStatus", "Łączenie...", 5, 0, 6, 1)
+	self.ui:addButton("bottom", nil, "Reset", 11, 0, 3, 1, self, self.comReset)
+	self.ui:addButton("bottom", nil, "S1", 15, 0, 2, 1, self, self.sendS1)
+	self.ui:addButton("bottom", nil, "S2", 17, 0, 2, 1, self, self.sendS2)
+	self.ui:addButton("bottom", nil, "S5", 19, 0, 2, 1, self, self.sendS5)
+	self.ui:addButton("bottom", nil, "S10", 21, 0, 2, 1, self, self.sendS10)
+	self.ui:addButton("bottom", nil, "S13", 23, 0, 2, 1, self, self.sendS13)
+	self.ui:addButton("bottom", nil, "Sz", 25, 0, 2, 1, self, self.sendSz)
+	self.ui:addButton("bottom", nil, "Ms1", 27, 0, 2, 1, self, self.sendMs1)
+	self.ui:addButton("bottom", nil, "Ms2", 29, 0, 2, 1, self, self.sendMs2)
+	self.ui:addButton("bottom", nil, "Uszk", 31, 0, 2, 1, self, self.sendUszk)
+	self.ui:addButton("bottom", nil, "Ures", 34, 0, 2, 1, self, self.sendUnres)
 	self.ui:addButton("bottom", nil, "Free", 36, 0, 2, 1, self, self.sendFree)
-	self.ui:addButton("bottom", nil, "Ures", 38, 0, 2, 1, self, self.sendUnres)
+	self.ui:addButton("bottom", nil, "Busy", 38, 0, 2, 1, self, self.sendBusy)
 	self.ui:addLabel("bottom", nil, "Komenda:", 41, 0, 4, 1)
 	self.ui:addInput("bottom", "command", 45, 0, 7, 1, self, nil, self.sendCommand)
 end
@@ -122,6 +123,10 @@ end
 
 function UIBottomPane:sendFree()
 	self:sendToCurrentTrack("free")
+end
+
+function UIBottomPane:sendBusy()
+	self:sendToCurrentTrack("busy")
 end
 
 function UIBottomPane:sendUnres()
