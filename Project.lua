@@ -7,10 +7,13 @@ local Project = class:derive("Project")
 
 function Project:new()
 	self.name = nil
+	self.unsaved = false
+	self.currentStationID = nil
+
+	---@type Station[]
 	self.stations = {}
 	---@type table<string, Station>
 	self.stationsByID = {}
-	self.currentStationID = nil
 
 	self:updateStationLists()
 end
@@ -41,19 +44,44 @@ function Project:getCurrentStation()
 	return self:getStation(self.currentStationID)
 end
 
+---Sets a new current station by shortcut.
+---@param shortcut string? The new station shortcut, or `nil` if not station should be selected.
 function Project:setCurrentStation(shortcut)
 	self.currentStationID = shortcut
 	_UI.rightPane:update()
 end
 
-function Project:getStationNames()
-	local names = {}
-	for i, station in ipairs(self.stations) do
-		table.insert(names, station:getFullName())
+---Moves the specified station up on the station list.
+---@param shortcut string The station shortcut.
+function Project:moveStationUp(shortcut)
+	local station = self.stationsByID[shortcut]
+	local n = _Utils.iTableGetValueIndex(self.stations, station)
+	if not n or n == 1 then
+		return
 	end
-	return names
+	table.remove(self.stations, n)
+	table.insert(self.stations, n - 1, station)
 end
 
+---Moves the specified station down on the station list.
+---@param shortcut string The station shortcut.
+function Project:moveStationDown(shortcut)
+	local station = self.stationsByID[shortcut]
+	local n = _Utils.iTableGetValueIndex(self.stations, station)
+	if not n or n == #self.stations then
+		return
+	end
+	table.remove(self.stations, n)
+	table.insert(self.stations, n + 1, station)
+end
+
+---Returns a list of stations in their display order.
+---@return Station[]
+function Project:getStations()
+	return self.stations
+end
+
+---Creates a new station.
 function Project:addStation()
 	-- Generate a unique station ID.
 	local id = 1
@@ -67,6 +95,10 @@ function Project:addStation()
 	self:updateStationLists()
 end
 
+---Renames a station.
+---@param shortcut string The shortcut of the station to be changed.
+---@param newName string The new name of the station.
+---@param newShortcut string The new shortcut of the station.
 function Project:renameStation(shortcut, newName, newShortcut)
 	local station = self:getStation(shortcut)
 	station.name = newName
@@ -77,6 +109,20 @@ function Project:renameStation(shortcut, newName, newShortcut)
 	self:updateStationLists()
 end
 
+---Removes the station with the specified shortcut.
+---@param shortcut string The station shortcut.
+function Project:deleteStation(shortcut)
+	local station = self.stationsByID[shortcut]
+	local n = _Utils.iTableGetValueIndex(self.stations, station)
+	if not n then
+		return
+	end
+	table.remove(self.stations, n)
+	self.stationsByID[shortcut] = nil
+end
+
+---Updates the `stationsByID` field with correct data.
+---@private
 function Project:updateStationLists()
 	self.stationsByID = {}
 	for i, station in ipairs(self.stations) do
@@ -120,6 +166,7 @@ function Project:save(name)
 		-- Cannot save a project if it has no name...
 		return
 	end
+	self.name = name
 	_Utils.saveJson("projects/" .. name .. ".json", self:serialize())
 	_Notifications:post("Zapisano projekt!")
 end
@@ -134,6 +181,7 @@ function Project:load(name)
 	end
 	self.name = name
 	self:deserialize(data)
+	self:setCurrentStation(self.stations[1].shortcut)
 end
 
 ---Serializes this Project's data for saving to a file.

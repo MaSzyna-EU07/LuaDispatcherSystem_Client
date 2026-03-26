@@ -1,8 +1,9 @@
 local class = require "class"
 ---@type Gspot
 local gui = require("Gspot")
+local UIProjectList = require("UIProjectList")
 local UIStationList = require("UIStationList")
-local UITopPane = require "UITopPane"
+local UITopPane = require("UITopPane")
 local UIRightPane = require("UIRightPane")
 local UIPickerPane = require("UIPickerPane")
 local UITrainPane = require("UITrainPane")
@@ -14,7 +15,7 @@ local UI = class:derive("UI")
 
 function UI:new()
 	self.U = 24
-	---@type table<Gspot.element, table>
+	---@type table<string, Gspot.element>
 	self.elements = {}
 end
 
@@ -196,8 +197,55 @@ function UI:addComboBox(parent, id, tx, ty, tw, th)
 	return box
 end
 
+---Adds an entry to the combo box.
+---@param parent string The parent element ID.
+---@param id string The value identifying this entry.
+---@param text string The text to be written on this entry.
+---@param tx number X coordinate of the top left corner of the element.
+---@param ty number Y coordinate of the top left corner of the element.
+---@param tw number Width of the element in tiles.
+---@param th number Height of the element in tiles.
+---@param executor any Class instance which will execute the subsequent functions.
+---@param onClick function? If specified, this function will be executed when the entry is clicked.
+---@param onDoubleClick function? If specified, this function will be executed when the entry is double clicked.
+---@return Gspot.option
+function UI:addEntry(parent, id, text, tx, ty, tw, th, executor, onClick, onDoubleClick)
+	local pos = self:tilesToPos(tx, ty, tw, th)
+	local entry = gui:option(text, pos, self.elements[parent], id)
+	self:addElement(parent, id, entry)
+	entry.click = function(this)
+		this.parent.value = this.value
+		if onClick then
+			onClick(executor, this)
+		end
+	end
+	if onDoubleClick then
+		entry.dblclick = function(this)
+			onDoubleClick(executor, this)
+		end
+	end
+	return entry
+end
+
+---Removes an UI element by its reference.
+---@param element Gspot.element The element to be removed.
+function UI:removeElement(element)
+	gui:rem(element)
+end
+
+---Removes all UI elements which are children of the specified element by its ID.
+---@param id string The element ID to be removed all children of.
+function UI:removeElementChildren(id)
+	for eID, element in pairs(self.elements) do
+		if _Utils.strStartsWith(eID, id .. "/") then
+			gui:rem(element)
+			self.elements[eID] = nil
+		end
+	end
+end
+
 ---Returns the focused Gspot element, if any.
----@return table?
+---@return Gspot.element?
 function UI:getFocus()
 	return gui.focus
 end
@@ -217,19 +265,32 @@ function UI:setup()
 	gui.style.font = _Font
 	gui.style.unit = self.U
 
+	self.projectList = UIProjectList(self)
 	self.stationList = UIStationList(self)
 	self.topPane = UITopPane(self)
 	self.rightPane = UIRightPane(self)
 	self.pickerPane = UIPickerPane(self)
 	self.trainPane = UITrainPane(self)
 	self.bottomPane = UIBottomPane(self)
+	self:hideWindows()
 end
 
 --######################################--
 ---------------- L O G I C ---------------
 --######################################--
 
+function UI:hideWindows()
+	self.stationList:hide()
+	self.projectList:hide()
+end
+
+function UI:showProjectList()
+	self:hideWindows()
+	self.projectList:show()
+end
+
 function UI:showStationList()
+	self:hideWindows()
 	self.stationList:show()
 end
 
