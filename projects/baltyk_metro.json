@@ -1,0 +1,506 @@
+{
+    "stations": [
+		{
+			"h": 6,
+			"name": "Kolumba",
+			"shortcut": "K",
+			"tiles": {
+				"10,3": {
+					"id": "switchL7",
+					"switchID": "szl10k_zwr6",
+					"trackID": "k_roz"
+				},
+				"10,4": {
+					"id": "switchR7",
+					"switchID": "szl10k_zwr5",
+					"trackID": "k_roz"
+				},
+				"11,2": {
+					"id": "curve6",
+					"trackID": "k_roz"
+				},
+				"11,3": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "tm3",
+					"trackID": "k_roz"
+				},
+				"11,4": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "tm4",
+					"trackID": "k_roz"
+				},
+				"11,5": {
+					"id": "curve3",
+					"trackID": "k_roz"
+				},
+				"12,2": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "tm6",
+					"trackID": "k_roz"
+				},
+				"12,3": {
+					"id": "platformF",
+					"trackID": "k_p"
+				},
+				"12,4": {
+					"id": "platformF",
+					"trackID": "k_l"
+				},
+				"12,5": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "tm5",
+					"trackID": "k_roz"
+				},
+				"13,2": {
+					"id": "track-"
+				},
+				"13,3": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "k_p"
+				},
+				"13,4": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "k_l"
+				},
+				"13,5": {
+					"id": "track-"
+				},
+				"14,2": {
+					"id": "track-"
+				},
+				"14,3": {
+					"id": "platformF",
+					"trackID": "k_p"
+				},
+				"14,4": {
+					"id": "platformF",
+					"trackID": "k_l"
+				},
+				"14,5": {
+					"id": "track-"
+				},
+				"15,2": {
+					"id": "curve7"
+				},
+				"15,3": {
+					"id": "buffer7",
+					"trackID": "k_p"
+				},
+				"15,4": {
+					"id": "buffer7",
+					"trackID": "k_l"
+				},
+				"15,5": {
+					"id": "curve2"
+				},
+				"16,3": {
+					"id": "curve3"
+				},
+				"16,4": {
+					"id": "curve6"
+				},
+				"17,3": {
+					"id": "arrow7",
+					"shuntTarget": true
+				},
+				"17,4": {
+					"id": "arrow3",
+					"shuntTarget": true
+				},
+				"2,3": {
+					"id": "arrow7",
+					"trackID": "torl_9",
+					"trainTarget": true,
+					"warp": "K-NS"
+				},
+				"2,4": {
+					"id": "arrow3",
+					"trackID": "torp_9",
+					"warp": "K-NS"
+				},
+				"3,3": {
+					"id": "semaphore7",
+					"semaphoreID": "sem_b10",
+					"trackID": "torl_9"
+				},
+				"3,4": {
+					"id": "track-",
+					"trackID": "torp_9"
+				},
+				"4,3": {
+					"id": "platformP",
+					"trackID": "torl_10"
+				},
+				"4,4": {
+					"id": "platformP",
+					"trackID": "torp_9"
+				},
+				"5,3": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "torl_10"
+				},
+				"5,4": {
+					"id": "platformP",
+					"trackID": "torp_9"
+				},
+				"6,3": {
+					"id": "platformP",
+					"trackID": "torl_10"
+				},
+				"6,4": {
+					"id": "platformP",
+					"trackID": "torp_9"
+				},
+				"7,3": {
+					"id": "track-",
+					"trackID": "k_roz"
+				},
+				"7,4": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "sem_a10",
+					"trackID": "k_roz"
+				},
+				"8,3": {
+					"id": "switchR7",
+					"switchID": "kom10k_zwr1",
+					"trackID": "k_roz"
+				},
+				"8,4": {
+					"id": "switchL7",
+					"switchID": "kom10k_zwr2",
+					"trackID": "k_roz"
+				},
+				"9,3": {
+					"id": "switchL3",
+					"switchID": "kom10k_zwr4",
+					"trackID": "k_roz"
+				},
+				"9,4": {
+					"id": "switchR3",
+					"switchID": "kom10k_zwr3",
+					"trackID": "k_roz"
+				}
+			},
+			"w": 18
+		},
+		{
+			"h": 6,
+			"name": "Nowy Slimsonów",
+			"shortcut": "NS",
+			"tiles": {
+				"10,3": {
+					"id": "platformP",
+					"trackID": "torl_1"
+				},
+				"10,4": {
+					"id": "platformP",
+					"trackID": "torp_0"
+				},
+				"11,3": {
+					"id": "platformP",
+					"trackID": "torl_1"
+				},
+				"11,4": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "torp_0"
+				},
+				"12,3": {
+					"id": "platformP",
+					"trackID": "torl_1"
+				},
+				"12,4": {
+					"id": "platformP",
+					"trackID": "torp_0"
+				},
+				"13,3": {
+					"id": "track-",
+					"trackID": "torl_1"
+				},
+				"13,4": {
+					"id": "semaphore3",
+					"semaphoreID": "sem_a1",
+					"trackID": "torp_1"
+				},
+				"14,3": {
+					"id": "arrow7",
+					"trackID": "torl_1",
+					"warp": "K-NS"
+				},
+				"14,4": {
+					"id": "arrow3",
+					"trackID": "torp_1",
+					"trainTarget": true,
+					"warp": "K-NS"
+				},
+				"2,3": {
+					"id": "buffer3",
+					"trackID": "ns_l"
+				},
+				"2,4": {
+					"id": "buffer3",
+					"trackID": "ns_p"
+				},
+				"3,3": {
+					"id": "platformF",
+					"trackID": "ns_l"
+				},
+				"3,4": {
+					"id": "platformF",
+					"trackID": "ns_p"
+				},
+				"4,3": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "ns_l"
+				},
+				"4,4": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "ns_p"
+				},
+				"5,3": {
+					"id": "platformF",
+					"trackID": "ns_l"
+				},
+				"5,4": {
+					"id": "platformF",
+					"trackID": "ns_p"
+				},
+				"6,3": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "tm2",
+					"trackID": "ns_roz"
+				},
+				"6,4": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "tm1",
+					"trackID": "ns_roz"
+				},
+				"7,3": {
+					"id": "switchR7",
+					"switchID": "kom1k_zwr3",
+					"trackID": "ns_roz"
+				},
+				"7,4": {
+					"id": "switchL7",
+					"switchID": "kom1k_zwr4",
+					"trackID": "ns_roz"
+				},
+				"8,3": {
+					"id": "switchL3",
+					"switchID": "kom1k_zwr2",
+					"trackID": "ns_roz"
+				},
+				"8,4": {
+					"id": "switchR3",
+					"switchID": "kom1k_zwr1",
+					"trackID": "ns_roz"
+				},
+				"9,3": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "sem_b1",
+					"trackID": "ns_roz"
+				},
+				"9,4": {
+					"id": "track-",
+					"trackID": "ns_roz"
+				}
+			},
+			"w": 15
+		},
+		{
+			"h": 6,
+			"name": "Kolumba-Nowy Slimsonów",
+			"shortcut": "K-NS",
+			"tiles": {
+				"10,3": {
+					"id": "platformP",
+					"trackID": "torl_5"
+				},
+				"10,4": {
+					"id": "platformP",
+					"trackID": "torp_4"
+				},
+				"11,3": {
+					"id": "semaphore7",
+					"semaphoreID": "sem_b6",
+					"trackID": "torl_5"
+				},
+				"11,4": {
+					"id": "semaphore3",
+					"semaphoreID": "sem_a5",
+					"trackID": "torp_5"
+				},
+				"12,3": {
+					"id": "platformP",
+					"trackID": "torl_6"
+				},
+				"12,4": {
+					"id": "platformP",
+					"trackID": "torp_5"
+				},
+				"13,3": {
+					"id": "semaphore7",
+					"semaphoreID": "sem_b7",
+					"trackID": "torl_6"
+				},
+				"13,4": {
+					"id": "semaphore3",
+					"semaphoreID": "sem_a6",
+					"trackID": "torp_6"
+				},
+				"14,3": {
+					"id": "platformP",
+					"trackID": "torl_7"
+				},
+				"14,4": {
+					"id": "platformP",
+					"trackID": "torp_6"
+				},
+				"15,3": {
+					"id": "semaphore7",
+					"semaphoreID": "sem_b8",
+					"trackID": "torl_7"
+				},
+				"15,4": {
+					"id": "semaphore3",
+					"semaphoreID": "sem_a7",
+					"trackID": "torp_7"
+				},
+				"16,3": {
+					"id": "platformP",
+					"trackID": "torl_8"
+				},
+				"16,4": {
+					"id": "platformP",
+					"trackID": "torp_7"
+				},
+				"17,3": {
+					"id": "semaphore7",
+					"semaphoreID": "sem_b9",
+					"trackID": "torl_8"
+				},
+				"17,4": {
+					"id": "semaphore3",
+					"semaphoreID": "sem_a8",
+					"trackID": "torp_8"
+				},
+				"18,3": {
+					"id": "platformP",
+					"trackID": "torl_9"
+				},
+				"18,4": {
+					"id": "platformP",
+					"trackID": "torp_8"
+				},
+				"19,3": {
+					"id": "semaphore7",
+					"semaphoreID": "sem_b10",
+					"trackID": "torl_9"
+				},
+				"19,4": {
+					"id": "semaphore3",
+					"semaphoreID": "sem_a9",
+					"trackID": "torp_9"
+				},
+				"2,3": {
+					"id": "arrow7",
+					"trackID": "torl_1",
+					"warp": "NS"
+				},
+				"2,4": {
+					"id": "arrow3",
+					"trackID": "torp_0",
+					"warp": "NS"
+				},
+				"20,3": {
+					"id": "arrow7",
+					"trackID": "torl_10",
+					"warp": "K"
+				},
+				"20,4": {
+					"id": "arrow3",
+					"trackID": "torp_9",
+					"warp": "K"
+				},
+				"3,3": {
+					"id": "semaphore7",
+					"semaphoreID": "sem_b2",
+					"trackID": "torl_1"
+				},
+				"3,4": {
+					"id": "semaphore3",
+					"semaphoreID": "sem_a1",
+					"trackID": "torp_1"
+				},
+				"4,3": {
+					"id": "platformP",
+					"trackID": "torl_2"
+				},
+				"4,4": {
+					"id": "platformP",
+					"trackID": "torp_1"
+				},
+				"5,3": {
+					"id": "semaphore7",
+					"semaphoreID": "sem_b3",
+					"trackID": "torl_2"
+				},
+				"5,4": {
+					"id": "semaphore3",
+					"semaphoreID": "sem_a2",
+					"trackID": "torp_2"
+				},
+				"6,3": {
+					"id": "platformP",
+					"trackID": "torl_3"
+				},
+				"6,4": {
+					"id": "platformP",
+					"trackID": "torp_2"
+				},
+				"7,3": {
+					"id": "semaphore7",
+					"semaphoreID": "sem_b4",
+					"trackID": "torl_3"
+				},
+				"7,4": {
+					"id": "semaphore3",
+					"semaphoreID": "sem_a3",
+					"trackID": "torp_3"
+				},
+				"8,3": {
+					"id": "platformP",
+					"trackID": "torl_4"
+				},
+				"8,4": {
+					"id": "platformP",
+					"trackID": "torp_3"
+				},
+				"9,3": {
+					"id": "semaphore7",
+					"semaphoreID": "sem_b5",
+					"trackID": "torl_4"
+				},
+				"9,4": {
+					"id": "semaphore3",
+					"semaphoreID": "sem_a4",
+					"trackID": "torp_4"
+				}
+			},
+			"w": 21
+		}
+    ]
+}

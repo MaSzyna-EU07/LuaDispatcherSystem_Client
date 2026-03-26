@@ -113,6 +113,9 @@ local com_version = {0, 0, 0, 0}
 local com_ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}}
 local com_counters = {}
 
+---Initializes the communication with the server.
+---@param path string Path to the MaSzyna's main directory where the server runs. if `findRecent` is true. Must have a trailing slash if `findRecent` is `true`. If `findRecent` is `false`, specifies the path to the `.dsl` log file.
+---@param findRecent boolean If `true`, `path` is the path to the main MaSzyna directory. From there, the DSL log file path is extracted from the `log.txt` file which should be the current simulator session.
 function com.init(path, findRecent)
 	_Obj:clear()
 	com_pos = 0

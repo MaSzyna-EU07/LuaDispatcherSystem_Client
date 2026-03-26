@@ -1,12 +1,12 @@
 local class = require "class"
+local Station = require("Station")
 
 ---@class Project : Class
 ---@overload fun(): Project
 local Project = class:derive("Project")
 
-local Station = require("Station")
-
 function Project:new()
+	self.name = nil
 	self.stations = {}
 	---@type table<string, Station>
 	self.stationsByID = {}
@@ -112,15 +112,32 @@ function Project:mousereleased(x, y, button)
 	end
 end
 
-function Project:save()
-	_Utils.saveJson("savefile.json", self:serialize())
+---Saves this project under the specified name.
+---@param name string? The project name to be saved as. If not specified, the current name will be used.
+function Project:save(name)
+	name = name or self.name
+	if not name then
+		-- Cannot save a project if it has no name...
+		return
+	end
+	_Utils.saveJson("projects/" .. name .. ".json", self:serialize())
 	_Notifications:post("Zapisano projekt!")
 end
 
-function Project:load()
-	self:deserialize(_Utils.loadJson("savefile.json"))
+---Loads a project from the specified name.
+---@param name string The project name to be loaded from.
+function Project:load(name)
+	local data = _Utils.loadJson("projects/" .. name .. ".json")
+	if not data then
+		_Notifications:post("Nie można załadować projektu...", NotificationColor.RED)
+		return
+	end
+	self.name = name
+	self:deserialize(data)
 end
 
+---Serializes this Project's data for saving to a file.
+---@return table
 function Project:serialize()
 	local t = {
 		stations = {}
@@ -128,18 +145,15 @@ function Project:serialize()
 	for i, station in ipairs(self.stations) do
 		t.stations[i] = station:serialize()
 	end
-	
 	return t
 end
 
+---Deserializes the savefile data into this Project.
+---@param t table Save data to be loaded.
 function Project:deserialize(t)
 	self.stations = {}
-	if t.stations then
-		for i, station in ipairs(t.stations) do
-			self.stations[i] = Station(station)
-		end
-	else
-		self.stations[1] = Station(t.station)
+	for i, station in ipairs(t.stations) do
+		self.stations[i] = Station(station)
 	end
 	self:updateStationLists()
 end

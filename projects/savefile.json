@@ -1,0 +1,318 @@
+{
+	"stations": [
+		{
+			"h": 10,
+			"name": "Pszczółki",
+			"shortcut": "Ps",
+			"tiles": [],
+			"w": 25
+		},
+		{
+			"h": 10,
+			"name": "Tczew",
+			"shortcut": "Tc",
+			"tiles": [],
+			"w": 25
+		},
+		{
+			"h": 10,
+			"name": "Gdańsk Główny",
+			"shortcut": "GG",
+			"tiles": [],
+			"w": 25
+		},
+		{
+			"h": 10,
+			"name": "Gdańsk Południowy",
+			"shortcut": "GP",
+			"tiles": {
+				"10,4": {
+					"id": "semaphore3"
+				},
+				"10,7": {
+					"id": "semaphore3"
+				},
+				"11,4": {
+					"id": "curve7"
+				},
+				"11,7": {
+					"id": "switchL7"
+				},
+				"12,5": {
+					"id": "curve8"
+				},
+				"12,6": {
+					"id": "curve1"
+				},
+				"12,7": {
+					"id": "semaphore7"
+				},
+				"13,7": {
+					"id": "track-"
+				},
+				"14,7": {
+					"id": "arrow-"
+				},
+				"4,7": {
+					"id": "arrow-"
+				},
+				"5,7": {
+					"id": "track-"
+				},
+				"6,5": {
+					"id": "curve5"
+				},
+				"6,6": {
+					"id": "curve4"
+				},
+				"6,7": {
+					"id": "semaphore3"
+				},
+				"7,4": {
+					"id": "curve6"
+				},
+				"7,7": {
+					"id": "switchR3"
+				},
+				"8,4": {
+					"id": "semaphore7"
+				},
+				"8,7": {
+					"id": "semaphore7"
+				},
+				"9,4": {
+					"id": "platformP"
+				},
+				"9,7": {
+					"id": "platformP"
+				}
+			},
+			"w": 25
+		},
+		{
+			"h": 10,
+			"name": "Gdańsk Śródmieście",
+			"shortcut": "GS",
+			"tiles": [],
+			"w": 25
+		},
+		{
+			"h": 7,
+			"name": "Górki",
+			"shortcut": "Gr",
+			"tiles": {
+				"10,2": {
+					"id": "platformF"
+				},
+				"10,3": {
+					"id": "platformF"
+				},
+				"10,4": {
+					"id": "platformF"
+				},
+				"10,5": {
+					"id": "platformF"
+				},
+				"10,6": {
+					"id": "platformF"
+				},
+				"11,2": {
+					"id": "platformF"
+				},
+				"11,3": {
+					"id": "platformF"
+				},
+				"11,4": {
+					"id": "platformF"
+				},
+				"11,5": {
+					"id": "platformF"
+				},
+				"11,6": {
+					"id": "platformF"
+				},
+				"12,2": {
+					"id": "platformF"
+				},
+				"12,3": {
+					"id": "platformF"
+				},
+				"12,4": {
+					"id": "platformF"
+				},
+				"12,5": {
+					"id": "platformF"
+				},
+				"12,6": {
+					"id": "platformF"
+				},
+				"13,2": {
+					"id": "semaphore3"
+				},
+				"13,3": {
+					"id": "track-"
+				},
+				"13,4": {
+					"id": "track-"
+				},
+				"13,5": {
+					"id": "semaphore3"
+				},
+				"13,6": {
+					"id": "semaphore3"
+				},
+				"14,2": {
+					"id": "curve7"
+				},
+				"14,3": {
+					"id": "semaphore3"
+				},
+				"14,4": {
+					"id": "track-"
+				},
+				"14,5": {
+					"id": "track-"
+				},
+				"14,6": {
+					"id": "track-"
+				},
+				"15,3": {
+					"id": "switchD3"
+				},
+				"15,4": {
+					"id": "semaphore3"
+				},
+				"15,5": {
+					"id": "track-"
+				},
+				"15,6": {
+					"id": "track-"
+				},
+				"16,3": {
+					"id": "semaphore7"
+				},
+				"16,4": {
+					"id": "switchR3"
+				},
+				"16,5": {
+					"id": "track-"
+				},
+				"16,6": {
+					"id": "track-"
+				},
+				"17,3": {
+					"id": "track-"
+				},
+				"17,4": {
+					"id": "semaphore7"
+				},
+				"17,5": {
+					"id": "track-"
+				},
+				"17,6": {
+					"id": "track-"
+				},
+				"18,3": {
+					"id": "arrow7"
+				},
+				"18,4": {
+					"id": "arrow3"
+				},
+				"18,5": {
+					"id": "arrow7"
+				},
+				"18,6": {
+					"id": "arrow3"
+				},
+				"2,5": {
+					"id": "arrow7"
+				},
+				"2,6": {
+					"id": "arrow3"
+				},
+				"3,4": {
+					"id": "buffer3"
+				},
+				"3,5": {
+					"id": "semaphore3"
+				},
+				"3,6": {
+					"id": "semaphore3"
+				},
+				"4,4": {
+					"id": "track-"
+				},
+				"4,5": {
+					"id": "switchL7"
+				},
+				"4,6": {
+					"id": "switchL7"
+				},
+				"5,4": {
+					"id": "switchR2"
+				},
+				"5,5": {
+					"id": "switchL3"
+				},
+				"5,6": {
+					"id": "track-"
+				},
+				"6,3": {
+					"id": "switchR6"
+				},
+				"6,5": {
+					"id": "switchL7"
+				},
+				"6,6": {
+					"id": "track-"
+				},
+				"7,2": {
+					"id": "curve6"
+				},
+				"7,3": {
+					"id": "track-"
+				},
+				"7,4": {
+					"id": "switchR6"
+				},
+				"7,5": {
+					"id": "switchR7"
+				},
+				"7,6": {
+					"id": "track-"
+				},
+				"8,2": {
+					"id": "semaphore7"
+				},
+				"8,3": {
+					"id": "switchL3"
+				},
+				"8,4": {
+					"id": "semaphore7"
+				},
+				"8,5": {
+					"id": "semaphore7"
+				},
+				"8,6": {
+					"id": "switchR3"
+				},
+				"9,2": {
+					"id": "track-"
+				},
+				"9,3": {
+					"id": "semaphore7"
+				},
+				"9,4": {
+					"id": "track-"
+				},
+				"9,5": {
+					"id": "track-"
+				},
+				"9,6": {
+					"id": "semaphore7"
+				}
+			},
+			"w": 19
+		}
+	]
+}

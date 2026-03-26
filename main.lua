@@ -1,6 +1,7 @@
 require("main_enums")
 _Utils = require("utils")
 _Com = require("communication")
+local Settings = require("Settings")
 local Objects = require("Objects")
 local UI = require("UI")
 local Notifications = require("Notifications")
@@ -12,9 +13,9 @@ local TileDatabase = require("TileDatabase")
 _WWIDTH, _WHEIGHT = 1600, 900
 _MouseX, _MouseY = 0, 0
 _Time = 0
-_SIM_PATH = "/run/media/jakub/LaCie/(Pliki)/Gry i programy/Symulatory/MaSzyna/SVN working/"
 _Font = love.graphics.newFont("data/dejavusans.ttf", 16)
 
+_Settings = Settings()
 _Obj = Objects()
 _UI = UI()
 _Notifications = Notifications()
@@ -144,9 +145,15 @@ function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBi
 end
 
 function love.load()
+	_Settings:load()
 	_UI:setup()
-	_Com.init(_SIM_PATH, true)
-	_Project:load()
+	_Com.init(_Settings.simPath, true)
+	if _Settings.project then
+		_Project:load(_Settings.project)
+	end
+	if _Settings.station then
+		_Project:setCurrentStation(_Settings.station)
+	end
 end
 
 function love.update(dt)
@@ -203,6 +210,12 @@ end
 function love.wheelmoved(x, y)
 	_Picker:wheelmoved(x, y)
 	_UI:wheelmoved(x, y)
+end
+
+function love.quit()
+	_Settings.project = _Project.name
+	_Settings.station = _Project.currentStationID
+	_Settings:save()
 end
 
 -- Legacy code

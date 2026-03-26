@@ -19,7 +19,7 @@ function UITopPane:saveProject()
 end
 
 function UITopPane:loadProject()
-	_Project:load()
+	_Project:load(_Settings.project)
 end
 
 return UITopPane

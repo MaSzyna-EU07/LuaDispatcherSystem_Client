@@ -40,7 +40,7 @@ function UIBottomPane:setStatus(text, color, tooltip)
 end
 
 function UIBottomPane:comReset()
-	_Com.init(_SIM_PATH, true)
+	_Com.init(_Settings.simPath, true)
 end
 
 function UIBottomPane:sendToCurrentSemaphore(this, next)

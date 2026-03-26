@@ -1,0 +1,1243 @@
+{
+    "stations": [
+		{
+			"h": 8,
+			"name": "Mińsk Maz-Mienia",
+			"shortcut": "MMz-Mia",
+			"tiles": {
+				"10,2": {
+					"command": "b MMz-Mia 1 p",
+					"id": "square"
+				},
+				"10,4": {
+					"id": "track-",
+					"trackID": "4442-4602@LK2.2"
+				},
+				"10,5": {
+					"id": "track-",
+					"trackID": "4451-4611@LK2.1"
+				},
+				"10,7": {
+					"command": "b MMz-Mrz 1 n",
+					"id": "square"
+				},
+				"11,2": {
+					"command": "b MMz-Mia 1 n",
+					"id": "square"
+				},
+				"11,4": {
+					"id": "semaphore7",
+					"semaphoreID": "460",
+					"trackID": "4442-4602@LK2.2"
+				},
+				"11,5": {
+					"id": "semaphore7",
+					"semaphoreID": "461N",
+					"trackID": "4451-4611@LK2.1"
+				},
+				"11,7": {
+					"command": "b MMz-Mrz 1 p",
+					"id": "square"
+				},
+				"12,2": {
+					"id": "letterN"
+				},
+				"12,4": {
+					"id": "semaphore3",
+					"semaphoreID": "460N",
+					"trackID": "4602-4802@LK2.2"
+				},
+				"12,5": {
+					"id": "semaphore3",
+					"semaphoreID": "461",
+					"trackID": "4611-4811@LK2.1"
+				},
+				"12,7": {
+					"id": "letterP"
+				},
+				"13,4": {
+					"id": "track-",
+					"trackID": "4602-4802@LK2.2"
+				},
+				"13,5": {
+					"id": "track-",
+					"trackID": "4611-4811@LK2.1"
+				},
+				"14,4": {
+					"id": "semaphore7",
+					"semaphoreID": "480",
+					"trackID": "4602-4802@LK2.2"
+				},
+				"14,5": {
+					"id": "semaphore7",
+					"semaphoreID": "481N",
+					"trackID": "4611-4811@LK2.1"
+				},
+				"15,4": {
+					"id": "semaphore3",
+					"semaphoreID": "480N",
+					"trackID": "4802-Y2@LK2.2"
+				},
+				"15,5": {
+					"id": "semaphore3",
+					"semaphoreID": "481",
+					"trackID": "4811-4931@LK2.1"
+				},
+				"16,4": {
+					"id": "track-",
+					"trackID": "4802-Y2@LK2.2"
+				},
+				"16,5": {
+					"id": "track-",
+					"trackID": "4811-4931@LK2.1"
+				},
+				"17,4": {
+					"id": "semaphore3",
+					"semaphoreID": "Mia_Y",
+					"trackID": "Mia_ItY"
+				},
+				"17,5": {
+					"id": "track-",
+					"trackID": "4811-4931@LK2.1"
+				},
+				"18,4": {
+					"id": "arrow7",
+					"trackID": "Mia_ItY",
+					"warp": "Mia"
+				},
+				"18,5": {
+					"id": "arrow3",
+					"trackID": "4811-4931@LK2.1",
+					"warp": "Mia"
+				},
+				"2,4": {
+					"id": "arrow7",
+					"trackID": "MMz_ItZ",
+					"warp": "MMz"
+				},
+				"2,5": {
+					"id": "arrow3",
+					"trackID": "MMz_ItY",
+					"warp": "MMz"
+				},
+				"3,4": {
+					"id": "semaphore7",
+					"semaphoreID": "MMz_Z",
+					"trackID": "MMz_ItZ"
+				},
+				"3,5": {
+					"id": "semaphore7",
+					"semaphoreID": "MMz_Y",
+					"trackID": "MMz_ItY"
+				},
+				"4,4": {
+					"id": "track-",
+					"trackID": "Z2-4302@LK2.2"
+				},
+				"4,5": {
+					"id": "track-",
+					"trackID": "Y1-4311@LK2.1"
+				},
+				"5,4": {
+					"id": "semaphore7",
+					"semaphoreID": "430",
+					"trackID": "Z2-4302@LK2.2"
+				},
+				"5,5": {
+					"id": "semaphore7",
+					"semaphoreID": "431N",
+					"trackID": "Y1-4311@LK2.1"
+				},
+				"6,4": {
+					"id": "semaphore3",
+					"semaphoreID": "430N",
+					"trackID": "4302-4442@LK2.2"
+				},
+				"6,5": {
+					"id": "semaphore3",
+					"semaphoreID": "431",
+					"trackID": "4311-4451@LK2.1"
+				},
+				"7,4": {
+					"id": "track-",
+					"trackID": "4302-4442@LK2.2"
+				},
+				"7,5": {
+					"id": "track-",
+					"trackID": "4311-4451@LK2.1"
+				},
+				"8,4": {
+					"id": "semaphore7",
+					"semaphoreID": "444",
+					"trackID": "4302-4442@LK2.2"
+				},
+				"8,5": {
+					"id": "semaphore7",
+					"semaphoreID": "445N",
+					"trackID": "4311-4451@LK2.1"
+				},
+				"9,2": {
+					"id": "letterP"
+				},
+				"9,4": {
+					"id": "semaphore3",
+					"semaphoreID": "444N",
+					"trackID": "4442-4602@LK2.2"
+				},
+				"9,5": {
+					"id": "semaphore3",
+					"semaphoreID": "445",
+					"trackID": "4451-4611@LK2.1"
+				},
+				"9,7": {
+					"id": "letterN"
+				}
+			},
+			"w": 19
+		},
+		{
+			"h": 10,
+			"name": "Mińsk Mazowiecki",
+			"shortcut": "MMz",
+			"tiles": {
+				"22,5": {
+					"id": "arrow7",
+					"warp": "MMz-Mia"
+				},
+				"22,6": {
+					"id": "arrow3",
+					"warp": "MMz-Mia"
+				}
+			},
+			"w": 25
+		},
+		{
+			"h": 8,
+			"name": "Mrozy",
+			"shortcut": "Mrz",
+			"tiles": {
+				"10,4": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_6",
+					"trackID": "Mrz_Iz6"
+				},
+				"10,5": {
+					"id": "track-",
+					"trackID": "Mrz_Iz4"
+				},
+				"10,6": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_7",
+					"trackID": "Mrz_Iz7"
+				},
+				"10,7": {
+					"id": "buffer3",
+					"trackID": "Mrz_It3a"
+				},
+				"11,3": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_9",
+					"trackID": "Mrz_Iz9"
+				},
+				"11,4": {
+					"id": "track-",
+					"trackID": "Mrz_Iz6"
+				},
+				"11,5": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_F",
+					"trackID": "Mrz_Iz4"
+				},
+				"11,6": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_8",
+					"trackID": "Mrz_Iz8"
+				},
+				"11,7": {
+					"id": "track-",
+					"trackID": "Mrz_It3a"
+				},
+				"12,2": {
+					"electrified": false,
+					"id": "curve6",
+					"trackID": "Mrz_Iz9"
+				},
+				"12,3": {
+					"id": "track-",
+					"trackID": "Mrz_Iz9"
+				},
+				"12,4": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_G",
+					"trackID": "Mrz_Iz6"
+				},
+				"12,5": {
+					"id": "track-",
+					"trackID": "Mrz_It2"
+				},
+				"12,6": {
+					"id": "track-",
+					"trackID": "Mrz_Iz8"
+				},
+				"12,7": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_10",
+					"trackID": "Mrz_Iz10"
+				},
+				"13,2": {
+					"electrified": false,
+					"id": "derailer7",
+					"trackID": "Mrz_Iz9"
+				},
+				"13,3": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_H",
+					"trackID": "Mrz_Iz9"
+				},
+				"13,4": {
+					"id": "track-",
+					"trackID": "Mrz_It6"
+				},
+				"13,5": {
+					"id": "track-",
+					"trackID": "Mrz_It2"
+				},
+				"13,6": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_E",
+					"trackID": "Mrz_Iz8"
+				},
+				"13,7": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_D",
+					"trackID": "Mrz_Iz10"
+				},
+				"14,2": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Mrz_Tm11",
+					"semaphoreType": 1,
+					"trackID": "Mrz_Iz9"
+				},
+				"14,3": {
+					"id": "track-",
+					"trackID": "Mrz_It8"
+				},
+				"14,4": {
+					"id": "track-",
+					"trackID": "Mrz_It6"
+				},
+				"14,5": {
+					"id": "track-",
+					"trackID": "Mrz_It2"
+				},
+				"14,6": {
+					"id": "track-",
+					"trackID": "Mrz_It1"
+				},
+				"14,7": {
+					"id": "track-",
+					"trackID": "Mrz_It3"
+				},
+				"15,2": {
+					"electrified": false,
+					"id": "platformF",
+					"trackID": "Mrz_It10"
+				},
+				"15,3": {
+					"id": "platformF",
+					"trackID": "Mrz_It8"
+				},
+				"15,4": {
+					"id": "platformF",
+					"trackID": "Mrz_It6"
+				},
+				"15,5": {
+					"id": "platformF",
+					"trackID": "Mrz_It2"
+				},
+				"15,6": {
+					"id": "platformF",
+					"trackID": "Mrz_It1"
+				},
+				"15,7": {
+					"id": "platformF",
+					"trackID": "Mrz_It3"
+				},
+				"16,2": {
+					"electrified": false,
+					"forbidTrain": true,
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Mrz_It10"
+				},
+				"16,3": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Mrz_It8",
+					"trainTarget": true
+				},
+				"16,4": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Mrz_It6",
+					"trainTarget": true
+				},
+				"16,5": {
+					"id": "platformF",
+					"trackID": "Mrz_It2",
+					"trainTarget": true
+				},
+				"16,6": {
+					"id": "platformF",
+					"trackID": "Mrz_It1",
+					"trainTarget": true
+				},
+				"16,7": {
+					"id": "platformF",
+					"trackID": "Mrz_It3",
+					"trainTarget": true
+				},
+				"17,2": {
+					"electrified": false,
+					"id": "platformF",
+					"trackID": "Mrz_It10"
+				},
+				"17,3": {
+					"id": "platformF",
+					"trackID": "Mrz_It8"
+				},
+				"17,4": {
+					"id": "platformF",
+					"trackID": "Mrz_It6"
+				},
+				"17,5": {
+					"id": "platformF",
+					"trackID": "Mrz_It2"
+				},
+				"17,6": {
+					"id": "platformF",
+					"trackID": "Mrz_It1"
+				},
+				"17,7": {
+					"id": "platformF",
+					"trackID": "Mrz_It3"
+				},
+				"18,2": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Mrz_Tm21",
+					"semaphoreType": 1,
+					"trackID": "Mrz_Iz22"
+				},
+				"18,3": {
+					"id": "track-",
+					"trackID": "Mrz_It8"
+				},
+				"18,4": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_L",
+					"semaphoreNoW24": true,
+					"trackID": "Mrz_Iz23"
+				},
+				"18,5": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_M",
+					"semaphoreNoW24": true,
+					"trackID": "Mrz_Iz21"
+				},
+				"18,6": {
+					"id": "track-",
+					"trackID": "Mrz_It1"
+				},
+				"18,7": {
+					"id": "track-",
+					"trackID": "Mrz_It3"
+				},
+				"19,2": {
+					"electrified": false,
+					"id": "derailer3",
+					"trackID": "Mrz_Iz22"
+				},
+				"19,3": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_K",
+					"semaphoreNoW24": true,
+					"trackID": "Mrz_Iz22"
+				},
+				"19,4": {
+					"id": "track-",
+					"trackID": "Mrz_Iz23"
+				},
+				"19,5": {
+					"id": "track-",
+					"trackID": "Mrz_Iz21"
+				},
+				"19,6": {
+					"id": "track-",
+					"trackID": "Mrz_It1"
+				},
+				"19,7": {
+					"id": "track-",
+					"trackID": "Mrz_It3"
+				},
+				"2,5": {
+					"id": "arrow7",
+					"semaphoreID": "558",
+					"trackID": "5582-A2@LK2.2",
+					"trainTarget": true,
+					"warp": "Mia-Mrz"
+				},
+				"2,6": {
+					"id": "arrow3",
+					"semaphoreID": "557N",
+					"targetW24": true,
+					"trackID": "5571-B1@LK2.1",
+					"trainTarget": true,
+					"warp": "Mia-Mrz"
+				},
+				"20,2": {
+					"electrified": false,
+					"id": "curve7",
+					"trackID": "Mrz_Iz22"
+				},
+				"20,3": {
+					"id": "track-",
+					"trackID": "Mrz_Iz22"
+				},
+				"20,4": {
+					"id": "track-",
+					"trackID": "Mrz_Iz23"
+				},
+				"20,5": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_21",
+					"trackID": "Mrz_Iz21"
+				},
+				"20,6": {
+					"id": "track-",
+					"trackID": "Mrz_It1"
+				},
+				"20,7": {
+					"id": "track-",
+					"trackID": "Mrz_It3"
+				},
+				"21,3": {
+					"id": "switchL4",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_22",
+					"trackID": "Mrz_Iz22"
+				},
+				"21,4": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_23",
+					"trackID": "Mrz_Iz23"
+				},
+				"21,5": {
+					"id": "track-",
+					"trackID": "Mrz_It2a"
+				},
+				"21,6": {
+					"id": "track-",
+					"trackID": "Mrz_It1"
+				},
+				"21,7": {
+					"id": "track-",
+					"trackID": "Mrz_It3"
+				},
+				"22,4": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_24",
+					"trackID": "Mrz_Iz24"
+				},
+				"22,5": {
+					"id": "track-",
+					"trackID": "Mrz_It2a"
+				},
+				"22,6": {
+					"id": "track-",
+					"trackID": "Mrz_It1"
+				},
+				"22,7": {
+					"id": "track-",
+					"trackID": "Mrz_It3"
+				},
+				"23,2": {
+					"electrified": false,
+					"id": "letterM"
+				},
+				"23,4": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_N",
+					"semaphoreNoW24": true,
+					"trackID": "Mrz_Iz24"
+				},
+				"23,5": {
+					"id": "track-",
+					"trackID": "Mrz_It2a"
+				},
+				"23,6": {
+					"id": "track-",
+					"trackID": "Mrz_It1"
+				},
+				"23,7": {
+					"id": "track-",
+					"trackID": "Mrz_It3"
+				},
+				"24,2": {
+					"electrified": false,
+					"id": "letterR"
+				},
+				"24,4": {
+					"id": "platformP",
+					"trackID": "Mrz_It4"
+				},
+				"24,5": {
+					"id": "platformF",
+					"trackID": "Mrz_It2a"
+				},
+				"24,6": {
+					"id": "platformP",
+					"trackID": "Mrz_It1"
+				},
+				"24,7": {
+					"id": "platformP",
+					"trackID": "Mrz_It3"
+				},
+				"25,2": {
+					"electrified": false,
+					"id": "letterO"
+				},
+				"25,4": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Mrz_It4",
+					"trainTarget": true
+				},
+				"25,5": {
+					"id": "platformF",
+					"trackID": "Mrz_It2a",
+					"trainTarget": true
+				},
+				"25,6": {
+					"id": "platformP",
+					"trackID": "Mrz_It1",
+					"trainTarget": true
+				},
+				"25,7": {
+					"id": "platformP",
+					"trackID": "Mrz_It3",
+					"trainTarget": true
+				},
+				"26,2": {
+					"electrified": false,
+					"id": "letterZ"
+				},
+				"26,4": {
+					"id": "platformP",
+					"trackID": "Mrz_It4"
+				},
+				"26,5": {
+					"id": "platformF",
+					"trackID": "Mrz_It2a"
+				},
+				"26,6": {
+					"id": "platformP",
+					"trackID": "Mrz_It1"
+				},
+				"26,7": {
+					"id": "platformP",
+					"trackID": "Mrz_It3"
+				},
+				"27,2": {
+					"electrified": false,
+					"id": "letterY"
+				},
+				"27,4": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_O",
+					"trackID": "Mrz_Iz26"
+				},
+				"27,5": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_P",
+					"trackID": "Mrz_Iz27"
+				},
+				"27,6": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_R",
+					"trackID": "Mrz_Iz29"
+				},
+				"27,7": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_S",
+					"trackID": "Mrz_Iz25"
+				},
+				"28,4": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_26",
+					"trackID": "Mrz_Iz26"
+				},
+				"28,5": {
+					"id": "track-",
+					"trackID": "Mrz_Iz27"
+				},
+				"28,6": {
+					"id": "track-",
+					"trackID": "Mrz_Iz29"
+				},
+				"28,7": {
+					"id": "track-",
+					"trackID": "Mrz_Iz25"
+				},
+				"29,4": {
+					"id": "buffer7",
+					"trackID": "Mrz_It4a"
+				},
+				"29,5": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_27",
+					"trackID": "Mrz_Iz27"
+				},
+				"29,6": {
+					"id": "track-",
+					"trackID": "Mrz_Iz29"
+				},
+				"29,7": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_25",
+					"trackID": "Mrz_Iz25"
+				},
+				"3,5": {
+					"id": "track-",
+					"trackID": "5582-A2@LK2.2"
+				},
+				"3,6": {
+					"id": "track-",
+					"trackID": "5571-B1@LK2.1"
+				},
+				"30,5": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_28",
+					"trackID": "Mrz_Iz28"
+				},
+				"30,6": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_29",
+					"trackID": "Mrz_Iz29"
+				},
+				"30,7": {
+					"id": "buffer7",
+					"trackID": "Mrz_It3b"
+				},
+				"31,5": {
+					"id": "track-",
+					"trackID": "Mrz_Iz28"
+				},
+				"31,6": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_30",
+					"trackID": "Mrz_Iz30"
+				},
+				"32,5": {
+					"id": "track-",
+					"trackID": "Mrz_Iz28"
+				},
+				"32,6": {
+					"id": "track-",
+					"trackID": "Mrz_Iz30"
+				},
+				"33,5": {
+					"id": "track-",
+					"trackID": "Mrz_Iz32"
+				},
+				"33,6": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_31",
+					"trackID": "Mrz_Iz31"
+				},
+				"34,5": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_32",
+					"trackID": "Mrz_Iz32"
+				},
+				"34,6": {
+					"id": "track-",
+					"trackID": "Mrz_ItU"
+				},
+				"35,5": {
+					"id": "track-",
+					"trackID": "Mrz_ItW"
+				},
+				"35,6": {
+					"id": "track-",
+					"trackID": "Mrz_ItU"
+				},
+				"36,5": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_W",
+					"semaphoreNoW24": true,
+					"trackID": "Mrz_ItW"
+				},
+				"36,6": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_U",
+					"semaphoreNoW24": true,
+					"trackID": "Mrz_ItU"
+				},
+				"37,5": {
+					"id": "track-",
+					"trackID": "W2-6122@LK2.2"
+				},
+				"37,6": {
+					"id": "track-",
+					"trackID": "U1-6111@LK2.1"
+				},
+				"38,5": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trackID": "W2-6122@LK2.2",
+					"trainTarget": true
+				},
+				"38,6": {
+					"id": "arrow3",
+					"trackID": "U1-6111@LK2.1",
+					"trainTarget": true
+				},
+				"4,5": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_A",
+					"semaphoreNoW24": true,
+					"trackID": "Mrz_ItA"
+				},
+				"4,6": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mrz_B",
+					"semaphoreNoW24": true,
+					"trackID": "Mrz_ItB"
+				},
+				"5,5": {
+					"id": "track-",
+					"trackID": "Mrz_ItA"
+				},
+				"5,6": {
+					"id": "track-",
+					"trackID": "Mrz_ItB"
+				},
+				"6,4": {
+					"id": "buffer3",
+					"trackID": "Mrz_It12"
+				},
+				"6,5": {
+					"id": "track-",
+					"trackID": "Mrz_ItA"
+				},
+				"6,6": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_1",
+					"trackID": "Mrz_Iz1"
+				},
+				"7,4": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Mrz_It12"
+				},
+				"7,5": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_2",
+					"trackID": "Mrz_Iz2"
+				},
+				"7,6": {
+					"id": "track-",
+					"trackID": "Mrz_Iz1"
+				},
+				"8,4": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Mrz_Tm1",
+					"semaphoreType": 1,
+					"trackID": "Mrz_Iz5"
+				},
+				"8,5": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_3",
+					"trackID": "Mrz_Iz3"
+				},
+				"8,6": {
+					"id": "track-",
+					"trackID": "Mrz_Iz7"
+				},
+				"9,4": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_5",
+					"trackID": "Mrz_Iz5"
+				},
+				"9,5": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mrz_4",
+					"trackID": "Mrz_Iz4"
+				},
+				"9,6": {
+					"id": "track-",
+					"trackID": "Mrz_Iz7"
+				}
+			},
+			"w": 39
+		},
+		{
+			"h": 8,
+			"name": "Mienia",
+			"shortcut": "Mia",
+			"tiles": {
+				"10,4": {
+					"id": "arrow7",
+					"semaphoreID": "522",
+					"targetW24": true,
+					"trackID": "Z2-5222@LK2.2",
+					"trainTarget": true,
+					"warp": "Mia-Mrz"
+				},
+				"10,5": {
+					"id": "arrow3",
+					"trackID": "5071-5231@LK2.1",
+					"warp": "Mia-Mrz"
+				},
+				"2,3": {
+					"id": "arrow-",
+					"trainTarget": true
+				},
+				"2,4": {
+					"id": "arrow7",
+					"semaphoreID": "480",
+					"trackID": "4802-Y2@LK2.2",
+					"trainTarget": true,
+					"warp": "MMz-Mia"
+				},
+				"2,5": {
+					"id": "arrow3",
+					"trackID": "4811-4931@LK2.1",
+					"warp": "MMz-Mia"
+				},
+				"3,3": {
+					"id": "track-"
+				},
+				"3,4": {
+					"id": "track-",
+					"trackID": "4802-Y2@LK2.2"
+				},
+				"3,5": {
+					"id": "track-",
+					"trackID": "4811-4931@LK2.1"
+				},
+				"4,3": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mia_X",
+					"trackID": "Mia_ItX"
+				},
+				"4,4": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mia_Y",
+					"trackID": "Mia_ItY"
+				},
+				"4,5": {
+					"id": "semaphore7",
+					"semaphoreID": "493N",
+					"trackID": "4811-4931@LK2.1"
+				},
+				"5,3": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "Mia_41",
+					"trackID": "Mia_Iz41"
+				},
+				"5,4": {
+					"id": "track-",
+					"trackID": "Mia_ItY"
+				},
+				"5,5": {
+					"id": "semaphore3",
+					"semaphoreID": "493",
+					"trackID": "4931-5071@LK2.1"
+				},
+				"6,3": {
+					"id": "buffer7",
+					"trackID": "Mia_Iz41"
+				},
+				"6,4": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mia_42",
+					"trackID": "Mia_Iz42"
+				},
+				"6,5": {
+					"id": "track-",
+					"trackID": "4931-5071@LK2.1"
+				},
+				"7,4": {
+					"id": "track-",
+					"trackID": "Mia_ItZ"
+				},
+				"7,5": {
+					"id": "semaphore7",
+					"semaphoreID": "507N",
+					"trackID": "4931-5071@LK2.1"
+				},
+				"8,4": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mia_Z",
+					"trackID": "Mia_ItZ"
+				},
+				"8,5": {
+					"id": "semaphore3",
+					"semaphoreID": "507",
+					"trackID": "5071-5231@LK2.1"
+				},
+				"9,4": {
+					"id": "track-",
+					"trackID": "Z2-5222@LK2.2"
+				},
+				"9,5": {
+					"id": "track-",
+					"trackID": "5071-5231@LK2.1"
+				}
+			},
+			"w": 11
+		},
+		{
+			"h": 8,
+			"name": "Mienia-Mrozy",
+			"shortcut": "Mia-Mrz",
+			"tiles": {
+				"10,2": {
+					"id": "letterN"
+				},
+				"10,4": {
+					"id": "track-",
+					"trackID": "5422-5582@LK2.2"
+				},
+				"10,5": {
+					"id": "track-",
+					"trackID": "5431-5571@LK2.1"
+				},
+				"10,7": {
+					"id": "letterP"
+				},
+				"11,4": {
+					"id": "semaphore7",
+					"semaphoreID": "558",
+					"trackID": "5422-5582@LK2.2"
+				},
+				"11,5": {
+					"id": "semaphore7",
+					"semaphoreID": "557N",
+					"trackID": "5431-5571@LK2.1"
+				},
+				"12,4": {
+					"id": "semaphore3",
+					"semaphoreID": "558N",
+					"trackID": "5582-A2@LK2.2"
+				},
+				"12,5": {
+					"id": "semaphore3",
+					"semaphoreID": "557",
+					"trackID": "5571-B1@LK2.1"
+				},
+				"13,4": {
+					"id": "track-",
+					"trackID": "5582-A2@LK2.2"
+				},
+				"13,5": {
+					"id": "track-",
+					"trackID": "5571-B1@LK2.1"
+				},
+				"14,4": {
+					"id": "semaphore3",
+					"semaphoreID": "Mrz_A",
+					"trackID": "Mrz_ItA"
+				},
+				"14,5": {
+					"id": "semaphore3",
+					"semaphoreID": "Mrz_B",
+					"trackID": "Mrz_ItB"
+				},
+				"15,4": {
+					"id": "arrow7",
+					"trackID": "Mrz_ItA",
+					"warp": "Mrz"
+				},
+				"15,5": {
+					"id": "arrow3",
+					"trackID": "Mrz_ItB",
+					"warp": "Mrz"
+				},
+				"2,4": {
+					"id": "arrow7",
+					"trackID": "Mia_ItZ",
+					"warp": "Mia"
+				},
+				"2,5": {
+					"id": "arrow3",
+					"trackID": "5071-5231@LK2.1",
+					"warp": "Mia"
+				},
+				"3,4": {
+					"id": "semaphore7",
+					"semaphoreID": "Mia_Z",
+					"trackID": "Mia_ItZ"
+				},
+				"3,5": {
+					"id": "track-",
+					"trackID": "5071-5231@LK2.1"
+				},
+				"4,4": {
+					"id": "track-",
+					"trackID": "Z2-5222@LK2.2"
+				},
+				"4,5": {
+					"id": "track-",
+					"trackID": "5071-5231@LK2.1"
+				},
+				"5,4": {
+					"id": "semaphore7",
+					"semaphoreID": "522",
+					"trackID": "Z2-5222@LK2.2"
+				},
+				"5,5": {
+					"id": "semaphore7",
+					"semaphoreID": "523N",
+					"trackID": "5071-5231@LK2.1"
+				},
+				"6,4": {
+					"id": "semaphore3",
+					"semaphoreID": "522N",
+					"trackID": "5222-5422@LK2.2"
+				},
+				"6,5": {
+					"id": "semaphore3",
+					"semaphoreID": "523",
+					"trackID": "5231-5431@LK2.1"
+				},
+				"7,2": {
+					"id": "letterP"
+				},
+				"7,4": {
+					"id": "track-",
+					"trackID": "5222-5422@LK2.2"
+				},
+				"7,5": {
+					"id": "track-",
+					"trackID": "5231-5431@LK2.1"
+				},
+				"7,7": {
+					"id": "letterN"
+				},
+				"8,2": {
+					"command": "b Mia-Mrz 1 p",
+					"id": "square"
+				},
+				"8,4": {
+					"id": "semaphore7",
+					"semaphoreID": "542",
+					"trackID": "5222-5422@LK2.2"
+				},
+				"8,5": {
+					"id": "semaphore7",
+					"semaphoreID": "543N",
+					"trackID": "5231-5431@LK2.1"
+				},
+				"8,7": {
+					"command": "b MMz-Mrz 1 n",
+					"id": "square"
+				},
+				"9,2": {
+					"command": "b Mia-Mrz 1 n",
+					"id": "square"
+				},
+				"9,4": {
+					"id": "semaphore3",
+					"semaphoreID": "542N",
+					"trackID": "5422-5582@LK2.2"
+				},
+				"9,5": {
+					"id": "semaphore3",
+					"semaphoreID": "543",
+					"trackID": "5431-5571@LK2.1"
+				},
+				"9,7": {
+					"command": "b MMz-Mrz 1 p",
+					"id": "square"
+				}
+			},
+			"w": 16
+		}
+    ]
+}
