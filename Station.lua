@@ -287,32 +287,6 @@ function Station:deleteRow(y)
 	self:generateCanvas()
 end
 
----Copies the server-side data of this station to be easily pasted into the server's .json file.
----TODO: At some point, the client and server's files will be shared, removing the need for this function.
-function Station:copyServerData()
-	local data = {name = self.name, tracks = {}, switches = {}, semaphores = {}}
-	for x = 1, self.w do
-		for y = 1, self.h do
-			local tile = self:assertGetTile(x, y)
-			if tile.trackID and not _Utils.isValueInTable(data.tracks, tile.trackID) then
-				table.insert(data.tracks, tile.trackID)
-			end
-			if tile.switchID then
-				table.insert(data.switches, tile.switchID)
-			end
-			if tile.semaphoreID then
-				local type = tile.semaphoreType
-				local shape = tile.semaphoreShape
-				local semaphoreData = {type = type ~= 0 and type or nil, shape = shape ~= false and shape or nil}
-				data.semaphores[tile.semaphoreID] = semaphoreData
-			end
-		end
-	end
-	local result = _Utils.jsonBeautify(json.encode(data))
-	love.system.setClipboardText(result)
-	_Notifications:post("Copied server data to clipboard!")
-end
-
 ---Handles the left click action.
 ---@private
 function Station:handleLeftClick()
@@ -381,7 +355,7 @@ function Station:handleRightClick()
 	if self.hoverX and self.hoverY then
 		if not _Picker.mode then
 			local tile = self:assertGetHoveredTile()
-			if tile.id == 0 then
+			if tile.id == "" then
 				_Picker:flipSelection()
 			else
 				self:setTile(self.hoverX, self.hoverY)
@@ -464,8 +438,6 @@ function Station:keypressed(key)
 		self:moveSingleSelection(0, -1)
 	elseif key == "down" then
 		self:moveSingleSelection(0, 1)
-	elseif key == "f2" then
-		self:copyServerData()
 	end
 end
 
@@ -521,9 +493,10 @@ function Station:draw()
 	love.graphics.setCanvas()
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.draw(self.canvas, self.x + 0.5, self.y + 0.5, 0, self.SCALE)
+	--self:drawFrame()
 end
 
----Draws the Station's background.
+---Draws the Station's tile backgrounds.
 ---@private
 function Station:drawBackground()
 	for i, column in ipairs(self.tiles) do
@@ -637,6 +610,14 @@ function Station:drawRectSelection()
 			self:assertGetTile(x, y):drawFrame(TileFrameColor.RECT_SELECTION)
 		end
 	end
+end
+
+---Draws the Station's frame, when the schematic is not synced with the server.
+---@private
+function Station:drawFrame()
+	love.graphics.setColor(1, 1, 0)
+	love.graphics.setLineWidth(2)
+	love.graphics.rectangle("line", self.x, self.y, self.canvas:getWidth() * self.SCALE + 1, self.canvas:getHeight() * self.SCALE + 1)
 end
 
 --####################################--

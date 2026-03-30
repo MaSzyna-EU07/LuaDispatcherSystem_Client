@@ -47,21 +47,18 @@ local COM_FUNCTIONS = {
 	[0xF2] = {
 		name = "initTrack",
 		params = {
-			{name = "stationID", type = "int", bytes = 2},
 			{name = "trackN", type = "string"}
 		}
 	},
 	[0xF3] = {
 		name = "initSwitch",
 		params = {
-			{name = "stationID", type = "int", bytes = 2},
 			{name = "switchN", type = "string"}
 		}
 	},
 	[0xF4] = {
 		name = "initSemaphore",
 		params = {
-			{name = "stationID", type = "int", bytes = 2},
 			{name = "semaphoreN", type = "string"},
 			{name = "type", type = "int", bytes = 1}
 		}
@@ -293,34 +290,28 @@ function com.readCall(name, params, silent)
 	elseif name == "debugPrint" then
 		_Notifications:post("[LOG] " .. params.message, NotificationColor.GREEN)
 	elseif name == "initStation" then
-		com.initObject(com_ids.stations, "station", params.stationN, nil)
+		com.initObject(com_ids.stations, "station", params.stationN)
 		_Obj:initStation(params.stationN)
 	elseif name == "initRoute" then
-		com.initObject(com_ids.stations, "station", params.routeN, nil)
+		com.initObject(com_ids.stations, "station", params.routeN)
 		_Obj:initStation(params.routeN)
 	elseif name == "initTrack" then
-		local station = com_ids.stations[params.stationID]
-		com.initObject(com_ids.tracks, "track", params.trackN, params.stationID)
+		com.initObject(com_ids.tracks, "track", params.trackN)
 		_Obj:initTrack(params.trackN)
 	elseif name == "initSwitch" then
-		local station = com_ids.stations[params.stationID]
-		com.initObject(com_ids.switches, "switch", params.switchN, params.stationID)
+		com.initObject(com_ids.switches, "switch", params.switchN)
 		_Obj:initSwitch(params.switchN)
 	elseif name == "initSemaphore" then
-		local station = com_ids.stations[params.stationID]
-		com.initObject(com_ids.semaphores, "semaphore", params.semaphoreN, params.stationID)
+		com.initObject(com_ids.semaphores, "semaphore", params.semaphoreN)
 		_Obj:initSemaphore(params.semaphoreN, params.type)
 	elseif name == "setTrack" then
 		local track = com_ids.tracks[params.trackID]
-		local station = com_ids.stations[track.sid]
 		_Obj:setTrackState(track.name, timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
 	elseif name == "setSwitch" then
 		local switch = com_ids.switches[params.switchID]
-		local station = com_ids.stations[switch.sid]
 		_Obj:setSwitchState(switch.name, timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 5))
 	elseif name == "setSemaphore" then
 		local semaphore = com_ids.semaphores[params.semaphoreID]
-		local station = com_ids.stations[semaphore.sid]
 		_Obj:setSemaphoreState(semaphore.name, timeTicks, params.speed, params.nextSpeed, COM_IMAGES[params.state])
 	end
 end
@@ -329,9 +320,9 @@ function com.nextTimeTick()
 	timeTicks = timeTicks + 1
 end
 
-function com.initObject(idTable, counter, name, stationID)
+function com.initObject(idTable, counter, name)
 	com_counters[counter] = (com_counters[counter] or 0) + 1
-	idTable[com_counters[counter]] = {name = name, sid = stationID}
+	idTable[com_counters[counter]] = {name = name}
 end
 
 function com.isConnected()

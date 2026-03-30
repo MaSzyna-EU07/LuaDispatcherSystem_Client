@@ -458,6 +458,21 @@ function utils.removeDeadObjects(t)
 	end
 end
 
+---Creates a multidimensional table (table of tables).
+---@param value any? The default value for all table elements. If `nil`, the table will be empty. If a function, the function's will be called for each item and the result will be put.
+---@param dimSize integer? First of the dimensions. If `nil`, returns the raw `value`.
+---@return any?
+function utils.tableNewMultidim(value, dimSize, ...)
+	if not dimSize then
+		return type(value) == "function" and value() or value
+	end
+	local tbl = {}
+	for i = 1, dimSize do
+		tbl[i] = utils.tableNewMultidim(value, ...)
+	end
+	return tbl
+end
+
 --##########################################--
 ---------------- S T R I N G S ---------------
 --##########################################--
