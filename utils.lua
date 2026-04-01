@@ -625,20 +625,18 @@ function utils.strIsInWholeBracket(s)
 	return true
 end
 
----Returns the first line in the string `s` which starts from the clause `c`.
+---Returns the first line in the string `s` which contains the clause `c`.
 ---Returns `nil` if no such line has been found.
 ---@param s string The string to be searched.
 ---@param c string The expected beginning of any of the lines of the string `s`.
 ---@return string?
 function utils.strFindLine(s, c)
-	local pos = nil
-	repeat
-		pos = s:find(c, pos or 1, true)
-		if pos and s:sub(pos - 1, pos - 1) == "\n" then
-			local pos2 = s:find("\n", pos, true)
-			return s:sub(pos, pos2 - 1)
-		end
-	until not pos
+	local pos = s:find(c, 1, true)
+	if pos then
+		local pos1 = s:len() - s:reverse():find("\n", s:len() - pos, true)
+		local pos2 = s:find("\n", pos, true)
+		return s:sub(pos1 + 2, pos2 - 1)
+	end
 end
 
 ---Strips the extension from a path to a file.
