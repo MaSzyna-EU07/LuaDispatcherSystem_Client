@@ -12,7 +12,7 @@ local COM_FUNCTIONS = {
 	[0x02] = {
 		name = "debugNotify",
 		params = {
-			{name = "color", type = "init", bytes = 1},
+			{name = "color", type = "int", bytes = 1},
 			{name = "message", type = "string"}
 		}
 	},
@@ -297,7 +297,13 @@ function com.readCall(name, params, silent)
 	elseif name == "debugPrint" then
 		print("[LOG] " .. params.message)
 	elseif name == "debugNotify" then
-		_Notifications:post(params.message, NotificationColorID[params.color])
+		if com_pos > 0 then
+			_Notifications:post(params.message, NotificationColorID[params.color])
+		else
+			-- Do not display the notification if this is the initial read, as we might read a lot
+			-- and we don't want to flood the user each time with trash content. This is not TikTok.
+			print("[NOTIFICATION] " .. params.message)
+		end
 	elseif name == "initStation" then
 		com.initObject(com_ids.stations, "station", params.stationN)
 		_Obj:initStation(params.stationN)

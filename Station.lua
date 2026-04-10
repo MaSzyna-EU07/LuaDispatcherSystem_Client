@@ -1,7 +1,5 @@
 local class = require "class"
-local json = require("json")
 local Tile = require("Tile")
-local Pathfinder = require("Pathfinder")
 
 ---@class Station : Class
 ---@overload fun(name, shortcut): Station
@@ -393,16 +391,13 @@ function Station:handleRightClick()
 				end
 			elseif self.activeX and self.activeY then
 				if tile:isTargetForMode(self.activeMode) then
-    				local t = love.timer.getTime()
-					local pathfinder = Pathfinder(self:assertGetTile(self.activeX, self.activeY), tile)
-					pathfinder:setMode(self.activeMode)
-					local result = pathfinder:calculatePath()
-					if result then
-						t = love.timer.getTime() - t
-						_Notifications:post(string.format("Pathfinding took %.1fms", t * 1000), NotificationColor.GREEN)
-						pathfinder:dispatch()
+					local track1 = self:assertGetTile(self.activeX, self.activeY):getSemaphorePrevTrackID()
+					local track2 = tile.trackID
+					if not track1 or not track2 then
+						_Notifications:post("Could not pathfind! Check track IDs.", NotificationColor.GRAY)
 					else
-        				_Notifications:post("Pathfinding failed! :(", NotificationColor.RED)
+						_Notifications:post("Sent pathfinding request.", NotificationColor.GRAY)
+						_Com.sendCommand("p " .. self.shortcut .. " " .. track1 .. " " .. track2 .. " " .. (self.activeMode == PathMode.TRAIN and "t" or "s"))
 					end
 				end
 				self.activeX, self.activeY = nil, nil
