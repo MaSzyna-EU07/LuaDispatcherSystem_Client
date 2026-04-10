@@ -82,3 +82,10 @@ NotificationColor = {
 	RED = {0.9, 0.1, 0},
 	GRAY = {0.4, 0.4, 0.4}
 }
+
+---@enum NotificationColorID
+NotificationColorID = {
+	NotificationColor.GREEN,
+	NotificationColor.RED,
+	NotificationColor.GRAY
+}

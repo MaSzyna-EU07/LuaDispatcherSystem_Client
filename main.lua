@@ -235,9 +235,3 @@ function _GetMaxLessThan(l, v)
 	for i, n in ipairs(l) do if n > v then return l[i-1] end end
 	return l[#l]
 end
-
-function _GetTableKeys(l)
-	local r = {}
-	for k, v in pairs(l) do table.insert(r, k) end
-	return r
-end

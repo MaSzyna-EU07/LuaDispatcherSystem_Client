@@ -9,6 +9,13 @@ local COM_FUNCTIONS = {
 			{name = "message", type = "string"}
 		}
 	},
+	[0x02] = {
+		name = "debugNotify",
+		params = {
+			{name = "color", type = "init", bytes = 1},
+			{name = "message", type = "string"}
+		}
+	},
 	[0x12] = {
 		name = "setTrack",
 		params = {
@@ -288,7 +295,9 @@ function com.readCall(name, params, silent)
 	if name == "nextTick" then
 		com.nextTimeTick()
 	elseif name == "debugPrint" then
-		_Notifications:post("[LOG] " .. params.message, NotificationColor.GREEN)
+		print("[LOG] " .. params.message)
+	elseif name == "debugNotify" then
+		_Notifications:post(params.message, NotificationColorID[params.color])
 	elseif name == "initStation" then
 		com.initObject(com_ids.stations, "station", params.stationN)
 		_Obj:initStation(params.stationN)
