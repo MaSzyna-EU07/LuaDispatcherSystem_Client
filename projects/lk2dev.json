@@ -1,4 +1,11 @@
 {
+	"stationIndex": {
+		"MMz": 2,
+		"MMz-Mia": 1,
+		"Mia": 4,
+		"Mia-Mrz": 5,
+		"Mrz": 3
+	},
 	"stations": [
 		{
 			"h": 8,
@@ -205,7 +212,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_E",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItE"
 				},
 				"10,6": {
@@ -213,7 +219,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_D",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItD"
 				},
 				"10,8": {
@@ -221,7 +226,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_C",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItC"
 				},
 				"11,10": {
@@ -229,7 +233,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_G4",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItG4"
 				},
 				"11,11": {
@@ -273,7 +276,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_G1",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItG1"
 				},
 				"12,15": {
@@ -303,7 +305,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_G2",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItG2"
 				},
 				"13,10": {
@@ -327,7 +328,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_G3",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItG3"
 				},
 				"14,5": {
@@ -335,7 +335,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_F",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItF"
 				},
 				"14,6": {
@@ -343,7 +342,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_G",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItG"
 				},
 				"14,7": {
@@ -421,7 +419,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_H",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItH"
 				},
 				"2,5": {
@@ -565,7 +562,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_N",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz15"
 				},
 				"24,6": {
@@ -574,7 +570,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_M",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz16"
 				},
 				"24,8": {
@@ -583,7 +578,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_L",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz21"
 				},
 				"24,9": {
@@ -610,7 +604,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_P",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz18"
 				},
 				"25,4": {
@@ -619,7 +612,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_O",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz18"
 				},
 				"25,5": {
@@ -640,7 +632,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_K",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz22"
 				},
 				"26,10": {
@@ -649,7 +640,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_J7",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz23"
 				},
 				"26,11": {
@@ -692,7 +682,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_J9",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz25"
 				},
 				"27,3": {
@@ -845,7 +834,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_X7",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz32"
 				},
 				"31,11": {
@@ -854,7 +842,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_X9",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz32"
 				},
 				"31,3": {
@@ -863,7 +850,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_R",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz34"
 				},
 				"31,4": {
@@ -872,7 +858,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_S",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz34"
 				},
 				"31,5": {
@@ -913,7 +898,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_T",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz39"
 				},
 				"32,7": {
@@ -954,7 +938,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_W",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz41"
 				},
 				"33,9": {
@@ -963,7 +946,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_V",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz38"
 				},
 				"34,10": {
@@ -988,7 +970,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_U",
-					"semaphoreType": 0,
 					"trackID": "MMz_Iz44"
 				},
 				"34,8": {
@@ -1156,7 +1137,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_A",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItA"
 				},
 				"4,6": {
@@ -1164,7 +1144,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_B",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItB"
 				},
 				"40,2": {
@@ -1229,7 +1208,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_Z",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItZ"
 				},
 				"43,6": {
@@ -1237,7 +1215,6 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "MMz_Y",
-					"semaphoreType": 0,
 					"trackID": "MMz_ItY"
 				},
 				"44,5": {

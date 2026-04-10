@@ -144,6 +144,7 @@ function UIPickerPane:forEachTile(f)
 		local tile = station:assertGetTile(coords.x, coords.y)
 		f(tile)
 	end
+	_Project:markUnsaved()
 end
 
 function UIPickerPane:updateTrackID(input)

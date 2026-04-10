@@ -1,4 +1,11 @@
 {
+	"stationIndex": {
+		"Bc": 4,
+		"EZ": 3,
+		"Eb": 1,
+		"Mn": 5,
+		"Tp": 2
+	},
 	"stations": [
 		{
 			"h": 19,
@@ -2934,6 +2941,7 @@
 					"trackID": "Bc_Iz28"
 				},
 				"21,5": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Bc_ItP"
 				},
@@ -2944,6 +2952,7 @@
 					"trackID": "Bc_Iz28"
 				},
 				"22,5": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Bc_ItP"
 				},
@@ -2952,6 +2961,7 @@
 					"trackID": "Bc_ItO"
 				},
 				"23,5": {
+					"electrified": false,
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -2968,6 +2978,7 @@
 					"trackID": "Bc_ItO"
 				},
 				"24,5": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Bc1-Mn1@LK204"
 				},
@@ -2976,9 +2987,11 @@
 					"trackID": "Ps1-Bc3@LK220"
 				},
 				"25,5": {
+					"electrified": false,
 					"id": "arrow-",
 					"trackID": "Bc1-Mn1@LK204",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Mn"
 				},
 				"25,6": {
 					"id": "arrow-",
@@ -3125,6 +3138,256 @@
 				}
 			},
 			"w": 26
+		},
+		{
+			"h": 5,
+			"name": "Młynary",
+			"shortcut": "Mn",
+			"tiles": {
+				"10,2": {
+					"electrified": false,
+					"id": "platformP",
+					"trackID": "Mn_It1"
+				},
+				"10,3": {
+					"electrified": false,
+					"id": "platformF",
+					"trackID": "Mn_It3"
+				},
+				"10,4": {
+					"electrified": false,
+					"id": "platformF",
+					"trackID": "Mn_It5"
+				},
+				"11,2": {
+					"electrified": false,
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Mn_It1",
+					"trainTarget": true
+				},
+				"11,3": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Mn_It3",
+					"trainTarget": true
+				},
+				"11,4": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Mn_It5",
+					"trainTarget": true
+				},
+				"12,2": {
+					"electrified": false,
+					"id": "platformP",
+					"trackID": "Mn_It1"
+				},
+				"12,3": {
+					"electrified": false,
+					"id": "platformF",
+					"trackID": "Mn_It3"
+				},
+				"12,4": {
+					"electrified": false,
+					"id": "platformF",
+					"trackID": "Mn_It5"
+				},
+				"13,2": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Mn_It1"
+				},
+				"13,3": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mn_H",
+					"semaphoreShape": true,
+					"trackID": "Mn_Iz11"
+				},
+				"13,4": {
+					"electrified": false,
+					"id": "curve2",
+					"trackID": "Mn_Iz11"
+				},
+				"14,2": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mn_G",
+					"semaphoreShape": true,
+					"trackID": "Mn_Iz15"
+				},
+				"14,3": {
+					"electrified": false,
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mn_11",
+					"trackID": "Mn_Iz11"
+				},
+				"15,2": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Mn_Iz15"
+				},
+				"15,3": {
+					"electrified": false,
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mn_13",
+					"trackID": "Mn_Iz13"
+				},
+				"16,2": {
+					"electrified": false,
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mn_15",
+					"trackID": "Mn_Iz15"
+				},
+				"16,3": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Mn_It23"
+				},
+				"17,2": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mn_J",
+					"semaphoreShape": true,
+					"trackID": "Mn_ItJ"
+				},
+				"17,3": {
+					"electrified": false,
+					"id": "buffer7",
+					"trackID": "Mn_It23"
+				},
+				"18,2": {
+					"electrified": false,
+					"id": "arrow-",
+					"trackID": "Mn1-Ch1@LK204",
+					"trainTarget": true
+				},
+				"2,2": {
+					"electrified": false,
+					"id": "arrow-",
+					"trackID": "Bc1-Mn1@LK204",
+					"trainTarget": true,
+					"warp": "Bc"
+				},
+				"3,2": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mn_B",
+					"semaphoreShape": true,
+					"trackID": "Mn_ItB"
+				},
+				"3,3": {
+					"electrified": false,
+					"id": "buffer3",
+					"trackID": "Mn_It13"
+				},
+				"4,2": {
+					"electrified": false,
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mn_1",
+					"trackID": "Mn_Iz1"
+				},
+				"4,3": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Mn_It13"
+				},
+				"5,2": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Mn_Iz1"
+				},
+				"5,3": {
+					"electrified": false,
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Mn_3",
+					"trackID": "Mn_Iz3"
+				},
+				"6,2": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Mn_Iz1"
+				},
+				"6,3": {
+					"electrified": false,
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Mn_4",
+					"trackID": "Mn_Iz4"
+				},
+				"7,2": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Mn_Iz1"
+				},
+				"7,3": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mn_C",
+					"semaphoreShape": true,
+					"trackID": "Mn_Iz4"
+				},
+				"7,4": {
+					"electrified": false,
+					"id": "curve3",
+					"trackID": "Mn_Iz4"
+				},
+				"8,2": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Mn_Iz1"
+				},
+				"8,3": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Mn_It3"
+				},
+				"8,4": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Mn_It5"
+				},
+				"9,2": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Mn_D",
+					"semaphoreShape": true,
+					"trackID": "Mn_Iz1"
+				},
+				"9,3": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Mn_It3"
+				},
+				"9,4": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Mn_It5"
+				}
+			},
+			"w": 19
 		}
 	]
 }

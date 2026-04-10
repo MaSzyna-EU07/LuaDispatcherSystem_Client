@@ -104,7 +104,6 @@ local COM_IMAGES = {
 	[0xFF] = "sz"
 }
 
-local logError = 0
 local timeTicks = 0
 
 com.path = nil
@@ -182,10 +181,6 @@ function com.readBytes()
 	local length = file:seek("end")
 	file:seek("set", com_pos) -- Start from where the file ended previously
 	for i = com_pos, length - 1 do
-		if logError ~= 0 then
-			print("logError found, breaking")
-			break
-		end
 		com.readByte(io.read(1))
 	end
 

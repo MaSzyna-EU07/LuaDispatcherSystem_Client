@@ -1,4 +1,12 @@
 {
+	"stationIndex": {
+		"GG": 3,
+		"GP": 4,
+		"GS": 5,
+		"Gr": 6,
+		"Ps": 1,
+		"Tc": 2
+	},
 	"stations": [
 		{
 			"h": 10,

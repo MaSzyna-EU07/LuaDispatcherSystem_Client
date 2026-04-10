@@ -8,6 +8,7 @@ local Project = class:derive("Project")
 function Project:new()
 	self.name = nil
 	self.unsaved = false
+	self.synced = true -- Whether the project file is synchronized with the server
 	self.currentStationID = nil
 
 	---@type Station[]
@@ -158,6 +159,25 @@ function Project:mousereleased(x, y, button)
 	end
 end
 
+---Marks this project as unsaved and unsynced.
+function Project:markUnsaved()
+	self.unsaved = true
+	self.synced = false
+end
+
+---Returns whether this project is synchronized with the server.
+---@return boolean
+function Project:isSynced()
+	return self.synced
+end
+
+---Exports this project if it is currently not synchronized with the server.
+function Project:sync()
+	if not self.synced then
+		self:export()
+	end
+end
+
 ---Saves this project under the specified name.
 ---@param name string? The project name to be saved as. If not specified, the current name will be used.
 function Project:save(name)
@@ -167,8 +187,20 @@ function Project:save(name)
 		return
 	end
 	self.name = name
+	self.unsaved = false
 	_Utils.saveJson("projects/" .. name .. ".json", self:serialize())
 	_Notifications:post("Zapisano projekt!")
+end
+
+---Exports this project to the simulator directory under the current name.
+---If there is no simulator directory specified, nothing happens.
+function Project:export()
+	if not _Settings.simPath then
+		return
+	end
+	self.synced = true
+	_Utils.saveJson(_Settings.simPath .. "scenery/luascript/" .. self.name .. "_proj.json", self:serialize())
+	_Notifications:post("Wyeksportowano projekt!")
 end
 
 ---Loads a project from the specified name.
@@ -188,10 +220,12 @@ end
 ---@return table
 function Project:serialize()
 	local t = {
-		stations = {}
+		stations = {},
+		stationIndex = {}
 	}
 	for i, station in ipairs(self.stations) do
 		t.stations[i] = station:serialize()
+		t.stationIndex[station.shortcut] = i
 	end
 	return t
 end

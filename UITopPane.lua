@@ -16,6 +16,7 @@ end
 
 function UITopPane:saveProject()
 	_Project:save()
+	_Project:sync()
 end
 
 function UITopPane:loadProject()

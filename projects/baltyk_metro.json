@@ -1,5 +1,10 @@
 {
-    "stations": [
+	"stationIndex": {
+		"K": 1,
+		"K-NS": 3,
+		"NS": 2
+	},
+	"stations": [
 		{
 			"h": 6,
 			"name": "Kolumba",
@@ -502,5 +507,5 @@
 			},
 			"w": 21
 		}
-    ]
+	]
 }

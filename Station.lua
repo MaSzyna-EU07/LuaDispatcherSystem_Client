@@ -295,18 +295,23 @@ function Station:handleLeftClick()
 			tile.id = _Picker.selection
 			tile.electrified = _Picker.electrified
 			self:setTile(self.hoverX, self.hoverY, tile)
+			_Project:markUnsaved()
 		elseif _Picker.mode == "addColumn" then
 			-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
 			local hx = self.hoverX + math.floor(self.hoverPartX * 2)
 			self:addColumn(hx)
+			_Project:markUnsaved()
 		elseif _Picker.mode == "addRow" then
 			-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
 			local hy = self.hoverY + math.floor(self.hoverPartY * 2)
 			self:addRow(hy)
+			_Project:markUnsaved()
 		elseif _Picker.mode == "delColumn" then
 			self:deleteColumn(self.hoverX)
+			_Project:markUnsaved()
 		elseif _Picker.mode == "delRow" then
 			self:deleteRow(self.hoverY)
+			_Project:markUnsaved()
 		elseif _Picker.mode == "properties" then
 			if not _Utils.isShiftPressed() and not _Utils.isCtrlPressed() then
 				self:unselectAllTiles()
@@ -357,6 +362,7 @@ function Station:handleRightClick()
 				_Picker:flipSelection()
 			else
 				self:setTile(self.hoverX, self.hoverY)
+				_Project:markUnsaved()
 			end
 		elseif _Picker.mode == "properties" then
 			local tile = self:assertGetHoveredTile()
@@ -396,6 +402,10 @@ function Station:handleRightClick()
 					if not track1 or not track2 then
 						_Notifications:post("Could not pathfind! Check track IDs.", NotificationColor.GRAY)
 					else
+						if not _Project:isSynced() then
+							_Project:sync()
+							_Com.sendCommand("r " .. self.shortcut)
+						end
 						_Notifications:post("Sent pathfinding request.", NotificationColor.GRAY)
 						_Com.sendCommand("p " .. self.shortcut .. " " .. track1 .. " " .. track2 .. " " .. (self.activeMode == PathMode.TRAIN and "t" or "s"))
 					end
@@ -495,7 +505,7 @@ function Station:draw()
 	love.graphics.setCanvas()
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.draw(self.canvas, self.x + 0.5, self.y + 0.5, 0, self.SCALE)
-	--self:drawFrame()
+	self:drawFrame()
 end
 
 ---Draws the Station's tile backgrounds.
@@ -617,6 +627,9 @@ end
 ---Draws the Station's frame, when the schematic is not synced with the server.
 ---@private
 function Station:drawFrame()
+	if _Project:isSynced() then
+		return
+	end
 	love.graphics.setColor(1, 1, 0)
 	love.graphics.setLineWidth(2)
 	love.graphics.rectangle("line", self.x, self.y, self.canvas:getWidth() * self.SCALE + 1, self.canvas:getHeight() * self.SCALE + 1)

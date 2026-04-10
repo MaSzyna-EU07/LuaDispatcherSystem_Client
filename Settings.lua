@@ -8,7 +8,7 @@ local Settings = Class:derive("Settings")
 function Settings:new()
     self.path = "settings.json"
 
-    ---Path to the simulator. This is used to communicate with the server.
+    ---Path to the simulator. This is used to communicate with the server. It must be always specified with a trailing slash.
     ---@type string?
     self.simPath = nil
     ---Project name to open when opening the program. If not specified, a new project will be opened.
