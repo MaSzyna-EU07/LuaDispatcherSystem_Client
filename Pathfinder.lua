@@ -35,10 +35,12 @@ function Pathfinder:setElectrified(electrified)
     self.electrified = electrified
 end
 
----Calculates the path based on the provided start and end point of this Pathfinder.
+---Calculates the path based on the provided start and end point of this Pathfinder. If a path is found, generates itineraries for it.
+---Returns `true` if the path has been found, `false` otherwise.
+---@return boolean
 function Pathfinder:calculatePath()
-    local t = love.timer.getTime()
     self:createInitialPossibility()
+    ---@type TraversalPossibility?
     local winner = nil
     while #self.possibilities > 0 do
         -- Get the possibility which has the lowest cost.
@@ -55,17 +57,15 @@ function Pathfinder:calculatePath()
     end
 
     if not winner then
-        _Notifications:post("Pathfinding failed! :(", NotificationColor.RED)
-        return
+        return false
     end
 
     print("Path found:")
     for i, node in ipairs(winner.path) do
         print(string.format("    %s: pos=%s,%s dirs=%s,%s", i, node.tile.x, node.tile.y, node.dir1, node.dir2))
     end
-    _Utils.tableAddInplace(self.itineraries, winner:generateItineraries())
-    t = love.timer.getTime() - t
-    _Notifications:post(string.format("Pathfinding took %.1fms", t * 1000), NotificationColor.GREEN)
+    self.itineraries = winner:generateItineraries()
+    return true
 end
 
 ---Creates the initial possibility starting from this Pathfinder's first tile.

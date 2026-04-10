@@ -393,10 +393,17 @@ function Station:handleRightClick()
 				end
 			elseif self.activeX and self.activeY then
 				if tile:isTargetForMode(self.activeMode) then
+    				local t = love.timer.getTime()
 					local pathfinder = Pathfinder(self:assertGetTile(self.activeX, self.activeY), tile)
 					pathfinder:setMode(self.activeMode)
-					pathfinder:calculatePath()
-					pathfinder:dispatch()
+					local result = pathfinder:calculatePath()
+					if result then
+						t = love.timer.getTime() - t
+						_Notifications:post(string.format("Pathfinding took %.1fms", t * 1000), NotificationColor.GREEN)
+						pathfinder:dispatch()
+					else
+        				_Notifications:post("Pathfinding failed! :(", NotificationColor.RED)
+					end
 				end
 				self.activeX, self.activeY = nil, nil
 			elseif tile.warp then
