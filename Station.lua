@@ -32,7 +32,7 @@ function Station:new(name, shortcut)
 
 	self.hoverX, self.hoverY = nil, nil
 	self.hoverPartX, self.hoverPartY = nil, nil
-	---@type {x: integer, y: integer}[]
+	---@type Tile[]
 	self.selectedTiles = {}
 	self.dragX, self.dragY = nil, nil
 	self.activeX, self.activeY = nil, nil
@@ -104,6 +104,14 @@ function Station:coordsToCanvasPos(tileX, tileY)
 	return (tileX - 1) * self.TILE_SIZE + 1, (tileY - 1) * self.TILE_SIZE + 1
 end
 
+---Returns `true` if the specified coordinates are inside of the schematic bounds, `false` otherwise.
+---@param x integer X coordinate of the tile.
+---@param y integer Y coordinate of the tile.
+---@return boolean
+function Station:isTileInBounds(x, y)
+	return _Utils.isPointInsideBox(x, y, 1, 1, self.w - 1, self.h - 1)
+end
+
 ---Returns a tile from this station based on coordinates, or `nil` if no tile lies at that location.
 ---@param x integer X coordinate of the tile.
 ---@param y integer Y coordinate of the tile.
@@ -120,13 +128,28 @@ function Station:assertGetTile(x, y)
 	return assert(self:getTile(x, y), string.format("There is no tile at (%s, %s)", x, y))
 end
 
----Sets a tile at provided coordinates.
+---Destroys a tile at provided coordinates. Note that it is not replaced!
+---Use `:setTile()` instead.
+---@param x integer X coordinate of the tile.
+---@param y integer Y coordinate of the tile.
+function Station:destroyTile(x, y)
+	self:unselectTile(x, y)
+end
+
+---Sets a tile at provided coordinates. This destroys the tile that was there previously.
+---If a tile is specified that was previously somewhere on the schematic, it will be replaced with an empty tile to prevent duplication.
 ---@param x integer X coordinate of the tile.
 ---@param y integer Y coordinate of the tile.
 ---@param tile Tile? The tile to be set at position. If not specified, an empty Tile will be placed instead.
-function Station:setTile(x, y, tile)
+---@param move boolean? If `true`, the `tile` will be moved there, and its previous position will be replaced by an empty tile.
+function Station:setTile(x, y, tile, move)
+	self:destroyTile(x, y)
 	self.tiles[x][y] = tile or Tile(self, x, y)
 	if tile then
+		if move then
+			-- Replace the previous position with an empty tile.
+			self.tiles[tile.x][tile.y] = Tile(self, tile.x, tile.y)
+		end
 		tile.x, tile.y = x, y
 	end
 end
@@ -159,12 +182,7 @@ end
 ---@param y integer Y coordinate of the tile.
 ---@return boolean
 function Station:isTileSelected(x, y)
-	for i, coords in ipairs(self.selectedTiles) do
-		if coords.x == x and coords.y == y then
-			return true
-		end
-	end
-	return false
+	return _Utils.isValueInTable(self.selectedTiles, self:getTile(x, y))
 end
 
 ---Returns whether exactly one tile is selected.
@@ -186,21 +204,17 @@ function Station:selectTile(x, y)
 	if self:isTileSelected(x, y) then
 		return
 	end
-	table.insert(self.selectedTiles, {x = x, y = y})
-	_UI:onTileSelected(self:assertGetTile(x, y))
+	local tile = self:assertGetTile(x, y)
+	table.insert(self.selectedTiles, tile)
+	_UI:onTileSelected(tile)
 end
 
 ---Unselects a tile at provided coordinates, if it is currently selected.
 ---@param x integer X coordinate of the tile.
 ---@param y integer Y coordinate of the tile.
 function Station:unselectTile(x, y)
-	for i, coords in ipairs(self.selectedTiles) do
-		if coords.x == x and coords.y == y then
-			table.remove(self.selectedTiles, i)
-			return
-		end
-	end
-	if #self.selectedTiles == 0 then
+	_Utils.iTableRemoveFirstValue(self.selectedTiles, self:getTile(x, y))
+	if _Utils.tableIsEmpty(self.selectedTiles) then
 		_UI:onAllTilesUnselected()
 	end
 end
@@ -226,6 +240,35 @@ function Station:moveSingleSelection(dx, dy)
 	end
 end
 
+local TILE_SORT_FUNCTIONS = {
+	xInc = function(a, b) return a.x < b.x end,
+	xDec = function(a, b) return a.x > b.x end,
+	yInc = function(a, b) return a.y < b.y end,
+	yDec = function(a, b) return a.y > b.y end
+}
+
+---Moves all selected tiles by specified offset.
+---If tiles are moving onto another tile, that tile is destroyed.
+---If any of the moving tiles move outside of the schematic, they are destroyed.
+---All empty spaces are replaced with empty tiles.
+---@param tiles Tile[] The list of tiles to be moved up.
+---@param dx integer Amount of tiles to move horizontally.
+---@param dy integer Amount of tiles to move vertically.
+function Station:moveTiles(tiles, dx, dy)
+	-- Copy and sort the list.
+	tiles = _Utils.copyTable(tiles)
+	table.sort(tiles, TILE_SORT_FUNCTIONS[dx > 0 and "xDec" or (dx < 0 and "xInc" or (dy > 0 and "yDec" or "yInc"))])
+	-- Move each tile and replace the starting tile with an empty tile.
+	for i, tile in ipairs(tiles) do
+		local x, y = tile.x, tile.y
+		if self:isTileInBounds(x + dx, y + dy) then
+			self:setTile(x + dx, y + dy, tile, true)
+		else
+			self:setTile(x, y)
+		end
+	end
+end
+
 ---Returns whether just a single tile is selected in the current rectangle selection.
 ---@return boolean
 function Station:rectSelectIsSingleTile()
@@ -235,8 +278,7 @@ end
 ---Executes a function for each selected tile.
 ---@param f fun(tile: Tile) The function to be executed.
 function Station:forEachSelectedTile(f)
-	for i, coords in ipairs(self.selectedTiles) do
-		local tile = self:assertGetTile(coords.x, coords.y)
+	for i, tile in ipairs(self.selectedTiles) do
 		f(tile)
 	end
 end
@@ -274,6 +316,9 @@ function Station:deleteColumn(x)
 		return
 	end
 	x = x or self.w
+	for y, tile in ipairs(self.tiles[x]) do
+		self:destroyTile(x, y)
+	end
 	table.remove(self.tiles, x)
 	self.w = self.w - 1
 	self:recalculateTilePositions()
@@ -289,6 +334,7 @@ function Station:deleteRow(y)
 	end
 	y = y or self.h
 	for x = 1, self.w do
+		self:destroyTile(x, y)
 		table.remove(self.tiles[x], y)
 	end
 	self.h = self.h - 1
@@ -469,14 +515,26 @@ function Station:keypressed(key)
 	if _UI:getFocus() then
 		return
 	end
-	if key == "left" then
-		self:moveSingleSelection(-1, 0)
-	elseif key == "right" then
-		self:moveSingleSelection(1, 0)
-	elseif key == "up" then
-		self:moveSingleSelection(0, -1)
-	elseif key == "down" then
-		self:moveSingleSelection(0, 1)
+	if _Utils.isShiftPressed() then
+		if key == "left" then
+			self:moveTiles(self.selectedTiles, -1, 0)
+		elseif key == "right" then
+			self:moveTiles(self.selectedTiles, 1, 0)
+		elseif key == "up" then
+			self:moveTiles(self.selectedTiles, 0, -1)
+		elseif key == "down" then
+			self:moveTiles(self.selectedTiles, 0, 1)
+		end
+	else
+		if key == "left" then
+			self:moveSingleSelection(-1, 0)
+		elseif key == "right" then
+			self:moveSingleSelection(1, 0)
+		elseif key == "up" then
+			self:moveSingleSelection(0, -1)
+		elseif key == "down" then
+			self:moveSingleSelection(0, 1)
+		end
 	end
 end
 
@@ -604,8 +662,8 @@ end
 ---Draws the selection frame for all selected tiles.
 ---@private
 function Station:drawSelection()
-	for i, coords in ipairs(self.selectedTiles) do
-		self:getTile(coords.x, coords.y):drawFrame(TileFrameColor.SELECTION)
+	for i, tile in ipairs(self.selectedTiles) do
+		tile:drawFrame(TileFrameColor.SELECTION)
 	end
 end
 

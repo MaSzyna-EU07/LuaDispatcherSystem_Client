@@ -54,8 +54,8 @@ function UITrainPane:sendToCurrentTrain(str, num1, num2)
 	if not station then
 		return
 	end
-	for i, coords in ipairs(station.selectedTiles) do
-		station:assertGetTile(coords.x, coords.y):sendTrainCommand(str, num1, num2)
+	for i, tile in ipairs(station.selectedTiles) do
+		tile:sendTrainCommand(str, num1, num2)
 	end
 end
 

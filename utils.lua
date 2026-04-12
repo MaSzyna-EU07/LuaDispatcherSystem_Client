@@ -435,6 +435,17 @@ function utils.tableShuffle(t)
 	end
 end
 
+---Returns the amount of all keys in table `t`.
+---@param t table The table of which the keys will be counted.
+---@return integer
+function utils.tableCountKeys(t)
+	local n = 0
+	for k, v in pairs(t) do
+		n = n + 1
+	end
+	return n
+end
+
 ---Returns a list of all keys in table `t`, sorted alphabetically.
 ---@param t table The table from which the keys will be sourced.
 ---@return table

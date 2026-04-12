@@ -48,8 +48,8 @@ function UIBottomPane:sendToCurrentSemaphore(this, next)
 	if not station then
 		return
 	end
-	for i, coords in ipairs(station.selectedTiles) do
-		station:assertGetTile(coords.x, coords.y):sendSemaphoreState(this, next)
+	for i, tile in ipairs(station.selectedTiles) do
+		tile:sendSemaphoreState(this, next)
 	end
 end
 
@@ -58,8 +58,8 @@ function UIBottomPane:sendToCurrentSemaphoreUnreserve()
 	if not station then
 		return
 	end
-	for i, coords in ipairs(station.selectedTiles) do
-		station:assertGetTile(coords.x, coords.y):sendSemaphoreUnreserve()
+	for i, tile in ipairs(station.selectedTiles) do
+		tile:sendSemaphoreUnreserve()
 	end
 end
 
@@ -68,8 +68,8 @@ function UIBottomPane:sendToCurrentTrack(command)
 	if not station then
 		return
 	end
-	for i, coords in ipairs(station.selectedTiles) do
-		station:assertGetTile(coords.x, coords.y):sendTrackState(command)
+	for i, tile in ipairs(station.selectedTiles) do
+		tile:sendTrackState(command)
 	end
 end
 
