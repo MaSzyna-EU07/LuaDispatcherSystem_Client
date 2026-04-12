@@ -137,14 +137,10 @@ end
 ---@param f fun(tile: Tile) The function to be executed.
 function UIPickerPane:forEachTile(f)
 	local station = _Project:getCurrentStation()
-	if not station then
-		return
+	if station then
+		station:forEachSelectedTile(f)
+		station:markUnsaved()
 	end
-	for i, coords in ipairs(station.selectedTiles) do
-		local tile = station:assertGetTile(coords.x, coords.y)
-		f(tile)
-	end
-	_Project:markUnsaved()
 end
 
 function UIPickerPane:updateTrackID(input)

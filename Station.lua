@@ -28,6 +28,8 @@ function Station:new(name, shortcut)
 		end
 	end
 
+	self.synced = true
+
 	self.hoverX, self.hoverY = nil, nil
 	self.hoverPartX, self.hoverPartY = nil, nil
 	---@type {x: integer, y: integer}[]
@@ -230,6 +232,15 @@ function Station:rectSelectIsSingleTile()
 	return self.dragX and self.dragY and self.hoverX == self.dragX and self.hoverY == self.dragY or false
 end
 
+---Executes a function for each selected tile.
+---@param f fun(tile: Tile) The function to be executed.
+function Station:forEachSelectedTile(f)
+	for i, coords in ipairs(self.selectedTiles) do
+		local tile = self:assertGetTile(coords.x, coords.y)
+		f(tile)
+	end
+end
+
 ---Adds a new column at the specified position and fills it with empty tiles.
 ---@param x integer? The column index at which the new column will be placed. If not specified, a new column will be created on the right side.
 function Station:addColumn(x)
@@ -285,6 +296,23 @@ function Station:deleteRow(y)
 	self:generateCanvas()
 end
 
+---Marks this Station as unsynced.
+function Station:markUnsaved()
+	self.synced = false
+	_Project:markUnsaved()
+end
+
+---Synchronizes this Station and the entire project with the server to make sure pathfinding works correctly.
+---@private
+function Station:sync()
+	if self.synced then
+		return
+	end
+	self.synced = true
+	_Project:sync()
+	_Com.sendCommand("r " .. self.shortcut)
+end
+
 ---Handles the left click action.
 ---@private
 function Station:handleLeftClick()
@@ -295,23 +323,23 @@ function Station:handleLeftClick()
 			tile.id = _Picker.selection
 			tile.electrified = _Picker.electrified
 			self:setTile(self.hoverX, self.hoverY, tile)
-			_Project:markUnsaved()
+			self:markUnsaved()
 		elseif _Picker.mode == "addColumn" then
 			-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
 			local hx = self.hoverX + math.floor(self.hoverPartX * 2)
 			self:addColumn(hx)
-			_Project:markUnsaved()
+			self:markUnsaved()
 		elseif _Picker.mode == "addRow" then
 			-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
 			local hy = self.hoverY + math.floor(self.hoverPartY * 2)
 			self:addRow(hy)
-			_Project:markUnsaved()
+			self:markUnsaved()
 		elseif _Picker.mode == "delColumn" then
 			self:deleteColumn(self.hoverX)
-			_Project:markUnsaved()
+			self:markUnsaved()
 		elseif _Picker.mode == "delRow" then
 			self:deleteRow(self.hoverY)
-			_Project:markUnsaved()
+			self:markUnsaved()
 		elseif _Picker.mode == "properties" then
 			if not _Utils.isShiftPressed() and not _Utils.isCtrlPressed() then
 				self:unselectAllTiles()
@@ -362,7 +390,7 @@ function Station:handleRightClick()
 				_Picker:flipSelection()
 			else
 				self:setTile(self.hoverX, self.hoverY)
-				_Project:markUnsaved()
+				self:markUnsaved()
 			end
 		elseif _Picker.mode == "properties" then
 			local tile = self:assertGetHoveredTile()
@@ -399,16 +427,15 @@ function Station:handleRightClick()
 				if tile:isTargetForMode(self.activeMode) then
 					local track1 = self:assertGetTile(self.activeX, self.activeY):getSemaphorePrevTrackID()
 					local track2 = tile.trackID
-					if not track1 or not track2 then
-						_Notifications:post("Could not pathfind! Check track IDs.", NotificationColor.GRAY)
-					else
-						if not _Project:isSynced() then
-							_Project:sync()
-							_Com.sendCommand("r " .. self.shortcut)
-						end
-						_Notifications:post("Sent pathfinding request.", NotificationColor.GRAY)
+					self:sync()
+					if track1 and track2 then
+						-- Pathfind by two tracks. Fancy!
 						_Com.sendCommand("p " .. self.shortcut .. " " .. track1 .. " " .. track2 .. " " .. (self.activeMode == PathMode.TRAIN and "t" or "s"))
+					else
+						-- Pathfind the old way, by coordinates.
+						_Com.sendCommand("pm " .. self.shortcut .. " " .. self.activeX .. " " .. self.activeY .. " " .. tile.x .. " " .. tile.y .. " " .. (self.activeMode == PathMode.TRAIN and "t" or "s"))
 					end
+					_Notifications:post("Sent pathfinding request.", NotificationColor.GRAY)
 				end
 				self.activeX, self.activeY = nil, nil
 			elseif tile.warp then
@@ -627,7 +654,7 @@ end
 ---Draws the Station's frame, when the schematic is not synced with the server.
 ---@private
 function Station:drawFrame()
-	if _Project:isSynced() then
+	if self.synced then
 		return
 	end
 	love.graphics.setColor(1, 1, 0)
