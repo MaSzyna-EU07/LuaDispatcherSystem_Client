@@ -265,6 +265,11 @@ function UI:getFocus()
 	return gui.focus
 end
 
+---Unfocuses any currently focused Gspot element, for example an input box.
+function UI:unfocus()
+	gui.focus = nil
+end
+
 ---Returns the whole GUI class. This is a temporary function as all GUI interactions should happen through this class.
 ---@deprecated
 ---@return Gspot

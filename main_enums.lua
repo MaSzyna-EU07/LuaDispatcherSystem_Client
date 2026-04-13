@@ -66,6 +66,24 @@ SemaphoreImage = {
 	sz = {color1 = SemaphoreColor.RED, color2 = SemaphoreColor.WHITE, blink2 = true}
 }
 
+---@enum TileHighlightMode
+TileHighlightMode = {
+	OFF = 0,
+	TRACK = 1,
+	SWITCH = 2,
+	SEMAPHORE = 3
+}
+
+---@alias TileBackgroundColorEntry {fill: [number, number, number], border: [number, number, number]}
+---@type table<string, TileBackgroundColorEntry>
+---@enum TileBackgroundColor
+TileBackgroundColor = {
+	REGULAR = {fill = {0.4, 0.4, 0.4}, border = {0.2, 0.2, 0.2}},
+	OK = {fill = {0.2, 0.8, 0.2}, border = {0.1, 0.4, 0.1}},
+	WARNING = {fill = {1, 1, 0.2}, border = {0.5, 0.5, 0.1}},
+	ERROR = {fill = {1, 0.2, 0.2}, border = {0.5, 0.1, 0.1}}
+}
+
 ---@enum TileFrameColor
 TileFrameColor = {
 	HOVER = {0, 1, 1},

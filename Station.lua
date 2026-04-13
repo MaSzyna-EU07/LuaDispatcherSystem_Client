@@ -451,6 +451,7 @@ function Station:handleRightClick()
 					local state = tile:getSwitchState(suffix)
 					if state then
 						tile:sendSwitchState(not state.state, suffix)
+						self:sync()
 					end
 				end
 			elseif tile:isSemaphore() then
@@ -598,7 +599,7 @@ end
 function Station:drawBackground()
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
-			tile:drawBackground()
+			tile:drawBackground(tile:getBackgroundColor())
 		end
 	end
 end

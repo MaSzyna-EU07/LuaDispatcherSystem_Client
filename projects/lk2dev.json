@@ -5,6 +5,7 @@
 		"Mia": 4,
 		"Mia-Mrz": 5,
 		"Mrz": 3,
+		"Rem": 7,
 		"Sul": 6
 	},
 	"stations": [
@@ -2654,6 +2655,1534 @@
 				}
 			},
 			"w": 24
+		},
+		{
+			"h": 13,
+			"name": "Warszawa Rembertów",
+			"shortcut": "Rem",
+			"tiles": {
+				"10,10": {
+					"id": "track-",
+					"trackID": "Rem_Iz15"
+				},
+				"10,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz21"
+				},
+				"10,5": {
+					"electrified": false,
+					"id": "arrow-",
+					"shuntTarget": true
+				},
+				"10,6": {
+					"electrified": false,
+					"id": "buffer3",
+					"trackID": "Rem_It16"
+				},
+				"10,7": {
+					"id": "track-",
+					"trackID": "Rem_It8a"
+				},
+				"10,8": {
+					"id": "track-",
+					"trackID": "Rem_Iz13"
+				},
+				"10,9": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_11",
+					"trackID": "Rem_Iz11"
+				},
+				"11,10": {
+					"id": "track-",
+					"trackID": "Rem_Iz15"
+				},
+				"11,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz21"
+				},
+				"11,5": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm4",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz19"
+				},
+				"11,6": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Rem_It16"
+				},
+				"11,7": {
+					"id": "track-",
+					"trackID": "Rem_It8a"
+				},
+				"11,8": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_13",
+					"trackID": "Rem_Iz13"
+				},
+				"11,9": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_12",
+					"trackID": "Rem_Iz12"
+				},
+				"12,10": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_15",
+					"trackID": "Rem_Iz15"
+				},
+				"12,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz21"
+				},
+				"12,5": {
+					"electrified": false,
+					"id": "derailer3",
+					"trackID": "Rem_Iz19"
+				},
+				"12,6": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm3",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz19"
+				},
+				"12,7": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm2",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz16"
+				},
+				"12,8": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_14",
+					"trackID": "Rem_Iz14"
+				},
+				"12,9": {
+					"id": "track-",
+					"trackID": "Rem_Iz12"
+				},
+				"13,10": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_17",
+					"trackID": "Rem_Iz17"
+				},
+				"13,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz21"
+				},
+				"13,5": {
+					"electrified": false,
+					"id": "curve7",
+					"trackID": "Rem_Iz19"
+				},
+				"13,6": {
+					"electrified": false,
+					"id": "derailer3",
+					"trackID": "Rem_Iz19"
+				},
+				"13,7": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_16",
+					"trackID": "Rem_Iz16"
+				},
+				"13,8": {
+					"id": "track-",
+					"trackID": "Rem_Iz14"
+				},
+				"13,9": {
+					"id": "track-",
+					"trackID": "Rem_Iz12"
+				},
+				"14,10": {
+					"id": "track-",
+					"trackID": "Rem_Iz17"
+				},
+				"14,11": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_21",
+					"trackID": "Rem_Iz21"
+				},
+				"14,6": {
+					"electrified": false,
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_19",
+					"trackID": "Rem_Iz19"
+				},
+				"14,7": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_18",
+					"trackID": "Rem_Iz18"
+				},
+				"14,8": {
+					"id": "track-",
+					"trackID": "Rem_Iz14"
+				},
+				"14,9": {
+					"id": "track-",
+					"trackID": "Rem_Iz12"
+				},
+				"15,10": {
+					"id": "track-",
+					"trackID": "Rem_Iz17"
+				},
+				"15,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz21"
+				},
+				"15,6": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_20",
+					"trackID": "Rem_Iz20"
+				},
+				"15,7": {
+					"id": "track-",
+					"trackID": "Rem_Iz18"
+				},
+				"15,8": {
+					"id": "track-",
+					"trackID": "Rem_Iz14"
+				},
+				"15,9": {
+					"id": "track-",
+					"trackID": "Rem_Iz12"
+				},
+				"16,10": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_H3",
+					"trackID": "Rem_Iz17"
+				},
+				"16,11": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_H1",
+					"trackID": "Rem_Iz21"
+				},
+				"16,6": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_22",
+					"trackID": "Rem_Iz22"
+				},
+				"16,7": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_H8",
+					"trackID": "Rem_Iz18"
+				},
+				"16,8": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_H2",
+					"trackID": "Rem_Iz14"
+				},
+				"16,9": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_H4",
+					"trackID": "Rem_Iz12"
+				},
+				"17,10": {
+					"id": "track-",
+					"trackID": "Rem_It3"
+				},
+				"17,11": {
+					"id": "track-",
+					"trackID": "Rem_It1"
+				},
+				"17,5": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_23",
+					"trackID": "Rem_Iz23"
+				},
+				"17,6": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_H10",
+					"trackID": "Rem_Iz22"
+				},
+				"17,7": {
+					"id": "track-",
+					"trackID": "Rem_It8"
+				},
+				"17,8": {
+					"id": "track-",
+					"trackID": "Rem_It2"
+				},
+				"17,9": {
+					"id": "track-",
+					"trackID": "Rem_It4"
+				},
+				"18,10": {
+					"id": "track-",
+					"trackID": "Rem_It3"
+				},
+				"18,11": {
+					"id": "track-",
+					"trackID": "Rem_It1"
+				},
+				"18,4": {
+					"electrified": false,
+					"id": "switchR6",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_24",
+					"trackID": "Rem_Iz24"
+				},
+				"18,5": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_H12",
+					"trackID": "Rem_Iz23"
+				},
+				"18,6": {
+					"id": "track-",
+					"trackID": "Rem_It10"
+				},
+				"18,7": {
+					"id": "track-",
+					"trackID": "Rem_It8"
+				},
+				"18,8": {
+					"id": "track-",
+					"trackID": "Rem_It2"
+				},
+				"18,9": {
+					"id": "track-",
+					"trackID": "Rem_It4"
+				},
+				"19,10": {
+					"id": "track-",
+					"trackID": "Rem_It3"
+				},
+				"19,11": {
+					"id": "track-",
+					"trackID": "Rem_It1"
+				},
+				"19,3": {
+					"electrified": false,
+					"id": "curve6",
+					"trackID": "Rem_Iz24"
+				},
+				"19,4": {
+					"electrified": false,
+					"id": "derailer7",
+					"trackID": "Rem_Iz24"
+				},
+				"19,5": {
+					"id": "track-",
+					"trackID": "Rem_It12"
+				},
+				"19,6": {
+					"id": "track-",
+					"trackID": "Rem_It10"
+				},
+				"19,7": {
+					"id": "track-",
+					"trackID": "Rem_It8"
+				},
+				"19,8": {
+					"id": "track-",
+					"trackID": "Rem_It2"
+				},
+				"19,9": {
+					"id": "track-",
+					"trackID": "Rem_It4"
+				},
+				"2,10": {
+					"id": "arrow3",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"2,11": {
+					"id": "arrow7",
+					"trainTarget": true
+				},
+				"2,12": {
+					"id": "arrow3",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"2,7": {
+					"id": "arrow7",
+					"trainTarget": true
+				},
+				"2,8": {
+					"id": "arrow3",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"2,9": {
+					"id": "arrow7",
+					"trainTarget": true
+				},
+				"20,10": {
+					"id": "platformF",
+					"trackID": "Rem_It3"
+				},
+				"20,11": {
+					"id": "platformF",
+					"trackID": "Rem_It1"
+				},
+				"20,3": {
+					"electrified": false,
+					"id": "derailer7",
+					"trackID": "Rem_Iz24"
+				},
+				"20,4": {
+					"electrified": false,
+					"id": "platformF",
+					"trackID": "Rem_It14"
+				},
+				"20,5": {
+					"id": "platformF",
+					"trackID": "Rem_It12"
+				},
+				"20,6": {
+					"id": "platformF",
+					"trackID": "Rem_It10"
+				},
+				"20,7": {
+					"id": "platformF",
+					"trackID": "Rem_It8"
+				},
+				"20,8": {
+					"id": "platformF",
+					"trackID": "Rem_It2"
+				},
+				"20,9": {
+					"id": "platformF",
+					"trackID": "Rem_It4"
+				},
+				"21,10": {
+					"id": "platformF",
+					"trackID": "Rem_It3",
+					"trainTarget": true
+				},
+				"21,11": {
+					"id": "platformF",
+					"trackID": "Rem_It1",
+					"trainTarget": true
+				},
+				"21,3": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm11",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz24"
+				},
+				"21,4": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Rem_It14"
+				},
+				"21,5": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Rem_It12",
+					"trainTarget": true
+				},
+				"21,6": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Rem_It10",
+					"trainTarget": true
+				},
+				"21,7": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Rem_It8",
+					"trainTarget": true
+				},
+				"21,8": {
+					"id": "platformF",
+					"trackID": "Rem_It2",
+					"trainTarget": true
+				},
+				"21,9": {
+					"id": "platformF",
+					"trackID": "Rem_It4",
+					"trainTarget": true
+				},
+				"22,10": {
+					"id": "platformF",
+					"trackID": "Rem_It3"
+				},
+				"22,11": {
+					"id": "platformF",
+					"trackID": "Rem_It1"
+				},
+				"22,3": {
+					"electrified": false,
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_100",
+					"trackID": "Rem_Iz100"
+				},
+				"22,4": {
+					"electrified": false,
+					"id": "platformF",
+					"trackID": "Rem_It14"
+				},
+				"22,5": {
+					"id": "platformF",
+					"trackID": "Rem_It12"
+				},
+				"22,6": {
+					"id": "platformF",
+					"trackID": "Rem_It10"
+				},
+				"22,7": {
+					"id": "platformF",
+					"trackID": "Rem_It8"
+				},
+				"22,8": {
+					"id": "platformF",
+					"trackID": "Rem_It2"
+				},
+				"22,9": {
+					"id": "platformF",
+					"trackID": "Rem_It4"
+				},
+				"23,10": {
+					"id": "track-",
+					"trackID": "Rem_It3"
+				},
+				"23,11": {
+					"id": "track-",
+					"trackID": "Rem_It1"
+				},
+				"23,2": {
+					"electrified": false,
+					"id": "curve6",
+					"trackID": "Rem_Iz100"
+				},
+				"23,3": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Rem_Iz100"
+				},
+				"23,4": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm14",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz33"
+				},
+				"23,5": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_K12",
+					"trackID": "Rem_Iz33"
+				},
+				"23,6": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_K10",
+					"trackID": "Rem_Iz32"
+				},
+				"23,7": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_K8",
+					"trackID": "Rem_Iz32"
+				},
+				"23,8": {
+					"id": "track-",
+					"trackID": "Rem_It2"
+				},
+				"23,9": {
+					"id": "track-",
+					"trackID": "Rem_It4"
+				},
+				"24,10": {
+					"id": "track-",
+					"trackID": "Rem_It3"
+				},
+				"24,11": {
+					"id": "track-",
+					"trackID": "Rem_It1"
+				},
+				"24,2": {
+					"electrified": false,
+					"id": "platformF"
+				},
+				"24,3": {
+					"electrified": false,
+					"id": "platformF"
+				},
+				"24,4": {
+					"electrified": false,
+					"id": "derailer3",
+					"trackID": "Rem_Iz33"
+				},
+				"24,5": {
+					"id": "track-",
+					"trackID": "Rem_Iz33"
+				},
+				"24,6": {
+					"id": "track-",
+					"trackID": "Rem_Iz32"
+				},
+				"24,7": {
+					"id": "track-",
+					"trackID": "Rem_Iz32"
+				},
+				"24,8": {
+					"id": "track-",
+					"trackID": "Rem_It2"
+				},
+				"24,9": {
+					"id": "track-",
+					"trackID": "Rem_It4"
+				},
+				"25,10": {
+					"id": "track-",
+					"trackID": "Rem_It3"
+				},
+				"25,11": {
+					"id": "track-",
+					"trackID": "Rem_It1"
+				},
+				"25,2": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"25,3": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"25,4": {
+					"electrified": false,
+					"id": "curve7",
+					"trackID": "Rem_Iz33"
+				},
+				"25,5": {
+					"id": "track-",
+					"trackID": "Rem_Iz33"
+				},
+				"25,6": {
+					"id": "track-",
+					"trackID": "Rem_Iz32"
+				},
+				"25,7": {
+					"id": "curve2",
+					"trackID": "Rem_Iz32"
+				},
+				"25,8": {
+					"id": "track-",
+					"trackID": "Rem_It2"
+				},
+				"25,9": {
+					"id": "track-",
+					"trackID": "Rem_It4"
+				},
+				"26,10": {
+					"id": "track-",
+					"trackID": "Rem_It3"
+				},
+				"26,11": {
+					"id": "track-",
+					"trackID": "Rem_It1"
+				},
+				"26,2": {
+					"electrified": false,
+					"id": "platformF"
+				},
+				"26,3": {
+					"electrified": false,
+					"id": "platformF"
+				},
+				"26,5": {
+					"id": "switchL4",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_33",
+					"trackID": "Rem_Iz33"
+				},
+				"26,6": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_32",
+					"trackID": "Rem_Iz32"
+				},
+				"26,8": {
+					"id": "track-",
+					"trackID": "Rem_It2"
+				},
+				"26,9": {
+					"id": "track-",
+					"trackID": "Rem_It4"
+				},
+				"27,10": {
+					"id": "track-",
+					"trackID": "Rem_It3"
+				},
+				"27,11": {
+					"id": "track-",
+					"trackID": "Rem_It1"
+				},
+				"27,2": {
+					"electrified": false,
+					"id": "buffer7"
+				},
+				"27,3": {
+					"electrified": false,
+					"id": "buffer7"
+				},
+				"27,6": {
+					"id": "switchL4",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_34",
+					"trackID": "Rem_Iz34"
+				},
+				"27,8": {
+					"id": "track-",
+					"trackID": "Rem_It2"
+				},
+				"27,9": {
+					"id": "track-",
+					"trackID": "Rem_It4"
+				},
+				"28,10": {
+					"id": "track-",
+					"trackID": "Rem_It3"
+				},
+				"28,11": {
+					"id": "track-",
+					"trackID": "Rem_It1"
+				},
+				"28,7": {
+					"id": "switchL8",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_35",
+					"trackID": "Rem_Iz35"
+				},
+				"28,8": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_K2",
+					"trackID": "Rem_Iz36"
+				},
+				"28,9": {
+					"id": "track-",
+					"trackID": "Rem_It4"
+				},
+				"29,10": {
+					"id": "track-",
+					"trackID": "Rem_It3"
+				},
+				"29,11": {
+					"id": "track-",
+					"trackID": "Rem_It1"
+				},
+				"29,7": {
+					"electrified": false,
+					"id": "derailer7",
+					"trackID": "Rem_Iz35"
+				},
+				"29,8": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_36",
+					"trackID": "Rem_Iz36"
+				},
+				"29,9": {
+					"id": "track-",
+					"trackID": "Rem_It4"
+				},
+				"3,10": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_D",
+					"trackID": "Rem_Iz7"
+				},
+				"3,11": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_E",
+					"trackID": "Rem_Iz3"
+				},
+				"3,12": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_F",
+					"trackID": "Rem_Iz1"
+				},
+				"3,7": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_A",
+					"trackID": "Rem_Iz2"
+				},
+				"3,8": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_B",
+					"trackID": "Rem_Iz5"
+				},
+				"3,9": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_C",
+					"trackID": "Rem_Iz9"
+				},
+				"30,10": {
+					"id": "track-",
+					"trackID": "Rem_It3"
+				},
+				"30,11": {
+					"id": "platformF",
+					"trackID": "Rem_It1"
+				},
+				"30,12": {
+					"electrified": false,
+					"id": "arrow-",
+					"shuntTarget": true
+				},
+				"30,7": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm18",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz35"
+				},
+				"30,8": {
+					"id": "track-",
+					"trackID": "Rem_ItL2"
+				},
+				"30,9": {
+					"id": "track-",
+					"trackID": "Rem_It4"
+				},
+				"31,10": {
+					"id": "track-",
+					"trackID": "Rem_It3"
+				},
+				"31,11": {
+					"id": "platformF",
+					"trackID": "Rem_It1"
+				},
+				"31,12": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm113",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz41"
+				},
+				"31,7": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"31,8": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_L2",
+					"semaphoreShortSpeed": 4,
+					"trackID": "Rem_ItL2"
+				},
+				"31,9": {
+					"forbidTrain": true,
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_L4",
+					"trackID": "Rem_It4"
+				},
+				"32,10": {
+					"id": "platformP",
+					"trackID": "Rem_It3"
+				},
+				"32,11": {
+					"id": "platformF",
+					"trackID": "Rem_It1"
+				},
+				"32,12": {
+					"electrified": false,
+					"id": "derailer3",
+					"trackID": "Rem_Iz41"
+				},
+				"32,7": {
+					"electrified": false,
+					"id": "buffer7"
+				},
+				"32,8": {
+					"id": "platformF",
+					"trackID": "Rem_It2d"
+				},
+				"32,9": {
+					"id": "platformP",
+					"trackID": "Rem_It4"
+				},
+				"33,10": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Rem_It3"
+				},
+				"33,11": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_M1",
+					"trackID": "Rem_Iz41"
+				},
+				"33,12": {
+					"electrified": false,
+					"id": "curve2",
+					"trackID": "Rem_Iz41"
+				},
+				"33,8": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Rem_It2d",
+					"trainTarget": true
+				},
+				"33,9": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Rem_It4",
+					"trainTarget": true
+				},
+				"34,10": {
+					"id": "platformP",
+					"trackID": "Rem_It3"
+				},
+				"34,11": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_41",
+					"trackID": "Rem_Iz41"
+				},
+				"34,8": {
+					"id": "platformF",
+					"trackID": "Rem_It2d"
+				},
+				"34,9": {
+					"id": "platformP",
+					"trackID": "Rem_It4"
+				},
+				"35,10": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_M3",
+					"trackID": "Rem_Iz43"
+				},
+				"35,11": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_42",
+					"trackID": "Rem_Iz42"
+				},
+				"35,8": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_M2",
+					"trackID": "Rem_Iz44"
+				},
+				"35,9": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_M4",
+					"trackID": "Rem_Iz46"
+				},
+				"36,10": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_43",
+					"trackID": "Rem_Iz43"
+				},
+				"36,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz42"
+				},
+				"36,8": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_44",
+					"trackID": "Rem_Iz44"
+				},
+				"36,9": {
+					"id": "track-",
+					"trackID": "Rem_Iz46"
+				},
+				"37,10": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_45",
+					"trackID": "Rem_Iz45"
+				},
+				"37,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz42"
+				},
+				"37,8": {
+					"id": "track-",
+					"trackID": "Rem_Iz44"
+				},
+				"37,9": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_46",
+					"trackID": "Rem_Iz46"
+				},
+				"38,10": {
+					"id": "track-",
+					"trackID": "Rem_Iz45"
+				},
+				"38,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz42"
+				},
+				"38,8": {
+					"id": "track-",
+					"trackID": "Rem_Iz53a"
+				},
+				"38,9": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_47",
+					"trackID": "Rem_Iz47"
+				},
+				"39,10": {
+					"id": "track-",
+					"trackID": "Rem_Iz50"
+				},
+				"39,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz54"
+				},
+				"39,8": {
+					"id": "track-",
+					"trackID": "Rem_Iz53a"
+				},
+				"39,9": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_48",
+					"trackID": "Rem_Iz48"
+				},
+				"4,10": {
+					"id": "track-",
+					"trackID": "Rem_Iz7"
+				},
+				"4,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz3"
+				},
+				"4,12": {
+					"id": "switchL7",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_1",
+					"trackID": "Rem_Iz1"
+				},
+				"4,7": {
+					"id": "track-",
+					"trackID": "Rem_Iz2"
+				},
+				"4,8": {
+					"id": "track-",
+					"trackID": "Rem_Iz5"
+				},
+				"4,9": {
+					"id": "track-",
+					"trackID": "Rem_Iz9"
+				},
+				"40,10": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_50",
+					"trackID": "Rem_Iz50"
+				},
+				"40,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz54"
+				},
+				"40,7": {
+					"electrified": false,
+					"id": "buffer3"
+				},
+				"40,8": {
+					"id": "switchL7",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_53a",
+					"trackID": "Rem_Iz53a"
+				},
+				"40,9": {
+					"id": "switchL7",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_49",
+					"trackID": "Rem_Iz49"
+				},
+				"41,10": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_52",
+					"trackID": "Rem_Iz52"
+				},
+				"41,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz54"
+				},
+				"41,7": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "Rem_54a",
+					"trackID": "Rem_Iz54a"
+				},
+				"41,8": {
+					"id": "switchL3",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_51",
+					"trackID": "Rem_Iz51"
+				},
+				"41,9": {
+					"id": "derailer7",
+					"trackID": "Rem_Iz49"
+				},
+				"42,10": {
+					"id": "track-",
+					"trackID": "Rem_Iz52"
+				},
+				"42,11": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_54",
+					"trackID": "Rem_Iz54"
+				},
+				"42,7": {
+					"id": "track-",
+					"trackID": "Rem_Iz54a"
+				},
+				"42,8": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_53",
+					"trackID": "Rem_Iz53"
+				},
+				"42,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm20",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz49"
+				},
+				"43,10": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "Rem_56b",
+					"trackID": "Rem_Iz56b"
+				},
+				"43,11": {
+					"id": "switchR7",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_56",
+					"trackID": "Rem_Iz56"
+				},
+				"43,12": {
+					"electrified": false,
+					"id": "buffer3"
+				},
+				"43,7": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_55",
+					"trackID": "Rem_Iz55"
+				},
+				"43,8": {
+					"id": "track-",
+					"trackID": "Rem_ItT"
+				},
+				"43,9": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Rem_It20"
+				},
+				"44,10": {
+					"electrified": false,
+					"id": "buffer7"
+				},
+				"44,11": {
+					"id": "switchR3",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_56a",
+					"trackID": "Rem_Iz56a"
+				},
+				"44,12": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "Rem_57",
+					"trackID": "Rem_Iz57"
+				},
+				"44,7": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_58",
+					"trackID": "Rem_Iz58"
+				},
+				"44,8": {
+					"id": "track-",
+					"trackID": "Rem_ItT"
+				},
+				"44,9": {
+					"id": "buffer7",
+					"trackID": "Rem_It20"
+				},
+				"45,11": {
+					"id": "curve2",
+					"trackID": "Rem_ItS"
+				},
+				"45,12": {
+					"id": "curve2"
+				},
+				"45,6": {
+					"electrified": false,
+					"id": "curve6",
+					"trackID": "Rem_Iz58"
+				},
+				"45,7": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_59",
+					"trackID": "Rem_Iz59"
+				},
+				"45,8": {
+					"id": "curve7",
+					"trackID": "Rem_ItT"
+				},
+				"46,10": {
+					"id": "curve6",
+					"trackID": "Rem_ItS"
+				},
+				"46,11": {
+					"id": "curve6"
+				},
+				"46,6": {
+					"electrified": false,
+					"id": "derailer7",
+					"trackID": "Rem_Iz58"
+				},
+				"46,7": {
+					"id": "track-",
+					"trackID": "Rem_ItW"
+				},
+				"46,8": {
+					"electrified": false,
+					"id": "curve3",
+					"trackID": "Rem_Iz59"
+				},
+				"46,9": {
+					"id": "curve3",
+					"trackID": "Rem_ItT"
+				},
+				"47,10": {
+					"id": "track-",
+					"trackID": "Rem_ItS"
+				},
+				"47,11": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_P1"
+				},
+				"47,6": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm111",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz58"
+				},
+				"47,7": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_P2",
+					"trackID": "Rem_ItW"
+				},
+				"47,8": {
+					"electrified": false,
+					"id": "derailer7",
+					"trackID": "Rem_Iz59"
+				},
+				"47,9": {
+					"id": "track-",
+					"trackID": "Rem_ItT"
+				},
+				"48,10": {
+					"id": "track-",
+					"trackID": "Rem_ItS"
+				},
+				"48,11": {
+					"id": "track-"
+				},
+				"48,6": {
+					"electrified": false,
+					"id": "track-"
+				},
+				"48,7": {
+					"id": "track-",
+					"trackID": "Rem_ItW"
+				},
+				"48,8": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Rem_Iz59"
+				},
+				"48,9": {
+					"id": "track-",
+					"trackID": "Rem_ItT"
+				},
+				"49,10": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_S",
+					"trackID": "Rem_ItS"
+				},
+				"49,11": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_R"
+				},
+				"49,6": {
+					"electrified": false,
+					"id": "track-"
+				},
+				"49,7": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_W",
+					"trackID": "Rem_ItW"
+				},
+				"49,8": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm112",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz59"
+				},
+				"49,9": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_T",
+					"trackID": "Rem_ItT"
+				},
+				"5,10": {
+					"id": "track-",
+					"trackID": "Rem_Iz7"
+				},
+				"5,11": {
+					"id": "switchL3",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_3",
+					"trackID": "Rem_Iz3"
+				},
+				"5,12": {
+					"electrified": false,
+					"id": "buffer7"
+				},
+				"5,7": {
+					"id": "switchR7",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_2",
+					"trackID": "Rem_Iz2"
+				},
+				"5,8": {
+					"id": "track-",
+					"trackID": "Rem_Iz5"
+				},
+				"5,9": {
+					"id": "track-",
+					"trackID": "Rem_Iz9"
+				},
+				"50,10": {
+					"id": "arrow3",
+					"trainTarget": true
+				},
+				"50,11": {
+					"id": "arrow3",
+					"trainTarget": true
+				},
+				"50,6": {
+					"electrified": false,
+					"id": "arrow-",
+					"shuntTarget": true
+				},
+				"50,7": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"50,8": {
+					"electrified": false,
+					"id": "arrow-",
+					"shuntTarget": true
+				},
+				"50,9": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"6,10": {
+					"id": "track-",
+					"trackID": "Rem_Iz7"
+				},
+				"6,11": {
+					"id": "switchL7",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_4",
+					"trackID": "Rem_Iz4"
+				},
+				"6,7": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm1",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz2"
+				},
+				"6,8": {
+					"id": "switchR3",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_5",
+					"trackID": "Rem_Iz5"
+				},
+				"6,9": {
+					"id": "track-",
+					"trackID": "Rem_Iz9"
+				},
+				"7,10": {
+					"id": "switchL3",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_7",
+					"trackID": "Rem_Iz7"
+				},
+				"7,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz4"
+				},
+				"7,7": {
+					"id": "track-",
+					"trackID": "Rem_It8a"
+				},
+				"7,8": {
+					"id": "switchR7",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_6",
+					"trackID": "Rem_Iz6"
+				},
+				"7,9": {
+					"id": "track-",
+					"trackID": "Rem_Iz9"
+				},
+				"8,10": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_8",
+					"trackID": "Rem_Iz8"
+				},
+				"8,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz4"
+				},
+				"8,7": {
+					"id": "track-",
+					"trackID": "Rem_It8a"
+				},
+				"8,8": {
+					"id": "track-",
+					"trackID": "Rem_Iz6"
+				},
+				"8,9": {
+					"id": "switchR3",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_9",
+					"trackID": "Rem_Iz9"
+				},
+				"9,10": {
+					"id": "track-",
+					"trackID": "Rem_Iz8"
+				},
+				"9,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz4"
+				},
+				"9,7": {
+					"id": "track-",
+					"trackID": "Rem_It8a"
+				},
+				"9,8": {
+					"id": "track-",
+					"trackID": "Rem_Iz13"
+				},
+				"9,9": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_10",
+					"trackID": "Rem_Iz10"
+				}
+			},
+			"w": 51
 		}
 	]
 }

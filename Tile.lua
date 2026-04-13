@@ -54,6 +54,12 @@ function Tile:new(station, x, y)
 	self.command = nil -- A command to be sent to the server when this tile is right clicked.
 end
 
+---Returns whether this Tile is a track, regardless of its type or what else is with it.
+---@return boolean
+function Tile:isTrack()
+	return self:getData().tracks ~= nil
+end
+
 ---Returns whether this Tile is a switch, regardless of its type.
 ---@return boolean
 function Tile:isSwitch()
@@ -411,6 +417,25 @@ function Tile:getPos()
 	return self.station:coordsToCanvasPos(self.x, self.y)
 end
 
+---Returns the background color to be used for this Tile.
+---@return TileBackgroundColor
+function Tile:getBackgroundColor()
+	if _Picker.highlightMode == TileHighlightMode.OFF or _Picker.mode ~= "properties" then
+		return TileBackgroundColor.REGULAR
+	end
+	if (self.trackID and not self:isTrack()) or (self.switchID and not self:isSwitch()) or (self.semaphoreID and not self:isSemaphore()) then
+		return TileBackgroundColor.WARNING
+	end
+	if self.trackID and _Picker.highlightMode == TileHighlightMode.TRACK then
+		return TileBackgroundColor.OK
+	elseif self.switchID and _Picker.highlightMode == TileHighlightMode.SWITCH then
+		return TileBackgroundColor.OK
+	elseif self.semaphoreID and _Picker.highlightMode == TileHighlightMode.SEMAPHORE then
+		return TileBackgroundColor.OK
+	end
+	return TileBackgroundColor.REGULAR
+end
+
 ---Draws this Tile at the specified position.
 function Tile:draw()
 	local data = self:getData()
@@ -428,20 +453,12 @@ function Tile:draw()
 end
 
 ---Draws this Tile's background at the specified position.
-function Tile:drawBackground()
+---@param color TileBackgroundColorEntry The background color set.
+function Tile:drawBackground(color)
 	local x, y = self:getPos()
-	local green = _Picker.mode == "properties" and self.trackID
-	if green then
-		love.graphics.setColor(0.2, 0.8, 0.2)
-	else
-		love.graphics.setColor(0.4, 0.4, 0.4)
-	end
+	love.graphics.setColor(color.fill)
 	love.graphics.rectangle("fill", x, y, self.size, self.size)
-	if green then
-		love.graphics.setColor(0.1, 0.4, 0.1)
-	else
-		love.graphics.setColor(0.2, 0.2, 0.2)
-	end
+	love.graphics.setColor(color.border)
 	love.graphics.setLineWidth(2)
 	love.graphics.rectangle("line", x, y, self.size, self.size)
 end

@@ -14,16 +14,18 @@ function UIPickerPane:new(ui)
 	self.electrified = self.ui:addCheckbox("picker", "electrified", "Tory zelektryfikowane", 0, 0, 1, 1, self, self.updateElectrified)
 	self.electrified.value = true
 	self.ui:addLabel("picker", nil, "Nazwa toru", 0, 1, 5, 1)
-	self.trackID = self.ui:addInput("picker", "trackID", 5, 1, 5, 1, self, self.updateTrackID)
+	self.trackID = self.ui:addInput("picker", "trackID", 5, 1, 5, 1, self, self.updateTrackID, self.confirmTrackID)
 	self.ui:addLabel("picker", nil, "Nazwa zwr.", 0, 2, 5, 1)
-	self.switchID = self.ui:addInput("picker", "switchID", 5, 2, 5, 1, self, self.updateSwitchID)
+	self.switchID = self.ui:addInput("picker", "switchID", 5, 2, 5, 1, self, self.updateSwitchID, self.confirmSwitchID)
 	self.ui:addLabel("picker", nil, "Nazwa sem.", 0, 3, 5, 1)
-	self.semaphoreID = self.ui:addInput("picker", "semaphoreID", 5, 3, 5, 1, self, self.updateSemaphoreID)
+	self.semaphoreID = self.ui:addInput("picker", "semaphoreID", 5, 3, 5, 1, self, self.updateSemaphoreID, self.confirmSemaphoreID)
 	self.ui:addLabel("picker", nil, "Punkt końc.", 0, 4, 5, 1)
 	self.itineraryEndID = self.ui:addInput("picker", "itineraryEndID", 5, 4, 5, 1, self, self.updateItineraryEndID)
 	self.ui:addLabel("picker", nil, "Sąsiednia st.:", 0, 5, 5, 1)
 	self.warp = self.ui:addInput("picker", "warp", 5, 5, 5, 1, self, self.updateWarp)
 	-- Second column
+	self.stationAutofill = self.ui:addCheckbox("picker", "stationAutofill", "Autouzup. ID stacji", 10, 0, 1, 1, self, self.updateStationAutofill)
+	self.stationAutofill.value = true
 	self.electrified2 = self.ui:addCheckbox("picker", "electrified2", "Elektr.", 10, 1, 1, 1, self, self.updateElectrified2)
 	self.ui:addLabel("picker", nil, "Zamień", 10, 2, 4, 1)
 	self.switchFlip = self.ui:addCheckbox("picker", "switchFlip", "+/-", 13, 2, 1, 1, self, self.updateSwitchFlip)
@@ -133,6 +135,9 @@ function UIPickerPane:updateElectrified(checkbox)
 	_Picker.electrified = checkbox.value
 end
 
+function UIPickerPane:updateStationAutofill(checkbox)
+end
+
 ---Executes a function for each selected tile.
 ---@param f fun(tile: Tile) The function to be executed.
 function UIPickerPane:forEachTile(f)
@@ -143,16 +148,65 @@ function UIPickerPane:forEachTile(f)
 	end
 end
 
+---Prepares a device ID, turning it to `nil` if empty and prefilling station shortcut if enabled.
+---@param id string The entered ID.
+---@return string?
+function UIPickerPane:prepareID(id)
+	if id == "" then
+		return nil
+	end
+	if self.stationAutofill.value and not _Utils.strContains(id, "_") then
+		local station = _Project:getCurrentStation()
+		if station then
+			return station.shortcut .. "_" .. id
+		end
+	end
+	return id
+end
+
+---Prepares a semaphore ID. In addition to what `:prepareID()` does, entering a number by itself will prefix it with "Tm".
+---@param id string The entered ID.
+function UIPickerPane:prepareSemaphoreID(id)
+	if self.stationAutofill.value and tonumber(id) then
+		return self:prepareID("Tm" .. id)
+	end
+	return self:prepareID(id)
+end
+
 function UIPickerPane:updateTrackID(input)
-	self:forEachTile(function(tile) tile.trackID = input.value ~= "" and input.value or nil end)
+	local value = self:prepareID(input.value)
+	self:forEachTile(function(tile) tile.trackID = value end)
+end
+
+function UIPickerPane:confirmTrackID(input)
+	local value = self:prepareID(input.value)
+	self:forEachTile(function(tile) tile.trackID = value end)
+	input.value = value or ""
+	self.ui:unfocus()
 end
 
 function UIPickerPane:updateSwitchID(input)
-	self:forEachTile(function(tile) tile.switchID = input.value ~= "" and input.value or nil end)
+	local value = self:prepareID(input.value)
+	self:forEachTile(function(tile) tile.switchID = value end)
+end
+
+function UIPickerPane:confirmSwitchID(input)
+	local value = self:prepareID(input.value)
+	self:forEachTile(function(tile) tile.switchID = value end)
+	input.value = value or ""
+	self.ui:unfocus()
 end
 
 function UIPickerPane:updateSemaphoreID(input)
-	self:forEachTile(function(tile) tile.semaphoreID = input.value ~= "" and input.value or nil end)
+	local value = self:prepareSemaphoreID(input.value)
+	self:forEachTile(function(tile) tile.semaphoreID = value end)
+end
+
+function UIPickerPane:confirmSemaphoreID(input)
+	local value = self:prepareSemaphoreID(input.value)
+	self:forEachTile(function(tile) tile.semaphoreID = value end)
+	input.value = value or ""
+	self.ui:unfocus()
 end
 
 function UIPickerPane:updateItineraryEndID(input)

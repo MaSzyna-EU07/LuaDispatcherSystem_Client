@@ -59,7 +59,9 @@ function Picker:new()
 	---@type string?
     self.hover = nil
 	self.hoverV = nil
+
     self.electrified = true
+	self.highlightMode = TileHighlightMode.TRACK
 end
 
 function Picker:getTilePos(i)
@@ -165,6 +167,9 @@ end
 ]]
 
 function Picker:keypressed(key)
+	if _UI:getFocus() then
+		return
+	end
 	if key == "a" then
 		--self.mode = "addRow"
 	elseif key == "s" then
@@ -173,6 +178,13 @@ function Picker:keypressed(key)
 		--self.mode = "delRow"
 	elseif key == "x" then
 		--self.mode = "delColumn"
+	end
+	if key == "1" then
+		self.highlightMode = TileHighlightMode.TRACK
+	elseif key == "2" then
+		self.highlightMode = TileHighlightMode.SWITCH
+	elseif key == "3" then
+		self.highlightMode = TileHighlightMode.SEMAPHORE
 	end
 end
 
