@@ -478,16 +478,17 @@
 					"trackID": "MMz_Iz16"
 				},
 				"21,7": {
-					"id": "switchL4",
+					"id": "switchR3",
 					"maxSpeedPlus": 40,
+					"switchFlip": true,
 					"switchID": "MMz_19",
 					"trackID": "MMz_Iz19"
 				},
-				"22,11": {
+				"22,10": {
 					"id": "arrow-",
 					"shuntTarget": true
 				},
-				"22,12": {
+				"22,11": {
 					"id": "arrow-",
 					"shuntTarget": true
 				},
@@ -505,20 +506,21 @@
 					"id": "track-",
 					"trackID": "MMz_Iz16"
 				},
-				"22,8": {
-					"id": "switchL8",
+				"22,7": {
+					"id": "switchR7",
 					"maxSpeedPlus": 40,
+					"switchFlip": true,
 					"switchID": "MMz_21",
 					"trackID": "MMz_Iz21"
 				},
-				"23,11": {
+				"23,10": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "MMz_Tm2",
 					"semaphoreType": 1,
 					"trackID": "MMz_Iz24"
 				},
-				"23,12": {
+				"23,11": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "MMz_Tm3",
@@ -539,27 +541,21 @@
 					"id": "track-",
 					"trackID": "MMz_Iz16"
 				},
-				"23,8": {
+				"23,7": {
 					"id": "track-",
 					"trackID": "MMz_Iz21"
 				},
-				"23,9": {
+				"23,8": {
 					"id": "switchL8",
 					"maxSpeedPlus": 40,
 					"switchID": "MMz_22",
 					"trackID": "MMz_Iz22"
 				},
 				"24,10": {
-					"id": "switchL8",
-					"maxSpeedPlus": 40,
-					"switchID": "MMz_23",
-					"trackID": "MMz_Iz23"
-				},
-				"24,11": {
 					"id": "derailer3",
 					"trackID": "MMz_Iz24"
 				},
-				"24,12": {
+				"24,11": {
 					"id": "derailer3",
 					"trackID": "MMz_Iz25"
 				},
@@ -587,7 +583,7 @@
 					"semaphoreID": "MMz_M",
 					"trackID": "MMz_Iz16"
 				},
-				"24,8": {
+				"24,7": {
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -595,21 +591,23 @@
 					"semaphoreID": "MMz_L",
 					"trackID": "MMz_Iz21"
 				},
-				"24,9": {
+				"24,8": {
 					"id": "track-",
 					"trackID": "MMz_Iz22"
 				},
-				"25,10": {
-					"id": "track-",
+				"24,9": {
+					"id": "switchL8",
+					"maxSpeedPlus": 40,
+					"switchID": "MMz_23",
 					"trackID": "MMz_Iz23"
 				},
-				"25,11": {
+				"25,10": {
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "MMz_24",
 					"trackID": "MMz_Iz24"
 				},
-				"25,12": {
+				"25,11": {
 					"id": "curve2",
 					"trackID": "MMz_Iz25"
 				},
@@ -634,14 +632,14 @@
 					"trackID": "MMz_It2"
 				},
 				"25,6": {
-					"id": "curve7",
+					"id": "track-",
 					"trackID": "MMz_It1"
 				},
-				"25,8": {
+				"25,7": {
 					"id": "track-",
 					"trackID": "MMz_It3"
 				},
-				"25,9": {
+				"25,8": {
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -649,15 +647,11 @@
 					"semaphoreID": "MMz_K",
 					"trackID": "MMz_Iz22"
 				},
-				"26,10": {
-					"id": "semaphore7",
-					"semaphoreAllowShunt": true,
-					"semaphoreAllowSz": true,
-					"semaphoreAllowTrain": true,
-					"semaphoreID": "MMz_J7",
+				"25,9": {
+					"id": "track-",
 					"trackID": "MMz_Iz23"
 				},
-				"26,11": {
+				"26,10": {
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "MMz_25",
@@ -675,23 +669,27 @@
 					"id": "track-",
 					"trackID": "MMz_It2"
 				},
-				"26,7": {
-					"id": "curve3",
+				"26,6": {
+					"id": "track-",
 					"trackID": "MMz_It1"
 				},
-				"26,8": {
+				"26,7": {
 					"id": "track-",
 					"trackID": "MMz_It3"
 				},
-				"26,9": {
+				"26,8": {
 					"id": "track-",
 					"trackID": "MMz_It5"
 				},
-				"27,10": {
-					"id": "track-",
-					"trackID": "MMz_It7"
+				"26,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "MMz_J7",
+					"trackID": "MMz_Iz23"
 				},
-				"27,11": {
+				"27,10": {
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -711,23 +709,23 @@
 					"id": "track-",
 					"trackID": "MMz_It2"
 				},
-				"27,7": {
+				"27,6": {
 					"id": "track-",
 					"trackID": "MMz_It1"
 				},
-				"27,8": {
+				"27,7": {
 					"id": "track-",
 					"trackID": "MMz_It3"
 				},
-				"27,9": {
+				"27,8": {
 					"id": "track-",
 					"trackID": "MMz_It5"
 				},
-				"28,10": {
-					"id": "platformF",
+				"27,9": {
+					"id": "track-",
 					"trackID": "MMz_It7"
 				},
-				"28,11": {
+				"28,10": {
 					"id": "platformF",
 					"trackID": "MMz_It9"
 				},
@@ -743,25 +741,23 @@
 					"id": "platformP",
 					"trackID": "MMz_It2"
 				},
-				"28,7": {
+				"28,6": {
 					"id": "platformP",
 					"trackID": "MMz_It1"
 				},
-				"28,8": {
+				"28,7": {
 					"id": "platformF",
 					"trackID": "MMz_It3"
 				},
-				"28,9": {
+				"28,8": {
 					"id": "platformF",
 					"trackID": "MMz_It5"
 				},
-				"29,10": {
+				"28,9": {
 					"id": "platformF",
-					"shuntTarget": true,
-					"trackID": "MMz_It7",
-					"trainTarget": true
+					"trackID": "MMz_It7"
 				},
-				"29,11": {
+				"29,10": {
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "MMz_It9",
@@ -785,22 +781,28 @@
 					"trackID": "MMz_It2",
 					"trainTarget": true
 				},
-				"29,7": {
+				"29,6": {
 					"id": "platformP",
 					"shuntTarget": true,
 					"trackID": "MMz_It1",
 					"trainTarget": true
 				},
-				"29,8": {
+				"29,7": {
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "MMz_It3",
 					"trainTarget": true
 				},
-				"29,9": {
+				"29,8": {
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "MMz_It5",
+					"trainTarget": true
+				},
+				"29,9": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "MMz_It7",
 					"trainTarget": true
 				},
 				"3,5": {
@@ -812,10 +814,6 @@
 					"trackID": "3691-B1@LK2.1"
 				},
 				"30,10": {
-					"id": "platformF",
-					"trackID": "MMz_It7"
-				},
-				"30,11": {
 					"id": "platformF",
 					"trackID": "MMz_It9"
 				},
@@ -831,27 +829,23 @@
 					"id": "platformP",
 					"trackID": "MMz_It2"
 				},
-				"30,7": {
+				"30,6": {
 					"id": "platformP",
 					"trackID": "MMz_It1"
 				},
-				"30,8": {
+				"30,7": {
 					"id": "platformF",
 					"trackID": "MMz_It3"
 				},
-				"30,9": {
+				"30,8": {
 					"id": "platformF",
 					"trackID": "MMz_It5"
 				},
-				"31,10": {
-					"id": "semaphore3",
-					"semaphoreAllowShunt": true,
-					"semaphoreAllowSz": true,
-					"semaphoreAllowTrain": true,
-					"semaphoreID": "MMz_X7",
-					"trackID": "MMz_Iz32"
+				"30,9": {
+					"id": "platformF",
+					"trackID": "MMz_It7"
 				},
-				"31,11": {
+				"31,10": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -879,23 +873,27 @@
 					"id": "track-",
 					"trackID": "MMz_It2"
 				},
-				"31,7": {
+				"31,6": {
 					"id": "track-",
 					"trackID": "MMz_It1"
 				},
-				"31,8": {
+				"31,7": {
 					"id": "track-",
 					"trackID": "MMz_It3"
 				},
-				"31,9": {
+				"31,8": {
 					"id": "track-",
 					"trackID": "MMz_It5"
 				},
-				"32,10": {
-					"id": "track-",
+				"31,9": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "MMz_X7",
 					"trackID": "MMz_Iz32"
 				},
-				"32,11": {
+				"32,10": {
 					"id": "curve2",
 					"trackID": "MMz_Iz32"
 				},
@@ -915,22 +913,20 @@
 					"semaphoreID": "MMz_T",
 					"trackID": "MMz_Iz39"
 				},
-				"32,7": {
+				"32,6": {
 					"id": "track-",
 					"trackID": "MMz_It1"
 				},
-				"32,8": {
+				"32,7": {
 					"id": "track-",
 					"trackID": "MMz_It3"
 				},
-				"32,9": {
+				"32,8": {
 					"id": "track-",
 					"trackID": "MMz_It5"
 				},
-				"33,10": {
-					"id": "switchL3",
-					"maxSpeedPlus": 40,
-					"switchID": "MMz_32",
+				"32,9": {
+					"id": "track-",
 					"trackID": "MMz_Iz32"
 				},
 				"33,4": {
@@ -943,11 +939,11 @@
 					"id": "track-",
 					"trackID": "MMz_Iz39"
 				},
-				"33,7": {
+				"33,6": {
 					"id": "track-",
 					"trackID": "MMz_It1"
 				},
-				"33,8": {
+				"33,7": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -955,7 +951,7 @@
 					"semaphoreID": "MMz_W",
 					"trackID": "MMz_Iz41"
 				},
-				"33,9": {
+				"33,8": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -963,11 +959,11 @@
 					"semaphoreID": "MMz_V",
 					"trackID": "MMz_Iz38"
 				},
-				"34,10": {
-					"id": "switchL7",
+				"33,9": {
+					"id": "switchL3",
 					"maxSpeedPlus": 40,
-					"switchID": "MMz_36",
-					"trackID": "MMz_Iz36"
+					"switchID": "MMz_32",
+					"trackID": "MMz_Iz32"
 				},
 				"34,4": {
 					"id": "switchR7",
@@ -979,7 +975,7 @@
 					"id": "track-",
 					"trackID": "MMz_Iz39"
 				},
-				"34,7": {
+				"34,6": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -987,16 +983,18 @@
 					"semaphoreID": "MMz_U",
 					"trackID": "MMz_Iz44"
 				},
-				"34,8": {
+				"34,7": {
 					"id": "track-",
 					"trackID": "MMz_Iz41"
 				},
-				"34,9": {
+				"34,8": {
 					"id": "track-",
 					"trackID": "MMz_Iz38"
 				},
-				"35,10": {
-					"id": "derailer7",
+				"34,9": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "MMz_36",
 					"trackID": "MMz_Iz36"
 				},
 				"35,4": {
@@ -1011,25 +1009,22 @@
 					"switchID": "MMz_39",
 					"trackID": "MMz_Iz39"
 				},
-				"35,7": {
-					"id": "curve2",
+				"35,6": {
+					"id": "track-",
 					"trackID": "MMz_Iz44"
 				},
-				"35,8": {
+				"35,7": {
 					"id": "track-",
 					"trackID": "MMz_Iz41"
 				},
-				"35,9": {
+				"35,8": {
 					"id": "switchR2",
 					"maxSpeedPlus": 40,
 					"switchID": "MMz_38",
 					"trackID": "MMz_Iz38"
 				},
-				"36,10": {
-					"id": "semaphore7",
-					"semaphoreAllowShunt": true,
-					"semaphoreID": "MMz_Tm14",
-					"semaphoreType": 1,
+				"35,9": {
+					"id": "derailer7",
 					"trackID": "MMz_Iz36"
 				},
 				"36,3": {
@@ -1052,18 +1047,22 @@
 					"trackID": "MMz_Iz42"
 				},
 				"36,6": {
-					"id": "curve6",
+					"id": "track-",
 					"trackID": "MMz_Iz44"
 				},
-				"36,8": {
-					"id": "switchR2",
+				"36,7": {
+					"id": "switchL3",
 					"maxSpeedPlus": 40,
+					"switchFlip": true,
 					"switchID": "MMz_41",
 					"trackID": "MMz_Iz41"
 				},
-				"37,10": {
-					"id": "arrow-",
-					"shuntTarget": true
+				"36,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "MMz_Tm14",
+					"semaphoreType": 1,
+					"trackID": "MMz_Iz36"
 				},
 				"37,2": {
 					"id": "curve6",
@@ -1091,10 +1090,15 @@
 					"trackID": "MMz_Iz44"
 				},
 				"37,7": {
-					"id": "switchR6",
+					"id": "switchL7",
 					"maxSpeedPlus": 40,
+					"switchFlip": true,
 					"switchID": "MMz_43",
 					"trackID": "MMz_Iz43"
+				},
+				"37,9": {
+					"id": "arrow-",
+					"shuntTarget": true
 				},
 				"38,2": {
 					"id": "derailer7",
