@@ -1979,6 +1979,7 @@
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Mrz_A",
 					"semaphoreNoW24": true,
+					"semaphoreShortSpeed": 100,
 					"trackID": "Mrz_ItA"
 				},
 				"4,6": {
@@ -3526,7 +3527,7 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Rem_L2",
-					"semaphoreShortSpeed": 4,
+					"semaphoreShortSpeed": 100,
 					"trackID": "Rem_ItL2"
 				},
 				"31,9": {
@@ -3811,7 +3812,7 @@
 				"42,8": {
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
-					"switchID": "Rem_53",
+					"switchID": "Rem_z1034",
 					"trackID": "Rem_Iz53"
 				},
 				"42,9": {
@@ -3822,21 +3823,12 @@
 					"trackID": "Rem_Iz49"
 				},
 				"43,10": {
-					"id": "switchR7",
-					"maxSpeedPlus": 40,
-					"switchFlip": true,
-					"switchID": "Rem_56b",
+					"id": "track-",
 					"trackID": "Rem_Iz56b"
 				},
 				"43,11": {
-					"id": "switchR7",
-					"maxSpeedPlus": 80,
-					"switchID": "Rem_56",
+					"id": "track-",
 					"trackID": "Rem_Iz56"
-				},
-				"43,12": {
-					"electrified": false,
-					"id": "buffer3"
 				},
 				"43,7": {
 					"id": "switchL3",
@@ -3854,21 +3846,21 @@
 					"trackID": "Rem_It20"
 				},
 				"44,10": {
-					"electrified": false,
-					"id": "buffer7"
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_56b",
+					"trackID": "Rem_Iz56b"
 				},
 				"44,11": {
-					"id": "switchR3",
+					"id": "switchL7",
 					"maxSpeedPlus": 80,
-					"switchID": "Rem_56a",
-					"trackID": "Rem_Iz56a"
+					"switchFlip": true,
+					"switchID": "Rem_z1026",
+					"trackID": "Rem_Iz56"
 				},
 				"44,12": {
-					"id": "switchR3",
-					"maxSpeedPlus": 40,
-					"switchFlip": true,
-					"switchID": "Rem_57",
-					"trackID": "Rem_Iz57"
+					"electrified": false,
+					"id": "buffer2"
 				},
 				"44,7": {
 					"id": "switchL7",
@@ -3884,12 +3876,18 @@
 					"id": "buffer7",
 					"trackID": "Rem_It20"
 				},
-				"45,11": {
-					"id": "curve2",
-					"trackID": "Rem_ItS"
+				"45,10": {
+					"id": "switchL3",
+					"maxSpeedPlus": 80,
+					"switchFlip": true,
+					"switchID": "Rem_56a",
+					"trackID": "Rem_Iz56a"
 				},
-				"45,12": {
-					"id": "curve2"
+				"45,11": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_57",
+					"trackID": "Rem_Iz57"
 				},
 				"45,6": {
 					"electrified": false,
@@ -3906,12 +3904,16 @@
 					"id": "curve7",
 					"trackID": "Rem_ItT"
 				},
+				"45,9": {
+					"electrified": false,
+					"id": "buffer6"
+				},
 				"46,10": {
-					"id": "curve6",
+					"id": "track-",
 					"trackID": "Rem_ItS"
 				},
 				"46,11": {
-					"id": "curve6"
+					"id": "track-"
 				},
 				"46,6": {
 					"electrified": false,

@@ -53,7 +53,7 @@ function UIPickerPane:new(ui)
 	self.speedMinus = self.ui:addInput("picker", "speedMinus", 27, 3, 3, 1, self, self.updateMaxSpeedMinus)
 	self.ui:addLabel("picker", nil, "Vskr", 20, 4, 2, 1)
 	self.semaphoreShortSpeed = self.ui:addInput("picker", "semaphoreShortSpeed", 22, 4, 3, 1, self, self.updateSemaphoreShortSpeed)
-	self.semaphoreShortSpeed.tip = "Prędkość dla skróconej drogi hamowania.\nWpisać identyfikator prędkości, nie samą prędkość!\n2 = 40 km/h\n3 = 60 km/h\n4 = 100 km/h"
+	self.semaphoreShortSpeed.tip = "Prędkość dla skróconej drogi hamowania w km/h."
 	self.semaphoreFourPhase = self.ui:addCheckbox("picker", "semaphoreFourPhase", "4-stawny", 25, 4, 1, 1, self, self.updateSemaphoreFourPhase)
 	self.semaphoreFourPhase.tip = "Gdy zaznaczony i za dwa semafory jest S1, to zamiast S2 wyświetlony zostanie S3, zamiast S10 - S11, itp."
 	-- Fourth column

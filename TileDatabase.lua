@@ -25,7 +25,7 @@ function TileDatabase:new()
     -- derailer - Sprite (n, 7) rendered on top of the tracks.
     -- semaphore - Sprites (n, 4), (n, 5) and (n, 6) used as semaphore body, first and second lamps respectively.
     -- doubleSwitch - Whether the tile is a double switch.
-    ---@alias TileData {tracks: integer?, background: integer?, backgroundXY: [integer, integer]?, foreground: integer?, dirs: table<integer, "-"|"+"|"ab-"|"ab+"|"cd-"|"cd+">?, buffer: integer?, derailer: integer?, semaphore: integer?, doubleSwitch: boolean?}
+    ---@alias TileData {tracks: integer?, background: integer?, backgroundXY: [integer, integer]?, foreground: integer?, dirs: table<integer, "-"|"+"|"ab-"|"ab+"|"cd-"|"cd+">?, buffer: integer?, derailer: integer?, semaphore: integer?, doubleSwitch: boolean?, exit: boolean?}
     ---@type table<string, TileData>
     self.tiles = {
         [""] = {},
@@ -105,9 +105,9 @@ function TileDatabase:new()
         ["semaphore6"] = {tracks = 34, semaphore = 6},
         ["semaphore7"] = {tracks = 68, semaphore = 7},
         ["semaphore8"] = {tracks = 136, semaphore = 8},
-        ["arrow3"] = {background = 12, foreground = 12},
-        ["arrow7"] = {background = 11, foreground = 11},
-        ["arrow-"] = {background = 13, foreground = 13},
+        ["arrow3"] = {background = 12, foreground = 12, exit = true},
+        ["arrow7"] = {background = 11, foreground = 11, exit = true},
+        ["arrow-"] = {background = 13, foreground = 13, exit = true},
         ["loco"] = {background = 14, foreground = 14},
         ["square"] = {background = 15, foreground = 15},
         ["letter1"] = {backgroundXY = {9, 3}},

@@ -504,9 +504,12 @@ end
 ---@private
 function Station:handleMiddleClick()
 	-- Middle click: tile pick
-	if self.hoverX and self.hoverY then
+	local tile = self:getHoveredTile()
+	if tile then
 		_Picker.mode = nil
-		_Picker.selection = self:getHoveredTile().id
+		_Picker.selection = tile.id
+		-- TODO: Checkbox state is not updated.
+		_Picker.electrified = tile.electrified
 	end
 end
 

@@ -78,6 +78,12 @@ function Tile:isSemaphore()
 	return self:getData().semaphore ~= nil
 end
 
+---Returns whether this Tile is an exit point.
+---@return boolean
+function Tile:isExitPoint()
+	return self:getData().exit ~= nil
+end
+
 --######################################--
 ---------------- L O G I C ---------------
 --######################################--
@@ -379,7 +385,8 @@ end
 ---@param extras "w24"? An additional token to be sent, for example to show W24.
 function Tile:sendSemaphoreState(this, next, extras)
 	if self.semaphoreID then
-		_Com.sendCommand("s " .. self.semaphoreID .. " " .. this .. (next and (" " .. next) or "") .. (extras and (" " .. extras) or ""))
+		next = type(next) == "string" and " :" .. next or (next and (" " .. next) or "")
+		_Com.sendCommand("s " .. self.semaphoreID .. " " .. this .. next .. (extras and (" " .. extras) or ""))
 	end
 end
 
@@ -423,7 +430,7 @@ function Tile:getBackgroundColor()
 	if _Picker.highlightMode == TileHighlightMode.OFF or _Picker.mode ~= "properties" then
 		return TileBackgroundColor.REGULAR
 	end
-	if (self.trackID and not self:isTrack()) or (self.switchID and not self:isSwitch()) or (self.semaphoreID and not self:isSemaphore()) then
+	if (self.trackID and (not self:isTrack() and not self:isExitPoint())) or (self.switchID and not self:isSwitch()) or (self.semaphoreID and (not self:isSemaphore() and not self:isExitPoint())) then
 		return TileBackgroundColor.WARNING
 	end
 	if self.trackID and _Picker.highlightMode == TileHighlightMode.TRACK then
