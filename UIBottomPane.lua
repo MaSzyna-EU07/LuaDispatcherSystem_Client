@@ -13,18 +13,18 @@ function UIBottomPane:new(ui)
 	self.ui:addLabel("bottom", nil, "Komunikacja:", 0, 0, 5, 1)
 	self.comStatus = self.ui:addLabel("bottom", "comStatus", "Łączenie...", 5, 0, 6, 1)
 	self.ui:addButton("bottom", nil, "Reset", 11, 0, 3, 1, self, self.comReset)
-	self.ui:addButton("bottom", nil, "S1", 15, 0, 2, 1, self, self.sendS1)
-	self.ui:addButton("bottom", nil, "S2", 17, 0, 2, 1, self, self.sendS2)
-	self.ui:addButton("bottom", nil, "S5", 19, 0, 2, 1, self, self.sendS5)
-	self.ui:addButton("bottom", nil, "S10", 21, 0, 2, 1, self, self.sendS10)
-	self.ui:addButton("bottom", nil, "S13", 23, 0, 2, 1, self, self.sendS13)
-	self.ui:addButton("bottom", nil, "Sz", 25, 0, 2, 1, self, self.sendSz)
-	self.ui:addButton("bottom", nil, "Ms1", 27, 0, 2, 1, self, self.sendMs1)
-	self.ui:addButton("bottom", nil, "Ms2", 29, 0, 2, 1, self, self.sendMs2)
-	self.ui:addButton("bottom", nil, "Uszk", 31, 0, 2, 1, self, self.sendUszk)
-	self.ui:addButton("bottom", nil, "Ures", 34, 0, 2, 1, self, self.sendUnres)
-	self.ui:addButton("bottom", nil, "Free", 36, 0, 2, 1, self, self.sendFree)
-	self.ui:addButton("bottom", nil, "Busy", 38, 0, 2, 1, self, self.sendBusy)
+	self.ui:addButton("bottom", nil, "S1", 15, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.STOP) end)
+	self.ui:addButton("bottom", nil, "S2", 17, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.VMAX) end)
+	self.ui:addButton("bottom", nil, "S5", 19, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.VMAX, Speed.STOP) end)
+	self.ui:addButton("bottom", nil, "S10", 21, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed["40"]) end)
+	self.ui:addButton("bottom", nil, "S13", 23, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed["40"], Speed.STOP) end)
+	self.ui:addButton("bottom", nil, "Sz", 25, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.SZ) end)
+	self.ui:addButton("bottom", nil, "Ms1", 27, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.MS1) end)
+	self.ui:addButton("bottom", nil, "Ms2", 29, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.MS2) end)
+	self.ui:addButton("bottom", nil, "Uszk", 31, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.DIM) end)
+	self.ui:addButton("bottom", nil, "Ures", 34, 0, 2, 1, self, function() self:sendToCurrentSemaphoreUnreserve() end)
+	self.ui:addButton("bottom", nil, "Free", 36, 0, 2, 1, self, function() self:sendToCurrentTrack("free") end)
+	self.ui:addButton("bottom", nil, "Busy", 38, 0, 2, 1, self, function() self:sendToCurrentTrack("busy") end)
 	self.ui:addLabel("bottom", nil, "Komenda:", 41, 0, 4, 1)
 	self.ui:addInput("bottom", "command", 45, 0, 7, 1, self, nil, self.sendCommand)
 end
@@ -43,94 +43,28 @@ function UIBottomPane:comReset()
 	_Com.init(_Settings.simPath, true)
 end
 
+---Sends this and next speeds to the selected semaphore.
+---@param this Speed Speed on this semaphore.
+---@param next Speed|string? Speed on next semaphore, or the semaphore ID.
 function UIBottomPane:sendToCurrentSemaphore(this, next)
 	local station = _Project:getCurrentStation()
-	if not station then
-		return
-	end
-	for i, tile in ipairs(station.selectedTiles) do
-		tile:sendSemaphoreState(this, next)
+	if station then
+		station:forEachSelectedTile(function(tile) tile:sendSemaphoreState(this, next) end)
 	end
 end
 
 function UIBottomPane:sendToCurrentSemaphoreUnreserve()
 	local station = _Project:getCurrentStation()
-	if not station then
-		return
-	end
-	for i, tile in ipairs(station.selectedTiles) do
-		tile:sendSemaphoreUnreserve()
+	if station then
+		station:forEachSelectedTile(function(tile) tile:sendSemaphoreUnreserve() end)
 	end
 end
 
 function UIBottomPane:sendToCurrentTrack(command)
 	local station = _Project:getCurrentStation()
-	if not station then
-		return
+	if station then
+		station:forEachSelectedTile(function(tile) tile:sendTrackState(command) end)
 	end
-	for i, tile in ipairs(station.selectedTiles) do
-		tile:sendTrackState(command)
-	end
-end
-
-function UIBottomPane:sendS1()
-	self:sendToCurrentSemaphore(0)
-end
-
-function UIBottomPane:sendS2()
-	self:sendToCurrentSemaphore(1, 1)
-end
-
-function UIBottomPane:sendS4()
-	self:sendToCurrentSemaphore(1, 2)
-end
-
-function UIBottomPane:sendS5()
-	self:sendToCurrentSemaphore(1, 0)
-end
-
-function UIBottomPane:sendS10()
-	self:sendToCurrentSemaphore(2, 1)
-end
-
-function UIBottomPane:sendS12()
-	self:sendToCurrentSemaphore(2, 2)
-end
-
-function UIBottomPane:sendS13()
-	self:sendToCurrentSemaphore(2, 0)
-end
-
-function UIBottomPane:sendSz()
-	self:sendToCurrentSemaphore(7)
-end
-
-function UIBottomPane:sendMs1()
-	self:sendToCurrentSemaphore(5)
-end
-
-function UIBottomPane:sendMs2()
-	self:sendToCurrentSemaphore(6)
-end
-
-function UIBottomPane:sendS1a()
-	self:sendToCurrentSemaphore(8)
-end
-
-function UIBottomPane:sendUszk()
-	self:sendToCurrentSemaphore(-1)
-end
-
-function UIBottomPane:sendFree()
-	self:sendToCurrentTrack("free")
-end
-
-function UIBottomPane:sendBusy()
-	self:sendToCurrentTrack("busy")
-end
-
-function UIBottomPane:sendUnres()
-	self:sendToCurrentSemaphoreUnreserve()
 end
 
 function UIBottomPane:sendCommand(input)

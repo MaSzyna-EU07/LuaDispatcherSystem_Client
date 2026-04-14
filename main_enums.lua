@@ -8,7 +8,8 @@ Speed = {
 	["100"] = 4,
 	MS1 = 5,
 	MS2 = 6,
-	SZ = 7
+	SZ = 7,
+	S1A = 8
 }
 
 ---@enum SemaphoreType

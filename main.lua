@@ -45,22 +45,6 @@ function _InvertDir(dir)
 	return (dir + 3) % 8 + 1
 end
 
----Turns speed in km/h into speed to be displayed on the semaphore.
----@param speed number? Desired speed.
----@return Speed
-function _SpeedToID(speed)
-	if not speed or speed == math.huge then
-		return Speed.VMAX
-	end
-	if speed >= 100 then
-		return Speed["100"]
-	elseif speed >= 60 then
-		return Speed["60"]
-	end
-	-- TODO: What about less than 40 km/h?
-	return Speed["40"]
-end
-
 ---Turns the track flags into the track color to be displayed on the tile.
 ---@param electrified boolean? Whether the track is electrified.
 ---@param occupied boolean? Whether the track is occupied.
