@@ -14,10 +14,10 @@ function UIBottomPane:new(ui)
 	self.comStatus = self.ui:addLabel("bottom", "comStatus", "Łączenie...", 5, 0, 6, 1)
 	self.ui:addButton("bottom", nil, "Reset", 11, 0, 3, 1, self, self.comReset)
 	self.ui:addButton("bottom", nil, "S1", 15, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.STOP) end)
-	self.ui:addButton("bottom", nil, "S2", 17, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.VMAX) end)
-	self.ui:addButton("bottom", nil, "S5", 19, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.VMAX, Speed.STOP) end)
-	self.ui:addButton("bottom", nil, "S10", 21, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed["40"]) end)
-	self.ui:addButton("bottom", nil, "S13", 23, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed["40"], Speed.STOP) end)
+	self.ui:addButton("bottom", nil, "S2", 17, 0, 2, 1, self, function() self:sendToCurrentSemaphore(math.huge) end)
+	self.ui:addButton("bottom", nil, "S5", 19, 0, 2, 1, self, function() self:sendToCurrentSemaphore(math.huge, Speed.STOP) end)
+	self.ui:addButton("bottom", nil, "S10", 21, 0, 2, 1, self, function() self:sendToCurrentSemaphore(40) end)
+	self.ui:addButton("bottom", nil, "S13", 23, 0, 2, 1, self, function() self:sendToCurrentSemaphore(40, Speed.STOP) end)
 	self.ui:addButton("bottom", nil, "Sz", 25, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.SZ) end)
 	self.ui:addButton("bottom", nil, "Ms1", 27, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.MS1) end)
 	self.ui:addButton("bottom", nil, "Ms2", 29, 0, 2, 1, self, function() self:sendToCurrentSemaphore(Speed.MS2) end)
@@ -44,8 +44,8 @@ function UIBottomPane:comReset()
 end
 
 ---Sends this and next speeds to the selected semaphore.
----@param this Speed Speed on this semaphore.
----@param next Speed|string? Speed on next semaphore, or the semaphore ID.
+---@param this integer Speed on this semaphore.
+---@param next integer|string? Speed on next semaphore, or the semaphore ID.
 function UIBottomPane:sendToCurrentSemaphore(this, next)
 	local station = _Project:getCurrentStation()
 	if station then

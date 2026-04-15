@@ -380,13 +380,13 @@ function Tile:sendSwitchUnforce()
 end
 
 ---Sends a command to the server to set the speeds on this tile's semaphore.
----@param this Speed The current speed to be displayed.
----@param next Speed|string? The next speed or the next semaphore ID to be displayed.
+---@param this integer The current speed to be displayed.
+---@param next integer|string? The next speed or the next semaphore ID to be displayed.
 ---@param extras "w24"? An additional token to be sent, for example to show W24.
 function Tile:sendSemaphoreState(this, next, extras)
 	if self.semaphoreID then
 		next = type(next) == "string" and " :" .. next or (next and (" " .. next) or "")
-		_Com.sendCommand("s " .. self.semaphoreID .. " " .. this .. next .. (extras and (" " .. extras) or ""))
+		_Com.sendCommand("s " .. self.semaphoreID .. " " .. (this == math.huge and "1" or this) .. next .. (extras and (" " .. extras) or ""))
 	end
 end
 
