@@ -446,6 +446,28 @@ function utils.tableCountKeys(t)
 	return n
 end
 
+---Turns all keys in table `t` to strings and returns a new table.
+---@param t table The table to stringify the keys for.
+---@return table
+function utils.stringifyKeys(t)
+	local r = {}
+	for k, v in pairs(t) do
+		r[tostring(k)] = v
+	end
+	return r
+end
+
+---Turns all keys in table `t` to numbers if possible and returns a new table.
+---@param t table The table to numify the keys for.
+---@return table
+function utils.numifyKeys(t)
+	local r = {}
+	for k, v in pairs(t) do
+		r[tonumber(k) or k] = v
+	end
+	return r
+end
+
 ---Returns a list of all keys in table `t`, sorted alphabetically.
 ---@param t table The table from which the keys will be sourced.
 ---@return table

@@ -52,10 +52,8 @@ function UIPickerPane:new(ui)
 	self.ui:addLabel("picker", nil, "V-", 25, 3, 2, 1)
 	self.speedMinus = self.ui:addInput("picker", "speedMinus", 27, 3, 3, 1, self, self.updateMaxSpeedMinus)
 	self.ui:addLabel("picker", nil, "Vskr", 20, 4, 2, 1)
-	self.semaphoreShortSpeed = self.ui:addInput("picker", "semaphoreShortSpeed", 22, 4, 3, 1, self, self.updateSemaphoreShortSpeed)
-	self.semaphoreShortSpeed.tip = "Prędkość dla skróconej drogi hamowania w km/h."
-	self.semaphoreFourPhase = self.ui:addCheckbox("picker", "semaphoreFourPhase", "4-stawny", 25, 4, 1, 1, self, self.updateSemaphoreFourPhase)
-	self.semaphoreFourPhase.tip = "Gdy zaznaczony i za dwa semafory jest S1, to zamiast S2 wyświetlony zostanie S3, zamiast S10 - S11, itp."
+	self.semaphoreShortSpeed = self.ui:addInput("picker", "semaphoreShortSpeed", 22, 4, 8, 1, self, self.updateSemaphoreShortSpeed)
+	self.semaphoreShortSpeed.tip = "Prędkość dla skróconej drogi hamowania w km/h.\nJeżeli wielostopniowa, to można wpisać dane w poniższym formacie:\n0:40,40:100\n- Przy następnym Stój, ogranicz do 40 km/h\n- Przy następnym 40 km/h, ogranicz do 100 km/h\n- Powyżej 40 km/h, nie ograniczaj"
 	-- Fourth column
 	self.ui:addLabel("picker", nil, "Możliwość podania:", 30, 0, 10, 1)
 	self.semaphoreAllowTrain = self.ui:addCheckbox("picker", "semaphoreAllowTrain", "poc.", 31, 1, 1, 1, self, self.updateSemaphoreAllowTrain)
@@ -68,6 +66,11 @@ function UIPickerPane:new(ui)
 	--self.semaphoreShape.tip = "Oznacza semafor jako kształtowy.\nSemafory kształtowe nie mają uzależnienia od następnego semafora i potrafią wyświetlić tylko sygnały Sr1, Sr2 i Sr3.\nW chwili obecnej nie wpływa to na wygląd semafora na schemacie."
 	self.semaphoreNoDanger = self.ui:addCheckbox("picker", "semaphoreNoDanger", "Brak pom.g.k.", 34, 2, 1, 1, self, self.updateSemaphoreNoDanger)
 	self.semaphoreNoDanger.tip = "Oznacza semafor jako nieposiadający górnej pomarańczowej komory.\nOznacza to, że pathfinder nie będzie w stanie wyświetlić sygnału zezwalającego na jazdę\njeżeli kolejny semafor nie zezwala na jazdę z prędkością 100km/h lub Vmax."
+	self.ui:addLabel("picker", nil, "Nast", 30, 3, 2, 1)
+	self.semaphoreNext = self.ui:addInput("picker", "semaphoreNext", 32, 3, 3, 1, self, self.updateSemaphoreNext)
+	self.semaphoreNext.tip = "Wskazuje następną prędkość w km/h (puste = Vmax) lub ID następnego semafora ze znakiem ':' na początku."
+	self.semaphoreFourPhase = self.ui:addCheckbox("picker", "semaphoreFourPhase", "4-stawny", 35, 3, 1, 1, self, self.updateSemaphoreFourPhase)
+	self.semaphoreFourPhase.tip = "Gdy zaznaczony i za dwa semafory jest S1, to zamiast S2 wyświetlony zostanie S3, zamiast S10 - S11, itp."
 end
 
 ---Resets all property inputs to their default values.
@@ -95,6 +98,7 @@ function UIPickerPane:resetValues()
 	self.semaphoreAllowSz.value = false
 	self.semaphoreShape.value = false
 	self.semaphoreShortSpeed.value = ""
+	self.semaphoreNext.value = ""
 	self.semaphoreFourPhase.value = false
 	self.warp.value = ""
 	self.command.value = ""
@@ -107,7 +111,7 @@ function UIPickerPane:setValuesForTile(tile)
 	self.switchID.value = tile.switchID or ""
 	self.switchFlip.value = tile.switchFlip
 	self.switchFlipABCD.value = tile.switchFlipABCD
-	self.semaphoreType.value = tile:isSemaphore() and tostring(tile.semaphoreType) or ""
+	self.semaphoreType.value = tile:isSemaphore() and (tile.semaphoreType and tostring(tile.semaphoreType) or "0") or ""
 	self.semaphoreNoW24.value = tile.semaphoreNoW24
 	self.semaphoreNoDanger.value = tile.semaphoreNoDanger
 	self.semaphoreID.value = tile.semaphoreID or ""
@@ -125,10 +129,76 @@ function UIPickerPane:setValuesForTile(tile)
 	self.semaphoreAllowShunt.value = tile.semaphoreAllowShunt
 	self.semaphoreAllowSz.value = tile.semaphoreAllowSz
 	self.semaphoreShape.value = tile.semaphoreShape
-	self.semaphoreShortSpeed.value = tile.semaphoreShortSpeed and tostring(tile.semaphoreShortSpeed) or ""
+	self.semaphoreShortSpeed.value = tile.semaphoreShortSpeed and self:shortSpeedToText(tile.semaphoreShortSpeed) or ""
+	self.semaphoreNext.value = tile.semaphoreNext and self:nextToText(tile.semaphoreNext) or ""
 	self.semaphoreFourPhase.value = tile.semaphoreFourPhase
 	self.warp.value = tile.warp or ""
 	self.command.value = tile.command or ""
+end
+
+---Turns short speed data into text format.
+---@param shortSpeed table<integer, integer> Short speed information.
+---@return string
+function UIPickerPane:shortSpeedToText(shortSpeed)
+	local keys = _Utils.tableGetSortedKeys(shortSpeed)
+	if #keys == 0 then
+		return ""
+	elseif #keys == 1 and keys[1] == 0 then
+		return tostring(shortSpeed[0])
+	end
+	local text = ""
+	for i, key in ipairs(keys) do
+		text = text .. (text ~= "" and "," or "") .. tostring(key) .. ":" .. tostring(shortSpeed[key])
+	end
+	return text
+end
+
+---Turns short speed in text format into its native format.
+---@param text string Short speed input.
+---@return table<integer, integer>
+function UIPickerPane:textToShortSpeed(text)
+	if text == "" then
+		return {}
+	elseif tonumber(text) then
+		return {[0] = tonumber(text)}
+	end
+	local entries = _Utils.strSplit(text, ",")
+	local shortSpeed = {}
+	for i, entry in ipairs(entries) do
+		local spl = _Utils.strSplit(entry, ":")
+		if #spl == 2 then
+			local nextSpeed = tonumber(spl[1])
+			local speed = tonumber(spl[2])
+			if nextSpeed and speed then
+				shortSpeed[nextSpeed] = speed
+			end
+		end
+	end
+	return shortSpeed
+end
+
+---Turns next semaphore indicator to its string representation, with a `:` if it is a string.
+---@param next string|integer? Semaphore or speed.
+---@return string
+function UIPickerPane:nextToText(next)
+	if type(next) == "number" then
+		return tostring(next)
+	elseif type(next) == "string" then
+		return ":" .. next
+	end
+	return ""
+end
+
+---Turns the string representation of the next semaphore to its full representation (`nil`, integer or string).
+---@param text string Input text.
+---@return string|integer?
+function UIPickerPane:textToNext(text)
+	if text == "" then
+		return nil
+	elseif text:sub(1, 1) == ":" then
+		return text:sub(2)
+	end
+	return tonumber(text) or text
 end
 
 function UIPickerPane:updateElectrified(checkbox)
@@ -286,7 +356,11 @@ function UIPickerPane:updateSemaphoreShape(checkbox)
 end
 
 function UIPickerPane:updateSemaphoreShortSpeed(input)
-	self:forEachTile(function(tile) tile.semaphoreShortSpeed = tonumber(input.value) end)
+	self:forEachTile(function(tile) tile.semaphoreShortSpeed = self:textToShortSpeed(input.value) end)
+end
+
+function UIPickerPane:updateSemaphoreNext(input)
+	self:forEachTile(function(tile) tile.semaphoreNext = self:textToNext(input.value) end)
 end
 
 function UIPickerPane:updateSemaphoreFourPhase(checkbox)
