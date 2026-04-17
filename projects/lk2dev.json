@@ -3612,13 +3612,8 @@
 					"trackID": "Rem_It3"
 				},
 				"30,11": {
-					"id": "platformF",
+					"id": "track-",
 					"trackID": "Rem_It1"
-				},
-				"30,12": {
-					"electrified": false,
-					"id": "arrow-",
-					"shuntTarget": true
 				},
 				"30,7": {
 					"electrified": false,
@@ -3641,16 +3636,8 @@
 					"trackID": "Rem_It3"
 				},
 				"31,11": {
-					"id": "platformF",
+					"id": "track-",
 					"trackID": "Rem_It1"
-				},
-				"31,12": {
-					"electrified": false,
-					"id": "semaphore3",
-					"semaphoreAllowShunt": true,
-					"semaphoreID": "Rem_Tm113",
-					"semaphoreType": 1,
-					"trackID": "Rem_Iz41"
 				},
 				"31,7": {
 					"electrified": false,
@@ -3685,8 +3672,8 @@
 				},
 				"32,12": {
 					"electrified": false,
-					"id": "derailer3",
-					"trackID": "Rem_Iz41"
+					"id": "arrow-",
+					"shuntTarget": true
 				},
 				"32,7": {
 					"electrified": false,
@@ -3706,15 +3693,15 @@
 					"trackID": "Rem_It3"
 				},
 				"33,11": {
-					"id": "semaphore3",
-					"semaphoreAllowSz": true,
-					"semaphoreAllowTrain": true,
-					"semaphoreID": "Rem_M1",
-					"trackID": "Rem_Iz41"
+					"id": "platformF",
+					"trackID": "Rem_It1"
 				},
 				"33,12": {
 					"electrified": false,
-					"id": "curve2",
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm113",
+					"semaphoreType": 1,
 					"trackID": "Rem_Iz41"
 				},
 				"33,8": {
@@ -3734,9 +3721,12 @@
 					"trackID": "Rem_It3"
 				},
 				"34,11": {
-					"id": "switchL3",
-					"maxSpeedPlus": 40,
-					"switchID": "Rem_41",
+					"id": "platformF",
+					"trackID": "Rem_It1"
+				},
+				"34,12": {
+					"electrified": false,
+					"id": "derailer3",
 					"trackID": "Rem_Iz41"
 				},
 				"34,8": {
@@ -3756,10 +3746,16 @@
 					"trackID": "Rem_Iz43"
 				},
 				"35,11": {
-					"id": "switchL7",
-					"maxSpeedPlus": 40,
-					"switchID": "Rem_42",
-					"trackID": "Rem_Iz42"
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_M1",
+					"trackID": "Rem_Iz41"
+				},
+				"35,12": {
+					"electrified": false,
+					"id": "curve2",
+					"trackID": "Rem_Iz41"
 				},
 				"35,8": {
 					"id": "semaphore3",
@@ -3778,19 +3774,17 @@
 					"trackID": "Rem_Iz46"
 				},
 				"36,10": {
-					"id": "switchL3",
-					"maxSpeedPlus": 40,
-					"switchID": "Rem_43",
+					"id": "track-",
 					"trackID": "Rem_Iz43"
 				},
 				"36,11": {
-					"id": "track-",
-					"trackID": "Rem_Iz42"
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_41",
+					"trackID": "Rem_Iz41"
 				},
 				"36,8": {
-					"id": "switchR7",
-					"maxSpeedPlus": 40,
-					"switchID": "Rem_44",
+					"id": "track-",
 					"trackID": "Rem_Iz44"
 				},
 				"36,9": {
@@ -3798,13 +3792,13 @@
 					"trackID": "Rem_Iz46"
 				},
 				"37,10": {
-					"id": "switchL7",
-					"maxSpeedPlus": 40,
-					"switchID": "Rem_45",
-					"trackID": "Rem_Iz45"
+					"id": "track-",
+					"trackID": "Rem_Iz43"
 				},
 				"37,11": {
-					"id": "track-",
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_42",
 					"trackID": "Rem_Iz42"
 				},
 				"37,8": {
@@ -3812,46 +3806,48 @@
 					"trackID": "Rem_Iz44"
 				},
 				"37,9": {
-					"id": "switchR3",
-					"maxSpeedPlus": 40,
-					"switchID": "Rem_46",
+					"id": "track-",
 					"trackID": "Rem_Iz46"
 				},
 				"38,10": {
-					"id": "track-",
-					"trackID": "Rem_Iz45"
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_43",
+					"trackID": "Rem_Iz43"
 				},
 				"38,11": {
 					"id": "track-",
 					"trackID": "Rem_Iz42"
 				},
 				"38,8": {
-					"id": "track-",
-					"trackID": "Rem_Iz53a"
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_44",
+					"trackID": "Rem_Iz44"
 				},
 				"38,9": {
-					"id": "switchL3",
-					"maxSpeedPlus": 40,
-					"switchID": "Rem_47",
-					"trackID": "Rem_Iz47"
+					"id": "track-",
+					"trackID": "Rem_Iz46"
 				},
 				"39,10": {
-					"id": "track-",
-					"trackID": "Rem_Iz50"
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_45",
+					"trackID": "Rem_Iz45"
 				},
 				"39,11": {
 					"id": "track-",
-					"trackID": "Rem_Iz54"
+					"trackID": "Rem_Iz42"
 				},
 				"39,8": {
 					"id": "track-",
-					"trackID": "Rem_Iz53a"
+					"trackID": "Rem_Iz44"
 				},
 				"39,9": {
-					"id": "switchR7",
+					"id": "switchR3",
 					"maxSpeedPlus": 40,
-					"switchID": "Rem_48",
-					"trackID": "Rem_Iz48"
+					"switchID": "Rem_46",
+					"trackID": "Rem_Iz46"
 				},
 				"4,10": {
 					"id": "track-",
@@ -3880,228 +3876,206 @@
 					"trackID": "Rem_Iz9"
 				},
 				"40,10": {
-					"id": "switchR3",
-					"maxSpeedPlus": 40,
-					"switchID": "Rem_50",
-					"trackID": "Rem_Iz50"
+					"id": "track-",
+					"trackID": "Rem_Iz45"
 				},
 				"40,11": {
 					"id": "track-",
-					"trackID": "Rem_Iz54"
-				},
-				"40,7": {
-					"electrified": false,
-					"id": "buffer3"
+					"trackID": "Rem_Iz42"
 				},
 				"40,8": {
-					"id": "switchL7",
-					"maxSpeedPlus": 80,
-					"switchID": "Rem_53a",
+					"id": "track-",
 					"trackID": "Rem_Iz53a"
 				},
 				"40,9": {
-					"id": "switchL7",
-					"maxSpeedPlus": 80,
-					"switchID": "Rem_49",
-					"trackID": "Rem_Iz49"
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_47",
+					"trackID": "Rem_Iz47"
 				},
 				"41,10": {
-					"id": "switchR7",
-					"maxSpeedPlus": 40,
-					"switchID": "Rem_52",
-					"trackID": "Rem_Iz52"
+					"id": "track-",
+					"trackID": "Rem_Iz50"
 				},
 				"41,11": {
 					"id": "track-",
 					"trackID": "Rem_Iz54"
 				},
-				"41,7": {
+				"41,8": {
+					"id": "track-",
+					"trackID": "Rem_Iz53a"
+				},
+				"41,9": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_48",
+					"trackID": "Rem_Iz48"
+				},
+				"42,10": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_50",
+					"trackID": "Rem_Iz50"
+				},
+				"42,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz54"
+				},
+				"42,7": {
+					"electrified": false,
+					"id": "buffer3"
+				},
+				"42,8": {
+					"id": "switchL7",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_53a",
+					"trackID": "Rem_Iz53a"
+				},
+				"42,9": {
+					"id": "switchL7",
+					"maxSpeedPlus": 80,
+					"switchID": "Rem_49",
+					"trackID": "Rem_Iz49"
+				},
+				"43,10": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Rem_52",
+					"trackID": "Rem_Iz52"
+				},
+				"43,11": {
+					"id": "track-",
+					"trackID": "Rem_Iz54"
+				},
+				"43,7": {
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
 					"switchID": "Rem_54a",
 					"trackID": "Rem_Iz54a"
 				},
-				"41,8": {
+				"43,8": {
 					"id": "switchL3",
 					"maxSpeedPlus": 80,
 					"switchID": "Rem_51",
 					"trackID": "Rem_Iz51"
 				},
-				"41,9": {
+				"43,9": {
 					"id": "derailer7",
 					"trackID": "Rem_Iz49"
 				},
-				"42,10": {
+				"44,10": {
 					"id": "track-",
 					"trackID": "Rem_Iz52"
 				},
-				"42,11": {
+				"44,11": {
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Rem_54",
 					"trackID": "Rem_Iz54"
 				},
-				"42,7": {
+				"44,7": {
 					"id": "track-",
 					"trackID": "Rem_Iz54a"
 				},
-				"42,8": {
+				"44,8": {
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "Rem_z1034",
 					"trackID": "Rem_Iz53"
 				},
-				"42,9": {
+				"44,9": {
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Rem_Tm20",
 					"semaphoreType": 1,
 					"trackID": "Rem_Iz49"
 				},
-				"43,10": {
+				"45,10": {
 					"id": "track-",
 					"trackID": "Rem_Iz56b"
 				},
-				"43,11": {
+				"45,11": {
 					"id": "track-",
 					"trackID": "Rem_Iz56"
 				},
-				"43,7": {
+				"45,7": {
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Rem_55",
 					"trackID": "Rem_Iz55"
 				},
-				"43,8": {
+				"45,8": {
 					"id": "track-",
 					"trackID": "Rem_ItT"
 				},
-				"43,9": {
+				"45,9": {
 					"id": "platformP",
 					"shuntTarget": true,
 					"trackID": "Rem_It20"
 				},
-				"44,10": {
+				"46,10": {
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "Rem_56b",
 					"trackID": "Rem_Iz56b"
 				},
-				"44,11": {
+				"46,11": {
 					"id": "switchL7",
 					"maxSpeedPlus": 80,
 					"switchFlip": true,
 					"switchID": "Rem_z1026",
 					"trackID": "Rem_Iz56"
 				},
-				"44,12": {
+				"46,12": {
 					"electrified": false,
 					"id": "buffer2"
 				},
-				"44,7": {
+				"46,7": {
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "Rem_58",
 					"trackID": "Rem_Iz58"
 				},
-				"44,8": {
+				"46,8": {
 					"id": "track-",
 					"trackID": "Rem_ItT"
 				},
-				"44,9": {
+				"46,9": {
 					"id": "buffer7",
 					"trackID": "Rem_It20"
 				},
-				"45,10": {
+				"47,10": {
 					"id": "switchL3",
 					"maxSpeedPlus": 80,
 					"switchFlip": true,
 					"switchID": "Rem_56a",
 					"trackID": "Rem_Iz56a"
 				},
-				"45,11": {
+				"47,11": {
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Rem_57",
 					"trackID": "Rem_Iz57"
 				},
-				"45,6": {
+				"47,6": {
 					"electrified": false,
 					"id": "curve6",
 					"trackID": "Rem_Iz58"
 				},
-				"45,7": {
+				"47,7": {
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Rem_59",
 					"trackID": "Rem_Iz59"
 				},
-				"45,8": {
+				"47,8": {
 					"id": "curve7",
 					"trackID": "Rem_ItT"
 				},
-				"45,9": {
+				"47,9": {
 					"electrified": false,
 					"id": "buffer6"
-				},
-				"46,10": {
-					"id": "track-",
-					"trackID": "Rem_ItS"
-				},
-				"46,11": {
-					"id": "track-",
-					"trackID": "Rem_ItR"
-				},
-				"46,6": {
-					"electrified": false,
-					"id": "derailer7",
-					"trackID": "Rem_Iz58"
-				},
-				"46,7": {
-					"id": "track-",
-					"trackID": "Rem_ItW"
-				},
-				"46,8": {
-					"electrified": false,
-					"id": "curve3",
-					"trackID": "Rem_Iz59"
-				},
-				"46,9": {
-					"id": "curve3",
-					"trackID": "Rem_ItT"
-				},
-				"47,10": {
-					"id": "track-",
-					"trackID": "Rem_ItS"
-				},
-				"47,11": {
-					"id": "track-",
-					"trackID": "Rem_ItR"
-				},
-				"47,6": {
-					"electrified": false,
-					"id": "semaphore7",
-					"semaphoreAllowShunt": true,
-					"semaphoreID": "Rem_Tm111",
-					"semaphoreType": 1,
-					"trackID": "Rem_Iz58"
-				},
-				"47,7": {
-					"id": "semaphore3",
-					"semaphoreAllowSz": true,
-					"semaphoreAllowTrain": true,
-					"semaphoreID": "Rem_P2",
-					"trackID": "Rem_ItP2"
-				},
-				"47,8": {
-					"electrified": false,
-					"id": "derailer7",
-					"trackID": "Rem_Iz59"
-				},
-				"47,9": {
-					"id": "track-",
-					"trackID": "Rem_ItT"
 				},
 				"48,10": {
 					"id": "track-",
@@ -4113,19 +4087,20 @@
 				},
 				"48,6": {
 					"electrified": false,
-					"id": "track-"
+					"id": "derailer7",
+					"trackID": "Rem_Iz58"
 				},
 				"48,7": {
 					"id": "track-",
-					"trackID": "Rem_ItP2"
+					"trackID": "Rem_ItW"
 				},
 				"48,8": {
 					"electrified": false,
-					"id": "track-",
+					"id": "curve3",
 					"trackID": "Rem_Iz59"
 				},
 				"48,9": {
-					"id": "track-",
+					"id": "curve3",
 					"trackID": "Rem_ItT"
 				},
 				"49,10": {
@@ -4138,21 +4113,22 @@
 				},
 				"49,6": {
 					"electrified": false,
-					"id": "track-"
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm111",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz58"
 				},
 				"49,7": {
-					"id": "semaphore7",
+					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
-					"semaphoreID": "Rem_W",
+					"semaphoreID": "Rem_P2",
 					"trackID": "Rem_ItP2"
 				},
 				"49,8": {
 					"electrified": false,
-					"id": "semaphore7",
-					"semaphoreAllowShunt": true,
-					"semaphoreID": "Rem_Tm112",
-					"semaphoreType": 1,
+					"id": "derailer7",
 					"trackID": "Rem_Iz59"
 				},
 				"49,9": {
@@ -4192,10 +4168,7 @@
 					"trackID": "Rem_ItS"
 				},
 				"50,11": {
-					"id": "semaphore7",
-					"semaphoreAllowSz": true,
-					"semaphoreAllowTrain": true,
-					"semaphoreID": "Rem_R",
+					"id": "track-",
 					"trackID": "Rem_ItR"
 				},
 				"50,6": {
@@ -4204,29 +4177,24 @@
 				},
 				"50,7": {
 					"id": "track-",
-					"trackID": "Rem_ItZ",
-					"trainTarget": true
+					"trackID": "Rem_ItP2"
 				},
 				"50,8": {
 					"electrified": false,
-					"id": "track-"
+					"id": "track-",
+					"trackID": "Rem_Iz59"
 				},
 				"50,9": {
 					"id": "track-",
 					"trackID": "Rem_ItT"
 				},
 				"51,10": {
-					"id": "semaphore7",
-					"semaphoreAllowSz": true,
-					"semaphoreAllowTrain": true,
-					"semaphoreID": "Rem_S",
+					"id": "track-",
 					"trackID": "Rem_ItS"
 				},
 				"51,11": {
-					"id": "semaphore3",
-					"semaphoreAllowSz": true,
-					"semaphoreAllowTrain": true,
-					"semaphoreID": "Rem_P1"
+					"id": "track-",
+					"trackID": "Rem_ItR"
 				},
 				"51,6": {
 					"electrified": false,
@@ -4236,44 +4204,108 @@
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
-					"semaphoreID": "Rem_Z",
-					"trackID": "Rem_ItZ"
+					"semaphoreID": "Rem_W",
+					"trackID": "Rem_ItP2"
 				},
 				"51,8": {
 					"electrified": false,
-					"id": "track-"
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Rem_Tm112",
+					"semaphoreType": 1,
+					"trackID": "Rem_Iz59"
 				},
 				"51,9": {
+					"id": "track-",
+					"trackID": "Rem_ItT"
+				},
+				"52,10": {
+					"id": "track-",
+					"trackID": "Rem_ItS"
+				},
+				"52,11": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_R",
+					"trackID": "Rem_ItR"
+				},
+				"52,6": {
+					"electrified": false,
+					"id": "track-"
+				},
+				"52,7": {
+					"id": "track-",
+					"trackID": "Rem_ItZ",
+					"trainTarget": true
+				},
+				"52,8": {
+					"electrified": false,
+					"id": "track-"
+				},
+				"52,9": {
+					"id": "track-",
+					"trackID": "Rem_ItT"
+				},
+				"53,10": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_S",
+					"trackID": "Rem_ItS"
+				},
+				"53,11": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_P1"
+				},
+				"53,6": {
+					"electrified": false,
+					"id": "track-"
+				},
+				"53,7": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Rem_Z",
+					"trackID": "Rem_ItZ"
+				},
+				"53,8": {
+					"electrified": false,
+					"id": "track-"
+				},
+				"53,9": {
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Rem_T",
 					"trackID": "Rem_ItT"
 				},
-				"52,10": {
+				"54,10": {
 					"id": "arrow3",
 					"trainTarget": true
 				},
-				"52,11": {
+				"54,11": {
 					"id": "arrow3",
 					"trainTarget": true
 				},
-				"52,6": {
+				"54,6": {
 					"electrified": false,
 					"id": "arrow-",
 					"shuntTarget": true
 				},
-				"52,7": {
+				"54,7": {
 					"id": "arrow7",
 					"targetW24": true,
 					"trainTarget": true
 				},
-				"52,8": {
+				"54,8": {
 					"electrified": false,
 					"id": "arrow-",
 					"shuntTarget": true
 				},
-				"52,9": {
+				"54,9": {
 					"id": "arrow7",
 					"targetW24": true,
 					"trainTarget": true
@@ -4377,7 +4409,7 @@
 					"trackID": "Rem_Iz10"
 				}
 			},
-			"w": 53
+			"w": 55
 		},
 		{
 			"h": 6,
