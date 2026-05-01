@@ -532,7 +532,7 @@ function Tile:serialize()
 		switchFlip = self.switchFlip or nil,
 		switchFlipABCD = self.switchFlipABCD or nil,
 		semaphoreID = self.semaphoreID,
-		semaphoreType = self.semaphoreID and (self.semaphoreType ~= SemaphoreType.SEM and self.semaphoreType or nil) or nil,
+		semaphoreType = self:isSemaphore() and (self.semaphoreType ~= SemaphoreType.SEM and self.semaphoreType or nil) or nil,
 		semaphoreAllowTrain = self.semaphoreAllowTrain or nil,
 		semaphoreAllowShunt = self.semaphoreAllowShunt or nil,
 		semaphoreAllowSz = self.semaphoreAllowSz or nil,
