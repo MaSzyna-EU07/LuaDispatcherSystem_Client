@@ -435,6 +435,19 @@ function utils.tableShuffle(t)
 	end
 end
 
+---Returns true if all values of keys in table `t` match values of keys in table `e`.
+---@param t table The table to be checked against.
+---@param e table The table specifying the requirements for table `t` to pass.
+---@return boolean
+function utils.tableMatch(t, e)
+	for k, v in pairs(e) do
+		if t[k] ~= v then
+			return false
+		end
+	end
+	return true
+end
+
 ---Returns the amount of all keys in table `t`.
 ---@param t table The table of which the keys will be counted.
 ---@return integer

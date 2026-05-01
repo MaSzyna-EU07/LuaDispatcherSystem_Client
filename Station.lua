@@ -32,6 +32,7 @@ function Station:new(name, shortcut)
 
 	self.hoverX, self.hoverY = nil, nil
 	self.hoverPartX, self.hoverPartY = nil, nil
+	self.hoverLineX, self.hoverLineY = nil, nil
 	---@type Tile[]
 	self.selectedTiles = {}
 	self.dragX, self.dragY = nil, nil
@@ -55,9 +56,13 @@ end
 function Station:update(dt)
 	self.hoverX, self.hoverY = nil, nil
 	self.hoverPartX, self.hoverPartY = nil, nil
+	self.hoverLineX, self.hoverLineY = nil, nil
 	if not _UI:isMouseInUI() then
 		self.hoverX, self.hoverY = self:posToCoords(_MouseX, _MouseY)
 		self.hoverPartX, self.hoverPartY = self:posToPartCoords(_MouseX, _MouseY)
+		if self.hoverX and self.hoverY and self.hoverPartX and self.hoverPartY then
+			self.hoverLineX, self.hoverLineY = self.hoverX + math.floor(self.hoverPartX * 2), self.hoverY + math.floor(self.hoverPartY * 2)
+		end
 	end
 end
 
@@ -366,19 +371,14 @@ function Station:handleLeftClick()
 	if self.hoverX and self.hoverY then
 		if not _Picker.mode then
 			local tile = Tile(self, self.hoverX, self.hoverY)
-			tile.id = _Picker.selection
-			tile.electrified = _Picker.electrified
+			_Picker:augmentTile(tile)
 			self:setTile(self.hoverX, self.hoverY, tile)
 			self:markUnsaved()
 		elseif _Picker.mode == "addColumn" then
-			-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
-			local hx = self.hoverX + math.floor(self.hoverPartX * 2)
-			self:addColumn(hx)
+			self:addColumn(self.hoverLineX)
 			self:markUnsaved()
 		elseif _Picker.mode == "addRow" then
-			-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
-			local hy = self.hoverY + math.floor(self.hoverPartY * 2)
-			self:addRow(hy)
+			self:addRow(self.hoverLineY)
 			self:markUnsaved()
 		elseif _Picker.mode == "delColumn" then
 			self:deleteColumn(self.hoverX)
@@ -506,10 +506,7 @@ function Station:handleMiddleClick()
 	-- Middle click: tile pick
 	local tile = self:getHoveredTile()
 	if tile then
-		_Picker.mode = nil
-		_Picker.selection = tile.id
-		-- TODO: Checkbox state is not updated.
-		_Picker.electrified = tile.electrified
+		_Picker:pickTile(tile)
 	end
 end
 
@@ -627,20 +624,18 @@ function Station:drawHover()
 		local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
 		self:getHoveredTile():drawFrame(TileFrameColor.HOVER)
 		-- Draw tile ghost.
-		_DrawTile(x, y, _Picker.selection, _Picker.electrified, false, false, false, 0, "s1", 1, 0.5)
+		local category = _Picker:getSelectedCategory()
+		local image = category.display and category.display.image or "s1"
+		_DrawTile(x, y, _Picker:getSelectedTileID(), _Picker.electrified, false, false, false, 0, image, 1, 0.5)
 	elseif _Picker.mode == "addColumn" then
-		-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
-		local hx = self.hoverX + math.floor(self.hoverPartX * 2)
-		local x1, y1 = self:coordsToCanvasPos(hx, 1)
-		local x2, y2 = self:coordsToCanvasPos(hx, self.h + 1)
+		local x1, y1 = self:coordsToCanvasPos(self.hoverLineX, 1)
+		local x2, y2 = self:coordsToCanvasPos(self.hoverLineX, self.h + 1)
 		love.graphics.setColor(0, 1, 0)
 		love.graphics.setLineWidth(2)
 		love.graphics.line(x1, y1, x2, y2)
 	elseif _Picker.mode == "addRow" then
-		-- TODO: Make hovered horizontal/vertical lines discrete state instead of calculating it everywhere!
-		local hy = self.hoverY + math.floor(self.hoverPartY * 2)
-		local x1, y1 = self:coordsToCanvasPos(1, hy)
-		local x2, y2 = self:coordsToCanvasPos(self.w + 1, hy)
+		local x1, y1 = self:coordsToCanvasPos(1, self.hoverLineY)
+		local x2, y2 = self:coordsToCanvasPos(self.w + 1, self.hoverLineY)
 		love.graphics.setColor(0, 1, 0)
 		love.graphics.setLineWidth(2)
 		love.graphics.line(x1, y1, x2, y2)

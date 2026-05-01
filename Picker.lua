@@ -7,28 +7,34 @@ local Picker = Class:derive("Picker")
 function Picker:new()
     self.x, self.y = 20, 500
     self.margin = 10
-	self.tiles = {"", "track-", "track+", "platformP", "platformF", "curve3", "switchL3", "switchR3", "switchD2", "switchW6", "switchT6", "buffer7", "derailer3", "semaphore3", "arrow7", "arrow3", "arrow-", "loco", "square", "letterA"}
+	---@alias TileCategory {tiles: string[], startIndex: integer?, display: {image: string?}, properties: table<string, any>?}
+	---@type TileCategory[]
+	self.tileCategories = {
+		{tiles = {""}},
+		{tiles = {"track-", "track\\", "track|", "track/"}},
+		{tiles = {"track+", "trackX"}},
+		{tiles = {"platformP"}},
+		{tiles = {"platformF"}},
+		{tiles = {"curve1", "curve2", "curve3", "curve4", "curve5", "curve6", "curve7", "curve8"}, startIndex = 3},
+		{tiles = {"switchL1", "switchL2", "switchL3", "switchL4", "switchL5", "switchL6", "switchL7", "switchL8"}, startIndex = 3, properties = {maxSpeedPlus = 40}},
+		{tiles = {"switchR1", "switchR2", "switchR3", "switchR4", "switchR5", "switchR6", "switchR7", "switchR8"}, startIndex = 3, properties = {maxSpeedPlus = 40}},
+		{tiles = {"switchD1", "switchD2", "switchD3", "switchD4"}, startIndex = 2, properties = {maxSpeedPlus = 40, maxSpeedMinus = 100}},
+		{tiles = {"switchW1", "switchW2", "switchW3", "switchW4", "switchW5", "switchW6", "switchW7", "switchW8"}, startIndex = 6, properties = {maxSpeedPlus = 40, maxSpeedMinus = 40}},
+		{tiles = {"buffer1", "buffer2", "buffer3", "buffer4", "buffer5", "buffer6", "buffer7", "buffer8"}, startIndex = 7},
+		{tiles = {"derailer1", "derailer2", "derailer3", "derailer4", "derailer5", "derailer6", "derailer7", "derailer8"}, startIndex = 3},
+		{tiles = {"semaphore1", "semaphore2", "semaphore3", "semaphore4", "semaphore5", "semaphore6", "semaphore7", "semaphore8"}, startIndex = 3, display = {image = "s1"}, properties = {semaphoreType = SemaphoreType.SEM}},
+		{tiles = {"semaphore1", "semaphore2", "semaphore3", "semaphore4", "semaphore5", "semaphore6", "semaphore7", "semaphore8"}, startIndex = 3, display = {image = "ms1"}, properties = {semaphoreType = SemaphoreType.TM}},
+		{tiles = {"arrow3", "arrow7", "arrow-"}, startIndex = 3},
+		{tiles = {"loco"}},
+		{tiles = {"square"}},
+		{tiles = {"letterA", "letterĄ", "letterB", "letterC", "letterĆ", "letterD", "letterE", "letterĘ", "letterF", "letterG", "letterH", "letterI", "letterJ", "letterK", "letterL", "letterŁ", "letterM", "letterN", "letterŃ", "letterO", "letterÓ", "letterP", "letterQ", "letterR", "letterS", "letterŚ", "letterT", "letterU", "letterV", "letterW", "letterX", "letterY", "letterZ", "letterŹ", "letterŻ"}}
+	}
     self.tileScale = 2
     self.tileMargin = 2
 
     self.tileSize = self.tileScale * 14 + self.tileMargin * 2
     self.boxX, self.boxY = self.x - self.margin, self.y - self.margin
-    self.boxW, self.boxH = #self.tiles * self.tileSize + self.margin * 2, self.tileSize + self.margin * 2
-	self.tmpRot = {
-		{"track-", "track\\", "track|", "track/"},
-		{"track+", "trackX"},
-		{"curve1", "curve2", "curve3", "curve4", "curve5", "curve6", "curve7", "curve8"},
-		{"switchL1", "switchL2", "switchL3", "switchL4", "switchL5", "switchL6", "switchL7", "switchL8"},
-		{"switchR1", "switchR2", "switchR3", "switchR4", "switchR5", "switchR6", "switchR7", "switchR8"},
-		{"switchD1", "switchD2", "switchD3", "switchD4"},
-		{"switchW1", "switchW2", "switchW3", "switchW4", "switchW5", "switchW6", "switchW7", "switchW8"},
-		{"switchT1", "switchT2", "switchT3", "switchT4", "switchT5", "switchT6", "switchT7", "switchT8"},
-		{"buffer1", "buffer2", "buffer3", "buffer4", "buffer5", "buffer6", "buffer7", "buffer8"},
-		{"derailer1", "derailer2", "derailer3", "derailer4", "derailer5", "derailer6", "derailer7", "derailer8"},
-		{"semaphore1", "semaphore2", "semaphore3", "semaphore4", "semaphore5", "semaphore6", "semaphore7", "semaphore8"},
-		{"arrow3", "arrow7", "arrow-"},
-		{"letterA", "letterĄ", "letterB", "letterC", "letterĆ", "letterD", "letterE", "letterĘ", "letterF", "letterG", "letterH", "letterI", "letterJ", "letterK", "letterL", "letterŁ", "letterM", "letterN", "letterŃ", "letterO", "letterÓ", "letterP", "letterQ", "letterR", "letterS", "letterŚ", "letterT", "letterU", "letterV", "letterW", "letterX", "letterY", "letterZ", "letterŹ", "letterŻ"}
-	}
+    self.boxW, self.boxH = #self.tileCategories * self.tileSize + self.margin * 2, self.tileSize + self.margin * 2
 	self.tmpFlip = {
 		["switchL1"] = "switchR1", ["switchR1"] = "switchL1",
 		["switchL2"] = "switchR2", ["switchR2"] = "switchL2",
@@ -51,14 +57,14 @@ function Picker:new()
 		--{x = 290, y = 700, tileX = 9, action = "deelectrify"}
 	}
 
-	self.mode = nil
-	---@type string
-    self.selection = ""
-	self.selectionV = 0
-	self.modeHover = nil
+	-- If `nil`, a tile is selected in the picker. Otherwise, a button is pressed, indicating a mode.
 	---@type string?
-    self.hover = nil
-	self.hoverV = nil
+	self.mode = nil
+
+	self.selectedTileCategory = 1
+	self.selectedTileOrientation = 1
+	self.modeHover = nil
+	self.hoveredTileCategory = nil
 
     self.electrified = true
 	self.highlightMode = TileHighlightMode.TRACK
@@ -70,16 +76,12 @@ end
 
 function Picker:update(dt)
 	self.modeHover = nil
-	self.hover = nil
-	self.hoverV = nil
+	self.hoveredTileCategory = nil
 	if _Utils.isPointInsideBox(_MouseX, _MouseY, self.boxX, self.boxY, self.boxW, self.boxH) and not _UI:isMouseInUI() then
-		self.hover = ""
-		self.hoverV = 0
-		for i = 1, #self.tiles do
+		for i = 1, #self.tileCategories do
 			local x, y = self:getTilePos(i)
 			if _Utils.isPointInsideBox(_MouseX, _MouseY, x, y, self.tileSize, self.tileSize) then
-				self.hover = self.tiles[i]
-				self.hoverV = i
+				self.hoveredTileCategory = i
 				break
 			end
 		end
@@ -91,51 +93,106 @@ function Picker:update(dt)
 	end
 end
 
-function Picker:tmpRotateSelection(notches)
+---Rotates the currently selected tile by the selected amount.
+---@param notches integer Number of rotations.
+function Picker:rotateSelection(notches)
 	if self.mode then
 		return
 	end
-	local groupMember = nil
-	local groupMemberN = nil
-	for i, group in ipairs(self.tmpRot) do
-		for j, tileID in ipairs(group) do
-			if self.selection == tileID then
-				groupMember = group
-				groupMemberN = j
-				break
-			end
-		end
-		if groupMember then
-			break
-		end
-	end
-	if not groupMember or not groupMemberN then
-		return
-	end
-	local newMemberN = (groupMemberN + notches - 1) % #groupMember + 1
-	self.selection = groupMember[newMemberN]
+	local orientationCount = #self.tileCategories[self.selectedTileCategory].tiles
+	self.selectedTileOrientation = (self.selectedTileOrientation + notches - 1) % orientationCount + 1
 end
 
+---Flips the currently selected tile.
 function Picker:flipSelection()
 	if self.mode then
 		return
 	end
-	self.selection = self.tmpFlip[self.selection] or self.selection
+	local newID = self.tmpFlip[self:getSelectedTileID()]
+	if not newID then
+		-- The tile is not flippable.
+		return
+	end
+	local category, orientation = self:findTileCategory(newID)
+	if not category or not orientation then
+		-- This should never happen, but abort in case our flip table points to a nonexistent tile ID.
+		return
+	end
+	self.selectedTileCategory, self.selectedTileOrientation = category, orientation
+end
+
+---Returns the currently selected tile category.
+---@return TileCategory
+function Picker:getSelectedCategory()
+	return self.tileCategories[self.selectedTileCategory]
+end
+
+---Returns the tile ID which is currently selected in the picker.
+---@return string
+function Picker:getSelectedTileID()
+	return self.tileCategories[self.selectedTileCategory].tiles[self.selectedTileOrientation]
+end
+
+---Returns the picker tile category index and orientation for the given tile ID, or `nil` if no category fits the tile ID.
+---@param id string The tile ID to be checked.
+---@param properties table<string, any>? If specified, a category matching the properties will be found. If no exact match is found, the search falls back to an unparametred one.
+---@return integer?, integer?
+function Picker:findTileCategory(id, properties)
+	for i, category in ipairs(self.tileCategories) do
+		for j, tileID in ipairs(category.tiles) do
+			if id == tileID and (not properties or _Utils.tableMatch(category.properties, properties)) then
+				return i, j
+			end
+		end
+	end
+	if properties then
+		-- Fall back.
+		return self:findTileCategory(id)
+	end
+end
+
+---Pick blocks the specified tile.
+---@param tile Tile The tile to be picked.
+function Picker:pickTile(tile)
+	local category, orientation = self:findTileCategory(tile.id, tile:isSemaphore() and {semaphoreType = tile.semaphoreType} or nil)
+	if not category or not orientation then
+		-- This tile is not pick blockable... Wait, is that ever supposed to happen?
+		return
+	end
+	self.mode = nil
+	self.selectedTileCategory, self.selectedTileOrientation = category, orientation
+	self.electrified = tile.electrified
+	_UI.pickerPane.electrified.value = tile.electrified
+end
+
+---Augments the provided tile with the selection. Sets the tile ID, electrified, and any special properties.
+---@param tile Tile The tile to be augmented.
+function Picker:augmentTile(tile)
+	tile.id = self:getSelectedTileID()
+	tile.electrified = self.electrified
+	local properties = self.tileCategories[self.selectedTileCategory].properties
+	if properties then
+		for k, v in pairs(properties) do
+			tile[k] = v
+		end
+	end
 end
 
 function Picker:draw()
 	love.graphics.setColor(0, 0, 1)
 	love.graphics.rectangle("fill", self.boxX, self.boxY, self.boxW, self.boxH)
-	for i = 1, #self.tiles do
+	for i = 1, #self.tileCategories do
 		local x, y = self:getTilePos(i)
-		if self.selectionV == i then
+		if self.selectedTileCategory == i and not self.mode then
 			love.graphics.setColor(1, 1, 1)
 			love.graphics.rectangle("fill", x, y, self.tileSize, self.tileSize)
-		elseif self.hoverV == i then
+		elseif self.hoveredTileCategory == i then
 			love.graphics.setColor(0, 1, 1)
 			love.graphics.rectangle("fill", x, y, self.tileSize, self.tileSize)
 		end
-		if self.tiles[i] == "" then
+		local category = self.tileCategories[i]
+		local categoryTile = category.tiles[category.startIndex or 1]
+		if categoryTile == "" then
 			local tx, ty = x + self.tileMargin * self.tileScale, y + self.tileMargin * self.tileScale
 			local size = self.tileSize - self.tileMargin * self.tileScale * 2
 			love.graphics.setColor(0.4, 0.4, 0.4)
@@ -144,7 +201,8 @@ function Picker:draw()
 			love.graphics.setLineWidth(2)
 			love.graphics.rectangle("line", tx, ty, size, size)
 		else
-			_DrawTile(x + self.tileMargin, y + self.tileMargin, self.tiles[i], _Picker.electrified, false, false, false, 0, "s1", self.tileScale)
+			local image = category.display and category.display.image
+			_DrawTile(x + self.tileMargin, y + self.tileMargin, categoryTile, _Picker.electrified, false, false, false, 0, image, self.tileScale)
 		end
 	end
 
@@ -190,19 +248,18 @@ end
 
 function Picker:mousepressed(x, y, button)
 	if button == 1 then
-		if self.hover then
+		if self.hoveredTileCategory then
 			self.mode = nil
-			self.selection = self.hover
-			self.selectionV = self.hoverV
+			self.selectedTileCategory = self.hoveredTileCategory
+			self.selectedTileOrientation = self.tileCategories[self.hoveredTileCategory].startIndex or 1
 		elseif self.modeHover then
 			self.mode = self.modeHover
-			self.selectionV = nil
 		end
 	end
 end
 
 function Picker:wheelmoved(x, y)
-	self:tmpRotateSelection(-y)
+	self:rotateSelection(-y)
 end
 
 return Picker
