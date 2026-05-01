@@ -84,6 +84,12 @@ function Tile:isExitPoint()
 	return self:getData().exit ~= nil
 end
 
+---Returns whether this Tile is a buffer.
+---@return boolean
+function Tile:isBuffer()
+	return self:getData().buffer ~= nil
+end
+
 --######################################--
 ---------------- L O G I C ---------------
 --######################################--
@@ -173,6 +179,28 @@ function Tile:getNextTrackDirection(sourceDir)
 			return i
 		end
 	end
+end
+
+---Returns `true` if this Tile is behind a switch which is switched the other way and shares the track ID with this Tile. 
+---@param sourceDir integer? If specified, only the directions coming from the specified direction will be considered.
+---@return boolean
+function Tile:isDimmedBySwitch(sourceDir)
+	if not self.trackID then
+		return false
+	end
+	local dirs = sourceDir and self:getPossibleTrackDirections(sourceDir) or self:getTrackDirections()
+	for i, dir in ipairs(dirs) do
+		local tile = self:getNeighbor(dir)
+		if tile and tile.trackID == self.trackID then
+			local invDir = _InvertDir(dir)
+			if tile:isSwitch() and not tile:hasTraversibleTrackInDirection(invDir) then
+				return true -- Direct check
+			elseif tile:isDimmedBySwitch(invDir) then
+				return true -- Indirect check
+			end
+		end
+	end
+	return false
 end
 
 ---Returns whether this Tile is a target for the specified path mode.
@@ -456,7 +484,12 @@ function Tile:draw()
 			end
 		end
 	end
-	_DrawTile(x + self.offset, y + self.offset, self.id, self.electrified, self:isTrackOccupied(), self:isTrackReserved(), self:isSwitchForced(), switchDimBits, self:getSemaphoreState())
+	local visible = not self:isDimmedBySwitch()
+	local occupied = visible and self:isTrackOccupied()
+	local reserved = visible and self:isTrackReserved()
+	local forced = self:isSwitchForced()
+	local semState = self:getSemaphoreState()
+	_DrawTile(x + self.offset, y + self.offset, self.id, self.electrified, occupied, reserved, forced, switchDimBits, semState)
 end
 
 ---Draws this Tile's background at the specified position.

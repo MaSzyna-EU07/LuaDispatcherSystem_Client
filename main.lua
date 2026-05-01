@@ -113,6 +113,9 @@ function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBi
 	if track.derailer then
 		_Tracks:drawTile(track.derailer, 7, x, y, scale)
 	end
+	if track.derailerL then
+		_Tracks:drawTile(track.derailerL, 8, x, y, scale)
+	end
 	-- Semaphore
 	if track.semaphore then
 		_Tracks:drawTile(track.semaphore, 4, x, y, scale)
@@ -162,12 +165,11 @@ function love.draw()
 	if station then
 		local tile = station:getHoveredTile()
 		love.graphics.setColor(1, 1, 1)
-		love.graphics.print("Hovered ID: " .. tostring(_Picker.hover), 0, 740)
-		love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 0, 760)
+		love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 0, 740)
 		if tile then
-			love.graphics.print(string.format("Hovered Tile: %s, %s (%s)", tile.x, tile.y, tile.id), 0, 780)
-			love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 0, 800)
-			love.graphics.print("Semaphore pointing: " .. tostring(tile:getSemaphoreDirection()), 0, 820)
+			love.graphics.print(string.format("Hovered Tile: %s, %s (%s)", tile.x, tile.y, tile.id), 0, 760)
+			love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 0, 780)
+			love.graphics.print("Semaphore pointing: " .. tostring(tile:getSemaphoreDirection()), 0, 800)
 		end
 	end
 end

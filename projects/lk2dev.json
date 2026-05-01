@@ -7,6 +7,7 @@
 		"Mia-Mrz": 5,
 		"Mrz": 3,
 		"Rem": 7,
+		"Sdl": 9,
 		"Sul": 6
 	},
 	"stations": [
@@ -3373,11 +3374,13 @@
 				},
 				"24,2": {
 					"electrified": false,
-					"id": "platformF"
+					"id": "platformF",
+					"trackID": "Rem_It102"
 				},
 				"24,3": {
 					"electrified": false,
-					"id": "platformF"
+					"id": "platformF",
+					"trackID": "Rem_It101"
 				},
 				"24,4": {
 					"electrified": false,
@@ -3415,12 +3418,14 @@
 				"25,2": {
 					"electrified": false,
 					"id": "platformF",
-					"shuntTarget": true
+					"shuntTarget": true,
+					"trackID": "Rem_It102"
 				},
 				"25,3": {
 					"electrified": false,
 					"id": "platformF",
-					"shuntTarget": true
+					"shuntTarget": true,
+					"trackID": "Rem_It101"
 				},
 				"25,4": {
 					"electrified": false,
@@ -3457,11 +3462,13 @@
 				},
 				"26,2": {
 					"electrified": false,
-					"id": "platformF"
+					"id": "platformF",
+					"trackID": "Rem_It102"
 				},
 				"26,3": {
 					"electrified": false,
-					"id": "platformF"
+					"id": "platformF",
+					"trackID": "Rem_It101"
 				},
 				"26,5": {
 					"id": "switchL4",
@@ -3493,11 +3500,13 @@
 				},
 				"27,2": {
 					"electrified": false,
-					"id": "buffer7"
+					"id": "buffer7",
+					"trackID": "Rem_It102"
 				},
 				"27,3": {
 					"electrified": false,
-					"id": "buffer7"
+					"id": "buffer7",
+					"trackID": "Rem_It101"
 				},
 				"27,6": {
 					"id": "switchL4",
@@ -3642,7 +3651,8 @@
 				"31,7": {
 					"electrified": false,
 					"id": "platformF",
-					"shuntTarget": true
+					"shuntTarget": true,
+					"trackID": "Rem_It18"
 				},
 				"31,8": {
 					"id": "semaphore7",
@@ -3677,7 +3687,8 @@
 				},
 				"32,7": {
 					"electrified": false,
-					"id": "buffer7"
+					"id": "buffer7",
+					"trackID": "Rem_It18"
 				},
 				"32,8": {
 					"id": "platformF",
@@ -4508,6 +4519,2057 @@
 				}
 			},
 			"w": 10
+		},
+		{
+			"h": 21,
+			"name": "Siedlce",
+			"shortcut": "Sdl",
+			"tiles": {
+				"10,10": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm201",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz207"
+				},
+				"10,11": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm203",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz206"
+				},
+				"10,12": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm205",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz205"
+				},
+				"10,13": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm207",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz205"
+				},
+				"10,7": {
+					"id": "track-"
+				},
+				"10,8": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_A",
+					"trackID": "Sdl_ItA"
+				},
+				"10,9": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_B",
+					"trackID": "Sdl_ItB"
+				},
+				"11,10": {
+					"id": "track-",
+					"trackID": "Sdl_Iz207"
+				},
+				"11,11": {
+					"id": "track-",
+					"trackID": "Sdl_Iz206"
+				},
+				"11,12": {
+					"id": "track-",
+					"trackID": "Sdl_Iz205"
+				},
+				"11,13": {
+					"id": "curve2",
+					"trackID": "Sdl_Iz205"
+				},
+				"11,7": {
+					"id": "track-"
+				},
+				"11,8": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_ItA"
+				},
+				"11,9": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_ItB"
+				},
+				"12,10": {
+					"id": "track-",
+					"trackID": "Sdl_Iz207"
+				},
+				"12,11": {
+					"id": "track-",
+					"trackID": "Sdl_Iz206"
+				},
+				"12,12": {
+					"id": "switchR2",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_205",
+					"trackID": "Sdl_Iz205"
+				},
+				"12,13": {
+					"id": "buffer3"
+				},
+				"12,14": {
+					"id": "buffer3"
+				},
+				"12,7": {
+					"id": "track-"
+				},
+				"12,8": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm1",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz1"
+				},
+				"12,9": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm2",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz2"
+				},
+				"13,10": {
+					"id": "track-",
+					"trackID": "Sdl_Iz207"
+				},
+				"13,11": {
+					"id": "switchR2",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_206",
+					"trackID": "Sdl_Iz206"
+				},
+				"13,13": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"13,14": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"13,7": {
+					"id": "track-"
+				},
+				"13,8": {
+					"id": "switchR7",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_1",
+					"trackID": "Sdl_Iz1"
+				},
+				"13,9": {
+					"id": "track-",
+					"trackID": "Sdl_Iz2"
+				},
+				"14,10": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_207",
+					"trackID": "Sdl_Iz207"
+				},
+				"14,13": {
+					"id": "curve2"
+				},
+				"14,14": {
+					"id": "curve2"
+				},
+				"14,7": {
+					"id": "track-"
+				},
+				"14,8": {
+					"id": "track-",
+					"trackID": "Sdl_Iz1"
+				},
+				"14,9": {
+					"id": "switchR3",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_2",
+					"trackID": "Sdl_Iz2"
+				},
+				"15,10": {
+					"id": "track-",
+					"trackID": "Sdl_Iz207"
+				},
+				"15,12": {
+					"id": "switchL2",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_208"
+				},
+				"15,13": {
+					"id": "curve1"
+				},
+				"15,7": {
+					"id": "track-"
+				},
+				"15,8": {
+					"id": "track-",
+					"trackID": "Sdl_Iz1"
+				},
+				"15,9": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_3",
+					"trackID": "Sdl_Iz3"
+				},
+				"16,10": {
+					"id": "track-",
+					"trackID": "Sdl_Iz209"
+				},
+				"16,11": {
+					"id": "semaphore2",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm209",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz209"
+				},
+				"16,7": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_C",
+					"trackID": "Sdl_ItC"
+				},
+				"16,8": {
+					"id": "track-",
+					"trackID": "Sdl_Iz5"
+				},
+				"16,9": {
+					"id": "switchL7",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_4",
+					"trackID": "Sdl_Iz4"
+				},
+				"17,10": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_209",
+					"trackID": "Sdl_Iz209"
+				},
+				"17,7": {
+					"id": "platformF",
+					"maxSpeed": 40,
+					"shuntTarget": true,
+					"trackID": "Sdl_ItC"
+				},
+				"17,8": {
+					"id": "switchL3",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_5",
+					"trackID": "Sdl_Iz5"
+				},
+				"17,9": {
+					"id": "track-",
+					"trackID": "Sdl_Iz4"
+				},
+				"18,10": {
+					"id": "derailer3",
+					"trackID": "Sdl_Iz11"
+				},
+				"18,7": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm209",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz7"
+				},
+				"18,8": {
+					"id": "switchL7",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_6",
+					"trackID": "Sdl_Iz6"
+				},
+				"18,9": {
+					"id": "switchR7",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_10",
+					"trackID": "Sdl_Iz10"
+				},
+				"19,10": {
+					"id": "switchR3",
+					"maxSpeedPlus": 60,
+					"switchFlip": true,
+					"switchID": "Sdl_11",
+					"trackID": "Sdl_Iz11"
+				},
+				"19,7": {
+					"id": "switchL3",
+					"maxSpeedPlus": 60,
+					"switchFlip": true,
+					"switchID": "Sdl_7",
+					"trackID": "Sdl_Iz7"
+				},
+				"19,8": {
+					"id": "track-",
+					"trackID": "Sdl_Iz6"
+				},
+				"19,9": {
+					"id": "track-",
+					"trackID": "Sdl_Iz10"
+				},
+				"2,7": {
+					"id": "arrow-",
+					"trainTarget": true
+				},
+				"2,8": {
+					"id": "arrow7",
+					"trainTarget": true
+				},
+				"2,9": {
+					"id": "arrow3",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"20,10": {
+					"id": "switchR7",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_12",
+					"trackID": "Sdl_Iz12"
+				},
+				"20,7": {
+					"id": "switchL7",
+					"maxSpeedPlus": 60,
+					"switchFlip": true,
+					"switchID": "Sdl_8",
+					"trackID": "Sdl_Iz8"
+				},
+				"20,8": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_G2",
+					"trackID": "Sdl_Iz6"
+				},
+				"20,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_F1",
+					"trackID": "Sdl_Iz10"
+				},
+				"21,10": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_F3",
+					"trackID": "Sdl_Iz12"
+				},
+				"21,11": {
+					"id": "curve3",
+					"trackID": "Sdl_Iz12"
+				},
+				"21,6": {
+					"id": "switchR6",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_9",
+					"trackID": "Sdl_Iz9"
+				},
+				"21,7": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_G4",
+					"trackID": "Sdl_Iz8"
+				},
+				"21,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2a"
+				},
+				"21,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1a"
+				},
+				"22,10": {
+					"id": "track-",
+					"trackID": "Sdl_It3"
+				},
+				"22,11": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_F5",
+					"trackID": "Sdl_Iz12"
+				},
+				"22,5": {
+					"id": "curve6",
+					"trackID": "Sdl_Iz9"
+				},
+				"22,6": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_G6",
+					"trackID": "Sdl_Iz9"
+				},
+				"22,7": {
+					"id": "track-",
+					"trackID": "Sdl_It4a"
+				},
+				"22,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2a"
+				},
+				"22,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1a"
+				},
+				"23,10": {
+					"id": "track-",
+					"trackID": "Sdl_It3"
+				},
+				"23,11": {
+					"id": "track-",
+					"trackID": "Sdl_It5a"
+				},
+				"23,5": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_G10",
+					"trackID": "Sdl_Iz9"
+				},
+				"23,6": {
+					"id": "track-",
+					"trackID": "Sdl_It6a"
+				},
+				"23,7": {
+					"id": "track-",
+					"trackID": "Sdl_It4a"
+				},
+				"23,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2a"
+				},
+				"23,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1a"
+				},
+				"24,10": {
+					"id": "platformP",
+					"trackID": "Sdl_It3"
+				},
+				"24,11": {
+					"id": "platformF",
+					"trackID": "Sdl_It5a"
+				},
+				"24,5": {
+					"id": "platformP",
+					"trackID": "Sdl_It10"
+				},
+				"24,6": {
+					"id": "platformF",
+					"trackID": "Sdl_It6a"
+				},
+				"24,7": {
+					"id": "platformP",
+					"trackID": "Sdl_It4a"
+				},
+				"24,8": {
+					"id": "platformP",
+					"trackID": "Sdl_It2a"
+				},
+				"24,9": {
+					"id": "platformP",
+					"trackID": "Sdl_It1a"
+				},
+				"25,10": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Sdl_It3",
+					"trainTarget": true
+				},
+				"25,11": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_It5a",
+					"trainTarget": true
+				},
+				"25,5": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Sdl_It10",
+					"trainTarget": true
+				},
+				"25,6": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_It6a",
+					"trainTarget": true
+				},
+				"25,7": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Sdl_It4a",
+					"trainTarget": true
+				},
+				"25,8": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Sdl_It2a",
+					"trainTarget": true
+				},
+				"25,9": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Sdl_It1a",
+					"trainTarget": true
+				},
+				"26,10": {
+					"id": "platformP",
+					"trackID": "Sdl_It3"
+				},
+				"26,11": {
+					"id": "platformF",
+					"trackID": "Sdl_It5a"
+				},
+				"26,13": {
+					"id": "loco"
+				},
+				"26,5": {
+					"id": "platformP",
+					"trackID": "Sdl_It10"
+				},
+				"26,6": {
+					"id": "platformF",
+					"trackID": "Sdl_It6a"
+				},
+				"26,7": {
+					"id": "platformP",
+					"trackID": "Sdl_It4a"
+				},
+				"26,8": {
+					"id": "platformP",
+					"trackID": "Sdl_It2a"
+				},
+				"26,9": {
+					"id": "platformP",
+					"trackID": "Sdl_It1a"
+				},
+				"27,10": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_J3",
+					"trackID": "Sdl_Iz19"
+				},
+				"27,11": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm21",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz13"
+				},
+				"27,12": {
+					"id": "curve6"
+				},
+				"27,13": {
+					"id": "curve7"
+				},
+				"27,5": {
+					"id": "buffer7",
+					"trackID": "Sdl_It10"
+				},
+				"27,6": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm6",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz15"
+				},
+				"27,7": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_K4",
+					"semaphoreShortSpeed": {
+						"60": 100
+					},
+					"trackID": "Sdl_Iz21"
+				},
+				"27,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2a"
+				},
+				"27,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1a"
+				},
+				"28,10": {
+					"id": "switchL7",
+					"maxSpeedPlus": 60,
+					"switchFlip": true,
+					"switchID": "Sdl_19",
+					"trackID": "Sdl_Iz19"
+				},
+				"28,11": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_13",
+					"trackID": "Sdl_Iz13"
+				},
+				"28,12": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm22",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz301"
+				},
+				"28,14": {
+					"id": "curve8"
+				},
+				"28,15": {
+					"id": "track|"
+				},
+				"28,16": {
+					"id": "curve4"
+				},
+				"28,6": {
+					"id": "switchL7",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_15",
+					"trackID": "Sdl_Iz15"
+				},
+				"28,7": {
+					"id": "switchR7",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_21",
+					"trackID": "Sdl_Iz21"
+				},
+				"28,8": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_K2",
+					"semaphoreShortSpeed": {
+						"60": 100
+					},
+					"trackID": "Sdl_Iz22"
+				},
+				"28,9": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_J1",
+					"trackID": "Sdl_Iz20"
+				},
+				"29,10": {
+					"id": "buffer7"
+				},
+				"29,11": {
+					"id": "switchR7",
+					"maxSpeedMinus": 60,
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_14",
+					"trackID": "Sdl_Iz14"
+				},
+				"29,12": {
+					"id": "switchL4",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_301",
+					"trackID": "Sdl_Iz301"
+				},
+				"29,17": {
+					"id": "switchL8",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_302"
+				},
+				"29,5": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "Sdl_16",
+					"trackID": "Sdl_Iz16"
+				},
+				"29,6": {
+					"id": "track-",
+					"trackID": "Sdl_Iz15"
+				},
+				"29,7": {
+					"id": "track-",
+					"trackID": "Sdl_Iz21"
+				},
+				"29,8": {
+					"id": "switchR3",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_22",
+					"trackID": "Sdl_Iz22"
+				},
+				"29,9": {
+					"id": "switchL3",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_20",
+					"trackID": "Sdl_Iz20"
+				},
+				"3,10": {
+					"id": "buffer3"
+				},
+				"3,12": {
+					"id": "buffer2"
+				},
+				"3,7": {
+					"id": "track-"
+				},
+				"3,8": {
+					"id": "track-"
+				},
+				"3,9": {
+					"id": "track-"
+				},
+				"30,11": {
+					"id": "track-",
+					"trackID": "Sdl_Iz14"
+				},
+				"30,12": {
+					"id": "curve3",
+					"trackID": "Sdl_Iz14"
+				},
+				"30,13": {
+					"id": "curve3",
+					"trackID": "Sdl_Iz301"
+				},
+				"30,17": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_303"
+				},
+				"30,18": {
+					"id": "curve3"
+				},
+				"30,4": {
+					"id": "switchDerR6",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_17",
+					"trackID": "Sdl_Iz17"
+				},
+				"30,5": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_N8",
+					"trackID": "Sdl_Iz16"
+				},
+				"30,6": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_N6",
+					"trackID": "Sdl_Iz15"
+				},
+				"30,7": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_L4",
+					"semaphoreShortSpeed": {
+						"0": 100
+					},
+					"trackID": "Sdl_Iz21"
+				},
+				"30,8": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_L2",
+					"semaphoreShortSpeed": {
+						"0": 100
+					},
+					"trackID": "Sdl_Iz22"
+				},
+				"30,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_L1",
+					"semaphoreShortSpeed": {
+						"0": 100
+					},
+					"trackID": "Sdl_Iz20"
+				},
+				"31,11": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_M5",
+					"semaphoreShortSpeed": {
+						"0": 40
+					},
+					"trackID": "Sdl_Iz14"
+				},
+				"31,12": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_M7",
+					"semaphoreShortSpeed": {
+						"0": 40
+					},
+					"trackID": "Sdl_Iz14"
+				},
+				"31,13": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm23",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz301"
+				},
+				"31,14": {
+					"id": "buffer3"
+				},
+				"31,15": {
+					"id": "buffer3"
+				},
+				"31,16": {
+					"id": "curve6"
+				},
+				"31,17": {
+					"id": "track-"
+				},
+				"31,18": {
+					"id": "track-"
+				},
+				"31,3": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_18",
+					"trackID": "Sdl_Iz18"
+				},
+				"31,4": {
+					"id": "track-",
+					"trackID": "Sdl_Iz17"
+				},
+				"31,5": {
+					"id": "track-",
+					"trackID": "Sdl_It8"
+				},
+				"31,6": {
+					"id": "track-",
+					"trackID": "Sdl_It6b"
+				},
+				"31,7": {
+					"id": "track-",
+					"trackID": "Sdl_It4b"
+				},
+				"31,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2b"
+				},
+				"31,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1b"
+				},
+				"32,11": {
+					"id": "track-",
+					"trackID": "Sdl_It5b"
+				},
+				"32,12": {
+					"id": "track-",
+					"trackID": "Sdl_It7"
+				},
+				"32,13": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Sdl_It101a"
+				},
+				"32,14": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"32,15": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"32,16": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"32,17": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"32,18": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"32,2": {
+					"id": "curve6",
+					"trackID": "Sdl_Iz18"
+				},
+				"32,3": {
+					"id": "track-",
+					"trackID": "Sdl_Iz18"
+				},
+				"32,4": {
+					"id": "track-",
+					"trackID": "Sdl_Iz17"
+				},
+				"32,5": {
+					"id": "track-",
+					"trackID": "Sdl_It8"
+				},
+				"32,6": {
+					"id": "track-",
+					"trackID": "Sdl_It6b"
+				},
+				"32,7": {
+					"id": "track-",
+					"trackID": "Sdl_It4b"
+				},
+				"32,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2b"
+				},
+				"32,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1b"
+				},
+				"33,11": {
+					"id": "track-",
+					"trackID": "Sdl_It5b"
+				},
+				"33,12": {
+					"id": "track-",
+					"trackID": "Sdl_It7"
+				},
+				"33,13": {
+					"id": "track-",
+					"trackID": "Sdl_Iz312"
+				},
+				"33,14": {
+					"id": "track-"
+				},
+				"33,15": {
+					"id": "track-"
+				},
+				"33,16": {
+					"id": "track-"
+				},
+				"33,17": {
+					"id": "curve2"
+				},
+				"33,18": {
+					"id": "track-"
+				},
+				"33,2": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm14",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz18"
+				},
+				"33,3": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm12",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz18"
+				},
+				"33,4": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm10",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz17"
+				},
+				"33,5": {
+					"id": "track-",
+					"trackID": "Sdl_It8"
+				},
+				"33,6": {
+					"id": "track-",
+					"trackID": "Sdl_It6b"
+				},
+				"33,7": {
+					"id": "track-",
+					"trackID": "Sdl_It4b"
+				},
+				"33,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2b"
+				},
+				"33,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1b"
+				},
+				"34,11": {
+					"id": "track-",
+					"trackID": "Sdl_It5b"
+				},
+				"34,12": {
+					"id": "track-",
+					"trackID": "Sdl_It7"
+				},
+				"34,13": {
+					"id": "track-",
+					"trackID": "Sdl_Iz312"
+				},
+				"34,14": {
+					"id": "track-"
+				},
+				"34,15": {
+					"id": "track-"
+				},
+				"34,16": {
+					"id": "switchR2",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_304"
+				},
+				"34,18": {
+					"id": "track-"
+				},
+				"34,2": {
+					"id": "track-",
+					"trackID": "Sdl_It104"
+				},
+				"34,3": {
+					"id": "track-",
+					"trackID": "Sdl_It102"
+				},
+				"34,4": {
+					"id": "track-",
+					"trackID": "Sdl_It100"
+				},
+				"34,5": {
+					"id": "track-",
+					"trackID": "Sdl_It8"
+				},
+				"34,6": {
+					"id": "track-",
+					"trackID": "Sdl_It6b"
+				},
+				"34,7": {
+					"id": "track-",
+					"trackID": "Sdl_It4b"
+				},
+				"34,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2b"
+				},
+				"34,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1b"
+				},
+				"35,11": {
+					"id": "track-",
+					"trackID": "Sdl_It5b"
+				},
+				"35,12": {
+					"id": "track-",
+					"trackID": "Sdl_It7"
+				},
+				"35,13": {
+					"id": "track-",
+					"trackID": "Sdl_Iz312"
+				},
+				"35,14": {
+					"id": "track-"
+				},
+				"35,15": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_305"
+				},
+				"35,18": {
+					"id": "curve2"
+				},
+				"35,2": {
+					"id": "track-",
+					"trackID": "Sdl_It104"
+				},
+				"35,3": {
+					"id": "track-",
+					"trackID": "Sdl_It102"
+				},
+				"35,4": {
+					"id": "track-",
+					"trackID": "Sdl_It100"
+				},
+				"35,5": {
+					"id": "track-",
+					"trackID": "Sdl_It8"
+				},
+				"35,6": {
+					"id": "track-",
+					"trackID": "Sdl_It6b"
+				},
+				"35,7": {
+					"id": "track-",
+					"trackID": "Sdl_It4b"
+				},
+				"35,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2b"
+				},
+				"35,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1b"
+				},
+				"36,11": {
+					"id": "platformF",
+					"trackID": "Sdl_It5b"
+				},
+				"36,12": {
+					"id": "platformF",
+					"trackID": "Sdl_It7"
+				},
+				"36,13": {
+					"id": "track-",
+					"trackID": "Sdl_Iz312"
+				},
+				"36,14": {
+					"id": "track-"
+				},
+				"36,15": {
+					"id": "switchW2",
+					"maxSpeedMinus": 40,
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "Sdl_310"
+				},
+				"36,16": {
+					"id": "track|"
+				},
+				"36,17": {
+					"id": "switchR1",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "Sdl_309"
+				},
+				"36,18": {
+					"id": "switchR1",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_308"
+				},
+				"36,2": {
+					"id": "platformF",
+					"trackID": "Sdl_It104"
+				},
+				"36,3": {
+					"id": "platformF",
+					"trackID": "Sdl_It102"
+				},
+				"36,4": {
+					"id": "platformF",
+					"trackID": "Sdl_It100"
+				},
+				"36,5": {
+					"id": "platformF",
+					"trackID": "Sdl_It8"
+				},
+				"36,6": {
+					"id": "platformF",
+					"trackID": "Sdl_It6b"
+				},
+				"36,7": {
+					"id": "platformF",
+					"trackID": "Sdl_It4b"
+				},
+				"36,8": {
+					"id": "platformF",
+					"trackID": "Sdl_It2b"
+				},
+				"36,9": {
+					"id": "platformF",
+					"trackID": "Sdl_It1b"
+				},
+				"37,11": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_It5b",
+					"trainTarget": true
+				},
+				"37,12": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_It7",
+					"trainTarget": true
+				},
+				"37,13": {
+					"id": "track-",
+					"trackID": "Sdl_Iz312"
+				},
+				"37,14": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "Sdl_311"
+				},
+				"37,2": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_It104"
+				},
+				"37,3": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_It102"
+				},
+				"37,4": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_It100"
+				},
+				"37,5": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_It8",
+					"trainTarget": true
+				},
+				"37,6": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_It6b",
+					"trainTarget": true
+				},
+				"37,7": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_It4b",
+					"trainTarget": true
+				},
+				"37,8": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_It2b",
+					"trainTarget": true
+				},
+				"37,9": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_It1b",
+					"trainTarget": true
+				},
+				"38,11": {
+					"id": "platformF",
+					"trackID": "Sdl_It5b"
+				},
+				"38,12": {
+					"id": "platformF",
+					"trackID": "Sdl_It7"
+				},
+				"38,13": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_312",
+					"trackID": "Sdl_Iz312"
+				},
+				"38,14": {
+					"id": "track-"
+				},
+				"38,2": {
+					"id": "platformF",
+					"trackID": "Sdl_It104"
+				},
+				"38,3": {
+					"id": "platformF",
+					"trackID": "Sdl_It102"
+				},
+				"38,4": {
+					"id": "platformF",
+					"trackID": "Sdl_It100"
+				},
+				"38,5": {
+					"id": "platformF",
+					"trackID": "Sdl_It8"
+				},
+				"38,6": {
+					"id": "platformF",
+					"trackID": "Sdl_It6b"
+				},
+				"38,7": {
+					"id": "platformF",
+					"trackID": "Sdl_It4b"
+				},
+				"38,8": {
+					"id": "platformF",
+					"trackID": "Sdl_It2b"
+				},
+				"38,9": {
+					"id": "platformF",
+					"trackID": "Sdl_It1b"
+				},
+				"39,11": {
+					"id": "track-",
+					"trackID": "Sdl_It5b"
+				},
+				"39,12": {
+					"id": "track-",
+					"trackID": "Sdl_It7"
+				},
+				"39,13": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "Sdl_It101b"
+				},
+				"39,14": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"39,2": {
+					"id": "track-",
+					"trackID": "Sdl_It104"
+				},
+				"39,3": {
+					"id": "track-",
+					"trackID": "Sdl_It102"
+				},
+				"39,4": {
+					"id": "track-",
+					"trackID": "Sdl_It100"
+				},
+				"39,5": {
+					"id": "track-",
+					"trackID": "Sdl_It8"
+				},
+				"39,6": {
+					"id": "track-",
+					"trackID": "Sdl_It6b"
+				},
+				"39,7": {
+					"id": "track-",
+					"trackID": "Sdl_It4b"
+				},
+				"39,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2b"
+				},
+				"39,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1b"
+				},
+				"4,10": {
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"4,11": {
+					"id": "derailer2"
+				},
+				"4,7": {
+					"id": "track-"
+				},
+				"4,8": {
+					"id": "track-"
+				},
+				"4,9": {
+					"id": "track-"
+				},
+				"40,11": {
+					"id": "track-",
+					"trackID": "Sdl_It5b"
+				},
+				"40,12": {
+					"id": "track-",
+					"trackID": "Sdl_It7"
+				},
+				"40,13": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm31",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz313"
+				},
+				"40,14": {
+					"id": "track-"
+				},
+				"40,2": {
+					"id": "track-",
+					"trackID": "Sdl_It104"
+				},
+				"40,3": {
+					"id": "track-",
+					"trackID": "Sdl_It102"
+				},
+				"40,4": {
+					"id": "track-",
+					"trackID": "Sdl_It100"
+				},
+				"40,5": {
+					"id": "track-",
+					"trackID": "Sdl_It8"
+				},
+				"40,6": {
+					"id": "track-",
+					"trackID": "Sdl_It6b"
+				},
+				"40,7": {
+					"id": "track-",
+					"trackID": "Sdl_It4b"
+				},
+				"40,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2b"
+				},
+				"40,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1b"
+				},
+				"41,11": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_R5",
+					"trackID": "Sdl_Iz38"
+				},
+				"41,12": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_R7",
+					"trackID": "Sdl_Iz37"
+				},
+				"41,13": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_313",
+					"trackID": "Sdl_Iz313"
+				},
+				"41,14": {
+					"id": "track-"
+				},
+				"41,2": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm104",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz31"
+				},
+				"41,3": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm102",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz31"
+				},
+				"41,4": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm100",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz32"
+				},
+				"41,5": {
+					"id": "track-",
+					"trackID": "Sdl_It8"
+				},
+				"41,6": {
+					"id": "track-",
+					"trackID": "Sdl_It6b"
+				},
+				"41,7": {
+					"id": "track-",
+					"trackID": "Sdl_It4b"
+				},
+				"41,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2b"
+				},
+				"41,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1b"
+				},
+				"42,11": {
+					"id": "track-",
+					"trackID": "Sdl_Iz38"
+				},
+				"42,12": {
+					"id": "switchR2",
+					"maxSpeedPlus": 60,
+					"switchFlip": true,
+					"switchID": "Sdl_37",
+					"trackID": "Sdl_Iz37"
+				},
+				"42,13": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm32",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz313"
+				},
+				"42,14": {
+					"id": "track-"
+				},
+				"42,2": {
+					"id": "curve7",
+					"trackID": "Sdl_Iz31"
+				},
+				"42,3": {
+					"id": "track-",
+					"trackID": "Sdl_Iz31"
+				},
+				"42,4": {
+					"id": "track-",
+					"trackID": "Sdl_Iz32"
+				},
+				"42,5": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_P8",
+					"trackID": "Sdl_Iz34"
+				},
+				"42,6": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_P6",
+					"trackID": "Sdl_Iz34"
+				},
+				"42,7": {
+					"id": "track-",
+					"trackID": "Sdl_It4b"
+				},
+				"42,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2b"
+				},
+				"42,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1b"
+				},
+				"43,11": {
+					"id": "switchR2",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_38",
+					"trackID": "Sdl_Iz38"
+				},
+				"43,13": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"43,14": {
+					"id": "curve2"
+				},
+				"43,3": {
+					"id": "switchL4",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_31",
+					"trackID": "Sdl_Iz31"
+				},
+				"43,4": {
+					"id": "track-",
+					"trackID": "Sdl_Iz32"
+				},
+				"43,5": {
+					"id": "curve7",
+					"trackID": "Sdl_Iz34"
+				},
+				"43,6": {
+					"id": "track-",
+					"trackID": "Sdl_Iz34"
+				},
+				"43,7": {
+					"id": "track-",
+					"trackID": "Sdl_It4b"
+				},
+				"43,8": {
+					"id": "track-",
+					"trackID": "Sdl_It2b"
+				},
+				"43,9": {
+					"id": "track-",
+					"trackID": "Sdl_It1b"
+				},
+				"44,10": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_39",
+					"trackID": "Sdl_Iz39"
+				},
+				"44,12": {
+					"id": "buffer3"
+				},
+				"44,13": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_314"
+				},
+				"44,4": {
+					"id": "switchL4",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_32",
+					"trackID": "Sdl_Iz32"
+				},
+				"44,6": {
+					"id": "switchR3",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_34",
+					"trackID": "Sdl_Iz34"
+				},
+				"44,7": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_P4",
+					"trackID": "Sdl_Iz36"
+				},
+				"44,8": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_P2",
+					"trackID": "Sdl_ItP2"
+				},
+				"44,9": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_R1",
+					"trackID": "Sdl_Iz40"
+				},
+				"45,10": {
+					"id": "derailerL7",
+					"trackID": "Sdl_Iz39"
+				},
+				"45,12": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"45,13": {
+					"id": "curve2"
+				},
+				"45,5": {
+					"id": "switchR8",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "Sdl_33",
+					"trackID": "Sdl_Iz33"
+				},
+				"45,6": {
+					"id": "switchW4",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_35",
+					"trackID": "Sdl_Iz35"
+				},
+				"45,7": {
+					"id": "track-",
+					"trackID": "Sdl_Iz36"
+				},
+				"45,8": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_ItP2"
+				},
+				"45,9": {
+					"id": "switchL3",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_40",
+					"trackID": "Sdl_Iz40"
+				},
+				"46,10": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm301",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz39"
+				},
+				"46,12": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_315"
+				},
+				"46,6": {
+					"id": "curve3",
+					"trackID": "Sdl_Iz33"
+				},
+				"46,7": {
+					"id": "switchR3",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_36",
+					"trackID": "Sdl_Iz36"
+				},
+				"46,8": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm41",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz43"
+				},
+				"46,9": {
+					"id": "switchL7",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_41",
+					"trackID": "Sdl_Iz41"
+				},
+				"47,12": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_316"
+				},
+				"47,6": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm401",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz33"
+				},
+				"47,7": {
+					"id": "switchR7",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_42",
+					"trackID": "Sdl_Iz42"
+				},
+				"47,8": {
+					"id": "switchL3",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_43",
+					"trackID": "Sdl_Iz43"
+				},
+				"47,9": {
+					"id": "track-",
+					"trackID": "Sdl_Iz41"
+				},
+				"48,12": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_317"
+				},
+				"48,13": {
+					"id": "curve3"
+				},
+				"48,6": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"48,7": {
+					"id": "track-",
+					"trackID": "Sdl_Iz42"
+				},
+				"48,8": {
+					"id": "switchR3",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_45",
+					"trackID": "Sdl_Iz45"
+				},
+				"48,9": {
+					"id": "track-",
+					"trackID": "Sdl_Iz41"
+				},
+				"49,12": {
+					"id": "track-"
+				},
+				"49,13": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_318"
+				},
+				"49,6": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm402",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz49"
+				},
+				"49,7": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_44",
+					"trackID": "Sdl_Iz44"
+				},
+				"49,8": {
+					"id": "switchR7",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_46",
+					"trackID": "Sdl_Iz46"
+				},
+				"49,9": {
+					"id": "track-",
+					"trackID": "Sdl_Iz48"
+				},
+				"5,10": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_201"
+				},
+				"5,7": {
+					"id": "track-"
+				},
+				"5,8": {
+					"id": "track-"
+				},
+				"5,9": {
+					"id": "track-"
+				},
+				"50,12": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"50,13": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"50,6": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "Sdl_49",
+					"trackID": "Sdl_Iz49"
+				},
+				"50,7": {
+					"id": "track-",
+					"trackID": "Sdl_Iz44"
+				},
+				"50,8": {
+					"id": "switchL7",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_47",
+					"trackID": "Sdl_Iz47"
+				},
+				"50,9": {
+					"id": "switchR3",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_48",
+					"trackID": "Sdl_Iz48"
+				},
+				"51,12": {
+					"id": "buffer7"
+				},
+				"51,13": {
+					"id": "buffer7"
+				},
+				"51,6": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm403",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz49"
+				},
+				"51,7": {
+					"id": "switchL3",
+					"maxSpeedPlus": 60,
+					"switchID": "Sdl_50",
+					"trackID": "Sdl_Iz50"
+				},
+				"51,8": {
+					"id": "curve7",
+					"trackID": "Sdl_Iz47"
+				},
+				"51,9": {
+					"id": "curve7",
+					"trackID": "Sdl_Iz48"
+				},
+				"52,10": {
+					"id": "curve3",
+					"trackID": "Sdl_Iz48"
+				},
+				"52,6": {
+					"id": "track-"
+				},
+				"52,7": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_51",
+					"trackID": "Sdl_Iz51"
+				},
+				"52,9": {
+					"id": "curve3",
+					"trackID": "Sdl_Iz47"
+				},
+				"53,10": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm42",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz48"
+				},
+				"53,7": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm44",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz51"
+				},
+				"53,8": {
+					"id": "curve3",
+					"trackID": "Sdl_Iz51"
+				},
+				"53,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm43",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz47"
+				},
+				"54,10": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_ItX"
+				},
+				"54,7": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_ItZ"
+				},
+				"54,8": {
+					"id": "derailerL7",
+					"trackID": "Sdl_Iz51"
+				},
+				"54,9": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Sdl_ItY"
+				},
+				"55,10": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_X",
+					"trackID": "Sdl_ItX"
+				},
+				"55,7": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_Z",
+					"trackID": "Sdl_ItZ"
+				},
+				"55,8": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Sdl_Tm501",
+					"semaphoreType": 1,
+					"trackID": "Sdl_Iz51"
+				},
+				"55,9": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Sdl_Y",
+					"trackID": "Sdl_ItY"
+				},
+				"56,10": {
+					"id": "arrow3",
+					"trainTarget": true
+				},
+				"56,7": {
+					"id": "arrow-",
+					"trainTarget": true
+				},
+				"56,8": {
+					"id": "arrow-",
+					"shuntTarget": true
+				},
+				"56,9": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"6,10": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_202"
+				},
+				"6,7": {
+					"id": "track-"
+				},
+				"6,8": {
+					"id": "track-"
+				},
+				"6,9": {
+					"id": "track-"
+				},
+				"7,10": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_203"
+				},
+				"7,11": {
+					"id": "switchR8",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "Sdl_204"
+				},
+				"7,12": {
+					"id": "curve4"
+				},
+				"7,7": {
+					"id": "track-"
+				},
+				"7,8": {
+					"id": "track-"
+				},
+				"7,9": {
+					"id": "track-"
+				},
+				"8,10": {
+					"id": "track-"
+				},
+				"8,11": {
+					"id": "curve3"
+				},
+				"8,12": {
+					"id": "curve3"
+				},
+				"8,13": {
+					"id": "curve3"
+				},
+				"8,7": {
+					"id": "track-"
+				},
+				"8,8": {
+					"id": "track-"
+				},
+				"8,9": {
+					"id": "track-"
+				},
+				"9,10": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"9,11": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"9,12": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"9,13": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"9,7": {
+					"id": "track-"
+				},
+				"9,8": {
+					"id": "track-"
+				},
+				"9,9": {
+					"id": "track-"
+				}
+			},
+			"w": 57
 		}
 	]
 }
