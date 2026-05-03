@@ -149,6 +149,18 @@ function Tile:getTrackDirections()
 	return results
 end
 
+---Returns a list of directions this tile is currently traversible in. Takes switch state into account.
+---@return integer[]
+function Tile:getTraversibleTrackDirections()
+	local results = {}
+	for i = 1, 8 do
+		if self:hasTraversibleTrackInDirection(i) then
+			table.insert(results, i)
+		end
+	end
+	return results
+end
+
 ---Returns a list of 0 to 3 directions for pathfinders to be able to go towards, when going from the specified direction.
 ---@param sourceDir integer The direction from which we are going from.
 ---@return integer[]
@@ -188,7 +200,7 @@ function Tile:isDimmedBySwitch(sourceDir)
 	if not self.trackID then
 		return false
 	end
-	local dirs = sourceDir and self:getPossibleTrackDirections(sourceDir) or self:getTrackDirections()
+	local dirs = sourceDir and {self:getNextTrackDirection(sourceDir)} or self:getTraversibleTrackDirections()
 	for i, dir in ipairs(dirs) do
 		local tile = self:getNeighbor(dir)
 		if tile and tile.trackID == self.trackID then
