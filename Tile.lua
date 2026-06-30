@@ -430,6 +430,11 @@ function Tile:sendSemaphoreState(this, next, extras)
 	end
 end
 
+---Sends a command to the server to display the stop speed on this tile's semaphore.
+function Tile:sendSemaphoreStop()
+	self:sendSemaphoreState(0)
+end
+
 ---Sends a command to the server to cancel this tile's semaphore's itinerary.
 function Tile:sendSemaphoreUnreserve()
 	if self.semaphoreID then

@@ -354,9 +354,9 @@ function Station:markUnsaved()
 end
 
 ---Synchronizes this Station and the entire project with the server to make sure pathfinding works correctly.
----@private
-function Station:sync()
-	if self.synced then
+---@param force boolean? Whether the station should be resynced even if it is already marked as synced.
+function Station:sync(force)
+	if self.synced and not force then
 		return
 	end
 	self.synced = true
@@ -370,10 +370,16 @@ function Station:handleLeftClick()
 	-- Left click: action dependant on the current mode
 	if self.hoverX and self.hoverY then
 		if not _Picker.mode then
-			local tile = Tile(self, self.hoverX, self.hoverY)
-			_Picker:augmentTile(tile)
-			self:setTile(self.hoverX, self.hoverY, tile)
-			self:markUnsaved()
+			-- Replace the tile (erases all properties)
+			--local tile = Tile(self, self.hoverX, self.hoverY)
+			--_Picker:augmentTile(tile)
+			--self:setTile(self.hoverX, self.hoverY, tile)
+			-- Keep the properties
+			local tile = self:getTile(self.hoverX, self.hoverY)
+			if tile then
+				_Picker:augmentTile(tile)
+				self:markUnsaved()
+			end
 		elseif _Picker.mode == "addColumn" then
 			self:addColumn(self.hoverLineX)
 			self:markUnsaved()
@@ -457,6 +463,8 @@ function Station:handleRightClick()
 			elseif tile:isSemaphore() then
 				if tile:isTrackReserved() then
 					tile:sendSemaphoreUnreserve()
+				elseif not tile:isSemaphoreStop() then
+					tile:sendSemaphoreStop()
 				else
 					local allowTrain = tile.semaphoreAllowTrain or tile.semaphoreAllowSz
 					local allowShunt = tile.semaphoreAllowShunt

@@ -25,6 +25,8 @@ function Picker:new()
 		{tiles = {"buffer1", "buffer2", "buffer3", "buffer4", "buffer5", "buffer6", "buffer7", "buffer8"}, startIndex = 7},
 		{tiles = {"derailer1", "derailer2", "derailer3", "derailer4", "derailer5", "derailer6", "derailer7", "derailer8"}, startIndex = 3},
 		{tiles = {"derailerL1", "derailerL2", "derailerL3", "derailerL4", "derailerL5", "derailerL6", "derailerL7", "derailerL8"}, startIndex = 3},
+		{tiles = {"curveDerL1", "curveDerL2", "curveDerL3", "curveDerL4", "curveDerL5", "curveDerL6", "curveDerL7", "curveDerL8"}, startIndex = 3},
+		{tiles = {"curveDerR1", "curveDerR2", "curveDerR3", "curveDerR4", "curveDerR5", "curveDerR6", "curveDerR7", "curveDerR8"}, startIndex = 3},
 		{tiles = {"semaphore1", "semaphore2", "semaphore3", "semaphore4", "semaphore5", "semaphore6", "semaphore7", "semaphore8"}, startIndex = 3, display = {image = "s1"}, properties = {semaphoreType = SemaphoreType.SEM}},
 		{tiles = {"semaphore1", "semaphore2", "semaphore3", "semaphore4", "semaphore5", "semaphore6", "semaphore7", "semaphore8"}, startIndex = 3, display = {image = "ms1"}, properties = {semaphoreType = SemaphoreType.TM}},
 		{tiles = {"arrow3", "arrow7", "arrow-"}, startIndex = 3},
@@ -63,6 +65,14 @@ function Picker:new()
 		["derailerL6"] = "derailer6", ["derailer6"] = "derailerL6",
 		["derailerL7"] = "derailer7", ["derailer7"] = "derailerL7",
 		["derailerL8"] = "derailer8", ["derailer8"] = "derailerL8",
+		["curveDerL1"] = "curveDerR4", ["curveDerR4"] = "curveDerL1",
+		["curveDerL2"] = "curveDerR5", ["curveDerR5"] = "curveDerL2",
+		["curveDerL3"] = "curveDerR6", ["curveDerR6"] = "curveDerL3",
+		["curveDerL4"] = "curveDerR7", ["curveDerR7"] = "curveDerL4",
+		["curveDerL5"] = "curveDerR8", ["curveDerR8"] = "curveDerL5",
+		["curveDerL6"] = "curveDerR1", ["curveDerR1"] = "curveDerL6",
+		["curveDerL7"] = "curveDerR2", ["curveDerR2"] = "curveDerL7",
+		["curveDerL8"] = "curveDerR3", ["curveDerR3"] = "curveDerL8",
 		["arrow3"] = "arrow7", ["arrow7"] = "arrow3"
 	}
 
@@ -138,6 +148,18 @@ function Picker:flipSelection()
 		return
 	end
 	self.selectedTileCategory, self.selectedTileOrientation = category, orientation
+end
+
+---Selects the specified tile category by index.
+---@param index integer The category index.
+function Picker:selectCategory(index)
+	self.mode = nil
+	self.selectedTileCategory = index
+	self.selectedTileOrientation = self.tileCategories[index].startIndex or 1
+	local station = _Project:getCurrentStation()
+	if station then
+		station:unselectAllTiles()
+	end
 end
 
 ---Returns the currently selected tile category.
@@ -268,9 +290,7 @@ end
 function Picker:mousepressed(x, y, button)
 	if button == 1 then
 		if self.hoveredTileCategory then
-			self.mode = nil
-			self.selectedTileCategory = self.hoveredTileCategory
-			self.selectedTileOrientation = self.tileCategories[self.hoveredTileCategory].startIndex or 1
+			self:selectCategory(self.hoveredTileCategory)
 		elseif self.modeHover then
 			self.mode = self.modeHover
 		end
