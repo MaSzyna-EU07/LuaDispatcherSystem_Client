@@ -607,7 +607,7 @@ end
 function Station:drawBackground()
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
-			tile:drawBackground(tile:getBackgroundColor())
+			self:drawTileBackground(tile, self:getTileBackgroundColor(tile))
 		end
 	end
 end
@@ -617,7 +617,7 @@ end
 function Station:drawTracks()
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
-			tile:draw()
+			self:drawTile(tile)
 		end
 	end
 end
@@ -630,7 +630,7 @@ function Station:drawHover()
 	end
 	if not _Picker.mode then
 		local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
-		self:getHoveredTile():drawFrame(TileFrameColor.HOVER)
+		self:drawTileFrame(self:assertGetHoveredTile(), TileFrameColor.HOVER)
 		-- Draw tile ghost.
 		local category = _Picker:getSelectedCategory()
 		local image = category.display and category.display.image or "s1"
@@ -670,7 +670,7 @@ end
 ---@private
 function Station:drawSelection()
 	for i, tile in ipairs(self.selectedTiles) do
-		tile:drawFrame(TileFrameColor.SELECTION)
+		self:drawTileFrame(tile, TileFrameColor.SELECTION)
 	end
 end
 
@@ -681,7 +681,7 @@ function Station:drawActive()
 		return
 	end
 	local color = self.activeMode == PathMode.SHUNT and TileFrameColor.ACTIVE_SHUNT or TileFrameColor.ACTIVE
-	self:getTile(self.activeX, self.activeY):drawFrame(color)
+	self:drawTileFrame(self:assertGetTile(self.activeX, self.activeY), color)
 end
 
 ---Draws the clickable tile frames.
@@ -693,7 +693,7 @@ function Station:drawClickable()
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
 			if tile:isTargetForMode(self.activeMode) then
-				tile:drawFrame(TileFrameColor.CLICKABLE)
+				self:drawTileFrame(tile, TileFrameColor.CLICKABLE)
 			end
 		end
 	end
@@ -711,7 +711,7 @@ function Station:drawRectSelection()
 	end
 	for x = math.min(self.dragX, self.hoverX), math.max(self.dragX, self.hoverX) do
 		for y = math.min(self.dragY, self.hoverY), math.max(self.dragY, self.hoverY) do
-			self:assertGetTile(x, y):drawFrame(TileFrameColor.RECT_SELECTION)
+			self:drawTileFrame(self:assertGetTile(x, y), TileFrameColor.RECT_SELECTION)
 		end
 	end
 end
@@ -725,6 +725,86 @@ function Station:drawFrame()
 	love.graphics.setColor(1, 1, 0)
 	love.graphics.setLineWidth(2)
 	love.graphics.rectangle("line", self.x, self.y, self.canvas:getWidth() * self.SCALE + 1, self.canvas:getHeight() * self.SCALE + 1)
+end
+
+--####################################################--
+---------------- T I L E   D R A W I N G ---------------
+--####################################################--
+
+---Returns the position of the top left corner of the specified tile on the station canvas.
+---@param tile Tile The tile to be drawn.
+---@return number, number
+function Station:getTilePos(tile)
+	return self:coordsToCanvasPos(tile.x, tile.y)
+end
+
+---Returns the background color to be used for the specified Tile.
+---@param tile Tile The tile to be drawn.
+---@return TileBackgroundColor
+function Station:getTileBackgroundColor(tile)
+	if _Picker.highlightMode == TileHighlightMode.OFF or _Picker.mode ~= "properties" then
+		return TileBackgroundColor.REGULAR
+	end
+	local trackWarning = tile.trackID and (not tile:isTrack() and not tile:isExitPoint())
+	local switchWarning = tile.switchID and not tile:isSwitch()
+	local semaphoreWarning = tile.semaphoreID and (not tile:isSemaphore() and not tile:isExitPoint())
+	if trackWarning or switchWarning or semaphoreWarning then
+		return TileBackgroundColor.WARNING
+	end
+	if tile.trackID and _Picker.highlightMode == TileHighlightMode.TRACK then
+		return TileBackgroundColor.OK
+	elseif tile.switchID and _Picker.highlightMode == TileHighlightMode.SWITCH then
+		return TileBackgroundColor.OK
+	elseif tile.semaphoreID and _Picker.highlightMode == TileHighlightMode.SEMAPHORE then
+		return TileBackgroundColor.OK
+	end
+	return TileBackgroundColor.REGULAR
+end
+
+---Draws the specified Tile at the specified position.
+---@param tile Tile The tile to be drawn.
+function Station:drawTile(tile)
+	local data = tile:getData()
+	local x, y = self:getTilePos(tile)
+	-- Calculate switch dim bits
+	local switchDimBits = 0
+	if data.tracks then
+		for i = 1, 8 do
+			if not tile:hasTraversibleTrackInDirection(i) then
+				switchDimBits = switchDimBits + 2 ^ (i - 1)
+			end
+		end
+	end
+	local visible = not tile:isDimmedBySwitch()
+	local occupied = visible and tile:isTrackOccupied()
+	local reserved = visible and tile:isTrackReserved()
+	local forced = tile:isSwitchForced()
+	local semState = tile:getSemaphoreState()
+	_DrawTile(x + tile.offset, y + tile.offset, tile.id, tile.electrified, occupied, reserved, forced, switchDimBits, semState)
+end
+
+---Draws the specified Tile's background at the specified position.
+---@param tile Tile The tile to be drawn.
+---@param color TileBackgroundColorEntry The background color set.
+function Station:drawTileBackground(tile, color)
+	local x, y = self:getTilePos(tile)
+	love.graphics.setColor(color.fill)
+	love.graphics.rectangle("fill", x, y, tile.size, tile.size)
+	love.graphics.setColor(color.border)
+	love.graphics.setLineWidth(2)
+	love.graphics.rectangle("line", x, y, tile.size, tile.size)
+end
+
+---Draws the specified Tile's frame at the specified position.
+---@param tile Tile The tile to be drawn.
+---@param color TileFrameColor The frame color.
+function Station:drawTileFrame(tile, color)
+	local x, y = self:getTilePos(tile)
+	love.graphics.setColor(color[1], color[2], color[3], 0.2)
+	love.graphics.rectangle("fill", x, y, tile.size, tile.size)
+	love.graphics.setColor(color)
+	love.graphics.setLineWidth(2)
+	love.graphics.rectangle("line", x, y, tile.size, tile.size)
 end
 
 --####################################--
