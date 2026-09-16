@@ -29,6 +29,7 @@ function Picker:new()
 		{tiles = {"curveDerR1", "curveDerR2", "curveDerR3", "curveDerR4", "curveDerR5", "curveDerR6", "curveDerR7", "curveDerR8"}, startIndex = 3},
 		{tiles = {"semaphore1", "semaphore2", "semaphore3", "semaphore4", "semaphore5", "semaphore6", "semaphore7", "semaphore8"}, startIndex = 3, display = {image = "s1"}, properties = {semaphoreType = SemaphoreType.SEM}},
 		{tiles = {"semaphore1", "semaphore2", "semaphore3", "semaphore4", "semaphore5", "semaphore6", "semaphore7", "semaphore8"}, startIndex = 3, display = {image = "ms1"}, properties = {semaphoreType = SemaphoreType.TM}},
+		{tiles = {"blockade1", "blockade2", "blockade3", "blockade4", "blockade5", "blockade6", "blockade7", "blockade8"}, startIndex = 3},
 		{tiles = {"arrow3", "arrow7", "arrow-"}, startIndex = 3},
 		{tiles = {"loco"}},
 		{tiles = {"square"}},

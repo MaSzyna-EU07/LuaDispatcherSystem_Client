@@ -20,7 +20,7 @@ _Settings = Settings()
 _Obj = Objects()
 _UI = UI()
 _Notifications = Notifications()
-_Tracks = Tileset("data/tracks.png", 17, 8, 14, 14)
+_Tracks = Tileset("data/tracks.png", 17, 10, 14, 14)
 _Buttons = Tileset("data/buttons.png", 11, 2, 21, 14)
 _ProjectManager = ProjectManager()
 _Project = Project()
@@ -75,59 +75,65 @@ end
 ---@param scale number? Tile scale.
 ---@param opacity number? Tile opacity, from 0 to 1.
 function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBits, semaphoreState, scale, opacity)
-	local track = _TileDB:getTile(id)
+	local data = _TileDB:getTile(id)
 	-- Background
 	love.graphics.setColor(1, 1, 1, opacity)
-	if track.background then
-		_Tracks:drawTile(track.background, 1, x, y, scale)
+	if data.background then
+		_Tracks:drawTile(data.background, 1, x, y, scale)
 	end
-	if track.backgroundXY then
-		_Tracks:drawTile(track.backgroundXY[1], track.backgroundXY[2], x, y, scale)
+	if data.backgroundXY then
+		_Tracks:drawTile(data.backgroundXY[1], data.backgroundXY[2], x, y, scale)
 	end
-	if track.tracks then
+	if data.tracks then
 		for i = 1, 8 do
-			if _Utils.getBit(track.tracks, i) then
+			if _Utils.getBit(data.tracks, i) then
 				_Tracks:drawTile(i, 1, x, y, scale)
 			end
 		end
 	end
-	if track.buffer then
-		_Tracks:drawTile(track.buffer, 3, x, y, scale)
+	if data.buffer then
+		_Tracks:drawTile(data.buffer, 3, x, y, scale)
+	end
+	if data.blockade then
+		_Tracks:drawTile(data.blockade, 9, x, y, scale)
 	end
 	-- Track
 	local color = _GetTrackColor(electrified, occupied, reserved, alarm)
 	love.graphics.setColor(color[1], color[2], color[3], opacity)
-	if track.tracks then
+	if data.tracks then
 		for i = 1, 8 do
 			local dim = _Utils.getBit(switchDimBits, i)
-			if _Utils.getBit(track.tracks, i) and not dim and (not alarm or _Time % 0.4 < 0.2) then
+			if _Utils.getBit(data.tracks, i) and not dim and (not alarm or _Time % 0.4 < 0.2) then
 				_Tracks:drawTile(i, 2, x, y, scale)
 			end
 		end
 	end
-	if track.foreground then
-		_Tracks:drawTile(track.foreground, 2, x, y, scale)
+	if data.foreground then
+		_Tracks:drawTile(data.foreground, 2, x, y, scale)
+	end
+	if data.blockade then
+		_Tracks:drawTile(data.blockade, 10, x, y, scale)
 	end
 	-- Derailer
 	love.graphics.setColor(1, 1, 1, opacity)
-	if track.derailer then
-		_Tracks:drawTile(track.derailer, 7, x, y, scale)
+	if data.derailer then
+		_Tracks:drawTile(data.derailer, 7, x, y, scale)
 	end
-	if track.derailerL then
-		_Tracks:drawTile(track.derailerL, 8, x, y, scale)
+	if data.derailerL then
+		_Tracks:drawTile(data.derailerL, 8, x, y, scale)
 	end
 	-- Semaphore
-	if track.semaphore then
-		_Tracks:drawTile(track.semaphore, 4, x, y, scale)
+	if data.semaphore then
+		_Tracks:drawTile(data.semaphore, 4, x, y, scale)
 		local image = semaphoreState and SemaphoreImage[type(semaphoreState) == "string" and semaphoreState or semaphoreState.image]
 		if image then
 			if image.color1 and (not image.blink1 or _Time % 1 < 0.5) then
 				love.graphics.setColor(image.color1[1], image.color1[2], image.color1[3], opacity)
-				_Tracks:drawTile(track.semaphore, 5, x, y, scale)
+				_Tracks:drawTile(data.semaphore, 5, x, y, scale)
 			end
 			if image.color2 and (not image.blink2 or _Time % 1 < 0.5) then
 				love.graphics.setColor(image.color2[1], image.color2[2], image.color2[3], opacity)
-				_Tracks:drawTile(track.semaphore, 6, x, y, scale)
+				_Tracks:drawTile(data.semaphore, 6, x, y, scale)
 			end
 		end
 	end

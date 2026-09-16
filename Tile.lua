@@ -49,6 +49,8 @@ function Tile:new(station, x, y)
 	self.forbidTrain = false -- Whether this Tile is excluded from pathfinding train signals.
 	self.forbidShunt = false -- Whether this Tile is excluded from pathfinding shunting signals.
 	---@type string?
+	self.blockadeID = nil -- The ID of this blockade.
+	---@type string?
 	self.warp = nil -- An index (shortcut) of the station to jump to when this tile is clicked.
 	---@type string?
 	self.command = nil -- A command to be sent to the server when this tile is right clicked.
@@ -76,6 +78,12 @@ end
 ---@return boolean
 function Tile:isSemaphore()
 	return self:getData().semaphore ~= nil
+end
+
+---Returns whether this Tile is a blockade generator.
+---@return boolean
+function Tile:isBlockadeGenerator()
+	return self:getData().blockade ~= nil
 end
 
 ---Returns whether this Tile is an exit point.
@@ -496,6 +504,7 @@ function Tile:serialize()
 		targetW24 = self.targetW24 or nil,
 		forbidTrain = self.forbidTrain or nil,
 		forbidShunt = self.forbidShunt or nil,
+		blockadeID = self.blockadeID,
 		warp = self.warp,
 		command = self.command
 	}
@@ -538,6 +547,7 @@ function Tile:deserialize(t)
 	self.targetW24 = t.targetW24 == true
 	self.forbidTrain = t.forbidTrain == true
 	self.forbidShunt = t.forbidShunt == true
+	self.blockadeID = t.blockadeID
 	self.warp = t.warp
 	self.command = t.command
 end

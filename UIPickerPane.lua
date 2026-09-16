@@ -14,7 +14,7 @@ function UIPickerPane:new(ui)
 	self.electrified = self.ui:addCheckbox("picker", "electrified", "Tory zelektryfikowane", 0, 0, 1, 1, self, self.updateElectrified)
 	self.electrified.value = true
 	self.ui:addLabel("picker", nil, "Nazwa toru", 0, 1, 5, 1)
-	self.trackID = self.ui:addInput("picker", "trackID", 5, 1, 5, 1, self, self.updateTrackID, self.confirmTrackID)
+	self.trackID = self.ui:addInput("picker", "trackID", 5, 1, 10, 1, self, self.updateTrackID, self.confirmTrackID)
 	self.ui:addLabel("picker", nil, "Nazwa zwr.", 0, 2, 5, 1)
 	self.switchID = self.ui:addInput("picker", "switchID", 5, 2, 5, 1, self, self.updateSwitchID, self.confirmSwitchID)
 	self.ui:addLabel("picker", nil, "Nazwa sem.", 0, 3, 5, 1)
@@ -26,7 +26,7 @@ function UIPickerPane:new(ui)
 	-- Second column
 	self.stationAutofill = self.ui:addCheckbox("picker", "stationAutofill", "Autouzup. ID stacji", 10, 0, 1, 1, self, self.updateStationAutofill)
 	self.stationAutofill.value = true
-	self.electrified2 = self.ui:addCheckbox("picker", "electrified2", "Elektr.", 10, 1, 1, 1, self, self.updateElectrified2)
+	self.electrified2 = self.ui:addCheckbox("picker", "electrified2", "Elektr.", 16, 1, 1, 1, self, self.updateElectrified2)
 	self.ui:addLabel("picker", nil, "Zamień", 10, 2, 4, 1)
 	self.switchFlip = self.ui:addCheckbox("picker", "switchFlip", "+/-", 13, 2, 1, 1, self, self.updateSwitchFlip)
 	self.switchFlipABCD = self.ui:addCheckbox("picker", "switchFlipABCD", "ab/cd", 16, 2, 1, 1, self, self.updateSwitchFlipABCD)
@@ -54,6 +54,8 @@ function UIPickerPane:new(ui)
 	self.ui:addLabel("picker", nil, "Vskr", 20, 4, 2, 1)
 	self.semaphoreShortSpeed = self.ui:addInput("picker", "semaphoreShortSpeed", 22, 4, 8, 1, self, self.updateSemaphoreShortSpeed)
 	self.semaphoreShortSpeed.tip = "Prędkość dla skróconej drogi hamowania w km/h.\nJeżeli wielostopniowa, to można wpisać dane w poniższym formacie:\n0:40,40:100\n- Przy następnym Stój, ogranicz do 40 km/h\n- Przy następnym 40 km/h, ogranicz do 100 km/h\n- Powyżej 40 km/h, nie ograniczaj"
+	self.ui:addLabel("picker", nil, "Nazwa blokady:", 20, 5, 6, 1)
+	self.blockadeID = self.ui:addInput("picker", "blockadeID", 26, 5, 4, 1, self, self.updateBlockadeID, self.confirmBlockadeID)
 	-- Fourth column
 	self.ui:addLabel("picker", nil, "Możliwość podania:", 30, 0, 10, 1)
 	self.semaphoreAllowTrain = self.ui:addCheckbox("picker", "semaphoreAllowTrain", "poc.", 31, 1, 1, 1, self, self.updateSemaphoreAllowTrain)
@@ -100,6 +102,7 @@ function UIPickerPane:resetValues()
 	self.semaphoreShortSpeed.value = ""
 	self.semaphoreNext.value = ""
 	self.semaphoreFourPhase.value = false
+	self.blockadeID.value = ""
 	self.warp.value = ""
 	self.command.value = ""
 end
@@ -132,6 +135,7 @@ function UIPickerPane:setValuesForTile(tile)
 	self.semaphoreShortSpeed.value = tile.semaphoreShortSpeed and self:shortSpeedToText(tile.semaphoreShortSpeed) or ""
 	self.semaphoreNext.value = tile.semaphoreNext and self:nextToText(tile.semaphoreNext) or ""
 	self.semaphoreFourPhase.value = tile.semaphoreFourPhase
+	self.blockadeID.value = tile.blockadeID or ""
 	self.warp.value = tile.warp or ""
 	self.command.value = tile.command or ""
 end
@@ -276,6 +280,16 @@ function UIPickerPane:confirmSemaphoreID(input)
 	local value = self:prepareSemaphoreID(input.value)
 	self:forEachTile(function(tile) tile.semaphoreID = value end)
 	input.value = value or ""
+	self.ui:unfocus()
+end
+
+function UIPickerPane:updateBlockadeID(input)
+	self:forEachTile(function(tile) tile.blockadeID = input.value end)
+end
+
+function UIPickerPane:confirmBlockadeID(input)
+	self:forEachTile(function(tile) tile.blockadeID = input.value end)
+	input.value = input.value or ""
 	self.ui:unfocus()
 end
 

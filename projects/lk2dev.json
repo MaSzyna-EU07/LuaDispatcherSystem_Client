@@ -8,7 +8,12 @@
 		"Mrz": 3,
 		"Rem": 7,
 		"Sdl": 9,
-		"Sul": 6
+		"Sul": 6,
+		"WAt": 13,
+		"WPd": 10,
+		"WPd-Rem": 12,
+		"WWO": 11,
+		"WWT": 14
 	},
 	"stations": [
 		{
@@ -17,7 +22,7 @@
 			"shortcut": "MMz-Mia",
 			"tiles": {
 				"10,2": {
-					"command": "b MMz-Mia 1 p",
+					"command": "b MMz-Mia p",
 					"id": "square"
 				},
 				"10,4": {
@@ -29,11 +34,11 @@
 					"trackID": "4451-4611@LK2.1"
 				},
 				"10,7": {
-					"command": "b MMz-Mrz 1 n",
+					"command": "b MMz-Mrz n",
 					"id": "square"
 				},
 				"11,2": {
-					"command": "b MMz-Mia 1 n",
+					"command": "b MMz-Mia n",
 					"id": "square"
 				},
 				"11,4": {
@@ -51,7 +56,7 @@
 					"trackID": "4451-4611@LK2.1"
 				},
 				"11,7": {
-					"command": "b MMz-Mrz 1 p",
+					"command": "b MMz-Mrz p",
 					"id": "square"
 				},
 				"12,2": {
@@ -183,7 +188,7 @@
 					"trackID": "Y1-4311@LK2.1"
 				},
 				"6,2": {
-					"command": "b MMz-Mia 1 x",
+					"command": "b MMz-Mia x",
 					"id": "square"
 				},
 				"6,4": {
@@ -201,7 +206,7 @@
 					"trackID": "4311-4451@LK2.1"
 				},
 				"6,7": {
-					"command": "b MMz-Mrz 1 x",
+					"command": "b MMz-Mrz x",
 					"id": "square"
 				},
 				"7,2": {
@@ -2433,7 +2438,7 @@
 					"id": "letterN"
 				},
 				"8,2": {
-					"command": "b Mia-Mrz 1 p",
+					"command": "b Mia-Mrz p",
 					"id": "square"
 				},
 				"8,4": {
@@ -2451,11 +2456,11 @@
 					"trackID": "5231-5431@LK2.1"
 				},
 				"8,7": {
-					"command": "b MMz-Mrz 1 n",
+					"command": "b MMz-Mrz n",
 					"id": "square"
 				},
 				"9,2": {
-					"command": "b Mia-Mrz 1 n",
+					"command": "b Mia-Mrz n",
 					"id": "square"
 				},
 				"9,4": {
@@ -2473,7 +2478,7 @@
 					"trackID": "5431-5571@LK2.1"
 				},
 				"9,7": {
-					"command": "b MMz-Mrz 1 p",
+					"command": "b MMz-Mrz p",
 					"id": "square"
 				}
 			},
@@ -3152,12 +3157,15 @@
 				"2,10": {
 					"id": "arrow3",
 					"targetW24": true,
-					"trainTarget": true
+					"trackID": "871-D1@LK448.1",
+					"trainTarget": true,
+					"warp": "WPd-Rem"
 				},
 				"2,11": {
 					"id": "arrow3",
 					"targetW24": true,
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "WAt"
 				},
 				"2,12": {
 					"id": "arrow3",
@@ -3170,11 +3178,14 @@
 				},
 				"2,8": {
 					"id": "arrow7",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "WAt"
 				},
 				"2,9": {
 					"id": "arrow7",
-					"trainTarget": true
+					"trackID": "942-C2@LK448.2",
+					"trainTarget": true,
+					"warp": "WPd-Rem"
 				},
 				"20,10": {
 					"id": "platformF",
@@ -3579,42 +3590,42 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Rem_D",
-					"trackID": "Rem_Iz7"
+					"trackID": "Rem_ItD"
 				},
 				"3,11": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Rem_E",
-					"trackID": "Rem_Iz3"
+					"trackID": "Rem_ItE"
 				},
 				"3,12": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Rem_F",
-					"trackID": "Rem_Iz1"
+					"trackID": "Rem_ItF"
 				},
 				"3,7": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Rem_A",
-					"trackID": "Rem_Iz2"
+					"trackID": "Rem_ItA"
 				},
 				"3,8": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Rem_B",
-					"trackID": "Rem_Iz5"
+					"trackID": "Rem_ItB"
 				},
 				"3,9": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Rem_C",
-					"trackID": "Rem_Iz9"
+					"trackID": "Rem_ItC"
 				},
 				"30,10": {
 					"id": "track-",
@@ -3862,11 +3873,11 @@
 				},
 				"4,10": {
 					"id": "track-",
-					"trackID": "Rem_Iz7"
+					"trackID": "Rem_ItD"
 				},
 				"4,11": {
 					"id": "track-",
-					"trackID": "Rem_Iz3"
+					"trackID": "Rem_ItE"
 				},
 				"4,12": {
 					"id": "switchL7",
@@ -3876,15 +3887,15 @@
 				},
 				"4,7": {
 					"id": "track-",
-					"trackID": "Rem_Iz2"
+					"trackID": "Rem_ItA"
 				},
 				"4,8": {
 					"id": "track-",
-					"trackID": "Rem_Iz5"
+					"trackID": "Rem_ItB"
 				},
 				"4,9": {
 					"id": "track-",
-					"trackID": "Rem_Iz9"
+					"trackID": "Rem_ItC"
 				},
 				"40,10": {
 					"id": "track-",
@@ -4148,7 +4159,7 @@
 				},
 				"5,10": {
 					"id": "track-",
-					"trackID": "Rem_Iz7"
+					"trackID": "Rem_ItD"
 				},
 				"5,11": {
 					"id": "switchL3",
@@ -4168,11 +4179,11 @@
 				},
 				"5,8": {
 					"id": "track-",
-					"trackID": "Rem_Iz5"
+					"trackID": "Rem_ItB"
 				},
 				"5,9": {
 					"id": "track-",
-					"trackID": "Rem_Iz9"
+					"trackID": "Rem_ItC"
 				},
 				"50,10": {
 					"id": "track-",
@@ -4323,7 +4334,7 @@
 				},
 				"6,10": {
 					"id": "track-",
-					"trackID": "Rem_Iz7"
+					"trackID": "Rem_ItD"
 				},
 				"6,11": {
 					"id": "switchL7",
@@ -4346,7 +4357,7 @@
 				},
 				"6,9": {
 					"id": "track-",
-					"trackID": "Rem_Iz9"
+					"trackID": "Rem_ItC"
 				},
 				"7,10": {
 					"id": "switchL3",
@@ -4370,7 +4381,7 @@
 				},
 				"7,9": {
 					"id": "track-",
-					"trackID": "Rem_Iz9"
+					"trackID": "Rem_ItC"
 				},
 				"8,10": {
 					"id": "switchL7",
@@ -6570,6 +6581,5099 @@
 				}
 			},
 			"w": 57
+		},
+		{
+			"h": 11,
+			"name": "Warszawa Podskarbińska",
+			"shortcut": "WPd",
+			"tiles": {
+				"10,2": {
+					"id": "track-",
+					"trackID": "WPd_ItA"
+				},
+				"10,3": {
+					"id": "track-",
+					"trackID": "WPd_ItB"
+				},
+				"10,4": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WPd_Tm7",
+					"semaphoreType": 1,
+					"trackID": "WPd_Iz9"
+				},
+				"10,5": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"10,7": {
+					"id": "track-",
+					"trackID": "WPd_ItD"
+				},
+				"10,8": {
+					"id": "track-",
+					"trackID": "WPd_Iz11"
+				},
+				"10,9": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WPd_Tm14",
+					"semaphoreType": 1,
+					"trackID": "WPd_Iz10"
+				},
+				"11,2": {
+					"id": "track-",
+					"trackID": "WPd_ItA"
+				},
+				"11,3": {
+					"id": "track-",
+					"trackID": "WPd_ItB"
+				},
+				"11,4": {
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"11,5": {
+					"electrified": false,
+					"id": "buffer7"
+				},
+				"11,7": {
+					"id": "track-",
+					"trackID": "WPd_ItD"
+				},
+				"11,8": {
+					"id": "track-",
+					"trackID": "WPd_Iz11"
+				},
+				"11,9": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "wog_WPd10",
+					"trackID": "WPd_Iz10"
+				},
+				"12,2": {
+					"id": "curve7",
+					"trackID": "WPd_ItA"
+				},
+				"12,3": {
+					"id": "curve7",
+					"trackID": "WPd_ItB"
+				},
+				"12,4": {
+					"id": "curve7"
+				},
+				"12,7": {
+					"id": "track-",
+					"trackID": "WPd_ItD"
+				},
+				"12,8": {
+					"id": "switchD2",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "wog_WPd11",
+					"trackID": "WPd_Iz11"
+				},
+				"12,9": {
+					"id": "track-",
+					"trackID": "WPd_ItH"
+				},
+				"13,3": {
+					"id": "track\\",
+					"trackID": "WPd_ItA"
+				},
+				"13,4": {
+					"id": "track\\",
+					"trackID": "WPd_ItB"
+				},
+				"13,5": {
+					"id": "semaphore4",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WPd_Tm15",
+					"semaphoreType": 1,
+					"trackID": "WPd_Iz13"
+				},
+				"13,7": {
+					"id": "switchD2",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "wog_WPd12",
+					"trackID": "WPd_Iz12"
+				},
+				"13,8": {
+					"id": "track-",
+					"trackID": "WPd_Iz11"
+				},
+				"13,9": {
+					"id": "track-",
+					"trackID": "WPd_ItH"
+				},
+				"14,4": {
+					"id": "curve3",
+					"trackID": "WPd_ItA"
+				},
+				"14,5": {
+					"id": "curve3",
+					"trackID": "WPd_ItB"
+				},
+				"14,6": {
+					"id": "switchW3",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "wog_WPd13",
+					"trackID": "WPd_Iz13"
+				},
+				"14,7": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "wog_WPd14",
+					"trackID": "WPd_Iz14"
+				},
+				"14,8": {
+					"id": "track-",
+					"trackID": "WPd_Iz15"
+				},
+				"14,9": {
+					"id": "track-",
+					"trackID": "WPd_ItH"
+				},
+				"15,4": {
+					"id": "track-",
+					"trackID": "WPd_ItA"
+				},
+				"15,5": {
+					"id": "track-",
+					"trackID": "WPd_ItB"
+				},
+				"15,6": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "wog_WPd16",
+					"trackID": "WPd_Iz16"
+				},
+				"15,7": {
+					"id": "track-",
+					"trackID": "WPd_ItL"
+				},
+				"15,8": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "wog_WPd15",
+					"trackID": "WPd_Iz15"
+				},
+				"15,9": {
+					"id": "track-",
+					"trackID": "WPd_ItH"
+				},
+				"16,4": {
+					"id": "track-",
+					"trackID": "WPd_ItA"
+				},
+				"16,5": {
+					"id": "switchD2",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "wog_WPd18",
+					"trackID": "WPd_Iz18"
+				},
+				"16,6": {
+					"id": "track-",
+					"trackID": "WPd_ItM"
+				},
+				"16,7": {
+					"id": "track-",
+					"trackID": "WPd_ItL"
+				},
+				"16,8": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "wog_WPd17",
+					"trackID": "WPd_Iz17"
+				},
+				"16,9": {
+					"id": "curve7",
+					"trackID": "WPd_ItH"
+				},
+				"17,10": {
+					"id": "curve3",
+					"trackID": "WPd_ItH"
+				},
+				"17,3": {
+					"id": "buffer3"
+				},
+				"17,4": {
+					"id": "switchD2",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "wog_WPd19",
+					"trackID": "WPd_Iz19"
+				},
+				"17,5": {
+					"id": "track-",
+					"trackID": "WPd_ItN"
+				},
+				"17,6": {
+					"id": "track-",
+					"trackID": "WPd_ItM"
+				},
+				"17,7": {
+					"id": "track-",
+					"trackID": "WPd_ItL"
+				},
+				"17,8": {
+					"id": "track-",
+					"trackID": "WPd_ItK"
+				},
+				"17,9": {
+					"id": "curve3",
+					"trackID": "WPd_ItJ"
+				},
+				"18,10": {
+					"id": "track-",
+					"trackID": "WPd_ItH"
+				},
+				"18,3": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "wog_WPd20",
+					"trackID": "WPd_Iz20"
+				},
+				"18,4": {
+					"id": "track-",
+					"trackID": "WPd_ItO"
+				},
+				"18,5": {
+					"id": "track-",
+					"trackID": "WPd_ItN"
+				},
+				"18,6": {
+					"id": "track-",
+					"trackID": "WPd_ItM"
+				},
+				"18,7": {
+					"id": "track-",
+					"trackID": "WPd_ItL"
+				},
+				"18,8": {
+					"id": "track-",
+					"trackID": "WPd_ItK"
+				},
+				"18,9": {
+					"id": "track-",
+					"trackID": "WPd_ItJ"
+				},
+				"19,10": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_H",
+					"trackID": "WPd_ItH"
+				},
+				"19,3": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WPd_Tm16",
+					"semaphoreType": 1,
+					"trackID": "WPd_Iz20"
+				},
+				"19,4": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_O",
+					"trackID": "WPd_ItO"
+				},
+				"19,5": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_N",
+					"trackID": "WPd_ItN"
+				},
+				"19,6": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_M",
+					"trackID": "WPd_ItM"
+				},
+				"19,7": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_L",
+					"trackID": "WPd_ItL"
+				},
+				"19,8": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_K",
+					"trackID": "WPd_ItK"
+				},
+				"19,9": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_J",
+					"trackID": "WPd_ItJ"
+				},
+				"2,3": {
+					"electrified": false,
+					"id": "arrow-",
+					"shuntTarget": true
+				},
+				"2,4": {
+					"electrified": false,
+					"id": "arrow-",
+					"shuntTarget": true
+				},
+				"2,5": {
+					"electrified": false,
+					"id": "arrow-",
+					"shuntTarget": true
+				},
+				"2,6": {
+					"electrified": false,
+					"id": "arrow-",
+					"shuntTarget": true
+				},
+				"20,10": {
+					"id": "arrow3",
+					"trainTarget": true
+				},
+				"20,3": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WPd_ItP"
+				},
+				"20,4": {
+					"id": "track-"
+				},
+				"20,5": {
+					"id": "track-"
+				},
+				"20,6": {
+					"id": "track-"
+				},
+				"20,7": {
+					"id": "track-",
+					"trackID": "L2-682@LK448.2"
+				},
+				"20,8": {
+					"id": "track-",
+					"trackID": "WPd_K1-652@LK448.1"
+				},
+				"20,9": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"21,3": {
+					"id": "semaphore3",
+					"semaphoreID": "WWT_D",
+					"trackID": "WWT_ItD"
+				},
+				"21,4": {
+					"id": "track-"
+				},
+				"21,5": {
+					"id": "track-"
+				},
+				"21,6": {
+					"id": "track-"
+				},
+				"21,7": {
+					"id": "track-",
+					"trackID": "L2-682@LK448.2"
+				},
+				"21,8": {
+					"id": "track-",
+					"trackID": "WPd_K1-652@LK448.1"
+				},
+				"22,3": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_P",
+					"trackID": "WWT_ItD"
+				},
+				"22,4": {
+					"id": "track-"
+				},
+				"22,5": {
+					"id": "track-"
+				},
+				"22,6": {
+					"id": "track-"
+				},
+				"22,7": {
+					"id": "track-",
+					"trackID": "L2-682@LK448.2"
+				},
+				"22,8": {
+					"id": "track-",
+					"trackID": "WPd_K1-652@LK448.1"
+				},
+				"23,3": {
+					"id": "arrow-",
+					"trainTarget": true
+				},
+				"23,4": {
+					"id": "arrow-",
+					"trainTarget": true
+				},
+				"23,5": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true,
+					"warp": "WAt"
+				},
+				"23,6": {
+					"id": "arrow3",
+					"trainTarget": true,
+					"warp": "WAt"
+				},
+				"23,7": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trackID": "L2-682@LK448.2",
+					"trainTarget": true,
+					"warp": "WPd-Rem"
+				},
+				"23,8": {
+					"id": "arrow3",
+					"trackID": "WPd_K1-652@LK448.1",
+					"trainTarget": true,
+					"warp": "WPd-Rem"
+				},
+				"3,3": {
+					"electrified": false,
+					"id": "curve7"
+				},
+				"3,4": {
+					"electrified": false,
+					"id": "curve7"
+				},
+				"3,5": {
+					"electrified": false,
+					"id": "curve7"
+				},
+				"3,6": {
+					"electrified": false,
+					"id": "track-"
+				},
+				"3,7": {
+					"id": "arrow7",
+					"semaphoreID": "WWO_T",
+					"trainTarget": true,
+					"warp": "WWO"
+				},
+				"3,8": {
+					"id": "arrow3",
+					"semaphoreID": "WWO_O",
+					"targetW24": true,
+					"trainTarget": true,
+					"warp": "WWO"
+				},
+				"3,9": {
+					"id": "buffer3"
+				},
+				"4,10": {
+					"electrified": false,
+					"id": "arrow-",
+					"shuntTarget": true
+				},
+				"4,4": {
+					"electrified": false,
+					"id": "track\\"
+				},
+				"4,5": {
+					"electrified": false,
+					"id": "track\\"
+				},
+				"4,6": {
+					"electrified": false,
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "wog_WPd6"
+				},
+				"4,7": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_D",
+					"trackID": "WPd_ItD"
+				},
+				"4,8": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_E",
+					"trackID": "WPd_ItE"
+				},
+				"4,9": {
+					"id": "platformP",
+					"shuntTarget": true
+				},
+				"5,10": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WPd_Tm11",
+					"semaphoreType": 1,
+					"trackID": "WPd_Iz3"
+				},
+				"5,5": {
+					"electrified": false,
+					"id": "curve3"
+				},
+				"5,6": {
+					"electrified": false,
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "wog_WPd7"
+				},
+				"5,7": {
+					"id": "track-",
+					"trackID": "WPd_ItD"
+				},
+				"5,8": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "wog_WPd1",
+					"trackID": "WPd_Iz1"
+				},
+				"5,9": {
+					"id": "derailer3",
+					"trackID": "WPd_Iz2"
+				},
+				"6,10": {
+					"electrified": false,
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "wog_WPd3",
+					"trackID": "WPd_Iz3"
+				},
+				"6,5": {
+					"electrified": false,
+					"id": "track-"
+				},
+				"6,6": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WPd_Tm1",
+					"semaphoreType": 1
+				},
+				"6,7": {
+					"id": "track-",
+					"trackID": "WPd_ItD"
+				},
+				"6,8": {
+					"id": "track-",
+					"trackID": "WPd_Iz1"
+				},
+				"6,9": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "wog_WPd2",
+					"trackID": "WPd_Iz2"
+				},
+				"7,10": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WPd_Tm12",
+					"semaphoreType": 1,
+					"trackID": "WPd_Iz3"
+				},
+				"7,2": {
+					"id": "arrow-",
+					"semaphoreID": "WWO_Y",
+					"trainTarget": true,
+					"warp": "WWO"
+				},
+				"7,3": {
+					"id": "arrow7",
+					"semaphoreID": "WWO_X",
+					"trainTarget": true,
+					"warp": "WWO"
+				},
+				"7,4": {
+					"id": "arrow3",
+					"semaphoreID": "WWO_U",
+					"targetW24": true,
+					"trainTarget": true,
+					"warp": "WWO"
+				},
+				"7,5": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreID": "WPd_T"
+				},
+				"7,6": {
+					"electrified": false,
+					"id": "curve2"
+				},
+				"7,7": {
+					"id": "track-",
+					"trackID": "WPd_ItD"
+				},
+				"7,8": {
+					"id": "track-",
+					"trackID": "WPd_Iz1"
+				},
+				"7,9": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "wog_WPd4",
+					"trackID": "WPd_Iz4"
+				},
+				"8,10": {
+					"electrified": false,
+					"id": "arrow-",
+					"shuntTarget": true
+				},
+				"8,2": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_A",
+					"trackID": "WPd_ItA"
+				},
+				"8,3": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_B",
+					"trackID": "WPd_ItB"
+				},
+				"8,4": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WPd_C",
+					"trackID": "WPd_ItC"
+				},
+				"8,5": {
+					"electrified": false,
+					"id": "switchD2",
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "wog_z5411"
+				},
+				"8,7": {
+					"id": "track-",
+					"trackID": "WPd_ItD"
+				},
+				"8,8": {
+					"id": "track-",
+					"trackID": "WPd_Iz1"
+				},
+				"8,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WPd_Tm13",
+					"semaphoreType": 1,
+					"trackID": "WPd_Iz4"
+				},
+				"9,2": {
+					"id": "track-",
+					"trackID": "WPd_ItA"
+				},
+				"9,3": {
+					"id": "track-",
+					"trackID": "WPd_ItB"
+				},
+				"9,4": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "wog_WPd9",
+					"trackID": "WPd_Iz9"
+				},
+				"9,5": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreID": "WPd_Tm6",
+					"semaphoreType": 1
+				},
+				"9,7": {
+					"id": "track-",
+					"trackID": "WPd_ItD"
+				},
+				"9,8": {
+					"id": "track-",
+					"trackID": "WPd_Iz11"
+				},
+				"9,9": {
+					"id": "platformP",
+					"shuntTarget": true
+				}
+			},
+			"w": 24
+		},
+		{
+			"h": 20,
+			"name": "Warszawa Wschodnia",
+			"shortcut": "WWO",
+			"tiles": {
+				"10,10": {
+					"id": "track|",
+					"trackID": "WWO_Iz22"
+				},
+				"10,11": {
+					"id": "switchL1",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "WOG_WWO22",
+					"trackID": "WWO_Iz22"
+				},
+				"10,12": {
+					"id": "switchL1",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO23",
+					"trackID": "WWO_Iz23"
+				},
+				"10,13": {
+					"id": "track|",
+					"trackID": "WWO_Iz23"
+				},
+				"10,14": {
+					"id": "curve4",
+					"trackID": "WWO_Iz23"
+				},
+				"10,15": {
+					"id": "track/",
+					"trackID": "WWO_Iz103"
+				},
+				"10,17": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO108",
+					"trackID": "WWO_Iz108"
+				},
+				"10,18": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm105",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz104"
+				},
+				"10,2": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It44"
+				},
+				"10,4": {
+					"id": "switchD3",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO14",
+					"trackID": "WWO_Iz14"
+				},
+				"10,5": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO7",
+					"trackID": "WWO_Iz7"
+				},
+				"10,6": {
+					"id": "track-",
+					"trackID": "WWO_Iz5"
+				},
+				"10,8": {
+					"id": "switchR8",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO6",
+					"trackID": "WWO_Iz6"
+				},
+				"10,9": {
+					"id": "track|",
+					"trackID": "WWO_Iz6"
+				},
+				"11,12": {
+					"id": "track\\",
+					"trackID": "WWO_Iz22"
+				},
+				"11,13": {
+					"id": "track\\",
+					"trackID": "WWO_Iz23"
+				},
+				"11,14": {
+					"id": "curve6",
+					"trackID": "WWO_Iz24"
+				},
+				"11,15": {
+					"id": "curve3",
+					"trackID": "WWO_Iz107"
+				},
+				"11,16": {
+					"id": "track/",
+					"trackID": "WWO_Iz108"
+				},
+				"11,17": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO109",
+					"trackID": "WWO_Iz109"
+				},
+				"11,18": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It3sa"
+				},
+				"11,2": {
+					"id": "buffer7",
+					"trackID": "WWO_It44"
+				},
+				"11,4": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO12",
+					"trackID": "WWO_Iz12"
+				},
+				"11,5": {
+					"id": "switchD3",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO11",
+					"trackID": "WWO_Iz11"
+				},
+				"11,6": {
+					"id": "curve7",
+					"trackID": "WWO_Iz5"
+				},
+				"11,9": {
+					"id": "switchL8",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO9",
+					"trackID": "WWO_Iz9"
+				},
+				"12,10": {
+					"id": "track\\",
+					"trackID": "WWO_Iz9"
+				},
+				"12,13": {
+					"id": "curve3",
+					"trackID": "WWO_Iz22"
+				},
+				"12,14": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO24",
+					"trackID": "WWO_Iz24"
+				},
+				"12,15": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO107",
+					"trackID": "WWO_Iz107"
+				},
+				"12,16": {
+					"id": "curve6",
+					"trackID": "WWO_Iz109"
+				},
+				"12,17": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO110",
+					"trackID": "WWO_Iz110"
+				},
+				"12,18": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_H",
+					"trackID": "WWO_Iz111"
+				},
+				"12,3": {
+					"id": "curve6",
+					"trackID": "WWO_Iz12"
+				},
+				"12,4": {
+					"id": "track-",
+					"trackID": "WWO_Iz12"
+				},
+				"12,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz11"
+				},
+				"12,6": {
+					"id": "switchL8",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO26",
+					"trackID": "WWO_Iz26"
+				},
+				"12,7": {
+					"id": "track\\",
+					"trackID": "WWO_Iz5"
+				},
+				"12,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm8",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz9"
+				},
+				"13,11": {
+					"id": "curve3",
+					"trackID": "WWO_Iz9"
+				},
+				"13,13": {
+					"id": "track-",
+					"trackID": "WWO_Iz22"
+				},
+				"13,14": {
+					"id": "track-",
+					"trackID": "WWO_Iz24"
+				},
+				"13,15": {
+					"id": "track-",
+					"trackID": "WWO_Iz107"
+				},
+				"13,16": {
+					"id": "track-",
+					"trackID": "WWO_Iz109"
+				},
+				"13,17": {
+					"id": "track-",
+					"trackID": "WWO_Iz110"
+				},
+				"13,18": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO111",
+					"trackID": "WWO_Iz111"
+				},
+				"13,3": {
+					"id": "track-",
+					"trackID": "WWO_Iz12"
+				},
+				"13,4": {
+					"id": "track-",
+					"trackID": "WWO_Iz12"
+				},
+				"13,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz11"
+				},
+				"13,6": {
+					"id": "track-",
+					"trackID": "WWO_Iz26"
+				},
+				"13,7": {
+					"id": "curve3",
+					"trackID": "WWO_Iz26"
+				},
+				"13,8": {
+					"id": "curve3",
+					"trackID": "WWO_Iz5"
+				},
+				"13,9": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItT1"
+				},
+				"14,11": {
+					"id": "track-",
+					"trackID": "WWO_Iz9"
+				},
+				"14,13": {
+					"id": "track-",
+					"trackID": "WWO_Iz22"
+				},
+				"14,14": {
+					"id": "track-",
+					"trackID": "WWO_Iz24"
+				},
+				"14,15": {
+					"id": "track-",
+					"trackID": "WWO_Iz107"
+				},
+				"14,16": {
+					"id": "track-",
+					"trackID": "WWO_Iz109"
+				},
+				"14,17": {
+					"id": "track-",
+					"trackID": "WWO_Iz110"
+				},
+				"14,18": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "WOG_WWO112",
+					"trackID": "WWO_Iz112"
+				},
+				"14,3": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J12",
+					"trackID": "WWO_Iz12"
+				},
+				"14,4": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J10",
+					"trackID": "WWO_Iz12"
+				},
+				"14,5": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J8",
+					"trackID": "WWO_Iz11"
+				},
+				"14,6": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J6",
+					"trackID": "WWO_Iz26"
+				},
+				"14,7": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J4",
+					"trackID": "WWO_Iz26"
+				},
+				"14,8": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J2",
+					"trackID": "WWO_Iz5"
+				},
+				"14,9": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm11",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz13"
+				},
+				"15,11": {
+					"id": "track-",
+					"trackID": "WWO_Iz9"
+				},
+				"15,13": {
+					"id": "track-",
+					"trackID": "WWO_Iz22"
+				},
+				"15,14": {
+					"id": "track-",
+					"trackID": "WWO_Iz24"
+				},
+				"15,15": {
+					"id": "track-",
+					"trackID": "WWO_Iz107"
+				},
+				"15,16": {
+					"id": "track-",
+					"trackID": "WWO_Iz109"
+				},
+				"15,17": {
+					"id": "track-",
+					"trackID": "WWO_Iz110"
+				},
+				"15,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz112"
+				},
+				"15,19": {
+					"id": "curve3",
+					"trackID": "WWO_Iz112"
+				},
+				"15,3": {
+					"id": "platformP",
+					"trackID": "WWO_It12"
+				},
+				"15,4": {
+					"id": "platformP",
+					"trackID": "WWO_It10"
+				},
+				"15,5": {
+					"id": "platformP",
+					"trackID": "WWO_It8"
+				},
+				"15,6": {
+					"id": "platformP",
+					"trackID": "WWO_It6"
+				},
+				"15,7": {
+					"id": "platformP",
+					"trackID": "WWO_It4"
+				},
+				"15,8": {
+					"id": "platformP",
+					"trackID": "WWO_It2"
+				},
+				"15,9": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "WOG_WWO13",
+					"trackID": "WWO_Iz13"
+				},
+				"16,10": {
+					"id": "curve3",
+					"trackID": "WWO_Iz13"
+				},
+				"16,11": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J1",
+					"trackID": "WWO_Iz9"
+				},
+				"16,13": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J3",
+					"trackID": "WWO_Iz22"
+				},
+				"16,14": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J5",
+					"trackID": "WWO_Iz24"
+				},
+				"16,15": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J24",
+					"trackID": "WWO_Iz107"
+				},
+				"16,16": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J22",
+					"trackID": "WWO_Iz109"
+				},
+				"16,17": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J20",
+					"trackID": "WWO_Iz110"
+				},
+				"16,18": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J21",
+					"trackID": "WWO_Iz112"
+				},
+				"16,19": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_J23",
+					"trackID": "WWO_Iz112"
+				},
+				"16,3": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It12",
+					"trainTarget": true
+				},
+				"16,4": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It10",
+					"trainTarget": true
+				},
+				"16,5": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It8",
+					"trainTarget": true
+				},
+				"16,6": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It6",
+					"trainTarget": true
+				},
+				"16,7": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It4",
+					"trainTarget": true
+				},
+				"16,8": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It2",
+					"trainTarget": true
+				},
+				"16,9": {
+					"id": "derailer7",
+					"trackID": "WWO_Iz13"
+				},
+				"17,10": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm13",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz13"
+				},
+				"17,11": {
+					"id": "platformP",
+					"trackID": "WWO_It1"
+				},
+				"17,13": {
+					"id": "platformP",
+					"trackID": "WWO_It3"
+				},
+				"17,14": {
+					"id": "platformP",
+					"trackID": "WWO_It5"
+				},
+				"17,15": {
+					"id": "platformP",
+					"trackID": "WWO_It24"
+				},
+				"17,16": {
+					"id": "platformP",
+					"trackID": "WWO_It22"
+				},
+				"17,17": {
+					"id": "platformP",
+					"trackID": "WWO_It20"
+				},
+				"17,18": {
+					"id": "platformP",
+					"trackID": "WWO_It21"
+				},
+				"17,19": {
+					"id": "platformP",
+					"trackID": "WWO_It23"
+				},
+				"17,3": {
+					"id": "platformP",
+					"trackID": "WWO_It12"
+				},
+				"17,4": {
+					"id": "platformP",
+					"trackID": "WWO_It10"
+				},
+				"17,5": {
+					"id": "platformP",
+					"trackID": "WWO_It8"
+				},
+				"17,6": {
+					"id": "platformP",
+					"trackID": "WWO_It6"
+				},
+				"17,7": {
+					"id": "platformP",
+					"trackID": "WWO_It4"
+				},
+				"17,8": {
+					"id": "platformP",
+					"trackID": "WWO_It2"
+				},
+				"17,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm14",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz13"
+				},
+				"18,10": {
+					"forbidTrain": true,
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It51"
+				},
+				"18,11": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It1",
+					"trainTarget": true
+				},
+				"18,13": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It3",
+					"trainTarget": true
+				},
+				"18,14": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It5",
+					"trainTarget": true
+				},
+				"18,15": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It24",
+					"trainTarget": true
+				},
+				"18,16": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It22",
+					"trainTarget": true
+				},
+				"18,17": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It20",
+					"trainTarget": true
+				},
+				"18,18": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It21",
+					"trainTarget": true
+				},
+				"18,19": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It23",
+					"trainTarget": true
+				},
+				"18,3": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K12",
+					"trackID": "WWO_Iz73"
+				},
+				"18,4": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K10",
+					"trackID": "WWO_Iz73"
+				},
+				"18,5": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K8",
+					"trackID": "WWO_Iz75"
+				},
+				"18,6": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K6",
+					"trackID": "WWO_Iz62"
+				},
+				"18,7": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K4",
+					"trackID": "WWO_Iz63"
+				},
+				"18,8": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K2",
+					"trackID": "WWO_Iz54"
+				},
+				"18,9": {
+					"forbidTrain": true,
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It52"
+				},
+				"19,10": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm22",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz32"
+				},
+				"19,11": {
+					"id": "platformP",
+					"trackID": "WWO_It1"
+				},
+				"19,13": {
+					"id": "platformP",
+					"trackID": "WWO_It3"
+				},
+				"19,14": {
+					"id": "platformP",
+					"trackID": "WWO_It5"
+				},
+				"19,15": {
+					"id": "platformP",
+					"trackID": "WWO_It24"
+				},
+				"19,16": {
+					"id": "platformP",
+					"trackID": "WWO_It22"
+				},
+				"19,17": {
+					"id": "platformP",
+					"trackID": "WWO_It20"
+				},
+				"19,18": {
+					"id": "platformP",
+					"trackID": "WWO_It21"
+				},
+				"19,19": {
+					"id": "platformP",
+					"trackID": "WWO_It23"
+				},
+				"19,3": {
+					"id": "curve7",
+					"trackID": "WWO_Iz73"
+				},
+				"19,4": {
+					"id": "track-",
+					"trackID": "WWO_Iz73"
+				},
+				"19,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz75"
+				},
+				"19,6": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO62",
+					"trackID": "WWO_Iz62"
+				},
+				"19,7": {
+					"id": "track-",
+					"trackID": "WWO_Iz63"
+				},
+				"19,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz54"
+				},
+				"19,9": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm21",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz31"
+				},
+				"2,5": {
+					"id": "arrow7",
+					"trainTarget": true
+				},
+				"2,6": {
+					"id": "arrow3",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"20,10": {
+					"id": "track-",
+					"trackID": "WWO_Iz32"
+				},
+				"20,11": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K1",
+					"trackID": "WWO_Iz34"
+				},
+				"20,12": {
+					"id": "buffer3",
+					"trackID": "WWO_It61"
+				},
+				"20,13": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K3",
+					"trackID": "WWO_Iz39"
+				},
+				"20,14": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K5",
+					"trackID": "WWO_Iz40"
+				},
+				"20,15": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K24",
+					"trackID": "WWO_Iz40"
+				},
+				"20,16": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K22",
+					"trackID": "WWO_ItK22"
+				},
+				"20,17": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K20",
+					"trackID": "WWO_ItK20"
+				},
+				"20,18": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K21",
+					"trackID": "WWO_Iz122"
+				},
+				"20,19": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_K23",
+					"trackID": "WWO_Iz121"
+				},
+				"20,4": {
+					"id": "switchD3",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO73",
+					"trackID": "WWO_Iz73"
+				},
+				"20,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz75"
+				},
+				"20,6": {
+					"id": "track-",
+					"trackID": "WWO_Iz62"
+				},
+				"20,7": {
+					"id": "switchD3",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO63",
+					"trackID": "WWO_Iz63"
+				},
+				"20,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz54"
+				},
+				"20,9": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO31",
+					"trackID": "WWO_Iz31"
+				},
+				"21,10": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO32",
+					"trackID": "WWO_Iz32"
+				},
+				"21,11": {
+					"id": "track-",
+					"trackID": "WWO_Iz34"
+				},
+				"21,12": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It61"
+				},
+				"21,13": {
+					"id": "track-",
+					"trackID": "WWO_Iz39"
+				},
+				"21,14": {
+					"id": "track-",
+					"trackID": "WWO_Iz40"
+				},
+				"21,15": {
+					"id": "track-",
+					"trackID": "WWO_Iz40"
+				},
+				"21,16": {
+					"id": "track-",
+					"trackID": "WWO_ItK22"
+				},
+				"21,17": {
+					"id": "track-",
+					"trackID": "WWO_ItK20"
+				},
+				"21,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz122"
+				},
+				"21,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz121"
+				},
+				"21,3": {
+					"id": "buffer3",
+					"trackID": "WWO_It72W"
+				},
+				"21,4": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO72",
+					"trackID": "WWO_Iz72"
+				},
+				"21,5": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO75",
+					"trackID": "WWO_Iz75"
+				},
+				"21,6": {
+					"id": "track-",
+					"trackID": "WWO_Iz65"
+				},
+				"21,7": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO64",
+					"trackID": "WWO_Iz64"
+				},
+				"21,8": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO54",
+					"trackID": "WWO_Iz54"
+				},
+				"21,9": {
+					"id": "track-",
+					"trackID": "WWO_Iz31"
+				},
+				"22,10": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO33",
+					"trackID": "WWO_Iz33"
+				},
+				"22,11": {
+					"id": "track-",
+					"trackID": "WWO_Iz34"
+				},
+				"22,12": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm25",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz38"
+				},
+				"22,13": {
+					"id": "track-",
+					"trackID": "WWO_Iz39"
+				},
+				"22,14": {
+					"id": "track-",
+					"trackID": "WWO_Iz40"
+				},
+				"22,15": {
+					"id": "track-",
+					"trackID": "WWO_Iz40"
+				},
+				"22,16": {
+					"id": "track-",
+					"trackID": "WWO_ItK22"
+				},
+				"22,17": {
+					"id": "track-",
+					"trackID": "WWO_ItK20"
+				},
+				"22,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz122"
+				},
+				"22,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz121"
+				},
+				"22,3": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO74",
+					"trackID": "WWO_Iz74"
+				},
+				"22,4": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWO_Iz72"
+				},
+				"22,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz75"
+				},
+				"22,6": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO65",
+					"trackID": "WWO_Iz65"
+				},
+				"22,7": {
+					"id": "track-",
+					"trackID": "WWO_Iz64"
+				},
+				"22,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz54"
+				},
+				"22,9": {
+					"id": "track-",
+					"trackID": "WWO_Iz31"
+				},
+				"23,10": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm24",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz33"
+				},
+				"23,11": {
+					"id": "switchD3",
+					"maxSpeedMinus": 40,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO34",
+					"trackID": "WWO_Iz34"
+				},
+				"23,12": {
+					"id": "derailer3",
+					"trackID": "WWO_Iz38"
+				},
+				"23,13": {
+					"id": "track-",
+					"trackID": "WWO_Iz39"
+				},
+				"23,14": {
+					"id": "track-",
+					"trackID": "WWO_Iz40"
+				},
+				"23,15": {
+					"id": "track-",
+					"trackID": "WWO_Iz40"
+				},
+				"23,16": {
+					"id": "track-",
+					"trackID": "WWO_ItK22"
+				},
+				"23,17": {
+					"id": "track-",
+					"trackID": "WWO_ItK20"
+				},
+				"23,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz122"
+				},
+				"23,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz121"
+				},
+				"23,2": {
+					"id": "curve6",
+					"trackID": "WWO_Iz74"
+				},
+				"23,3": {
+					"id": "track-",
+					"trackID": "WWO_Iz74"
+				},
+				"23,4": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWO_Iz72"
+				},
+				"23,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz75"
+				},
+				"23,6": {
+					"id": "track-",
+					"trackID": "WWO_Iz65"
+				},
+				"23,7": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_L4",
+					"trackID": "WWO_Iz64"
+				},
+				"23,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz54"
+				},
+				"23,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm23",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz31"
+				},
+				"24,10": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It53"
+				},
+				"24,11": {
+					"id": "track-",
+					"trackID": "WWO_Iz34"
+				},
+				"24,12": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "WOG_WWO38",
+					"trackID": "WWO_Iz38"
+				},
+				"24,13": {
+					"id": "track-",
+					"trackID": "WWO_Iz39"
+				},
+				"24,14": {
+					"id": "track-",
+					"trackID": "WWO_Iz40"
+				},
+				"24,15": {
+					"id": "curve2",
+					"trackID": "WWO_Iz40"
+				},
+				"24,16": {
+					"id": "curve2",
+					"trackID": "WWO_ItK22"
+				},
+				"24,17": {
+					"id": "track-",
+					"trackID": "WWO_ItK20"
+				},
+				"24,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz122"
+				},
+				"24,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz121"
+				},
+				"24,2": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm81",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz74"
+				},
+				"24,3": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm80",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz74"
+				},
+				"24,4": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWO_Iz72"
+				},
+				"24,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz75"
+				},
+				"24,6": {
+					"id": "track-",
+					"trackID": "WWO_Iz65"
+				},
+				"24,7": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It4a"
+				},
+				"24,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz54"
+				},
+				"24,9": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It54"
+				},
+				"25,10": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm28",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz52"
+				},
+				"25,11": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO51",
+					"trackID": "WWO_Iz51"
+				},
+				"25,12": {
+					"id": "track-",
+					"trackID": "WWO_Iz38"
+				},
+				"25,13": {
+					"id": "curve2",
+					"trackID": "WWO_Iz39"
+				},
+				"25,14": {
+					"id": "switchR2",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "WOG_WWO40",
+					"trackID": "WWO_Iz40"
+				},
+				"25,15": {
+					"id": "track/",
+					"trackID": "WWO_ItK22"
+				},
+				"25,17": {
+					"id": "track-",
+					"trackID": "WWO_ItK20"
+				},
+				"25,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz122"
+				},
+				"25,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz121"
+				},
+				"25,2": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It74"
+				},
+				"25,3": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It72"
+				},
+				"25,4": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWO_Iz72"
+				},
+				"25,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz66"
+				},
+				"25,6": {
+					"id": "track-",
+					"trackID": "WWO_Iz65"
+				},
+				"25,7": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm56",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz71"
+				},
+				"25,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz55"
+				},
+				"25,9": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm29",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz53"
+				},
+				"26,10": {
+					"id": "switchR2",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO52",
+					"trackID": "WWO_Iz52"
+				},
+				"26,11": {
+					"id": "curve2",
+					"trackID": "WWO_Iz51"
+				},
+				"26,12": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO39",
+					"trackID": "WWO_Iz39"
+				},
+				"26,13": {
+					"id": "track/",
+					"trackID": "WWO_Iz41"
+				},
+				"26,14": {
+					"id": "track/",
+					"trackID": "WWO_ItK22"
+				},
+				"26,17": {
+					"id": "track-",
+					"trackID": "WWO_ItK20"
+				},
+				"26,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz122"
+				},
+				"26,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz121"
+				},
+				"26,2": {
+					"id": "buffer7",
+					"trackID": "WWO_It74"
+				},
+				"26,3": {
+					"id": "buffer7",
+					"trackID": "WWO_It72"
+				},
+				"26,4": {
+					"electrified": false,
+					"id": "curve2",
+					"trackID": "WWO_Iz72"
+				},
+				"26,5": {
+					"id": "curve2",
+					"trackID": "WWO_Iz66"
+				},
+				"26,6": {
+					"id": "curve2",
+					"trackID": "WWO_Iz76"
+				},
+				"26,7": {
+					"id": "track-",
+					"trackID": "WWO_Iz71"
+				},
+				"26,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz55"
+				},
+				"26,9": {
+					"id": "derailerL3",
+					"trackID": "WWO_Iz53"
+				},
+				"27,10": {
+					"id": "track/",
+					"trackID": "WWO_Iz51"
+				},
+				"27,11": {
+					"id": "track/",
+					"trackID": "WWO_Iz39"
+				},
+				"27,12": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO41",
+					"trackID": "WWO_Iz41"
+				},
+				"27,13": {
+					"id": "curve6",
+					"trackID": "WWO_ItK22"
+				},
+				"27,17": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItK20"
+				},
+				"27,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz122"
+				},
+				"27,19": {
+					"id": "switchL7",
+					"maxSpeedMinus": 40,
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO121",
+					"trackID": "WWO_Iz121"
+				},
+				"27,3": {
+					"electrified": false,
+					"id": "curve6",
+					"trackID": "WWO_Iz72"
+				},
+				"27,4": {
+					"id": "curve6",
+					"trackID": "WWO_Iz66"
+				},
+				"27,5": {
+					"id": "curve6",
+					"trackID": "WWO_Iz76"
+				},
+				"27,7": {
+					"id": "track-",
+					"trackID": "WWO_Iz71"
+				},
+				"27,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz55"
+				},
+				"27,9": {
+					"id": "switchR2",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO53",
+					"trackID": "WWO_Iz53"
+				},
+				"28,10": {
+					"id": "curve6",
+					"trackID": "WWO_Iz39"
+				},
+				"28,11": {
+					"id": "curve6",
+					"trackID": "WWO_Iz42"
+				},
+				"28,12": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm114",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz124"
+				},
+				"28,13": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItK22"
+				},
+				"28,17": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm112",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz123"
+				},
+				"28,18": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO122",
+					"trackID": "WWO_Iz122"
+				},
+				"28,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz121"
+				},
+				"28,3": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWO_Iz72"
+				},
+				"28,4": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO66",
+					"trackID": "WWO_Iz66"
+				},
+				"28,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz76"
+				},
+				"28,7": {
+					"id": "track-",
+					"trackID": "WWO_Iz71"
+				},
+				"28,8": {
+					"id": "switchD2",
+					"maxSpeedMinus": 40,
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO55",
+					"trackID": "WWO_Iz55"
+				},
+				"28,9": {
+					"id": "curve6",
+					"trackID": "WWO_Iz51"
+				},
+				"29,10": {
+					"id": "track-",
+					"trackID": "WWO_Iz39"
+				},
+				"29,11": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "WOG_WWO42",
+					"trackID": "WWO_Iz42"
+				},
+				"29,12": {
+					"id": "curve7",
+					"trackID": "WWO_Iz124"
+				},
+				"29,13": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm113",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz124"
+				},
+				"29,17": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO123",
+					"trackID": "WWO_Iz123"
+				},
+				"29,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz122"
+				},
+				"29,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz121"
+				},
+				"29,3": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWO_Iz72"
+				},
+				"29,4": {
+					"id": "track-",
+					"trackID": "WWO_Iz66"
+				},
+				"29,5": {
+					"id": "switchD3",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO76",
+					"trackID": "WWO_Iz76"
+				},
+				"29,7": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO71",
+					"trackID": "WWO_Iz71"
+				},
+				"29,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz55"
+				},
+				"29,9": {
+					"id": "track-",
+					"trackID": "WWO_Iz51"
+				},
+				"3,17": {
+					"id": "arrow7",
+					"trainTarget": true
+				},
+				"3,18": {
+					"id": "arrow3",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"3,5": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_A",
+					"trackID": "WWO_ItA"
+				},
+				"3,6": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_B",
+					"trackID": "WWO_ItB"
+				},
+				"30,10": {
+					"id": "track-",
+					"trackID": "WWO_Iz39"
+				},
+				"30,11": {
+					"id": "track-",
+					"trackID": "WWO_Iz42"
+				},
+				"30,12": {
+					"id": "curve3",
+					"trackID": "WWO_Iz42"
+				},
+				"30,13": {
+					"id": "switchD3",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO124",
+					"trackID": "WWO_Iz124"
+				},
+				"30,15": {
+					"id": "buffer3",
+					"trackID": "WWO_It28W"
+				},
+				"30,16": {
+					"id": "track/",
+					"trackID": "WWO_Iz125"
+				},
+				"30,17": {
+					"id": "track-",
+					"trackID": "WWO_Iz123"
+				},
+				"30,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz122"
+				},
+				"30,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz121"
+				},
+				"30,3": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWO_Iz72"
+				},
+				"30,4": {
+					"id": "track-",
+					"trackID": "WWO_Iz66"
+				},
+				"30,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz76"
+				},
+				"30,6": {
+					"id": "curve3",
+					"trackID": "WWO_Iz76"
+				},
+				"30,7": {
+					"id": "track-",
+					"trackID": "WWO_Iz71"
+				},
+				"30,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz55"
+				},
+				"30,9": {
+					"id": "track-",
+					"trackID": "WWO_Iz51"
+				},
+				"31,10": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm32",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz39"
+				},
+				"31,11": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm33",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz42"
+				},
+				"31,12": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm34",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz42"
+				},
+				"31,13": {
+					"id": "track-",
+					"trackID": "WWO_Iz124"
+				},
+				"31,14": {
+					"id": "switchL8",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO126",
+					"trackID": "WWO_Iz126"
+				},
+				"31,15": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO125",
+					"trackID": "WWO_Iz125"
+				},
+				"31,17": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm118",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz123"
+				},
+				"31,18": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm117",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz122"
+				},
+				"31,19": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm111",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz121"
+				},
+				"31,3": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_L70",
+					"trackID": "WWO_Iz72"
+				},
+				"31,4": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_L18",
+					"trackID": "WWO_Iz66"
+				},
+				"31,5": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_L16",
+					"trackID": "WWO_Iz76"
+				},
+				"31,6": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_L14",
+					"trackID": "WWO_Iz76"
+				},
+				"31,7": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm59",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz71"
+				},
+				"31,8": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm42",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz55"
+				},
+				"31,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm30",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz51"
+				},
+				"32,10": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It3a"
+				},
+				"32,11": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It63"
+				},
+				"32,12": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It5a"
+				},
+				"32,13": {
+					"id": "track-",
+					"trackID": "WWO_Iz129"
+				},
+				"32,14": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO127",
+					"trackID": "WWO_Iz127"
+				},
+				"32,15": {
+					"id": "switchD3",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO128",
+					"trackID": "WWO_Iz128"
+				},
+				"32,17": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It20a"
+				},
+				"32,18": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It21a",
+					"trainTarget": true
+				},
+				"32,19": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It23a",
+					"trainTarget": true
+				},
+				"32,3": {
+					"electrified": false,
+					"id": "platformF",
+					"trackID": "WWO_It70"
+				},
+				"32,4": {
+					"id": "platformF",
+					"trackID": "WWO_It18"
+				},
+				"32,5": {
+					"id": "platformF",
+					"trackID": "WWO_It16"
+				},
+				"32,6": {
+					"id": "platformF",
+					"trackID": "WWO_It14"
+				},
+				"32,7": {
+					"id": "platformF",
+					"trackID": "WWO_It4b"
+				},
+				"32,8": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It2a"
+				},
+				"32,9": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It1a"
+				},
+				"33,10": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm40",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz47"
+				},
+				"33,11": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm41",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz61"
+				},
+				"33,12": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm35",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz43"
+				},
+				"33,13": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO129",
+					"trackID": "WWO_Iz129"
+				},
+				"33,14": {
+					"id": "track-",
+					"trackID": "WWO_Iz127"
+				},
+				"33,15": {
+					"id": "track-",
+					"trackID": "WWO_Iz128"
+				},
+				"33,16": {
+					"id": "switchL8",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO130",
+					"trackID": "WWO_Iz130"
+				},
+				"33,17": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm121",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz131"
+				},
+				"33,18": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_N21",
+					"trackID": "WWO_Iz132"
+				},
+				"33,19": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_N23",
+					"trackID": "WWO_Iz133"
+				},
+				"33,3": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It70",
+					"trainTarget": true
+				},
+				"33,4": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It18",
+					"trainTarget": true
+				},
+				"33,5": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It16",
+					"trainTarget": true
+				},
+				"33,6": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It14",
+					"trainTarget": true
+				},
+				"33,7": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It4b",
+					"trainTarget": true
+				},
+				"33,8": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm45",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz56"
+				},
+				"33,9": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm39",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz47"
+				},
+				"34,10": {
+					"id": "curve2",
+					"trackID": "WWO_Iz47"
+				},
+				"34,11": {
+					"id": "curve2",
+					"trackID": "WWO_Iz61"
+				},
+				"34,12": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "WOG_WWO43",
+					"trackID": "WWO_Iz43"
+				},
+				"34,13": {
+					"id": "track-",
+					"trackID": "WWO_Iz129"
+				},
+				"34,14": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_L30",
+					"trackID": "WWO_Iz127"
+				},
+				"34,15": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_L28",
+					"trackID": "WWO_Iz128"
+				},
+				"34,16": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_L26",
+					"trackID": "WWO_Iz130"
+				},
+				"34,17": {
+					"id": "switchD3",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO131",
+					"trackID": "WWO_Iz131"
+				},
+				"34,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz132"
+				},
+				"34,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz133"
+				},
+				"34,3": {
+					"electrified": false,
+					"id": "platformF",
+					"trackID": "WWO_It70"
+				},
+				"34,4": {
+					"id": "platformF",
+					"trackID": "WWO_It18"
+				},
+				"34,5": {
+					"id": "platformF",
+					"trackID": "WWO_It16"
+				},
+				"34,6": {
+					"id": "platformF",
+					"trackID": "WWO_It14"
+				},
+				"34,7": {
+					"id": "platformF",
+					"trackID": "WWO_It4b"
+				},
+				"34,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz56"
+				},
+				"34,9": {
+					"id": "track-",
+					"trackID": "WWO_Iz47"
+				},
+				"35,10": {
+					"id": "track/",
+					"trackID": "WWO_Iz61"
+				},
+				"35,11": {
+					"id": "curve6",
+					"trackID": "WWO_Iz43"
+				},
+				"35,12": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm36",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz43"
+				},
+				"35,13": {
+					"id": "track-",
+					"trackID": "WWO_Iz129"
+				},
+				"35,14": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It30"
+				},
+				"35,15": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It28"
+				},
+				"35,16": {
+					"id": "platformP",
+					"shuntTarget": true,
+					"trackID": "WWO_It26"
+				},
+				"35,17": {
+					"id": "track-",
+					"trackID": "WWO_Iz131"
+				},
+				"35,18": {
+					"id": "switchD3",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO132",
+					"trackID": "WWO_Iz132"
+				},
+				"35,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz133"
+				},
+				"35,3": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_M70",
+					"trackID": "WWO_Iz84"
+				},
+				"35,4": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_M18",
+					"trackID": "WWO_Iz83"
+				},
+				"35,5": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_M16",
+					"trackID": "WWO_Iz82"
+				},
+				"35,6": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm57",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz80"
+				},
+				"35,7": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm61",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz81"
+				},
+				"35,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz56"
+				},
+				"35,9": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO47",
+					"trackID": "WWO_Iz47"
+				},
+				"36,11": {
+					"id": "track-",
+					"trackID": "WWO_Iz43"
+				},
+				"36,12": {
+					"electrified": false,
+					"id": "arrow-",
+					"shuntTarget": true
+				},
+				"36,13": {
+					"id": "track-",
+					"trackID": "WWO_Iz129"
+				},
+				"36,14": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_N30",
+					"trackID": "WWO_Iz136"
+				},
+				"36,15": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_N28",
+					"trackID": "WWO_Iz136"
+				},
+				"36,16": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_N26",
+					"trackID": "WWO_Iz137"
+				},
+				"36,17": {
+					"id": "track-",
+					"trackID": "WWO_Iz131"
+				},
+				"36,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz132"
+				},
+				"36,19": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO133",
+					"trackID": "WWO_Iz133"
+				},
+				"36,3": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWO_Iz84"
+				},
+				"36,4": {
+					"id": "track-",
+					"trackID": "WWO_Iz83"
+				},
+				"36,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz82"
+				},
+				"36,6": {
+					"id": "track-",
+					"trackID": "WWO_Iz80"
+				},
+				"36,7": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO81",
+					"trackID": "WWO_Iz81"
+				},
+				"36,8": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO56",
+					"trackID": "WWO_Iz56"
+				},
+				"36,9": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO61",
+					"trackID": "WWO_Iz61"
+				},
+				"37,11": {
+					"id": "track-",
+					"trackID": "WWO_Iz43"
+				},
+				"37,13": {
+					"id": "curve7",
+					"trackID": "WWO_Iz129"
+				},
+				"37,14": {
+					"id": "curve7",
+					"trackID": "WWO_Iz136"
+				},
+				"37,15": {
+					"id": "track-",
+					"trackID": "WWO_Iz136"
+				},
+				"37,16": {
+					"id": "track-",
+					"trackID": "WWO_Iz137"
+				},
+				"37,17": {
+					"id": "track-",
+					"trackID": "WWO_Iz131"
+				},
+				"37,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz132"
+				},
+				"37,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz133"
+				},
+				"37,3": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWO_Iz84"
+				},
+				"37,4": {
+					"id": "track-",
+					"trackID": "WWO_Iz83"
+				},
+				"37,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz82"
+				},
+				"37,6": {
+					"id": "switchR2",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "WOG_WWO80",
+					"trackID": "WWO_Iz80"
+				},
+				"37,7": {
+					"id": "curve2",
+					"trackID": "WWO_Iz81"
+				},
+				"37,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz56"
+				},
+				"37,9": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO57",
+					"trackID": "WWO_Iz57"
+				},
+				"38,11": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm37",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz43"
+				},
+				"38,14": {
+					"id": "track\\",
+					"trackID": "WWO_Iz129"
+				},
+				"38,15": {
+					"id": "switchL4",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO136",
+					"trackID": "WWO_Iz136"
+				},
+				"38,16": {
+					"id": "track-",
+					"trackID": "WWO_Iz137"
+				},
+				"38,17": {
+					"id": "track-",
+					"trackID": "WWO_Iz131"
+				},
+				"38,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz132"
+				},
+				"38,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz133"
+				},
+				"38,3": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWO_Iz84"
+				},
+				"38,4": {
+					"id": "track-",
+					"trackID": "WWO_Iz83"
+				},
+				"38,5": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO82",
+					"trackID": "WWO_Iz82"
+				},
+				"38,6": {
+					"id": "curve6",
+					"trackID": "WWO_Iz81"
+				},
+				"38,8": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm43",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz56"
+				},
+				"38,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm44",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz57"
+				},
+				"39,11": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It5b"
+				},
+				"39,15": {
+					"id": "curve3",
+					"trackID": "WWO_Iz129"
+				},
+				"39,16": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO137",
+					"trackID": "WWO_Iz137"
+				},
+				"39,17": {
+					"id": "track-",
+					"trackID": "WWO_ItR"
+				},
+				"39,18": {
+					"id": "track-",
+					"trackID": "WWO_ItP"
+				},
+				"39,19": {
+					"id": "track-",
+					"trackID": "WWO_Iz133"
+				},
+				"39,3": {
+					"electrified": false,
+					"id": "curve7",
+					"trackID": "WWO_Iz84"
+				},
+				"39,4": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO83",
+					"trackID": "WWO_Iz83"
+				},
+				"39,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz82"
+				},
+				"39,6": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm62",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz81"
+				},
+				"39,8": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It2b"
+				},
+				"39,9": {
+					"id": "track-"
+				},
+				"4,17": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_C",
+					"trackID": "WWO_ItE4"
+				},
+				"4,18": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_D",
+					"trackID": "WWO_ItE3"
+				},
+				"4,5": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItA"
+				},
+				"4,6": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItB"
+				},
+				"40,11": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm73",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz60"
+				},
+				"40,15": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm122",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz129"
+				},
+				"40,16": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm124",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz137"
+				},
+				"40,17": {
+					"id": "track-",
+					"trackID": "WWO_ItR"
+				},
+				"40,18": {
+					"id": "track-",
+					"trackID": "WWO_ItP"
+				},
+				"40,19": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm123",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz133"
+				},
+				"40,4": {
+					"id": "switchD3",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO84",
+					"trackID": "WWO_Iz84"
+				},
+				"40,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz85"
+				},
+				"40,6": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It4c"
+				},
+				"40,8": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm47",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz49"
+				},
+				"40,9": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm46",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz48"
+				},
+				"41,11": {
+					"id": "track-",
+					"trackID": "WWO_Iz60"
+				},
+				"41,15": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItT"
+				},
+				"41,16": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItS"
+				},
+				"41,17": {
+					"id": "track-",
+					"trackID": "WWO_ItR"
+				},
+				"41,18": {
+					"id": "track-",
+					"trackID": "WWO_ItP"
+				},
+				"41,19": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItO"
+				},
+				"41,4": {
+					"id": "track-",
+					"trackID": "WWO_Iz84"
+				},
+				"41,5": {
+					"id": "switchD3",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWO85",
+					"trackID": "WWO_Iz85"
+				},
+				"41,6": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm63",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz86"
+				},
+				"41,8": {
+					"id": "track-",
+					"trackID": "WWO_Iz49"
+				},
+				"41,9": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO48",
+					"trackID": "WWO_Iz48"
+				},
+				"42,11": {
+					"id": "track-",
+					"trackID": "WWO_Iz60"
+				},
+				"42,15": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_T",
+					"trackID": "WWO_ItT"
+				},
+				"42,16": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_S",
+					"trackID": "WWO_ItS"
+				},
+				"42,17": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_R",
+					"trackID": "WWO_ItR"
+				},
+				"42,18": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_P",
+					"trackID": "WWO_ItP"
+				},
+				"42,19": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_O",
+					"trackID": "WWO_ItO"
+				},
+				"42,4": {
+					"id": "track-",
+					"trackID": "WWO_Iz84"
+				},
+				"42,5": {
+					"id": "track-",
+					"trackID": "WWO_Iz85"
+				},
+				"42,6": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO86",
+					"trackID": "WWO_Iz86"
+				},
+				"42,8": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO49",
+					"trackID": "WWO_Iz49"
+				},
+				"42,9": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO58",
+					"trackID": "WWO_Iz58"
+				},
+				"43,10": {
+					"id": "switchL8",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "WOG_WWO59",
+					"trackID": "WWO_Iz59"
+				},
+				"43,11": {
+					"id": "track-",
+					"trackID": "WWO_Iz60"
+				},
+				"43,15": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true,
+					"warp": "WPd"
+				},
+				"43,16": {
+					"id": "arrow-",
+					"trainTarget": true
+				},
+				"43,17": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"43,18": {
+					"id": "arrow3",
+					"trainTarget": true
+				},
+				"43,19": {
+					"id": "arrow3",
+					"trainTarget": true,
+					"warp": "WPd"
+				},
+				"43,4": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm64",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz84"
+				},
+				"43,5": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm65",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz85"
+				},
+				"43,6": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm66",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz86"
+				},
+				"43,8": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm48",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz49"
+				},
+				"43,9": {
+					"id": "track-",
+					"trackID": "WWO_ItW1"
+				},
+				"44,10": {
+					"id": "track-",
+					"trackID": "WWO_ItV"
+				},
+				"44,11": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO60",
+					"trackID": "WWO_Iz60"
+				},
+				"44,4": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItZ"
+				},
+				"44,5": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItY"
+				},
+				"44,6": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItX"
+				},
+				"44,8": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItW2"
+				},
+				"44,9": {
+					"id": "track-",
+					"trackID": "WWO_ItW1"
+				},
+				"45,10": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_V",
+					"trackID": "WWO_ItV"
+				},
+				"45,11": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_U",
+					"trackID": "WWO_ItU"
+				},
+				"45,4": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_Z",
+					"trackID": "WWO_ItZ"
+				},
+				"45,5": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_Y",
+					"trackID": "WWO_ItY"
+				},
+				"45,6": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_X",
+					"trackID": "WWO_ItX"
+				},
+				"45,8": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_W2",
+					"trackID": "WWO_ItW2"
+				},
+				"45,9": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_W1",
+					"trackID": "WWO_ItW1"
+				},
+				"46,10": {
+					"id": "arrow3",
+					"trainTarget": true
+				},
+				"46,11": {
+					"id": "arrow3",
+					"trainTarget": true,
+					"warp": "WPd"
+				},
+				"46,4": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"46,5": {
+					"id": "arrow-",
+					"trainTarget": true,
+					"warp": "WPd"
+				},
+				"46,6": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true,
+					"warp": "WPd"
+				},
+				"46,8": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"46,9": {
+					"id": "arrow3",
+					"trainTarget": true
+				},
+				"5,17": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_E4",
+					"trackID": "WWO_ItE4"
+				},
+				"5,18": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_E3",
+					"trackID": "WWO_ItE3"
+				},
+				"5,2": {
+					"id": "buffer3",
+					"trackID": "WWO_It40"
+				},
+				"5,5": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm1",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz1"
+				},
+				"5,6": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm2",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz2"
+				},
+				"6,17": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItC"
+				},
+				"6,18": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_ItD"
+				},
+				"6,2": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It40"
+				},
+				"6,4": {
+					"id": "buffer3",
+					"trackID": "WWO_It41"
+				},
+				"6,5": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO",
+					"trackID": "WWO_Iz1"
+				},
+				"6,6": {
+					"id": "track-",
+					"trackID": "WWO_Iz2"
+				},
+				"7,17": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm101",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz103"
+				},
+				"7,18": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWO_F",
+					"trackID": "WWO_ItF2"
+				},
+				"7,2": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm9",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz15"
+				},
+				"7,4": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It41"
+				},
+				"7,5": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm3",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz1"
+				},
+				"7,6": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "WOG_WWO2",
+					"trackID": "WWO_Iz2"
+				},
+				"8,17": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO103",
+					"trackID": "WWO_Iz103"
+				},
+				"8,18": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO104",
+					"trackID": "WWO_Iz104"
+				},
+				"8,2": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO15",
+					"trackID": "WWO_Iz15"
+				},
+				"8,4": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm10",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz14"
+				},
+				"8,5": {
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"8,6": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO3",
+					"trackID": "WWO_Iz3"
+				},
+				"9,16": {
+					"id": "track/",
+					"trackID": "WWO_Iz103"
+				},
+				"9,17": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO105",
+					"trackID": "WWO_Iz105"
+				},
+				"9,18": {
+					"id": "track-",
+					"trackID": "WWO_Iz104"
+				},
+				"9,2": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm15",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz15"
+				},
+				"9,3": {
+					"id": "track\\",
+					"trackID": "WWO_Iz15"
+				},
+				"9,4": {
+					"id": "derailerL3",
+					"trackID": "WWO_Iz14"
+				},
+				"9,5": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm5",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz7"
+				},
+				"9,6": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWO5",
+					"trackID": "WWO_Iz5"
+				},
+				"9,7": {
+					"id": "semaphore4",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWO_Tm4",
+					"semaphoreType": 1,
+					"trackID": "WWO_Iz6"
+				}
+			},
+			"w": 47
+		},
+		{
+			"h": 8,
+			"name": "Wwa Pods-Wwa Remb",
+			"shortcut": "WPd-Rem",
+			"tiles": {
+				"10,4": {
+					"id": "track-",
+					"trackID": "802-862@LK448.2"
+				},
+				"10,5": {
+					"id": "track-",
+					"trackID": "791-871@LK448.1"
+				},
+				"11,4": {
+					"id": "semaphore7",
+					"semaphoreID": "86",
+					"semaphoreNext": "80",
+					"trackID": "802-862@LK448.2"
+				},
+				"11,5": {
+					"id": "semaphore3",
+					"semaphoreID": "87",
+					"semaphoreNext": "Rem_D",
+					"trackID": "871-D1@LK448.1"
+				},
+				"12,4": {
+					"id": "track-",
+					"trackID": "862-942@LK448.2"
+				},
+				"12,5": {
+					"id": "track-",
+					"trackID": "871-D1@LK448.1"
+				},
+				"13,4": {
+					"id": "semaphore7",
+					"semaphoreID": "94",
+					"semaphoreNext": "86",
+					"trackID": "862-942@LK448.2"
+				},
+				"13,5": {
+					"id": "track-",
+					"trackID": "871-D1@LK448.1"
+				},
+				"14,4": {
+					"blockadeID": "Rem-WPd",
+					"id": "blockade7",
+					"trackID": "942-C2@LK448.2"
+				},
+				"14,5": {
+					"id": "track-",
+					"trackID": "871-D1@LK448.1"
+				},
+				"15,4": {
+					"id": "semaphore3",
+					"semaphoreID": "Rem_C",
+					"trackID": "Rem_ItC"
+				},
+				"15,5": {
+					"id": "semaphore3",
+					"semaphoreID": "Rem_D",
+					"trackID": "Rem_ItD"
+				},
+				"16,4": {
+					"id": "arrow7",
+					"trackID": "Rem_ItC",
+					"warp": "Rem"
+				},
+				"16,5": {
+					"id": "arrow3",
+					"trackID": "Rem_ItD",
+					"warp": "Rem"
+				},
+				"2,4": {
+					"id": "arrow7",
+					"trackID": "WPd_ItL",
+					"warp": "WPd"
+				},
+				"2,5": {
+					"id": "arrow3",
+					"trackID": "WPd_ItK",
+					"warp": "WPd"
+				},
+				"3,4": {
+					"id": "semaphore7",
+					"semaphoreID": "WPd_L",
+					"trackID": "WPd_ItL"
+				},
+				"3,5": {
+					"id": "semaphore7",
+					"semaphoreID": "WPd_K",
+					"trackID": "WPd_ItK"
+				},
+				"4,4": {
+					"id": "track-",
+					"trackID": "L2-682@LK448.2"
+				},
+				"4,5": {
+					"blockadeID": "WPd-Rem",
+					"id": "blockade3",
+					"trackID": "K1-652@LK448.1"
+				},
+				"5,4": {
+					"id": "semaphore7",
+					"semaphoreID": "68",
+					"semaphoreNext": "WPd_L",
+					"trackID": "L2-682@LK448.2"
+				},
+				"5,5": {
+					"id": "semaphore3",
+					"semaphoreID": "65",
+					"semaphoreNext": "71",
+					"trackID": "651-711@LK448.1"
+				},
+				"6,4": {
+					"id": "track-",
+					"trackID": "682-722@LK448.2"
+				},
+				"6,5": {
+					"id": "track-",
+					"trackID": "651-711@LK448.1"
+				},
+				"7,4": {
+					"id": "semaphore7",
+					"semaphoreID": "72",
+					"semaphoreNext": "68",
+					"trackID": "682-722@LK448.2"
+				},
+				"7,5": {
+					"id": "semaphore3",
+					"semaphoreID": "71",
+					"semaphoreNext": "79",
+					"trackID": "711-791@LK448.1"
+				},
+				"8,4": {
+					"id": "track-",
+					"trackID": "722-802@LK448.2"
+				},
+				"8,5": {
+					"id": "track-",
+					"trackID": "711-791@LK448.1"
+				},
+				"9,4": {
+					"id": "semaphore7",
+					"semaphoreID": "80",
+					"semaphoreNext": "72",
+					"trackID": "722-802@LK448.2"
+				},
+				"9,5": {
+					"id": "semaphore3",
+					"semaphoreID": "79",
+					"semaphoreNext": "87",
+					"trackID": "791-871@LK448.1"
+				}
+			},
+			"w": 17
+		},
+		{
+			"h": 6,
+			"name": "Warszawa Antoninów",
+			"shortcut": "WAt",
+			"tiles": {
+				"2,3": {
+					"id": "arrow7",
+					"semaphoreID": "WPd_N",
+					"trainTarget": true,
+					"warp": "WPd"
+				},
+				"2,4": {
+					"id": "arrow3",
+					"semaphoreID": "WPd_M",
+					"targetW24": true,
+					"trainTarget": true,
+					"warp": "WPd"
+				},
+				"3,3": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WAt_A",
+					"trackID": "WWT_ItA"
+				},
+				"3,4": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WAt_B",
+					"trackID": "WWT_ItB"
+				},
+				"4,3": {
+					"id": "switchR7",
+					"maxSpeedPlus": 50,
+					"switchID": "WOg_WWT101",
+					"trackID": "WWT_Iz101"
+				},
+				"4,4": {
+					"id": "track-",
+					"trackID": "WWT_Iz102"
+				},
+				"5,3": {
+					"id": "track-",
+					"trackID": "WWT_Iz101"
+				},
+				"5,4": {
+					"id": "switchR3",
+					"maxSpeedPlus": 50,
+					"switchID": "WOg_WWT102",
+					"trackID": "WWT_Iz102"
+				},
+				"6,3": {
+					"id": "track-",
+					"trackID": "WWT_Iz101"
+				},
+				"6,4": {
+					"id": "switchR7",
+					"maxSpeedPlus": 100,
+					"switchID": "WOg_WWT103",
+					"trackID": "WWT_Iz103"
+				},
+				"7,3": {
+					"id": "track-",
+					"trackID": "WWT_Iz101"
+				},
+				"7,4": {
+					"id": "track-",
+					"trackID": "WWT_Iz103"
+				},
+				"7,5": {
+					"id": "curve3",
+					"trackID": "WWT_Iz103"
+				},
+				"8,3": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WAt_F",
+					"trackID": "WWT_ItF"
+				},
+				"8,4": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WAt_E",
+					"trackID": "WWT_ItE"
+				},
+				"8,5": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WAt_D",
+					"trackID": "WWT_ItD"
+				},
+				"9,3": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true,
+					"warp": "Rem"
+				},
+				"9,4": {
+					"id": "arrow3",
+					"trainTarget": true,
+					"warp": "Rem"
+				},
+				"9,5": {
+					"id": "arrow-",
+					"trainTarget": true
+				}
+			},
+			"w": 10
+		},
+		{
+			"h": 16,
+			"name": "Warszawa Wschodnia Towarowa",
+			"shortcut": "WWT",
+			"tiles": {
+				"10,10": {
+					"id": "track-"
+				},
+				"10,11": {
+					"id": "track-"
+				},
+				"10,8": {
+					"id": "semaphore3"
+				},
+				"10,9": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40
+				},
+				"11,10": {
+					"id": "track-"
+				},
+				"11,11": {
+					"id": "track-"
+				},
+				"11,8": {
+					"id": "switchR2",
+					"maxSpeedPlus": 40
+				},
+				"11,9": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40
+				},
+				"12,10": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40
+				},
+				"12,11": {
+					"id": "track-"
+				},
+				"12,7": {
+					"id": "semaphore6"
+				},
+				"12,9": {
+					"id": "curve2"
+				},
+				"13,10": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40
+				},
+				"13,11": {
+					"id": "track-"
+				},
+				"13,8": {
+					"id": "curve6"
+				},
+				"14,10": {
+					"id": "track-"
+				},
+				"14,11": {
+					"id": "switchD3",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40
+				},
+				"14,8": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40
+				},
+				"15,10": {
+					"id": "track-"
+				},
+				"15,11": {
+					"id": "track-"
+				},
+				"15,12": {
+					"id": "switchL4",
+					"maxSpeedPlus": 40
+				},
+				"15,7": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40
+				},
+				"15,8": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40
+				},
+				"16,10": {
+					"id": "track-"
+				},
+				"16,11": {
+					"id": "track-"
+				},
+				"16,13": {
+					"id": "switchL8",
+					"maxSpeedPlus": 40
+				},
+				"16,6": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40
+				},
+				"16,7": {
+					"id": "track-"
+				},
+				"16,8": {
+					"id": "track-"
+				},
+				"16,9": {
+					"id": "curve3"
+				},
+				"17,10": {
+					"id": "track-"
+				},
+				"17,11": {
+					"id": "track-"
+				},
+				"17,13": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40
+				},
+				"17,14": {
+					"id": "curveDerL3"
+				},
+				"17,5": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40
+				},
+				"17,6": {
+					"id": "track-"
+				},
+				"17,7": {
+					"id": "track-"
+				},
+				"17,8": {
+					"id": "track-"
+				},
+				"17,9": {
+					"id": "track-"
+				},
+				"18,10": {
+					"id": "track-"
+				},
+				"18,11": {
+					"id": "track-"
+				},
+				"18,12": {
+					"id": "curve6"
+				},
+				"18,13": {
+					"id": "track-"
+				},
+				"18,14": {
+					"id": "semaphore7"
+				},
+				"18,4": {
+					"id": "curveDerR6"
+				},
+				"18,5": {
+					"id": "track-"
+				},
+				"18,6": {
+					"id": "track-"
+				},
+				"18,7": {
+					"id": "track-"
+				},
+				"18,8": {
+					"id": "track-"
+				},
+				"18,9": {
+					"id": "track-"
+				},
+				"19,10": {
+					"id": "semaphore7"
+				},
+				"19,11": {
+					"id": "semaphore7"
+				},
+				"19,12": {
+					"id": "semaphore7"
+				},
+				"19,13": {
+					"id": "semaphore7"
+				},
+				"19,14": {
+					"id": "platformF"
+				},
+				"19,4": {
+					"id": "semaphore7"
+				},
+				"19,5": {
+					"id": "semaphore7"
+				},
+				"19,6": {
+					"id": "semaphore7"
+				},
+				"19,7": {
+					"id": "semaphore7"
+				},
+				"19,8": {
+					"id": "semaphore7"
+				},
+				"19,9": {
+					"id": "semaphore7"
+				},
+				"20,10": {
+					"id": "platformF",
+					"trackID": "WWT_It6M"
+				},
+				"20,11": {
+					"id": "platformF",
+					"trackID": "WWT_It5M"
+				},
+				"20,12": {
+					"id": "platformF",
+					"trackID": "WWT_It3"
+				},
+				"20,13": {
+					"id": "platformF",
+					"trackID": "WWT_It5"
+				},
+				"20,14": {
+					"id": "buffer7"
+				},
+				"20,4": {
+					"id": "platformF",
+					"trackID": "WWT_It14"
+				},
+				"20,5": {
+					"id": "platformF",
+					"trackID": "WWT_It12"
+				},
+				"20,6": {
+					"id": "platformF",
+					"trackID": "WWT_It10"
+				},
+				"20,7": {
+					"id": "platformF",
+					"trackID": "WWT_It8"
+				},
+				"20,8": {
+					"id": "platformF",
+					"trackID": "WWT_It6"
+				},
+				"20,9": {
+					"id": "platformF",
+					"trackID": "WWT_It4"
+				},
+				"21,10": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_It6M",
+					"trainTarget": true
+				},
+				"21,11": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_It5M",
+					"trainTarget": true
+				},
+				"21,12": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_It3",
+					"trainTarget": true
+				},
+				"21,13": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_It5",
+					"trainTarget": true
+				},
+				"21,4": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_It14",
+					"trainTarget": true
+				},
+				"21,5": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_It12",
+					"trainTarget": true
+				},
+				"21,6": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_It10",
+					"trainTarget": true
+				},
+				"21,7": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_It8",
+					"trainTarget": true
+				},
+				"21,8": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_It6",
+					"trainTarget": true
+				},
+				"21,9": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_It4",
+					"trainTarget": true
+				},
+				"22,10": {
+					"id": "platformF",
+					"trackID": "WWT_It6M"
+				},
+				"22,11": {
+					"id": "platformF",
+					"trackID": "WWT_It5M"
+				},
+				"22,12": {
+					"id": "platformF",
+					"trackID": "WWT_It3"
+				},
+				"22,13": {
+					"id": "platformF",
+					"trackID": "WWT_It5"
+				},
+				"22,4": {
+					"id": "platformF",
+					"trackID": "WWT_It14"
+				},
+				"22,5": {
+					"id": "platformF",
+					"trackID": "WWT_It12"
+				},
+				"22,6": {
+					"id": "platformF",
+					"trackID": "WWT_It10"
+				},
+				"22,7": {
+					"id": "platformF",
+					"trackID": "WWT_It8"
+				},
+				"22,8": {
+					"id": "platformF",
+					"trackID": "WWT_It6"
+				},
+				"22,9": {
+					"id": "platformF",
+					"trackID": "WWT_It4"
+				},
+				"23,10": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_G2",
+					"trackID": "WWT_Iz45"
+				},
+				"23,11": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_G1",
+					"trackID": "WWT_Iz42"
+				},
+				"23,12": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_G3",
+					"trackID": "WWT_Iz41"
+				},
+				"23,13": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_G5",
+					"trackID": "WWT_Iz41"
+				},
+				"23,4": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm21",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz37"
+				},
+				"23,5": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreID": "WWT_G12",
+					"trackID": "WWT_Iz35"
+				},
+				"23,6": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreID": "WWT_G10",
+					"trackID": "WWT_Iz33"
+				},
+				"23,7": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_G8",
+					"trackID": "WWT_Iz32"
+				},
+				"23,8": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_G6",
+					"trackID": "WWT_Iz31"
+				},
+				"23,9": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_G4",
+					"trackID": "WWT_Iz31"
+				},
+				"24,10": {
+					"id": "track-",
+					"trackID": "WWT_Iz45"
+				},
+				"24,11": {
+					"id": "track-",
+					"trackID": "WWT_Iz42"
+				},
+				"24,12": {
+					"id": "track-",
+					"trackID": "WWT_Iz41"
+				},
+				"24,13": {
+					"id": "track-",
+					"trackID": "WWT_Iz41"
+				},
+				"24,4": {
+					"id": "track-",
+					"trackID": "WWT_Iz37"
+				},
+				"24,5": {
+					"id": "track-",
+					"trackID": "WWT_Iz35"
+				},
+				"24,6": {
+					"id": "track-",
+					"trackID": "WWT_Iz33"
+				},
+				"24,7": {
+					"id": "track-",
+					"trackID": "WWT_Iz32"
+				},
+				"24,8": {
+					"id": "track-",
+					"trackID": "WWT_Iz31"
+				},
+				"24,9": {
+					"id": "curve2",
+					"trackID": "WWT_Iz31"
+				},
+				"25,10": {
+					"id": "track-",
+					"trackID": "WWT_Iz45"
+				},
+				"25,11": {
+					"id": "track-",
+					"trackID": "WWT_Iz42"
+				},
+				"25,12": {
+					"id": "track-",
+					"trackID": "WWT_Iz41"
+				},
+				"25,13": {
+					"id": "curve2",
+					"trackID": "WWT_Iz41"
+				},
+				"25,4": {
+					"id": "track-",
+					"trackID": "WWT_Iz37"
+				},
+				"25,5": {
+					"id": "track-",
+					"trackID": "WWT_Iz35"
+				},
+				"25,6": {
+					"id": "track-",
+					"trackID": "WWT_Iz33"
+				},
+				"25,7": {
+					"id": "track-",
+					"trackID": "WWT_Iz32"
+				},
+				"25,8": {
+					"id": "switchR2",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT31",
+					"trackID": "WWT_Iz31"
+				},
+				"26,10": {
+					"id": "track-",
+					"trackID": "WWT_Iz45"
+				},
+				"26,11": {
+					"id": "track-",
+					"trackID": "WWT_Iz42"
+				},
+				"26,12": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT41",
+					"trackID": "WWT_Iz41"
+				},
+				"26,4": {
+					"id": "track-",
+					"trackID": "WWT_Iz37"
+				},
+				"26,5": {
+					"id": "track-",
+					"trackID": "WWT_Iz35"
+				},
+				"26,6": {
+					"id": "track-",
+					"trackID": "WWT_Iz33"
+				},
+				"26,7": {
+					"id": "switchD2",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWT32",
+					"trackID": "WWT_Iz32"
+				},
+				"27,10": {
+					"id": "track-",
+					"trackID": "WWT_Iz45"
+				},
+				"27,11": {
+					"id": "track-",
+					"trackID": "WWT_Iz42"
+				},
+				"27,12": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_Iz41"
+				},
+				"27,13": {
+					"id": "arrow7",
+					"trainTarget": true
+				},
+				"27,4": {
+					"id": "track-",
+					"trackID": "WWT_Iz37"
+				},
+				"27,5": {
+					"id": "track-",
+					"trackID": "WWT_Iz35"
+				},
+				"27,6": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT33",
+					"trackID": "WWT_Iz33"
+				},
+				"27,7": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_H",
+					"trackID": "WWT_ItH"
+				},
+				"28,10": {
+					"id": "track-",
+					"trackID": "WWT_Iz45"
+				},
+				"28,11": {
+					"id": "track-",
+					"trackID": "WWT_Iz42"
+				},
+				"28,12": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm41",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz43"
+				},
+				"28,13": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_J"
+				},
+				"28,4": {
+					"id": "track-",
+					"trackID": "WWT_Iz37"
+				},
+				"28,5": {
+					"id": "track-",
+					"trackID": "WWT_Iz35"
+				},
+				"28,6": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT34",
+					"trackID": "WWT_Iz34"
+				},
+				"28,7": {
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"29,10": {
+					"id": "curve2",
+					"trackID": "WWT_Iz45"
+				},
+				"29,11": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "WOG_WWT42",
+					"trackID": "WWT_Iz42"
+				},
+				"29,12": {
+					"id": "curve2",
+					"trackID": "WWT_Iz43"
+				},
+				"29,13": {
+					"id": "curve2"
+				},
+				"29,4": {
+					"id": "track-",
+					"trackID": "WWT_Iz37"
+				},
+				"29,5": {
+					"id": "switchR2",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT35",
+					"trackID": "WWT_Iz35"
+				},
+				"29,6": {
+					"id": "switchDerR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT36",
+					"trackID": "WWT_Iz36"
+				},
+				"29,7": {
+					"id": "curve7"
+				},
+				"30,10": {
+					"id": "curve6",
+					"trackID": "WWT_Iz44"
+				},
+				"30,11": {
+					"id": "switchD2",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWT43",
+					"trackID": "WWT_Iz43"
+				},
+				"30,12": {
+					"id": "curve6"
+				},
+				"30,4": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT37",
+					"trackID": "WWT_Iz37"
+				},
+				"30,6": {
+					"id": "track-",
+					"trackID": "WWT_Iz36"
+				},
+				"30,7": {
+					"id": "curve3",
+					"trackID": "WWT_Iz36"
+				},
+				"30,8": {
+					"id": "semaphore4",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm42",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz45"
+				},
+				"30,9": {
+					"id": "curve6",
+					"trackID": "WWT_Iz45"
+				},
+				"31,10": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT44",
+					"trackID": "WWT_Iz44"
+				},
+				"31,11": {
+					"id": "track-",
+					"trackID": "WWT_Iz43"
+				},
+				"31,12": {
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"31,4": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_Iz37"
+				},
+				"31,6": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm23",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz36"
+				},
+				"31,7": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm22",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz36"
+				},
+				"31,9": {
+					"id": "switchD3",
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWT45",
+					"trackID": "WWT_Iz45"
+				},
+				"32,10": {
+					"id": "switchD3",
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWT46",
+					"trackID": "WWT_Iz46"
+				},
+				"32,11": {
+					"id": "curve7",
+					"trackID": "WWT_Iz47"
+				},
+				"32,12": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm43",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz47"
+				},
+				"32,4": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm32",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz37"
+				},
+				"32,6": {
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"32,7": {
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"32,9": {
+					"id": "track-",
+					"trackID": "WWT_Iz45"
+				},
+				"33,10": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT48",
+					"trackID": "WWT_Iz48"
+				},
+				"33,11": {
+					"id": "track\\",
+					"trackID": "WWT_Iz49"
+				},
+				"33,12": {
+					"id": "switchD3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT47",
+					"trackID": "WWT_Iz47"
+				},
+				"33,3": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm31",
+					"semaphoreType": 1
+				},
+				"33,4": {
+					"id": "curve2"
+				},
+				"33,6": {
+					"id": "buffer7"
+				},
+				"33,7": {
+					"id": "buffer7"
+				},
+				"33,9": {
+					"id": "track-",
+					"trackID": "WWT_Iz50"
+				},
+				"34,10": {
+					"id": "track-",
+					"trackID": "WWT_Iz48"
+				},
+				"34,12": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT49",
+					"trackID": "WWT_Iz49"
+				},
+				"34,13": {
+					"id": "curve3",
+					"trackID": "WWT_ItW"
+				},
+				"34,3": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT"
+				},
+				"34,9": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT50",
+					"trackID": "WWT_Iz50"
+				},
+				"35,10": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm46",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz48"
+				},
+				"35,12": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_X",
+					"trackID": "WWT_ItX"
+				},
+				"35,13": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_W",
+					"trackID": "WWT_ItW"
+				},
+				"35,3": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm33",
+					"semaphoreType": 1
+				},
+				"35,9": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm47",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz50"
+				},
+				"36,10": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_ItS"
+				},
+				"36,12": {
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"36,13": {
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"36,9": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_ItR"
+				},
+				"37,10": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_S",
+					"trackID": "WWT_ItS"
+				},
+				"37,12": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_Y",
+					"trackID": "WWT_ItY"
+				},
+				"37,13": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_Z",
+					"trackID": "WWT_ItZ"
+				},
+				"37,14": {
+					"id": "arrow3",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"37,9": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_R",
+					"trackID": "WWT_ItR"
+				},
+				"38,10": {
+					"id": "track-"
+				},
+				"38,12": {
+					"id": "curve7",
+					"trackID": "WWT_ItY"
+				},
+				"38,13": {
+					"id": "curve7",
+					"trackID": "WWT_ItZ"
+				},
+				"38,14": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_P",
+					"trackID": "WWT_ItP"
+				},
+				"38,9": {
+					"id": "track-"
+				},
+				"39,10": {
+					"id": "track-"
+				},
+				"39,13": {
+					"id": "curve3",
+					"trackID": "WWT_ItT"
+				},
+				"39,14": {
+					"id": "switchR3",
+					"maxSpeedPlus": 60,
+					"switchID": "WOG_WWT51",
+					"trackID": "WWT_Iz51"
+				},
+				"39,9": {
+					"id": "track-"
+				},
+				"40,10": {
+					"id": "track-"
+				},
+				"40,13": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_T",
+					"trackID": "WWT_ItT"
+				},
+				"40,14": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_U",
+					"trackID": "WWT_ItU"
+				},
+				"40,9": {
+					"id": "track-"
+				},
+				"41,10": {
+					"id": "arrow3",
+					"trainTarget": true
+				},
+				"41,13": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"41,14": {
+					"id": "arrow3",
+					"trainTarget": true
+				},
+				"41,9": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"5,10": {
+					"id": "arrow7"
+				},
+				"5,11": {
+					"id": "arrow3"
+				},
+				"6,10": {
+					"id": "semaphore3"
+				},
+				"6,11": {
+					"id": "semaphore3"
+				},
+				"6,9": {
+					"id": "semaphore3"
+				},
+				"7,10": {
+					"id": "platformF"
+				},
+				"7,11": {
+					"id": "track-"
+				},
+				"7,9": {
+					"id": "track-"
+				},
+				"8,10": {
+					"id": "semaphore3"
+				},
+				"8,11": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40
+				},
+				"8,8": {
+					"id": "buffer3"
+				},
+				"8,9": {
+					"id": "track-"
+				},
+				"9,10": {
+					"id": "switchD2",
+					"maxSpeedMinus": 100,
+					"maxSpeedPlus": 40
+				},
+				"9,11": {
+					"id": "track-"
+				},
+				"9,8": {
+					"id": "platformF"
+				},
+				"9,9": {
+					"id": "track-"
+				}
+			},
+			"w": 43
 		}
 	]
 }

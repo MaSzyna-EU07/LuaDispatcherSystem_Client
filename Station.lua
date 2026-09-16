@@ -745,7 +745,7 @@ function Station:getTileBackgroundColor(tile)
 	if _Picker.highlightMode == TileHighlightMode.OFF or _Picker.mode ~= "properties" then
 		return TileBackgroundColor.REGULAR
 	end
-	local trackWarning = tile.trackID and (not tile:isTrack() and not tile:isExitPoint())
+	local trackWarning = tile.trackID and (not tile:isTrack() and not tile:isBlockadeGenerator() and not tile:isExitPoint())
 	local switchWarning = tile.switchID and not tile:isSwitch()
 	local semaphoreWarning = tile.semaphoreID and (not tile:isSemaphore() and not tile:isExitPoint())
 	if trackWarning or switchWarning or semaphoreWarning then
