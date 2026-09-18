@@ -84,7 +84,7 @@ function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBi
 	if data.backgroundXY then
 		_Tracks:drawTile(data.backgroundXY[1], data.backgroundXY[2], x, y, scale)
 	end
-	if data.tracks and not data.blockade then
+	if data.tracks and not data.exit and not data.blockade then
 		for i = 1, 8 do
 			if _Utils.getBit(data.tracks, i) then
 				_Tracks:drawTile(i, 1, x, y, scale)
@@ -100,7 +100,7 @@ function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBi
 	-- Track
 	local color = _GetTrackColor(electrified, occupied, reserved, alarm)
 	love.graphics.setColor(color[1], color[2], color[3], opacity)
-	if data.tracks and not data.blockade then
+	if data.tracks and not data.exit and not data.blockade then
 		for i = 1, 8 do
 			local dim = _Utils.getBit(switchDimBits, i)
 			if _Utils.getBit(data.tracks, i) and not dim and (not alarm or _Time % 0.4 < 0.2) then

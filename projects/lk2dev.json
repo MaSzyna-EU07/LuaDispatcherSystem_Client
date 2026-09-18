@@ -1,6 +1,7 @@
 {
 	"stationIndex": {
 		"Kot": 8,
+		"Kot-Sdl": 15,
 		"MMz": 2,
 		"MMz-Mia": 1,
 		"Mia": 4,
@@ -22,7 +23,7 @@
 			"shortcut": "MMz-Mia",
 			"tiles": {
 				"10,2": {
-					"command": "b MMz-Mia p",
+					"command": "b Mia-MMz p",
 					"id": "square"
 				},
 				"10,4": {
@@ -38,21 +39,19 @@
 					"id": "square"
 				},
 				"11,2": {
-					"command": "b MMz-Mia n",
+					"command": "b Mia-MMz n",
 					"id": "square"
 				},
 				"11,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "460",
-					"semaphoreNext": "444",
 					"trackID": "4442-4602@LK2.2"
 				},
 				"11,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "461N",
-					"semaphoreNext": "445N",
 					"trackID": "4451-4611@LK2.1"
 				},
 				"11,7": {
@@ -66,14 +65,12 @@
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "460N",
-					"semaphoreNext": "480N",
 					"trackID": "4602-4802@LK2.2"
 				},
 				"12,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "461",
-					"semaphoreNext": "481",
 					"trackID": "4611-4811@LK2.1"
 				},
 				"12,7": {
@@ -91,28 +88,24 @@
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "480",
-					"semaphoreNext": "460",
 					"trackID": "4602-4802@LK2.2"
 				},
 				"14,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "481N",
-					"semaphoreNext": "461N",
 					"trackID": "4611-4811@LK2.1"
 				},
 				"15,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "480N",
-					"semaphoreNext": "Mia_Y",
 					"trackID": "4802-Y2@LK2.2"
 				},
 				"15,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "481",
-					"semaphoreNext": "493",
 					"trackID": "4811-4931@LK2.1"
 				},
 				"16,4": {
@@ -139,22 +132,30 @@
 				"18,4": {
 					"id": "arrow7",
 					"trackID": "Mia_ItY",
-					"warp": "Mia"
+					"warp": "Mia",
+					"warpID": "MiaN",
+					"warpTargetID": "MMz"
 				},
 				"18,5": {
 					"id": "arrow3",
 					"trackID": "4811-4931@LK2.1",
-					"warp": "Mia"
+					"warp": "Mia",
+					"warpID": "Mrz",
+					"warpTargetID": "MMzN"
 				},
 				"2,4": {
 					"id": "arrow7",
 					"trackID": "MMz_ItZ",
-					"warp": "MMz"
+					"warp": "MMz",
+					"warpID": "MMz",
+					"warpTargetID": "MiaN"
 				},
 				"2,5": {
 					"id": "arrow3",
 					"trackID": "MMz_ItY",
-					"warp": "MMz"
+					"warp": "MMz",
+					"warpID": "MMzN",
+					"warpTargetID": "Mrz"
 				},
 				"3,4": {
 					"id": "semaphore7",
@@ -185,32 +186,28 @@
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "430",
-					"semaphoreNext": "MMz_Z",
 					"trackID": "Z2-4302@LK2.2"
 				},
 				"5,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "431N",
-					"semaphoreNext": "MMz_Y",
 					"trackID": "Y1-4311@LK2.1"
 				},
 				"6,2": {
-					"command": "b MMz-Mia x",
+					"command": "b Mia-MMz x",
 					"id": "square"
 				},
 				"6,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "430N",
-					"semaphoreNext": "444N",
 					"trackID": "4302-4442@LK2.2"
 				},
 				"6,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "431",
-					"semaphoreNext": "445",
 					"trackID": "4311-4451@LK2.1"
 				},
 				"6,7": {
@@ -235,14 +232,12 @@
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "444",
-					"semaphoreNext": "430",
 					"trackID": "4302-4442@LK2.2"
 				},
 				"8,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "445N",
-					"semaphoreNext": "431N",
 					"trackID": "4311-4451@LK2.1"
 				},
 				"9,2": {
@@ -252,14 +247,12 @@
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "444N",
-					"semaphoreNext": "460N",
 					"trackID": "4442-4602@LK2.2"
 				},
 				"9,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "445",
-					"semaphoreNext": "461",
 					"trackID": "4451-4611@LK2.1"
 				},
 				"9,7": {
@@ -1326,13 +1319,17 @@
 					"targetW24": true,
 					"trackID": "Z2-4302@LK2.2",
 					"trainTarget": true,
-					"warp": "MMz-Mia"
+					"warp": "MMz-Mia",
+					"warpID": "MiaN",
+					"warpTargetID": "MMz"
 				},
 				"45,6": {
 					"id": "arrow3",
 					"trackID": "Y1-4311@LK2.1",
 					"trainTarget": true,
-					"warp": "MMz-Mia"
+					"warp": "MMz-Mia",
+					"warpID": "Mrz",
+					"warpTargetID": "MMzN"
 				},
 				"5,4": {
 					"id": "buffer3",
@@ -1716,7 +1713,9 @@
 					"semaphoreID": "558",
 					"trackID": "5582-A2@LK2.2",
 					"trainTarget": true,
-					"warp": "Mia-Mrz"
+					"warp": "Mia-Mrz",
+					"warpID": "Mia",
+					"warpTargetID": "MrzN"
 				},
 				"2,6": {
 					"id": "arrow3",
@@ -1724,7 +1723,9 @@
 					"targetW24": true,
 					"trackID": "5571-B1@LK2.1",
 					"trainTarget": true,
-					"warp": "Mia-Mrz"
+					"warp": "Mia-Mrz",
+					"warpID": "MMzN",
+					"warpTargetID": "Mrz"
 				},
 				"20,2": {
 					"electrified": false,
@@ -2168,16 +2169,20 @@
 			"tiles": {
 				"10,4": {
 					"id": "arrow7",
-					"semaphoreID": "522",
+					"semaphoreID": "522N",
 					"targetW24": true,
 					"trackID": "Z2-5222@LK2.2",
 					"trainTarget": true,
-					"warp": "Mia-Mrz"
+					"warp": "Mia-Mrz",
+					"warpID": "MrzN",
+					"warpTargetID": "Mia"
 				},
 				"10,5": {
 					"id": "arrow3",
 					"trackID": "5071-5231@LK2.1",
-					"warp": "Mia-Mrz"
+					"warp": "Mia-Mrz",
+					"warpID": "Mrz",
+					"warpTargetID": "MMzN"
 				},
 				"2,3": {
 					"id": "arrow-",
@@ -2188,12 +2193,16 @@
 					"semaphoreID": "480",
 					"trackID": "4802-Y2@LK2.2",
 					"trainTarget": true,
-					"warp": "MMz-Mia"
+					"warp": "MMz-Mia",
+					"warpID": "MMz",
+					"warpTargetID": "MiaN"
 				},
 				"2,5": {
 					"id": "arrow3",
 					"trackID": "4811-4931@LK2.1",
-					"warp": "MMz-Mia"
+					"warp": "MMz-Mia",
+					"warpID": "MMzN",
+					"warpTargetID": "Mrz"
 				},
 				"3,3": {
 					"id": "track-"
@@ -2226,7 +2235,6 @@
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "493N",
-					"semaphoreNext": "481N",
 					"trackID": "4811-4931@LK2.1"
 				},
 				"5,3": {
@@ -2244,7 +2252,6 @@
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "493",
-					"semaphoreNext": "507",
 					"trackID": "4931-5071@LK2.1"
 				},
 				"6,3": {
@@ -2269,7 +2276,6 @@
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "507N",
-					"semaphoreNext": "493N",
 					"trackID": "4931-5071@LK2.1"
 				},
 				"8,4": {
@@ -2284,7 +2290,6 @@
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "507",
-					"semaphoreNext": "523",
 					"trackID": "5071-5231@LK2.1"
 				},
 				"9,4": {
@@ -2321,28 +2326,24 @@
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "558",
-					"semaphoreNext": "542",
 					"trackID": "5422-5582@LK2.2"
 				},
 				"11,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "557N",
-					"semaphoreNext": "543N",
 					"trackID": "5431-5571@LK2.1"
 				},
 				"12,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "558N",
-					"semaphoreNext": "Mrz_A",
 					"trackID": "5582-A2@LK2.2"
 				},
 				"12,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "557",
-					"semaphoreNext": "Mrz_B",
 					"trackID": "5571-B1@LK2.1"
 				},
 				"13,4": {
@@ -2373,22 +2374,30 @@
 				"15,4": {
 					"id": "arrow7",
 					"trackID": "Mrz_ItA",
-					"warp": "Mrz"
+					"warp": "Mrz",
+					"warpID": "MrzN",
+					"warpTargetID": "Mia"
 				},
 				"15,5": {
 					"id": "arrow3",
 					"trackID": "Mrz_ItB",
-					"warp": "Mrz"
+					"warp": "Mrz",
+					"warpID": "Mrz",
+					"warpTargetID": "MMzN"
 				},
 				"2,4": {
 					"id": "arrow7",
 					"trackID": "Mia_ItZ",
-					"warp": "Mia"
+					"warp": "Mia",
+					"warpID": "Mia",
+					"warpTargetID": "MrzN"
 				},
 				"2,5": {
 					"id": "arrow3",
 					"trackID": "5071-5231@LK2.1",
-					"warp": "Mia"
+					"warp": "Mia",
+					"warpID": "MMzN",
+					"warpTargetID": "Mrz"
 				},
 				"3,4": {
 					"id": "semaphore7",
@@ -2414,28 +2423,24 @@
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "522",
-					"semaphoreNext": "Mia_Z",
 					"trackID": "Z2-5222@LK2.2"
 				},
 				"5,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "523N",
-					"semaphoreNext": "507N",
 					"trackID": "5071-5231@LK2.1"
 				},
 				"6,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "522N",
-					"semaphoreNext": "542N",
 					"trackID": "5222-5422@LK2.2"
 				},
 				"6,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "523",
-					"semaphoreNext": "543",
 					"trackID": "5231-5431@LK2.1"
 				},
 				"7,2": {
@@ -2453,21 +2458,19 @@
 					"id": "letterN"
 				},
 				"8,2": {
-					"command": "b Mia-Mrz p",
+					"command": "b Mrz-Mia p",
 					"id": "square"
 				},
 				"8,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "542",
-					"semaphoreNext": "522",
 					"trackID": "5222-5422@LK2.2"
 				},
 				"8,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "543N",
-					"semaphoreNext": "523N",
 					"trackID": "5231-5431@LK2.1"
 				},
 				"8,7": {
@@ -2475,21 +2478,19 @@
 					"id": "square"
 				},
 				"9,2": {
-					"command": "b Mia-Mrz n",
+					"command": "b Mrz-Mia n",
 					"id": "square"
 				},
 				"9,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "542N",
-					"semaphoreNext": "558N",
 					"trackID": "5422-5582@LK2.2"
 				},
 				"9,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "543",
-					"semaphoreNext": "557",
 					"trackID": "5431-5571@LK2.1"
 				},
 				"9,7": {
@@ -3198,6 +3199,7 @@
 				},
 				"2,9": {
 					"id": "arrow7",
+					"semaphoreID": "94",
 					"trackID": "942-C2@LK448.2",
 					"trainTarget": true,
 					"warp": "WPd-Rem"
@@ -4468,12 +4470,14 @@
 				},
 				"3,3": {
 					"id": "semaphore3",
+					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Kot_A",
 					"trackID": "Kot_ItA"
 				},
 				"3,4": {
 					"id": "semaphore3",
+					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Kot_B",
 					"trackID": "Kot_ItB"
@@ -4520,12 +4524,14 @@
 				},
 				"8,3": {
 					"id": "semaphore7",
+					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Kot_E",
 					"trackID": "Kot_ItE"
 				},
 				"8,4": {
 					"id": "semaphore7",
+					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Kot_D",
 					"trackID": "Kot_ItD"
@@ -4535,13 +4541,19 @@
 					"semaphoreID": "792N",
 					"targetW24": true,
 					"trackID": "E2-7922@LK2.2",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Kot-Sdl",
+					"warpID": "SdlN",
+					"warpTargetID": "Kot"
 				},
 				"9,4": {
 					"id": "arrow3",
 					"semaphoreID": "791",
 					"trackID": "D1-7911@LK2.1",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Kot-Sdl",
+					"warpID": "Sdl",
+					"warpTargetID": "KotN"
 				}
 			},
 			"w": 10
@@ -4586,6 +4598,7 @@
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_A",
 					"trackID": "Sdl_ItA"
 				},
@@ -4593,6 +4606,7 @@
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_B",
 					"trackID": "Sdl_ItB"
 				},
@@ -4760,6 +4774,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_C",
 					"trackID": "Sdl_ItC"
 				},
@@ -4846,12 +4861,22 @@
 				},
 				"2,8": {
 					"id": "arrow7",
-					"trainTarget": true
+					"semaphoreID": "902",
+					"trackID": "9022-A2@LK2.2",
+					"trainTarget": true,
+					"warp": "Kot-Sdl",
+					"warpID": "Kot",
+					"warpTargetID": "SdlN"
 				},
 				"2,9": {
 					"id": "arrow3",
+					"semaphoreID": "901N",
 					"targetW24": true,
-					"trainTarget": true
+					"trackID": "9011-B1@LK2.1",
+					"trainTarget": true,
+					"warp": "Kot-Sdl",
+					"warpID": "KotN",
+					"warpTargetID": "Sdl"
 				},
 				"20,10": {
 					"id": "switchR7",
@@ -4871,6 +4896,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_G2",
 					"trackID": "Sdl_Iz6"
 				},
@@ -4879,6 +4905,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_F1",
 					"trackID": "Sdl_Iz10"
 				},
@@ -4887,6 +4914,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_F3",
 					"trackID": "Sdl_Iz12"
 				},
@@ -4905,6 +4933,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_G4",
 					"trackID": "Sdl_Iz8"
 				},
@@ -4925,6 +4954,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_F5",
 					"trackID": "Sdl_Iz12"
 				},
@@ -4937,6 +4967,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_G6",
 					"trackID": "Sdl_Iz9"
 				},
@@ -4965,6 +4996,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_G10",
 					"trackID": "Sdl_Iz9"
 				},
@@ -5090,6 +5122,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_J3",
 					"trackID": "Sdl_Iz19"
 				},
@@ -5122,6 +5155,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_K4",
 					"semaphoreShortSpeed": {
 						"60": 100
@@ -5182,6 +5216,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_K2",
 					"semaphoreShortSpeed": {
 						"60": 100
@@ -5193,6 +5228,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_J1",
 					"trackID": "Sdl_Iz20"
 				},
@@ -5254,10 +5290,12 @@
 					"id": "track-"
 				},
 				"3,8": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9022-A2@LK2.2"
 				},
 				"3,9": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9011-B1@LK2.1"
 				},
 				"30,11": {
 					"id": "track-",
@@ -5290,6 +5328,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_N8",
 					"trackID": "Sdl_Iz16"
 				},
@@ -5298,6 +5337,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_N6",
 					"trackID": "Sdl_Iz15"
 				},
@@ -5306,6 +5346,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_L4",
 					"semaphoreShortSpeed": {
 						"0": 100
@@ -5317,6 +5358,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_L2",
 					"semaphoreShortSpeed": {
 						"0": 100
@@ -5328,6 +5370,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_L1",
 					"semaphoreShortSpeed": {
 						"0": 100
@@ -5339,6 +5382,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_M5",
 					"semaphoreShortSpeed": {
 						"0": 40
@@ -5350,6 +5394,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_M7",
 					"semaphoreShortSpeed": {
 						"0": 40
@@ -5899,10 +5944,12 @@
 					"id": "track-"
 				},
 				"4,8": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9022-A2@LK2.2"
 				},
 				"4,9": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9011-B1@LK2.1"
 				},
 				"40,11": {
 					"id": "track-",
@@ -5959,6 +6006,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_R5",
 					"trackID": "Sdl_Iz38"
 				},
@@ -5967,6 +6015,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_R7",
 					"trackID": "Sdl_Iz37"
 				},
@@ -6058,6 +6107,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_P8",
 					"trackID": "Sdl_Iz34"
 				},
@@ -6066,6 +6116,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_P6",
 					"trackID": "Sdl_Iz34"
 				},
@@ -6155,6 +6206,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_P4",
 					"trackID": "Sdl_Iz36"
 				},
@@ -6163,6 +6215,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_P2",
 					"trackID": "Sdl_ItP2"
 				},
@@ -6171,6 +6224,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_R1",
 					"trackID": "Sdl_Iz40"
 				},
@@ -6342,10 +6396,12 @@
 					"id": "track-"
 				},
 				"5,8": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9022-A2@LK2.2"
 				},
 				"5,9": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9011-B1@LK2.1"
 				},
 				"50,12": {
 					"id": "platformP",
@@ -6470,6 +6526,7 @@
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_X",
 					"trackID": "Sdl_ItX"
 				},
@@ -6477,6 +6534,7 @@
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_Z",
 					"trackID": "Sdl_ItZ"
 				},
@@ -6491,6 +6549,7 @@
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_Y",
 					"trackID": "Sdl_ItY"
 				},
@@ -6520,10 +6579,12 @@
 					"id": "track-"
 				},
 				"6,8": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9022-A2@LK2.2"
 				},
 				"6,9": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9011-B1@LK2.1"
 				},
 				"7,10": {
 					"id": "switchR7",
@@ -6543,10 +6604,12 @@
 					"id": "track-"
 				},
 				"7,8": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9022-A2@LK2.2"
 				},
 				"7,9": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9011-B1@LK2.1"
 				},
 				"8,10": {
 					"id": "track-"
@@ -6564,10 +6627,12 @@
 					"id": "track-"
 				},
 				"8,8": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9022-A2@LK2.2"
 				},
 				"8,9": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9011-B1@LK2.1"
 				},
 				"9,10": {
 					"id": "platformP",
@@ -6589,10 +6654,12 @@
 					"id": "track-"
 				},
 				"9,8": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9022-A2@LK2.2"
 				},
 				"9,9": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "9011-B1@LK2.1"
 				}
 			},
 			"w": 57
@@ -7064,6 +7131,7 @@
 				},
 				"23,8": {
 					"id": "arrow3",
+					"semaphoreID": "65",
 					"trackID": "WPd_K1-652@LK448.1",
 					"trainTarget": true,
 					"warp": "WPd-Rem"
@@ -10393,13 +10461,11 @@
 				"11,4": {
 					"id": "semaphore7",
 					"semaphoreID": "86",
-					"semaphoreNext": "80",
 					"trackID": "802-862@LK448.2"
 				},
 				"11,5": {
 					"id": "semaphore3",
 					"semaphoreID": "87",
-					"semaphoreNext": "Rem_D",
 					"trackID": "871-D1@LK448.1"
 				},
 				"12,4": {
@@ -10413,7 +10479,6 @@
 				"13,4": {
 					"id": "semaphore7",
 					"semaphoreID": "94",
-					"semaphoreNext": "86",
 					"trackID": "862-942@LK448.2"
 				},
 				"13,5": {
@@ -10489,13 +10554,11 @@
 				"5,4": {
 					"id": "semaphore7",
 					"semaphoreID": "68",
-					"semaphoreNext": "WPd_L",
 					"trackID": "L2-682@LK448.2"
 				},
 				"5,5": {
 					"id": "semaphore3",
 					"semaphoreID": "65",
-					"semaphoreNext": "71",
 					"trackID": "651-711@LK448.1"
 				},
 				"6,4": {
@@ -10509,13 +10572,11 @@
 				"7,4": {
 					"id": "semaphore7",
 					"semaphoreID": "72",
-					"semaphoreNext": "68",
 					"trackID": "682-722@LK448.2"
 				},
 				"7,5": {
 					"id": "semaphore3",
 					"semaphoreID": "71",
-					"semaphoreNext": "79",
 					"trackID": "711-791@LK448.1"
 				},
 				"8,4": {
@@ -10529,13 +10590,11 @@
 				"9,4": {
 					"id": "semaphore7",
 					"semaphoreID": "80",
-					"semaphoreNext": "72",
 					"trackID": "722-802@LK448.2"
 				},
 				"9,5": {
 					"id": "semaphore3",
 					"semaphoreID": "79",
-					"semaphoreNext": "87",
 					"trackID": "791-871@LK448.1"
 				}
 			},
@@ -11697,6 +11756,276 @@
 				}
 			},
 			"w": 43
+		},
+		{
+			"h": 8,
+			"name": "Kotuń-Siedlce",
+			"shortcut": "Kot-Sdl",
+			"tiles": {
+				"10,4": {
+					"id": "track-",
+					"trackID": "8142-8362@LK2.2"
+				},
+				"10,5": {
+					"id": "track-",
+					"trackID": "8131-8351@LK2.1"
+				},
+				"11,4": {
+					"id": "semaphore7",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "836",
+					"trackID": "8142-8362@LK2.2"
+				},
+				"11,5": {
+					"id": "semaphore7",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "835N",
+					"trackID": "8131-8351@LK2.1"
+				},
+				"12,4": {
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "836N",
+					"trackID": "8362-8562@LK2.2"
+				},
+				"12,5": {
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "835",
+					"trackID": "8351-8571@LK2.1"
+				},
+				"13,4": {
+					"id": "track-",
+					"trackID": "8362-8562@LK2.2"
+				},
+				"13,5": {
+					"id": "track-",
+					"trackID": "8351-8571@LK2.1"
+				},
+				"14,4": {
+					"id": "semaphore7",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "856",
+					"trackID": "8362-8562@LK2.2"
+				},
+				"14,5": {
+					"id": "semaphore7",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "857N",
+					"trackID": "8351-8571@LK2.1"
+				},
+				"15,4": {
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "856N",
+					"trackID": "8562-8822@LK2.2"
+				},
+				"15,5": {
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "857",
+					"trackID": "8571-8811@LK2.1"
+				},
+				"16,4": {
+					"id": "track-",
+					"trackID": "8562-8822@LK2.2"
+				},
+				"16,5": {
+					"id": "track-",
+					"trackID": "8571-8811@LK2.1"
+				},
+				"17,4": {
+					"id": "semaphore7",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "882",
+					"trackID": "8562-8822@LK2.2"
+				},
+				"17,5": {
+					"id": "semaphore7",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "881N",
+					"trackID": "8571-8811@LK2.1"
+				},
+				"18,4": {
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "882N",
+					"trackID": "8822-9022@LK2.2"
+				},
+				"18,5": {
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "881",
+					"trackID": "8811-9011@LK2.1"
+				},
+				"19,4": {
+					"id": "track-",
+					"trackID": "8822-9022@LK2.2"
+				},
+				"19,5": {
+					"id": "track-",
+					"trackID": "8811-9011@LK2.1"
+				},
+				"2,4": {
+					"id": "arrow7",
+					"trackID": "Kot_ItE",
+					"warp": "Kot",
+					"warpID": "Kot",
+					"warpTargetID": "SdlN"
+				},
+				"2,5": {
+					"id": "arrow3",
+					"trackID": "Kot_ItD",
+					"warp": "Kot",
+					"warpID": "KotN",
+					"warpTargetID": "Sdl"
+				},
+				"20,4": {
+					"id": "semaphore7",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "902",
+					"trackID": "8822-9022@LK2.2"
+				},
+				"20,5": {
+					"id": "semaphore7",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "901N",
+					"trackID": "8811-9011@LK2.1"
+				},
+				"21,4": {
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "902N",
+					"trackID": "9022-A2@LK2.2"
+				},
+				"21,5": {
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "901",
+					"trackID": "9011-B1@LK2.1"
+				},
+				"22,4": {
+					"blockadeID": "Sdl-Kot",
+					"id": "blockade7",
+					"trackID": "9022-A2@LK2.2"
+				},
+				"22,5": {
+					"id": "track-",
+					"trackID": "9011-B1@LK2.1"
+				},
+				"23,4": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
+					"semaphoreID": "Sdl_A",
+					"trackID": "Sdl_ItA"
+				},
+				"23,5": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
+					"semaphoreID": "Sdl_B",
+					"trackID": "Sdl_ItB"
+				},
+				"24,4": {
+					"id": "arrow7",
+					"trackID": "Sdl_ItA",
+					"warp": "Sdl",
+					"warpID": "SdlN",
+					"warpTargetID": "Kot"
+				},
+				"24,5": {
+					"id": "arrow3",
+					"trackID": "Sdl_ItB",
+					"warp": "Sdl",
+					"warpID": "Sdl",
+					"warpTargetID": "KotN"
+				},
+				"3,4": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
+					"semaphoreID": "Kot_E",
+					"trackID": "Kot_ItE"
+				},
+				"3,5": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreFourPhase": true,
+					"semaphoreID": "Kot_D",
+					"trackID": "Kot_ItD"
+				},
+				"4,4": {
+					"id": "track-",
+					"trackID": "E2-7922@LK2.2"
+				},
+				"4,5": {
+					"blockadeID": "Kot-Sdl",
+					"id": "blockade3",
+					"trackID": "D1-7911@LK2.1"
+				},
+				"5,4": {
+					"id": "semaphore7",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "792",
+					"trackID": "E2-7922@LK2.2"
+				},
+				"5,5": {
+					"id": "semaphore7",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "791N",
+					"trackID": "D1-7911@LK2.1"
+				},
+				"6,4": {
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "792N",
+					"trackID": "7922-8142@LK2.2"
+				},
+				"6,5": {
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "791",
+					"trackID": "7911-8131@LK2.1"
+				},
+				"7,4": {
+					"id": "track-",
+					"trackID": "7922-8142@LK2.2"
+				},
+				"7,5": {
+					"id": "track-",
+					"trackID": "7911-8131@LK2.1"
+				},
+				"8,4": {
+					"id": "semaphore7",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "814",
+					"trackID": "7922-8142@LK2.2"
+				},
+				"8,5": {
+					"id": "semaphore7",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "813N",
+					"trackID": "7911-8131@LK2.1"
+				},
+				"9,4": {
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "814N",
+					"trackID": "8142-8362@LK2.2"
+				},
+				"9,5": {
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "813",
+					"trackID": "8131-8351@LK2.1"
+				}
+			},
+			"w": 25
 		}
 	]
 }

@@ -55,7 +55,7 @@ function UIPickerPane:new(ui)
 	self.semaphoreShortSpeed = self.ui:addInput("picker", "semaphoreShortSpeed", 22, 4, 8, 1, self, self.updateSemaphoreShortSpeed)
 	self.semaphoreShortSpeed.tip = "Prędkość dla skróconej drogi hamowania w km/h.\nJeżeli wielostopniowa, to można wpisać dane w poniższym formacie:\n0:40,40:100\n- Przy następnym Stój, ogranicz do 40 km/h\n- Przy następnym 40 km/h, ogranicz do 100 km/h\n- Powyżej 40 km/h, nie ograniczaj"
 	self.ui:addLabel("picker", nil, "Nazwa blokady:", 20, 5, 6, 1)
-	self.blockadeID = self.ui:addInput("picker", "blockadeID", 26, 5, 4, 1, self, self.updateBlockadeID, self.confirmBlockadeID)
+	self.blockadeID = self.ui:addInput("picker", "blockadeID", 26, 5, 4, 1, self, self.updateBlockadeID)
 	-- Fourth column
 	self.ui:addLabel("picker", nil, "Możliwość podania:", 30, 0, 10, 1)
 	self.semaphoreAllowTrain = self.ui:addCheckbox("picker", "semaphoreAllowTrain", "poc.", 31, 1, 1, 1, self, self.updateSemaphoreAllowTrain)
@@ -73,6 +73,10 @@ function UIPickerPane:new(ui)
 	self.semaphoreNext.tip = "Wskazuje następną prędkość w km/h (puste = Vmax) lub ID następnego semafora ze znakiem ':' na początku."
 	self.semaphoreFourPhase = self.ui:addCheckbox("picker", "semaphoreFourPhase", "4-stawny", 35, 3, 1, 1, self, self.updateSemaphoreFourPhase)
 	self.semaphoreFourPhase.tip = "Gdy zaznaczony i za dwa semafory jest S1, to zamiast S2 wyświetlony zostanie S3, zamiast S10 - S11, itp."
+	self.ui:addLabel("picker", nil, "ID pkt końc.:", 30, 4, 5, 1)
+	self.warpID = self.ui:addInput("picker", "warpID", 35, 4, 5, 1, self, self.updateWarpID)
+	self.ui:addLabel("picker", nil, "Docelowy PK:", 30, 5, 5, 1)
+	self.warpTargetID = self.ui:addInput("picker", "warpTargetID", 35, 5, 5, 1, self, self.updateWarpTargetID)
 end
 
 ---Resets all property inputs to their default values.
@@ -104,6 +108,8 @@ function UIPickerPane:resetValues()
 	self.semaphoreFourPhase.value = false
 	self.blockadeID.value = ""
 	self.warp.value = ""
+	self.warpID.value = ""
+	self.warpTargetID.value = ""
 	self.command.value = ""
 end
 
@@ -137,6 +143,8 @@ function UIPickerPane:setValuesForTile(tile)
 	self.semaphoreFourPhase.value = tile.semaphoreFourPhase
 	self.blockadeID.value = tile.blockadeID or ""
 	self.warp.value = tile.warp or ""
+	self.warpID.value = tile.warpID or ""
+	self.warpTargetID.value = tile.warpTargetID or ""
 	self.command.value = tile.command or ""
 end
 
@@ -229,7 +237,7 @@ function UIPickerPane:prepareID(id)
 	if id == "" then
 		return nil
 	end
-	if self.stationAutofill.value and not _Utils.strContains(id, "_") then
+	if self.stationAutofill.value and not _Utils.strContains(id, "_") and not _Utils.strContains(id, "@") then
 		local station = _Project:getCurrentStation()
 		if station then
 			return station.shortcut .. "_" .. id
@@ -285,12 +293,6 @@ end
 
 function UIPickerPane:updateBlockadeID(input)
 	self:forEachTile(function(tile) tile.blockadeID = input.value end)
-end
-
-function UIPickerPane:confirmBlockadeID(input)
-	self:forEachTile(function(tile) tile.blockadeID = input.value end)
-	input.value = input.value or ""
-	self.ui:unfocus()
 end
 
 function UIPickerPane:updateItineraryEndID(input)
@@ -383,6 +385,14 @@ end
 
 function UIPickerPane:updateWarp(input)
 	self:forEachTile(function(tile) tile.warp = input.value end)
+end
+
+function UIPickerPane:updateWarpID(input)
+	self:forEachTile(function(tile) tile.warpID = input.value end)
+end
+
+function UIPickerPane:updateWarpTargetID(input)
+	self:forEachTile(function(tile) tile.warpTargetID = input.value end)
 end
 
 function UIPickerPane:updateCommand(input)
