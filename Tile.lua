@@ -329,7 +329,7 @@ function Tile:isSemaphoreStop()
 	return state and (state.image == "s1" or state.image == "ms1")
 end
 
----Returns whether any route can ever be reserved by this semaphore.
+---Returns whether any itinerary can ever be reserved by this semaphore.
 ---@return boolean
 function Tile:isSemaphoreControllable()
 	return self.semaphoreAllowTrain or self.semaphoreAllowShunt or self.semaphoreAllowSz

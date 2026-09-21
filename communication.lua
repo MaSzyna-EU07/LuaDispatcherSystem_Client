@@ -45,12 +45,6 @@ local COM_FUNCTIONS = {
 			{name = "stationN", type = "string"}
 		}
 	},
-	[0xF1] = {
-		name = "initRoute",
-		params = {
-			{name = "routeN", type = "string"}
-		}
-	},
 	[0xF2] = {
 		name = "initTrack",
 		params = {
@@ -104,26 +98,39 @@ local COM_IMAGES = {
 	[0xFF] = "sz"
 }
 
-local timeTicks = 0
+---@type string?
+com.path = nil -- Full path to the log file that is being read
+com.fail = false -- `true` if in failure state
+com.pos = 0 -- Total amount of read bytes
+com.readTime = 0 -- Time since last read
+com.timeTicks = 0 -- How many ticks have elapsed since the beginning of the log file
 
-com.path = nil
-com.fail = false
-local com_pos = 0
-local com_readTime = 0
-local com_readData = {step = "validate", byteCounter = 0}
+---Contains all byte parsing state.
+---
+---`step` is one of the following:
+--- - `"validate"` - Checks the header (bytes 1-4)
+--- - `"version"` - Fetches the version (bytes 5-8) and puts them into `com.version`
+--- - `"function"` - Fetches the function byte (`COM_FUNCTIONS`)
+--- - `"param"` - Fetches the function parameters based on the list of parameters
+---@type {step: "validate"|"version"|"function"|"param", byteCounter: integer, funcID: integer?, params: integer[]|string[]?, paramCounter: integer?}
+com.readData = {step = "validate", byteCounter = 0}
 
-local com_version = {0, 0, 0, 0}
-local com_ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}}
-local com_counters = {}
+---@type [integer, integer, integer, integer]
+com.version = {0, 0, 0, 0} -- Version data as read from the log file
+---@type {stations: table<string, {name: string}>, tracks: table<string, {name: string}>, switches: table<string, {name: string}> , semaphores: table<string, {name: string}>}
+com.ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}} -- Maps IDs to object names
+---@type {stations: integer, tracks: integer, switches: integer, semaphores: integer}
+com.counters = {} -- How many objects of each type have been initialized
 
 ---Initializes the communication with the server.
 ---@param path string Path to the MaSzyna's main directory where the server runs. if `findRecent` is true. Must have a trailing slash if `findRecent` is `true`. If `findRecent` is `false`, specifies the path to the `.dsl` log file.
 ---@param findRecent boolean If `true`, `path` is the path to the main MaSzyna directory. From there, the DSL log file path is extracted from the `log.txt` file which should be the current simulator session.
 function com.init(path, findRecent)
 	_Obj:clear()
-	com_pos = 0
-	com_ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}}
-	com_counters = {}
+	com.pos = 0
+	com.ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}}
+	com.counters = {}
+	com.timeTicks = 0
 	com.fail = false
 	if findRecent then
 		com.path = com.findMostRecentLogFile(path)
@@ -147,9 +154,9 @@ function com.update(dt)
 	if com.fail then
 		return
 	end
-	com_readTime = com_readTime + dt
-	if com_readTime >= COM_READ_DELAY then
-		com_readTime = 0
+	com.readTime = com.readTime + dt
+	if com.readTime >= COM_READ_DELAY then
+		com.readTime = 0
 		com.readBytes()
 		_UI:onComUpdated()
 	end
@@ -179,44 +186,44 @@ function com.readBytes()
 	end
 	io.input(file)
 	local length = file:seek("end")
-	file:seek("set", com_pos) -- Start from where the file ended previously
-	for i = com_pos, length - 1 do
+	file:seek("set", com.pos) -- Start from where the file ended previously
+	for i = com.pos, length - 1 do
 		com.readByte(io.read(1))
 	end
 
 	io.close(file)
-	com_pos = length
+	com.pos = length
 end
 
 function com.readByte(b)
 	local bv = string.byte(b)
 
-	if com_readData.step == "validate" then
-		com_readData.byteCounter = com_readData.byteCounter + 1
+	if com.readData.step == "validate" then
+		com.readData.byteCounter = com.readData.byteCounter + 1
 		-- check if the byte is correct
-		local expectedByte = COM_VALIDATION_KEY[com_readData.byteCounter]
+		local expectedByte = COM_VALIDATION_KEY[com.readData.byteCounter]
 		if bv ~= expectedByte then
 			_LogWrite("[COMMUNICATION] Verification failed! (" .. bv .. " != " .. expectedByte .. ")", 2, 1)
 			-- Start the file over next time.
-			com_pos = 0
-			com_readData.byteCounter = 0
+			com.pos = 0
+			com.readData.byteCounter = 0
 			return
 		end
 		-- end validation once 4 bytes were read
-		if com_readData.byteCounter == 4 then
+		if com.readData.byteCounter == 4 then
 			_LogWrite("[COMMUNICATION] Verification successful!", 1, 1)
-			com_readData.step = "version"
-			com_readData.byteCounter = 0
+			com.readData.step = "version"
+			com.readData.byteCounter = 0
 		end
-	elseif com_readData.step == "version" then
-		com_readData.byteCounter = com_readData.byteCounter + 1
-		com_version[com_readData.byteCounter] = bv
+	elseif com.readData.step == "version" then
+		com.readData.byteCounter = com.readData.byteCounter + 1
+		com.version[com.readData.byteCounter] = bv
 		-- end once 4 bytes were read
-		if com_readData.byteCounter == 4 then
-			_LogWrite(string.format("[COMMUNICATION] Server version: %s.%s.%s/%s", com_version[1], com_version[2], com_version[3], com_version[4]), 1, 1)
-			com_readData.step = "function"
+		if com.readData.byteCounter == 4 then
+			_LogWrite(string.format("[COMMUNICATION] Server version: %s.%s.%s/%s", com.version[1], com.version[2], com.version[3], com.version[4]), 1, 1)
+			com.readData.step = "function"
 		end
-	elseif com_readData.step == "function" then
+	elseif com.readData.step == "function" then
 		local func = COM_FUNCTIONS[bv]
 		if not func then
 			_LogWrite("[COMMUNICATION] Unknown function code: " .. tostring(bv) .. ", skipping to the next byte. Beware, this may break the whole program!", 4, 1)
@@ -224,52 +231,52 @@ function com.readByte(b)
 		end
 
 		if #func.params > 0 then -- don't read parameters if they don't exist
-			com_readData.funcID = bv
-			com_readData.step = "param"
-			com_readData.params = {}
-			com_readData.paramCounter = 1
-			com_readData.byteCounter = 0
+			com.readData.funcID = bv
+			com.readData.step = "param"
+			com.readData.params = {}
+			com.readData.paramCounter = 1
+			com.readData.byteCounter = 0
 		else
 			com.readCall(func.name, {}, func.silent)
 		end
-	elseif com_readData.step == "param" then
-		local func = COM_FUNCTIONS[com_readData.funcID]
-		local param = func.params[com_readData.paramCounter]
+	elseif com.readData.step == "param" then
+		local func = COM_FUNCTIONS[com.readData.funcID]
+		local param = func.params[com.readData.paramCounter]
 		local paramFinish = false
 
 		if param.type == "int" then
-			com_readData.byteCounter = com_readData.byteCounter + 1
-			if not com_readData.params[com_readData.paramCounter] then
-				com_readData.params[com_readData.paramCounter] = 0
+			com.readData.byteCounter = com.readData.byteCounter + 1
+			if not com.readData.params[com.readData.paramCounter] then
+				com.readData.params[com.readData.paramCounter] = 0
 			end
-			com_readData.params[com_readData.paramCounter] = com_readData.params[com_readData.paramCounter] + (bv * (256 ^ (param.bytes - com_readData.byteCounter)))
-			if com_readData.byteCounter == param.bytes then
+			com.readData.params[com.readData.paramCounter] = com.readData.params[com.readData.paramCounter] + (bv * (256 ^ (param.bytes - com.readData.byteCounter)))
+			if com.readData.byteCounter == param.bytes then
 				paramFinish = true -- if read all the bytes, finish
 			end
 
 		elseif param.type == "string" then
-			if not com_readData.params[com_readData.paramCounter] then
-				com_readData.params[com_readData.paramCounter] = ""
+			if not com.readData.params[com.readData.paramCounter] then
+				com.readData.params[com.readData.paramCounter] = ""
 			end
 			if bv == 0 then
 				paramFinish = true -- if noticed a string terminator, finish
 			else
-				com_readData.params[com_readData.paramCounter] = com_readData.params[com_readData.paramCounter] .. b
+				com.readData.params[com.readData.paramCounter] = com.readData.params[com.readData.paramCounter] .. b
 			end
 		end
 
 		if paramFinish then
-			if com_readData.paramCounter == #func.params then -- check if this was the last parameter
-				com_readData.step = "function"
+			if com.readData.paramCounter == #func.params then -- check if this was the last parameter
+				com.readData.step = "function"
 				-- now pack all that together and execute in a separate function
 				local params = {}
 				for i, param in ipairs(func.params) do
-					params[param.name] = com_readData.params[i]
+					params[param.name] = com.readData.params[i]
 				end
 				com.readCall(func.name, params, func.silent)
 			else
-				com_readData.paramCounter = com_readData.paramCounter + 1
-				com_readData.byteCounter = 0
+				com.readData.paramCounter = com.readData.paramCounter + 1
+				com.readData.byteCounter = 0
 			end
 		end
 	end
@@ -292,7 +299,7 @@ function com.readCall(name, params, silent)
 	elseif name == "debugPrint" then
 		print("[LOG] " .. params.message)
 	elseif name == "debugNotify" then
-		if com_pos > 0 then
+		if com.pos > 0 then
 			_Notifications:post(params.message, NotificationColorID[params.color])
 		else
 			-- Do not display the notification if this is the initial read, as we might read a lot
@@ -300,39 +307,36 @@ function com.readCall(name, params, silent)
 			print("[NOTIFICATION] " .. params.message)
 		end
 	elseif name == "initStation" then
-		com.initObject(com_ids.stations, "station", params.stationN)
+		com.initObject(com.ids.stations, "station", params.stationN)
 		_Obj:initStation(params.stationN)
-	elseif name == "initRoute" then
-		com.initObject(com_ids.stations, "station", params.routeN)
-		_Obj:initStation(params.routeN)
 	elseif name == "initTrack" then
-		com.initObject(com_ids.tracks, "track", params.trackN)
+		com.initObject(com.ids.tracks, "track", params.trackN)
 		_Obj:initTrack(params.trackN)
 	elseif name == "initSwitch" then
-		com.initObject(com_ids.switches, "switch", params.switchN)
+		com.initObject(com.ids.switches, "switch", params.switchN)
 		_Obj:initSwitch(params.switchN)
 	elseif name == "initSemaphore" then
-		com.initObject(com_ids.semaphores, "semaphore", params.semaphoreN)
+		com.initObject(com.ids.semaphores, "semaphore", params.semaphoreN)
 		_Obj:initSemaphore(params.semaphoreN, params.type)
 	elseif name == "setTrack" then
-		local track = com_ids.tracks[params.trackID]
-		_Obj:setTrackState(track.name, timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
+		local track = com.ids.tracks[params.trackID]
+		_Obj:setTrackState(track.name, com.timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
 	elseif name == "setSwitch" then
-		local switch = com_ids.switches[params.switchID]
-		_Obj:setSwitchState(switch.name, timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 5))
+		local switch = com.ids.switches[params.switchID]
+		_Obj:setSwitchState(switch.name, com.timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 5))
 	elseif name == "setSemaphore" then
-		local semaphore = com_ids.semaphores[params.semaphoreID]
-		_Obj:setSemaphoreState(semaphore.name, timeTicks, params.speed, params.nextSpeed, COM_IMAGES[params.state])
+		local semaphore = com.ids.semaphores[params.semaphoreID]
+		_Obj:setSemaphoreState(semaphore.name, com.timeTicks, params.speed, params.nextSpeed, COM_IMAGES[params.state])
 	end
 end
 
 function com.nextTimeTick()
-	timeTicks = timeTicks + 1
+	com.timeTicks = com.timeTicks + 1
 end
 
 function com.initObject(idTable, counter, name)
-	com_counters[counter] = (com_counters[counter] or 0) + 1
-	idTable[com_counters[counter]] = {name = name}
+	com.counters[counter] = (com.counters[counter] or 0) + 1
+	idTable[com.counters[counter]] = {name = name}
 end
 
 function com.isConnected()
