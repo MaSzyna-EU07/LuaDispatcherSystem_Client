@@ -347,6 +347,22 @@ function Station:deleteRow(y)
 	self:generateCanvas()
 end
 
+---Returns the first found tile with the specified warp ID on this schematic.
+---If none of the tiles have this ID, returns `nil`.
+---TODO: When schematics are brought over here from the server, use the index from there.
+---@param warpID string The warp ID to be looked for.
+---@return Tile?
+function Station:getTileWithWarpID(warpID)
+	for x = 1, self.w do
+		for y = 1, self.h do
+			local tile = self:assertGetTile(x, y)
+			if tile.warpID == warpID then
+				return tile
+			end
+		end
+	end
+end
+
 ---Marks this Station as unsynced.
 function Station:markUnsaved()
 	self.synced = false
@@ -494,8 +510,16 @@ function Station:handleRightClick()
 				end
 				self.activeX, self.activeY = nil, nil
 			elseif tile.warp then
-				if _Project:getStation(tile.warp) then
+				local station = _Project:getStation(tile.warp)
+				if station then
 					_Project:setCurrentStation(tile.warp)
+					station:unselectAllTiles()
+					local targetTile = station:getTileWithWarpID(tile.warpTargetID)
+					if targetTile then
+						station:selectTile(targetTile.x, targetTile.y)
+					else
+						_Notifications:post(string.format("Nie znaleziono punktu końcowego: %s:%s", tile.warp, tile.warpTargetID), NotificationColor.RED)
+					end
 				end
 			elseif tile.command then
 				tile:sendCustomCommand()

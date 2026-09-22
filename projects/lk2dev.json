@@ -8716,15 +8716,15 @@
 					"id": "arrow7",
 					"trackID": "Kot_ItA",
 					"warp": "Kot",
-					"warpID": "Mrz",
-					"warpTargetID": "KotN"
+					"warpID": "KotN",
+					"warpTargetID": "Mrz"
 				},
 				"27,5": {
 					"id": "arrow3",
 					"trackID": "Kot_ItB",
 					"warp": "Kot",
-					"warpID": "MrzN",
-					"warpTargetID": "Kot"
+					"warpID": "Kot",
+					"warpTargetID": "MrzN"
 				},
 				"3,4": {
 					"id": "semaphore7",

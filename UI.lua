@@ -340,12 +340,12 @@ end
 ---Executed when in the Station a tile is selected.
 ---@param tile Tile The tile that has just been selected.
 function UI:onTileSelected(tile)
-	self.pickerPane:setValuesForTile(tile)
+	self.rightPane:setValuesForTile(tile)
 end
 
 ---Executed when all tiles in the Station are unselected.
 function UI:onAllTilesUnselected()
-	self.pickerPane:resetValues()
+	self.rightPane:resetValues()
 end
 
 ---Executed when a log file is loaded.
