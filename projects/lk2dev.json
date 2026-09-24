@@ -6104,12 +6104,14 @@
 					"trainTarget": true
 				},
 				"12,5": {
-					"id": "track-",
-					"trackID": "MMz_It2a"
+					"id": "platformP",
+					"trackID": "MMz_It2a",
+					"trainTarget": true
 				},
 				"12,6": {
-					"id": "track-",
-					"trackID": "MMz_It1a"
+					"id": "platformP",
+					"trackID": "MMz_It1a",
+					"trainTarget": true
 				},
 				"12,7": {
 					"id": "arrow-",

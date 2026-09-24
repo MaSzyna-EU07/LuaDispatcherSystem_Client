@@ -39,7 +39,7 @@ function UIRightPane:addHeader(name)
 	end
 	local header = self.ui:addPane("right", nil, nil, 0, self.uiGenY, 14, 1)
 	self.ui:addLabel("right", nil, text, 0, self.uiGenY, 14, 1)
-	header.style.bg = {0.7, 0.5, 0.3}
+	header.style.bg = {0.6, 0.4, 0.2}
 	self.uiGenY = self.uiGenY + 1
 end
 

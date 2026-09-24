@@ -184,6 +184,13 @@ function love.keypressed(key)
 	_Picker:keypressed(key)
 	_Project:keypressed(key)
 	_UI:keypressed(key)
+
+	-- Spawn a trainset contained in the clipboard when Ctrl+V is pressed.
+	-- TODO: Contextualize this cute workflow somehow so that it remains cute while not running unnecessarily.
+	if key == "v" and love.keyboard.isDown("lctrl", "rctrl") then
+		_Com.sendCommand("st " .. _Utils.strJoin(_Utils.strSplit(love.system.getClipboardText(), "\n"), " "))
+		_Notifications:post("Wyslano trainset", NotificationColor.GREEN)
+	end
 end
 
 function love.textinput(t)
