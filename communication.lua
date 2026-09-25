@@ -1,7 +1,13 @@
 local com = {}
 
 local COM_READ_DELAY = 1
+
+---@type [integer, integer, integer, integer]
 local COM_VALIDATION_KEY = {0x70, 0xA0, 0xE0, 0x07}
+
+---@alias ComFunctionParam {name: string, type: "string"|"int", bytes: integer?}
+---@alias ComFunction {name: string, params: ComFunctionParam[], silent: boolean?}
+---@type table<integer, ComFunction>
 local COM_FUNCTIONS = {
 	[0x01] = {
 		name = "debugPrint",
@@ -14,6 +20,15 @@ local COM_FUNCTIONS = {
 		params = {
 			{name = "color", type = "int", bytes = 1},
 			{name = "message", type = "string"}
+		}
+	},
+	[0x03] = {
+		name = "debugHighlightTile",
+		params = {
+			{name = "stationID", type = "int", bytes = 2},
+			{name = "x", type = "int", bytes = 1},
+			{name = "y", type = "int", bytes = 1},
+			{name = "type", type = "int", bytes = 1}
 		}
 	},
 	[0x12] = {
@@ -305,6 +320,15 @@ function com.readCall(name, params, silent)
 			-- Do not display the notification if this is the initial read, as we might read a lot
 			-- and we don't want to flood the user each time with trash content. This is not TikTok.
 			print("[NOTIFICATION] " .. params.message)
+		end
+	elseif name == "debugHighlightTile" then
+		local stationID = com.ids.stations[params.stationID].name
+		if stationID then
+			local station = _Project:getStation(stationID)
+			if station then
+				station:highlightTile(params.x, params.y)
+				-- TODO: Type parameter remains unused for now
+			end
 		end
 	elseif name == "initStation" then
 		com.initObject(com.ids.stations, "station", params.stationN)

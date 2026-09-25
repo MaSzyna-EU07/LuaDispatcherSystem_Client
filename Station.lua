@@ -39,6 +39,9 @@ function Station:new(name, shortcut)
 	self.activeX, self.activeY = nil, nil
 	self.activeMode = PathMode.TRAIN
 	self.activeW24 = true
+	---@alias TileHighlight {x: integer, y: integer, t: number, delQueue: boolean?}
+	---@type TileHighlight[]
+	self.tileHighlights = {}
 
 	self.canvas = nil
 	self:generateCanvas()
@@ -64,6 +67,15 @@ function Station:update(dt)
 			self.hoverLineX, self.hoverLineY = self.hoverX + math.floor(self.hoverPartX * 2), self.hoverY + math.floor(self.hoverPartY * 2)
 		end
 	end
+
+	-- Update the tile highlights.
+	for i, highlight in ipairs(self.tileHighlights) do
+		highlight.t = highlight.t + dt
+		if highlight.t >= 1 then
+			highlight.delQueue = true
+		end
+	end
+	_Utils.removeDeadObjects(self.tileHighlights)
 end
 
 ---Returns the full display name of this station.
@@ -286,6 +298,13 @@ function Station:forEachSelectedTile(f)
 	for i, tile in ipairs(self.selectedTiles) do
 		f(tile)
 	end
+end
+
+---Briefly highlights the given tile.
+---@param x integer X coordinate of the tile that should be highlighted.
+---@param y integer Y coordinate of the tile that should be highlighted.
+function Station:highlightTile(x, y)
+	table.insert(self.tileHighlights, {x = x, y = y, t = 0})
 end
 
 ---Adds a new column at the specified position and fills it with empty tiles.
@@ -620,6 +639,7 @@ function Station:draw()
 	self:drawActive()
 	self:drawClickable()
 	self:drawRectSelection()
+	self:drawTileHighlights()
 	love.graphics.setCanvas()
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.draw(self.canvas, self.x + 0.5, self.y + 0.5, 0, self.SCALE)
@@ -737,6 +757,16 @@ function Station:drawRectSelection()
 		for y = math.min(self.dragY, self.hoverY), math.max(self.dragY, self.hoverY) do
 			self:drawTileFrame(self:assertGetTile(x, y), TileFrameColor.RECT_SELECTION)
 		end
+	end
+end
+
+---Draws the currently active tile highlights.
+---@private
+function Station:drawTileHighlights()
+	for i, highlight in ipairs(self.tileHighlights) do
+		local x, y = self:coordsToCanvasPos(highlight.x, highlight.y)
+		love.graphics.setColor(1, 1, 1, _Utils.mapc(1, 0, 0, 0.4, highlight.t))
+		love.graphics.rectangle("fill", x, y, self.TILE_SIZE, self.TILE_SIZE)
 	end
 end
 

@@ -129,6 +129,7 @@
 				},
 				"11,18": {
 					"id": "platformF",
+					"maxSpeed": 40,
 					"shuntTarget": true,
 					"trackID": "WWO_It3sa"
 				},
@@ -160,6 +161,7 @@
 				"11,9": {
 					"id": "switchL8",
 					"maxSpeedPlus": 40,
+					"switchFlip": true,
 					"switchID": "WOG_WWO9",
 					"trackID": "WWO_Iz9"
 				},
@@ -180,6 +182,7 @@
 				"12,15": {
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
+					"switchFlip": true,
 					"switchID": "WOG_WWO107",
 					"trackID": "WWO_Iz107"
 				},
@@ -198,7 +201,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
-					"semaphoreID": "WWO_H",
+					"semaphoreID": "WWO_H2m",
 					"trackID": "WWO_Iz111"
 				},
 				"12,3": {
@@ -895,7 +898,7 @@
 				},
 				"20,7": {
 					"id": "switchD3",
-					"maxSpeedMinus": 100,
+					"maxSpeedMinus": 40,
 					"maxSpeedPlus": 40,
 					"switchFlipABCD": true,
 					"switchID": "WOG_WWO63",
@@ -1512,8 +1515,8 @@
 				"28,4": {
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
-					"switchID": "WOG_WWO66",
-					"trackID": "WWO_Iz66"
+					"switchID": "WOG_WWO68",
+					"trackID": "WWO_Iz68"
 				},
 				"28,5": {
 					"id": "track-",
@@ -1586,7 +1589,7 @@
 				},
 				"29,5": {
 					"id": "switchD3",
-					"maxSpeedMinus": 100,
+					"maxSpeedMinus": 40,
 					"maxSpeedPlus": 40,
 					"switchFlipABCD": true,
 					"switchID": "WOG_WWO76",
@@ -1643,7 +1646,7 @@
 				},
 				"30,13": {
 					"id": "switchD3",
-					"maxSpeedMinus": 100,
+					"maxSpeedMinus": 40,
 					"maxSpeedPlus": 40,
 					"switchFlipABCD": true,
 					"switchID": "WOG_WWO124",
@@ -2117,17 +2120,20 @@
 				"35,14": {
 					"id": "platformP",
 					"shuntTarget": true,
-					"trackID": "WWO_It30"
+					"trackID": "WWO_It30",
+					"trainTarget": true
 				},
 				"35,15": {
 					"id": "platformP",
 					"shuntTarget": true,
-					"trackID": "WWO_It28"
+					"trackID": "WWO_It28",
+					"trainTarget": true
 				},
 				"35,16": {
 					"id": "platformP",
 					"shuntTarget": true,
-					"trackID": "WWO_It26"
+					"trackID": "WWO_It26",
+					"trainTarget": true
 				},
 				"35,17": {
 					"id": "track-",
@@ -2390,7 +2396,6 @@
 				},
 				"38,5": {
 					"id": "switchD2",
-					"maxSpeedMinus": 100,
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
 					"switchFlipABCD": true,
@@ -2426,6 +2431,7 @@
 				},
 				"39,16": {
 					"id": "switchR3",
+					"maxSpeedMinus": 40,
 					"maxSpeedPlus": 40,
 					"switchID": "WOG_WWO137",
 					"trackID": "WWO_Iz137"
@@ -2534,7 +2540,6 @@
 				},
 				"40,4": {
 					"id": "switchD3",
-					"maxSpeedMinus": 100,
 					"maxSpeedPlus": 40,
 					"switchFlipABCD": true,
 					"switchID": "WOG_WWO84",
@@ -2596,7 +2601,6 @@
 				},
 				"41,5": {
 					"id": "switchD3",
-					"maxSpeedMinus": 100,
 					"maxSpeedPlus": 40,
 					"switchFlipABCD": true,
 					"switchID": "WOG_WWO85",
@@ -2902,11 +2906,13 @@
 				},
 				"6,17": {
 					"id": "platformF",
+					"maxSpeed": 40,
 					"shuntTarget": true,
 					"trackID": "WWO_ItC"
 				},
 				"6,18": {
 					"id": "platformF",
+					"maxSpeed": 40,
 					"shuntTarget": true,
 					"trackID": "WWO_ItD"
 				},
@@ -2997,7 +3003,8 @@
 				},
 				"8,5": {
 					"id": "platformF",
-					"shuntTarget": true
+					"shuntTarget": true,
+					"trackID": "WWO_It2Sa"
 				},
 				"8,6": {
 					"id": "switchR7",
@@ -3044,6 +3051,7 @@
 				"9,6": {
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
+					"switchFlip": true,
 					"switchID": "WOG_WWO5",
 					"trackID": "WWO_Iz5"
 				},
