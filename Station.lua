@@ -39,7 +39,7 @@ function Station:new(name, shortcut)
 	self.activeX, self.activeY = nil, nil
 	self.activeMode = PathMode.TRAIN
 	self.activeW24 = true
-	---@alias TileHighlight {x: integer, y: integer, t: number, delQueue: boolean?}
+	---@alias TileHighlight {x: integer, y: integer, type: integer, t: number, delQueue: boolean?}
 	---@type TileHighlight[]
 	self.tileHighlights = {}
 
@@ -303,8 +303,9 @@ end
 ---Briefly highlights the given tile.
 ---@param x integer X coordinate of the tile that should be highlighted.
 ---@param y integer Y coordinate of the tile that should be highlighted.
-function Station:highlightTile(x, y)
-	table.insert(self.tileHighlights, {x = x, y = y, t = 0})
+---@param type integer The highlight type.
+function Station:highlightTile(x, y, type)
+	table.insert(self.tileHighlights, {x = x, y = y, t = 0, type = type})
 end
 
 ---Adds a new column at the specified position and fills it with empty tiles.

@@ -9,7 +9,7 @@ local UIBottomPane = Class:derive("UIBottomPane")
 function UIBottomPane:new(ui)
     self.ui = ui
 
-	self.ui:addPane(nil, "bottom", nil, 0, _WHEIGHT / self.ui.U - 1, (_WWIDTH - 320) / self.ui.U, 1)
+	self.ui:addPane(nil, "bottom", nil, 0, _WHEIGHT / self.ui.U - 1, (_WWIDTH - 280) / self.ui.U, 1)
 	self.ui:addLabel("bottom", nil, "Komunikacja:", 0, 0, 5, 1)
 	self.comStatus = self.ui:addLabel("bottom", "comStatus", "Łączenie...", 5, 0, 6, 1)
 	self.ui:addButton("bottom", nil, "Reset", 11, 0, 3, 1, self, self.comReset)

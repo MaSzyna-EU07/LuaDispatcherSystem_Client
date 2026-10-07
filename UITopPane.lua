@@ -9,7 +9,7 @@ local UITopPane = Class:derive("UITopPane")
 function UITopPane:new(ui)
     self.ui = ui
 
-	self.ui:addPane(nil, "top", nil, 0, 0, (_WWIDTH - 320) / self.ui.U, 1)
+	self.ui:addPane(nil, "top", nil, 0, 0, (_WWIDTH - 280) / self.ui.U, 1)
 	self.ui:addButton("top", "bSave", "Zapisz", 0, 0, 4, 1, self, self.saveProject)
 	self.ui:addButton("top", "bLoad", "Wczytaj", 4, 0, 4, 1, self, self.loadProject)
 	self.ui:addButton("top", "bReload", "Synchronizuj stację", 8, 0, 8, 1, self, self.syncStation)

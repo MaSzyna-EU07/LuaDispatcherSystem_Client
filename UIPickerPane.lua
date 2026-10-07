@@ -9,7 +9,7 @@ local UIPickerPane = Class:derive("UIPickerPane")
 function UIPickerPane:new(ui)
     self.ui = ui
 
-	self.ui:addPane(nil, "picker", nil, 0, 23, 40, 6)
+	self.ui:addPane(nil, "picker", nil, 0, 38, 40, 6)
 	-- First column
 	self.electrified = self.ui:addCheckbox("picker", "electrified", "Tory zelektryfikowane", 0, 0, 1, 1, self, self.updateElectrified)
 	self.electrified.value = true

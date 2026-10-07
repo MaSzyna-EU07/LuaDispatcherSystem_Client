@@ -14,7 +14,7 @@ local UIBottomPane = require("UIBottomPane")
 local UI = class:derive("UI")
 
 function UI:new()
-	self.U = 24
+	self.U = 20
 	---@type table<string, Gspot.element>
 	self.elements = {}
 end
@@ -43,7 +43,7 @@ end
 ---@private
 ---@param parent string? The parent element ID.
 ---@param id string? The ID of the element. If not specified, the element will not be added.
----@param element table The Gspot element itself.
+---@param element Gspot.element The Gspot element itself.
 function UI:addElement(parent, id, element)
 	if id then
 		id = parent and parent .. "/" .. id or id

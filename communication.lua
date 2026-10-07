@@ -322,12 +322,14 @@ function com.readCall(name, params, silent)
 			print("[NOTIFICATION] " .. params.message)
 		end
 	elseif name == "debugHighlightTile" then
-		local stationID = com.ids.stations[params.stationID].name
-		if stationID then
-			local station = _Project:getStation(stationID)
-			if station then
-				station:highlightTile(params.x, params.y)
-				-- TODO: Type parameter remains unused for now
+		if com.pos > 0 then
+			-- Do not display the highlight when this is the initial read.
+			local stationID = com.ids.stations[params.stationID].name
+			if stationID then
+				local station = _Project:getStation(stationID)
+				if station then
+					station:highlightTile(params.x, params.y, params.type)
+				end
 			end
 		end
 	elseif name == "initStation" then

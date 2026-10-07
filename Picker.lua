@@ -5,7 +5,7 @@ local Class = require("class")
 local Picker = Class:derive("Picker")
 
 function Picker:new()
-    self.x, self.y = 20, 500
+    self.x, self.y = 20, 710
     self.margin = 10
 	---@alias TileCategory {tiles: string[], startIndex: integer?, display: {image: string?}, properties: table<string, any>?}
 	---@type TileCategory[]
@@ -78,13 +78,13 @@ function Picker:new()
 	}
 
 	self.buttons = {
-		{x = 20, y = 700, tileX = 1, action = "addRow"},
-		{x = 65, y = 700, tileX = 2, action = "delRow"},
-		{x = 110, y = 700, tileX = 3, action = "addColumn"},
-		{x = 155, y = 700, tileX = 4, action = "delColumn"},
-		{x = 200, y = 700, tileX = 5, action = "properties"},
-		--{x = 245, y = 700, tileX = 8, action = "electrify"},
-		--{x = 290, y = 700, tileX = 9, action = "deelectrify"}
+		{x = 20, y = 665, tileX = 1, action = "addRow"},
+		{x = 65, y = 665, tileX = 2, action = "delRow"},
+		{x = 110, y = 665, tileX = 3, action = "addColumn"},
+		{x = 155, y = 665, tileX = 4, action = "delColumn"},
+		{x = 200, y = 665, tileX = 5, action = "properties"},
+		--{x = 245, y = 665, tileX = 8, action = "electrify"},
+		--{x = 290, y = 665, tileX = 9, action = "deelectrify"}
 	}
 
 	-- If `nil`, a tile is selected in the picker. Otherwise, a button is pressed, indicating a mode.

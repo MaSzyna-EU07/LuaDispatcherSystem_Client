@@ -14,7 +14,7 @@ local TileDatabase = require("TileDatabase")
 _WWIDTH, _WHEIGHT = 1600, 900
 _MouseX, _MouseY = 0, 0
 _Time = 0
-_Font = love.graphics.newFont("data/dejavusans.ttf", 16)
+_Font = love.graphics.newFont("data/dejavusans.ttf", 12)
 
 _Settings = Settings()
 _Obj = Objects()
@@ -171,11 +171,11 @@ function love.draw()
 	if station then
 		local tile = station:getHoveredTile()
 		love.graphics.setColor(1, 1, 1)
-		love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 0, 740)
+		love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 820, 740)
 		if tile then
-			love.graphics.print(string.format("Hovered Tile: %s, %s (%s)", tile.x, tile.y, tile.id), 0, 760)
-			love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 0, 780)
-			love.graphics.print("Semaphore pointing: " .. tostring(tile:getSemaphoreDirection()), 0, 800)
+			love.graphics.print(string.format("Hovered Tile: %s, %s (%s)", tile.x, tile.y, tile.id), 820, 760)
+			love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 820, 780)
+			love.graphics.print("Semaphore pointing: " .. tostring(tile:getSemaphoreDirection()), 820, 800)
 		end
 	end
 end

@@ -9,7 +9,7 @@ local UITrainPane = Class:derive("UITrainPane")
 function UITrainPane:new(ui)
     self.ui = ui
 
-	self.ui:addPane(nil, "train", nil, 42, 23, 10, 12)
+	self.ui:addPane(nil, "train", nil, 56, 33, 10, 12)
 	self.ui:addLabel("train", nil, "Komendy pociągów", 0, 0, 10, 1)
 
 	self.ui:addButton("train", "horn", "Zatrąb", 0, 1, 5, 1, nil, function() self:sendToCurrentTrain("Warning_signal", 1, 1) end)
