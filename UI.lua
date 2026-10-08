@@ -340,6 +340,7 @@ end
 ---Executed when in the Station a tile is selected.
 ---@param tile Tile The tile that has just been selected.
 function UI:onTileSelected(tile)
+	self.rightPane:resetValues()
 	self.rightPane:setValuesForTile(tile)
 end
 

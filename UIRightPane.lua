@@ -17,14 +17,12 @@ function UIRightPane:new(ui)
 	-- Tile Settings
 	self.stationAutofill = self.ui:addCheckbox("right", "stationAutofill", "Autouzupełnianie ID stacji", 0, 3, 1, 1, self, self.updateStationAutofill)
 	self.stationAutofill.value = true
+	---@type (Gspot.group|Gspot.text)[]
+	self.headers = {}
+	---@type table<string, any>
+	self.widgets = {}
 
 	self.uiGenY = 4
-	self:addTrackSettings()
-	self:addSwitchSettings()
-	self:addSemaphoreSettings()
-	self:addWarpSettings()
-	self:addBlockadeSettings()
-	self:addMiscSettings()
 
 	self:update()
 end
@@ -38,8 +36,10 @@ function UIRightPane:addHeader(name)
 		text = text .. " " .. char
 	end
 	local header = self.ui:addPane("right", nil, nil, 0, self.uiGenY, 14, 1)
-	self.ui:addLabel("right", nil, text, 0, self.uiGenY, 14, 1)
+	local headerLabel = self.ui:addLabel("right", nil, text, 0, self.uiGenY, 14, 1)
 	header.style.bg = {0.6, 0.4, 0.2}
+	table.insert(self.headers, header)
+	table.insert(self.headers, headerLabel)
 	self.uiGenY = self.uiGenY + 1
 end
 
@@ -47,33 +47,33 @@ end
 function UIRightPane:addTrackSettings()
 	self:addHeader("Tor")
 
-	self.ui:addLabel("right", nil, "Nazwa toru:", 0, self.uiGenY, 5, 1)
-	self.trackID = self.ui:addInput("right", "trackID", 5, self.uiGenY, 9, 1, self, self.updateTrackID, self.confirmTrackID)
+	self.widgets.trackID_l = self.ui:addLabel("right", nil, "Nazwa toru:", 0, self.uiGenY, 5, 1)
+	self.widgets.trackID = self.ui:addInput("right", "trackID", 5, self.uiGenY, 9, 1, self, self.updateTrackID, self.confirmTrackID)
 	self.uiGenY = self.uiGenY + 1
 
-	self.electrified2 = self.ui:addCheckbox("right", "electrified2", "Zelektryfikowany", 0, self.uiGenY, 1, 1, self, self.updateElectrified2)
+	self.widgets.electrified2 = self.ui:addCheckbox("right", "electrified2", "Zelektryfikowany", 0, self.uiGenY, 1, 1, self, self.updateElectrified2)
 	self.uiGenY = self.uiGenY + 1
 
-	self.ui:addLabel("right", nil, "Punkt końcowy jazd:", 0, self.uiGenY, 8, 1)
-	self.trainTarget = self.ui:addCheckbox("right", "trainTarget", "poc.", 8, self.uiGenY, 1, 1, self, self.updateTrainTarget)
-	self.shuntTarget = self.ui:addCheckbox("right", "shuntTarget", "man.", 11, self.uiGenY, 1, 1, self, self.updateShuntTarget)
+	self.widgets.target_l = self.ui:addLabel("right", nil, "Punkt końcowy jazd:", 0, self.uiGenY, 8, 1)
+	self.widgets.trainTarget = self.ui:addCheckbox("right", "trainTarget", "poc.", 8, self.uiGenY, 1, 1, self, self.updateTrainTarget)
+	self.widgets.shuntTarget = self.ui:addCheckbox("right", "shuntTarget", "man.", 11, self.uiGenY, 1, 1, self, self.updateShuntTarget)
 	self.uiGenY = self.uiGenY + 1
 
-	self.ui:addLabel("right", nil, "Zakaz jazdy:", 0, self.uiGenY, 8, 1)
-	self.forbidTrain = self.ui:addCheckbox("right", "forbidTrain", "poc.", 8, self.uiGenY, 1, 1, self, self.updateForbidTrain)
-	self.forbidShunt = self.ui:addCheckbox("right", "forbidShunt", "man.", 11, self.uiGenY, 1, 1, self, self.updateForbidShunt)
+	self.widgets.forbid_l = self.ui:addLabel("right", nil, "Zakaz jazdy:", 0, self.uiGenY, 8, 1)
+	self.widgets.forbidTrain = self.ui:addCheckbox("right", "forbidTrain", "poc.", 8, self.uiGenY, 1, 1, self, self.updateForbidTrain)
+	self.widgets.forbidShunt = self.ui:addCheckbox("right", "forbidShunt", "man.", 11, self.uiGenY, 1, 1, self, self.updateForbidShunt)
 	self.uiGenY = self.uiGenY + 1
 
-	self.ui:addLabel("right", nil, "Vmax [km/h]", 0, self.uiGenY, 8, 1)
-	self.speed = self.ui:addInput("right", "speed", 8, self.uiGenY, 6, 1, self, self.updateMaxSpeed)
+	self.widgets.speed_l = self.ui:addLabel("right", nil, "Vmax [km/h]", 0, self.uiGenY, 8, 1)
+	self.widgets.speed = self.ui:addInput("right", "speed", 8, self.uiGenY, 6, 1, self, self.updateMaxSpeed)
 	self.uiGenY = self.uiGenY + 1
 
-	self.ui:addLabel("right", nil, "ID punktu końcowego:", 0, self.uiGenY, 8, 1)
-	self.itineraryEndID = self.ui:addInput("right", "itineraryEndID", 8, self.uiGenY, 6, 1, self, self.updateItineraryEndID)
+	self.widgets.itineraryEndID_l = self.ui:addLabel("right", nil, "ID punktu końcowego:", 0, self.uiGenY, 8, 1)
+	self.widgets.itineraryEndID = self.ui:addInput("right", "itineraryEndID", 8, self.uiGenY, 6, 1, self, self.updateItineraryEndID)
 	self.uiGenY = self.uiGenY + 1
 
-	self.targetW24 = self.ui:addCheckbox("right", "targetW24", "W24", 0, self.uiGenY, 1, 1, self, self.updateTargetW24)
-	self.targetW24.tip = "Odnosi się do punktu docelowego.\nJeżeli przebieg kończy się na tym punkcie, to na semaforze wyświetlony zostanie wskaźnik W24."
+	self.widgets.targetW24 = self.ui:addCheckbox("right", "targetW24", "W24", 0, self.uiGenY, 1, 1, self, self.updateTargetW24)
+	self.widgets.targetW24.tip = "Odnosi się do punktu docelowego.\nJeżeli przebieg kończy się na tym punkcie, to na semaforze wyświetlony zostanie wskaźnik W24."
 	self.uiGenY = self.uiGenY + 1
 end
 
@@ -81,19 +81,19 @@ end
 function UIRightPane:addSwitchSettings()
 	self:addHeader("Rozjazd")
 
-	self.ui:addLabel("right", nil, "Nazwa rozjazdu:", 0, self.uiGenY, 8, 1)
-	self.switchID = self.ui:addInput("right", "switchID", 8, self.uiGenY, 6, 1, self, self.updateSwitchID, self.confirmSwitchID)
+	self.widgets.switchID_l = self.ui:addLabel("right", nil, "Nazwa rozjazdu:", 0, self.uiGenY, 8, 1)
+	self.widgets.switchID = self.ui:addInput("right", "switchID", 8, self.uiGenY, 6, 1, self, self.updateSwitchID, self.confirmSwitchID)
 	self.uiGenY = self.uiGenY + 1
 
-	self.ui:addLabel("right", nil, "Zamień stronami:", 0, self.uiGenY, 8, 1)
-	self.switchFlip = self.ui:addCheckbox("right", "switchFlip", "+/-", 8, self.uiGenY, 1, 1, self, self.updateSwitchFlip)
-	self.switchFlipABCD = self.ui:addCheckbox("right", "switchFlipABCD", "ab/cd", 11, self.uiGenY, 1, 1, self, self.updateSwitchFlipABCD)
+	self.widgets.switchFlip_l = self.ui:addLabel("right", nil, "Zamień stronami:", 0, self.uiGenY, 8, 1)
+	self.widgets.switchFlip = self.ui:addCheckbox("right", "switchFlip", "+/-", 8, self.uiGenY, 1, 1, self, self.updateSwitchFlip)
+	self.widgets.switchFlipABCD = self.ui:addCheckbox("right", "switchFlipABCD", "ab/cd", 11, self.uiGenY, 1, 1, self, self.updateSwitchFlipABCD)
 	self.uiGenY = self.uiGenY + 1
 
-	self.ui:addLabel("right", nil, "V+", 0, self.uiGenY, 2, 1)
-	self.speedPlus = self.ui:addInput("right", "speedPlus", 2, self.uiGenY, 5, 1, self, self.updateMaxSpeedPlus)
-	self.ui:addLabel("right", nil, "V-", 7, self.uiGenY, 2, 1)
-	self.speedMinus = self.ui:addInput("right", "speedMinus", 9, self.uiGenY, 5, 1, self, self.updateMaxSpeedMinus)
+	self.widgets.speedPlus_l = self.ui:addLabel("right", nil, "V+", 0, self.uiGenY, 2, 1)
+	self.widgets.speedPlus = self.ui:addInput("right", "speedPlus", 2, self.uiGenY, 5, 1, self, self.updateMaxSpeedPlus)
+	self.widgets.speedMinus_l = self.ui:addLabel("right", nil, "V-", 7, self.uiGenY, 2, 1)
+	self.widgets.speedMinus = self.ui:addInput("right", "speedMinus", 9, self.uiGenY, 5, 1, self, self.updateMaxSpeedMinus)
 	self.uiGenY = self.uiGenY + 1
 end
 
@@ -101,46 +101,46 @@ end
 function UIRightPane:addSemaphoreSettings()
 	self:addHeader("Semafor")
 
-	self.ui:addLabel("right", nil, "Nazwa semafora:", 0, self.uiGenY, 8, 1)
-	self.semaphoreID = self.ui:addInput("right", "semaphoreID", 8, self.uiGenY, 6, 1, self, self.updateSemaphoreID, self.confirmSemaphoreID)
+	self.widgets.semaphoreID_l = self.ui:addLabel("right", nil, "Nazwa semafora:", 0, self.uiGenY, 8, 1)
+	self.widgets.semaphoreID = self.ui:addInput("right", "semaphoreID", 8, self.uiGenY, 6, 1, self, self.updateSemaphoreID, self.confirmSemaphoreID)
 	self.uiGenY = self.uiGenY + 1
 
-	self.ui:addLabel("right", nil, "Typ:", 0, self.uiGenY, 8, 1)
-	self.semaphoreType = self.ui:addInput("right", "semaphoreType", 8, self.uiGenY, 6, 1, self, self.updateSemaphoreType)
-	self.semaphoreType.tip = "Typ semafora:\n0 = semafor\n1 = tarcza manewrowa"
+	self.widgets.semaphoreType_l = self.ui:addLabel("right", nil, "Typ:", 0, self.uiGenY, 8, 1)
+	self.widgets.semaphoreType = self.ui:addInput("right", "semaphoreType", 8, self.uiGenY, 6, 1, self, self.updateSemaphoreType)
+	self.widgets.semaphoreType.tip = "Typ semafora:\n0 = semafor\n1 = tarcza manewrowa"
 	self.uiGenY = self.uiGenY + 1
 
-	self.semaphoreNoW24 = self.ui:addCheckbox("right", "semaphoreNoW24", "Brak W24", 0, self.uiGenY, 1, 1, self, self.updateSemaphoreNoW24)
-	self.semaphoreNoW24.tip = "Odnosi się do semafora.\nOznacza, że dany semafor NIE posiada wskaźnika W24.\nTaki semafor nie może podać przebiegu wymagającego wyświetlenia tego wskaźnika."
+	self.widgets.semaphoreNoW24 = self.ui:addCheckbox("right", "semaphoreNoW24", "Brak W24", 0, self.uiGenY, 1, 1, self, self.updateSemaphoreNoW24)
+	self.widgets.semaphoreNoW24.tip = "Odnosi się do semafora.\nOznacza, że dany semafor NIE posiada wskaźnika W24.\nTaki semafor nie może podać przebiegu wymagającego wyświetlenia tego wskaźnika."
 	self.uiGenY = self.uiGenY + 1
 
-	self.ui:addLabel("right", nil, "V dla skr. drogi ham.", 0, self.uiGenY, 8, 1)
-	self.semaphoreShortSpeed = self.ui:addInput("right", "semaphoreShortSpeed", 8, self.uiGenY, 6, 1, self, self.updateSemaphoreShortSpeed)
-	self.semaphoreShortSpeed.tip = "Prędkość dla skróconej drogi hamowania w km/h.\nJeżeli wielostopniowa, to można wpisać dane w poniższym formacie:\n0:40,40:100\n- Przy następnym Stój, ogranicz do 40 km/h\n- Przy następnym 40 km/h, ogranicz do 100 km/h\n- Powyżej 40 km/h, nie ograniczaj"
+	self.widgets.semaphoreShortSpeed_l = self.ui:addLabel("right", nil, "V dla skr. drogi ham.", 0, self.uiGenY, 8, 1)
+	self.widgets.semaphoreShortSpeed = self.ui:addInput("right", "semaphoreShortSpeed", 8, self.uiGenY, 6, 1, self, self.updateSemaphoreShortSpeed)
+	self.widgets.semaphoreShortSpeed.tip = "Prędkość dla skróconej drogi hamowania w km/h.\nJeżeli wielostopniowa, to można wpisać dane w poniższym formacie:\n0:40,40:100\n- Przy następnym Stój, ogranicz do 40 km/h\n- Przy następnym 40 km/h, ogranicz do 100 km/h\n- Powyżej 40 km/h, nie ograniczaj"
 	self.uiGenY = self.uiGenY + 1
 
-	self.ui:addLabel("right", nil, "Możl. podania:", 0, self.uiGenY, 6, 1)
-	self.semaphoreAllowTrain = self.ui:addCheckbox("right", "semaphoreAllowTrain", "poc.", 6, self.uiGenY, 1, 1, self, self.updateSemaphoreAllowTrain)
-	--self.semaphoreAllowTrain.tip = "Oznacza możliwość wyświetlenia sygnału zezwalającego na jazdę na tym semaforze (np. S2, S5, S13).\nNależy zaznaczyć dla sygnalizatorów półsamoczynnych i sygnalizatorów SBL.\nNie należy zaznaczać dla tarcz manewrowych, semaforów zaporowych i sygnalizatorów Sz."
-	self.semaphoreAllowShunt = self.ui:addCheckbox("right", "semaphoreAllowShunt", "man.", 9, self.uiGenY, 1, 1, self, self.updateSemaphoreAllowShunt)
-	--self.semaphoreAllowShunt.tip = "Oznacza możliwość wyświetlenia sygnału zezwalającego na manewry na tym semaforze (Ms2).\nNależy zaznaczyć dla większości semaforów, tarcz manewrowych i tarcz zaporowych.\nNie należy zaznaczać dla semaforów wjazdowych, semaforów bez indeksu \"m\", sygnalizatorów SBL i Sz."
-	self.semaphoreAllowSz = self.ui:addCheckbox("right", "semaphoreAllowSz", "Sz", 12, self.uiGenY, 1, 1, self, self.updateSemaphoreAllowSz)
-	--self.semaphoreAllowSz.tip = "Oznacza możliwość wyświetlenia sygnału zastępczego na tym semaforze (Sz).\nNależy zaznaczyć dla większości semaforów i sygnalizatorów Sz.\nNie należy zaznaczać dla tarcz manewrowych i semaforów nieposiadających fizycznie komory białej (na posterunkach odstępowych, SBL)."
+	self.widgets.semaphoreAllow_l = self.ui:addLabel("right", nil, "Możl. podania:", 0, self.uiGenY, 6, 1)
+	self.widgets.semaphoreAllowTrain = self.ui:addCheckbox("right", "semaphoreAllowTrain", "poc.", 6, self.uiGenY, 1, 1, self, self.updateSemaphoreAllowTrain)
+	self.widgets.semaphoreAllowTrain.tip = "Możliwość wyświetlenia sygnału zezwalającego na jazdę na tym semaforze (np. S2, S5, S13).\nNależy zaznaczyć dla sygnalizatorów półsamoczynnych i sygnalizatorów SBL.\nNie należy zaznaczać dla tarcz manewrowych, semaforów zaporowych i sygnalizatorów Sz."
+	self.widgets.semaphoreAllowShunt = self.ui:addCheckbox("right", "semaphoreAllowShunt", "man.", 9, self.uiGenY, 1, 1, self, self.updateSemaphoreAllowShunt)
+	self.widgets.semaphoreAllowShunt.tip = "Możliwość wyświetlenia sygnału zezwalającego na manewry na tym semaforze (Ms2).\nNależy zaznaczyć dla większości semaforów, tarcz manewrowych i tarcz zaporowych.\nNie należy zaznaczać dla semaforów wjazdowych, semaforów bez indeksu \"m\", sygnalizatorów SBL i Sz."
+	self.widgets.semaphoreAllowSz = self.ui:addCheckbox("right", "semaphoreAllowSz", "Sz", 12, self.uiGenY, 1, 1, self, self.updateSemaphoreAllowSz)
+	self.widgets.semaphoreAllowSz.tip = "Możliwość wyświetlenia sygnału zastępczego na tym semaforze (Sz).\nNależy zaznaczyć dla większości semaforów i sygnalizatorów Sz.\nNie należy zaznaczać dla tarcz manewrowych i semaforów nieposiadających fizycznie komory białej (na posterunkach odstępowych, SBL)."
 	self.uiGenY = self.uiGenY + 1
 
-	self.semaphoreShape = self.ui:addCheckbox("right", "semaphoreShape", "Kształtowy", 0, self.uiGenY, 1, 1, self, self.updateSemaphoreShape)
-	--self.semaphoreShape.tip = "Oznacza semafor jako kształtowy.\nSemafory kształtowe nie mają uzależnienia od następnego semafora i potrafią wyświetlić tylko sygnały Sr1, Sr2 i Sr3.\nW chwili obecnej nie wpływa to na wygląd semafora na schemacie."
-	self.semaphoreFourPhase = self.ui:addCheckbox("right", "semaphoreFourPhase", "4-stawny", 7, self.uiGenY, 1, 1, self, self.updateSemaphoreFourPhase)
-	self.semaphoreFourPhase.tip = "Gdy zaznaczony i za dwa semafory jest S1, to zamiast S2 wyświetlony zostanie S3, zamiast S10 - S11, itp."
+	self.widgets.semaphoreShape = self.ui:addCheckbox("right", "semaphoreShape", "Kształtowy", 0, self.uiGenY, 1, 1, self, self.updateSemaphoreShape)
+	self.widgets.semaphoreShape.tip = "Oznacza semafor jako kształtowy.\nSemafory kształtowe nie mają uzależnienia od następnego semafora i potrafią wyświetlić tylko sygnały Sr1, Sr2 i Sr3.\nW chwili obecnej nie wpływa to na wygląd semafora na schemacie."
+	self.widgets.semaphoreFourPhase = self.ui:addCheckbox("right", "semaphoreFourPhase", "4-stawny", 7, self.uiGenY, 1, 1, self, self.updateSemaphoreFourPhase)
+	self.widgets.semaphoreFourPhase.tip = "Gdy zaznaczony i za dwa semafory jest S1, to zamiast S2 wyświetlony zostanie S3, zamiast S10 - S11, itp."
 	self.uiGenY = self.uiGenY + 1
 
-	self.semaphoreNoDanger = self.ui:addCheckbox("right", "semaphoreNoDanger", "Brak górnej pomarańczowej komory", 0, self.uiGenY, 1, 1, self, self.updateSemaphoreNoDanger)
-	self.semaphoreNoDanger.tip = "Oznacza semafor jako nieposiadający górnej pomarańczowej komory.\nOznacza to, że pathfinder nie będzie w stanie wyświetlić sygnału zezwalającego na jazdę\njeżeli kolejny semafor nie zezwala na jazdę z prędkością 100km/h lub Vmax."
+	self.widgets.semaphoreNoDanger = self.ui:addCheckbox("right", "semaphoreNoDanger", "Brak górnej pomarańczowej komory", 0, self.uiGenY, 1, 1, self, self.updateSemaphoreNoDanger)
+	self.widgets.semaphoreNoDanger.tip = "Oznacza semafor jako nieposiadający górnej pomarańczowej komory.\nOznacza to, że pathfinder nie będzie w stanie wyświetlić sygnału zezwalającego na jazdę\njeżeli kolejny semafor nie zezwala na jazdę z prędkością 100km/h lub Vmax."
 	self.uiGenY = self.uiGenY + 1
 
-	self.ui:addLabel("right", nil, "Następny semafor:", 0, self.uiGenY, 8, 1)
-	self.semaphoreNext = self.ui:addInput("right", "semaphoreNext", 8, self.uiGenY, 6, 1, self, self.updateSemaphoreNext)
-	self.semaphoreNext.tip = "Wskazuje następną prędkość w km/h (puste = Vmax) lub ID następnego semafora ze znakiem ':' na początku."
+	self.widgets.semaphoreNext_l = self.ui:addLabel("right", nil, "Następny semafor:", 0, self.uiGenY, 8, 1)
+	self.widgets.semaphoreNext = self.ui:addInput("right", "semaphoreNext", 8, self.uiGenY, 6, 1, self, self.updateSemaphoreNext)
+	self.widgets.semaphoreNext.tip = "Wskazuje następną prędkość w km/h (puste = Vmax) lub ID następnego semafora ze znakiem ':' na początku."
 	self.uiGenY = self.uiGenY + 1
 end
 
@@ -148,14 +148,14 @@ end
 function UIRightPane:addWarpSettings()
 	self:addHeader("Punkt końcowy")
 
-	self.ui:addLabel("right", nil, "ID:", 0, self.uiGenY, 2, 1)
-	self.warpID = self.ui:addInput("right", "warpID", 2, self.uiGenY, 3, 1, self, self.updateWarpID)
-	self.warpID.tip = "Wskaż unikalny dla tej stacji identyfikator punktu końcowego, do którego można się jednoznacznie odnieść z innej stacji, np. `MMz_N`."
-	self.ui:addLabel("right", nil, "Cel:", 5, self.uiGenY, 2, 1)
-	self.warp = self.ui:addInput("right", "warp", 7, self.uiGenY, 4, 1, self, self.updateWarp)
-	self.warp.tip = "Wskaż skrót stacji lub szlaku do której prowadzi strzałka, np. `Mrz`."
-	self.warpTargetID = self.ui:addInput("right", "warpTargetID", 11, self.uiGenY, 3, 1, self, self.updateWarpTargetID)
-	self.warpTargetID.tip = "Wskaż identyfikator punktu końcowego, do którego prowadzi ta strzałka na wskazanej stacji, np. `MMz_N`."
+	self.widgets.warpID_l = self.ui:addLabel("right", nil, "ID:", 0, self.uiGenY, 2, 1)
+	self.widgets.warpID = self.ui:addInput("right", "warpID", 2, self.uiGenY, 3, 1, self, self.updateWarpID)
+	self.widgets.warpID.tip = "Wskaż unikalny dla tej stacji identyfikator punktu końcowego, do którego można się jednoznacznie odnieść z innej stacji, np. `MMz_N`."
+	self.widgets.warp_l = self.ui:addLabel("right", nil, "Cel:", 5, self.uiGenY, 2, 1)
+	self.widgets.warp = self.ui:addInput("right", "warp", 7, self.uiGenY, 4, 1, self, self.updateWarp)
+	self.widgets.warp.tip = "Wskaż skrót stacji lub szlaku do której prowadzi strzałka, np. `Mrz`."
+	self.widgets.warpTargetID = self.ui:addInput("right", "warpTargetID", 11, self.uiGenY, 3, 1, self, self.updateWarpTargetID)
+	self.widgets.warpTargetID.tip = "Wskaż identyfikator punktu końcowego, do którego prowadzi ta strzałka na wskazanej stacji, np. `MMz_N`."
 	self.uiGenY = self.uiGenY + 1
 end
 
@@ -163,8 +163,8 @@ end
 function UIRightPane:addBlockadeSettings()
 	self:addHeader("Blokada liniowa")
 
-	self.ui:addLabel("right", nil, "Nazwa blokady:", 0, self.uiGenY, 8, 1)
-	self.blockadeID = self.ui:addInput("right", "blockadeID", 8, self.uiGenY, 6, 1, self, self.updateBlockadeID)
+	self.widgets.blockadeID_l = self.ui:addLabel("right", nil, "Nazwa blokady:", 0, self.uiGenY, 8, 1)
+	self.widgets.blockadeID = self.ui:addInput("right", "blockadeID", 8, self.uiGenY, 6, 1, self, self.updateBlockadeID)
 	self.uiGenY = self.uiGenY + 1
 end
 
@@ -172,10 +172,24 @@ end
 function UIRightPane:addMiscSettings()
 	self:addHeader("Różne")
 
-	self.ui:addLabel("right", nil, "Komenda:", 0, self.uiGenY, 8, 1)
-	self.command = self.ui:addInput("right", "command", 8, self.uiGenY, 6, 1, self, self.updateCommand)
-	self.command.tip = "Komenda jaka zostanie wykonana po kliknięciu tej kostki prawym przyciskiem myszy."
+	self.widgets.command_l = self.ui:addLabel("right", nil, "Komenda:", 0, self.uiGenY, 8, 1)
+	self.widgets.command = self.ui:addInput("right", "command", 8, self.uiGenY, 6, 1, self, self.updateCommand)
+	self.widgets.command.tip = "Komenda jaka zostanie wykonana po kliknięciu tej kostki prawym przyciskiem myszy."
 	self.uiGenY = self.uiGenY + 1
+end
+
+---Removes all tile setting groups from the UI panel.
+function UIRightPane:removeAllSettings()
+	for i, header in ipairs(self.headers) do
+		self.ui:removeElement(header)
+	end
+	_Utils.emptyTable(self.headers)
+	for name, widget in pairs(self.widgets) do
+		self.ui:removeElement(widget)
+	end
+	_Utils.emptyTable(self.widgets)
+	-- Prepare for next additions (start from scratch)
+	self.uiGenY = 4
 end
 
 function UIRightPane:update()
@@ -185,71 +199,59 @@ end
 
 ---Resets all property inputs to their default values.
 function UIRightPane:resetValues()
-	self.trackID.value = ""
-	self.switchID.value = ""
-	self.switchFlip.value = false
-	self.switchFlipABCD.value = false
-	self.semaphoreType.value = ""
-	self.semaphoreNoW24.value = false
-	self.semaphoreNoDanger.value = false
-	self.semaphoreID.value = ""
-	self.itineraryEndID.value = ""
-	self.electrified2.value = false
-	self.targetW24.value = false
-	self.trainTarget.value = false
-	self.shuntTarget.value = false
-	self.forbidTrain.value = false
-	self.forbidShunt.value = false
-	self.speed.value = ""
-	self.speedPlus.value = ""
-	self.speedMinus.value = ""
-	self.semaphoreAllowTrain.value = false
-	self.semaphoreAllowShunt.value = false
-	self.semaphoreAllowSz.value = false
-	self.semaphoreShape.value = false
-	self.semaphoreShortSpeed.value = ""
-	self.semaphoreNext.value = ""
-	self.semaphoreFourPhase.value = false
-	self.blockadeID.value = ""
-	self.warp.value = ""
-	self.warpID.value = ""
-	self.warpTargetID.value = ""
-	self.command.value = ""
+	self:removeAllSettings()
 end
 
 ---Sets all property inputs to values from the specified tile.
 ---@param tile Tile The tile for which to set the input values.
 function UIRightPane:setValuesForTile(tile)
-	self.trackID.value = tile.trackID or ""
-	self.switchID.value = tile.switchID or ""
-	self.switchFlip.value = tile.switchFlip
-	self.switchFlipABCD.value = tile.switchFlipABCD
-	self.semaphoreType.value = tile:isSemaphore() and (tile.semaphoreType and tostring(tile.semaphoreType) or "0") or ""
-	self.semaphoreNoW24.value = tile.semaphoreNoW24
-	self.semaphoreNoDanger.value = tile.semaphoreNoDanger
-	self.semaphoreID.value = tile.semaphoreID or ""
-	self.itineraryEndID.value = tile.itineraryEndID or ""
-	self.electrified2.value = tile.electrified
-	self.targetW24.value = tile.targetW24
-	self.trainTarget.value = tile.trainTarget
-	self.shuntTarget.value = tile.shuntTarget
-	self.forbidTrain.value = tile.forbidTrain
-	self.forbidShunt.value = tile.forbidShunt
-	self.speed.value = tile.maxSpeed ~= math.huge and tostring(tile.maxSpeed) or ""
-	self.speedPlus.value = tile.maxSpeedPlus ~= math.huge and tostring(tile.maxSpeedPlus) or ""
-	self.speedMinus.value = tile.maxSpeedMinus ~= math.huge and tostring(tile.maxSpeedMinus) or ""
-	self.semaphoreAllowTrain.value = tile.semaphoreAllowTrain
-	self.semaphoreAllowShunt.value = tile.semaphoreAllowShunt
-	self.semaphoreAllowSz.value = tile.semaphoreAllowSz
-	self.semaphoreShape.value = tile.semaphoreShape
-	self.semaphoreShortSpeed.value = tile.semaphoreShortSpeed and self:shortSpeedToText(tile.semaphoreShortSpeed) or ""
-	self.semaphoreNext.value = tile.semaphoreNext and self:nextToText(tile.semaphoreNext) or ""
-	self.semaphoreFourPhase.value = tile.semaphoreFourPhase
-	self.blockadeID.value = tile.blockadeID or ""
-	self.warp.value = tile.warp or ""
-	self.warpID.value = tile.warpID or ""
-	self.warpTargetID.value = tile.warpTargetID or ""
-	self.command.value = tile.command or ""
+	-- Spawn appropriate sections for the tile
+	if tile:isTrack() then
+		self:addTrackSettings()
+		self.widgets.trackID.value = tile.trackID or ""
+		self.widgets.electrified2.value = tile.electrified
+		self.widgets.trainTarget.value = tile.trainTarget
+		self.widgets.shuntTarget.value = tile.shuntTarget
+		self.widgets.forbidTrain.value = tile.forbidTrain
+		self.widgets.forbidShunt.value = tile.forbidShunt
+		self.widgets.speed.value = tile.maxSpeed ~= math.huge and tostring(tile.maxSpeed) or ""
+		self.widgets.itineraryEndID.value = tile.itineraryEndID or ""
+		self.widgets.targetW24.value = tile.targetW24
+	end
+	if tile:isSwitch() then
+		self:addSwitchSettings()
+		self.widgets.switchID.value = tile.switchID or ""
+		self.widgets.switchFlip.value = tile.switchFlip
+		self.widgets.switchFlipABCD.value = tile.switchFlipABCD
+		self.widgets.speedPlus.value = tile.maxSpeedPlus ~= math.huge and tostring(tile.maxSpeedPlus) or ""
+		self.widgets.speedMinus.value = tile.maxSpeedMinus ~= math.huge and tostring(tile.maxSpeedMinus) or ""
+	end
+	if tile:isSemaphore() then
+		self:addSemaphoreSettings()
+		self.widgets.semaphoreID.value = tile.semaphoreID or ""
+		self.widgets.semaphoreType.value = tile:isSemaphore() and (tile.semaphoreType and tostring(tile.semaphoreType) or "0") or ""
+		self.widgets.semaphoreNoW24.value = tile.semaphoreNoW24
+		self.widgets.semaphoreShortSpeed.value = tile.semaphoreShortSpeed and self:shortSpeedToText(tile.semaphoreShortSpeed) or ""
+		self.widgets.semaphoreAllowTrain.value = tile.semaphoreAllowTrain
+		self.widgets.semaphoreAllowShunt.value = tile.semaphoreAllowShunt
+		self.widgets.semaphoreAllowSz.value = tile.semaphoreAllowSz
+		self.widgets.semaphoreShape.value = tile.semaphoreShape
+		self.widgets.semaphoreFourPhase.value = tile.semaphoreFourPhase
+		self.widgets.semaphoreNoDanger.value = tile.semaphoreNoDanger
+		self.widgets.semaphoreNext.value = tile.semaphoreNext and self:nextToText(tile.semaphoreNext) or ""
+	end
+	if tile:isExitPoint() then
+		self:addWarpSettings()
+		self.widgets.warpID.value = tile.warpID or ""
+		self.widgets.warp.value = tile.warp or ""
+		self.widgets.warpTargetID.value = tile.warpTargetID or ""
+	end
+	if tile:isBlockadeGenerator() then
+		self:addBlockadeSettings()
+		self.widgets.blockadeID.value = tile.blockadeID or ""
+	end
+	self:addMiscSettings()
+	self.widgets.command.value = tile.command or ""
 end
 
 ---Turns short speed data into text format.
