@@ -9,22 +9,22 @@ local UIStationList = Class:derive("UIStationList")
 function UIStationList:new(ui)
     self.ui = ui
 
-	self.window = self.ui:createCenteredWindow("sl", "Lista stacji", 25, 20)
-	self.ui:addLabel("sl", nil, "Stacje", 0, 1, 12, 1)
-	self.stations = self.ui:addComboBox("sl", "stations", 0, 2, 12, 17)
+	self.window = self.ui:createCenteredWindow("sl", "Lista stacji", 30, 20)
+	self.ui:addLabel("sl", nil, "Stacje", 0, 1, 17, 1)
+	self.stations = self.ui:addComboBox("sl", "stations", 0, 2, 17, 17)
 
 	-- Add a station, rename a station and go to station
-	self.ui:addButton("sl", "bAdd", "Dodaj stację", 0, 19, 12, 1, self, self.addStation)
+	self.ui:addButton("sl", "bAdd", "Dodaj stację", 0, 19, 17, 1, self, self.addStation)
 
-	self.ui:addLabel("sl", nil, "Nazwa", 12, 1, 4, 1)
-	self.name = self.ui:addInput("sl", "name", 16, 1, 9, 1, self, nil, self.saveStation)
-	self.ui:addLabel("sl", nil, "Identyfikator", 12, 2, 8, 1)
-	self.id = self.ui:addInput("sl", "id", 20, 2, 5, 1, self, nil, self.saveStation)
-	self.ui:addButton("sl", "bSave", "Zapisz zmiany", 13, 5, 11, 1, self, self.saveStation)
-	self.ui:addButton("sl", "bGo", "Skocz do stacji", 13, 6, 11, 1, self, self.goToStation)
-	self.ui:addButton("sl", "bMoveUp", "Przenieś do góry", 13, 7, 11, 1, self, self.moveStationUp)
-	self.ui:addButton("sl", "bMoveDown", "Przenieś na dół", 13, 8, 11, 1, self, self.moveStationDown)
-	self.ui:addButton("sl", nil, "Usuń stację", 13, 14, 11, 1, self, self.deleteStation)
+	self.ui:addLabel("sl", nil, "Nazwa", 17, 1, 4, 1)
+	self.name = self.ui:addInput("sl", "name", 21, 1, 9, 1, self, nil, self.saveStation)
+	self.ui:addLabel("sl", nil, "Identyfikator", 17, 2, 8, 1)
+	self.id = self.ui:addInput("sl", "id", 25, 2, 5, 1, self, nil, self.saveStation)
+	self.ui:addButton("sl", "bSave", "Zapisz zmiany", 18, 5, 11, 1, self, self.saveStation)
+	self.ui:addButton("sl", "bGo", "Skocz do stacji", 18, 6, 11, 1, self, self.goToStation)
+	self.ui:addButton("sl", "bMoveUp", "Przenieś do góry", 18, 7, 11, 1, self, self.moveStationUp)
+	self.ui:addButton("sl", "bMoveDown", "Przenieś na dół", 18, 8, 11, 1, self, self.moveStationDown)
+	self.ui:addButton("sl", nil, "Usuń stację", 18, 14, 11, 1, self, self.deleteStation)
 end
 
 ---Shows this window.
@@ -44,7 +44,7 @@ end
 function UIStationList:updateList()
 	self.ui:removeElementChildren("sl/stations")
 	for i, station in ipairs(_Project:getStations()) do
-		self.ui:addEntry("sl/stations", station.shortcut, station:getFullName(), 0, i - 1, 11, 1, self, self.onEntrySelected, self.goToStation)
+		self.ui:addEntry("sl/stations", station.shortcut, station:getFullName(), 0, i - 1, 16, 1, self, self.onEntrySelected, self.goToStation)
 	end
 end
 
