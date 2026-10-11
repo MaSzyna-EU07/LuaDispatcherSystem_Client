@@ -1,28 +1,21 @@
 local Class = require("class")
+local PickerButton = require("PickerButton")
 
 ---@class Picker : Class
 ---@overload fun(): Picker
 local Picker = Class:derive("Picker")
 
 function Picker:new()
-    self.x, self.y = 20, 710
-    self.margin = 10
+    self.x, self.y = 10, 25
+    self.margin = 0
 	---@alias TileCategory {tiles: string[], startIndex: integer?, display: {image: string?}, properties: table<string, any>?}
 	---@type TileCategory[]
 	self.tileCategories = {
 		{tiles = {""}},
-		{tiles = {"track-", "track\\", "track|", "track/"}},
-		{tiles = {"track+", "trackX"}},
 		{tiles = {"platformP"}},
 		{tiles = {"platformF"}},
-		{tiles = {"curve1", "curve2", "curve3", "curve4", "curve5", "curve6", "curve7", "curve8"}, startIndex = 3},
-		{tiles = {"switchL1", "switchL2", "switchL3", "switchL4", "switchL5", "switchL6", "switchL7", "switchL8"}, startIndex = 3, properties = {maxSpeedPlus = 40}},
-		{tiles = {"switchR1", "switchR2", "switchR3", "switchR4", "switchR5", "switchR6", "switchR7", "switchR8"}, startIndex = 3, properties = {maxSpeedPlus = 40}},
-		{tiles = {"switchD1", "switchD2", "switchD3", "switchD4"}, startIndex = 2, properties = {maxSpeedPlus = 40, maxSpeedMinus = 100}},
-		{tiles = {"switchW1", "switchW2", "switchW3", "switchW4", "switchW5", "switchW6", "switchW7", "switchW8"}, startIndex = 6, properties = {maxSpeedPlus = 40, maxSpeedMinus = 40}},
 		{tiles = {"switchDerL1", "switchDerL2", "switchDerL3", "switchDerL4", "switchDerL5", "switchDerL6", "switchDerL7", "switchDerL8"}, startIndex = 3, properties = {maxSpeedPlus = 40}},
 		{tiles = {"switchDerR1", "switchDerR2", "switchDerR3", "switchDerR4", "switchDerR5", "switchDerR6", "switchDerR7", "switchDerR8"}, startIndex = 3, properties = {maxSpeedPlus = 40}},
-		{tiles = {"buffer1", "buffer2", "buffer3", "buffer4", "buffer5", "buffer6", "buffer7", "buffer8"}, startIndex = 7},
 		{tiles = {"derailer1", "derailer2", "derailer3", "derailer4", "derailer5", "derailer6", "derailer7", "derailer8"}, startIndex = 3},
 		{tiles = {"derailerL1", "derailerL2", "derailerL3", "derailerL4", "derailerL5", "derailerL6", "derailerL7", "derailerL8"}, startIndex = 3},
 		{tiles = {"curveDerL1", "curveDerL2", "curveDerL3", "curveDerL4", "curveDerL5", "curveDerL6", "curveDerL7", "curveDerL8"}, startIndex = 3},
@@ -42,14 +35,6 @@ function Picker:new()
     self.boxX, self.boxY = self.x - self.margin, self.y - self.margin
     self.boxW, self.boxH = #self.tileCategories * self.tileSize + self.margin * 2, self.tileSize + self.margin * 2
 	self.tmpFlip = {
-		["switchL1"] = "switchR1", ["switchR1"] = "switchL1",
-		["switchL2"] = "switchR2", ["switchR2"] = "switchL2",
-		["switchL3"] = "switchR3", ["switchR3"] = "switchL3",
-		["switchL4"] = "switchR4", ["switchR4"] = "switchL4",
-		["switchL5"] = "switchR5", ["switchR5"] = "switchL5",
-		["switchL6"] = "switchR6", ["switchR6"] = "switchL6",
-		["switchL7"] = "switchR7", ["switchR7"] = "switchL7",
-		["switchL8"] = "switchR8", ["switchR8"] = "switchL8",
 		["switchDerL1"] = "switchDerR1", ["switchDerR1"] = "switchDerL1",
 		["switchDerL2"] = "switchDerR2", ["switchDerR2"] = "switchDerL2",
 		["switchDerL3"] = "switchDerR3", ["switchDerR3"] = "switchDerL3",
@@ -77,17 +62,22 @@ function Picker:new()
 		["arrow3"] = "arrow7", ["arrow7"] = "arrow3"
 	}
 
-	---@type {x: integer, y: integer, tileX: integer, action: PickerMode}[]
-	self.buttons = {
-		{x = 20, y = 665, tileX = 1, action = PickerMode.ADD_ROW},
-		{x = 65, y = 665, tileX = 2, action = PickerMode.DEL_ROW},
-		{x = 110, y = 665, tileX = 3, action = PickerMode.ADD_COLUMN},
-		{x = 155, y = 665, tileX = 4, action = PickerMode.DEL_COLUMN},
-		{x = 200, y = 665, tileX = 5, action = PickerMode.PROPERTIES},
-		{x = 245, y = 665, tileX = 10, action = PickerMode.RAILS},
-		--{x = 245, y = 665, tileX = 8, action = PickerMode.ELECTRIFY},
-		--{x = 290, y = 665, tileX = 9, action = PickerMode.DEELECTRIFY}
+	local tileX = {1, 2, 3, 4, 5, 10, 8, 9}
+	local actions = {
+		PickerMode.ADD_ROW,
+		PickerMode.DEL_ROW,
+		PickerMode.ADD_COLUMN,
+		PickerMode.DEL_COLUMN,
+		PickerMode.PROPERTIES,
+		PickerMode.RAILS,
+		PickerMode.ELECTRIFY,
+		PickerMode.DEELECTRIFY
 	}
+	---@type PickerButton[]
+	self.buttons = {}
+	for i = 1, #tileX do
+		self.buttons[i] = PickerButton({x = 910 + i * 45, y = 25, tileX = tileX[i], action = actions[i]})
+	end
 
 	-- If `TILE`, a tile is selected in the picker. Otherwise, a button is pressed, indicating a mode.
 	---@type PickerMode
@@ -95,8 +85,6 @@ function Picker:new()
 
 	self.selectedTileCategory = 1
 	self.selectedTileOrientation = 1
-	---@type PickerMode?
-	self.modeHover = nil
 	self.hoveredTileCategory = nil
 
     self.electrified = true
@@ -108,7 +96,6 @@ function Picker:getTilePos(i)
 end
 
 function Picker:update(dt)
-	self.modeHover = nil
 	self.hoveredTileCategory = nil
 	if _Utils.isPointInsideBox(_MouseX, _MouseY, self.boxX, self.boxY, self.boxW, self.boxH) and not _UI:isMouseInUI() then
 		for i = 1, #self.tileCategories do
@@ -120,9 +107,7 @@ function Picker:update(dt)
 		end
 	end
 	for i, button in ipairs(self.buttons) do
-		if _Utils.isPointInsideBox(_MouseX, _MouseY, button.x, button.y, 40, 28) then
-			self.modeHover = button.action
-		end
+		button:setPressed(button.action == self.mode)
 	end
 end
 
@@ -207,7 +192,6 @@ function Picker:pickTile(tile)
 	self.mode = PickerMode.TILE
 	self.selectedTileCategory, self.selectedTileOrientation = category, orientation
 	self.electrified = tile.electrified
-	_UI.pickerPane.electrified.value = tile.electrified
 end
 
 ---Augments the provided tile with the selection. Sets the tile ID, electrified, and any special properties.
@@ -265,8 +249,7 @@ function Picker:draw()
 	end
 
 	for i, button in ipairs(self.buttons) do
-		local tileY = self.mode == button.action and 2 or 1
-		_Buttons:drawTile(button.tileX, tileY, button.x, button.y)
+		button:draw()
 	end
 end
 
@@ -308,8 +291,12 @@ function Picker:mousepressed(x, y, button)
 	if button == 1 then
 		if self.hoveredTileCategory then
 			self:selectCategory(self.hoveredTileCategory)
-		elseif self.modeHover then
-			self.mode = self.modeHover
+		else
+			for i, btn in ipairs(self.buttons) do
+				if btn:isHovered() then
+					self.mode = btn.action
+				end
+			end
 		end
 	end
 end

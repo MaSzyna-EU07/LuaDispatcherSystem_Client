@@ -6,8 +6,8 @@ local Tile = require("Tile")
 local Station = class:derive("Station")
 
 function Station:new(name, shortcut)
-	self.x, self.y = 40, 40
-	self.SCALE = 1.5
+	self.x, self.y = 5, 61
+	self.scale = 1.5
 	self.TILE_SIZE = 14
 
 	if type(name) == "table" then
@@ -75,14 +75,15 @@ function Station:update(dt)
 			-- Hover rail tool
 			self.hoverRailX, self.hoverRailY = self.hoverX, self.hoverY
 			-- Snap to either edge or middle of tile
-			if self.hoverPartX >= 0.85 then
+			local MARGIN = 0.25
+			if self.hoverPartX >= 1 - MARGIN then
 				self.hoverRailX = self.hoverRailX + 1
-			elseif self.hoverPartX >= 0.15 then
+			elseif self.hoverPartX >= MARGIN then
 				self.hoverRailX = self.hoverRailX + 0.5
 			end
-			if self.hoverPartY >= 0.85 then
+			if self.hoverPartY >= 1 - MARGIN then
 				self.hoverRailY = self.hoverRailY + 1
-			elseif self.hoverPartY >= 0.15 then
+			elseif self.hoverPartY >= MARGIN then
 				self.hoverRailY = self.hoverRailY + 0.5
 			end
 			if self.railToolDragX and self.railToolDragY then
@@ -126,7 +127,7 @@ end
 ---@param y number Global Y position within the window.
 ---@return integer?, integer?
 function Station:posToCoords(x, y)
-	local tileX, tileY = math.floor((x - self.x) / (self.TILE_SIZE * self.SCALE)) + 1, math.floor((y - self.y) / (self.TILE_SIZE * self.SCALE)) + 1
+	local tileX, tileY = math.floor((x - self.x) / (self.TILE_SIZE * self.scale)) + 1, math.floor((y - self.y) / (self.TILE_SIZE * self.scale)) + 1
 	if tileX >= 1 and tileY >= 1 and tileX <= self.w and tileY <= self.h then
 		return tileX, tileY
 	end
@@ -137,7 +138,7 @@ end
 ---@param y number Global Y position within the window.
 ---@return number, number
 function Station:posToPartCoords(x, y)
-	local partX, partY = ((x - self.x) / (self.TILE_SIZE * self.SCALE)) % 1, ((y - self.y) / (self.TILE_SIZE * self.SCALE)) % 1
+	local partX, partY = ((x - self.x) / (self.TILE_SIZE * self.scale)) % 1, ((y - self.y) / (self.TILE_SIZE * self.scale)) % 1
 	return partX, partY
 end
 
@@ -146,7 +147,7 @@ end
 ---@param tileY integer Tile Y coordinate.
 ---@return number, number
 function Station:coordsToPos(tileX, tileY)
-	return self.x + (tileX - 1) * self.TILE_SIZE * self.SCALE, self.y + (tileY - 1) * self.TILE_SIZE * self.SCALE
+	return self.x + (tileX - 1) * self.TILE_SIZE * self.scale, self.y + (tileY - 1) * self.TILE_SIZE * self.scale
 end
 
 ---Returns the on-canvas position of the top left corner of the specified tile.
@@ -464,6 +465,12 @@ function Station:confirmRailToolDrag()
 	end
 end
 
+---Zooms the schematic in or out.
+---@param steps integer Positive values increase the zoom, negative ones decrease it.
+function Station:zoom(steps)
+	self.scale = _Utils.clamp(self.scale + steps * 0.25, 1, 4)
+end
+
 ---Returns the first found tile with the specified warp ID on this schematic.
 ---If none of the tiles have this ID, returns `nil`.
 ---TODO: When schematics are brought over here from the server, use the index from there.
@@ -535,6 +542,8 @@ function Station:handleLeftClick()
 				self:unselectTile(self.hoverX, self.hoverY)
 			end
 			self.dragX, self.dragY = self.hoverX, self.hoverY
+		elseif _Picker.mode == PickerMode.ELECTRIFY or _Picker.mode == PickerMode.DEELECTRIFY then
+			self.dragX, self.dragY = self.hoverX, self.hoverY
 		elseif _Picker.mode == PickerMode.RAILS then
 			if self.railToolDragX and self.railToolDragY and self.railToolRemove then
 				-- Cancel dragging if we were holding the right mouse button
@@ -565,6 +574,18 @@ function Station:handleLeftUnclick()
 						else
 							self:selectTile(x, y)
 						end
+					end
+				end
+			end
+			self.dragX, self.dragY = nil, nil
+		end
+	elseif _Picker.mode == PickerMode.ELECTRIFY or _Picker.mode == PickerMode.DEELECTRIFY then
+		if self.dragX and self.dragY then
+			if self.hoverX and self.hoverY then
+				for x = math.min(self.dragX, self.hoverX), math.max(self.dragX, self.hoverX) do
+					for y = math.min(self.dragY, self.hoverY), math.max(self.dragY, self.hoverY) do
+						local tile = self:getTile(x, y)
+						tile.electrified = _Picker.mode == PickerMode.ELECTRIFY
 					end
 				end
 			end
@@ -719,9 +740,9 @@ function Station:keypressed(key)
 		elseif key == "down" then
 			self:moveSingleSelection(0, 1)
 		elseif key == "kp+" then
-			self.SCALE = math.min(self.SCALE + 0.25, 4)
+			self:zoom(1)
 		elseif key == "kp-" then
-			self.SCALE = math.max(self.SCALE - 0.25, 1)
+			self:zoom(-1)
 		end
 	end
 end
@@ -755,6 +776,15 @@ function Station:mousereleased(x, y, button)
 	end
 end
 
+---Executed when the mouse wheel is scrolled.
+---@param x integer The X movement.
+---@param y integer The Y movement.
+function Station:wheelmoved(x, y)
+	if _Utils.isCtrlPressed() then
+		self:zoom(y)
+	end
+end
+
 ---Executed when the mouse cursor is moved.
 ---@param x integer The X coordinate of mouse position.
 ---@param y integer The Y coordinate of mouse position.
@@ -772,17 +802,17 @@ function Station:draw()
 	love.graphics.setCanvas(self.canvas)
 	self:drawBackground()
 	self:drawTracks()
-	self:drawHover()
 	self:drawSizeToolHover()
 	self:drawRailToolHover()
 	self:drawSelection()
 	self:drawActive()
 	self:drawClickable()
 	self:drawRectSelection()
+	self:drawHover()
 	self:drawTileHighlights()
 	love.graphics.setCanvas()
 	love.graphics.setColor(1, 1, 1)
-	love.graphics.draw(self.canvas, self.x + 0.5, self.y + 0.5, 0, self.SCALE)
+	love.graphics.draw(self.canvas, self.x + 0.5, self.y + 0.5, 0, self.scale)
 	self:drawFrame()
 end
 
@@ -812,10 +842,12 @@ function Station:drawHover()
 	if not self.hoverX or not self.hoverY then
 		return
 	end
+	if _Picker.mode == PickerMode.TILE or _Picker.mode == PickerMode.PROPERTIES or _Picker.mode == PickerMode.ELECTRIFY or _Picker.mode == PickerMode.DEELECTRIFY then
+		self:drawTileFrame(self:assertGetHoveredTile(), TileFrameColor.HOVER, true)
+	end
 	if _Picker.mode == PickerMode.TILE then
-		local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
-		self:drawTileFrame(self:assertGetHoveredTile(), TileFrameColor.HOVER)
 		-- Draw tile ghost.
+		local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
 		local category = _Picker:getSelectedCategory()
 		local image = category.display and category.display.image or "s1"
 		_DrawTile(x, y, _Picker:getSelectedTileID(), _Picker.electrified, false, false, false, 0, image, 1, 0.5)
@@ -930,15 +962,13 @@ function Station:drawRectSelection()
 	if not self.dragX or not self.dragY or not self.hoverX or not self.hoverY then
 		return
 	end
-	-- Do not display the frame if we are not selecting more than one tile.
-	if self:rectSelectIsSingleTile() then
-		return
-	end
-	for x = math.min(self.dragX, self.hoverX), math.max(self.dragX, self.hoverX) do
-		for y = math.min(self.dragY, self.hoverY), math.max(self.dragY, self.hoverY) do
-			self:drawTileFrame(self:assertGetTile(x, y), TileFrameColor.RECT_SELECTION)
-		end
-	end
+	local x1, y1 = assert(math.min(self.dragX, self.hoverX)), assert(math.min(self.dragY, self.hoverY))
+	local x2, y2 = assert(math.max(self.dragX, self.hoverX)) + 1, assert(math.max(self.dragY, self.hoverY)) + 1
+	x1, y1 = self:coordsToCanvasPos(x1, y1)
+	x2, y2 = self:coordsToCanvasPos(x2, y2)
+	love.graphics.setColor(0, 1, 0)
+	love.graphics.setLineWidth(2)
+	love.graphics.rectangle("line", x1, y1, x2 - x1, y2 - y1)
 end
 
 ---Draws the currently active tile highlights.
@@ -959,7 +989,7 @@ function Station:drawFrame()
 	end
 	love.graphics.setColor(1, 1, 0)
 	love.graphics.setLineWidth(2)
-	love.graphics.rectangle("line", self.x, self.y, self.canvas:getWidth() * self.SCALE + 1, self.canvas:getHeight() * self.SCALE + 1)
+	love.graphics.rectangle("line", self.x, self.y, self.canvas:getWidth() * self.scale + 1, self.canvas:getHeight() * self.scale + 1)
 end
 
 --####################################################--
@@ -1033,10 +1063,13 @@ end
 ---Draws the specified Tile's frame at the specified position.
 ---@param tile Tile The tile to be drawn.
 ---@param color TileFrameColor The frame color.
-function Station:drawTileFrame(tile, color)
+---@param noFill boolean? If `true`, the tile itself will not be shaded.
+function Station:drawTileFrame(tile, color, noFill)
 	local x, y = self:getTilePos(tile)
-	love.graphics.setColor(color[1], color[2], color[3], 0.2)
-	love.graphics.rectangle("fill", x, y, tile.size, tile.size)
+	if not noFill then
+		love.graphics.setColor(color[1], color[2], color[3], 0.2)
+		love.graphics.rectangle("fill", x, y, tile.size, tile.size)
+	end
 	love.graphics.setColor(color)
 	love.graphics.setLineWidth(1)
 	love.graphics.rectangle("line", x + 0.5, y + 0.5, tile.size - 1, tile.size - 1)

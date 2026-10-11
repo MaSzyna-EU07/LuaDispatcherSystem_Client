@@ -83,7 +83,7 @@ TileBackgroundColor = {
 
 ---@enum TileFrameColor
 TileFrameColor = {
-	HOVER = {0, 1, 1},
+	HOVER = {1, 1, 1},
 	SELECTION = {0, 1, 0},
 	ACTIVE = {1, 0, 1},
 	ACTIVE_SHUNT = {1, 1, 1},

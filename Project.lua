@@ -159,6 +159,13 @@ function Project:mousereleased(x, y, button)
 	end
 end
 
+function Project:wheelmoved(x, y)
+	local station = self:getCurrentStation()
+	if station then
+		station:wheelmoved(x, y)
+	end
+end
+
 ---Marks this project as unsaved and unsynced.
 function Project:markUnsaved()
 	self.unsaved = true

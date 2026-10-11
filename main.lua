@@ -247,6 +247,7 @@ end
 
 function love.wheelmoved(x, y)
 	_Picker:wheelmoved(x, y)
+	_Project:wheelmoved(x, y)
 	_UI:wheelmoved(x, y)
 end
 
