@@ -33,9 +33,14 @@ function Station:new(name, shortcut)
 	self.hoverX, self.hoverY = nil, nil
 	self.hoverPartX, self.hoverPartY = nil, nil
 	self.hoverLineX, self.hoverLineY = nil, nil
+	self.hoverRailX, self.hoverRailY = nil, nil
 	---@type Tile[]
 	self.selectedTiles = {}
 	self.dragX, self.dragY = nil, nil
+	self.railToolDragX, self.railToolDragY = nil, nil
+	self.railToolDragEndX, self.railToolDragEndY = nil, nil
+	self.railToolDragDir = nil
+	self.railToolRemove = false
 	self.activeX, self.activeY = nil, nil
 	self.activeMode = PathMode.TRAIN
 	self.activeW24 = true
@@ -60,11 +65,42 @@ function Station:update(dt)
 	self.hoverX, self.hoverY = nil, nil
 	self.hoverPartX, self.hoverPartY = nil, nil
 	self.hoverLineX, self.hoverLineY = nil, nil
+	self.hoverRailX, self.hoverRailY = nil, nil
+	self.railToolDragEndX, self.railToolDragEndY = nil, nil
 	if not _UI:isMouseInUI() then
 		self.hoverX, self.hoverY = self:posToCoords(_MouseX, _MouseY)
 		self.hoverPartX, self.hoverPartY = self:posToPartCoords(_MouseX, _MouseY)
 		if self.hoverX and self.hoverY and self.hoverPartX and self.hoverPartY then
 			self.hoverLineX, self.hoverLineY = self.hoverX + math.floor(self.hoverPartX * 2), self.hoverY + math.floor(self.hoverPartY * 2)
+			-- Hover rail tool
+			self.hoverRailX, self.hoverRailY = self.hoverX, self.hoverY
+			-- Snap to either edge or middle of tile
+			if self.hoverPartX >= 0.85 then
+				self.hoverRailX = self.hoverRailX + 1
+			elseif self.hoverPartX >= 0.15 then
+				self.hoverRailX = self.hoverRailX + 0.5
+			end
+			if self.hoverPartY >= 0.85 then
+				self.hoverRailY = self.hoverRailY + 1
+			elseif self.hoverPartY >= 0.15 then
+				self.hoverRailY = self.hoverRailY + 0.5
+			end
+			if self.railToolDragX and self.railToolDragY then
+				-- We are dragging, so we need to determine the end position
+				local dx, dy = self.hoverRailX - self.railToolDragX, self.hoverRailY - self.railToolDragY
+				local angle = -_V.angle(dx, dy)
+				local angles = _DirsToAngles(self:getValidRailToolDragDirections())
+				local dir = _AngleToDir(_Utils.getClosestAngle(angle, angles))
+				local length = math.floor(math.abs(dx) + math.abs(dy)) / 2
+				-- Do not consider an irrelevant axis on horizontal drags when calculating length
+				if dir == 1 or dir == 5 then
+					length = math.abs(dy)
+				elseif dir == 3 or dir == 7 then
+					length = math.abs(dx)
+				end
+				self.railToolDragEndX, self.railToolDragEndY = self.railToolDragX + _DIRS[dir].x * length, self.railToolDragY + _DIRS[dir].y * length
+				self.railToolDragDir = dir
+			end
 		end
 	end
 
@@ -367,6 +403,67 @@ function Station:deleteRow(y)
 	self:generateCanvas()
 end
 
+---While using the drag tool, returns a list of valid directions to go towards depending on the currently held point.
+---Returns an empty list if no point is being held with the rail tool.
+---@return integer[]
+function Station:getValidRailToolDragDirections()
+	if not self.railToolDragX or not self.railToolDragY then
+		return {}
+	end
+	local h, v = self.railToolDragX % 1 == 0, self.railToolDragY % 1 == 0
+	if h and v then
+		-- Corners -> Diagonals
+		return {2, 4, 6, 8}
+	elseif h and not v then
+		-- Left/Right -> Horizontals
+		return {3, 7}
+	elseif not h and v then
+		-- Up/Down -> Verticals
+		return {1, 5}
+	else
+		-- Middle -> All directions
+		return {1, 2, 3, 4, 5, 6, 7, 8}
+	end
+end
+
+---Returns a list of tiles which are affected by the current shape of the line, their affected directions and the resulting IDs.
+---The resulting ID can be `nil` if conversion isn't possible.
+---@return {tile: Tile, dirs: integer[], newID: string?}[]
+function Station:getAffectedRailToolDragTiles()
+	if not self.railToolDragEndX or not self.railToolDragEndY then
+		return {}
+	end
+	local tiles = {}
+	local x, y = self.railToolDragX, self.railToolDragY
+	local dir = self.railToolDragDir
+	while x ~= self.railToolDragEndX or y ~= self.railToolDragEndY do
+		local dx, dy = _DIRS[dir].x * 0.5, _DIRS[dir].y * 0.5
+		local tile = self:getTile(math.floor(x + dx / 2), math.floor(y + dy / 2))
+		if not tile then
+			break
+		end
+		if #tiles == 0 or tiles[#tiles].tile ~= tile then
+			table.insert(tiles, {tile = tile, dirs = {}})
+		end
+		table.insert(tiles[#tiles].dirs, (x % 1 ~= 0 and y % 1 ~= 0) and dir or _InvertDir(dir))
+		x, y = x + dx, y + dy
+	end
+	for i, tile in ipairs(tiles) do
+		tile.newID = _Picker:getMaskedTrackTileID(tile.tile, _DirsToBitsum(tile.dirs), self.railToolRemove)
+	end
+	return tiles
+end
+
+---Applies the changes suggested by `:getAffectedRailToolDragTiles()`.
+function Station:confirmRailToolDrag()
+	local tiles = self:getAffectedRailToolDragTiles()
+	for i, tile in ipairs(tiles) do
+		if tile.newID then
+			tile.tile.id = tile.newID
+		end
+	end
+end
+
 ---Returns the first found tile with the specified warp ID on this schematic.
 ---If none of the tiles have this ID, returns `nil`.
 ---TODO: When schematics are brought over here from the server, use the index from there.
@@ -405,7 +502,7 @@ end
 function Station:handleLeftClick()
 	-- Left click: action dependant on the current mode
 	if self.hoverX and self.hoverY then
-		if not _Picker.mode then
+		if _Picker.mode == PickerMode.TILE then
 			-- Replace the tile (erases all properties)
 			--local tile = Tile(self, self.hoverX, self.hoverY)
 			--_Picker:augmentTile(tile)
@@ -416,19 +513,19 @@ function Station:handleLeftClick()
 				_Picker:augmentTile(tile)
 				self:markUnsaved()
 			end
-		elseif _Picker.mode == "addColumn" then
+		elseif _Picker.mode == PickerMode.ADD_COLUMN then
 			self:addColumn(self.hoverLineX)
 			self:markUnsaved()
-		elseif _Picker.mode == "addRow" then
+		elseif _Picker.mode == PickerMode.ADD_ROW then
 			self:addRow(self.hoverLineY)
 			self:markUnsaved()
-		elseif _Picker.mode == "delColumn" then
+		elseif _Picker.mode == PickerMode.DEL_COLUMN then
 			self:deleteColumn(self.hoverX)
 			self:markUnsaved()
-		elseif _Picker.mode == "delRow" then
+		elseif _Picker.mode == PickerMode.DEL_ROW then
 			self:deleteRow(self.hoverY)
 			self:markUnsaved()
-		elseif _Picker.mode == "properties" then
+		elseif _Picker.mode == PickerMode.PROPERTIES then
 			if not _Utils.isShiftPressed() and not _Utils.isCtrlPressed() then
 				self:unselectAllTiles()
 			end
@@ -438,9 +535,18 @@ function Station:handleLeftClick()
 				self:unselectTile(self.hoverX, self.hoverY)
 			end
 			self.dragX, self.dragY = self.hoverX, self.hoverY
+		elseif _Picker.mode == PickerMode.RAILS then
+			if self.railToolDragX and self.railToolDragY and self.railToolRemove then
+				-- Cancel dragging if we were holding the right mouse button
+				self.railToolDragX, self.railToolDragY = nil, nil
+			else
+				-- Start dragging with the left mouse button
+				self.railToolDragX, self.railToolDragY = self.hoverRailX, self.hoverRailY
+				self.railToolRemove = false
+			end
 		end
 	else
-		if _Picker.mode == "properties" then
+		if _Picker.mode == PickerMode.PROPERTIES then
 			self:unselectAllTiles()
 		end
 	end
@@ -449,7 +555,7 @@ end
 ---Handles the left click release action.
 ---@private
 function Station:handleLeftUnclick()
-	if _Picker.mode == "properties" then
+	if _Picker.mode == PickerMode.PROPERTIES then
 		if self.dragX and self.dragY then
 			if self.hoverX and self.hoverY and not self:rectSelectIsSingleTile() then
 				for x = math.min(self.dragX, self.hoverX), math.max(self.dragX, self.hoverX) do
@@ -464,6 +570,11 @@ function Station:handleLeftUnclick()
 			end
 			self.dragX, self.dragY = nil, nil
 		end
+	elseif _Picker.mode == PickerMode.RAILS then
+		if self.railToolDragX and self.railToolDragY then
+			self:confirmRailToolDrag()
+			self.railToolDragX, self.railToolDragY = nil, nil
+		end
 	end
 end
 
@@ -472,7 +583,7 @@ end
 function Station:handleRightClick()
 	-- Right click: remove a tile, flip selection or switch a switch
 	if self.hoverX and self.hoverY then
-		if not _Picker.mode then
+		if _Picker.mode == PickerMode.TILE then
 			local tile = self:assertGetHoveredTile()
 			if tile.id == "" then
 				_Picker:flipSelection()
@@ -480,7 +591,7 @@ function Station:handleRightClick()
 				self:setTile(self.hoverX, self.hoverY)
 				self:markUnsaved()
 			end
-		elseif _Picker.mode == "properties" then
+		elseif _Picker.mode == PickerMode.PROPERTIES then
 			local tile = self:assertGetHoveredTile()
 			if tile:isSwitch() then
 				if tile:isSwitchForced() then
@@ -544,10 +655,30 @@ function Station:handleRightClick()
 			elseif tile.command then
 				tile:sendCustomCommand()
 			end
+		elseif _Picker.mode == PickerMode.RAILS then
+			if self.railToolDragX and self.railToolDragY and not self.railToolRemove then
+				-- Cancel dragging if we were holding the left mouse button
+				self.railToolDragX, self.railToolDragY = nil, nil
+			else
+				-- Start dragging with the right mouse button
+				self.railToolDragX, self.railToolDragY = self.hoverRailX, self.hoverRailY
+				self.railToolRemove = true
+			end
 		end
 	else
-		if _Picker.mode == "properties" then
+		if _Picker.mode == PickerMode.PROPERTIES then
 			self.activeX, self.activeY = nil, nil
+		end
+	end
+end
+
+---Handles the right click release action.
+---@private
+function Station:handleRightUnclick()
+	if _Picker.mode == PickerMode.RAILS then
+		if self.railToolDragX and self.railToolDragY then
+			self:confirmRailToolDrag()
+			self.railToolDragX, self.railToolDragY = nil, nil
 		end
 	end
 end
@@ -587,6 +718,10 @@ function Station:keypressed(key)
 			self:moveSingleSelection(0, -1)
 		elseif key == "down" then
 			self:moveSingleSelection(0, 1)
+		elseif key == "kp+" then
+			self.SCALE = math.min(self.SCALE + 0.25, 4)
+		elseif key == "kp-" then
+			self.SCALE = math.max(self.SCALE - 0.25, 1)
 		end
 	end
 end
@@ -615,6 +750,8 @@ end
 function Station:mousereleased(x, y, button)
 	if button == 1 then
 		self:handleLeftUnclick()
+	elseif button == 2 then
+		self:handleRightUnclick()
 	end
 end
 
@@ -636,6 +773,8 @@ function Station:draw()
 	self:drawBackground()
 	self:drawTracks()
 	self:drawHover()
+	self:drawSizeToolHover()
+	self:drawRailToolHover()
 	self:drawSelection()
 	self:drawActive()
 	self:drawClickable()
@@ -667,32 +806,41 @@ function Station:drawTracks()
 	end
 end
 
----Draws the Station's hovered tile frame, and also some helpers when adding/removing rows, tile ghosts, etc.
+---Draws the Station's hovered tile frame, and also tile ghosts.
 ---@private
 function Station:drawHover()
 	if not self.hoverX or not self.hoverY then
 		return
 	end
-	if not _Picker.mode then
+	if _Picker.mode == PickerMode.TILE then
 		local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
 		self:drawTileFrame(self:assertGetHoveredTile(), TileFrameColor.HOVER)
 		-- Draw tile ghost.
 		local category = _Picker:getSelectedCategory()
 		local image = category.display and category.display.image or "s1"
 		_DrawTile(x, y, _Picker:getSelectedTileID(), _Picker.electrified, false, false, false, 0, image, 1, 0.5)
-	elseif _Picker.mode == "addColumn" then
+	end
+end
+
+---Draws hover helpers when adding/removing rows.
+---@private
+function Station:drawSizeToolHover()
+	if not self.hoverX or not self.hoverY then
+		return
+	end
+	if _Picker.mode == PickerMode.ADD_COLUMN then
 		local x1, y1 = self:coordsToCanvasPos(self.hoverLineX, 1)
 		local x2, y2 = self:coordsToCanvasPos(self.hoverLineX, self.h + 1)
 		love.graphics.setColor(0, 1, 0)
 		love.graphics.setLineWidth(2)
 		love.graphics.line(x1, y1, x2, y2)
-	elseif _Picker.mode == "addRow" then
+	elseif _Picker.mode == PickerMode.ADD_ROW then
 		local x1, y1 = self:coordsToCanvasPos(1, self.hoverLineY)
 		local x2, y2 = self:coordsToCanvasPos(self.w + 1, self.hoverLineY)
 		love.graphics.setColor(0, 1, 0)
 		love.graphics.setLineWidth(2)
 		love.graphics.line(x1, y1, x2, y2)
-	elseif _Picker.mode == "delColumn" then
+	elseif _Picker.mode == PickerMode.DEL_COLUMN then
 		local x, y = self:coordsToCanvasPos(self.hoverX, 1)
 		local w, h = self.TILE_SIZE, self.TILE_SIZE * self.h
 		love.graphics.setColor(1, 0, 0, 0.5)
@@ -700,7 +848,7 @@ function Station:drawHover()
 		love.graphics.setColor(1, 0, 0)
 		love.graphics.setLineWidth(2)
 		love.graphics.rectangle("line", x, y, w, h)
-	elseif _Picker.mode == "delRow" then
+	elseif _Picker.mode == PickerMode.DEL_ROW then
 		local x, y = self:coordsToCanvasPos(1, self.hoverY)
 		local w, h = self.TILE_SIZE * self.w, self.TILE_SIZE
 		love.graphics.setColor(1, 0, 0, 0.5)
@@ -708,6 +856,38 @@ function Station:drawHover()
 		love.graphics.setColor(1, 0, 0)
 		love.graphics.setLineWidth(2)
 		love.graphics.rectangle("line", x, y, w, h)
+	end
+end
+
+function Station:drawRailToolHover()
+	if _Picker.mode ~= PickerMode.RAILS then
+		return
+	end
+	local dragging = self.railToolDragX and self.railToolDragY
+	if not dragging then
+		if self.hoverRailX and self.hoverRailY then
+			local x, y = self:coordsToCanvasPos(self.hoverRailX, self.hoverRailY)
+			love.graphics.setColor(0, 1, 1)
+			love.graphics.circle("fill", x, y, 3)
+		end
+	else
+		local tiles = self:getAffectedRailToolDragTiles()
+		for i, tile in ipairs(tiles) do
+			if tile.tile.id ~= tile.newID then
+				self:drawTileFrame(tile.tile, tile.newID and TileFrameColor.RAILDRAG_AFFECTED or TileFrameColor.RAILDRAG_CONFLICT)
+			end
+		end
+		local startX, startY = self:coordsToCanvasPos(self.railToolDragX, self.railToolDragY)
+		if self.railToolDragEndX and self.railToolDragEndY then
+			local endX, endY = self:coordsToCanvasPos(self.railToolDragEndX, self.railToolDragEndY)
+			love.graphics.setColor(self.railToolRemove and 1 or 0, self.railToolRemove and 0 or 1, 0)
+			love.graphics.setLineWidth(2)
+			love.graphics.line(startX, startY, endX, endY)
+			love.graphics.setColor(0, 1, 1)
+			love.graphics.circle("fill", endX, endY, 3)
+		end
+		love.graphics.setColor(0, 1, 1)
+		love.graphics.circle("fill", startX, startY, 3)
 	end
 end
 
@@ -797,7 +977,7 @@ end
 ---@param tile Tile The tile to be drawn.
 ---@return TileBackgroundColor
 function Station:getTileBackgroundColor(tile)
-	if _Picker.highlightMode == TileHighlightMode.OFF or _Picker.mode ~= "properties" then
+	if _Picker.highlightMode == TileHighlightMode.OFF or _Picker.mode ~= PickerMode.PROPERTIES then
 		return TileBackgroundColor.REGULAR
 	end
 	local trackWarning = tile.trackID and (not tile:isTrack() and not tile:isBlockadeGenerator() and not tile:isExitPoint())
@@ -858,8 +1038,8 @@ function Station:drawTileFrame(tile, color)
 	love.graphics.setColor(color[1], color[2], color[3], 0.2)
 	love.graphics.rectangle("fill", x, y, tile.size, tile.size)
 	love.graphics.setColor(color)
-	love.graphics.setLineWidth(2)
-	love.graphics.rectangle("line", x, y, tile.size, tile.size)
+	love.graphics.setLineWidth(1)
+	love.graphics.rectangle("line", x + 0.5, y + 0.5, tile.size - 1, tile.size - 1)
 end
 
 --####################################--

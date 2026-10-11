@@ -15,6 +15,9 @@ local UI = class:derive("UI")
 
 function UI:new()
 	self.U = 20
+	--self.accentColor = {0.6, 0.4, 0.2}
+	self.accentColor = {0.1, 0.5, 0.2}
+
 	---@type table<string, Gspot.element>
 	self.elements = {}
 end

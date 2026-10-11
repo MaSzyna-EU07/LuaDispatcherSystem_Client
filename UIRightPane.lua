@@ -29,7 +29,8 @@ end
 
 ---Adds a header to the property list.
 ---@param name string Header contents.
-function UIRightPane:addHeader(name)
+---@param color [number, number, number]? Header's background color, accent color by default.
+function UIRightPane:addHeader(name, color)
 	local text = "  "
 	local chars = _Utils.strSplitChars(name)
 	for i, char in ipairs(chars) do
@@ -37,7 +38,7 @@ function UIRightPane:addHeader(name)
 	end
 	local header = self.ui:addPane("right", nil, nil, 0, self.uiGenY, 14, 1)
 	local headerLabel = self.ui:addLabel("right", nil, text, 0, self.uiGenY, 14, 1)
-	header.style.bg = {0.6, 0.4, 0.2}
+	header.style.bg = color or self.ui.accentColor
 	table.insert(self.headers, header)
 	table.insert(self.headers, headerLabel)
 	self.uiGenY = self.uiGenY + 1

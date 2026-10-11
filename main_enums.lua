@@ -88,7 +88,9 @@ TileFrameColor = {
 	ACTIVE = {1, 0, 1},
 	ACTIVE_SHUNT = {1, 1, 1},
 	CLICKABLE = {1, 1, 0},
-	RECT_SELECTION = {0, 1, 1}
+	RECT_SELECTION = {0, 1, 1},
+	RAILDRAG_AFFECTED = {0, 1, 0},
+	RAILDRAG_CONFLICT = {1, 0, 0}
 }
 
 ---@enum NotificationColor
@@ -103,4 +105,17 @@ NotificationColorID = {
 	NotificationColor.GREEN,
 	NotificationColor.RED,
 	NotificationColor.GRAY
+}
+
+---@enum PickerMode
+PickerMode = {
+	TILE = 0,
+	ADD_ROW = 1,
+	DEL_ROW = 2,
+	ADD_COLUMN = 3,
+	DEL_COLUMN = 4,
+	PROPERTIES = 5,
+	ELECTRIFY = 6,
+	DEELECTRIFY = 7,
+	RAILS = 8
 }

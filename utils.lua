@@ -997,6 +997,25 @@ function utils.getBit(n, b)
 	return math.floor((n % (2 ^ b)) / (2 ^ (b - 1))) ~= 0
 end
 
+---Returns an angle from the provided list that is the closest to the specified angle.
+---Angles are provided in radians, loop around at `pi*2` and should be normalized before being passed to this function.
+---If no angles are provided, returns `angle` itself to ensure a number is always returned.
+---@param angle number The angle to find the closest angle to.
+---@param angles number[] The angles to pick from.
+---@return number
+function utils.getClosestAngle(angle, angles)
+	local closest = nil
+	local diff = math.huge
+	for i, tested in ipairs(angles) do
+		local d = math.pi - math.abs((angle - tested) % (math.pi * 2) - math.pi)
+		if d < diff then
+			closest = tested
+			diff = d
+		end
+	end
+	return closest or angle
+end
+
 --####################################################--
 ---------------- C O L O R E D   T E X T ---------------
 --####################################################--

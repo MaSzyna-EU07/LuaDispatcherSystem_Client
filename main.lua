@@ -1,5 +1,6 @@
 require("main_enums")
 _Utils = require("utils")
+_V = require("vectorutils")
 _Com = require("communication")
 local Settings = require("Settings")
 local Objects = require("Objects")
@@ -21,7 +22,7 @@ _Obj = Objects()
 _UI = UI()
 _Notifications = Notifications()
 _Tracks = Tileset("data/tracks.png", 17, 10, 14, 14)
-_Buttons = Tileset("data/buttons.png", 11, 2, 21, 14)
+_Buttons = Tileset("data/buttons.png", 11, 2, 42, 28)
 _ProjectManager = ProjectManager()
 _Project = Project()
 _Picker = Picker()
@@ -43,6 +44,42 @@ _DIRS = {
 ---@return integer
 function _InvertDir(dir)
 	return (dir + 3) % 8 + 1
+end
+
+---Returns the angle of the provided direction, where 0 is to the right, and moving clockwise.
+---@param dir integer The direction to calculate the angle from.
+---@return number
+function _DirToAngle(dir)
+	return (3 - dir) % 8 * math.pi / 4
+end
+
+---Returns the angles of the provided directions, similarly to `_DirToAngle()`.
+---@param dirs integer[] The directions to calculate the angles from.
+---@return number[]
+function _DirsToAngles(dirs)
+	local angles = {}
+	for i, dir in ipairs(dirs) do
+		table.insert(angles, _DirToAngle(dir))
+	end
+	return angles
+end
+
+---Returns the closest direction to the specified angle in radians.
+---@param angle number The angle to be considered.
+---@return integer
+function _AngleToDir(angle)
+	return (2 - math.floor((angle + math.pi / 8) % (math.pi * 2) * 4 / math.pi)) % 8 + 1
+end
+
+---Turns a list of directions into their bitsum.
+---@param dirs integer[] The list of directions.
+---@return integer
+function _DirsToBitsum(dirs)
+	local sum = 0
+	for i, dir in ipairs(dirs) do
+		sum = sum + 2 ^ (dir - 1)
+	end
+	return sum
 end
 
 ---Turns the track flags into the track color to be displayed on the tile.

@@ -77,22 +77,25 @@ function Picker:new()
 		["arrow3"] = "arrow7", ["arrow7"] = "arrow3"
 	}
 
+	---@type {x: integer, y: integer, tileX: integer, action: PickerMode}[]
 	self.buttons = {
-		{x = 20, y = 665, tileX = 1, action = "addRow"},
-		{x = 65, y = 665, tileX = 2, action = "delRow"},
-		{x = 110, y = 665, tileX = 3, action = "addColumn"},
-		{x = 155, y = 665, tileX = 4, action = "delColumn"},
-		{x = 200, y = 665, tileX = 5, action = "properties"},
-		--{x = 245, y = 665, tileX = 8, action = "electrify"},
-		--{x = 290, y = 665, tileX = 9, action = "deelectrify"}
+		{x = 20, y = 665, tileX = 1, action = PickerMode.ADD_ROW},
+		{x = 65, y = 665, tileX = 2, action = PickerMode.DEL_ROW},
+		{x = 110, y = 665, tileX = 3, action = PickerMode.ADD_COLUMN},
+		{x = 155, y = 665, tileX = 4, action = PickerMode.DEL_COLUMN},
+		{x = 200, y = 665, tileX = 5, action = PickerMode.PROPERTIES},
+		{x = 245, y = 665, tileX = 10, action = PickerMode.RAILS},
+		--{x = 245, y = 665, tileX = 8, action = PickerMode.ELECTRIFY},
+		--{x = 290, y = 665, tileX = 9, action = PickerMode.DEELECTRIFY}
 	}
 
-	-- If `nil`, a tile is selected in the picker. Otherwise, a button is pressed, indicating a mode.
-	---@type string?
-	self.mode = nil
+	-- If `TILE`, a tile is selected in the picker. Otherwise, a button is pressed, indicating a mode.
+	---@type PickerMode
+	self.mode = PickerMode.TILE
 
 	self.selectedTileCategory = 1
 	self.selectedTileOrientation = 1
+	---@type PickerMode?
 	self.modeHover = nil
 	self.hoveredTileCategory = nil
 
@@ -126,7 +129,7 @@ end
 ---Rotates the currently selected tile by the selected amount.
 ---@param notches integer Number of rotations.
 function Picker:rotateSelection(notches)
-	if self.mode then
+	if self.mode ~= PickerMode.TILE then
 		return
 	end
 	local orientationCount = #self.tileCategories[self.selectedTileCategory].tiles
@@ -135,7 +138,7 @@ end
 
 ---Flips the currently selected tile.
 function Picker:flipSelection()
-	if self.mode then
+	if self.mode ~= PickerMode.TILE then
 		return
 	end
 	local newID = self.tmpFlip[self:getSelectedTileID()]
@@ -154,7 +157,7 @@ end
 ---Selects the specified tile category by index.
 ---@param index integer The category index.
 function Picker:selectCategory(index)
-	self.mode = nil
+	self.mode = PickerMode.TILE
 	self.selectedTileCategory = index
 	self.selectedTileOrientation = self.tileCategories[index].startIndex or 1
 	local station = _Project:getCurrentStation()
@@ -201,7 +204,7 @@ function Picker:pickTile(tile)
 		-- This tile is not pick blockable... Wait, is that ever supposed to happen?
 		return
 	end
-	self.mode = nil
+	self.mode = PickerMode.TILE
 	self.selectedTileCategory, self.selectedTileOrientation = category, orientation
 	self.electrified = tile.electrified
 	_UI.pickerPane.electrified.value = tile.electrified
@@ -220,12 +223,25 @@ function Picker:augmentTile(tile)
 	end
 end
 
+---Returns the tile ID the specified tile could have if specified tracks were to be added or removed.
+---Returns `nil` if the resulting track combination could not be achieved.
+---This function will remove semaphores and/or derailers if necessary (for example adding a switch to a semaphore tile).
+---@param tile Tile The tile to add or remove tracks from.
+---@param mask integer The bitmask of the tracks. See the tile database for more information.
+---@param subtract boolean? If `true`, the specified tracks will be removed, not added.
+---@return string?
+function Picker:getMaskedTrackTileID(tile, mask, subtract)
+	local tracks = tile:getData().tracks or 0
+	local newTracks = subtract and bit.band(tracks, bit.bnot(mask)) or bit.bor(tracks, mask)
+	return _TileDB:getTileWithTracks(newTracks, tile.id)
+end
+
 function Picker:draw()
 	love.graphics.setColor(0, 0, 1)
 	love.graphics.rectangle("fill", self.boxX, self.boxY, self.boxW, self.boxH)
 	for i = 1, #self.tileCategories do
 		local x, y = self:getTilePos(i)
-		if self.selectedTileCategory == i and not self.mode then
+		if self.selectedTileCategory == i and self.mode == PickerMode.TILE then
 			love.graphics.setColor(1, 1, 1)
 			love.graphics.rectangle("fill", x, y, self.tileSize, self.tileSize)
 		elseif self.hoveredTileCategory == i then
@@ -250,7 +266,7 @@ function Picker:draw()
 
 	for i, button in ipairs(self.buttons) do
 		local tileY = self.mode == button.action and 2 or 1
-		_Buttons:drawTile(button.tileX, tileY, button.x, button.y, 2)
+		_Buttons:drawTile(button.tileX, tileY, button.x, button.y)
 	end
 end
 
@@ -271,13 +287,13 @@ function Picker:keypressed(key)
 		return
 	end
 	if key == "a" then
-		--self.mode = "addRow"
+		--self.mode = PickerMode.ADD_ROW
 	elseif key == "s" then
-		--self.mode = "addColumn"
+		--self.mode = PickerMode.ADD_COLUMN
 	elseif key == "z" then
-		--self.mode = "delRow"
+		--self.mode = PickerMode.DEL_ROW
 	elseif key == "x" then
-		--self.mode = "delColumn"
+		--self.mode = PickerMode.DEL_COLUMN
 	end
 	if key == "1" then
 		self.highlightMode = TileHighlightMode.TRACK
