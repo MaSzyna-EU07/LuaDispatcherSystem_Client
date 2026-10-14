@@ -17,6 +17,9 @@ function Settings:new()
     ---Station name to open within the project when opening the program. If not specified, no station will be selected.
     ---@type string?
     self.station = nil
+    ---Scale to draw stations in.
+    ---@type number
+    self.scale = 1.5
 end
 
 ---Loads data from the settings file. If the file is not found, nothing happens.
@@ -38,7 +41,8 @@ function Settings:serialize()
     return {
         simPath = self.simPath,
         project = self.project,
-        station = self.station
+        station = self.station,
+        scale = self.scale
     }
 end
 
@@ -48,6 +52,7 @@ function Settings:deserialize(t)
     self.simPath = t.simPath
     self.project = t.project
     self.station = t.station
+    self.scale = t.scale or self.scale
 end
 
 return Settings

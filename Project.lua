@@ -220,7 +220,7 @@ function Project:load(name)
 	end
 	self.name = name
 	self:deserialize(data)
-	self:setCurrentStation(self.stations[1].shortcut)
+	self:setCurrentStation(self.stations[1] and self.stations[1].shortcut)
 end
 
 ---Serializes this Project's data for saving to a file.

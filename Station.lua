@@ -7,7 +7,6 @@ local Station = class:derive("Station")
 
 function Station:new(name, shortcut)
 	self.x, self.y = 5, 61
-	self.scale = 1.5
 	self.TILE_SIZE = 14
 
 	if type(name) == "table" then
@@ -105,6 +104,17 @@ function Station:update(dt)
 		end
 	end
 
+	-- Update the tooltip.
+	local hoveredTile = self:getHoveredTile()
+	if hoveredTile then
+		local text = self:getTileTooltip(hoveredTile)
+		if text then
+			_Tooltip:setText(text)
+			_Tooltip:setPos(self:coordsToPos(hoveredTile.x + 8/14, hoveredTile.y + 1))
+			_Tooltip:setAnchor(0.5, 0)
+		end
+	end
+
 	-- Update the tile highlights.
 	for i, highlight in ipairs(self.tileHighlights) do
 		highlight.t = highlight.t + dt
@@ -127,7 +137,7 @@ end
 ---@param y number Global Y position within the window.
 ---@return integer?, integer?
 function Station:posToCoords(x, y)
-	local tileX, tileY = math.floor((x - self.x) / (self.TILE_SIZE * self.scale)) + 1, math.floor((y - self.y) / (self.TILE_SIZE * self.scale)) + 1
+	local tileX, tileY = math.floor((x - self.x) / (self.TILE_SIZE * _Settings.scale)) + 1, math.floor((y - self.y) / (self.TILE_SIZE * _Settings.scale)) + 1
 	if tileX >= 1 and tileY >= 1 and tileX <= self.w and tileY <= self.h then
 		return tileX, tileY
 	end
@@ -138,7 +148,7 @@ end
 ---@param y number Global Y position within the window.
 ---@return number, number
 function Station:posToPartCoords(x, y)
-	local partX, partY = ((x - self.x) / (self.TILE_SIZE * self.scale)) % 1, ((y - self.y) / (self.TILE_SIZE * self.scale)) % 1
+	local partX, partY = ((x - self.x) / (self.TILE_SIZE * _Settings.scale)) % 1, ((y - self.y) / (self.TILE_SIZE * _Settings.scale)) % 1
 	return partX, partY
 end
 
@@ -147,7 +157,7 @@ end
 ---@param tileY integer Tile Y coordinate.
 ---@return number, number
 function Station:coordsToPos(tileX, tileY)
-	return self.x + (tileX - 1) * self.TILE_SIZE * self.scale, self.y + (tileY - 1) * self.TILE_SIZE * self.scale
+	return self.x + (tileX - 1) * self.TILE_SIZE * _Settings.scale, self.y + (tileY - 1) * self.TILE_SIZE * _Settings.scale
 end
 
 ---Returns the on-canvas position of the top left corner of the specified tile.
@@ -468,7 +478,7 @@ end
 ---Zooms the schematic in or out.
 ---@param steps integer Positive values increase the zoom, negative ones decrease it.
 function Station:zoom(steps)
-	self.scale = _Utils.clamp(self.scale + steps * 0.25, 1, 4)
+	_Settings.scale = _Utils.clamp(_Settings.scale + steps * 0.25, 1, 4)
 end
 
 ---Returns the first found tile with the specified warp ID on this schematic.
@@ -485,6 +495,27 @@ function Station:getTileWithWarpID(warpID)
 			end
 		end
 	end
+end
+
+---Returns the tooltip text for the specified tile, if any.
+---@param tile Tile The tile to generate tooltip for.
+---@return string?
+function Station:getTileTooltip(tile)
+	local lines = {}
+	if tile:isTrack() and tile.trackID then
+		table.insert(lines, "Tor: " .. tile.trackID)
+	end
+	if tile:isSwitch() and tile.switchID then
+		table.insert(lines, "Rozjazd: " .. tile.switchID)
+	end
+	if tile:isSemaphore() and tile.semaphoreID then
+		table.insert(lines, "Semafor: " .. tile.semaphoreID)
+	end
+	if tile.warp then
+		local station = _Project:getStation(tile.warp)
+		table.insert(lines, string.format("-> %s (%s)", station and station.name or "<Nieznana stacja>", tile.warp))
+	end
+	return #lines > 0 and _Utils.strJoin(lines, "\n") or nil
 end
 
 ---Marks this Station as unsynced.
@@ -812,7 +843,7 @@ function Station:draw()
 	self:drawTileHighlights()
 	love.graphics.setCanvas()
 	love.graphics.setColor(1, 1, 1)
-	love.graphics.draw(self.canvas, self.x + 0.5, self.y + 0.5, 0, self.scale)
+	love.graphics.draw(self.canvas, self.x + 0.5, self.y + 0.5, 0, _Settings.scale)
 	self:drawFrame()
 end
 
@@ -989,7 +1020,7 @@ function Station:drawFrame()
 	end
 	love.graphics.setColor(1, 1, 0)
 	love.graphics.setLineWidth(2)
-	love.graphics.rectangle("line", self.x, self.y, self.canvas:getWidth() * self.scale + 1, self.canvas:getHeight() * self.scale + 1)
+	love.graphics.rectangle("line", self.x, self.y, self.canvas:getWidth() * _Settings.scale + 1, self.canvas:getHeight() * _Settings.scale + 1)
 end
 
 --####################################################--
