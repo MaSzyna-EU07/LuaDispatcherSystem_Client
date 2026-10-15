@@ -1,5 +1,6 @@
 {
 	"stationIndex": {
+		"Gbk": 17,
 		"Kot": 13,
 		"Kot-Sdl": 14,
 		"MMz": 7,
@@ -6109,7 +6110,10 @@
 				},
 				"12,16": {
 					"id": "arrow-",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Gbk",
+					"warpID": "Gbk",
+					"warpTargetID": "MMz"
 				},
 				"12,5": {
 					"id": "platformP",
@@ -12353,6 +12357,321 @@
 				}
 			},
 			"w": 43
+		},
+		{
+			"h": 9,
+			"name": "Grzebowilk",
+			"shortcut": "Gbk",
+			"tiles": {
+				"10,3": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Gbk_G5",
+					"trackID": "Gbk_Iz23"
+				},
+				"10,4": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Gbk_G3",
+					"trackID": "Gbk_Iz23"
+				},
+				"10,5": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Gbk_G1",
+					"trackID": "Gbk_Iz22"
+				},
+				"10,6": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Gbk_F2",
+					"trackID": "Gbk_Iz21"
+				},
+				"10,7": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Gbk_F4",
+					"trackID": "Gbk_Iz21"
+				},
+				"11,3": {
+					"id": "platformF",
+					"trackID": "Gbk_It5"
+				},
+				"11,4": {
+					"id": "platformF",
+					"trackID": "Gbk_It3"
+				},
+				"11,5": {
+					"id": "platformF",
+					"trackID": "Gbk_It1"
+				},
+				"11,6": {
+					"id": "platformF",
+					"trackID": "Gbk_It2"
+				},
+				"11,7": {
+					"id": "platformF",
+					"trackID": "Gbk_It4"
+				},
+				"12,3": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Gbk_It5",
+					"trainTarget": true
+				},
+				"12,4": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Gbk_It3",
+					"trainTarget": true
+				},
+				"12,5": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Gbk_It1",
+					"trainTarget": true
+				},
+				"12,6": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Gbk_It2",
+					"trainTarget": true
+				},
+				"12,7": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Gbk_It4",
+					"trainTarget": true
+				},
+				"13,3": {
+					"id": "platformF",
+					"trackID": "Gbk_It5"
+				},
+				"13,4": {
+					"id": "platformF",
+					"trackID": "Gbk_It3"
+				},
+				"13,5": {
+					"id": "platformF",
+					"trackID": "Gbk_It1"
+				},
+				"13,6": {
+					"id": "platformF",
+					"trackID": "Gbk_It2"
+				},
+				"13,7": {
+					"id": "platformF",
+					"trackID": "Gbk_It4"
+				},
+				"14,3": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Gbk_C5",
+					"trackID": "Gbk_Iz7"
+				},
+				"14,4": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Gbk_C3",
+					"trackID": "Gbk_Iz7"
+				},
+				"14,5": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Gbk_C1",
+					"trackID": "Gbk_Iz5"
+				},
+				"14,6": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Gbk_D2",
+					"trackID": "Gbk_Iz6"
+				},
+				"14,7": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Gbk_D4",
+					"trackID": "Gbk_Iz6"
+				},
+				"15,3": {
+					"id": "curve7",
+					"trackID": "Gbk_Iz7"
+				},
+				"15,4": {
+					"id": "track-",
+					"trackID": "Gbk_Iz7"
+				},
+				"15,5": {
+					"id": "track-",
+					"trackID": "Gbk_Iz5"
+				},
+				"15,6": {
+					"id": "track-",
+					"trackID": "Gbk_Iz6"
+				},
+				"15,7": {
+					"id": "curve2",
+					"trackID": "Gbk_Iz6"
+				},
+				"16,4": {
+					"id": "switchL4",
+					"maxSpeedPlus": 40,
+					"switchID": "Gbk_7",
+					"trackID": "Gbk_Iz7"
+				},
+				"16,5": {
+					"id": "track-",
+					"trackID": "Gbk_Iz5"
+				},
+				"16,6": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Gbk_6",
+					"trackID": "Gbk_Iz6"
+				},
+				"17,5": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Gbk_5",
+					"trackID": "Gbk_Iz5"
+				},
+				"17,6": {
+					"id": "curve2",
+					"trackID": "Gbk_Iz3"
+				},
+				"18,5": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Gbk_3",
+					"trackID": "Gbk_Iz3"
+				},
+				"19,5": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Gbk_Tm1",
+					"semaphoreType": 1,
+					"trackID": "Gbk_Iz3"
+				},
+				"2,5": {
+					"id": "arrow-",
+					"trainTarget": true
+				},
+				"20,5": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Gbk_ItA"
+				},
+				"21,5": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Gbk_A",
+					"trackID": "Gbk_ItA"
+				},
+				"22,5": {
+					"id": "arrow-",
+					"trainTarget": true,
+					"warp": "MMz",
+					"warpID": "MMz",
+					"warpTargetID": "Gbk"
+				},
+				"3,5": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Gbk_M",
+					"trackID": "Gbk_ItM"
+				},
+				"4,5": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "Gbk_ItM"
+				},
+				"5,5": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "Gbk_Tm2",
+					"semaphoreType": 1,
+					"trackID": "Gbk_Iz24"
+				},
+				"6,5": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Gbk_24",
+					"trackID": "Gbk_Iz24"
+				},
+				"7,4": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40,
+					"switchID": "Gbk_23",
+					"trackID": "Gbk_Iz23"
+				},
+				"7,5": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Gbk_22",
+					"trackID": "Gbk_Iz22"
+				},
+				"8,3": {
+					"id": "curve6",
+					"trackID": "Gbk_Iz23"
+				},
+				"8,4": {
+					"id": "track-",
+					"trackID": "Gbk_Iz23"
+				},
+				"8,5": {
+					"id": "track-",
+					"trackID": "Gbk_Iz22"
+				},
+				"8,6": {
+					"id": "switchL8",
+					"maxSpeedPlus": 40,
+					"switchID": "Gbk_21",
+					"trackID": "Gbk_Iz21"
+				},
+				"9,3": {
+					"id": "track-",
+					"trackID": "Gbk_Iz23"
+				},
+				"9,4": {
+					"id": "track-",
+					"trackID": "Gbk_Iz23"
+				},
+				"9,5": {
+					"id": "track-",
+					"trackID": "Gbk_Iz22"
+				},
+				"9,6": {
+					"id": "track-",
+					"trackID": "Gbk_Iz21"
+				},
+				"9,7": {
+					"id": "curve3",
+					"trackID": "Gbk_Iz21"
+				}
+			},
+			"w": 23
 		}
 	]
 }

@@ -143,6 +143,7 @@ com.counters = {} -- How many objects of each type have been initialized
 function com.init(path, findRecent)
 	_Obj:clear()
 	com.pos = 0
+	com.readData = {step = "validate", byteCounter = 0}
 	com.ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}}
 	com.counters = {}
 	com.timeTicks = 0
