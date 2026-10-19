@@ -3073,16 +3073,18 @@
 			"tiles": {
 				"2,3": {
 					"id": "arrow7",
-					"semaphoreID": "WPd_N",
 					"trainTarget": true,
-					"warp": "WPd"
+					"warp": "WPd",
+					"warpID": "WPd",
+					"warpTargetID": "WAt_N"
 				},
 				"2,4": {
 					"id": "arrow3",
-					"semaphoreID": "WPd_M",
 					"targetW24": true,
 					"trainTarget": true,
-					"warp": "WPd"
+					"warp": "WPd",
+					"warpID": "WPd_N",
+					"warpTargetID": "WAt"
 				},
 				"3,3": {
 					"id": "semaphore3",
@@ -3165,16 +3167,23 @@
 					"id": "arrow7",
 					"targetW24": true,
 					"trainTarget": true,
-					"warp": "Rem"
+					"warp": "Rem",
+					"warpID": "Rem_N",
+					"warpTargetID": "WAt"
 				},
 				"9,4": {
 					"id": "arrow3",
 					"trainTarget": true,
-					"warp": "Rem"
+					"warp": "Rem",
+					"warpID": "Rem",
+					"warpTargetID": "WAt_N"
 				},
 				"9,5": {
-					"id": "arrow-",
-					"trainTarget": true
+					"id": "arrow3",
+					"trainTarget": true,
+					"warp": "WWT",
+					"warpID": "WWT",
+					"warpTargetID": "WAt_N"
 				}
 			},
 			"w": 10
@@ -3620,22 +3629,33 @@
 				},
 				"23,3": {
 					"id": "arrow-",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "WWT",
+					"warpID": "WWT",
+					"warpTargetID": "WPd_N"
 				},
 				"23,4": {
-					"id": "arrow-",
-					"trainTarget": true
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true,
+					"warp": "WWT",
+					"warpID": "WWT_N",
+					"warpTargetID": "WPd"
 				},
 				"23,5": {
 					"id": "arrow7",
 					"targetW24": true,
 					"trainTarget": true,
-					"warp": "WAt"
+					"warp": "WAt",
+					"warpID": "WAt_N",
+					"warpTargetID": "WPd"
 				},
 				"23,6": {
 					"id": "arrow3",
 					"trainTarget": true,
-					"warp": "WAt"
+					"warp": "WAt",
+					"warpID": "WAt",
+					"warpTargetID": "WPd_N"
 				},
 				"23,7": {
 					"id": "arrow7",
@@ -3646,7 +3666,6 @@
 				},
 				"23,8": {
 					"id": "arrow3",
-					"semaphoreID": "65",
 					"trackID": "WPd_K1-652@LK448.1",
 					"trainTarget": true,
 					"warp": "WPd-Rem"
@@ -3669,13 +3688,11 @@
 				},
 				"3,7": {
 					"id": "arrow7",
-					"semaphoreID": "WWO_T",
 					"trainTarget": true,
 					"warp": "WWO"
 				},
 				"3,8": {
 					"id": "arrow3",
-					"semaphoreID": "WWO_O",
 					"targetW24": true,
 					"trainTarget": true,
 					"warp": "WWO"
@@ -3796,19 +3813,16 @@
 				},
 				"7,2": {
 					"id": "arrow-",
-					"semaphoreID": "WWO_Y",
 					"trainTarget": true,
 					"warp": "WWO"
 				},
 				"7,3": {
 					"id": "arrow7",
-					"semaphoreID": "WWO_X",
 					"trainTarget": true,
 					"warp": "WWO"
 				},
 				"7,4": {
 					"id": "arrow3",
-					"semaphoreID": "WWO_U",
 					"targetW24": true,
 					"trainTarget": true,
 					"warp": "WWO"
@@ -4446,25 +4460,34 @@
 					"id": "arrow3",
 					"targetW24": true,
 					"trainTarget": true,
-					"warp": "WAt"
+					"warp": "WAt",
+					"warpID": "WAt_N",
+					"warpTargetID": "Rem"
 				},
 				"2,12": {
 					"id": "arrow3",
 					"targetW24": true,
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "WWT",
+					"warpID": "WWT_N",
+					"warpTargetID": "Rem"
 				},
 				"2,7": {
 					"id": "arrow7",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "WWT",
+					"warpID": "WWT",
+					"warpTargetID": "Rem_N"
 				},
 				"2,8": {
 					"id": "arrow7",
 					"trainTarget": true,
-					"warp": "WAt"
+					"warp": "WAt",
+					"warpID": "WAt",
+					"warpTargetID": "Rem_N"
 				},
 				"2,9": {
 					"id": "arrow7",
-					"semaphoreID": "94",
 					"trackID": "942-C2@LK448.2",
 					"trainTarget": true,
 					"warp": "WPd-Rem"
@@ -7421,7 +7444,6 @@
 			"tiles": {
 				"10,4": {
 					"id": "arrow7",
-					"semaphoreID": "522N",
 					"targetW24": true,
 					"trackID": "Z2-5222@LK2.2",
 					"trainTarget": true,
@@ -7442,7 +7464,6 @@
 				},
 				"2,4": {
 					"id": "arrow7",
-					"semaphoreID": "480",
 					"trackID": "4802-Y2@LK2.2",
 					"trainTarget": true,
 					"warp": "MMz-Mia",
@@ -8062,7 +8083,6 @@
 				},
 				"2,5": {
 					"id": "arrow7",
-					"semaphoreID": "558",
 					"trackID": "5582-A2@LK2.2",
 					"trainTarget": true,
 					"warp": "Mia-Mrz",
@@ -8071,7 +8091,6 @@
 				},
 				"2,6": {
 					"id": "arrow3",
-					"semaphoreID": "557N",
 					"targetW24": true,
 					"trackID": "5571-B1@LK2.1",
 					"trainTarget": true,
@@ -8411,7 +8430,6 @@
 				},
 				"38,5": {
 					"id": "arrow7",
-					"semaphoreID": "612N",
 					"targetW24": true,
 					"trackID": "W2-6122@LK2.2",
 					"trainTarget": true,
@@ -8421,7 +8439,6 @@
 				},
 				"38,6": {
 					"id": "arrow3",
-					"semaphoreID": "611",
 					"trackID": "U1-6111@LK2.1",
 					"trainTarget": true,
 					"warp": "Mrz-Kot",
@@ -8831,7 +8848,6 @@
 			"tiles": {
 				"2,4": {
 					"id": "arrow7",
-					"semaphoreID": "752",
 					"trackID": "7522-A2@LK2.2",
 					"trainTarget": true,
 					"warp": "Mrz-Kot",
@@ -8840,7 +8856,6 @@
 				},
 				"2,5": {
 					"id": "arrow3",
-					"semaphoreID": "751N",
 					"targetW24": true,
 					"trackID": "7511-B1@LK2.1",
 					"trainTarget": true,
@@ -8918,7 +8933,6 @@
 				},
 				"9,4": {
 					"id": "arrow7",
-					"semaphoreID": "792N",
 					"targetW24": true,
 					"trackID": "E2-7922@LK2.2",
 					"trainTarget": true,
@@ -8928,7 +8942,6 @@
 				},
 				"9,5": {
 					"id": "arrow3",
-					"semaphoreID": "791",
 					"trackID": "D1-7911@LK2.1",
 					"trainTarget": true,
 					"warp": "Kot-Sdl",
@@ -9511,7 +9524,6 @@
 				},
 				"2,8": {
 					"id": "arrow7",
-					"semaphoreID": "902",
 					"trackID": "9022-A2@LK2.2",
 					"trainTarget": true,
 					"warp": "Kot-Sdl",
@@ -9520,7 +9532,6 @@
 				},
 				"2,9": {
 					"id": "arrow3",
-					"semaphoreID": "901N",
 					"targetW24": true,
 					"trackID": "9011-B1@LK2.1",
 					"trainTarget": true,
@@ -11465,7 +11476,9 @@
 					"id": "track-"
 				},
 				"18,14": {
-					"id": "semaphore7"
+					"id": "semaphore7",
+					"semaphoreID": "WWT_Tm14",
+					"semaphoreType": 1
 				},
 				"18,4": {
 					"id": "curveDerR6"
@@ -11486,37 +11499,52 @@
 					"id": "track-"
 				},
 				"19,10": {
-					"id": "semaphore7"
+					"id": "semaphore7",
+					"semaphoreID": "WWT_F2",
+					"semaphoreOwnShield": true
 				},
 				"19,11": {
-					"id": "semaphore7"
+					"id": "semaphore7",
+					"semaphoreID": "WWT_F1",
+					"semaphoreOwnShield": true
 				},
 				"19,12": {
-					"id": "semaphore7"
+					"id": "semaphore7",
+					"semaphoreID": "WWT_F3",
+					"semaphoreOwnShield": true
 				},
 				"19,13": {
-					"id": "semaphore7"
+					"id": "semaphore7",
+					"semaphoreID": "WWT_F5",
+					"semaphoreOwnShield": true
 				},
 				"19,14": {
 					"id": "platformF"
 				},
 				"19,4": {
-					"id": "semaphore7"
+					"id": "semaphore7",
+					"semaphoreID": "WWT_Tm15",
+					"semaphoreType": 1
 				},
 				"19,5": {
-					"id": "semaphore7"
+					"id": "semaphore7",
+					"semaphoreID": "WWT_F12"
 				},
 				"19,6": {
-					"id": "semaphore7"
+					"id": "semaphore7",
+					"semaphoreID": "WWT_F10"
 				},
 				"19,7": {
-					"id": "semaphore7"
+					"id": "semaphore7",
+					"semaphoreID": "WWT_F8"
 				},
 				"19,8": {
-					"id": "semaphore7"
+					"id": "semaphore7",
+					"semaphoreID": "WWT_F6"
 				},
 				"19,9": {
-					"id": "semaphore7"
+					"id": "semaphore7",
+					"semaphoreID": "WWT_F4"
 				},
 				"20,10": {
 					"id": "platformF",
@@ -11667,6 +11695,7 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_G2",
+					"semaphoreOwnShield": true,
 					"trackID": "WWT_Iz45"
 				},
 				"23,11": {
@@ -11675,6 +11704,7 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_G1",
+					"semaphoreOwnShield": true,
 					"trackID": "WWT_Iz42"
 				},
 				"23,12": {
@@ -11683,6 +11713,7 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_G3",
+					"semaphoreOwnShield": true,
 					"trackID": "WWT_Iz41"
 				},
 				"23,13": {
@@ -11691,6 +11722,7 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_G5",
+					"semaphoreOwnShield": true,
 					"trackID": "WWT_Iz41"
 				},
 				"23,4": {
@@ -11827,6 +11859,7 @@
 				"26,12": {
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
+					"switchFlip": true,
 					"switchID": "WOG_WWT41",
 					"trackID": "WWT_Iz41"
 				},
@@ -11864,8 +11897,11 @@
 					"trackID": "WWT_Iz41"
 				},
 				"27,13": {
-					"id": "arrow7",
-					"trainTarget": true
+					"id": "arrow-",
+					"trainTarget": true,
+					"warp": "WPd",
+					"warpID": "WPd_N",
+					"warpTargetID": "WWT"
 				},
 				"27,4": {
 					"id": "track-",
@@ -12095,6 +12131,7 @@
 				"33,12": {
 					"id": "switchD3",
 					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
 					"switchID": "WOG_WWT47",
 					"trackID": "WWT_Iz47"
 				},
@@ -12185,11 +12222,13 @@
 				},
 				"36,12": {
 					"id": "platformF",
-					"shuntTarget": true
+					"shuntTarget": true,
+					"trainTarget": true
 				},
 				"36,13": {
 					"id": "platformF",
-					"shuntTarget": true
+					"shuntTarget": true,
+					"trainTarget": true
 				},
 				"36,9": {
 					"id": "platformF",
@@ -12220,7 +12259,10 @@
 				"37,14": {
 					"id": "arrow3",
 					"targetW24": true,
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "WAt",
+					"warpID": "WAt_N",
+					"warpTargetID": "WWT"
 				},
 				"37,9": {
 					"id": "semaphore7",
@@ -12233,7 +12275,7 @@
 					"id": "track-"
 				},
 				"38,12": {
-					"id": "curve7",
+					"id": "track-",
 					"trackID": "WWT_ItY"
 				},
 				"38,13": {
@@ -12253,8 +12295,8 @@
 				"39,10": {
 					"id": "track-"
 				},
-				"39,13": {
-					"id": "curve3",
+				"39,12": {
+					"id": "track-",
 					"trackID": "WWT_ItT"
 				},
 				"39,14": {
@@ -12269,7 +12311,7 @@
 				"40,10": {
 					"id": "track-"
 				},
-				"40,13": {
+				"40,12": {
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -12288,9 +12330,12 @@
 				},
 				"41,10": {
 					"id": "arrow3",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Rem",
+					"warpID": "Rem",
+					"warpTargetID": "WWT_N"
 				},
-				"41,13": {
+				"41,12": {
 					"id": "arrow7",
 					"targetW24": true,
 					"trainTarget": true
@@ -12302,7 +12347,10 @@
 				"41,9": {
 					"id": "arrow7",
 					"targetW24": true,
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Rem",
+					"warpID": "Rem_N",
+					"warpTargetID": "WWT"
 				},
 				"5,10": {
 					"id": "arrow7"

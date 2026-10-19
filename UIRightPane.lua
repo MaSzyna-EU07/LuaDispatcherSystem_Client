@@ -139,6 +139,10 @@ function UIRightPane:addSemaphoreSettings()
 	self.widgets.semaphoreNoDanger.tip = "Oznacza semafor jako nieposiadający górnej pomarańczowej komory.\nOznacza to, że pathfinder nie będzie w stanie wyświetlić sygnału zezwalającego na jazdę\njeżeli kolejny semafor nie zezwala na jazdę z prędkością 100km/h lub Vmax."
 	self.uiGenY = self.uiGenY + 1
 
+	self.widgets.semaphoreOwnShield = self.ui:addCheckbox("right", "semaphoreOwnShield", "Własna tarcza ostrzegawcza", 0, self.uiGenY, 1, 1, self, self.updateSemaphoreOwnShield)
+	self.widgets.semaphoreOwnShield.tip = "Gdy zaznaczone, semafor posiada własną tarczę ostrzegawczą, czyli poprzedni semafor nie będzie od niego uzależniony."
+	self.uiGenY = self.uiGenY + 1
+
 	self.widgets.semaphoreNext_l = self.ui:addLabel("right", nil, "Następny semafor:", 0, self.uiGenY, 8, 1)
 	self.widgets.semaphoreNext = self.ui:addInput("right", "semaphoreNext", 8, self.uiGenY, 6, 1, self, self.updateSemaphoreNext)
 	self.widgets.semaphoreNext.tip = "Wskazuje następną prędkość w km/h (puste = Vmax) lub ID następnego semafora ze znakiem ':' na początku."
@@ -207,7 +211,7 @@ end
 ---@param tile Tile The tile for which to set the input values.
 function UIRightPane:setValuesForTile(tile)
 	-- Spawn appropriate sections for the tile
-	if tile:isTrack() then
+	if tile:isTrack() or self.ui.showAllTileProperties then
 		self:addTrackSettings()
 		self.widgets.trackID.value = tile.trackID or ""
 		self.widgets.electrified2.value = tile.electrified
@@ -219,7 +223,7 @@ function UIRightPane:setValuesForTile(tile)
 		self.widgets.itineraryEndID.value = tile.itineraryEndID or ""
 		self.widgets.targetW24.value = tile.targetW24
 	end
-	if tile:isSwitch() then
+	if tile:isSwitch() or self.ui.showAllTileProperties then
 		self:addSwitchSettings()
 		self.widgets.switchID.value = tile.switchID or ""
 		self.widgets.switchFlip.value = tile.switchFlip
@@ -227,7 +231,7 @@ function UIRightPane:setValuesForTile(tile)
 		self.widgets.speedPlus.value = tile.maxSpeedPlus ~= math.huge and tostring(tile.maxSpeedPlus) or ""
 		self.widgets.speedMinus.value = tile.maxSpeedMinus ~= math.huge and tostring(tile.maxSpeedMinus) or ""
 	end
-	if tile:isSemaphore() then
+	if tile:isSemaphore() or self.ui.showAllTileProperties then
 		self:addSemaphoreSettings()
 		self.widgets.semaphoreID.value = tile.semaphoreID or ""
 		self.widgets.semaphoreType.value = tile:isSemaphore() and (tile.semaphoreType and tostring(tile.semaphoreType) or "0") or ""
@@ -239,15 +243,16 @@ function UIRightPane:setValuesForTile(tile)
 		self.widgets.semaphoreShape.value = tile.semaphoreShape
 		self.widgets.semaphoreFourPhase.value = tile.semaphoreFourPhase
 		self.widgets.semaphoreNoDanger.value = tile.semaphoreNoDanger
+		self.widgets.semaphoreOwnShield.value = tile.semaphoreOwnShield
 		self.widgets.semaphoreNext.value = tile.semaphoreNext and self:nextToText(tile.semaphoreNext) or ""
 	end
-	if tile:isExitPoint() then
+	if tile:isExitPoint() or self.ui.showAllTileProperties then
 		self:addWarpSettings()
 		self.widgets.warpID.value = tile.warpID or ""
 		self.widgets.warp.value = tile.warp or ""
 		self.widgets.warpTargetID.value = tile.warpTargetID or ""
 	end
-	if tile:isBlockadeGenerator() then
+	if tile:isBlockadeGenerator() or self.ui.showAllTileProperties then
 		self:addBlockadeSettings()
 		self.widgets.blockadeID.value = tile.blockadeID or ""
 	end
@@ -428,6 +433,10 @@ end
 
 function UIRightPane:updateSemaphoreNoDanger(checkbox)
 	self:forEachTile(function(tile) tile.semaphoreNoDanger = checkbox.value end)
+end
+
+function UIRightPane:updateSemaphoreOwnShield(checkbox)
+	self:forEachTile(function(tile) tile.semaphoreOwnShield = checkbox.value end)
 end
 
 function UIRightPane:updateMaxSpeed(input)

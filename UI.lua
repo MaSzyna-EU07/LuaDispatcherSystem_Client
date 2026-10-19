@@ -19,6 +19,8 @@ function UI:new()
 
 	---@type table<string, Gspot.element>
 	self.elements = {}
+
+	self.showAllTileProperties = false
 end
 
 ---Returns the Gspot position for a centered window with size in tiles.
@@ -373,6 +375,10 @@ end
 
 function UI:keypressed(key)
 	gui:keypress(key)
+	if key == "f11" then
+		self.showAllTileProperties = not self.showAllTileProperties
+		-- TODO: Refresh the pane
+	end
 end
 
 function UI:textinput(t)
