@@ -76,19 +76,40 @@ function Picker:new()
 	---@type PickerButton[]
 	self.buttons = {}
 	for i = 1, #tileX do
-		self.buttons[i] = PickerButton({x = 910 + i * 45, y = 25, tileX = tileX[i], action = actions[i]})
+		self.buttons[i] = PickerButton({x = 1270 + (i - #tileX) * 45, y = 25, tileX = tileX[i], action = actions[i]})
 	end
 
 	-- If `TILE`, a tile is selected in the picker. Otherwise, a button is pressed, indicating a mode.
 	---@type PickerMode
 	self.mode = PickerMode.TILE
 
+	local highlightTileX = {12, 13, 14}
+	local highlightActions = {
+		TileHighlightMode.TRACK,
+		TileHighlightMode.SWITCH,
+		TileHighlightMode.SEMAPHORE
+	}
+	---@type PickerButton[]
+	self.highlightButtons = {}
+	for i = 1, #highlightTileX do
+		self.highlightButtons[i] = PickerButton({x = 1270 + (i - #highlightTileX) * 45, y = 55, tileX = highlightTileX[i], action = highlightActions[i]})
+	end
+
+	---@type table<string, TileHighlightMode>
+	self.highlightActionKeybinds = {
+		["1"] = TileHighlightMode.TRACK,
+		["2"] = TileHighlightMode.SWITCH,
+		["3"] = TileHighlightMode.SEMAPHORE
+	}
+
+	---@type TileHighlightMode
+	self.highlightMode = TileHighlightMode.OFF
+
 	self.selectedTileCategory = 1
 	self.selectedTileOrientation = 1
 	self.hoveredTileCategory = nil
 
     self.electrified = true
-	self.highlightMode = TileHighlightMode.TRACK
 end
 
 function Picker:getTilePos(i)
@@ -108,6 +129,9 @@ function Picker:update(dt)
 	end
 	for i, button in ipairs(self.buttons) do
 		button:setPressed(button.action == self.mode)
+	end
+	for i, button in ipairs(self.highlightButtons) do
+		button:setPressed(button.action == self.highlightMode)
 	end
 end
 
@@ -220,6 +244,13 @@ function Picker:getMaskedTrackTileID(tile, mask, subtract)
 	return _TileDB:getTileWithTracks(newTracks, tile.id)
 end
 
+---Responds to a particular tile highlight mode being pressed.
+---If that particular mode is already enabled, disables the tile highlights.
+---@param mode TileHighlightMode The mode that has been entered.
+function Picker:setOrUnsetHighlightMode(mode)
+	self.highlightMode = self.highlightMode == mode and TileHighlightMode.OFF or mode
+end
+
 function Picker:draw()
 	love.graphics.setColor(0, 0, 1)
 	love.graphics.rectangle("fill", self.boxX, self.boxY, self.boxW, self.boxH)
@@ -251,6 +282,9 @@ function Picker:draw()
 	for i, button in ipairs(self.buttons) do
 		button:draw()
 	end
+	for i, button in ipairs(self.highlightButtons) do
+		button:draw()
+	end
 end
 
 -- The following function is kept here just in case I ever need to check all of the tile possibilities again.
@@ -278,12 +312,8 @@ function Picker:keypressed(key)
 	elseif key == "x" then
 		--self.mode = PickerMode.DEL_COLUMN
 	end
-	if key == "1" then
-		self.highlightMode = TileHighlightMode.TRACK
-	elseif key == "2" then
-		self.highlightMode = TileHighlightMode.SWITCH
-	elseif key == "3" then
-		self.highlightMode = TileHighlightMode.SEMAPHORE
+	if self.highlightActionKeybinds[key] then
+		self:setOrUnsetHighlightMode(self.highlightActionKeybinds[key])
 	end
 end
 
@@ -295,6 +325,11 @@ function Picker:mousepressed(x, y, button)
 			for i, btn in ipairs(self.buttons) do
 				if btn:isHovered() then
 					self.mode = btn.action
+				end
+			end
+			for i, btn in ipairs(self.highlightButtons) do
+				if btn:isHovered() then
+					self:setOrUnsetHighlightMode(btn.action)
 				end
 			end
 		end

@@ -8,6 +8,7 @@ local Station = class:derive("Station")
 function Station:new(name, shortcut)
 	self.x, self.y = 5, 61
 	self.TILE_SIZE = 14
+	self.CANVAS_MARGIN = 2
 
 	if type(name) == "table" then
 		self:deserialize(name)
@@ -46,6 +47,8 @@ function Station:new(name, shortcut)
 	---@alias TileHighlight {x: integer, y: integer, type: integer, t: number, delQueue: boolean?}
 	---@type TileHighlight[]
 	self.tileHighlights = {}
+	---@type TileColorEntry[][]
+	self.tileFrameColors = _Utils.tableNewMultidim(nil, self.w, self.h)
 
 	self.canvas = nil
 	self:generateCanvas()
@@ -55,7 +58,7 @@ end
 ---This should be called each time the station size changes.
 ---@private
 function Station:generateCanvas()
-	self.canvas = love.graphics.newCanvas(self.TILE_SIZE * self.w + 2, self.TILE_SIZE * self.h + 2)
+	self.canvas = love.graphics.newCanvas(self.TILE_SIZE * self.w + self.CANVAS_MARGIN * 2, self.TILE_SIZE * self.h + self.CANVAS_MARGIN * 2)
 end
 
 ---Updates the Station's logic.
@@ -110,7 +113,7 @@ function Station:update(dt)
 		local text = self:getTileTooltip(hoveredTile)
 		if text then
 			_Tooltip:setText(text)
-			_Tooltip:setPos(self:coordsToPos(hoveredTile.x + 8/14, hoveredTile.y + 1))
+			_Tooltip:setPos(self:coordsToPos(hoveredTile.x + 0.5, hoveredTile.y + 1))
 			_Tooltip:setAnchor(0.5, 0)
 		end
 	end
@@ -131,25 +134,41 @@ function Station:getFullName()
 	return string.format("%s [%s]", self.name, self.shortcut)
 end
 
+---Returns the coordinates of the tile based on the global onscreen position, including fractions.
+---If there is no tile (out of bounds), returns `nil`.
+---@param x number Global X position within the window.
+---@param y number Global Y position within the window.
+---@return number?, number?
+function Station:posToFullCoords(x, y)
+	local tileX = (x - self.x - self.CANVAS_MARGIN * _Settings.scale) / (self.TILE_SIZE * _Settings.scale) + 1
+	local tileY = (y - self.y - self.CANVAS_MARGIN * _Settings.scale) / (self.TILE_SIZE * _Settings.scale) + 1
+	if tileX >= 1 and tileY >= 1 and tileX < self.w + 1 and tileY < self.h + 1 then
+		return tileX, tileY
+	end
+end
+
 ---Returns the coordinates of the tile based on the global onscreen position.
 ---If there is no tile (out of bounds), returns `nil`.
 ---@param x number Global X position within the window.
 ---@param y number Global Y position within the window.
 ---@return integer?, integer?
 function Station:posToCoords(x, y)
-	local tileX, tileY = math.floor((x - self.x) / (self.TILE_SIZE * _Settings.scale)) + 1, math.floor((y - self.y) / (self.TILE_SIZE * _Settings.scale)) + 1
-	if tileX >= 1 and tileY >= 1 and tileX <= self.w and tileY <= self.h then
-		return tileX, tileY
+	local tileX, tileY = self:posToFullCoords(x, y)
+	if tileX and tileY then
+		return math.floor(tileX), math.floor(tileY)
 	end
 end
 
 ---Returns the partial coordinates within the hovered tile, from 0 to 1.
+---If there is no tile (out of bounds), returns `nil`.
 ---@param x number Global X position within the window.
 ---@param y number Global Y position within the window.
----@return number, number
+---@return number?, number?
 function Station:posToPartCoords(x, y)
-	local partX, partY = ((x - self.x) / (self.TILE_SIZE * _Settings.scale)) % 1, ((y - self.y) / (self.TILE_SIZE * _Settings.scale)) % 1
-	return partX, partY
+	local tileX, tileY = self:posToFullCoords(x, y)
+	if tileX and tileY then
+		return tileX % 1, tileY % 1
+	end
 end
 
 ---Returns the global onscreen position of the top left corner of the specified tile.
@@ -157,7 +176,8 @@ end
 ---@param tileY integer Tile Y coordinate.
 ---@return number, number
 function Station:coordsToPos(tileX, tileY)
-	return self.x + (tileX - 1) * self.TILE_SIZE * _Settings.scale, self.y + (tileY - 1) * self.TILE_SIZE * _Settings.scale
+	local canvasX, canvasY = self:coordsToCanvasPos(tileX, tileY)
+	return self.x + canvasX * _Settings.scale, self.y + canvasY * _Settings.scale
 end
 
 ---Returns the on-canvas position of the top left corner of the specified tile.
@@ -165,7 +185,7 @@ end
 ---@param tileY integer Tile Y coordinate.
 ---@return number, number
 function Station:coordsToCanvasPos(tileX, tileY)
-	return (tileX - 1) * self.TILE_SIZE + 1, (tileY - 1) * self.TILE_SIZE + 1
+	return (tileX - 1) * self.TILE_SIZE + self.CANVAS_MARGIN, (tileY - 1) * self.TILE_SIZE + self.CANVAS_MARGIN
 end
 
 ---Returns `true` if the specified coordinates are inside of the schematic bounds, `false` otherwise.
@@ -227,6 +247,12 @@ function Station:recalculateTilePositions()
 			tile.x, tile.y = x, y
 		end
 	end
+end
+
+---It does what it says on the tin.
+---@private
+function Station:recalculateTileFrameColorCacheSize()
+	self.tileFrameColors = _Utils.tableNewMultidim(nil, self.w, self.h)
 end
 
 ---Returns the currently hovered tile, if any.
@@ -364,8 +390,7 @@ function Station:addColumn(x)
 	for y = 1, self.h do
 		self.tiles[x][y] = Tile(self, x, y)
 	end
-	self:recalculateTilePositions()
-	self:generateCanvas()
+	self:afterSizeChange()
 end
 
 ---Adds a new row at the specified position and fills it with empty tiles.
@@ -376,8 +401,7 @@ function Station:addRow(y)
 	for x = 1, self.w do
 		table.insert(self.tiles[x], y, Tile(self, x, y))
 	end
-	self:recalculateTilePositions()
-	self:generateCanvas()
+	self:afterSizeChange()
 end
 
 ---Removes a column at the specified index. All tiles belonging to that column will be IRRETRIEVABLY deleted.
@@ -393,8 +417,7 @@ function Station:deleteColumn(x)
 	end
 	table.remove(self.tiles, x)
 	self.w = self.w - 1
-	self:recalculateTilePositions()
-	self:generateCanvas()
+	self:afterSizeChange()
 end
 
 ---Removes a row at the specified index. All tiles belonging to that row will be IRRETRIEVABLY deleted.
@@ -410,7 +433,14 @@ function Station:deleteRow(y)
 		table.remove(self.tiles[x], y)
 	end
 	self.h = self.h - 1
+	self:afterSizeChange()
+end
+
+---Does stuff after changing the station size to make sure internally cached values are right.
+---@private
+function Station:afterSizeChange()
 	self:recalculateTilePositions()
+	self:recalculateTileFrameColorCacheSize()
 	self:generateCanvas()
 end
 
@@ -830,36 +860,70 @@ end
 
 ---Draws the Station's components.
 function Station:draw()
+	self:resetTileFrameColors()
+	self:drawFrameHover()
+	self:drawFrameSelection()
+	self:drawFrameActive()
+	self:drawFrameClickable()
+	self:drawFrameRailToolHover()
 	love.graphics.setCanvas(self.canvas)
 	self:drawBackground()
-	self:drawTracks()
+	self:drawTileBackgrounds()
 	self:drawSizeToolHover()
 	self:drawRailToolHover()
-	self:drawSelection()
-	self:drawActive()
-	self:drawClickable()
+	self:drawTiles()
+	self:drawTileFrameBackgrounds()
+	self:drawTileFrames()
 	self:drawRectSelection()
-	self:drawHover()
+	self:drawTileGhost()
 	self:drawTileHighlights()
 	love.graphics.setCanvas()
 	love.graphics.setColor(1, 1, 1)
-	love.graphics.draw(self.canvas, self.x + 0.5, self.y + 0.5, 0, _Settings.scale)
-	self:drawFrame()
+	love.graphics.draw(self.canvas, self.x, self.y, 0, _Settings.scale)
+end
+
+---Draws the Station's background.
+function Station:drawBackground()
+	love.graphics.setColor(0, 1, 1)
+	if not self.synced then
+		love.graphics.setColor(1, 1, 0)
+	end
+	love.graphics.rectangle("fill", 0, 0, self.canvas:getWidth(), self.canvas:getHeight())
 end
 
 ---Draws the Station's tile backgrounds.
 ---@private
-function Station:drawBackground()
+function Station:drawTileBackgrounds()
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
-			self:drawTileBackground(tile, self:getTileBackgroundColor(tile))
+			self:drawTileBackground(tile)
+		end
+	end
+end
+
+---Draws the Station's tile frames.
+---@private
+function Station:drawTileFrames()
+	for i, column in ipairs(self.tiles) do
+		for j, tile in ipairs(column) do
+			self:drawTileFrame(tile)
+		end
+	end
+end
+
+---Draws the Station's tile frame backgrounds.
+---@private
+function Station:drawTileFrameBackgrounds()
+	for i, column in ipairs(self.tiles) do
+		for j, tile in ipairs(column) do
+			self:drawTileFrameBackground(tile)
 		end
 	end
 end
 
 ---Draws the Station's tracks.
 ---@private
-function Station:drawTracks()
+function Station:drawTiles()
 	for i, column in ipairs(self.tiles) do
 		for j, tile in ipairs(column) do
 			self:drawTile(tile)
@@ -867,22 +931,16 @@ function Station:drawTracks()
 	end
 end
 
----Draws the Station's hovered tile frame, and also tile ghosts.
+---Draws the picker's tile ghost.
 ---@private
-function Station:drawHover()
-	if not self.hoverX or not self.hoverY then
+function Station:drawTileGhost()
+	if _Picker.mode ~= PickerMode.TILE or not self.hoverX or not self.hoverY then
 		return
 	end
-	if _Picker.mode == PickerMode.TILE or _Picker.mode == PickerMode.PROPERTIES or _Picker.mode == PickerMode.ELECTRIFY or _Picker.mode == PickerMode.DEELECTRIFY then
-		self:drawTileFrame(self:assertGetHoveredTile(), TileFrameColor.HOVER, true)
-	end
-	if _Picker.mode == PickerMode.TILE then
-		-- Draw tile ghost.
-		local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
-		local category = _Picker:getSelectedCategory()
-		local image = category.display and category.display.image or "s1"
-		_DrawTile(x, y, _Picker:getSelectedTileID(), _Picker.electrified, false, false, false, 0, image, 1, 0.5)
-	end
+	local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
+	local category = _Picker:getSelectedCategory()
+	local image = category.display and category.display.image or "s1"
+	_DrawTile(x, y, _Picker:getSelectedTileID(), _Picker.electrified, false, false, false, 0, image, 1, 0.5)
 end
 
 ---Draws hover helpers when adding/removing rows.
@@ -922,6 +980,8 @@ function Station:drawSizeToolHover()
 	end
 end
 
+---Draws the guides for the rail tool.
+---@private
 function Station:drawRailToolHover()
 	if _Picker.mode ~= PickerMode.RAILS then
 		return
@@ -934,12 +994,6 @@ function Station:drawRailToolHover()
 			love.graphics.circle("fill", x, y, 3)
 		end
 	else
-		local tiles = self:getAffectedRailToolDragTiles()
-		for i, tile in ipairs(tiles) do
-			if tile.tile.id ~= tile.newID then
-				self:drawTileFrame(tile.tile, tile.newID and TileFrameColor.RAILDRAG_AFFECTED or TileFrameColor.RAILDRAG_CONFLICT)
-			end
-		end
 		local startX, startY = self:coordsToCanvasPos(self.railToolDragX, self.railToolDragY)
 		if self.railToolDragEndX and self.railToolDragEndY then
 			local endX, endY = self:coordsToCanvasPos(self.railToolDragEndX, self.railToolDragEndY)
@@ -951,39 +1005,6 @@ function Station:drawRailToolHover()
 		end
 		love.graphics.setColor(0, 1, 1)
 		love.graphics.circle("fill", startX, startY, 3)
-	end
-end
-
----Draws the selection frame for all selected tiles.
----@private
-function Station:drawSelection()
-	for i, tile in ipairs(self.selectedTiles) do
-		self:drawTileFrame(tile, TileFrameColor.SELECTION)
-	end
-end
-
----Draws the currently active tile's frame.
----@private
-function Station:drawActive()
-	if not self.activeX or not self.activeY then
-		return
-	end
-	local color = self.activeMode == PathMode.SHUNT and TileFrameColor.ACTIVE_SHUNT or TileFrameColor.ACTIVE
-	self:drawTileFrame(self:assertGetTile(self.activeX, self.activeY), color)
-end
-
----Draws the clickable tile frames.
----@private
-function Station:drawClickable()
-	if not self.activeX or not self.activeY then
-		return
-	end
-	for i, column in ipairs(self.tiles) do
-		for j, tile in ipairs(column) do
-			if tile:isTargetForMode(self.activeMode) then
-				self:drawTileFrame(tile, TileFrameColor.CLICKABLE)
-			end
-		end
 	end
 end
 
@@ -1012,17 +1033,6 @@ function Station:drawTileHighlights()
 	end
 end
 
----Draws the Station's frame, when the schematic is not synced with the server.
----@private
-function Station:drawFrame()
-	if self.synced then
-		return
-	end
-	love.graphics.setColor(1, 1, 0)
-	love.graphics.setLineWidth(2)
-	love.graphics.rectangle("line", self.x, self.y, self.canvas:getWidth() * _Settings.scale + 1, self.canvas:getHeight() * _Settings.scale + 1)
-end
-
 --####################################################--
 ---------------- T I L E   D R A W I N G ---------------
 --####################################################--
@@ -1036,9 +1046,9 @@ end
 
 ---Returns the background color to be used for the specified Tile.
 ---@param tile Tile The tile to be drawn.
----@return TileBackgroundColor
+---@return TileColorEntry
 function Station:getTileBackgroundColor(tile)
-	if _Picker.highlightMode == TileHighlightMode.OFF or _Picker.mode ~= PickerMode.PROPERTIES then
+	if _Picker.highlightMode == TileHighlightMode.OFF then
 		return TileBackgroundColor.REGULAR
 	end
 	local trackWarning = tile.trackID and (not tile:isTrack() and not tile:isBlockadeGenerator() and not tile:isExitPoint())
@@ -1047,14 +1057,117 @@ function Station:getTileBackgroundColor(tile)
 	if trackWarning or switchWarning or semaphoreWarning then
 		return TileBackgroundColor.WARNING
 	end
-	if tile.trackID and _Picker.highlightMode == TileHighlightMode.TRACK then
-		return TileBackgroundColor.OK
-	elseif tile.switchID and _Picker.highlightMode == TileHighlightMode.SWITCH then
-		return TileBackgroundColor.OK
-	elseif tile.semaphoreID and _Picker.highlightMode == TileHighlightMode.SEMAPHORE then
-		return TileBackgroundColor.OK
+	if _Picker.highlightMode == TileHighlightMode.TRACK then
+		if tile.trackID then
+			return TileBackgroundColor.OK
+		elseif tile:isTrack() then
+			return TileBackgroundColor.MISSING
+		end
+	elseif _Picker.highlightMode == TileHighlightMode.SWITCH then
+		if tile.switchID then
+			return TileBackgroundColor.OK
+		elseif tile:isSwitch() then
+			return TileBackgroundColor.MISSING
+		end
+	elseif _Picker.highlightMode == TileHighlightMode.SEMAPHORE then
+		if tile.semaphoreID then
+			return TileBackgroundColor.OK
+		elseif tile:isSemaphore() then
+			return TileBackgroundColor.MISSING
+		end
 	end
 	return TileBackgroundColor.REGULAR
+end
+
+---Sets the frame color for the specified tile.
+---@param tile Tile The tile for which to change the frame color.
+---@param color TileColorEntry The frame color to be applied.
+function Station:setTileFrameColor(tile, color)
+	self.tileFrameColors[tile.x][tile.y] = color
+end
+
+---Returns the frame color for the specified tile, or `nil` if the tile has no frame.
+---@param tile Tile The tile for which to change the frame color.
+---@return TileColorEntry?
+function Station:getTileFrameColor(tile)
+	return self.tileFrameColors[tile.x][tile.y]
+end
+
+---Resets the tile frame colors.
+function Station:resetTileFrameColors()
+	for x = 1, self.w do
+		for y = 1, self.h do
+			self.tileFrameColors[x][y] = nil
+		end
+	end
+end
+
+---Sets the frame color for all selected tiles.
+---@private
+function Station:drawFrameSelection()
+	for i, tile in ipairs(self.selectedTiles) do
+		self:setTileFrameColor(tile, TileFrameColor.SELECTION)
+	end
+end
+
+---Sets the frame color for the currently active tile.
+---@private
+function Station:drawFrameActive()
+	if not self.activeX or not self.activeY then
+		return
+	end
+	local color = self.activeMode == PathMode.SHUNT and TileFrameColor.ACTIVE_SHUNT or TileFrameColor.ACTIVE
+	self:setTileFrameColor(self:assertGetTile(self.activeX, self.activeY), color)
+end
+
+---Sets the frame color for the clickable tiles.
+---@private
+function Station:drawFrameClickable()
+	if self.activeX and self.activeY then
+		for i, column in ipairs(self.tiles) do
+			for j, tile in ipairs(column) do
+				if tile:isTargetForMode(self.activeMode) then
+					self:setTileFrameColor(tile, TileFrameColor.CLICKABLE)
+				end
+			end
+		end
+	else
+		if _Picker.mode == PickerMode.PROPERTIES then
+			for i, column in ipairs(self.tiles) do
+				for j, tile in ipairs(column) do
+					if tile:isSemaphore() then
+						--self:setTileFrameColor(tile, TileFrameColor.CLICKABLE)
+					end
+				end
+			end
+		end
+	end
+end
+
+---Sets the frame color for the currently hovered tile.
+---@private
+function Station:drawFrameHover()
+	local hoveredTile = self:getHoveredTile()
+	if hoveredTile and (_Picker.mode == PickerMode.TILE or _Picker.mode == PickerMode.PROPERTIES or _Picker.mode == PickerMode.ELECTRIFY or _Picker.mode == PickerMode.DEELECTRIFY) then
+		self:setTileFrameColor(hoveredTile, TileFrameColor.HOVER)
+	end
+end
+
+---Sets the frame color for the affected tiles if the rail tool is active.
+---@private
+function Station:drawFrameRailToolHover()
+	if _Picker.mode ~= PickerMode.RAILS then
+		return
+	end
+	local dragging = self.railToolDragX and self.railToolDragY
+	if dragging then
+		local tiles = self:getAffectedRailToolDragTiles()
+		for i, tile in ipairs(tiles) do
+			if tile.tile.id ~= tile.newID then
+				self:setTileFrameColor(tile.tile, tile.newID and TileFrameColor.RAILDRAG_AFFECTED or TileFrameColor.RAILDRAG_CONFLICT)
+			end
+		end
+	end
 end
 
 ---Draws the specified Tile at the specified position.
@@ -1079,31 +1192,39 @@ function Station:drawTile(tile)
 	_DrawTile(x + tile.offset, y + tile.offset, tile.id, tile.electrified, occupied, reserved, forced, switchDimBits, semState)
 end
 
----Draws the specified Tile's background at the specified position.
+---Draws the specified Tile's background.
 ---@param tile Tile The tile to be drawn.
----@param color TileBackgroundColorEntry The background color set.
-function Station:drawTileBackground(tile, color)
+function Station:drawTileBackground(tile)
 	local x, y = self:getTilePos(tile)
+	local color = self:getTileBackgroundColor(tile)
 	love.graphics.setColor(color.fill)
 	love.graphics.rectangle("fill", x, y, tile.size, tile.size)
 	love.graphics.setColor(color.border)
-	love.graphics.setLineWidth(2)
-	love.graphics.rectangle("line", x, y, tile.size, tile.size)
-end
-
----Draws the specified Tile's frame at the specified position.
----@param tile Tile The tile to be drawn.
----@param color TileFrameColor The frame color.
----@param noFill boolean? If `true`, the tile itself will not be shaded.
-function Station:drawTileFrame(tile, color, noFill)
-	local x, y = self:getTilePos(tile)
-	if not noFill then
-		love.graphics.setColor(color[1], color[2], color[3], 0.2)
-		love.graphics.rectangle("fill", x, y, tile.size, tile.size)
-	end
-	love.graphics.setColor(color)
 	love.graphics.setLineWidth(1)
 	love.graphics.rectangle("line", x + 0.5, y + 0.5, tile.size - 1, tile.size - 1)
+end
+
+---Draws the specified Tile's frame.
+---@param tile Tile The tile to be drawn.
+function Station:drawTileFrame(tile)
+	local x, y = self:getTilePos(tile)
+	local color = self:getTileFrameColor(tile)
+	if color and color.border then
+		love.graphics.setColor(color.border)
+		love.graphics.setLineWidth(1)
+		love.graphics.rectangle("line", x + 0.5, y + 0.5, tile.size - 1, tile.size - 1)
+	end
+end
+
+---Draws the specified Tile's frame background.
+---@param tile Tile The tile to be drawn.
+function Station:drawTileFrameBackground(tile)
+	local x, y = self:getTilePos(tile)
+	local color = self:getTileFrameColor(tile)
+	if color and color.fill then
+		love.graphics.setColor(color.fill)
+		love.graphics.rectangle("fill", x, y, tile.size, tile.size)
+	end
 end
 
 --####################################--

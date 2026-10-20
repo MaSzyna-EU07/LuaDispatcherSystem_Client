@@ -2704,7 +2704,9 @@
 					"id": "arrow7",
 					"targetW24": true,
 					"trainTarget": true,
-					"warp": "WPd"
+					"warp": "WPd",
+					"warpID": "WPd_4M",
+					"warpTargetID": "WWO_4M"
 				},
 				"43,16": {
 					"id": "arrow-",
@@ -2722,7 +2724,9 @@
 				"43,19": {
 					"id": "arrow3",
 					"trainTarget": true,
-					"warp": "WPd"
+					"warp": "WPd",
+					"warpID": "WPd_3M",
+					"warpTargetID": "WWO_3M"
 				},
 				"43,4": {
 					"id": "semaphore7",
@@ -2846,7 +2850,9 @@
 				"46,11": {
 					"id": "arrow3",
 					"trainTarget": true,
-					"warp": "WPd"
+					"warp": "WPd",
+					"warpID": "WPd_1M",
+					"warpTargetID": "WWO_1M"
 				},
 				"46,4": {
 					"id": "arrow7",
@@ -2856,13 +2862,17 @@
 				"46,5": {
 					"id": "arrow-",
 					"trainTarget": true,
-					"warp": "WPd"
+					"warp": "WPd",
+					"warpID": "WPd_2P",
+					"warpTargetID": "WWO_2P"
 				},
 				"46,6": {
 					"id": "arrow7",
 					"targetW24": true,
 					"trainTarget": true,
-					"warp": "WPd"
+					"warp": "WPd",
+					"warpID": "WPd_2M",
+					"warpTargetID": "WWO_2M"
 				},
 				"46,8": {
 					"id": "arrow7",
@@ -3631,16 +3641,16 @@
 					"id": "arrow-",
 					"trainTarget": true,
 					"warp": "WWT",
-					"warpID": "WWT",
-					"warpTargetID": "WPd_N"
+					"warpID": "WWT_547",
+					"warpTargetID": "WPd_547"
 				},
 				"23,4": {
 					"id": "arrow7",
 					"targetW24": true,
 					"trainTarget": true,
 					"warp": "WWT",
-					"warpID": "WWT_N",
-					"warpTargetID": "WPd"
+					"warpID": "WWT_902",
+					"warpTargetID": "WPd_902"
 				},
 				"23,5": {
 					"id": "arrow7",
@@ -3689,13 +3699,17 @@
 				"3,7": {
 					"id": "arrow7",
 					"trainTarget": true,
-					"warp": "WWO"
+					"warp": "WWO",
+					"warpID": "WWO_4M",
+					"warpTargetID": "WPd_4M"
 				},
 				"3,8": {
 					"id": "arrow3",
 					"targetW24": true,
 					"trainTarget": true,
-					"warp": "WWO"
+					"warp": "WWO",
+					"warpID": "WWO_3M",
+					"warpTargetID": "WPd_3M"
 				},
 				"3,9": {
 					"id": "buffer3"
@@ -3814,18 +3828,24 @@
 				"7,2": {
 					"id": "arrow-",
 					"trainTarget": true,
-					"warp": "WWO"
+					"warp": "WWO",
+					"warpID": "WWO_2P",
+					"warpTargetID": "WPd_2P"
 				},
 				"7,3": {
 					"id": "arrow7",
 					"trainTarget": true,
-					"warp": "WWO"
+					"warp": "WWO",
+					"warpID": "WWO_2M",
+					"warpTargetID": "WPd_2M"
 				},
 				"7,4": {
 					"id": "arrow3",
 					"targetW24": true,
 					"trainTarget": true,
-					"warp": "WWO"
+					"warp": "WWO",
+					"warpID": "WWO_1M",
+					"warpTargetID": "WPd_1M"
 				},
 				"7,5": {
 					"electrified": false,
@@ -5298,7 +5318,7 @@
 				"44,11": {
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
-					"switchID": "Rem_54",
+					"switchID": "Rem_z1026",
 					"trackID": "Rem_Iz54"
 				},
 				"44,7": {
@@ -5351,7 +5371,7 @@
 					"id": "switchL7",
 					"maxSpeedPlus": 80,
 					"switchFlip": true,
-					"switchID": "Rem_z1026",
+					"switchID": "Rem_z1025",
 					"trackID": "Rem_Iz56"
 				},
 				"46,12": {
@@ -11330,366 +11350,521 @@
 			"name": "Warszawa Wschodnia Towarowa",
 			"shortcut": "WWT",
 			"tiles": {
-				"10,10": {
-					"id": "track-"
-				},
 				"10,11": {
-					"id": "track-"
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT7",
+					"trackID": "WWT_Iz7"
 				},
-				"10,8": {
-					"id": "semaphore3"
+				"10,12": {
+					"id": "track-",
+					"trackID": "WWT_Iz8"
+				},
+				"10,13": {
+					"id": "arrow-",
+					"warp": "WPd",
+					"warpID": "WPd_547",
+					"warpTargetID": "WWT_547"
+				},
+				"10,7": {
+					"electrified": false,
+					"id": "track/"
 				},
 				"10,9": {
-					"id": "switchD2",
-					"maxSpeedMinus": 100,
-					"maxSpeedPlus": 40
-				},
-				"11,10": {
-					"id": "track-"
+					"id": "curve6",
+					"trackID": "WWT_Iz12"
 				},
 				"11,11": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "WWT_Iz7"
 				},
-				"11,8": {
-					"id": "switchR2",
-					"maxSpeedPlus": 40
+				"11,12": {
+					"id": "switchD3",
+					"maxSpeedPlus": 40,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWT8",
+					"trackID": "WWT_Iz8"
+				},
+				"11,6": {
+					"electrified": false,
+					"id": "track/"
 				},
 				"11,9": {
-					"id": "switchR7",
-					"maxSpeedPlus": 40
-				},
-				"12,10": {
-					"id": "switchR3",
-					"maxSpeedPlus": 40
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT12",
+					"trackID": "WWT_Iz12"
 				},
 				"12,11": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "WWT_Iz7"
 				},
-				"12,7": {
-					"id": "semaphore6"
+				"12,12": {
+					"id": "track-",
+					"trackID": "WWT_Iz8"
+				},
+				"12,13": {
+					"id": "switchL4",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT9",
+					"trackID": "WWT_Iz9"
+				},
+				"12,5": {
+					"electrified": false,
+					"id": "track/"
+				},
+				"12,8": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT13",
+					"trackID": "WWT_Iz13"
 				},
 				"12,9": {
-					"id": "curve2"
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT14",
+					"trackID": "WWT_Iz14"
 				},
 				"13,10": {
-					"id": "switchR7",
-					"maxSpeedPlus": 40
+					"id": "curve3",
+					"trackID": "WWT_Iz14"
 				},
 				"13,11": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "WWT_Iz7"
+				},
+				"13,12": {
+					"id": "track-",
+					"trackID": "WWT_Iz8"
+				},
+				"13,14": {
+					"id": "switchL8",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchID": "WOG_WWT10",
+					"trackID": "WWT_Iz10"
+				},
+				"13,4": {
+					"electrified": false,
+					"id": "track/"
+				},
+				"13,7": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT15",
+					"trackID": "WWT_Iz15"
 				},
 				"13,8": {
-					"id": "curve6"
+					"id": "track-",
+					"trackID": "WWT_Iz13"
+				},
+				"13,9": {
+					"id": "track-",
+					"trackID": "WWT_Iz14"
 				},
 				"14,10": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "WWT_Iz14"
 				},
 				"14,11": {
-					"id": "switchD3",
-					"maxSpeedMinus": 100,
-					"maxSpeedPlus": 40
+					"id": "track-",
+					"trackID": "WWT_Iz7"
+				},
+				"14,12": {
+					"id": "track-",
+					"trackID": "WWT_Iz8"
+				},
+				"14,14": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT11",
+					"trackID": "WWT_Iz11"
+				},
+				"14,15": {
+					"electrified": false,
+					"id": "curveDerL3",
+					"trackID": "WWT_Iz10"
+				},
+				"14,3": {
+					"electrified": false,
+					"id": "switchR6"
+				},
+				"14,6": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT16",
+					"trackID": "WWT_Iz16"
+				},
+				"14,7": {
+					"id": "track-",
+					"trackID": "WWT_Iz15"
 				},
 				"14,8": {
-					"id": "switchL7",
-					"maxSpeedPlus": 40
+					"id": "track-",
+					"trackID": "WWT_Iz13"
+				},
+				"14,9": {
+					"id": "track-",
+					"trackID": "WWT_Iz14"
 				},
 				"15,10": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "WWT_Iz14"
 				},
 				"15,11": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "WWT_Iz7"
 				},
 				"15,12": {
-					"id": "switchL4",
-					"maxSpeedPlus": 40
+					"id": "track-",
+					"trackID": "WWT_Iz8"
 				},
-				"15,7": {
-					"id": "switchR6",
-					"maxSpeedPlus": 40
+				"15,13": {
+					"id": "curve6",
+					"trackID": "WWT_Iz11"
 				},
-				"15,8": {
-					"id": "switchR7",
-					"maxSpeedPlus": 40
+				"15,14": {
+					"id": "track-",
+					"trackID": "WWT_Iz11"
 				},
-				"16,10": {
-					"id": "track-"
+				"15,15": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWT_Iz10"
 				},
-				"16,11": {
-					"id": "track-"
-				},
-				"16,13": {
-					"id": "switchL8",
-					"maxSpeedPlus": 40
-				},
-				"16,6": {
-					"id": "switchR6",
-					"maxSpeedPlus": 40
-				},
-				"16,7": {
-					"id": "track-"
-				},
-				"16,8": {
-					"id": "track-"
-				},
-				"16,9": {
-					"id": "curve3"
-				},
-				"17,10": {
-					"id": "track-"
-				},
-				"17,11": {
-					"id": "track-"
-				},
-				"17,13": {
-					"id": "switchL7",
-					"maxSpeedPlus": 40
-				},
-				"17,14": {
-					"id": "curveDerL3"
-				},
-				"17,5": {
-					"id": "switchR6",
-					"maxSpeedPlus": 40
-				},
-				"17,6": {
-					"id": "track-"
-				},
-				"17,7": {
-					"id": "track-"
-				},
-				"17,8": {
-					"id": "track-"
-				},
-				"17,9": {
-					"id": "track-"
-				},
-				"18,10": {
-					"id": "track-"
-				},
-				"18,11": {
-					"id": "track-"
-				},
-				"18,12": {
+				"15,2": {
+					"electrified": false,
 					"id": "curve6"
 				},
-				"18,13": {
+				"15,3": {
+					"electrified": false,
 					"id": "track-"
 				},
-				"18,14": {
+				"15,5": {
+					"electrified": false,
+					"id": "curveDerR6",
+					"trackID": "WWT_Iz16"
+				},
+				"15,6": {
+					"id": "track-",
+					"trackID": "WWT_Iz16"
+				},
+				"15,7": {
+					"id": "track-",
+					"trackID": "WWT_Iz15"
+				},
+				"15,8": {
+					"id": "track-",
+					"trackID": "WWT_Iz13"
+				},
+				"15,9": {
+					"id": "track-",
+					"trackID": "WWT_Iz14"
+				},
+				"16,10": {
 					"id": "semaphore7",
-					"semaphoreID": "WWT_Tm14",
-					"semaphoreType": 1
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_F4",
+					"trackID": "WWT_Iz14"
 				},
-				"18,4": {
-					"id": "curveDerR6"
-				},
-				"18,5": {
-					"id": "track-"
-				},
-				"18,6": {
-					"id": "track-"
-				},
-				"18,7": {
-					"id": "track-"
-				},
-				"18,8": {
-					"id": "track-"
-				},
-				"18,9": {
-					"id": "track-"
-				},
-				"19,10": {
+				"16,11": {
 					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_F2",
-					"semaphoreOwnShield": true
+					"semaphoreOwnShield": true,
+					"trackID": "WWT_Iz7"
 				},
-				"19,11": {
+				"16,12": {
 					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_F1",
-					"semaphoreOwnShield": true
+					"semaphoreOwnShield": true,
+					"trackID": "WWT_Iz8"
 				},
-				"19,12": {
+				"16,13": {
 					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_F3",
-					"semaphoreOwnShield": true
+					"semaphoreOwnShield": true,
+					"trackID": "WWT_Iz11"
 				},
-				"19,13": {
+				"16,14": {
 					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_F5",
-					"semaphoreOwnShield": true
+					"semaphoreOwnShield": true,
+					"trackID": "WWT_Iz11"
 				},
-				"19,14": {
-					"id": "platformF"
-				},
-				"19,4": {
+				"16,15": {
+					"electrified": false,
 					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm14",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz10"
+				},
+				"16,2": {
+					"electrified": false,
+					"id": "track-"
+				},
+				"16,3": {
+					"electrified": false,
+					"id": "track-"
+				},
+				"16,5": {
+					"electrified": false,
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
 					"semaphoreID": "WWT_Tm15",
-					"semaphoreType": 1
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz16"
 				},
-				"19,5": {
+				"16,6": {
 					"id": "semaphore7",
-					"semaphoreID": "WWT_F12"
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_F12",
+					"trackID": "WWT_Iz16"
 				},
-				"19,6": {
+				"16,7": {
 					"id": "semaphore7",
-					"semaphoreID": "WWT_F10"
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_F10",
+					"trackID": "WWT_Iz15"
 				},
-				"19,7": {
+				"16,8": {
 					"id": "semaphore7",
-					"semaphoreID": "WWT_F8"
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_F8",
+					"trackID": "WWT_Iz13"
 				},
-				"19,8": {
+				"16,9": {
 					"id": "semaphore7",
-					"semaphoreID": "WWT_F6"
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_F6",
+					"trackID": "WWT_Iz14"
 				},
-				"19,9": {
-					"id": "semaphore7",
-					"semaphoreID": "WWT_F4"
-				},
-				"20,10": {
-					"id": "platformF",
-					"trackID": "WWT_It6M"
-				},
-				"20,11": {
-					"id": "platformF",
-					"trackID": "WWT_It5M"
-				},
-				"20,12": {
-					"id": "platformF",
-					"trackID": "WWT_It3"
-				},
-				"20,13": {
-					"id": "platformF",
-					"trackID": "WWT_It5"
-				},
-				"20,14": {
-					"id": "buffer7"
-				},
-				"20,4": {
-					"id": "platformF",
-					"trackID": "WWT_It14"
-				},
-				"20,5": {
-					"id": "platformF",
-					"trackID": "WWT_It12"
-				},
-				"20,6": {
-					"id": "platformF",
-					"trackID": "WWT_It10"
-				},
-				"20,7": {
-					"id": "platformF",
-					"trackID": "WWT_It8"
-				},
-				"20,8": {
-					"id": "platformF",
-					"trackID": "WWT_It6"
-				},
-				"20,9": {
+				"17,10": {
 					"id": "platformF",
 					"trackID": "WWT_It4"
 				},
-				"21,10": {
+				"17,11": {
 					"id": "platformF",
-					"shuntTarget": true,
-					"trackID": "WWT_It6M",
-					"trainTarget": true
+					"trackID": "WWT_It6M"
 				},
-				"21,11": {
+				"17,12": {
 					"id": "platformF",
-					"shuntTarget": true,
-					"trackID": "WWT_It5M",
-					"trainTarget": true
+					"trackID": "WWT_It5M"
 				},
-				"21,12": {
+				"17,13": {
 					"id": "platformF",
-					"shuntTarget": true,
-					"trackID": "WWT_It3",
-					"trainTarget": true
+					"trackID": "WWT_It3"
 				},
-				"21,13": {
+				"17,14": {
 					"id": "platformF",
-					"shuntTarget": true,
-					"trackID": "WWT_It5",
-					"trainTarget": true
+					"trackID": "WWT_It5"
 				},
-				"21,4": {
+				"17,15": {
+					"electrified": false,
+					"id": "platformF"
+				},
+				"17,2": {
+					"electrified": false,
+					"id": "platformF"
+				},
+				"17,3": {
+					"electrified": false,
+					"id": "platformF"
+				},
+				"17,5": {
+					"electrified": false,
 					"id": "platformF",
-					"shuntTarget": true,
-					"trackID": "WWT_It14",
-					"trainTarget": true
+					"trackID": "WWT_It14"
 				},
-				"21,5": {
+				"17,6": {
 					"id": "platformF",
-					"shuntTarget": true,
-					"trackID": "WWT_It12",
-					"trainTarget": true
+					"trackID": "WWT_It12"
 				},
-				"21,6": {
+				"17,7": {
 					"id": "platformF",
-					"shuntTarget": true,
-					"trackID": "WWT_It10",
-					"trainTarget": true
+					"trackID": "WWT_It10"
 				},
-				"21,7": {
+				"17,8": {
 					"id": "platformF",
-					"shuntTarget": true,
-					"trackID": "WWT_It8",
-					"trainTarget": true
+					"trackID": "WWT_It8"
 				},
-				"21,8": {
+				"17,9": {
 					"id": "platformF",
-					"shuntTarget": true,
-					"trackID": "WWT_It6",
-					"trainTarget": true
+					"trackID": "WWT_It6"
 				},
-				"21,9": {
+				"18,10": {
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "WWT_It4",
 					"trainTarget": true
 				},
-				"22,10": {
+				"18,11": {
 					"id": "platformF",
-					"trackID": "WWT_It6M"
+					"shuntTarget": true,
+					"trackID": "WWT_It6M",
+					"trainTarget": true
 				},
-				"22,11": {
+				"18,12": {
 					"id": "platformF",
-					"trackID": "WWT_It5M"
+					"shuntTarget": true,
+					"trackID": "WWT_It5M",
+					"trainTarget": true
 				},
-				"22,12": {
+				"18,13": {
 					"id": "platformF",
-					"trackID": "WWT_It3"
+					"shuntTarget": true,
+					"trackID": "WWT_It3",
+					"trainTarget": true
 				},
-				"22,13": {
+				"18,14": {
 					"id": "platformF",
-					"trackID": "WWT_It5"
+					"shuntTarget": true,
+					"trackID": "WWT_It5",
+					"trainTarget": true
 				},
-				"22,4": {
+				"18,15": {
+					"electrified": false,
 					"id": "platformF",
+					"shuntTarget": true
+				},
+				"18,2": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"18,3": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"18,5": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true,
 					"trackID": "WWT_It14"
 				},
-				"22,5": {
+				"18,6": {
 					"id": "platformF",
-					"trackID": "WWT_It12"
+					"shuntTarget": true,
+					"trackID": "WWT_It12",
+					"trainTarget": true
 				},
-				"22,6": {
+				"18,7": {
 					"id": "platformF",
-					"trackID": "WWT_It10"
+					"shuntTarget": true,
+					"trackID": "WWT_It10",
+					"trainTarget": true
 				},
-				"22,7": {
+				"18,8": {
 					"id": "platformF",
-					"trackID": "WWT_It8"
+					"shuntTarget": true,
+					"trackID": "WWT_It8",
+					"trainTarget": true
 				},
-				"22,8": {
+				"18,9": {
 					"id": "platformF",
-					"trackID": "WWT_It6"
+					"shuntTarget": true,
+					"trackID": "WWT_It6",
+					"trainTarget": true
 				},
-				"22,9": {
+				"19,10": {
 					"id": "platformF",
 					"trackID": "WWT_It4"
 				},
-				"23,10": {
+				"19,11": {
+					"id": "platformF",
+					"trackID": "WWT_It6M"
+				},
+				"19,12": {
+					"id": "platformF",
+					"trackID": "WWT_It5M"
+				},
+				"19,13": {
+					"id": "platformF",
+					"trackID": "WWT_It3"
+				},
+				"19,14": {
+					"id": "platformF",
+					"trackID": "WWT_It5"
+				},
+				"19,15": {
+					"electrified": false,
+					"id": "platformF"
+				},
+				"19,2": {
+					"electrified": false,
+					"id": "platformF"
+				},
+				"19,3": {
+					"electrified": false,
+					"id": "platformF"
+				},
+				"19,5": {
+					"electrified": false,
+					"id": "platformF",
+					"trackID": "WWT_It14"
+				},
+				"19,6": {
+					"id": "platformF",
+					"trackID": "WWT_It12"
+				},
+				"19,7": {
+					"id": "platformF",
+					"trackID": "WWT_It10"
+				},
+				"19,8": {
+					"id": "platformF",
+					"trackID": "WWT_It8"
+				},
+				"19,9": {
+					"id": "platformF",
+					"trackID": "WWT_It6"
+				},
+				"2,10": {
+					"electrified": false,
+					"id": "arrow-",
+					"trainTarget": true
+				},
+				"2,11": {
+					"id": "arrow7",
+					"trainTarget": true
+				},
+				"2,12": {
+					"id": "arrow3",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"20,10": {
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_G4",
+					"trackID": "WWT_Iz31"
+				},
+				"20,11": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -11698,7 +11873,7 @@
 					"semaphoreOwnShield": true,
 					"trackID": "WWT_Iz45"
 				},
-				"23,11": {
+				"20,12": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -11707,7 +11882,7 @@
 					"semaphoreOwnShield": true,
 					"trackID": "WWT_Iz42"
 				},
-				"23,12": {
+				"20,13": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -11716,7 +11891,7 @@
 					"semaphoreOwnShield": true,
 					"trackID": "WWT_Iz41"
 				},
-				"23,13": {
+				"20,14": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -11725,28 +11900,41 @@
 					"semaphoreOwnShield": true,
 					"trackID": "WWT_Iz41"
 				},
-				"23,4": {
+				"20,15": {
+					"electrified": false,
+					"id": "buffer7"
+				},
+				"20,2": {
+					"electrified": false,
+					"id": "buffer7"
+				},
+				"20,3": {
+					"electrified": false,
+					"id": "buffer7"
+				},
+				"20,5": {
+					"electrified": false,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "WWT_Tm21",
 					"semaphoreType": 1,
 					"trackID": "WWT_Iz37"
 				},
-				"23,5": {
+				"20,6": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreID": "WWT_G12",
 					"trackID": "WWT_Iz35"
 				},
-				"23,6": {
+				"20,7": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreID": "WWT_G10",
 					"trackID": "WWT_Iz33"
 				},
-				"23,7": {
+				"20,8": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -11754,7 +11942,7 @@
 					"semaphoreID": "WWT_G8",
 					"trackID": "WWT_Iz32"
 				},
-				"23,8": {
+				"20,9": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -11762,120 +11950,115 @@
 					"semaphoreID": "WWT_G6",
 					"trackID": "WWT_Iz31"
 				},
-				"23,9": {
-					"id": "semaphore3",
-					"semaphoreAllowShunt": true,
-					"semaphoreAllowSz": true,
-					"semaphoreAllowTrain": true,
-					"semaphoreID": "WWT_G4",
-					"trackID": "WWT_Iz31"
-				},
-				"24,10": {
-					"id": "track-",
-					"trackID": "WWT_Iz45"
-				},
-				"24,11": {
-					"id": "track-",
-					"trackID": "WWT_Iz42"
-				},
-				"24,12": {
-					"id": "track-",
-					"trackID": "WWT_Iz41"
-				},
-				"24,13": {
-					"id": "track-",
-					"trackID": "WWT_Iz41"
-				},
-				"24,4": {
-					"id": "track-",
-					"trackID": "WWT_Iz37"
-				},
-				"24,5": {
-					"id": "track-",
-					"trackID": "WWT_Iz35"
-				},
-				"24,6": {
-					"id": "track-",
-					"trackID": "WWT_Iz33"
-				},
-				"24,7": {
-					"id": "track-",
-					"trackID": "WWT_Iz32"
-				},
-				"24,8": {
-					"id": "track-",
-					"trackID": "WWT_Iz31"
-				},
-				"24,9": {
+				"21,10": {
 					"id": "curve2",
 					"trackID": "WWT_Iz31"
 				},
-				"25,10": {
+				"21,11": {
 					"id": "track-",
 					"trackID": "WWT_Iz45"
 				},
-				"25,11": {
+				"21,12": {
 					"id": "track-",
 					"trackID": "WWT_Iz42"
 				},
-				"25,12": {
+				"21,13": {
 					"id": "track-",
 					"trackID": "WWT_Iz41"
 				},
-				"25,13": {
-					"id": "curve2",
+				"21,14": {
+					"id": "track-",
 					"trackID": "WWT_Iz41"
 				},
-				"25,4": {
+				"21,5": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "WWT_Iz37"
 				},
-				"25,5": {
+				"21,6": {
 					"id": "track-",
 					"trackID": "WWT_Iz35"
 				},
-				"25,6": {
+				"21,7": {
 					"id": "track-",
 					"trackID": "WWT_Iz33"
 				},
-				"25,7": {
+				"21,8": {
 					"id": "track-",
 					"trackID": "WWT_Iz32"
 				},
-				"25,8": {
+				"21,9": {
+					"id": "track-",
+					"trackID": "WWT_Iz31"
+				},
+				"22,11": {
+					"id": "track-",
+					"trackID": "WWT_Iz45"
+				},
+				"22,12": {
+					"id": "track-",
+					"trackID": "WWT_Iz42"
+				},
+				"22,13": {
+					"id": "track-",
+					"trackID": "WWT_Iz41"
+				},
+				"22,14": {
+					"id": "curve2",
+					"trackID": "WWT_Iz41"
+				},
+				"22,5": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWT_Iz37"
+				},
+				"22,6": {
+					"id": "track-",
+					"trackID": "WWT_Iz35"
+				},
+				"22,7": {
+					"id": "track-",
+					"trackID": "WWT_Iz33"
+				},
+				"22,8": {
+					"id": "track-",
+					"trackID": "WWT_Iz32"
+				},
+				"22,9": {
 					"id": "switchR2",
 					"maxSpeedPlus": 40,
 					"switchID": "WOG_WWT31",
 					"trackID": "WWT_Iz31"
 				},
-				"26,10": {
+				"23,11": {
 					"id": "track-",
 					"trackID": "WWT_Iz45"
 				},
-				"26,11": {
+				"23,12": {
 					"id": "track-",
 					"trackID": "WWT_Iz42"
 				},
-				"26,12": {
+				"23,13": {
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
 					"switchID": "WOG_WWT41",
 					"trackID": "WWT_Iz41"
 				},
-				"26,4": {
+				"23,5": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "WWT_Iz37"
 				},
-				"26,5": {
+				"23,6": {
 					"id": "track-",
 					"trackID": "WWT_Iz35"
 				},
-				"26,6": {
+				"23,7": {
 					"id": "track-",
 					"trackID": "WWT_Iz33"
 				},
-				"26,7": {
+				"23,8": {
 					"id": "switchD2",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
@@ -11883,41 +12066,42 @@
 					"switchID": "WOG_WWT32",
 					"trackID": "WWT_Iz32"
 				},
-				"27,10": {
+				"24,11": {
 					"id": "track-",
 					"trackID": "WWT_Iz45"
 				},
-				"27,11": {
+				"24,12": {
 					"id": "track-",
 					"trackID": "WWT_Iz42"
 				},
-				"27,12": {
+				"24,13": {
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "WWT_Iz41"
 				},
-				"27,13": {
-					"id": "arrow-",
+				"24,14": {
+					"id": "arrow7",
 					"trainTarget": true,
 					"warp": "WPd",
-					"warpID": "WPd_N",
-					"warpTargetID": "WWT"
+					"warpID": "WPd_902",
+					"warpTargetID": "WWT_902"
 				},
-				"27,4": {
+				"24,5": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "WWT_Iz37"
 				},
-				"27,5": {
+				"24,6": {
 					"id": "track-",
 					"trackID": "WWT_Iz35"
 				},
-				"27,6": {
+				"24,7": {
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "WOG_WWT33",
 					"trackID": "WWT_Iz33"
 				},
-				"27,7": {
+				"24,8": {
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -11925,87 +12109,94 @@
 					"semaphoreID": "WWT_H",
 					"trackID": "WWT_ItH"
 				},
-				"28,10": {
+				"25,11": {
 					"id": "track-",
 					"trackID": "WWT_Iz45"
 				},
-				"28,11": {
+				"25,12": {
 					"id": "track-",
 					"trackID": "WWT_Iz42"
 				},
-				"28,12": {
+				"25,13": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "WWT_Tm41",
 					"semaphoreType": 1,
 					"trackID": "WWT_Iz43"
 				},
-				"28,13": {
+				"25,14": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
-					"semaphoreID": "WWT_J"
+					"semaphoreID": "WWT_J",
+					"semaphoreOwnShield": true
 				},
-				"28,4": {
+				"25,5": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "WWT_Iz37"
 				},
-				"28,5": {
+				"25,6": {
 					"id": "track-",
 					"trackID": "WWT_Iz35"
 				},
-				"28,6": {
+				"25,7": {
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "WOG_WWT34",
 					"trackID": "WWT_Iz34"
 				},
-				"28,7": {
+				"25,8": {
 					"id": "platformF",
 					"shuntTarget": true
 				},
-				"29,10": {
+				"26,11": {
 					"id": "curve2",
 					"trackID": "WWT_Iz45"
 				},
-				"29,11": {
+				"26,12": {
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
 					"switchID": "WOG_WWT42",
 					"trackID": "WWT_Iz42"
 				},
-				"29,12": {
+				"26,13": {
 					"id": "curve2",
 					"trackID": "WWT_Iz43"
 				},
-				"29,13": {
+				"26,14": {
 					"id": "curve2"
 				},
-				"29,4": {
+				"26,5": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "WWT_Iz37"
 				},
-				"29,5": {
+				"26,6": {
 					"id": "switchR2",
 					"maxSpeedPlus": 40,
 					"switchID": "WOG_WWT35",
 					"trackID": "WWT_Iz35"
 				},
-				"29,6": {
+				"26,7": {
 					"id": "switchDerR7",
 					"maxSpeedPlus": 40,
 					"switchID": "WOG_WWT36",
 					"trackID": "WWT_Iz36"
 				},
-				"29,7": {
+				"26,8": {
 					"id": "curve7"
 				},
-				"30,10": {
+				"27,10": {
+					"id": "curve6",
+					"trackID": "WWT_Iz45"
+				},
+				"27,11": {
 					"id": "curve6",
 					"trackID": "WWT_Iz44"
 				},
-				"30,11": {
+				"27,12": {
 					"id": "switchD2",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
@@ -12013,180 +12204,211 @@
 					"switchID": "WOG_WWT43",
 					"trackID": "WWT_Iz43"
 				},
-				"30,12": {
+				"27,13": {
 					"id": "curve6"
 				},
-				"30,4": {
+				"27,5": {
+					"electrified": false,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "WOG_WWT37",
 					"trackID": "WWT_Iz37"
 				},
-				"30,6": {
+				"27,7": {
 					"id": "track-",
 					"trackID": "WWT_Iz36"
 				},
-				"30,7": {
+				"27,8": {
 					"id": "curve3",
 					"trackID": "WWT_Iz36"
 				},
-				"30,8": {
+				"27,9": {
 					"id": "semaphore4",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "WWT_Tm42",
 					"semaphoreType": 1,
 					"trackID": "WWT_Iz45"
 				},
-				"30,9": {
-					"id": "curve6",
-					"trackID": "WWT_Iz45"
-				},
-				"31,10": {
-					"id": "switchL3",
-					"maxSpeedPlus": 40,
-					"switchID": "WOG_WWT44",
-					"trackID": "WWT_Iz44"
-				},
-				"31,11": {
-					"id": "track-",
-					"trackID": "WWT_Iz43"
-				},
-				"31,12": {
-					"id": "platformF",
-					"shuntTarget": true
-				},
-				"31,4": {
-					"id": "platformF",
-					"shuntTarget": true,
-					"trackID": "WWT_Iz37"
-				},
-				"31,6": {
-					"id": "semaphore7",
-					"semaphoreAllowShunt": true,
-					"semaphoreID": "WWT_Tm23",
-					"semaphoreType": 1,
-					"trackID": "WWT_Iz36"
-				},
-				"31,7": {
-					"id": "semaphore7",
-					"semaphoreAllowShunt": true,
-					"semaphoreID": "WWT_Tm22",
-					"semaphoreType": 1,
-					"trackID": "WWT_Iz36"
-				},
-				"31,9": {
+				"28,10": {
 					"id": "switchD3",
 					"maxSpeedPlus": 40,
 					"switchFlipABCD": true,
 					"switchID": "WOG_WWT45",
 					"trackID": "WWT_Iz45"
 				},
-				"32,10": {
+				"28,11": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT44",
+					"trackID": "WWT_Iz44"
+				},
+				"28,12": {
+					"id": "track-",
+					"trackID": "WWT_Iz43"
+				},
+				"28,13": {
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"28,5": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_Iz37"
+				},
+				"28,7": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm23",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz36"
+				},
+				"28,8": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm22",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz36"
+				},
+				"29,10": {
+					"id": "track-",
+					"trackID": "WWT_Iz45"
+				},
+				"29,11": {
 					"id": "switchD3",
 					"maxSpeedPlus": 40,
 					"switchFlipABCD": true,
 					"switchID": "WOG_WWT46",
 					"trackID": "WWT_Iz46"
 				},
-				"32,11": {
+				"29,12": {
 					"id": "curve7",
 					"trackID": "WWT_Iz47"
 				},
-				"32,12": {
+				"29,13": {
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "WWT_Tm43",
 					"semaphoreType": 1,
 					"trackID": "WWT_Iz47"
 				},
-				"32,4": {
+				"29,5": {
+					"electrified": false,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "WWT_Tm32",
 					"semaphoreType": 1,
 					"trackID": "WWT_Iz37"
 				},
-				"32,6": {
+				"29,7": {
 					"id": "platformF",
 					"shuntTarget": true
 				},
-				"32,7": {
+				"29,8": {
 					"id": "platformF",
 					"shuntTarget": true
 				},
-				"32,9": {
+				"3,10": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_E",
+					"trackID": "WWT_ItE"
+				},
+				"3,11": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_B",
+					"trackID": "WWT_ItB"
+				},
+				"3,12": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_C",
+					"trackID": "WWT_ItC"
+				},
+				"30,10": {
 					"id": "track-",
-					"trackID": "WWT_Iz45"
+					"trackID": "WWT_Iz50"
 				},
-				"33,10": {
+				"30,11": {
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "WOG_WWT48",
 					"trackID": "WWT_Iz48"
 				},
-				"33,11": {
+				"30,12": {
 					"id": "track\\",
 					"trackID": "WWT_Iz49"
 				},
-				"33,12": {
+				"30,13": {
 					"id": "switchD3",
 					"maxSpeedPlus": 40,
 					"switchFlipABCD": true,
 					"switchID": "WOG_WWT47",
 					"trackID": "WWT_Iz47"
 				},
-				"33,3": {
+				"30,4": {
+					"electrified": false,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "WWT_Tm31",
 					"semaphoreType": 1
 				},
-				"33,4": {
+				"30,5": {
+					"electrified": false,
 					"id": "curve2"
 				},
-				"33,6": {
+				"30,7": {
 					"id": "buffer7"
 				},
-				"33,7": {
+				"30,8": {
 					"id": "buffer7"
 				},
-				"33,9": {
-					"id": "track-",
-					"trackID": "WWT_Iz50"
-				},
-				"34,10": {
-					"id": "track-",
-					"trackID": "WWT_Iz48"
-				},
-				"34,12": {
-					"id": "switchR3",
-					"maxSpeedPlus": 40,
-					"switchID": "WOG_WWT49",
-					"trackID": "WWT_Iz49"
-				},
-				"34,13": {
-					"id": "curve3",
-					"trackID": "WWT_ItW"
-				},
-				"34,3": {
-					"id": "switchL3",
-					"maxSpeedPlus": 40,
-					"switchID": "WOG_WWT"
-				},
-				"34,9": {
+				"31,10": {
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "WOG_WWT50",
 					"trackID": "WWT_Iz50"
 				},
-				"35,10": {
+				"31,11": {
+					"id": "track-",
+					"trackID": "WWT_Iz48"
+				},
+				"31,13": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT49",
+					"trackID": "WWT_Iz49"
+				},
+				"31,14": {
+					"id": "curve3",
+					"trackID": "WWT_ItW"
+				},
+				"31,4": {
+					"electrified": false,
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT"
+				},
+				"32,10": {
+					"id": "semaphore7",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm47",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz50"
+				},
+				"32,11": {
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "WWT_Tm46",
 					"semaphoreType": 1,
 					"trackID": "WWT_Iz48"
 				},
-				"35,12": {
+				"32,13": {
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -12194,7 +12416,7 @@
 					"semaphoreID": "WWT_X",
 					"trackID": "WWT_ItX"
 				},
-				"35,13": {
+				"32,14": {
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -12202,61 +12424,64 @@
 					"semaphoreID": "WWT_W",
 					"trackID": "WWT_ItW"
 				},
-				"35,3": {
+				"32,4": {
+					"electrified": false,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "WWT_Tm33",
 					"semaphoreType": 1
 				},
-				"35,9": {
-					"id": "semaphore7",
-					"semaphoreAllowShunt": true,
-					"semaphoreID": "WWT_Tm47",
-					"semaphoreType": 1,
-					"trackID": "WWT_Iz50"
-				},
-				"36,10": {
-					"id": "platformF",
-					"shuntTarget": true,
-					"trackID": "WWT_ItS"
-				},
-				"36,12": {
-					"id": "platformF",
-					"shuntTarget": true,
-					"trainTarget": true
-				},
-				"36,13": {
-					"id": "platformF",
-					"shuntTarget": true,
-					"trainTarget": true
-				},
-				"36,9": {
+				"33,10": {
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "WWT_ItR"
 				},
-				"37,10": {
+				"33,11": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_ItS"
+				},
+				"33,13": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trainTarget": true
+				},
+				"33,14": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trainTarget": true
+				},
+				"34,10": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "WWT_R",
+					"semaphoreOwnShield": true,
+					"trackID": "WWT_ItR"
+				},
+				"34,11": {
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_S",
+					"semaphoreOwnShield": true,
 					"trackID": "WWT_ItS"
 				},
-				"37,12": {
+				"34,13": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_Y",
 					"trackID": "WWT_ItY"
 				},
-				"37,13": {
+				"34,14": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_Z",
 					"trackID": "WWT_ItZ"
 				},
-				"37,14": {
+				"34,15": {
 					"id": "arrow3",
 					"targetW24": true,
 					"trainTarget": true,
@@ -12264,87 +12489,64 @@
 					"warpID": "WAt_N",
 					"warpTargetID": "WWT"
 				},
-				"37,9": {
-					"id": "semaphore7",
-					"semaphoreAllowSz": true,
-					"semaphoreAllowTrain": true,
-					"semaphoreID": "WWT_R",
-					"trackID": "WWT_ItR"
-				},
-				"38,10": {
+				"35,10": {
 					"id": "track-"
 				},
-				"38,12": {
+				"35,11": {
+					"id": "track-"
+				},
+				"35,13": {
 					"id": "track-",
 					"trackID": "WWT_ItY"
 				},
-				"38,13": {
+				"35,14": {
 					"id": "curve7",
 					"trackID": "WWT_ItZ"
 				},
-				"38,14": {
+				"35,15": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_P",
 					"trackID": "WWT_ItP"
 				},
-				"38,9": {
+				"36,10": {
 					"id": "track-"
 				},
-				"39,10": {
+				"36,11": {
 					"id": "track-"
 				},
-				"39,12": {
+				"36,13": {
 					"id": "track-",
 					"trackID": "WWT_ItT"
 				},
-				"39,14": {
+				"36,15": {
 					"id": "switchR3",
 					"maxSpeedPlus": 60,
 					"switchID": "WOG_WWT51",
 					"trackID": "WWT_Iz51"
 				},
-				"39,9": {
+				"37,10": {
 					"id": "track-"
 				},
-				"40,10": {
+				"37,11": {
 					"id": "track-"
 				},
-				"40,12": {
+				"37,13": {
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_T",
 					"trackID": "WWT_ItT"
 				},
-				"40,14": {
+				"37,15": {
 					"id": "semaphore7",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_U",
 					"trackID": "WWT_ItU"
 				},
-				"40,9": {
-					"id": "track-"
-				},
-				"41,10": {
-					"id": "arrow3",
-					"trainTarget": true,
-					"warp": "Rem",
-					"warpID": "Rem",
-					"warpTargetID": "WWT_N"
-				},
-				"41,12": {
-					"id": "arrow7",
-					"targetW24": true,
-					"trainTarget": true
-				},
-				"41,14": {
-					"id": "arrow3",
-					"trainTarget": true
-				},
-				"41,9": {
+				"38,10": {
 					"id": "arrow7",
 					"targetW24": true,
 					"trainTarget": true,
@@ -12352,59 +12554,149 @@
 					"warpID": "Rem_N",
 					"warpTargetID": "WWT"
 				},
+				"38,11": {
+					"id": "arrow3",
+					"trainTarget": true,
+					"warp": "Rem",
+					"warpID": "Rem",
+					"warpTargetID": "WWT_N"
+				},
+				"38,13": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"38,15": {
+					"id": "arrow3",
+					"trainTarget": true
+				},
+				"4,10": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWT_ItE"
+				},
+				"4,11": {
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWT_ItB"
+				},
+				"4,12": {
+					"id": "track-",
+					"trackID": "WWT_ItC"
+				},
 				"5,10": {
-					"id": "arrow7"
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWT_Iz3"
 				},
 				"5,11": {
-					"id": "arrow3"
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm11",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz2"
 				},
-				"6,10": {
-					"id": "semaphore3"
-				},
-				"6,11": {
-					"id": "semaphore3"
-				},
-				"6,9": {
-					"id": "semaphore3"
-				},
-				"7,10": {
-					"id": "platformF"
-				},
-				"7,11": {
-					"id": "track-"
-				},
-				"7,9": {
-					"id": "track-"
-				},
-				"8,10": {
-					"id": "semaphore3"
-				},
-				"8,11": {
+				"5,12": {
 					"id": "switchL7",
-					"maxSpeedPlus": 40
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT1",
+					"trackID": "WWT_Iz1"
 				},
-				"8,8": {
+				"5,9": {
+					"electrified": false,
 					"id": "buffer3"
 				},
+				"6,10": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "WWT_Iz3"
+				},
+				"6,11": {
+					"id": "switchD2",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWT2",
+					"trackID": "WWT_Iz2"
+				},
+				"6,12": {
+					"id": "track-",
+					"trackID": "WWT_Iz1"
+				},
+				"6,9": {
+					"electrified": false,
+					"id": "platformF",
+					"shuntTarget": true
+				},
+				"7,10": {
+					"id": "switchD2",
+					"maxSpeedPlus": 40,
+					"switchFlip": true,
+					"switchFlipABCD": true,
+					"switchID": "WOG_WWT3",
+					"trackID": "WWT_Iz3"
+				},
+				"7,11": {
+					"id": "track-",
+					"trackID": "WWT_Iz2"
+				},
+				"7,12": {
+					"id": "track-",
+					"trackID": "WWT_Iz1"
+				},
+				"7,9": {
+					"electrified": false,
+					"id": "semaphore3",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm12",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz5"
+				},
+				"8,10": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT4",
+					"trackID": "WWT_Iz4"
+				},
+				"8,11": {
+					"id": "track-",
+					"trackID": "WWT_Iz6"
+				},
+				"8,12": {
+					"id": "track-",
+					"trackID": "WWT_Iz8"
+				},
 				"8,9": {
-					"id": "track-"
+					"electrified": false,
+					"id": "switchR2",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT5",
+					"trackID": "WWT_Iz5"
 				},
 				"9,10": {
-					"id": "switchD2",
-					"maxSpeedMinus": 100,
-					"maxSpeedPlus": 40
+					"id": "curve2",
+					"trackID": "WWT_Iz4"
 				},
 				"9,11": {
-					"id": "track-"
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "WOG_WWT6",
+					"trackID": "WWT_Iz6"
+				},
+				"9,12": {
+					"id": "track-",
+					"trackID": "WWT_Iz8"
 				},
 				"9,8": {
-					"id": "platformF"
-				},
-				"9,9": {
-					"id": "track-"
+					"electrified": false,
+					"id": "semaphore6",
+					"semaphoreAllowShunt": true,
+					"semaphoreID": "WWT_Tm13",
+					"semaphoreType": 1,
+					"trackID": "WWT_Iz5"
 				}
 			},
-			"w": 43
+			"w": 39
 		},
 		{
 			"h": 9,

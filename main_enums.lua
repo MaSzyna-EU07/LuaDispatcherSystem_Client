@@ -71,40 +71,45 @@ TileHighlightMode = {
 	SEMAPHORE = 3
 }
 
----@alias TileBackgroundColorEntry {fill: [number, number, number], border: [number, number, number]}
----@type table<string, TileBackgroundColorEntry>
+---@alias TileColorEntry {border: [number, number, number, number?]?, fill: [number, number, number, number?]?}
+
+---@type table<string, TileColorEntry>
 ---@enum TileBackgroundColor
 TileBackgroundColor = {
-	REGULAR = {fill = {0.4, 0.4, 0.4}, border = {0.2, 0.2, 0.2}},
-	OK = {fill = {0.2, 0.8, 0.2}, border = {0.1, 0.4, 0.1}},
-	WARNING = {fill = {1, 1, 0.2}, border = {0.5, 0.5, 0.1}},
-	ERROR = {fill = {1, 0.2, 0.2}, border = {0.5, 0.1, 0.1}}
+	REGULAR = {border = {0.2, 0.2, 0.2}, fill = {0.4, 0.4, 0.4}},
+	OK = {border = {0.1, 0.4, 0.1}, fill = {0.2, 0.8, 0.2}},
+	WARNING = {border = {0.5, 0.5, 0.1}, fill = {1, 1, 0.2}},
+	ERROR = {border = {0.5, 0.1, 0.1}, fill = {1, 0.2, 0.2}},
+	MISSING = {border = {0.5, 0.1, 0.5}, fill = {1, 0.2, 1}}
 }
 
+---@type table<string, TileColorEntry>
 ---@enum TileFrameColor
 TileFrameColor = {
-	HOVER = {1, 1, 1},
-	SELECTION = {0, 1, 0},
-	ACTIVE = {1, 0, 1},
-	ACTIVE_SHUNT = {1, 1, 1},
-	CLICKABLE = {1, 1, 0},
-	RECT_SELECTION = {0, 1, 1},
-	RAILDRAG_AFFECTED = {0, 1, 0},
-	RAILDRAG_CONFLICT = {1, 0, 0}
+	HOVER = {fill = {1, 1, 1, 0.4}},
+	SELECTION = {border = {0, 1, 0}, fill = {0, 1, 0, 0.2}},
+	ACTIVE = {border = {1, 0, 1}, fill = {1, 0, 1, 0.2}},
+	ACTIVE_SHUNT = {border = {1, 1, 1}, fill = {1, 1, 1, 0.2}},
+	CLICKABLE = {border = {1, 1, 0}, fill = {1, 1, 0, 0.2}},
+	RECT_SELECTION = {border = {0, 1, 1}, fill = {0, 1, 1, 0.2}},
+	RAILDRAG_AFFECTED = {border = {0, 1, 0}, fill = {0, 1, 0, 0.2}},
+	RAILDRAG_CONFLICT = {border = {1, 0, 0}, fill = {1, 0, 0, 0.2}}
 }
 
 ---@enum NotificationColor
 NotificationColor = {
 	GREEN = {0.15, 0.6, 0.05},
 	RED = {0.9, 0.1, 0},
-	GRAY = {0.4, 0.4, 0.4}
+	GRAY = {0.4, 0.4, 0.4},
+	ORANGE = {0.9, 0.5, 0}
 }
 
 ---@enum NotificationColorID
 NotificationColorID = {
 	NotificationColor.GREEN,
 	NotificationColor.RED,
-	NotificationColor.GRAY
+	NotificationColor.GRAY,
+	NotificationColor.ORANGE
 }
 
 ---@enum PickerMode
