@@ -47,8 +47,8 @@ function Station:new(name, shortcut)
 	---@alias TileHighlight {x: integer, y: integer, type: integer, t: number, delQueue: boolean?}
 	---@type TileHighlight[]
 	self.tileHighlights = {}
-	---@type TileColorEntry[][]
-	self.tileFrameColors = _Utils.tableNewMultidim(nil, self.w, self.h)
+	---@type table<Tile, TileColorEntry>
+	self.tileFrameColors = {}
 
 	self.canvas = nil
 	self:generateCanvas()
@@ -249,12 +249,6 @@ function Station:recalculateTilePositions()
 	end
 end
 
----It does what it says on the tin.
----@private
-function Station:recalculateTileFrameColorCacheSize()
-	self.tileFrameColors = _Utils.tableNewMultidim(nil, self.w, self.h)
-end
-
 ---Returns the currently hovered tile, if any.
 ---@return Tile?
 function Station:getHoveredTile()
@@ -440,7 +434,6 @@ end
 ---@private
 function Station:afterSizeChange()
 	self:recalculateTilePositions()
-	self:recalculateTileFrameColorCacheSize()
 	self:generateCanvas()
 end
 
@@ -534,12 +527,21 @@ function Station:getTileTooltip(tile)
 	local lines = {}
 	if tile:isTrack() and tile.trackID then
 		table.insert(lines, "Tor: " .. tile.trackID)
+		if tile:isTrackOccupied() then
+			table.insert(lines, "    Zajęty")
+		end
+		if tile:isTrackReserved() then
+			table.insert(lines, "    Zarezerwowany")
+		end
 	end
 	if tile:isSwitch() and tile.switchID then
 		table.insert(lines, "Rozjazd: " .. tile.switchID)
 	end
 	if tile:isSemaphore() and tile.semaphoreID then
 		table.insert(lines, "Semafor: " .. tile.semaphoreID)
+	end
+	if tile:isBlockadeGenerator() and tile.blockadeID then
+		table.insert(lines, "Blokada: " .. tile.blockadeID)
 	end
 	if tile.warp then
 		local station = _Project:getStation(tile.warp)
@@ -869,12 +871,12 @@ function Station:draw()
 	love.graphics.setCanvas(self.canvas)
 	self:drawBackground()
 	self:drawTileBackgrounds()
-	self:drawSizeToolHover()
-	self:drawRailToolHover()
 	self:drawTiles()
 	self:drawTileFrameBackgrounds()
 	self:drawTileFrames()
 	self:drawRectSelection()
+	self:drawSizeToolHover()
+	self:drawRailToolHover()
 	self:drawTileGhost()
 	self:drawTileHighlights()
 	love.graphics.setCanvas()
@@ -1083,23 +1085,19 @@ end
 ---@param tile Tile The tile for which to change the frame color.
 ---@param color TileColorEntry The frame color to be applied.
 function Station:setTileFrameColor(tile, color)
-	self.tileFrameColors[tile.x][tile.y] = color
+	self.tileFrameColors[tile] = color
 end
 
 ---Returns the frame color for the specified tile, or `nil` if the tile has no frame.
 ---@param tile Tile The tile for which to change the frame color.
 ---@return TileColorEntry?
 function Station:getTileFrameColor(tile)
-	return self.tileFrameColors[tile.x][tile.y]
+	return self.tileFrameColors[tile]
 end
 
 ---Resets the tile frame colors.
 function Station:resetTileFrameColors()
-	for x = 1, self.w do
-		for y = 1, self.h do
-			self.tileFrameColors[x][y] = nil
-		end
-	end
+	_Utils.emptyTable(self.tileFrameColors)
 end
 
 ---Sets the frame color for all selected tiles.

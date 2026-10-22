@@ -337,7 +337,9 @@ function Picker:mousepressed(x, y, button)
 end
 
 function Picker:wheelmoved(x, y)
-	self:rotateSelection(-y)
+	if not _Utils.isCtrlPressed() then
+		self:rotateSelection(-y)
+	end
 end
 
 return Picker
