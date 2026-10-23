@@ -155,6 +155,10 @@ function Project:keypressed(key)
 	if station then
 		station:keypressed(key)
 	end
+
+	if _Utils.isCtrlPressed() and key == "s" then
+		_Commands:saveProject(self)
+	end
 end
 
 function Project:mousepressed(x, y, button)

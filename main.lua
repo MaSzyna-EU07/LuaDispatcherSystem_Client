@@ -4,6 +4,7 @@ _V = require("vectorutils")
 _Com = require("communication")
 local Settings = require("Settings")
 local Objects = require("Objects")
+local Commands = require("Commands")
 local UI = require("UI")
 local Tooltip = require("Tooltip")
 local Notifications = require("Notifications")
@@ -20,6 +21,7 @@ _Font = love.graphics.newFont("data/dejavusans.ttf", 12)
 
 _Settings = Settings()
 _Obj = Objects()
+_Commands = Commands()
 _UI = UI()
 _Tooltip = Tooltip()
 _Notifications = Notifications()
@@ -228,7 +230,7 @@ function love.keypressed(key)
 
 	-- Spawn a trainset contained in the clipboard when Ctrl+V is pressed.
 	-- TODO: Contextualize this cute workflow somehow so that it remains cute while not running unnecessarily.
-	if key == "v" and love.keyboard.isDown("lctrl", "rctrl") then
+	if _Utils.isCtrlPressed() and key == "v" then
 		_Com.sendCommand("st " .. _Utils.strJoin(_Utils.strSplit(love.system.getClipboardText(), "\n"), " "))
 		_Notifications:post("Wyslano trainset", NotificationColor.GREEN)
 	end

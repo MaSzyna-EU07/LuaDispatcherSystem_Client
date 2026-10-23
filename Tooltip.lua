@@ -53,25 +53,22 @@ function Tooltip:draw()
     x, y = math.floor(x - w * self.anchorX), math.floor(y - h * self.anchorY)
     -- Don't draw outside the screen
     x, y = _Utils.clamp(x, 0, _WWIDTH - w), _Utils.clamp(y, 0, _WHEIGHT - h)
-    --love.graphics.setColor(0, 0, 0, 0.5)
-    --love.graphics.rectangle("fill", x + self.shadowOffset, y + self.shadowOffset, w, h)
-    --love.graphics.setColor(0.4, 0, 0.8, 0.8)
-    --love.graphics.setColor(0, 0.5, 0.25, 0.8)
+    -- Background
     love.graphics.setColor(0.2, 0.2, 0.2, 0.8)
     love.graphics.rectangle("fill", x, y, w, h)
+    -- Border
     love.graphics.setLineWidth(2)
-    --love.graphics.setColor(0.25, 0, 0.5, 1)
-    --love.graphics.setColor(0, 0.2, 0.1, 1)
     love.graphics.setColor(0.1, 0.1, 0.1, 1)
     love.graphics.rectangle("line", x, y, w, h)
+    -- Text
     love.graphics.setFont(_Font)
     love.graphics.setColor(0, 0, 0, 1)
     love.graphics.print(self.text, x + self.marginX + self.shadowOffset, y + self.marginY + self.shadowOffset)
     love.graphics.setColor(1, 1, 1)
     love.graphics.print(self.text, x + self.marginX, y + self.marginY)
-
-    love.graphics.setColor(1, 1, 0)
-    love.graphics.rectangle("fill", self.x - 1, self.y - 1, 3, 3)
+    -- Anchor
+    --love.graphics.setColor(1, 1, 0)
+    --love.graphics.rectangle("fill", self.x - 1, self.y - 1, 3, 3)
 end
 
 return Tooltip

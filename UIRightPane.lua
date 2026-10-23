@@ -262,6 +262,9 @@ end
 ---@param tiles TileList The list of tiles for which to set the input values.
 function UIRightPane:setValuesForTiles(tiles)
 	self:resetValues()
+	if tiles:isEmpty() then
+		return
+	end
 	self:addTilesInfo(tiles)
 	-- Spawn appropriate sections for the tile
 	if tiles:hasTrackTile() or self.ui.showAllTileProperties then

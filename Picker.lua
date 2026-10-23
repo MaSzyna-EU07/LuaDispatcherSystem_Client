@@ -81,7 +81,7 @@ function Picker:new()
 
 	-- If `TILE`, a tile is selected in the picker. Otherwise, a button is pressed, indicating a mode.
 	---@type PickerMode
-	self.mode = PickerMode.TILE
+	self.mode = PickerMode.PROPERTIES
 
 	local highlightTileX = {12, 13, 14}
 	local highlightActions = {

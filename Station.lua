@@ -880,6 +880,7 @@ function Station:draw()
 	love.graphics.setCanvas()
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.draw(self.canvas, self.x, self.y, 0, _Settings.scale)
+	self:drawTileTabTooltips()
 end
 
 ---Draws the Station's background.
@@ -1030,6 +1031,27 @@ function Station:drawTileHighlights()
 		local x, y = self:coordsToCanvasPos(highlight.x, highlight.y)
 		love.graphics.setColor(1, 1, 1, _Utils.mapc(1, 0, 0, 0.4, highlight.t))
 		love.graphics.rectangle("fill", x, y, self.TILE_SIZE, self.TILE_SIZE)
+	end
+end
+
+function Station:drawTileTabTooltips()
+	if not love.keyboard.isDown("tab") then
+		return
+	end
+	for x = 1, self.w do
+		for y = 1, self.h do
+			local tile = self:assertGetTile(x, y)
+			if tile:isSemaphore() and tile.semaphoreID then
+				local id = _Utils.strSplit(tile.semaphoreID, "_")
+				-- TODO: This tooltip drawing code is EXTREMELY ROUGH.
+				-- Do something about that. Either spawn tooltips when Tab is pressed or make tooltip drawing a global routine.
+				-- Or maybe in the UI class?
+				_Tooltip:setPos(self:coordsToPos(x + 0.5, y + 0.5))
+				_Tooltip:setAnchor(0.5, 0.5)
+				_Tooltip:setText(id[#id])
+				_Tooltip:draw()
+			end
+		end
 	end
 end
 

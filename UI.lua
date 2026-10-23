@@ -371,7 +371,10 @@ function UI:keypressed(key)
 	gui:keypress(key)
 	if key == "f11" then
 		self.showAllTileProperties = not self.showAllTileProperties
-		-- TODO: Refresh the pane
+		local station = _Project:getCurrentStation()
+		if station then
+			self.rightPane:setValuesForTiles(station.selectedTiles)
+		end
 	end
 end
 

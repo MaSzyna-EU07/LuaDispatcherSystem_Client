@@ -16,8 +16,7 @@ function UITopPane:new(ui)
 end
 
 function UITopPane:saveProject()
-	_Project:save()
-	_Project:sync()
+	_Commands:saveProject(_Project)
 end
 
 function UITopPane:loadProject()
@@ -27,7 +26,7 @@ end
 function UITopPane:syncStation()
 	local station = _Project:getCurrentStation()
 	if station then
-		station:sync(true)
+		_Commands:syncStation(station)
 	end
 end
 
