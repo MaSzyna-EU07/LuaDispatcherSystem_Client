@@ -27,14 +27,19 @@ function UIRightPane:new(ui)
 	self:update()
 end
 
+function UIRightPane:update()
+	local station = _Project:getCurrentStation()
+	self.header.label = string.format("Stacja: %s", station and station:getFullName() or "(brak)")
+end
+
 ---Adds a header to the property list.
 ---@param name string Header contents.
 ---@param color [number, number, number]? Header's background color, accent color by default.
 function UIRightPane:addHeader(name, color)
-	local text = "  "
+	local text = "  " .. name
 	local chars = _Utils.strSplitChars(name)
 	for i, char in ipairs(chars) do
-		text = text .. " " .. char
+		--text = text .. " " .. char
 	end
 	local header = self.ui:addPane("right", nil, nil, 0, self.uiGenY, 14, 1)
 	local headerLabel = self.ui:addLabel("right", nil, text, 0, self.uiGenY, 14, 1)
@@ -42,6 +47,23 @@ function UIRightPane:addHeader(name, color)
 	table.insert(self.headers, header)
 	table.insert(self.headers, headerLabel)
 	self.uiGenY = self.uiGenY + 1
+end
+
+---Adds tile information to the property list.
+---@param tiles TileList The tiles for which the information should be provided.
+function UIRightPane:addTilesInfo(tiles)
+	if tiles:size() == 0 then
+		return
+	end
+	if tiles:size() == 1 then
+		local tile = assert(tiles:get(1))
+		self:addHeader(string.format("Kostka: (%s, %s) [%s]", tile.x, tile.y, tile.id))
+	else
+		self:addHeader(string.format("Zaznaczono %s kostek", tiles:size()))
+	end
+
+	--self.widgets.info1 = self.ui:addLabel("right", nil, "blabla", 0, self.uiGenY, 10, 1)
+	--self.uiGenY = self.uiGenY + 1
 end
 
 ---Adds track settings to the property list.
@@ -197,67 +219,98 @@ function UIRightPane:removeAllSettings()
 	self.uiGenY = 4
 end
 
-function UIRightPane:update()
-	local station = _Project:getCurrentStation()
-	self.header.label = string.format("Stacja: %s", station and station:getFullName() or "(brak)")
-end
-
 ---Resets all property inputs to their default values.
 function UIRightPane:resetValues()
 	self:removeAllSettings()
 end
 
----Sets all property inputs to values from the specified tile.
----@param tile Tile The tile for which to set the input values.
-function UIRightPane:setValuesForTile(tile)
+---Prepends a value for an input widget.
+---@param widget any The UI element to be changed the value for.
+---@param tiles TileList The list of tiles to fetch the data from.
+---@param field string Field name as it is in the tile data.
+---@param fieldType "boolean"|"string"|"speed"|"shortSpeed"|"next"|"semaphoreType" The value will be handled differently depending on this type.
+function UIRightPane:prependValue(widget, tiles, field, fieldType)
+	if tiles:isEmpty() then
+		return
+	end
+	local value = tiles:get(1)[field]
+	for i = 2, tiles:size() do
+		local newValue = tiles:get(i)[field]
+		if newValue ~= value then
+			-- Consensus broken - prepend ... and bail out...
+			-- TODO: After switch to another UI library, the checkbox should be "half-checked"
+			widget.value = fieldType ~= "boolean" and "..." or false
+			return
+		end
+	end
+	if fieldType == "boolean" then
+		widget.value = value
+	elseif fieldType == "string" then
+		widget.value = value or ""
+	elseif fieldType == "speed" then
+		widget.value = value ~= math.huge and tostring(value) or ""
+	elseif fieldType == "shortSpeed" then
+		widget.value = value and self:shortSpeedToText(value) or ""
+	elseif fieldType == "next" then
+		widget.value = value and self:nextToText(value) or ""
+	elseif fieldType == "semaphoreType" then
+		widget.value = value and tostring(value) or "0"
+	end
+end
+
+---Sets all property inputs to values from the specified tiles.
+---@param tiles TileList The list of tiles for which to set the input values.
+function UIRightPane:setValuesForTiles(tiles)
+	self:resetValues()
+	self:addTilesInfo(tiles)
 	-- Spawn appropriate sections for the tile
-	if tile:isTrack() or self.ui.showAllTileProperties then
+	if tiles:hasTrackTile() or self.ui.showAllTileProperties then
 		self:addTrackSettings()
-		self.widgets.trackID.value = tile.trackID or ""
-		self.widgets.electrified2.value = tile.electrified
-		self.widgets.trainTarget.value = tile.trainTarget
-		self.widgets.shuntTarget.value = tile.shuntTarget
-		self.widgets.forbidTrain.value = tile.forbidTrain
-		self.widgets.forbidShunt.value = tile.forbidShunt
-		self.widgets.speed.value = tile.maxSpeed ~= math.huge and tostring(tile.maxSpeed) or ""
-		self.widgets.itineraryEndID.value = tile.itineraryEndID or ""
-		self.widgets.targetW24.value = tile.targetW24
+		self:prependValue(self.widgets.trackID, tiles, "trackID", "string")
+		self:prependValue(self.widgets.electrified2, tiles, "electrified", "boolean")
+		self:prependValue(self.widgets.trainTarget, tiles, "trainTarget", "boolean")
+		self:prependValue(self.widgets.shuntTarget, tiles, "shuntTarget", "boolean")
+		self:prependValue(self.widgets.forbidTrain, tiles, "forbidTrain", "boolean")
+		self:prependValue(self.widgets.forbidShunt, tiles, "forbidShunt", "boolean")
+		self:prependValue(self.widgets.speed, tiles, "maxSpeed", "speed")
+		self:prependValue(self.widgets.itineraryEndID, tiles, "itineraryEndID", "string")
+		self:prependValue(self.widgets.targetW24, tiles, "targetW24", "boolean")
 	end
-	if tile:isSwitch() or self.ui.showAllTileProperties then
+	if tiles:hasSwitchTile() or self.ui.showAllTileProperties then
 		self:addSwitchSettings()
-		self.widgets.switchID.value = tile.switchID or ""
-		self.widgets.switchFlip.value = tile.switchFlip
-		self.widgets.switchFlipABCD.value = tile.switchFlipABCD
-		self.widgets.speedPlus.value = tile.maxSpeedPlus ~= math.huge and tostring(tile.maxSpeedPlus) or ""
-		self.widgets.speedMinus.value = tile.maxSpeedMinus ~= math.huge and tostring(tile.maxSpeedMinus) or ""
+		self:prependValue(self.widgets.switchID, tiles, "switchID", "string")
+		self:prependValue(self.widgets.switchFlip, tiles, "switchFlip", "boolean")
+		self:prependValue(self.widgets.switchFlipABCD, tiles, "switchFlipABCD", "boolean")
+		self:prependValue(self.widgets.speedPlus, tiles, "maxSpeedPlus", "speed")
+		self:prependValue(self.widgets.speedMinus, tiles, "maxSpeedMinus", "speed")
 	end
-	if tile:isSemaphore() or self.ui.showAllTileProperties then
+	if tiles:hasSemaphoreTile() or self.ui.showAllTileProperties then
 		self:addSemaphoreSettings()
-		self.widgets.semaphoreID.value = tile.semaphoreID or ""
-		self.widgets.semaphoreType.value = tile:isSemaphore() and (tile.semaphoreType and tostring(tile.semaphoreType) or "0") or ""
-		self.widgets.semaphoreNoW24.value = tile.semaphoreNoW24
-		self.widgets.semaphoreShortSpeed.value = tile.semaphoreShortSpeed and self:shortSpeedToText(tile.semaphoreShortSpeed) or ""
-		self.widgets.semaphoreAllowTrain.value = tile.semaphoreAllowTrain
-		self.widgets.semaphoreAllowShunt.value = tile.semaphoreAllowShunt
-		self.widgets.semaphoreAllowSz.value = tile.semaphoreAllowSz
-		self.widgets.semaphoreShape.value = tile.semaphoreShape
-		self.widgets.semaphoreFourPhase.value = tile.semaphoreFourPhase
-		self.widgets.semaphoreNoDanger.value = tile.semaphoreNoDanger
-		self.widgets.semaphoreOwnShield.value = tile.semaphoreOwnShield
-		self.widgets.semaphoreNext.value = tile.semaphoreNext and self:nextToText(tile.semaphoreNext) or ""
+		self:prependValue(self.widgets.semaphoreID, tiles, "semaphoreID", "string")
+		self:prependValue(self.widgets.semaphoreType, tiles, "semaphoreType", "semaphoreType")
+		self:prependValue(self.widgets.semaphoreNoW24, tiles, "semaphoreNoW24", "boolean")
+		self:prependValue(self.widgets.semaphoreShortSpeed, tiles, "semaphoreShortSpeed", "shortSpeed")
+		self:prependValue(self.widgets.semaphoreAllowTrain, tiles, "semaphoreAllowTrain", "boolean")
+		self:prependValue(self.widgets.semaphoreAllowShunt, tiles, "semaphoreAllowShunt", "boolean")
+		self:prependValue(self.widgets.semaphoreAllowSz, tiles, "semaphoreAllowSz", "boolean")
+		self:prependValue(self.widgets.semaphoreShape, tiles, "semaphoreShape", "boolean")
+		self:prependValue(self.widgets.semaphoreFourPhase, tiles, "semaphoreFourPhase", "boolean")
+		self:prependValue(self.widgets.semaphoreNoDanger, tiles, "semaphoreNoDanger", "boolean")
+		self:prependValue(self.widgets.semaphoreOwnShield, tiles, "semaphoreOwnShield", "boolean")
+		self:prependValue(self.widgets.semaphoreNext, tiles, "semaphoreNext", "next")
 	end
-	if tile:isExitPoint() or self.ui.showAllTileProperties then
+	if tiles:hasExitPointTile() or self.ui.showAllTileProperties then
 		self:addWarpSettings()
-		self.widgets.warpID.value = tile.warpID or ""
-		self.widgets.warp.value = tile.warp or ""
-		self.widgets.warpTargetID.value = tile.warpTargetID or ""
+		self:prependValue(self.widgets.warpID, tiles, "warpID", "string")
+		self:prependValue(self.widgets.warp, tiles, "warp", "string")
+		self:prependValue(self.widgets.warpTargetID, tiles, "warpTargetID", "string")
 	end
-	if tile:isBlockadeGenerator() or self.ui.showAllTileProperties then
+	if tiles:hasBlockadeGeneratorTile() or self.ui.showAllTileProperties then
 		self:addBlockadeSettings()
-		self.widgets.blockadeID.value = tile.blockadeID or ""
+		self:prependValue(self.widgets.blockadeID, tiles, "blockadeID", "string")
 	end
 	self:addMiscSettings()
-	self.widgets.command.value = tile.command or ""
+	self:prependValue(self.widgets.command, tiles, "command", "string")
 end
 
 ---Turns short speed data into text format.

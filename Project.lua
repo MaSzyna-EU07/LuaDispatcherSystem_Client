@@ -29,6 +29,18 @@ function Project:update(dt)
 	end
 end
 
+---Returns the path to the project file.
+---@return string
+function Project:getSavePath()
+	return "projects/" .. self.name .. ".json"
+end
+
+---Returns the path to the project file on the server side.
+---@return string
+function Project:getServerSavePath()
+	return _Settings.simPath .. "scenery/luascript/" .. self.name .. ".json"
+end
+
 ---Returns the current station, or `nil` if it doesn't exist or isn't selected.
 ---@param shortcut string? The station shortcut.
 ---@return Station?
@@ -188,14 +200,13 @@ end
 ---Saves this project under the specified name.
 ---@param name string? The project name to be saved as. If not specified, the current name will be used.
 function Project:save(name)
-	name = name or self.name
-	if not name then
+	self.name = name or self.name
+	if not self.name then
 		-- Cannot save a project if it has no name...
 		return
 	end
-	self.name = name
 	self.unsaved = false
-	_Utils.saveJson("projects/" .. name .. ".json", self:serialize())
+	_Utils.saveJson(self:getSavePath(), self:serialize())
 	_Notifications:post("Zapisano projekt!")
 end
 
@@ -206,19 +217,19 @@ function Project:export()
 		return
 	end
 	self.synced = true
-	_Utils.saveJson(_Settings.simPath .. "scenery/luascript/" .. self.name .. "_proj.json", self:serialize())
+	_Utils.saveJson(self:getServerSavePath(), self:serialize())
 	_Notifications:post("Wyeksportowano projekt!")
 end
 
 ---Loads a project from the specified name.
 ---@param name string The project name to be loaded from.
 function Project:load(name)
-	local data = _Utils.loadJson("projects/" .. name .. ".json")
+	self.name = name
+	local data = _Utils.loadJson(self:getSavePath())
 	if not data then
 		_Notifications:post("Nie można załadować projektu...", NotificationColor.RED)
 		return
 	end
-	self.name = name
 	self:deserialize(data)
 	self:setCurrentStation(self.stationIndex[1] and self.stationIndex[1].shortcut)
 end
@@ -247,6 +258,7 @@ function Project:deserialize(t)
 	self.stations = {}
 	if t.version == 5 then
 		for shortcut, station in pairs(t.stations) do
+			assert(station.shortcut == shortcut, "Shortcut mismatch in file " .. self:getSavePath())
 			self.stations[shortcut] = Station(station)
 		end
 		for i, shortcut in ipairs(t.stationIndex) do

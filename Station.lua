@@ -1,5 +1,6 @@
 local class = require "class"
 local Tile = require("Tile")
+local TileList = require("TileList")
 
 ---@class Station : Class
 ---@overload fun(name, shortcut): Station
@@ -34,8 +35,7 @@ function Station:new(name, shortcut)
 	self.hoverPartX, self.hoverPartY = nil, nil
 	self.hoverLineX, self.hoverLineY = nil, nil
 	self.hoverRailX, self.hoverRailY = nil, nil
-	---@type Tile[]
-	self.selectedTiles = {}
+	self.selectedTiles = TileList()
 	self.dragX, self.dragY = nil, nil
 	self.railToolDragX, self.railToolDragY = nil, nil
 	self.railToolDragEndX, self.railToolDragEndY = nil, nil
@@ -266,19 +266,19 @@ end
 ---@param y integer Y coordinate of the tile.
 ---@return boolean
 function Station:isTileSelected(x, y)
-	return _Utils.isValueInTable(self.selectedTiles, self:getTile(x, y))
+	return self.selectedTiles:contains(self:assertGetTile(x, y))
 end
 
 ---Returns whether exactly one tile is selected.
 ---@return boolean
 function Station:isSingleSelecting()
-	return #self.selectedTiles == 1
+	return self.selectedTiles:size() == 1
 end
 
 ---Returns whether two or more tiles are selected.
 ---@return boolean
 function Station:isMultiSelecting()
-	return #self.selectedTiles >= 2
+	return self.selectedTiles:size() >= 2
 end
 
 ---Selects a tile at provided coordinates, if it is not selected yet.
@@ -289,24 +289,22 @@ function Station:selectTile(x, y)
 		return
 	end
 	local tile = self:assertGetTile(x, y)
-	table.insert(self.selectedTiles, tile)
-	_UI:onTileSelected(tile)
+	self.selectedTiles:insert(tile)
+	_UI:onSelectedTilesChanged(self.selectedTiles)
 end
 
 ---Unselects a tile at provided coordinates, if it is currently selected.
 ---@param x integer X coordinate of the tile.
 ---@param y integer Y coordinate of the tile.
 function Station:unselectTile(x, y)
-	_Utils.iTableRemoveFirstValue(self.selectedTiles, self:getTile(x, y))
-	if _Utils.tableIsEmpty(self.selectedTiles) then
-		_UI:onAllTilesUnselected()
-	end
+	self.selectedTiles:removeFirst(self:assertGetTile(x, y))
+	_UI:onSelectedTilesChanged(self.selectedTiles)
 end
 
 ---Unselects all tiles.
 function Station:unselectAllTiles()
-	_Utils.emptyTable(self.selectedTiles)
-	_UI:onAllTilesUnselected()
+	self.selectedTiles:empty()
+	_UI:onSelectedTilesChanged(self.selectedTiles)
 end
 
 ---Moves a single tile selection by provided amount of tiles.
@@ -316,10 +314,10 @@ function Station:moveSingleSelection(dx, dy)
 	if not self:isSingleSelecting() then
 		return
 	end
-	local ox, oy = self.selectedTiles[1].x, self.selectedTiles[1].y
-	local x, y = ox + dx, oy + dy
+	local tile = assert(self.selectedTiles:get(1))
+	local x, y = tile.x + dx, tile.y + dy
 	if self:getTile(x, y) then
-		self:unselectTile(ox, oy)
+		self:unselectTile(tile.x, tile.y)
 		self:selectTile(x, y)
 	end
 end
@@ -335,15 +333,15 @@ local TILE_SORT_FUNCTIONS = {
 ---If tiles are moving onto another tile, that tile is destroyed.
 ---If any of the moving tiles move outside of the schematic, they are destroyed.
 ---All empty spaces are replaced with empty tiles.
----@param tiles Tile[] The list of tiles to be moved up.
+---@param tiles TileList The list of tiles to be moved up.
 ---@param dx integer Amount of tiles to move horizontally.
 ---@param dy integer Amount of tiles to move vertically.
 function Station:moveTiles(tiles, dx, dy)
 	-- Copy and sort the list.
-	tiles = _Utils.copyTable(tiles)
-	table.sort(tiles, TILE_SORT_FUNCTIONS[dx > 0 and "xDec" or (dx < 0 and "xInc" or (dy > 0 and "yDec" or "yInc"))])
+	tiles = tiles:copy()
+	tiles:sort(TILE_SORT_FUNCTIONS[dx > 0 and "xDec" or (dx < 0 and "xInc" or (dy > 0 and "yDec" or "yInc"))])
 	-- Move each tile and replace the starting tile with an empty tile.
-	for i, tile in ipairs(tiles) do
+	for i, tile in ipairs(tiles:getItems()) do
 		local x, y = tile.x, tile.y
 		if self:isTileInBounds(x + dx, y + dy) then
 			self:setTile(x + dx, y + dy, tile, true)
@@ -362,9 +360,7 @@ end
 ---Executes a function for each selected tile.
 ---@param f fun(tile: Tile) The function to be executed.
 function Station:forEachSelectedTile(f)
-	for i, tile in ipairs(self.selectedTiles) do
-		f(tile)
-	end
+	self.selectedTiles:forEachItem(f)
 end
 
 ---Briefly highlights the given tile.
@@ -494,6 +490,7 @@ function Station:confirmRailToolDrag()
 	for i, tile in ipairs(tiles) do
 		if tile.newID then
 			tile.tile.id = tile.newID
+			self:markUnsaved()
 		end
 	end
 end
@@ -651,6 +648,7 @@ function Station:handleLeftUnclick()
 						tile.electrified = _Picker.mode == PickerMode.ELECTRIFY
 					end
 				end
+				self:markUnsaved()
 			end
 			self.dragX, self.dragY = nil, nil
 		end
@@ -1103,7 +1101,7 @@ end
 ---Sets the frame color for all selected tiles.
 ---@private
 function Station:drawFrameSelection()
-	for i, tile in ipairs(self.selectedTiles) do
+	for i, tile in ipairs(self.selectedTiles:getItems()) do
 		self:setTileFrameColor(tile, TileFrameColor.SELECTION)
 	end
 end

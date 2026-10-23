@@ -25,8 +25,8 @@ function Tile:new(station, x, y)
 	self.switchFlipABCD = false -- Whether the double switch's sides are flipped (`ab` is on the right side, `cd` is on the left side).
 	---@type string?
 	self.semaphoreID = nil -- Semaphore ID for this tile.
-	---@type SemaphoreType?
-	self.semaphoreType = nil -- Semaphore type for this tile.
+	---@type SemaphoreType
+	self.semaphoreType = SemaphoreType.SEM -- Semaphore type for this tile.
 	self.semaphoreAllowTrain = false -- Whether this tile's semaphore can display a clear signal for non-shunting trains.
 	self.semaphoreAllowShunt = false -- Whether this tile's semaphore can display a shunting signal.
 	self.semaphoreAllowSz = false -- Whether this tile's semaphore can display an Sz signal.
@@ -502,7 +502,7 @@ function Tile:serialize()
 		switchFlip = self.switchFlip or nil,
 		switchFlipABCD = self.switchFlipABCD or nil,
 		semaphoreID = self.semaphoreID,
-		semaphoreType = self:isSemaphore() and (self.semaphoreType ~= SemaphoreType.SEM and self.semaphoreType or nil) or nil,
+		semaphoreType = self.semaphoreType ~= SemaphoreType.SEM and self.semaphoreType or nil,
 		semaphoreAllowTrain = self.semaphoreAllowTrain or nil,
 		semaphoreAllowShunt = self.semaphoreAllowShunt or nil,
 		semaphoreAllowSz = self.semaphoreAllowSz or nil,
@@ -548,7 +548,7 @@ function Tile:deserialize(t)
 	self.switchFlip = t.switchFlip == true
 	self.switchFlipABCD = t.switchFlipABCD == true
 	self.semaphoreID = t.semaphoreID
-	self.semaphoreType = t.semaphoreID and (t.semaphoreType or SemaphoreType.SEM) or nil
+	self.semaphoreType = t.semaphoreType or SemaphoreType.SEM
 	self.semaphoreAllowTrain = t.semaphoreAllowTrain == true
 	self.semaphoreAllowShunt = t.semaphoreAllowShunt == true
 	self.semaphoreAllowSz = t.semaphoreAllowSz == true

@@ -340,16 +340,10 @@ end
 ---------------- I N T E R N A L   C A L L B A C K S ---------------
 --################################################################--
 
----Executed when in the Station a tile is selected.
----@param tile Tile The tile that has just been selected.
-function UI:onTileSelected(tile)
-	self.rightPane:resetValues()
-	self.rightPane:setValuesForTile(tile)
-end
-
----Executed when all tiles in the Station are unselected.
-function UI:onAllTilesUnselected()
-	self.rightPane:resetValues()
+---Executed when the list of currently selected tiles is changed.
+---@param tiles TileList The currently selected tiles.
+function UI:onSelectedTilesChanged(tiles)
+	self.rightPane:setValuesForTiles(tiles)
 end
 
 ---Executed when a log file is loaded.

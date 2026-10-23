@@ -291,22 +291,25 @@ function utils.iTableGetLastValueIndex(t, v)
 end
 
 ---Removes the first occurence of the value `v` from the table `t`. Don't use this on keyed tables!
+---Returns the removed value.
 ---@param t table The table to be checked.
 ---@param v any The value to be removed from the table `t`.
+---@return any?
 function utils.iTableRemoveFirstValue(t, v)
 	local i = utils.iTableGetValueIndex(t, v)
 	if i then
-		table.remove(t, i)
+		return table.remove(t, i)
 	end
 end
 
 ---Removes the last occurence of the value `v` from the table `t`. Don't use this on keyed tables!
+---Returns the removed value.
 ---@param t table The table to be checked.
 ---@param v any The value to be removed from the table `t`.
 function utils.iTableRemoveLastValue(t, v)
 	local i = utils.iTableGetLastValueIndex(t, v)
 	if i then
-		table.remove(t, i)
+		return table.remove(t, i)
 	end
 end
 
