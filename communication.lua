@@ -54,6 +54,13 @@ local COM_FUNCTIONS = {
 			{name = "state", type = "int", bytes = 1}
 		}
 	},
+	[0x15] = {
+		name = "setBlockade",
+		params = {
+			{name = "blockadeID", type = "int", bytes = 2},
+			{name = "direction", type = "int", bytes = 1}
+		}
+	},
 	[0xF0] = {
 		name = "initStation",
 		params = {
@@ -77,6 +84,12 @@ local COM_FUNCTIONS = {
 		params = {
 			{name = "semaphoreN", type = "string"},
 			{name = "type", type = "int", bytes = 1}
+		}
+	},
+	[0xF5] = {
+		name = "initBlockade",
+		params = {
+			{name = "blockadeN", type = "string"}
 		}
 	},
 	[0xFF] = {
@@ -113,6 +126,12 @@ local COM_IMAGES = {
 	[0xFF] = "sz"
 }
 
+local COM_BLOCKADES = {
+	[0x00] = false,
+	[0x01] = true,
+	[0xFF] = nil
+}
+
 ---@type string?
 com.path = nil -- Full path to the log file that is being read
 com.fail = false -- `true` if in failure state
@@ -132,8 +151,9 @@ com.readData = {step = "validate", byteCounter = 0}
 
 ---@type [integer, integer, integer, integer]
 com.version = {0, 0, 0, 0} -- Version data as read from the log file
----@type {stations: table<string, {name: string}>, tracks: table<string, {name: string}>, switches: table<string, {name: string}> , semaphores: table<string, {name: string}>}
-com.ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}} -- Maps IDs to object names
+---@alias ComIDToName table<string, {name: string}>
+---@type {stations: ComIDToName, tracks: ComIDToName, switches: ComIDToName, semaphores: ComIDToName, blockades: ComIDToName}
+com.ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}, blockades = {}} -- Maps IDs to object names
 ---@type {stations: integer, tracks: integer, switches: integer, semaphores: integer}
 com.counters = {} -- How many objects of each type have been initialized
 
@@ -144,7 +164,7 @@ function com.init(path, findRecent)
 	_Obj:clear()
 	com.pos = 0
 	com.readData = {step = "validate", byteCounter = 0}
-	com.ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}}
+	com.ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}, blockades = {}}
 	com.counters = {}
 	com.timeTicks = 0
 	com.fail = false
@@ -345,6 +365,9 @@ function com.readCall(name, params, silent)
 	elseif name == "initSemaphore" then
 		com.initObject(com.ids.semaphores, "semaphore", params.semaphoreN)
 		_Obj:initSemaphore(params.semaphoreN, params.type)
+	elseif name == "initBlockade" then
+		com.initObject(com.ids.blockades, "blockade", params.blockadeN)
+		_Obj:initBlockade(params.blockadeN)
 	elseif name == "setTrack" then
 		local track = com.ids.tracks[params.trackID]
 		_Obj:setTrackState(track.name, com.timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
@@ -354,6 +377,9 @@ function com.readCall(name, params, silent)
 	elseif name == "setSemaphore" then
 		local semaphore = com.ids.semaphores[params.semaphoreID]
 		_Obj:setSemaphoreState(semaphore.name, com.timeTicks, params.speed, params.nextSpeed, COM_IMAGES[params.state])
+	elseif name == "setBlockade" then
+		local blockade = com.ids.blockades[params.blockadeID]
+		_Obj:setBlockadeState(blockade.name, com.timeTicks, com.blockadeDirFromHex(params.direction))
 	end
 end
 
@@ -364,6 +390,14 @@ end
 function com.initObject(idTable, counter, name)
 	com.counters[counter] = (com.counters[counter] or 0) + 1
 	idTable[com.counters[counter]] = {name = name}
+end
+
+function com.blockadeDirFromHex(direction)
+	return COM_BLOCKADES[direction]
+end
+
+function com.blockadeDirToHex(direction)
+	return direction and 0x01 or (direction == false and 0x00 or 0xFF)
 end
 
 function com.isConnected()

@@ -1872,10 +1872,6 @@
 			"name": "Mińsk Maz-Mienia",
 			"shortcut": "MMz-Mia",
 			"tiles": {
-				"10,2": {
-					"command": "b Mia-MMz p",
-					"id": "square"
-				},
 				"10,4": {
 					"id": "track-",
 					"trackID": "4442-4602@LK2.2"
@@ -1883,14 +1879,6 @@
 				"10,5": {
 					"id": "track-",
 					"trackID": "4451-4611@LK2.1"
-				},
-				"10,7": {
-					"command": "b MMz-Mrz n",
-					"id": "square"
-				},
-				"11,2": {
-					"command": "b Mia-MMz n",
-					"id": "square"
 				},
 				"11,4": {
 					"id": "semaphore7",
@@ -1904,13 +1892,6 @@
 					"semaphoreID": "461N",
 					"trackID": "4451-4611@LK2.1"
 				},
-				"11,7": {
-					"command": "b MMz-Mrz p",
-					"id": "square"
-				},
-				"12,2": {
-					"id": "letterN"
-				},
 				"12,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
@@ -1922,9 +1903,6 @@
 					"semaphoreFourPhase": true,
 					"semaphoreID": "461",
 					"trackID": "4611-4811@LK2.1"
-				},
-				"12,7": {
-					"id": "letterP"
 				},
 				"13,4": {
 					"id": "track-",
@@ -2044,10 +2022,6 @@
 					"semaphoreID": "431N",
 					"trackID": "Y1-4311@LK2.1"
 				},
-				"6,2": {
-					"command": "b Mia-MMz x",
-					"id": "square"
-				},
 				"6,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
@@ -2060,13 +2034,6 @@
 					"semaphoreID": "431",
 					"trackID": "4311-4451@LK2.1"
 				},
-				"6,7": {
-					"command": "b MMz-Mrz x",
-					"id": "square"
-				},
-				"7,2": {
-					"id": "letterX"
-				},
 				"7,4": {
 					"id": "track-",
 					"trackID": "4302-4442@LK2.2"
@@ -2074,9 +2041,6 @@
 				"7,5": {
 					"id": "track-",
 					"trackID": "4311-4451@LK2.1"
-				},
-				"7,7": {
-					"id": "letterX"
 				},
 				"8,4": {
 					"id": "semaphore7",
@@ -2090,9 +2054,6 @@
 					"semaphoreID": "445N",
 					"trackID": "4311-4451@LK2.1"
 				},
-				"9,2": {
-					"id": "letterP"
-				},
 				"9,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
@@ -2104,9 +2065,6 @@
 					"semaphoreFourPhase": true,
 					"semaphoreID": "445",
 					"trackID": "4451-4611@LK2.1"
-				},
-				"9,7": {
-					"id": "letterN"
 				}
 			},
 			"w": 19
@@ -2255,9 +2213,6 @@
 			"name": "Mienia-Mrozy",
 			"shortcut": "Mia-Mrz",
 			"tiles": {
-				"10,2": {
-					"id": "letterN"
-				},
 				"10,4": {
 					"id": "track-",
 					"trackID": "5422-5582@LK2.2"
@@ -2265,9 +2220,6 @@
 				"10,5": {
 					"id": "track-",
 					"trackID": "5431-5571@LK2.1"
-				},
-				"10,7": {
-					"id": "letterP"
 				},
 				"11,4": {
 					"id": "semaphore7",
@@ -2390,9 +2342,6 @@
 					"semaphoreID": "523",
 					"trackID": "5231-5431@LK2.1"
 				},
-				"7,2": {
-					"id": "letterP"
-				},
 				"7,4": {
 					"id": "track-",
 					"trackID": "5222-5422@LK2.2"
@@ -2400,13 +2349,6 @@
 				"7,5": {
 					"id": "track-",
 					"trackID": "5231-5431@LK2.1"
-				},
-				"7,7": {
-					"id": "letterN"
-				},
-				"8,2": {
-					"command": "b Mrz-Mia p",
-					"id": "square"
 				},
 				"8,4": {
 					"id": "semaphore7",
@@ -2420,14 +2362,6 @@
 					"semaphoreID": "543N",
 					"trackID": "5231-5431@LK2.1"
 				},
-				"8,7": {
-					"command": "b MMz-Mrz n",
-					"id": "square"
-				},
-				"9,2": {
-					"command": "b Mrz-Mia n",
-					"id": "square"
-				},
 				"9,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
@@ -2439,10 +2373,6 @@
 					"semaphoreFourPhase": true,
 					"semaphoreID": "543",
 					"trackID": "5431-5571@LK2.1"
-				},
-				"9,7": {
-					"command": "b MMz-Mrz p",
-					"id": "square"
 				}
 			},
 			"w": 16
@@ -5408,6 +5338,7 @@
 					"trackID": "Sdl_Iz205"
 				},
 				"10,13": {
+					"electrified": false,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm207",
@@ -5447,6 +5378,7 @@
 					"trackID": "Sdl_Iz205"
 				},
 				"11,13": {
+					"electrified": false,
 					"id": "curve2",
 					"trackID": "Sdl_Iz205"
 				},
@@ -5479,9 +5411,11 @@
 					"trackID": "Sdl_Iz205"
 				},
 				"12,13": {
+					"electrified": false,
 					"id": "buffer3"
 				},
 				"12,14": {
+					"electrified": false,
 					"id": "buffer3"
 				},
 				"12,7": {
@@ -5513,10 +5447,12 @@
 					"trackID": "Sdl_Iz206"
 				},
 				"13,13": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"13,14": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
@@ -5542,9 +5478,11 @@
 					"trackID": "Sdl_Iz207"
 				},
 				"14,13": {
+					"electrified": false,
 					"id": "curve2"
 				},
 				"14,14": {
+					"electrified": false,
 					"id": "curve2"
 				},
 				"14,7": {
@@ -5566,11 +5504,13 @@
 					"trackID": "Sdl_Iz207"
 				},
 				"15,12": {
+					"electrified": false,
 					"id": "switchL2",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_208"
 				},
 				"15,13": {
+					"electrified": false,
 					"id": "curve1"
 				},
 				"15,7": {
@@ -5592,6 +5532,7 @@
 					"trackID": "Sdl_Iz209"
 				},
 				"16,11": {
+					"electrified": false,
 					"id": "semaphore2",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm209",
@@ -5926,6 +5867,7 @@
 					"trackID": "Sdl_It5a"
 				},
 				"26,13": {
+					"electrified": false,
 					"id": "loco"
 				},
 				"26,5": {
@@ -5965,9 +5907,11 @@
 					"trackID": "Sdl_Iz13"
 				},
 				"27,12": {
+					"electrified": false,
 					"id": "curve6"
 				},
 				"27,13": {
+					"electrified": false,
 					"id": "curve7"
 				},
 				"27,5": {
@@ -6015,6 +5959,7 @@
 					"trackID": "Sdl_Iz13"
 				},
 				"28,12": {
+					"electrified": false,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm22",
@@ -6022,12 +5967,15 @@
 					"trackID": "Sdl_Iz301"
 				},
 				"28,14": {
+					"electrified": false,
 					"id": "curve8"
 				},
 				"28,15": {
+					"electrified": false,
 					"id": "track|"
 				},
 				"28,16": {
+					"electrified": false,
 					"id": "curve4"
 				},
 				"28,6": {
@@ -6064,6 +6012,7 @@
 					"trackID": "Sdl_Iz20"
 				},
 				"29,10": {
+					"electrified": false,
 					"id": "buffer7"
 				},
 				"29,11": {
@@ -6080,6 +6029,7 @@
 					"trackID": "Sdl_Iz301"
 				},
 				"29,17": {
+					"electrified": false,
 					"id": "switchL8",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_302"
@@ -6115,6 +6065,7 @@
 					"id": "buffer3"
 				},
 				"3,12": {
+					"electrified": false,
 					"id": "buffer2"
 				},
 				"3,7": {
@@ -6142,14 +6093,17 @@
 					"trackID": "Sdl_Iz301"
 				},
 				"30,17": {
+					"electrified": false,
 					"id": "switchL7",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_303"
 				},
 				"30,18": {
+					"electrified": false,
 					"id": "curve3"
 				},
 				"30,4": {
+					"electrified": false,
 					"id": "switchDerR6",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_17",
@@ -6241,27 +6195,34 @@
 					"trackID": "Sdl_Iz301"
 				},
 				"31,14": {
+					"electrified": false,
 					"id": "buffer3"
 				},
 				"31,15": {
+					"electrified": false,
 					"id": "buffer3"
 				},
 				"31,16": {
+					"electrified": false,
 					"id": "curve6"
 				},
 				"31,17": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"31,18": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"31,3": {
+					"electrified": false,
 					"id": "switchR6",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_18",
 					"trackID": "Sdl_Iz18"
 				},
 				"31,4": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_Iz17"
 				},
@@ -6299,34 +6260,42 @@
 					"trackID": "Sdl_It101a"
 				},
 				"32,14": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"32,15": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"32,16": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"32,17": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"32,18": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"32,2": {
+					"electrified": false,
 					"id": "curve6",
 					"trackID": "Sdl_Iz18"
 				},
 				"32,3": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_Iz18"
 				},
 				"32,4": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_Iz17"
 				},
@@ -6363,21 +6332,27 @@
 					"trackID": "Sdl_Iz312"
 				},
 				"33,14": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"33,15": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"33,16": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"33,17": {
+					"electrified": false,
 					"id": "curve2"
 				},
 				"33,18": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"33,2": {
+					"electrified": false,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm14",
@@ -6385,6 +6360,7 @@
 					"trackID": "Sdl_Iz18"
 				},
 				"33,3": {
+					"electrified": false,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm12",
@@ -6392,6 +6368,7 @@
 					"trackID": "Sdl_Iz18"
 				},
 				"33,4": {
+					"electrified": false,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm10",
@@ -6431,28 +6408,35 @@
 					"trackID": "Sdl_Iz312"
 				},
 				"34,14": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"34,15": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"34,16": {
+					"electrified": false,
 					"id": "switchR2",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_304"
 				},
 				"34,18": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"34,2": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_It104"
 				},
 				"34,3": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_It102"
 				},
 				"34,4": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_It100"
 				},
@@ -6489,25 +6473,31 @@
 					"trackID": "Sdl_Iz312"
 				},
 				"35,14": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"35,15": {
+					"electrified": false,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_305"
 				},
 				"35,18": {
+					"electrified": false,
 					"id": "curve2"
 				},
 				"35,2": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_It104"
 				},
 				"35,3": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_It102"
 				},
 				"35,4": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_It100"
 				},
@@ -6544,9 +6534,11 @@
 					"trackID": "Sdl_Iz312"
 				},
 				"36,14": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"36,15": {
+					"electrified": false,
 					"id": "switchW2",
 					"maxSpeedMinus": 40,
 					"maxSpeedPlus": 40,
@@ -6554,28 +6546,34 @@
 					"switchID": "Sdl_310"
 				},
 				"36,16": {
+					"electrified": false,
 					"id": "track|"
 				},
 				"36,17": {
+					"electrified": false,
 					"id": "switchR1",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
 					"switchID": "Sdl_309"
 				},
 				"36,18": {
+					"electrified": false,
 					"id": "switchR1",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_308"
 				},
 				"36,2": {
+					"electrified": false,
 					"id": "platformF",
 					"trackID": "Sdl_It104"
 				},
 				"36,3": {
+					"electrified": false,
 					"id": "platformF",
 					"trackID": "Sdl_It102"
 				},
 				"36,4": {
+					"electrified": false,
 					"id": "platformF",
 					"trackID": "Sdl_It100"
 				},
@@ -6616,6 +6614,7 @@
 					"trackID": "Sdl_Iz312"
 				},
 				"37,14": {
+					"electrified": false,
 					"id": "switchD2",
 					"maxSpeedMinus": 100,
 					"maxSpeedPlus": 40,
@@ -6623,16 +6622,19 @@
 					"switchID": "Sdl_311"
 				},
 				"37,2": {
+					"electrified": false,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "Sdl_It104"
 				},
 				"37,3": {
+					"electrified": false,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "Sdl_It102"
 				},
 				"37,4": {
+					"electrified": false,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "Sdl_It100"
@@ -6682,17 +6684,21 @@
 					"trackID": "Sdl_Iz312"
 				},
 				"38,14": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"38,2": {
+					"electrified": false,
 					"id": "platformF",
 					"trackID": "Sdl_It104"
 				},
 				"38,3": {
+					"electrified": false,
 					"id": "platformF",
 					"trackID": "Sdl_It102"
 				},
 				"38,4": {
+					"electrified": false,
 					"id": "platformF",
 					"trackID": "Sdl_It100"
 				},
@@ -6730,18 +6736,22 @@
 					"trackID": "Sdl_It101b"
 				},
 				"39,14": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"39,2": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_It104"
 				},
 				"39,3": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_It102"
 				},
 				"39,4": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_It100"
 				},
@@ -6770,6 +6780,7 @@
 					"shuntTarget": true
 				},
 				"4,11": {
+					"electrified": false,
 					"id": "derailer2"
 				},
 				"4,7": {
@@ -6800,17 +6811,21 @@
 					"trackID": "Sdl_Iz313"
 				},
 				"40,14": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"40,2": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_It104"
 				},
 				"40,3": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_It102"
 				},
 				"40,4": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_It100"
 				},
@@ -6859,9 +6874,11 @@
 					"trackID": "Sdl_Iz313"
 				},
 				"41,14": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"41,2": {
+					"electrified": false,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm104",
@@ -6869,6 +6886,7 @@
 					"trackID": "Sdl_Iz31"
 				},
 				"41,3": {
+					"electrified": false,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm102",
@@ -6876,6 +6894,7 @@
 					"trackID": "Sdl_Iz31"
 				},
 				"41,4": {
+					"electrified": false,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm100",
@@ -6914,6 +6933,7 @@
 					"trackID": "Sdl_Iz37"
 				},
 				"42,13": {
+					"electrified": false,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm32",
@@ -6921,17 +6941,21 @@
 					"trackID": "Sdl_Iz313"
 				},
 				"42,14": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"42,2": {
+					"electrified": false,
 					"id": "curve7",
 					"trackID": "Sdl_Iz31"
 				},
 				"42,3": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_Iz31"
 				},
 				"42,4": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_Iz32"
 				},
@@ -6972,19 +6996,23 @@
 					"trackID": "Sdl_Iz38"
 				},
 				"43,13": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"43,14": {
+					"electrified": false,
 					"id": "curve2"
 				},
 				"43,3": {
+					"electrified": false,
 					"id": "switchL4",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_31",
 					"trackID": "Sdl_Iz31"
 				},
 				"43,4": {
+					"electrified": false,
 					"id": "track-",
 					"trackID": "Sdl_Iz32"
 				},
@@ -7015,14 +7043,17 @@
 					"trackID": "Sdl_Iz39"
 				},
 				"44,12": {
+					"electrified": false,
 					"id": "buffer3"
 				},
 				"44,13": {
+					"electrified": false,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_314"
 				},
 				"44,4": {
+					"electrified": false,
 					"id": "switchL4",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_32",
@@ -7062,17 +7093,21 @@
 					"trackID": "Sdl_Iz40"
 				},
 				"45,10": {
+					"electrified": false,
 					"id": "derailerL7",
 					"trackID": "Sdl_Iz39"
 				},
 				"45,12": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"45,13": {
+					"electrified": false,
 					"id": "curve2"
 				},
 				"45,5": {
+					"electrified": false,
 					"id": "switchR8",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
@@ -7101,6 +7136,7 @@
 					"trackID": "Sdl_Iz40"
 				},
 				"46,10": {
+					"electrified": false,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm301",
@@ -7108,11 +7144,13 @@
 					"trackID": "Sdl_Iz39"
 				},
 				"46,12": {
+					"electrified": false,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_315"
 				},
 				"46,6": {
+					"electrified": false,
 					"id": "curve3",
 					"trackID": "Sdl_Iz33"
 				},
@@ -7136,11 +7174,13 @@
 					"trackID": "Sdl_Iz41"
 				},
 				"47,12": {
+					"electrified": false,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_316"
 				},
 				"47,6": {
+					"electrified": false,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm401",
@@ -7164,14 +7204,17 @@
 					"trackID": "Sdl_Iz41"
 				},
 				"48,12": {
+					"electrified": false,
 					"id": "switchR7",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_317"
 				},
 				"48,13": {
+					"electrified": false,
 					"id": "curve3"
 				},
 				"48,6": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
@@ -7190,14 +7233,17 @@
 					"trackID": "Sdl_Iz41"
 				},
 				"49,12": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"49,13": {
+					"electrified": false,
 					"id": "switchR3",
 					"maxSpeedPlus": 40,
 					"switchID": "Sdl_318"
 				},
 				"49,6": {
+					"electrified": false,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm402",
@@ -7238,14 +7284,17 @@
 					"trackID": "9011-B1@LK2.1"
 				},
 				"50,12": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"50,13": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
 				"50,6": {
+					"electrified": false,
 					"id": "switchL3",
 					"maxSpeedPlus": 40,
 					"switchFlip": true,
@@ -7269,12 +7318,15 @@
 					"trackID": "Sdl_Iz48"
 				},
 				"51,12": {
+					"electrified": false,
 					"id": "buffer7"
 				},
 				"51,13": {
+					"electrified": false,
 					"id": "buffer7"
 				},
 				"51,6": {
+					"electrified": false,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm403",
@@ -7300,6 +7352,7 @@
 					"trackID": "Sdl_Iz48"
 				},
 				"52,6": {
+					"electrified": false,
 					"id": "track-"
 				},
 				"52,7": {
@@ -7327,6 +7380,7 @@
 					"trackID": "Sdl_Iz51"
 				},
 				"53,8": {
+					"electrified": false,
 					"id": "curve3",
 					"trackID": "Sdl_Iz51"
 				},
@@ -7348,6 +7402,7 @@
 					"trackID": "Sdl_ItZ"
 				},
 				"54,8": {
+					"electrified": false,
 					"id": "derailerL7",
 					"trackID": "Sdl_Iz51"
 				},
@@ -7373,6 +7428,7 @@
 					"trackID": "Sdl_ItZ"
 				},
 				"55,8": {
+					"electrified": false,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreID": "Sdl_Tm501",
@@ -7396,6 +7452,7 @@
 					"trainTarget": true
 				},
 				"56,8": {
+					"electrified": false,
 					"id": "arrow-",
 					"shuntTarget": true
 				},
@@ -7433,6 +7490,7 @@
 					"switchID": "Sdl_204"
 				},
 				"7,12": {
+					"electrified": false,
 					"id": "curve4"
 				},
 				"7,7": {
@@ -7457,6 +7515,7 @@
 					"id": "curve3"
 				},
 				"8,13": {
+					"electrified": false,
 					"id": "curve3"
 				},
 				"8,7": {
@@ -7484,6 +7543,7 @@
 					"shuntTarget": true
 				},
 				"9,13": {
+					"electrified": false,
 					"id": "platformP",
 					"shuntTarget": true
 				},
@@ -10366,7 +10426,6 @@
 					"trackID": "WWO_Iz74"
 				},
 				"22,4": {
-					"electrified": false,
 					"id": "track-",
 					"trackID": "WWO_Iz72"
 				},
@@ -10448,7 +10507,6 @@
 					"trackID": "WWO_Iz74"
 				},
 				"23,4": {
-					"electrified": false,
 					"id": "track-",
 					"trackID": "WWO_Iz72"
 				},
@@ -10538,7 +10596,6 @@
 					"trackID": "WWO_Iz74"
 				},
 				"24,4": {
-					"electrified": false,
 					"id": "track-",
 					"trackID": "WWO_Iz72"
 				},
@@ -10619,7 +10676,6 @@
 					"trackID": "WWO_It72"
 				},
 				"25,4": {
-					"electrified": false,
 					"id": "track-",
 					"trackID": "WWO_Iz72"
 				},
@@ -10697,7 +10753,6 @@
 					"trackID": "WWO_It72"
 				},
 				"26,4": {
-					"electrified": false,
 					"id": "curve2",
 					"trackID": "WWO_Iz72"
 				},
@@ -10759,7 +10814,6 @@
 					"trackID": "WWO_Iz121"
 				},
 				"27,3": {
-					"electrified": false,
 					"id": "curve6",
 					"trackID": "WWO_Iz72"
 				},
@@ -10826,7 +10880,6 @@
 					"trackID": "WWO_Iz121"
 				},
 				"28,3": {
-					"electrified": false,
 					"id": "track-",
 					"trackID": "WWO_Iz72"
 				},
@@ -10897,7 +10950,6 @@
 					"trackID": "WWO_Iz121"
 				},
 				"29,3": {
-					"electrified": false,
 					"id": "track-",
 					"trackID": "WWO_Iz72"
 				},
@@ -10991,7 +11043,6 @@
 					"trackID": "WWO_Iz121"
 				},
 				"30,3": {
-					"electrified": false,
 					"id": "track-",
 					"trackID": "WWO_Iz72"
 				},
@@ -11081,7 +11132,6 @@
 					"trackID": "WWO_Iz121"
 				},
 				"31,3": {
-					"electrified": false,
 					"id": "semaphore7",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -11188,7 +11238,6 @@
 					"trainTarget": true
 				},
 				"32,3": {
-					"electrified": false,
 					"id": "platformF",
 					"trackID": "WWO_It70"
 				},
@@ -11283,7 +11332,6 @@
 					"trackID": "WWO_Iz133"
 				},
 				"33,3": {
-					"electrified": false,
 					"id": "platformF",
 					"shuntTarget": true,
 					"trackID": "WWO_It70",
@@ -11387,7 +11435,6 @@
 					"trackID": "WWO_Iz133"
 				},
 				"34,3": {
-					"electrified": false,
 					"id": "platformF",
 					"trackID": "WWO_It70"
 				},
@@ -11470,7 +11517,6 @@
 					"trackID": "WWO_Iz133"
 				},
 				"35,3": {
-					"electrified": false,
 					"id": "semaphore3",
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
@@ -11570,7 +11616,6 @@
 					"trackID": "WWO_Iz133"
 				},
 				"36,3": {
-					"electrified": false,
 					"id": "track-",
 					"trackID": "WWO_Iz84"
 				},
@@ -11637,7 +11682,6 @@
 					"trackID": "WWO_Iz133"
 				},
 				"37,3": {
-					"electrified": false,
 					"id": "track-",
 					"trackID": "WWO_Iz84"
 				},
@@ -11704,7 +11748,6 @@
 					"trackID": "WWO_Iz133"
 				},
 				"38,3": {
-					"electrified": false,
 					"id": "track-",
 					"trackID": "WWO_Iz84"
 				},
@@ -11767,7 +11810,6 @@
 					"trackID": "WWO_Iz133"
 				},
 				"39,3": {
-					"electrified": false,
 					"id": "curve7",
 					"trackID": "WWO_Iz84"
 				},

@@ -342,6 +342,12 @@ function Tile:getBlockadeDirection()
 	return self:getData().blockade
 end
 
+---Returns this tile's blockade state, or `nil` if no semaphore is specified for this tile.
+---@return BlockadeState?
+function Tile:getBlockadeState()
+	return self.blockadeID and _Obj:getBlockadeState(self.blockadeID)
+end
+
 ---Returns the current maximum speed on this Tile, or `nil` if there is no speed limit.
 ---@return number
 function Tile:getSpeed()
@@ -464,6 +470,14 @@ end
 function Tile:sendSemaphoreUnreserve()
 	if self.semaphoreID then
 		_Com.sendCommand("su " .. self.semaphoreID)
+	end
+end
+
+---Sends a command to the server to change this tile's blockade direction.
+---@param direction boolean? The target blockade direction.
+function Tile:sendBlockadeDirection(direction)
+	if self.blockadeID then
+		_Com.sendCommand("b " .. self.blockadeID .. " " .. (direction and "n" or (direction == false and "p" or "x")))
 	end
 end
 

@@ -275,7 +275,7 @@ function Picker:draw()
 			love.graphics.rectangle("line", tx, ty, size, size)
 		else
 			local image = category.display and category.display.image
-			_DrawTile(x + self.tileMargin, y + self.tileMargin, categoryTile, _Picker.electrified, false, false, false, 0, image, self.tileScale)
+			_DrawTile(x + self.tileMargin, y + self.tileMargin, categoryTile, _Picker.electrified, false, false, false, 0, image, true, self.tileScale)
 		end
 	end
 

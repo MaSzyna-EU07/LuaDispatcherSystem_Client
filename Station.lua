@@ -307,6 +307,14 @@ function Station:unselectAllTiles()
 	_UI:onSelectedTilesChanged(self.selectedTiles)
 end
 
+---Clears all selected tiles and replaces them with empty ones.
+function Station:clearSelectedTiles()
+	for i = self.selectedTiles:size(), 1, -1 do
+		local tile = assert(self.selectedTiles:get(i))
+		self:setTile(tile.x, tile.y)
+	end
+end
+
 ---Moves a single tile selection by provided amount of tiles.
 ---@param dx integer Amount of tiles to move horizontally.
 ---@param dy integer Amount of tiles to move vertically.
@@ -539,6 +547,16 @@ function Station:getTileTooltip(tile)
 	end
 	if tile:isBlockadeGenerator() and tile.blockadeID then
 		table.insert(lines, "Blokada: " .. tile.blockadeID)
+		local state = tile:getBlockadeState()
+		if state then
+			if state.direction then
+				table.insert(lines, "    Kierunek: N")
+			elseif state.direction == false then
+				table.insert(lines, "    Kierunek: P")
+			else
+				table.insert(lines, "    Kierunek: X")
+			end
+		end
 	end
 	if tile.warp then
 		local station = _Project:getStation(tile.warp)
@@ -707,6 +725,12 @@ function Station:handleRightClick()
 						self.activeW24 = not tile.semaphoreNoW24
 					end
 				end
+			elseif tile:isBlockadeGenerator() then
+				if _Utils.isShiftPressed() then
+					tile:sendBlockadeDirection(tile:getBlockadeState().direction == nil or nil)
+				else
+					tile:sendBlockadeDirection(tile:getBlockadeState().direction == false)
+				end
 			elseif self.activeX and self.activeY then
 				if tile:isTargetForMode(self.activeMode) then
 					local track1 = self:assertGetTile(self.activeX, self.activeY):getSemaphorePrevTrackID()
@@ -804,6 +828,8 @@ function Station:keypressed(key)
 			self:zoom(1)
 		elseif key == "kp-" then
 			self:zoom(-1)
+		elseif key == "delete" then
+			self:clearSelectedTiles()
 		end
 	end
 end
@@ -941,7 +967,7 @@ function Station:drawTileGhost()
 	local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
 	local category = _Picker:getSelectedCategory()
 	local image = category.display and category.display.image or "s1"
-	_DrawTile(x, y, _Picker:getSelectedTileID(), _Picker.electrified, false, false, false, 0, image, 1, 0.5)
+	_DrawTile(x, y, _Picker:getSelectedTileID(), _Picker.electrified, false, false, false, 0, image, true, 1, 0.5)
 end
 
 ---Draws hover helpers when adding/removing rows.
@@ -1207,7 +1233,8 @@ function Station:drawTile(tile)
 	local reserved = visible and tile:isTrackReserved()
 	local forced = tile:isSwitchForced()
 	local semState = tile:getSemaphoreState()
-	_DrawTile(x + tile.offset, y + tile.offset, tile.id, tile.electrified, occupied, reserved, forced, switchDimBits, semState)
+	local blkState = tile:getBlockadeState()
+	_DrawTile(x + tile.offset, y + tile.offset, tile.id, tile.electrified, occupied, reserved, forced, switchDimBits, semState, blkState)
 end
 
 ---Draws the specified Tile's background.

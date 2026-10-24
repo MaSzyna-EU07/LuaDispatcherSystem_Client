@@ -17,6 +17,9 @@ function Objects:new()
 	---@alias SemaphoreState {speed: Speed, nextSpeed: Speed, image: string}
 	---@type table<string, {current: SemaphoreState, history: table<integer, SemaphoreState>}>
 	self.semaphores = {}
+	---@alias BlockadeState {direction: boolean?}
+	---@type table<string, {current: BlockadeState, history: table<integer, BlockadeState>}>
+	self.blockades = {}
 end
 
 ---Removes all data from the simulation.
@@ -25,6 +28,7 @@ function Objects:clear()
 	_Utils.emptyTable(self.tracks)
 	_Utils.emptyTable(self.switches)
 	_Utils.emptyTable(self.semaphores)
+	_Utils.emptyTable(self.blockades)
 end
 
 ---Initializes a station.
@@ -56,19 +60,35 @@ function Objects:initSemaphore(name, type)
 	self.semaphores[name] = {current = initialState, history = {[0] = initialState}}
 end
 
+---Initializes a blockade.
+---@param name string The full blockade ID.
+function Objects:initBlockade(name)
+	local initialState = {direction = false}
+	self.blockades[name] = {current = initialState, history = {[0] = initialState}}
+end
+
+---Sets a new state for the specified history type.
+---@private
+---@generic T
+---@param history {current: T, history: table<integer, T>} The history table for an object to be used.
+---@param tick integer The tick on which this state is set. This state is valid until the next change.
+---@param state T New state to be applied.
+function Objects:updateHistory(history, tick, state)
+	history.history[tick] = state
+	-- Update the current state if the newly provided timestamp is the most recent one.
+	if _GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), 999999999) == tick then
+		history.current = state
+	end
+end
+
 ---Sets a new state for the specified track.
 ---@param trackID string The full track ID.
 ---@param tick integer The tick on which this state is set. This state is valid until the next change.
 ---@param occupied boolean Whether this track is occupied.
 ---@param reserved boolean Whether this track is reserved.
 function Objects:setTrackState(trackID, tick, occupied, reserved)
-	local history = self.tracks[trackID]
 	local newState = {occupied = occupied, reserved = reserved}
-	history.history[tick] = newState
-	-- Update the current state if the newly provided timestamp is the most recent one.
-	if _GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), 999999999) == tick then
-		history.current = newState
-	end
+	self:updateHistory(self.tracks[trackID], tick, newState)
     print(string.format("[t=%s] %s : occupied=%s reserved=%s", tick, trackID, occupied, reserved))
 end
 
@@ -78,13 +98,8 @@ end
 ---@param state boolean If `true`, "+", otherwise - "-".
 ---@param forced boolean Whether the switch has been forcefully switched ("rozprucie rozjazdu").
 function Objects:setSwitchState(switchID, tick, state, forced)
-	local history = self.switches[switchID]
 	local newState = {state = state, forced = forced}
-	history.history[tick] = newState
-	-- Update the current state if the newly provided timestamp is the most recent one.
-	if _GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), 999999999) == tick then
-		history.current = newState
-	end
+	self:updateHistory(self.switches[switchID], tick, newState)
     print(string.format("[t=%s] %s : state=%s forced=%s", tick, switchID, state, forced))
 end
 
@@ -95,14 +110,19 @@ end
 ---@param nextSpeed Speed The next speed on the semaphore.
 ---@param image string The image on the semaphore.
 function Objects:setSemaphoreState(semaphoreID, tick, speed, nextSpeed, image)
-	local history = self.semaphores[semaphoreID]
 	local newState = {speed = speed, nextSpeed = nextSpeed, image = image}
-	history.history[tick] = newState
-	-- Update the current state if the newly provided timestamp is the most recent one.
-	if _GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), 999999999) == tick then
-		history.current = newState
-	end
+	self:updateHistory(self.semaphores[semaphoreID], tick, newState)
     print(string.format("[t=%s] %s : speed=%s nextSpeed=%s image=%s", tick, semaphoreID, speed, nextSpeed, image))
+end
+
+---Sets a new state for the specified blockade.
+---@param blockadeID string The full blockade ID.
+---@param tick integer The tick on which this state is set. This state is valid until the next change.
+---@param direction boolean? The new blockade direction.
+function Objects:setBlockadeState(blockadeID, tick, direction)
+	local newState = {direction = direction}
+	self:updateHistory(self.blockades[blockadeID], tick, newState)
+    print(string.format("[t=%s] %s : direction=%s", tick, blockadeID, direction))
 end
 
 ---Returns the track state at the given tick, or `nil` if the provided track doesn't exist.
@@ -129,6 +149,15 @@ end
 ---@return SemaphoreState?
 function Objects:getSemaphoreState(name, tick)
 	local history = self.semaphores[name]
+	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history), tick)] or history.current)
+end
+
+---Returns the blockade state at the given tick, or `nil` if the provided blockade doesn't exist.
+---@param name string The full blockade ID.
+---@param tick integer? The tick for which the state should be returned. If not specified, the current state will be returned.
+---@return BlockadeState?
+function Objects:getBlockadeState(name, tick)
+	local history = self.blockades[name]
 	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history), tick)] or history.current)
 end
 

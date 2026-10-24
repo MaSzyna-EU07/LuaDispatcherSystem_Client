@@ -20,12 +20,27 @@ PathMode = {
 	SHUNT = 1
 }
 
+---@enum BlockadeDirection
+BlockadeDirection = {
+	FORWARD = 0,
+	BACKWARD = 1,
+	OFF = 255
+}
+
 ---@enum TrackColor
 TrackColor = {
 	BASE = {0, 1, 0},
 	ELECTRIFIED = {1, 1, 0},
 	OCCUPIED = {1, 0, 0},
 	RESERVED = {0, 0, 1}
+}
+
+---@enum BlockadeColor
+BlockadeColor = {
+	NONE = {0, 0, 0},
+	FORWARD = {1, 1, 0},
+	BACKWARD = {1, 0, 0},
+	OFF = {0.5, 0.5, 0.5}
 }
 
 ---@enum SemaphoreColor

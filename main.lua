@@ -103,6 +103,22 @@ function _GetTrackColor(electrified, occupied, reserved, alarm)
 	return TrackColor.BASE
 end
 
+---Turns the blockade state into the blockade color to be displayed on the tile.
+---@param blockadeState BlockadeState|boolean? The blockade state to be displayed.
+---@return BlockadeColor
+function _GetBlockadeColor(blockadeState)
+	if not blockadeState then
+		return BlockadeColor.NONE
+	elseif blockadeState == true then
+		return BlockadeColor.FORWARD
+	elseif blockadeState.direction then
+		return BlockadeColor.BACKWARD
+	elseif blockadeState.direction == false then
+		return BlockadeColor.FORWARD
+	end
+	return BlockadeColor.OFF
+end
+
 ---Draws tile graphics.
 ---@param x number Top left corner X screen coordinate.
 ---@param y number Top left corner Y screen coordinate.
@@ -113,9 +129,10 @@ end
 ---@param alarm boolean? Whether the track should flash red (for example when a switch is forced).
 ---@param switchDimBits integer Bitmask of directions which should be dark on track tiles.
 ---@param semaphoreState SemaphoreState|string? State of the semaphore, or its image directly.
+---@param blockadeState BlockadeState|boolean? State of the blockade.
 ---@param scale number? Tile scale.
 ---@param opacity number? Tile opacity, from 0 to 1.
-function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBits, semaphoreState, scale, opacity)
+function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBits, semaphoreState, blockadeState, scale, opacity)
 	local data = _TileDB:getTile(id)
 	-- Background
 	love.graphics.setColor(1, 1, 1, opacity)
@@ -138,6 +155,12 @@ function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBi
 	if data.blockade then
 		_Tracks:drawTile(data.blockade, 9, x, y, scale)
 	end
+	-- Blockade
+	if data.blockade then
+		local blockadeColor = _GetBlockadeColor(blockadeState)
+		love.graphics.setColor(blockadeColor[1], blockadeColor[2], blockadeColor[3], opacity)
+		_Tracks:drawTile(data.blockade, 10, x, y, scale)
+	end
 	-- Track
 	local color = _GetTrackColor(electrified, occupied, reserved, alarm)
 	love.graphics.setColor(color[1], color[2], color[3], opacity)
@@ -151,9 +174,6 @@ function _DrawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBi
 	end
 	if data.foreground then
 		_Tracks:drawTile(data.foreground, 2, x, y, scale)
-	end
-	if data.blockade then
-		_Tracks:drawTile(data.blockade, 10, x, y, scale)
 	end
 	-- Derailer
 	love.graphics.setColor(1, 1, 1, opacity)
