@@ -18,10 +18,258 @@
 		"Kot",
 		"Kot-Sdl",
 		"Sdl",
+		"Dol",
 		"WWT",
 		"Gbk"
 	],
 	"stations": {
+		"Dol": {
+			"h": 13,
+			"name": "Doły",
+			"shortcut": "Dol",
+			"tiles": {
+				"10,11": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Dol_H",
+					"trackID": "Sdl_Dol_ItH"
+				},
+				"10,12": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Dol_G",
+					"trackID": "Sdl_Dol_ItG"
+				},
+				"11,11": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"11,12": {
+					"id": "arrow3",
+					"trainTarget": true
+				},
+				"2,11": {
+					"id": "arrow7",
+					"trainTarget": true,
+					"warp": "Sdl",
+					"warpID": "Sdl",
+					"warpTargetID": "Dol_N"
+				},
+				"2,12": {
+					"id": "arrow3",
+					"targetW24": true,
+					"trainTarget": true,
+					"warp": "Sdl",
+					"warpID": "Sdl_N",
+					"warpTargetID": "Dol"
+				},
+				"2,3": {
+					"id": "arrow-",
+					"trainTarget": true,
+					"warp": "Sdl",
+					"warpID": "Sdl_31",
+					"warpTargetID": "Sdl_31"
+				},
+				"2,5": {
+					"id": "curve5",
+					"trackID": "Sdl_Dol_ItE"
+				},
+				"2,6": {
+					"id": "semaphore1",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Dol_E",
+					"trackID": "Sdl_Dol_ItE"
+				},
+				"2,7": {
+					"id": "track|",
+					"trainTarget": true
+				},
+				"2,8": {
+					"id": "semaphore5",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Dol_F",
+					"trackID": "Sdl_Dol_ItF"
+				},
+				"2,9": {
+					"id": "curve4",
+					"trackID": "Sdl_Dol_ItF"
+				},
+				"3,10": {
+					"id": "switchL8",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_Dol_1",
+					"trackID": "Sdl_Dol_Iz1"
+				},
+				"3,11": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Dol_B",
+					"semaphoreOwnShield": true,
+					"trackID": "Sdl_Dol_ItB"
+				},
+				"3,12": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Dol_C",
+					"semaphoreOwnShield": true,
+					"trackID": "Sdl_Dol_ItC"
+				},
+				"3,3": {
+					"id": "semaphore3",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Dol_A",
+					"semaphoreOwnShield": true,
+					"trackID": "Sdl_Dol_ItA"
+				},
+				"3,4": {
+					"id": "switchR6",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_Dol_11",
+					"trackID": "Sdl_Dol_Iz11"
+				},
+				"4,10": {
+					"electrified": false,
+					"id": "buffer7",
+					"trackID": "Sdl_Dol_Iz1"
+				},
+				"4,11": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_Dol_2",
+					"trackID": "Sdl_Dol_Iz2"
+				},
+				"4,12": {
+					"id": "track-",
+					"trackID": "Sdl_Dol_Iz4"
+				},
+				"4,2": {
+					"electrified": false,
+					"id": "buffer3",
+					"trackID": "Sdl_Dol_Iz14"
+				},
+				"4,3": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_Dol_12",
+					"trackID": "Sdl_Dol_Iz12"
+				},
+				"4,4": {
+					"electrified": false,
+					"id": "buffer7",
+					"trackID": "Sdl_Dol_Iz11"
+				},
+				"5,11": {
+					"id": "switchR7",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_Dol_3",
+					"trackID": "Sdl_Dol_Iz3"
+				},
+				"5,12": {
+					"id": "track-",
+					"trackID": "Sdl_Dol_Iz4"
+				},
+				"5,2": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Sdl_Dol_Iz14"
+				},
+				"5,3": {
+					"id": "track-",
+					"trackID": "Sdl_Dol_Iz12"
+				},
+				"6,11": {
+					"id": "track-",
+					"trackID": "Sdl_Dol_Iz3"
+				},
+				"6,12": {
+					"id": "switchR3",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_Dol_4",
+					"trackID": "Sdl_Dol_Iz4"
+				},
+				"6,2": {
+					"electrified": false,
+					"id": "track-",
+					"trackID": "Sdl_Dol_Iz14"
+				},
+				"6,3": {
+					"id": "switchL7",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_Dol_13",
+					"trackID": "Sdl_Dol_Iz13"
+				},
+				"7,11": {
+					"id": "track-",
+					"trackID": "Sdl_Dol_ItH"
+				},
+				"7,12": {
+					"id": "platformP",
+					"stationName": "Białki Siedleckie",
+					"trackID": "Sdl_Dol_ItG"
+				},
+				"7,2": {
+					"id": "switchL3",
+					"maxSpeedPlus": 40,
+					"switchID": "Sdl_Dol_14",
+					"trackID": "Sdl_Dol_Iz14"
+				},
+				"7,3": {
+					"id": "track-",
+					"trackID": "Sdl_Dol_Iz13"
+				},
+				"8,11": {
+					"id": "track-",
+					"trackID": "Sdl_Dol_ItH"
+				},
+				"8,12": {
+					"id": "track-",
+					"trackID": "Sdl_Dol_ItG"
+				},
+				"8,2": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Dol_L",
+					"semaphoreOwnShield": true,
+					"trackID": "Sdl_Dol_ItL"
+				},
+				"8,3": {
+					"id": "semaphore7",
+					"semaphoreAllowSz": true,
+					"semaphoreAllowTrain": true,
+					"semaphoreID": "Dol_K",
+					"semaphoreOwnShield": true,
+					"trackID": "Sdl_Dol_ItK"
+				},
+				"9,11": {
+					"id": "platformP",
+					"stationName": "Białki Siedleckie",
+					"trackID": "Sdl_Dol_ItH"
+				},
+				"9,12": {
+					"id": "track-",
+					"trackID": "Sdl_Dol_ItG"
+				},
+				"9,2": {
+					"id": "arrow7",
+					"targetW24": true,
+					"trainTarget": true
+				},
+				"9,3": {
+					"id": "arrow3",
+					"trainTarget": true
+				}
+			},
+			"w": 12
+		},
 		"Gbk": {
 			"h": 9,
 			"name": "Grzebowilk",
@@ -453,107 +701,113 @@
 			"shortcut": "Kot-Sdl",
 			"tiles": {
 				"10,4": {
-					"id": "track-",
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "814N",
 					"trackID": "8142-8362@LK2.2"
 				},
 				"10,5": {
-					"id": "track-",
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "813",
 					"trackID": "8131-8351@LK2.1"
 				},
 				"11,4": {
+					"id": "track-",
+					"trackID": "8142-8362@LK2.2"
+				},
+				"11,5": {
+					"id": "track-",
+					"trackID": "8131-8351@LK2.1"
+				},
+				"12,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "836",
 					"trackID": "8142-8362@LK2.2"
 				},
-				"11,5": {
+				"12,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "835N",
 					"trackID": "8131-8351@LK2.1"
 				},
-				"12,4": {
+				"13,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "836N",
 					"trackID": "8362-8562@LK2.2"
 				},
-				"12,5": {
+				"13,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "835",
 					"trackID": "8351-8571@LK2.1"
 				},
-				"13,4": {
-					"id": "track-",
+				"14,4": {
+					"id": "platformP",
+					"stationName": "Sabinka",
 					"trackID": "8362-8562@LK2.2"
 				},
-				"13,5": {
-					"id": "track-",
+				"14,5": {
+					"id": "platformP",
+					"stationName": "Sabinka",
 					"trackID": "8351-8571@LK2.1"
 				},
-				"14,4": {
+				"15,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "856",
 					"trackID": "8362-8562@LK2.2"
 				},
-				"14,5": {
+				"15,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "857N",
 					"trackID": "8351-8571@LK2.1"
 				},
-				"15,4": {
+				"16,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "856N",
 					"trackID": "8562-8822@LK2.2"
 				},
-				"15,5": {
+				"16,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "857",
 					"trackID": "8571-8811@LK2.1"
 				},
-				"16,4": {
+				"17,4": {
 					"id": "track-",
 					"trackID": "8562-8822@LK2.2"
 				},
-				"16,5": {
+				"17,5": {
 					"id": "track-",
 					"trackID": "8571-8811@LK2.1"
 				},
-				"17,4": {
+				"18,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "882",
 					"trackID": "8562-8822@LK2.2"
 				},
-				"17,5": {
+				"18,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "881N",
 					"trackID": "8571-8811@LK2.1"
 				},
-				"18,4": {
+				"19,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "882N",
 					"trackID": "8822-9022@LK2.2"
 				},
-				"18,5": {
+				"19,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "881",
-					"trackID": "8811-9011@LK2.1"
-				},
-				"19,4": {
-					"id": "track-",
-					"trackID": "8822-9022@LK2.2"
-				},
-				"19,5": {
-					"id": "track-",
 					"trackID": "8811-9011@LK2.1"
 				},
 				"2,4": {
@@ -571,39 +825,49 @@
 					"warpTargetID": "Sdl"
 				},
 				"20,4": {
+					"id": "platformP",
+					"stationName": "Siedlce Zachodnie",
+					"trackID": "8822-9022@LK2.2"
+				},
+				"20,5": {
+					"id": "platformP",
+					"stationName": "Siedlce Zachodnie",
+					"trackID": "8811-9011@LK2.1"
+				},
+				"21,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "902",
 					"trackID": "8822-9022@LK2.2"
 				},
-				"20,5": {
+				"21,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "901N",
 					"trackID": "8811-9011@LK2.1"
 				},
-				"21,4": {
+				"22,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "902N",
 					"trackID": "9022-A2@LK2.2"
 				},
-				"21,5": {
+				"22,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "901",
 					"trackID": "9011-B1@LK2.1"
 				},
-				"22,4": {
+				"23,4": {
 					"blockadeID": "Sdl-Kot",
 					"id": "blockade7",
 					"trackID": "9022-A2@LK2.2"
 				},
-				"22,5": {
+				"23,5": {
 					"id": "track-",
 					"trackID": "9011-B1@LK2.1"
 				},
-				"23,4": {
+				"24,4": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -611,7 +875,7 @@
 					"semaphoreID": "Sdl_A",
 					"trackID": "Sdl_ItA"
 				},
-				"23,5": {
+				"24,5": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -619,14 +883,14 @@
 					"semaphoreID": "Sdl_B",
 					"trackID": "Sdl_ItB"
 				},
-				"24,4": {
+				"25,4": {
 					"id": "arrow7",
 					"trackID": "Sdl_ItA",
 					"warp": "Sdl",
 					"warpID": "SdlN",
 					"warpTargetID": "Kot"
 				},
-				"24,5": {
+				"25,5": {
 					"id": "arrow3",
 					"trackID": "Sdl_ItB",
 					"warp": "Sdl",
@@ -650,72 +914,70 @@
 					"trackID": "Kot_ItD"
 				},
 				"4,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Kotuń",
 					"trackID": "E2-7922@LK2.2"
 				},
 				"4,5": {
+					"id": "platformP",
+					"stationName": "Kotuń",
+					"trackID": "D1-7911@LK2.1"
+				},
+				"5,4": {
+					"id": "track-",
+					"trackID": "E2-7922@LK2.2"
+				},
+				"5,5": {
 					"blockadeID": "Kot-Sdl",
 					"id": "blockade3",
 					"trackID": "D1-7911@LK2.1"
 				},
-				"5,4": {
+				"6,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "792",
 					"trackID": "E2-7922@LK2.2"
 				},
-				"5,5": {
+				"6,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "791N",
 					"trackID": "D1-7911@LK2.1"
 				},
-				"6,4": {
+				"7,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "792N",
 					"trackID": "7922-8142@LK2.2"
 				},
-				"6,5": {
+				"7,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "791",
 					"trackID": "7911-8131@LK2.1"
 				},
-				"7,4": {
+				"8,4": {
 					"id": "track-",
 					"trackID": "7922-8142@LK2.2"
 				},
-				"7,5": {
+				"8,5": {
 					"id": "track-",
 					"trackID": "7911-8131@LK2.1"
 				},
-				"8,4": {
+				"9,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "814",
 					"trackID": "7922-8142@LK2.2"
 				},
-				"8,5": {
+				"9,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "813N",
 					"trackID": "7911-8131@LK2.1"
-				},
-				"9,4": {
-					"id": "semaphore3",
-					"semaphoreFourPhase": true,
-					"semaphoreID": "814N",
-					"trackID": "8142-8362@LK2.2"
-				},
-				"9,5": {
-					"id": "semaphore3",
-					"semaphoreFourPhase": true,
-					"semaphoreID": "813",
-					"trackID": "8131-8351@LK2.1"
 				}
 			},
-			"w": 25
+			"w": 26
 		},
 		"MMz": {
 			"h": 17,
@@ -1291,24 +1553,36 @@
 				"29,3": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Mińsk Mazowiecki",
+					"stationPlatform": "1",
+					"stationTrack": "6",
 					"trackID": "MMz_It6",
 					"trainTarget": true
 				},
 				"29,4": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Mińsk Mazowiecki",
+					"stationPlatform": "2",
+					"stationTrack": "4",
 					"trackID": "MMz_It4",
 					"trainTarget": true
 				},
 				"29,5": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Mińsk Mazowiecki",
+					"stationPlatform": "3",
+					"stationTrack": "2",
 					"trackID": "MMz_It2",
 					"trainTarget": true
 				},
 				"29,6": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Mińsk Mazowiecki",
+					"stationPlatform": "3",
+					"stationTrack": "1",
 					"trackID": "MMz_It1",
 					"trainTarget": true
 				},
@@ -1873,79 +2147,93 @@
 			"shortcut": "MMz-Mia",
 			"tiles": {
 				"10,4": {
-					"id": "track-",
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "444N",
 					"trackID": "4442-4602@LK2.2"
 				},
 				"10,5": {
-					"id": "track-",
+					"id": "semaphore3",
+					"semaphoreFourPhase": true,
+					"semaphoreID": "445",
 					"trackID": "4451-4611@LK2.1"
 				},
 				"11,4": {
+					"id": "track-",
+					"trackID": "4442-4602@LK2.2"
+				},
+				"11,5": {
+					"id": "platformP",
+					"stationName": "Barcząca",
+					"trackID": "4451-4611@LK2.1"
+				},
+				"12,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "460",
 					"trackID": "4442-4602@LK2.2"
 				},
-				"11,5": {
+				"12,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "461N",
 					"trackID": "4451-4611@LK2.1"
 				},
-				"12,4": {
+				"13,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "460N",
 					"trackID": "4602-4802@LK2.2"
 				},
-				"12,5": {
+				"13,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "461",
 					"trackID": "4611-4811@LK2.1"
 				},
-				"13,4": {
-					"id": "track-",
+				"14,4": {
+					"id": "platformP",
+					"stationName": "Barcząca",
 					"trackID": "4602-4802@LK2.2"
 				},
-				"13,5": {
+				"14,5": {
 					"id": "track-",
 					"trackID": "4611-4811@LK2.1"
 				},
-				"14,4": {
+				"15,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "480",
 					"trackID": "4602-4802@LK2.2"
 				},
-				"14,5": {
+				"15,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "481N",
 					"trackID": "4611-4811@LK2.1"
 				},
-				"15,4": {
+				"16,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "480N",
 					"trackID": "4802-Y2@LK2.2"
 				},
-				"15,5": {
+				"16,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "481",
 					"trackID": "4811-4931@LK2.1"
 				},
-				"16,4": {
+				"17,4": {
 					"blockadeID": "Mia-MMz",
 					"id": "blockade7",
 					"trackID": "4802-Y2@LK2.2"
 				},
-				"16,5": {
+				"17,5": {
 					"id": "track-",
 					"trackID": "4811-4931@LK2.1"
 				},
-				"17,4": {
+				"18,4": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
@@ -1953,18 +2241,18 @@
 					"semaphoreID": "Mia_Y",
 					"trackID": "Mia_ItY"
 				},
-				"17,5": {
+				"18,5": {
 					"id": "track-",
 					"trackID": "4811-4931@LK2.1"
 				},
-				"18,4": {
+				"19,4": {
 					"id": "arrow7",
 					"trackID": "Mia_ItY",
 					"warp": "Mia",
 					"warpID": "MiaN",
 					"warpTargetID": "MMz"
 				},
-				"18,5": {
+				"19,5": {
 					"id": "arrow3",
 					"trackID": "4811-4931@LK2.1",
 					"warp": "Mia",
@@ -2011,63 +2299,61 @@
 					"trackID": "Y1-4311@LK2.1"
 				},
 				"5,4": {
+					"id": "track-",
+					"trackID": "Z2-4302@LK2.2"
+				},
+				"5,5": {
+					"id": "platformP",
+					"stationName": "Mińsk Mazowiecki Anielina",
+					"trackID": "Y1-4311@LK2.1"
+				},
+				"6,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "430",
 					"trackID": "Z2-4302@LK2.2"
 				},
-				"5,5": {
+				"6,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "431N",
 					"trackID": "Y1-4311@LK2.1"
 				},
-				"6,4": {
+				"7,4": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "430N",
 					"trackID": "4302-4442@LK2.2"
 				},
-				"6,5": {
+				"7,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "431",
 					"trackID": "4311-4451@LK2.1"
 				},
-				"7,4": {
-					"id": "track-",
+				"8,4": {
+					"id": "platformP",
+					"stationName": "Mińsk Mazowiecki Anielina",
 					"trackID": "4302-4442@LK2.2"
 				},
-				"7,5": {
+				"8,5": {
 					"id": "track-",
 					"trackID": "4311-4451@LK2.1"
 				},
-				"8,4": {
+				"9,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "444",
 					"trackID": "4302-4442@LK2.2"
 				},
-				"8,5": {
+				"9,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "445N",
 					"trackID": "4311-4451@LK2.1"
-				},
-				"9,4": {
-					"id": "semaphore3",
-					"semaphoreFourPhase": true,
-					"semaphoreID": "444N",
-					"trackID": "4442-4602@LK2.2"
-				},
-				"9,5": {
-					"id": "semaphore3",
-					"semaphoreFourPhase": true,
-					"semaphoreID": "445",
-					"trackID": "4451-4611@LK2.1"
 				}
 			},
-			"w": 19
+			"w": 20
 		},
 		"Mia": {
 			"h": 8,
@@ -2170,11 +2456,13 @@
 					"trackID": "Mia_Iz42"
 				},
 				"6,5": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Mienia",
 					"trackID": "4931-5071@LK2.1"
 				},
 				"7,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Mienia",
 					"trackID": "Mia_ItZ"
 				},
 				"7,5": {
@@ -2343,11 +2631,13 @@
 					"trackID": "5231-5431@LK2.1"
 				},
 				"7,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Cegłów",
 					"trackID": "5222-5422@LK2.2"
 				},
 				"7,5": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Cegłów",
 					"trackID": "5231-5431@LK2.1"
 				},
 				"8,4": {
@@ -2824,6 +3114,9 @@
 				"25,4": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Mrozy",
+					"stationPlatform": "1",
+					"stationTrack": "4",
 					"trackID": "Mrz_It4",
 					"trainTarget": true
 				},
@@ -2834,11 +3127,17 @@
 				},
 				"25,6": {
 					"id": "platformP",
+					"stationName": "Mrozy",
+					"stationPlatform": "2",
+					"stationTrack": "1",
 					"trackID": "Mrz_It1",
 					"trainTarget": true
 				},
 				"25,7": {
 					"id": "platformP",
+					"stationName": "Mrozy",
+					"stationPlatform": "2",
+					"stationTrack": "3",
 					"trackID": "Mrz_It3",
 					"trainTarget": true
 				},
@@ -3149,7 +3448,8 @@
 			"shortcut": "Mrz-Kot",
 			"tiles": {
 				"10,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Grodziszcze Mazowieckie",
 					"trackID": "6382-6622@LK2.2"
 				},
 				"10,5": {
@@ -3213,11 +3513,13 @@
 					"trackID": "6831-7091@LK2.1"
 				},
 				"16,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Sosnowe",
 					"trackID": "6842-7102@LK2.2"
 				},
 				"16,5": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Sosnowe",
 					"trackID": "6831-7091@LK2.1"
 				},
 				"17,4": {
@@ -3245,11 +3547,13 @@
 					"trackID": "7091-7251@LK2.1"
 				},
 				"19,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Koszewnica",
 					"trackID": "7102-7262@LK2.2"
 				},
 				"19,5": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Koszewnica",
 					"trackID": "7091-7251@LK2.1"
 				},
 				"2,4": {
@@ -3415,7 +3719,8 @@
 					"trackID": "6122-6382@LK2.2"
 				},
 				"7,5": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Grodziszcze Mazowieckie",
 					"trackID": "6111-6371@LK2.1"
 				},
 				"8,4": {
@@ -3825,6 +4130,7 @@
 				"2,12": {
 					"id": "arrow3",
 					"targetW24": true,
+					"trackID": "S1-F1@LK901.1",
 					"trainTarget": true,
 					"warp": "WWT",
 					"warpID": "WWT_N",
@@ -3832,6 +4138,7 @@
 				},
 				"2,7": {
 					"id": "arrow7",
+					"trackID": "R1-A1@LK546.1",
 					"trainTarget": true,
 					"warp": "WWT",
 					"warpID": "WWT",
@@ -4380,6 +4687,9 @@
 				"33,10": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Rembertów",
+					"stationPlatform": "1",
+					"stationTrack": "3",
 					"trackID": "Rem_It3"
 				},
 				"33,11": {
@@ -4403,6 +4713,9 @@
 				"33,9": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Rembertów",
+					"stationPlatform": "1",
+					"stationTrack": "4",
 					"trackID": "Rem_It4",
 					"trainTarget": true
 				},
@@ -5115,11 +5428,13 @@
 			"shortcut": "Rem-Sul",
 			"tiles": {
 				"10,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Warszawa Wesoła",
 					"trackID": "1582-1722@LK2.2"
 				},
 				"10,5": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Warszawa Wesoła",
 					"trackID": "1571-1731@LK2.1"
 				},
 				"11,4": {
@@ -5147,11 +5462,13 @@
 					"trackID": "1731-1871@LK2.1"
 				},
 				"13,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Warszawa Wola Grzybowska",
 					"trackID": "1722-1922@LK2.2"
 				},
 				"13,5": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Warszawa Wola Grzybowska",
 					"trackID": "1731-1871@LK2.1"
 				},
 				"14,4": {
@@ -5179,36 +5496,46 @@
 					"trackID": "B1-1871@LK2.1"
 				},
 				"16,4": {
+					"id": "platformP",
+					"stationName": "Sulejówek",
+					"trackID": "A2-1922@LK2.2"
+				},
+				"16,5": {
+					"id": "platformP",
+					"stationName": "Sulejówek",
+					"trackID": "B1-1871@LK2.1"
+				},
+				"17,4": {
 					"blockadeID": "Sul-Rem",
 					"id": "blockade7",
 					"trackID": "A2-1922@LK2.2"
 				},
-				"16,5": {
+				"17,5": {
 					"id": "track-",
 					"trackID": "B1-1871@LK2.1"
 				},
-				"17,4": {
+				"18,4": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Ml_A",
 					"trackID": "Ml_ItA"
 				},
-				"17,5": {
+				"18,5": {
 					"id": "semaphore3",
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "Ml_B",
 					"trackID": "Ml_ItB"
 				},
-				"18,4": {
+				"19,4": {
 					"id": "arrow7",
 					"trackID": "Ml_ItA",
 					"warp": "Sul",
 					"warpID": "Sul_N",
 					"warpTargetID": "Rem"
 				},
-				"18,5": {
+				"19,5": {
 					"id": "arrow3",
 					"trackID": "Ml_ItB",
 					"warp": "Sul",
@@ -5309,7 +5636,7 @@
 					"trackID": "1571-1731@LK2.1"
 				}
 			},
-			"w": 19
+			"w": 20
 		},
 		"Sdl": {
 			"h": 21,
@@ -5819,6 +6146,9 @@
 				"25,10": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Siedlce",
+					"stationPlatform": "3",
+					"stationTrack": "3",
 					"trackID": "Sdl_It3",
 					"trainTarget": true
 				},
@@ -5831,6 +6161,9 @@
 				"25,5": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Siedlce",
+					"stationPlatform": "1",
+					"stationTrack": "10",
 					"trackID": "Sdl_It10",
 					"trainTarget": true
 				},
@@ -5843,18 +6176,27 @@
 				"25,7": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Siedlce",
+					"stationPlatform": "2",
+					"stationTrack": "4",
 					"trackID": "Sdl_It4a",
 					"trainTarget": true
 				},
 				"25,8": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Siedlce",
+					"stationPlatform": "2",
+					"stationTrack": "2",
 					"trackID": "Sdl_It2a",
 					"trainTarget": true
 				},
 				"25,9": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Siedlce",
+					"stationPlatform": "3",
+					"stationTrack": "1",
 					"trackID": "Sdl_It1a",
 					"trainTarget": true
 				},
@@ -7417,6 +7759,7 @@
 					"semaphoreAllowTrain": true,
 					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_X",
+					"semaphoreOwnShield": true,
 					"trackID": "Sdl_ItX"
 				},
 				"55,7": {
@@ -7425,6 +7768,7 @@
 					"semaphoreAllowTrain": true,
 					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_Z",
+					"semaphoreOwnShield": true,
 					"trackID": "Sdl_ItZ"
 				},
 				"55,8": {
@@ -7441,15 +7785,22 @@
 					"semaphoreAllowTrain": true,
 					"semaphoreFourPhase": true,
 					"semaphoreID": "Sdl_Y",
+					"semaphoreOwnShield": true,
 					"trackID": "Sdl_ItY"
 				},
 				"56,10": {
 					"id": "arrow3",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Dol",
+					"warpID": "Dol",
+					"warpTargetID": "Sdl_N"
 				},
 				"56,7": {
 					"id": "arrow-",
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Dol",
+					"warpID": "Sdl_31",
+					"warpTargetID": "Sdl_31"
 				},
 				"56,8": {
 					"electrified": false,
@@ -7459,7 +7810,10 @@
 				"56,9": {
 					"id": "arrow7",
 					"targetW24": true,
-					"trainTarget": true
+					"trainTarget": true,
+					"warp": "Dol",
+					"warpID": "Dol_N",
+					"warpTargetID": "Sdl"
 				},
 				"6,10": {
 					"id": "switchR7",
@@ -7620,16 +7974,25 @@
 				"13,2": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Sulejówek Miłosna",
+					"stationPlatform": "2",
+					"stationTrack": "4",
 					"trackID": "Ml_It4",
 					"trainTarget": true
 				},
 				"13,3": {
 					"id": "platformP",
+					"stationName": "Sulejówek Miłosna",
+					"stationPlatform": "2",
+					"stationTrack": "2",
 					"trackID": "Ml_It2",
 					"trainTarget": true
 				},
 				"13,4": {
 					"id": "platformP",
+					"stationName": "Sulejówek Miłosna",
+					"stationPlatform": "1",
+					"stationTrack": "1",
 					"trackID": "Ml_It1",
 					"trainTarget": true
 				},
@@ -7923,11 +8286,13 @@
 					"trackID": "2751-2931@LK2.1"
 				},
 				"13,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Halinów",
 					"trackID": "2742-2942@LK2.2"
 				},
 				"13,5": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Halinów",
 					"trackID": "2751-2931@LK2.1"
 				},
 				"14,4": {
@@ -7946,33 +8311,33 @@
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "294N",
-					"trackID": "2742-3062@LK2.2"
+					"trackID": "2942-3062@LK2.2"
 				},
 				"15,5": {
 					"id": "semaphore3",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "293",
-					"trackID": "2751-3071@LK2.1"
+					"trackID": "2951-3071@LK2.1"
 				},
 				"16,4": {
 					"id": "track-",
-					"trackID": "2742-3062@LK2.2"
+					"trackID": "2942-3062@LK2.2"
 				},
 				"16,5": {
 					"id": "track-",
-					"trackID": "2751-3071@LK2.1"
+					"trackID": "2951-3071@LK2.1"
 				},
 				"17,4": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "306",
-					"trackID": "2742-3062@LK2.2"
+					"trackID": "2942-3062@LK2.2"
 				},
 				"17,5": {
 					"id": "semaphore7",
 					"semaphoreFourPhase": true,
 					"semaphoreID": "307N",
-					"trackID": "2751-3071@LK2.1"
+					"trackID": "2951-3071@LK2.1"
 				},
 				"18,4": {
 					"id": "semaphore3",
@@ -7987,11 +8352,13 @@
 					"trackID": "3071-3251@LK2.1"
 				},
 				"19,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Cisie",
 					"trackID": "3062-3242@LK2.2"
 				},
 				"19,5": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Cisie",
 					"trackID": "3071-3251@LK2.1"
 				},
 				"2,4": {
@@ -8033,11 +8400,13 @@
 					"trackID": "3251-3371@LK2.1"
 				},
 				"22,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Dębe Wielkie",
 					"trackID": "3242-3382@LK2.2"
 				},
 				"22,5": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Dębe Wielkie",
 					"trackID": "3251-3371@LK2.1"
 				},
 				"23,4": {
@@ -8097,11 +8466,13 @@
 					"trackID": "3511-3691@LK2.1"
 				},
 				"28,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Nowe Dębe Wielkie",
 					"trackID": "3522-3702@LK2.2"
 				},
 				"28,5": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Nowe Dębe Wielkie",
 					"trackID": "3511-3691@LK2.1"
 				},
 				"29,4": {
@@ -8213,11 +8584,13 @@
 					"trackID": "2411-2591@LK2.1"
 				},
 				"7,4": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Józefin",
 					"trackID": "2422-2582@LK2.2"
 				},
 				"7,5": {
-					"id": "track-",
+					"id": "platformP",
+					"stationName": "Józefin",
 					"trackID": "2411-2591@LK2.1"
 				},
 				"8,4": {
@@ -8363,6 +8736,7 @@
 				},
 				"9,5": {
 					"id": "arrow3",
+					"trackID": "D1-P1@LK844.1",
 					"trainTarget": true,
 					"warp": "WWT",
 					"warpID": "WWT",
@@ -8523,7 +8897,8 @@
 				},
 				"11,4": {
 					"id": "platformF",
-					"shuntTarget": true
+					"shuntTarget": true,
+					"trackID": "WPd_It1M"
 				},
 				"11,5": {
 					"electrified": false,
@@ -8552,7 +8927,8 @@
 					"trackID": "WPd_ItB"
 				},
 				"12,4": {
-					"id": "curve7"
+					"id": "curve7",
+					"trackID": "WPd_It1M"
 				},
 				"12,7": {
 					"id": "track-",
@@ -8844,7 +9220,8 @@
 					"trackID": "WPd_ItP"
 				},
 				"20,4": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "O1-J1@LK902.1"
 				},
 				"20,5": {
 					"id": "track-"
@@ -8871,7 +9248,8 @@
 					"trackID": "WWT_ItD"
 				},
 				"21,4": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "O1-J1@LK902.1"
 				},
 				"21,5": {
 					"id": "track-"
@@ -8896,7 +9274,8 @@
 					"trackID": "WWT_ItD"
 				},
 				"22,4": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "O1-J1@LK902.1"
 				},
 				"22,5": {
 					"id": "track-"
@@ -8922,6 +9301,7 @@
 				"23,4": {
 					"id": "arrow7",
 					"targetW24": true,
+					"trackID": "O1-J1@LK902.1",
 					"trainTarget": true,
 					"warp": "WWT",
 					"warpID": "WWT_902",
@@ -9229,7 +9609,8 @@
 				},
 				"9,9": {
 					"id": "platformP",
-					"shuntTarget": true
+					"shuntTarget": true,
+					"trackID": "WPd_It5G"
 				}
 			},
 			"w": 24
@@ -9891,36 +10272,54 @@
 				"16,3": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "1",
+					"stationTrack": "12",
 					"trackID": "WWO_It12",
 					"trainTarget": true
 				},
 				"16,4": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "1",
+					"stationTrack": "10",
 					"trackID": "WWO_It10",
 					"trainTarget": true
 				},
 				"16,5": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "2",
+					"stationTrack": "8",
 					"trackID": "WWO_It8",
 					"trainTarget": true
 				},
 				"16,6": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "2",
+					"stationTrack": "6",
 					"trackID": "WWO_It6",
 					"trainTarget": true
 				},
 				"16,7": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "3",
+					"stationTrack": "4",
 					"trackID": "WWO_It4",
 					"trainTarget": true
 				},
 				"16,8": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "3",
+					"stationTrack": "2",
 					"trackID": "WWO_It2",
 					"trainTarget": true
 				},
@@ -10007,48 +10406,72 @@
 				"18,11": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "4",
+					"stationTrack": "1",
 					"trackID": "WWO_It1",
 					"trainTarget": true
 				},
 				"18,13": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "4",
+					"stationTrack": "3",
 					"trackID": "WWO_It3",
 					"trainTarget": true
 				},
 				"18,14": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "5",
+					"stationTrack": "5",
 					"trackID": "WWO_It5",
 					"trainTarget": true
 				},
 				"18,15": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "5",
+					"stationTrack": "24",
 					"trackID": "WWO_It24",
 					"trainTarget": true
 				},
 				"18,16": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "6",
+					"stationTrack": "22",
 					"trackID": "WWO_It22",
 					"trainTarget": true
 				},
 				"18,17": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "6",
+					"stationTrack": "20",
 					"trackID": "WWO_It20",
 					"trainTarget": true
 				},
 				"18,18": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "7",
+					"stationTrack": "21",
 					"trackID": "WWO_It21",
 					"trainTarget": true
 				},
 				"18,19": {
 					"id": "platformP",
 					"shuntTarget": true,
+					"stationName": "Warszawa Wschodnia",
+					"stationPlatform": "7",
+					"stationTrack": "23",
 					"trackID": "WWO_It23",
 					"trainTarget": true
 				},
@@ -10347,6 +10770,7 @@
 				},
 				"21,5": {
 					"id": "switchR3",
+					"maxSpeedMinus": 40,
 					"maxSpeedPlus": 40,
 					"switchID": "WOG_WWO75",
 					"trackID": "WWO_Iz75"
@@ -11144,7 +11568,7 @@
 					"semaphoreAllowShunt": true,
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
-					"semaphoreID": "WWO_TmL18",
+					"semaphoreID": "WWO_L18",
 					"trackID": "WWO_Iz66"
 				},
 				"31,5": {
@@ -11836,7 +12260,9 @@
 					"trackID": "WWO_It2b"
 				},
 				"39,9": {
-					"id": "track-"
+					"id": "platformF",
+					"shuntTarget": true,
+					"trackID": "WWO_It1b"
 				},
 				"4,17": {
 					"id": "semaphore3",
@@ -12773,7 +13199,8 @@
 				},
 				"17,15": {
 					"electrified": false,
-					"id": "platformF"
+					"id": "platformF",
+					"trackID": "WWT_It15"
 				},
 				"17,2": {
 					"electrified": false,
@@ -12837,7 +13264,8 @@
 				"18,15": {
 					"electrified": false,
 					"id": "platformF",
-					"shuntTarget": true
+					"shuntTarget": true,
+					"trackID": "WWT_It15"
 				},
 				"18,2": {
 					"electrified": false,
@@ -12901,7 +13329,8 @@
 				},
 				"19,15": {
 					"electrified": false,
-					"id": "platformF"
+					"id": "platformF",
+					"trackID": "WWT_It15"
 				},
 				"19,2": {
 					"electrified": false,
@@ -12992,7 +13421,8 @@
 				},
 				"20,15": {
 					"electrified": false,
-					"id": "buffer7"
+					"id": "buffer7",
+					"trackID": "WWT_It15"
 				},
 				"20,2": {
 					"electrified": false,
@@ -13169,6 +13599,7 @@
 				},
 				"24,14": {
 					"id": "arrow7",
+					"trackID": "O1-J1@LK902.1",
 					"trainTarget": true,
 					"warp": "WPd",
 					"warpID": "WPd_902",
@@ -13217,7 +13648,8 @@
 					"semaphoreAllowSz": true,
 					"semaphoreAllowTrain": true,
 					"semaphoreID": "WWT_J",
-					"semaphoreOwnShield": true
+					"semaphoreOwnShield": true,
+					"trackID": "WWT_ItJ"
 				},
 				"25,5": {
 					"electrified": false,
@@ -13236,7 +13668,8 @@
 				},
 				"25,8": {
 					"id": "platformF",
-					"shuntTarget": true
+					"shuntTarget": true,
+					"trackID": "WWT_It46"
 				},
 				"26,11": {
 					"id": "curve2",
@@ -13254,7 +13687,8 @@
 					"trackID": "WWT_Iz43"
 				},
 				"26,14": {
-					"id": "curve2"
+					"id": "curve2",
+					"trackID": "WWT_ItJ"
 				},
 				"26,5": {
 					"electrified": false,
@@ -13274,7 +13708,8 @@
 					"trackID": "WWT_Iz36"
 				},
 				"26,8": {
-					"id": "curve7"
+					"id": "curve7",
+					"trackID": "WWT_It46"
 				},
 				"27,10": {
 					"id": "curve6",
@@ -13293,7 +13728,8 @@
 					"trackID": "WWT_Iz43"
 				},
 				"27,13": {
-					"id": "curve6"
+					"id": "curve6",
+					"trackID": "WWT_ItJ"
 				},
 				"27,5": {
 					"electrified": false,
@@ -13336,7 +13772,8 @@
 				},
 				"28,13": {
 					"id": "platformF",
-					"shuntTarget": true
+					"shuntTarget": true,
+					"trackID": "WWT_ItJ"
 				},
 				"28,5": {
 					"electrified": false,
@@ -13572,16 +14009,19 @@
 				"34,15": {
 					"id": "arrow3",
 					"targetW24": true,
+					"trackID": "D1-P1@LK844.1",
 					"trainTarget": true,
 					"warp": "WAt",
 					"warpID": "WAt_N",
 					"warpTargetID": "WWT"
 				},
 				"35,10": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "R1-A1@LK546.1"
 				},
 				"35,11": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "S1-F1@LK901.1"
 				},
 				"35,13": {
 					"id": "track-",
@@ -13599,10 +14039,12 @@
 					"trackID": "WWT_ItP"
 				},
 				"36,10": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "R1-A1@LK546.1"
 				},
 				"36,11": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "S1-F1@LK901.1"
 				},
 				"36,13": {
 					"id": "track-",
@@ -13615,10 +14057,12 @@
 					"trackID": "WWT_Iz51"
 				},
 				"37,10": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "R1-A1@LK546.1"
 				},
 				"37,11": {
-					"id": "track-"
+					"id": "track-",
+					"trackID": "S1-F1@LK901.1"
 				},
 				"37,13": {
 					"id": "semaphore7",
@@ -13637,6 +14081,7 @@
 				"38,10": {
 					"id": "arrow7",
 					"targetW24": true,
+					"trackID": "R1-A1@LK546.1",
 					"trainTarget": true,
 					"warp": "Rem",
 					"warpID": "Rem_N",
@@ -13644,6 +14089,7 @@
 				},
 				"38,11": {
 					"id": "arrow3",
+					"trackID": "S1-F1@LK901.1",
 					"trainTarget": true,
 					"warp": "Rem",
 					"warpID": "Rem",
@@ -13692,7 +14138,8 @@
 				},
 				"5,9": {
 					"electrified": false,
-					"id": "buffer3"
+					"id": "buffer3",
+					"trackID": "WWT_It4W"
 				},
 				"6,10": {
 					"electrified": false,
@@ -13714,7 +14161,8 @@
 				"6,9": {
 					"electrified": false,
 					"id": "platformF",
-					"shuntTarget": true
+					"shuntTarget": true,
+					"trackID": "WWT_It4W"
 				},
 				"7,10": {
 					"id": "switchD2",

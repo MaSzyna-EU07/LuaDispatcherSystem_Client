@@ -54,7 +54,7 @@ function UITrainPane:sendToCurrentTrain(str, num1, num2)
 	if not station then
 		return
 	end
-	for i, tile in ipairs(station.selectedTiles) do
+	for i, tile in ipairs(station.selectedTiles:getItems()) do
 		tile:sendTrainCommand(str, num1, num2)
 	end
 end

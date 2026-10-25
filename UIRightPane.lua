@@ -8,7 +8,7 @@ local UIRightPane = Class:derive("UIRightPane")
 ---@param ui UI UI which owns this pane.
 function UIRightPane:new(ui)
     self.ui = ui
-	self.pane = self.ui:addPane(nil, "right", "Informacje o stacji", _WWIDTH / self.ui.U - 14, 0, 14, _WHEIGHT / self.ui.U)
+	self.pane = self.ui:addPane(nil, "right", "Informacje o schemacie", _WWIDTH / self.ui.U - 14, 0, 14, _WHEIGHT / self.ui.U)
 
 	-- Station name and list button
 	self.header = self.ui:addLabel("right", "header", "", 0, 1, 11, 1)
@@ -29,7 +29,7 @@ end
 
 function UIRightPane:update()
 	local station = _Project:getCurrentStation()
-	self.header.label = string.format("Stacja: %s", station and station:getFullName() or "(brak)")
+	self.header.label = string.format("Schemat: %s", station and station:getFullName() or "(brak)")
 end
 
 ---Adds a header to the property list.
@@ -91,8 +91,17 @@ function UIRightPane:addTrackSettings()
 	self.widgets.speed = self.ui:addInput("right", "speed", 8, self.uiGenY, 6, 1, self, self.updateMaxSpeed)
 	self.uiGenY = self.uiGenY + 1
 
-	self.widgets.itineraryEndID_l = self.ui:addLabel("right", nil, "ID punktu końcowego:", 0, self.uiGenY, 8, 1)
-	self.widgets.itineraryEndID = self.ui:addInput("right", "itineraryEndID", 8, self.uiGenY, 6, 1, self, self.updateItineraryEndID)
+	self.widgets.stationName_l = self.ui:addLabel("right", nil, "Nazwa stacji:", 0, self.uiGenY, 5, 1)
+	self.widgets.stationName = self.ui:addInput("right", "stationName", 5, self.uiGenY, 9, 1, self, self.updateStationName)
+	self.widgets.stationName.tip = "Nazwa stacji w tym punkcie końcowym.\nNa jednym schemacie może być więcej niż jedna stacja,\nnp. na szlakach z wieloma przystankami."
+	self.uiGenY = self.uiGenY + 1
+
+	self.widgets.stationTrack_l = self.ui:addLabel("right", nil, "Tor:", 0, self.uiGenY, 3, 1)
+	self.widgets.stationTrack = self.ui:addInput("right", "stationTrack", 3, self.uiGenY, 4, 1, self, self.updateStationTrack)
+	self.widgets.stationTrack.tip = "Numer toru w tym punkcie końcowym.\nWykorzystywany do planowania tras zgodnie z numerem toru wpisanym w rozkładzie jazdy,\na także do generowania zapowiedzi stacyjnych."
+	self.widgets.stationPlatform_l = self.ui:addLabel("right", nil, "Peron:", 7, self.uiGenY, 3, 1)
+	self.widgets.stationPlatform = self.ui:addInput("right", "stationPlatform", 10, self.uiGenY, 4, 1, self, self.updateStationPlatform)
+	self.widgets.stationPlatform.tip = "Numer peronu w tym punkcie końcowym.\nWykorzystywany do planowania tras zgodnie z numerem toru wpisanym w rozkładzie jazdy,\na także do generowania zapowiedzi stacyjnych."
 	self.uiGenY = self.uiGenY + 1
 
 	self.widgets.targetW24 = self.ui:addCheckbox("right", "targetW24", "W24", 0, self.uiGenY, 1, 1, self, self.updateTargetW24)
@@ -276,7 +285,9 @@ function UIRightPane:setValuesForTiles(tiles)
 		self:prependValue(self.widgets.forbidTrain, tiles, "forbidTrain", "boolean")
 		self:prependValue(self.widgets.forbidShunt, tiles, "forbidShunt", "boolean")
 		self:prependValue(self.widgets.speed, tiles, "maxSpeed", "speed")
-		self:prependValue(self.widgets.itineraryEndID, tiles, "itineraryEndID", "string")
+		self:prependValue(self.widgets.stationName, tiles, "stationName", "string")
+		self:prependValue(self.widgets.stationTrack, tiles, "stationTrack", "string")
+		self:prependValue(self.widgets.stationPlatform, tiles, "stationPlatform", "string")
 		self:prependValue(self.widgets.targetW24, tiles, "targetW24", "boolean")
 	end
 	if tiles:hasSwitchTile() or self.ui.showAllTileProperties then
@@ -459,8 +470,16 @@ function UIRightPane:updateBlockadeID(input)
 	self:forEachTile(function(tile) tile.blockadeID = input.value end)
 end
 
-function UIRightPane:updateItineraryEndID(input)
-	self:forEachTile(function(tile) tile.itineraryEndID = input.value ~= "" and input.value or nil end)
+function UIRightPane:updateStationName(input)
+	self:forEachTile(function(tile) tile.stationName = input.value ~= "" and input.value or nil end)
+end
+
+function UIRightPane:updateStationTrack(input)
+	self:forEachTile(function(tile) tile.stationTrack = input.value ~= "" and input.value or nil end)
+end
+
+function UIRightPane:updateStationPlatform(input)
+	self:forEachTile(function(tile) tile.stationPlatform = input.value ~= "" and input.value or nil end)
 end
 
 function UIRightPane:updateElectrified2(checkbox)
@@ -480,7 +499,7 @@ function UIRightPane:updateSwitchFlipABCD(checkbox)
 end
 
 function UIRightPane:updateSemaphoreType(input)
-	self:forEachTile(function(tile) tile.semaphoreType = tonumber(input.value) end)
+	self:forEachTile(function(tile) tile.semaphoreType = tonumber(input.value) or 0 end)
 end
 
 function UIRightPane:updateSemaphoreNoW24(checkbox)

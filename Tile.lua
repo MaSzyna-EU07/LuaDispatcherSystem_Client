@@ -40,7 +40,11 @@ function Tile:new(station, x, y)
 	---@type string|integer?
 	self.semaphoreNext = nil -- The default next speed or semaphore when the pathfinder doesn't specify one.
 	---@type string?
-	self.itineraryEndID = nil -- Itinerary end ID for this Tile. TODO: Later on, check whether we need this. The only reason we would need this is for dispatcher algorithms.
+	self.stationName = nil -- The station name for this track. Should be used only for target tiles.
+	---@type string?
+	self.stationTrack = nil -- The track number for this track on its station. Should be used only for target tiles.
+	---@type string?
+	self.stationPlatform = nil -- The platform number for this track on its station. Should be used only for target tiles.
 	self.maxSpeed = math.huge -- The maximum speed for this Tile. Is `math.huge` if no limit is specified.
 	self.maxSpeedPlus = math.huge -- Maximum speed for this Tile when the switch on this Tile is set to `true` ("+"). Is `math.huge` if no limit is specified.
 	self.maxSpeedMinus = math.huge -- Maximum speed for this Tile when the switch on this Tile is set to `false` ("-"). Is `math.huge` if no limit is specified.
@@ -330,6 +334,13 @@ function Tile:isSemaphoreStop()
 	return state and (state.image == "s1" or state.image == "ms1")
 end
 
+---Returns whether this tile's semaphore is currently not displaying anything, or `nil` if there's no semaphore.
+---@return boolean?
+function Tile:isSemaphoreDim()
+	local state = self:getSemaphoreState()
+	return state and state.image == "uszk"
+end
+
 ---Returns whether any itinerary can ever be reserved by this semaphore.
 ---@return boolean
 function Tile:isSemaphoreControllable()
@@ -527,7 +538,9 @@ function Tile:serialize()
 		semaphoreShortSpeed = not _Utils.tableIsEmpty(self.semaphoreShortSpeed) and _Utils.stringifyKeys(self.semaphoreShortSpeed) or nil,
 		semaphoreFourPhase = self.semaphoreFourPhase or nil,
 		semaphoreNext = self.semaphoreNext,
-		itineraryEndID = self.itineraryEndID,
+		stationName = self.stationName,
+		stationTrack = self.stationTrack,
+		stationPlatform = self.stationPlatform,
 		maxSpeed = self.maxSpeed ~= math.huge and self.maxSpeed or nil,
 		maxSpeedPlus = self.maxSpeedPlus ~= math.huge and self.maxSpeedPlus or nil,
 		maxSpeedMinus = self.maxSpeedMinus ~= math.huge and self.maxSpeedMinus or nil,
@@ -573,7 +586,9 @@ function Tile:deserialize(t)
 	self.semaphoreShortSpeed = t.semaphoreShortSpeed and (type(t.semaphoreShortSpeed) == "table" and _Utils.numifyKeys(t.semaphoreShortSpeed) or {[0] = t.semaphoreShortSpeed}) or {}
 	self.semaphoreFourPhase = t.semaphoreFourPhase == true
 	self.semaphoreNext = t.semaphoreNext
-	self.itineraryEndID = t.itineraryEndID
+	self.stationName = t.stationName
+	self.stationTrack = t.stationTrack
+	self.stationPlatform = t.stationPlatform
 	self.maxSpeed = t.maxSpeed or math.huge
 	self.maxSpeedPlus = t.maxSpeedPlus or math.huge
 	self.maxSpeedMinus = t.maxSpeedMinus or math.huge

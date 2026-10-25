@@ -34,11 +34,19 @@ function Tooltip:setAnchor(x, y)
     self.anchorX, self.anchorY = x, y
 end
 
+---Sets the tooltip's margin.
+---@param x number Horizontal margin.
+---@param y number Vertical margin.
+function Tooltip:setMargin(x, y)
+    self.marginX, self.marginY = x, y
+end
+
 ---Resets this Tooltip's state.
 function Tooltip:reset()
     self:setText()
     self:setPos()
     self:setAnchor(0, 0)
+    self:setMargin(6, 3)
 end
 
 ---Draws the tooltip.

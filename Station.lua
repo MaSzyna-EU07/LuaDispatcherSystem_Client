@@ -530,14 +530,15 @@ end
 ---@return string?
 function Station:getTileTooltip(tile)
 	local lines = {}
-	if tile:isTrack() and tile.trackID then
-		table.insert(lines, "Tor: " .. tile.trackID)
-		if tile:isTrackOccupied() then
-			table.insert(lines, "    Zajęty")
+	if tile.stationName then
+		local str = "Stacja: " .. tile.stationName
+		if tile.stationTrack then
+			str = str .. " t" .. tile.stationTrack
 		end
-		if tile:isTrackReserved() then
-			table.insert(lines, "    Zarezerwowany")
+		if tile.stationPlatform then
+			str = str .. " p" .. tile.stationPlatform
 		end
+		table.insert(lines, str)
 	end
 	if tile:isSwitch() and tile.switchID then
 		table.insert(lines, "Rozjazd: " .. tile.switchID)
@@ -561,6 +562,15 @@ function Station:getTileTooltip(tile)
 	if tile.warp then
 		local station = _Project:getStation(tile.warp)
 		table.insert(lines, string.format("-> %s (%s)", station and station.name or "<Nieznana stacja>", tile.warp))
+	end
+	if tile:isTrack() and tile.trackID then
+		table.insert(lines, "Tor: " .. tile.trackID)
+		if tile:isTrackOccupied() then
+			table.insert(lines, "    Zajęty")
+		end
+		if tile:isTrackReserved() then
+			table.insert(lines, "    Zarezerwowany")
+		end
 	end
 	return #lines > 0 and _Utils.strJoin(lines, "\n") or nil
 end
@@ -710,7 +720,7 @@ function Station:handleRightClick()
 			elseif tile:isSemaphore() then
 				if tile:isTrackReserved() then
 					tile:sendSemaphoreUnreserve()
-				elseif not tile:isSemaphoreStop() then
+				elseif tile:isSemaphoreStop() == false then
 					tile:sendSemaphoreStop()
 				else
 					local allowTrain = tile.semaphoreAllowTrain or tile.semaphoreAllowSz
@@ -1060,6 +1070,8 @@ function Station:drawTileHighlights()
 	end
 end
 
+---Draws tile tooltip when the Tab key is held down.
+---@private
 function Station:drawTileTabTooltips()
 	if not love.keyboard.isDown("tab") then
 		return
@@ -1074,6 +1086,7 @@ function Station:drawTileTabTooltips()
 				-- Or maybe in the UI class?
 				_Tooltip:setPos(self:coordsToPos(x + 0.5, y + 0.5))
 				_Tooltip:setAnchor(0.5, 0.5)
+				_Tooltip:setMargin(2, 1)
 				_Tooltip:setText(id[#id])
 				_Tooltip:draw()
 			end
