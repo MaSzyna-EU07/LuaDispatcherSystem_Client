@@ -161,6 +161,13 @@ function Project:keypressed(key)
 	end
 end
 
+function Project:keyreleased(key)
+	local station = self:getCurrentStation()
+	if station then
+		station:keyreleased(key)
+	end
+end
+
 function Project:mousepressed(x, y, button)
 	local station = self:getCurrentStation()
 	if station then

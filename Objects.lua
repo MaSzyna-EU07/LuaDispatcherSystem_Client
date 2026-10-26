@@ -20,6 +20,9 @@ function Objects:new()
 	---@alias BlockadeState {direction: boolean?}
 	---@type table<string, {current: BlockadeState, history: table<integer, BlockadeState>}>
 	self.blockades = {}
+	---@alias TrackReservationState {semaphoreID: string?}
+	---@type table<string, {current: TrackReservationState, history: table<integer, TrackReservationState>}>
+	self.trackReservations = {}
 end
 
 ---Removes all data from the simulation.
@@ -29,6 +32,7 @@ function Objects:clear()
 	_Utils.emptyTable(self.switches)
 	_Utils.emptyTable(self.semaphores)
 	_Utils.emptyTable(self.blockades)
+	_Utils.emptyTable(self.trackReservations)
 end
 
 ---Initializes a station.
@@ -42,6 +46,8 @@ end
 function Objects:initTrack(name)
 	local initialState = {occupied = false, reserved = false}
 	self.tracks[name] = {current = initialState, history = {[0] = initialState}}
+	-- TODO: Merge track and track reservation state by adding partial state update support.
+	self:initTrackReservation(name)
 end
 
 ---Initializes a switch.
@@ -65,6 +71,13 @@ end
 function Objects:initBlockade(name)
 	local initialState = {direction = false}
 	self.blockades[name] = {current = initialState, history = {[0] = initialState}}
+end
+
+---Initializes a track reservation slot.
+---@param name string The full track ID.
+function Objects:initTrackReservation(name)
+	local initialState = {}
+	self.trackReservations[name] = {current = initialState, history = {[0] = initialState}}
 end
 
 ---Sets a new state for the specified history type.
@@ -125,6 +138,16 @@ function Objects:setBlockadeState(blockadeID, tick, direction)
     print(string.format("[t=%s] %s : direction=%s", tick, blockadeID, direction))
 end
 
+---Sets a new "reserved by" state for the specified track.
+---@param trackID string The full track ID.
+---@param tick integer The tick on which this state is set. This state is valid until the next change.
+---@param semaphoreID string? The new semaphore (or lack thereof) by which this track is reserved.
+function Objects:setTrackReservationState(trackID, tick, semaphoreID)
+	local newState = {semaphoreID = semaphoreID}
+	self:updateHistory(self.trackReservations[trackID], tick, newState)
+    print(string.format("[t=%s] %s : reserved by semaphoreID=%s", tick, trackID, semaphoreID))
+end
+
 ---Returns the track state at the given tick, or `nil` if the provided track doesn't exist.
 ---@param name string The full track ID.
 ---@param tick integer? The tick for which the state should be returned. If not specified, the current state will be returned.
@@ -158,6 +181,15 @@ end
 ---@return BlockadeState?
 function Objects:getBlockadeState(name, tick)
 	local history = self.blockades[name]
+	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history), tick)] or history.current)
+end
+
+---Returns the track reservation state at the given tick, or `nil` if the provided track doesn't exist.
+---@param name string The full blockade ID.
+---@param tick integer? The tick for which the state should be returned. If not specified, the current state will be returned.
+---@return TrackReservationState?
+function Objects:getTrackReservationState(name, tick)
+	local history = self.trackReservations[name]
 	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history), tick)] or history.current)
 end
 

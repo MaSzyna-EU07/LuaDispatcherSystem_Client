@@ -256,6 +256,10 @@ function love.keypressed(key)
 	end
 end
 
+function love.keyreleased(key)
+	_Project:keyreleased(key)
+end
+
 function love.textinput(t)
 	_UI:textinput(t)
 end

@@ -270,6 +270,13 @@ function Tile:getTrackState()
 	return self.trackID and _Obj:getTrackState(self.trackID)
 end
 
+---Returns the current track reservation state in the simulation.
+---If no track ID is specified for this tile, the function will return `nil`.
+---@return TrackReservationState?
+function Tile:getTrackReservationState()
+	return self.trackID and _Obj:getTrackReservationState(self.trackID)
+end
+
 ---Returns whether this tile's track is occupied, or `nil` if no track is specified for this tile.
 ---@return boolean?
 function Tile:isTrackOccupied()

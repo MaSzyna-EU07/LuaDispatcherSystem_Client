@@ -251,6 +251,22 @@ function Picker:setOrUnsetHighlightMode(mode)
 	self.highlightMode = self.highlightMode == mode and TileHighlightMode.OFF or mode
 end
 
+---Returns whether the mouse is currently hovering any of the UI buttons.
+---@return boolean
+function Picker:isMouseInUI()
+	for i, button in ipairs(self.buttons) do
+		if button:isHovered() then
+			return true
+		end
+	end
+	for i, button in ipairs(self.highlightButtons) do
+		if button:isHovered() then
+			return true
+		end
+	end
+	return false
+end
+
 function Picker:draw()
 	love.graphics.setColor(0, 0, 1)
 	love.graphics.rectangle("fill", self.boxX, self.boxY, self.boxW, self.boxH)

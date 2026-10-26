@@ -61,6 +61,13 @@ local COM_FUNCTIONS = {
 			{name = "direction", type = "int", bytes = 1}
 		}
 	},
+	[0x21] = {
+		name = "setTrackReservation",
+		params = {
+			{name = "trackID", type = "int", bytes = 2},
+			{name = "semaphoreID", type = "int", bytes = 2}
+		}
+	},
 	[0xF0] = {
 		name = "initStation",
 		params = {
@@ -151,7 +158,7 @@ com.readData = {step = "validate", byteCounter = 0}
 
 ---@type [integer, integer, integer, integer]
 com.version = {0, 0, 0, 0} -- Version data as read from the log file
----@alias ComIDToName table<string, {name: string}>
+---@alias ComIDToName table<integer, string>
 ---@type {stations: ComIDToName, tracks: ComIDToName, switches: ComIDToName, semaphores: ComIDToName, blockades: ComIDToName}
 com.ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}, blockades = {}} -- Maps IDs to object names
 ---@type {stations: integer, tracks: integer, switches: integer, semaphores: integer}
@@ -345,7 +352,7 @@ function com.readCall(name, params, silent)
 	elseif name == "debugHighlightTile" then
 		if com.pos > 0 then
 			-- Do not display the highlight when this is the initial read.
-			local stationID = com.ids.stations[params.stationID].name
+			local stationID = com.ids.stations[params.stationID]
 			if stationID then
 				local station = _Project:getStation(stationID)
 				if station then
@@ -369,17 +376,20 @@ function com.readCall(name, params, silent)
 		com.initObject(com.ids.blockades, "blockade", params.blockadeN)
 		_Obj:initBlockade(params.blockadeN)
 	elseif name == "setTrack" then
-		local track = com.ids.tracks[params.trackID]
-		_Obj:setTrackState(track.name, com.timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
+		local trackID = com.ids.tracks[params.trackID]
+		_Obj:setTrackState(trackID, com.timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
 	elseif name == "setSwitch" then
-		local switch = com.ids.switches[params.switchID]
-		_Obj:setSwitchState(switch.name, com.timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 5))
+		local switchID = com.ids.switches[params.switchID]
+		_Obj:setSwitchState(switchID, com.timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 5))
 	elseif name == "setSemaphore" then
-		local semaphore = com.ids.semaphores[params.semaphoreID]
-		_Obj:setSemaphoreState(semaphore.name, com.timeTicks, params.speed, params.nextSpeed, COM_IMAGES[params.state])
+		local semaphoreID = com.ids.semaphores[params.semaphoreID]
+		_Obj:setSemaphoreState(semaphoreID, com.timeTicks, params.speed, params.nextSpeed, COM_IMAGES[params.state])
 	elseif name == "setBlockade" then
-		local blockade = com.ids.blockades[params.blockadeID]
-		_Obj:setBlockadeState(blockade.name, com.timeTicks, com.blockadeDirFromHex(params.direction))
+		local blockadeID = com.ids.blockades[params.blockadeID]
+		_Obj:setBlockadeState(blockadeID, com.timeTicks, com.blockadeDirFromHex(params.direction))
+	elseif name == "setTrackReservation" then
+		local trackID = com.ids.tracks[params.trackID]
+		_Obj:setTrackReservationState(trackID, com.timeTicks, params.semaphoreID and com.ids.semaphores[params.semaphoreID])
 	end
 end
 
@@ -389,7 +399,7 @@ end
 
 function com.initObject(idTable, counter, name)
 	com.counters[counter] = (com.counters[counter] or 0) + 1
-	idTable[com.counters[counter]] = {name = name}
+	idTable[com.counters[counter]] = name
 end
 
 function com.blockadeDirFromHex(direction)

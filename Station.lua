@@ -1,6 +1,7 @@
 local class = require "class"
 local Tile = require("Tile")
 local TileList = require("TileList")
+local Tooltip = require("Tooltip")
 
 ---@class Station : Class
 ---@overload fun(name, shortcut): Station
@@ -49,6 +50,9 @@ function Station:new(name, shortcut)
 	self.tileHighlights = {}
 	---@type table<Tile, TileColorEntry>
 	self.tileFrameColors = {}
+	---@type table<Tile, Tooltip>
+	self.tileTooltips = {}
+	self.tileTooltipsEnabled = false
 
 	self.canvas = nil
 	self:generateCanvas()
@@ -569,7 +573,12 @@ function Station:getTileTooltip(tile)
 			table.insert(lines, "    Zajęty")
 		end
 		if tile:isTrackReserved() then
-			table.insert(lines, "    Zarezerwowany")
+			local reservationState = tile:getTrackReservationState()
+			if reservationState and reservationState.semaphoreID then
+				table.insert(lines, "    Zarezerwowany (" .. reservationState.semaphoreID .. ")")
+			else
+				table.insert(lines, "    Zarezerwowany")
+			end
 		end
 	end
 	return #lines > 0 and _Utils.strJoin(lines, "\n") or nil
@@ -842,6 +851,17 @@ function Station:keypressed(key)
 			self:clearSelectedTiles()
 		end
 	end
+	if key == "tab" then
+		self.tileTooltipsEnabled = true
+	end
+end
+
+---Executed when a key is released.
+---@param key string The key code.
+function Station:keyreleased(key)
+	if key == "tab" then
+		self.tileTooltipsEnabled = false
+	end
 end
 
 ---Executed when a mouse button is pressed.
@@ -849,7 +869,7 @@ end
 ---@param y integer The Y coordinate of mouse position.
 ---@param button integer The mouse button.
 function Station:mousepressed(x, y, button)
-	if _UI:isMouseInUI() then
+	if _UI:isMouseInUI() or _Picker:isMouseInUI() then
 		return
 	end
 	if button == 1 then
@@ -916,6 +936,7 @@ function Station:draw()
 	love.graphics.setCanvas()
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.draw(self.canvas, self.x, self.y, 0, _Settings.scale)
+	self:updateTileTooltips()
 	self:drawTileTabTooltips()
 end
 
@@ -1070,27 +1091,33 @@ function Station:drawTileHighlights()
 	end
 end
 
----Draws tile tooltip when the Tab key is held down.
----@private
-function Station:drawTileTabTooltips()
-	if not love.keyboard.isDown("tab") then
+---Updates the list of tooltips to be displayed. Also shows and hides them depending on `self.tileTooltipsEnabled`.
+function Station:updateTileTooltips()
+	_Utils.emptyTable(self.tileTooltips)
+	if not self.tileTooltipsEnabled then
 		return
 	end
 	for x = 1, self.w do
 		for y = 1, self.h do
 			local tile = self:assertGetTile(x, y)
 			if tile:isSemaphore() and tile.semaphoreID then
+				local tooltip = Tooltip()
 				local id = _Utils.strSplit(tile.semaphoreID, "_")
-				-- TODO: This tooltip drawing code is EXTREMELY ROUGH.
-				-- Do something about that. Either spawn tooltips when Tab is pressed or make tooltip drawing a global routine.
-				-- Or maybe in the UI class?
-				_Tooltip:setPos(self:coordsToPos(x + 0.5, y + 0.5))
-				_Tooltip:setAnchor(0.5, 0.5)
-				_Tooltip:setMargin(2, 1)
-				_Tooltip:setText(id[#id])
-				_Tooltip:draw()
+				tooltip:setPos(self:coordsToPos(x + 0.5, y + 0.5))
+				tooltip:setAnchor(0.5, 0.5)
+				tooltip:setMargin(2, 1)
+				tooltip:setText(id[#id])
+				self.tileTooltips[tile] = tooltip
 			end
 		end
+	end
+end
+
+---Draws tile tooltip when the Tab key is held down.
+---@private
+function Station:drawTileTabTooltips()
+	for tile, tooltip in pairs(self.tileTooltips) do
+		tooltip:draw()
 	end
 end
 
