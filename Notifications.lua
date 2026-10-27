@@ -18,7 +18,7 @@ end
 ---@param text string The notification text.
 ---@param color NotificationColor? The notification color, green by default.
 function Notifications:post(text, color)
-    table.insert(self.notifications, {text = text, color = color or NotificationColor.GREEN, time = _Time})
+    table.insert(self.notifications, {text = text, color = color or NotificationColor.GREEN, time = _T})
     print("[NOTIFICATION] " .. text)
 end
 
@@ -26,13 +26,13 @@ end
 function Notifications:draw()
     local y = 50
     for i, notification in ipairs(self.notifications) do
-        local time = _Time - notification.time
+        local time = _T - notification.time
         if time <= self.duration then
             y = y + 27
         end
     end
     for i, notification in ipairs(self.notifications) do
-        local time = _Time - notification.time
+        local time = _T - notification.time
         if time <= self.duration then
             y = y - 27
             local w = self.font:getWidth(notification.text)

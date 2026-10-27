@@ -96,8 +96,8 @@ function Station:update(dt)
 				-- We are dragging, so we need to determine the end position
 				local dx, dy = self.hoverRailX - self.railToolDragX, self.hoverRailY - self.railToolDragY
 				local angle = -_V.angle(dx, dy)
-				local angles = _DirsToAngles(self:getValidRailToolDragDirections())
-				local dir = _AngleToDir(_Utils.getClosestAngle(angle, angles))
+				local angles = _Dir.dirsToAngles(self:getValidRailToolDragDirections())
+				local dir = _Dir.angleToDir(_Utils.getClosestAngle(angle, angles))
 				local length = math.floor(math.abs(dx) + math.abs(dy)) / 2
 				-- Do not consider an irrelevant axis on horizontal drags when calculating length
 				if dir == 1 or dir == 5 then
@@ -105,7 +105,7 @@ function Station:update(dt)
 				elseif dir == 3 or dir == 7 then
 					length = math.abs(dx)
 				end
-				self.railToolDragEndX, self.railToolDragEndY = self.railToolDragX + _DIRS[dir].x * length, self.railToolDragY + _DIRS[dir].y * length
+				self.railToolDragEndX, self.railToolDragEndY = self.railToolDragX + _Dir.DIRS[dir].x * length, self.railToolDragY + _Dir.DIRS[dir].y * length
 				self.railToolDragDir = dir
 			end
 		end
@@ -479,7 +479,7 @@ function Station:getAffectedRailToolDragTiles()
 	local x, y = self.railToolDragX, self.railToolDragY
 	local dir = self.railToolDragDir
 	while x ~= self.railToolDragEndX or y ~= self.railToolDragEndY do
-		local dx, dy = _DIRS[dir].x * 0.5, _DIRS[dir].y * 0.5
+		local dx, dy = _Dir.DIRS[dir].x * 0.5, _Dir.DIRS[dir].y * 0.5
 		local tile = self:getTile(math.floor(x + dx / 2), math.floor(y + dy / 2))
 		if not tile then
 			break
@@ -487,11 +487,11 @@ function Station:getAffectedRailToolDragTiles()
 		if #tiles == 0 or tiles[#tiles].tile ~= tile then
 			table.insert(tiles, {tile = tile, dirs = {}})
 		end
-		table.insert(tiles[#tiles].dirs, (x % 1 ~= 0 and y % 1 ~= 0) and dir or _InvertDir(dir))
+		table.insert(tiles[#tiles].dirs, (x % 1 ~= 0 and y % 1 ~= 0) and dir or _Dir.invertDir(dir))
 		x, y = x + dx, y + dy
 	end
 	for i, tile in ipairs(tiles) do
-		tile.newID = _Picker:getMaskedTrackTileID(tile.tile, _DirsToBitsum(tile.dirs), self.railToolRemove)
+		tile.newID = _Picker:getMaskedTrackTileID(tile.tile, _Dir.dirsToBitsum(tile.dirs), self.railToolRemove)
 	end
 	return tiles
 end
