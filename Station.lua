@@ -581,6 +581,9 @@ function Station:getTileTooltip(tile)
 			end
 		end
 	end
+	if _Debug then
+		table.insert(lines, string.format("DEBUG warp exit: %s", tile:getWarpExitDirection() or "nil"))
+	end
 	return #lines > 0 and _Utils.strJoin(lines, "\n") or nil
 end
 

@@ -20,6 +20,7 @@ _WWIDTH, _WHEIGHT = 1600, 900
 _MouseX, _MouseY = 0, 0
 _T = 0
 _Font = love.graphics.newFont("data/dejavusans.ttf", 12)
+_Debug = false
 
 _Settings = Settings()
 _Obj = Objects()
@@ -178,15 +179,17 @@ function love.draw()
 	_Tooltip:draw()
 	_Notifications:draw()
 	-- Debug
-	local station = _Project:getCurrentStation()
-	if station then
-		local tile = station:getHoveredTile()
-		love.graphics.setColor(1, 1, 1)
-		love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 820, 740)
-		if tile then
-			love.graphics.print(string.format("Hovered Tile: %s, %s (%s)", tile.x, tile.y, tile.id), 820, 760)
-			love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 820, 780)
-			love.graphics.print("Semaphore pointing: " .. tostring(tile:getSemaphoreDirection()), 820, 800)
+	if _Debug then
+		local station = _Project:getCurrentStation()
+		if station then
+			local tile = station:getHoveredTile()
+			love.graphics.setColor(1, 1, 1)
+			love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 820, 740)
+			if tile then
+				love.graphics.print(string.format("Hovered Tile: %s, %s (%s)", tile.x, tile.y, tile.id), 820, 760)
+				love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 820, 780)
+				love.graphics.print("Semaphore pointing: " .. tostring(tile:getSemaphoreDirection()), 820, 800)
+			end
 		end
 	end
 end
@@ -196,6 +199,9 @@ function love.keypressed(key)
 	_Project:keypressed(key)
 	_UI:keypressed(key)
 
+	if key == "f12" then
+		_Debug = not _Debug
+	end
 	-- Spawn a trainset contained in the clipboard when Ctrl+V is pressed.
 	-- TODO: Contextualize this cute workflow somehow so that it remains cute while not running unnecessarily.
 	if _Utils.isCtrlPressed() and key == "v" then

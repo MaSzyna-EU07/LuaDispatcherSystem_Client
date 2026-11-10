@@ -438,6 +438,27 @@ function Tile:flipSwitchSuffix(suffix)
 	return suffix == "ab" and "cd" or "ab"
 end
 
+---Returns the direction the pathfinder should go in order to properly get out of the warp tile.
+---Returns `nil` if there's no such direction or this is not a warp tile.
+---@return integer?
+function Tile:getWarpExitDirection()
+	if not self:isExitPoint() then
+		return
+	end
+	local result = nil
+	for i, dir in ipairs(self:getTrackDirections()) do
+		local neighbor = self:getNeighbor(dir)
+		if neighbor and neighbor:hasTrackInDirection(_Dir.invertDir(dir)) then
+			if result then
+				-- Multiple directions found, this is an error state.
+				return
+			end
+			result = dir
+		end
+	end
+	return result
+end
+
 --################################################--
 ---------------- S I M U L A T I O N ---------------
 --################################################--
