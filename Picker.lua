@@ -291,7 +291,7 @@ function Picker:draw()
 			love.graphics.rectangle("line", tx, ty, size, size)
 		else
 			local image = category.display and category.display.image
-			_DrawTile(x + self.tileMargin, y + self.tileMargin, categoryTile, _Picker.electrified, false, false, false, 0, image, true, self.tileScale)
+			_Draw.drawTile(x + self.tileMargin, y + self.tileMargin, categoryTile, _Picker.electrified, false, false, false, 0, image, true, self.tileScale)
 		end
 	end
 
@@ -310,7 +310,7 @@ function Picker:drawDebug()
 	love.graphics.rectangle("fill", 0, 0, 500, 200)
 	for i, data in ipairs(_TileDB.tiles) do
 		local x, y = (i - 1) % 16, math.floor((i - 1) / 16)
-		_DrawTile(x * 28, y * 28 + 28, i, true, false, false, false, 0, nil, 2)
+		_Draw.drawTile(x * 28, y * 28 + 28, i, true, false, false, false, 0, nil, 2)
 	end
 end
 ]]

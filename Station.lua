@@ -1001,7 +1001,7 @@ function Station:drawTileGhost()
 	local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
 	local category = _Picker:getSelectedCategory()
 	local image = category.display and category.display.image or "s1"
-	_DrawTile(x, y, _Picker:getSelectedTileID(), _Picker.electrified, false, false, false, 0, image, true, 1, 0.5)
+	_Draw.drawTile(x, y, _Picker:getSelectedTileID(), _Picker.electrified, false, false, false, 0, image, true, 1, 0.5)
 end
 
 ---Draws hover helpers when adding/removing rows.
@@ -1140,7 +1140,7 @@ end
 ---@return TileColorEntry
 function Station:getTileBackgroundColor(tile)
 	if _Picker.highlightMode == TileHighlightMode.OFF then
-		return TileBackgroundColor.REGULAR
+		return (tile.x + tile.y) % 2 == 0 and TileBackgroundColor.REGULAR or TileBackgroundColor.REGULAR_ODD
 	end
 	local trackWarning = tile.trackID and (not tile:isTrack() and not tile:isBlockadeGenerator() and not tile:isExitPoint())
 	local switchWarning = tile.switchID and not tile:isSwitch()
@@ -1167,7 +1167,7 @@ function Station:getTileBackgroundColor(tile)
 			return TileBackgroundColor.MISSING
 		end
 	end
-	return TileBackgroundColor.REGULAR
+	return (tile.x + tile.y) % 2 == 0 and TileBackgroundColor.REGULAR or TileBackgroundColor.REGULAR_ODD
 end
 
 ---Sets the frame color for the specified tile.
@@ -1277,7 +1277,7 @@ function Station:drawTile(tile)
 	local forced = tile:isSwitchForced()
 	local semState = tile:getSemaphoreState()
 	local blkState = tile:getBlockadeState()
-	_DrawTile(x + tile.offset, y + tile.offset, tile.id, tile.electrified, occupied, reserved, forced, switchDimBits, semState, blkState)
+	_Draw.drawTile(x + tile.offset, y + tile.offset, tile.id, tile.electrified, occupied, reserved, forced, switchDimBits, semState, blkState)
 end
 
 ---Draws the specified Tile's background.
@@ -1285,11 +1285,18 @@ end
 function Station:drawTileBackground(tile)
 	local x, y = self:getTilePos(tile)
 	local color = self:getTileBackgroundColor(tile)
-	love.graphics.setColor(color.fill)
-	love.graphics.rectangle("fill", x, y, tile.size, tile.size)
-	love.graphics.setColor(color.border)
-	love.graphics.setLineWidth(1)
-	love.graphics.rectangle("line", x + 0.5, y + 0.5, tile.size - 1, tile.size - 1)
+	if color.fill then
+		love.graphics.setColor(color.fill)
+		love.graphics.rectangle("fill", x, y, tile.size, tile.size)
+	end
+	if color.border then
+		love.graphics.setColor(color.border)
+		love.graphics.setLineWidth(1)
+		love.graphics.rectangle("line", x + 0.5, y + 0.5, tile.size - 1, tile.size - 1)
+	end
+	if not color.fill and not color.border then
+		_Draw.drawTileBackground(x, y)
+	end
 end
 
 ---Draws the specified Tile's frame.

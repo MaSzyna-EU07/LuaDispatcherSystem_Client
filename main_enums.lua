@@ -49,7 +49,7 @@ SemaphoreColor = {
 	GREEN = {0, 1, 0},
 	ORANGE = {1, 0.6, 0},
 	WHITE = {1, 1, 1},
-	BLUE = {0.2, 0.4, 1}
+	BLUE = {0.2, 0.6, 1}
 }
 
 ---@enum SemaphoreImage
@@ -91,11 +91,13 @@ TileHighlightMode = {
 ---@type table<string, TileColorEntry>
 ---@enum TileBackgroundColor
 TileBackgroundColor = {
-	REGULAR = {border = {0.2, 0.2, 0.2}, fill = {0.4, 0.4, 0.4}},
-	OK = {border = {0.1, 0.4, 0.1}, fill = {0.2, 0.8, 0.2}},
-	WARNING = {border = {0.5, 0.5, 0.1}, fill = {1, 1, 0.2}},
-	ERROR = {border = {0.5, 0.1, 0.1}, fill = {1, 0.2, 0.2}},
-	MISSING = {border = {0.5, 0.1, 0.5}, fill = {1, 0.2, 1}}
+	--REGULAR = {border = {0, 0, 0, 0.3}, fill = {0.4, 0.4, 0.4}},
+	REGULAR = {},
+	REGULAR_ODD = {},
+	OK = {border = {0, 0, 0, 0.3}, fill = {0.2, 0.8, 0.2}},
+	WARNING = {border = {0, 0, 0, 0.3}, fill = {1, 1, 0.2}},
+	ERROR = {border = {0, 0, 0, 0.3}, fill = {1, 0.2, 0.2}},
+	MISSING = {border = {0, 0, 0, 0.3}, fill = {1, 0.2, 1}}
 }
 
 ---@type table<string, TileColorEntry>
