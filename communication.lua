@@ -350,15 +350,9 @@ function com.readCall(name, params, silent)
 			print("[NOTIFICATION] " .. params.message)
 		end
 	elseif name == "debugHighlightTile" then
+		-- Do not display the highlight when this is the initial read.
 		if com.pos > 0 then
-			-- Do not display the highlight when this is the initial read.
-			local stationID = com.ids.stations[params.stationID]
-			if stationID then
-				local station = _Project:getStation(stationID)
-				if station then
-					station:highlightTile(params.x, params.y, params.type)
-				end
-			end
+			com.highlightTile(params.stationID, params.x, params.y, params.type)
 		end
 	elseif name == "initStation" then
 		com.initObject(com.ids.stations, "station", params.stationN)
@@ -408,6 +402,13 @@ end
 
 function com.blockadeDirToHex(direction)
 	return direction and 0x01 or (direction == false and 0x00 or 0xFF)
+end
+
+function com.highlightTile(stationID, x, y, type)
+	local station = _Project:getStation(com.ids.stations[stationID])
+	if station then
+		station:highlightTile(x, y, type)
+	end
 end
 
 function com.isConnected()

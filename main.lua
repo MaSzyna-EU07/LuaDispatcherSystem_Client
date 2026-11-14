@@ -15,7 +15,7 @@ local Tileset = require("Tileset")
 local ProjectManager = require("ProjectManager")
 local Project = require("Project")
 local Picker = require("Picker")
-local TileDatabase = require("TileDatabase")
+local TileDatabase = require("lua.TileDatabase")
 
 _WWIDTH, _WHEIGHT = 1600, 900
 _MouseX, _MouseY = 0, 0

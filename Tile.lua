@@ -65,6 +65,12 @@ function Tile:new(station, x, y)
 	self.command = nil -- A command to be sent to the server when this tile is right clicked.
 end
 
+---Returns whether this Tile is empty.
+---@return boolean
+function Tile:isEmpty()
+	return self.id == ""
+end
+
 ---Returns whether this Tile is a track, regardless of its type or what else is with it.
 ---@return boolean
 function Tile:isTrack()
@@ -110,6 +116,12 @@ end
 --######################################--
 ---------------- L O G I C ---------------
 --######################################--
+
+---Returns the strigified position of this Tile, including its X and Y coordinates as well as the schematic shortcut it's on.
+---@return string
+function Tile:getLocation()
+	return string.format("%s(%s, %s)", self.station.shortcut, self.x, self.y)
+end
 
 ---Returns tile data coming from its ID.
 ---@return TileData
@@ -436,6 +448,29 @@ function Tile:flipSwitchSuffix(suffix)
 		return suffix
 	end
 	return suffix == "ab" and "cd" or "ab"
+end
+
+---Returns the destination tile, if this Tile is a warp tile and the destinations are properly set.
+---@return Tile?
+function Tile:getWarpDestination()
+	if not self.warp or not self.warpTargetID then
+        -- No warp specified
+        _LogWrite("Warp destination search failed: no warp specified", Severity.INFO, 2)
+        return
+    end
+    local schematic = _Project:getStation(self.warp)
+    if not schematic then
+        -- Warp is to an invalid schematic
+        _LogWrite(string.format("Warp destination search failed: target schematic `%s` not found", self.warp), Severity.INFO, 2)
+        return
+    end
+    local destination = schematic:getTileWithWarpID(self.warpTargetID)
+    if not destination then
+        -- Exit not found on the target schematic
+        _LogWrite(string.format("Warp destination search failed: target exit point `%s` not found on schematic `%s`", self.warpTargetID, schematic.shortcut), Severity.INFO, 2)
+        return
+    end
+    return destination
 end
 
 ---Returns the direction the pathfinder should go in order to properly get out of the warp tile.

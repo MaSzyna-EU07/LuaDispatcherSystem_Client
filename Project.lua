@@ -41,7 +41,7 @@ function Project:getServerSavePath()
 	return _Settings.simPath .. "scenery/luascript/" .. self.name .. ".json"
 end
 
----Returns the current station, or `nil` if it doesn't exist or isn't selected.
+---Returns the station by its shortcut, or `nil` if it doesn't exist.
 ---@param shortcut string? The station shortcut.
 ---@return Station?
 function Project:getStation(shortcut)
