@@ -2,6 +2,7 @@ local class = require "class"
 local Tile = require("Tile")
 local TileList = require("TileList")
 local Tooltip = require("Tooltip")
+local Pathfinder = require("lua.Pathfinder.Pathfinder")
 
 ---@class Station : Class
 ---@overload fun(name, shortcut): Station
@@ -53,6 +54,10 @@ function Station:new(name, shortcut)
 	---@type table<Tile, Tooltip>
 	self.tileTooltips = {}
 	self.tileTooltipsEnabled = false
+	---@type Path?
+	self.pathTest = nil
+	---@type Pathfinder?
+	self.pathfinderTest = nil
 
 	self.canvas = nil
 	self:generateCanvas()
@@ -130,6 +135,17 @@ function Station:update(dt)
 		end
 	end
 	_Utils.removeDeadObjects(self.tileHighlights)
+
+	-- Update the pathfinder test.
+	if self.pathfinderTest then
+		local tile = self.pathfinderTest:getNextUnexploredTile()
+		self.pathTest = self.pathfinderTest:getPath(tile)
+		local result = self.pathfinderTest:findPathStep()
+		if result ~= nil then
+			self.pathfinderTest = nil
+			print(result and "SUCCESS" or "FAILURE")
+		end
+	end
 end
 
 ---Returns the full display name of this station.
@@ -616,6 +632,30 @@ function Station:sync(force)
 	_Com.sendCommand("r " .. self.shortcut)
 end
 
+---Summons a test pathfinder from the active tile to the hovered tile.
+function Station:pathfindTest()
+	local hoveredTile = self:getHoveredTile()
+	local activeTile = self:getActiveTile()
+	if not hoveredTile or not activeTile then
+		return
+	end
+	local pathfinder = Pathfinder(activeTile, hoveredTile)
+	pathfinder:setMode(self.activeMode)
+	self.pathTest = pathfinder:findPath()
+end
+
+---Summons a test pathfinder from the active tile to the hovered tile.
+---One exploration is done per frame, instead of calculating everything instantly.
+function Station:slowPathfindTest()
+	local hoveredTile = self:getHoveredTile()
+	local activeTile = self:getActiveTile()
+	if not hoveredTile or not activeTile then
+		return
+	end
+	self.pathfinderTest = Pathfinder(activeTile, hoveredTile)
+	self.pathfinderTest:setMode(self.activeMode)
+end
+
 ---Handles the left click action.
 ---@private
 function Station:handleLeftClick()
@@ -848,6 +888,8 @@ function Station:keypressed(key)
 			self:moveTiles(self.selectedTiles, 0, -1)
 		elseif key == "down" then
 			self:moveTiles(self.selectedTiles, 0, 1)
+		elseif key == "p" then
+			self:slowPathfindTest()
 		end
 	else
 		if key == "left" then
@@ -864,6 +906,8 @@ function Station:keypressed(key)
 			self:zoom(-1)
 		elseif key == "delete" then
 			self:clearSelectedTiles()
+		elseif key == "p" then
+			self:pathfindTest()
 		end
 	end
 	if key == "tab" then
@@ -948,6 +992,7 @@ function Station:draw()
 	self:drawRailToolHover()
 	self:drawTileGhost()
 	self:drawTileHighlights()
+	self:drawTilePathTest()
 	love.graphics.setCanvas()
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.draw(self.canvas, self.x, self.y, 0, _Settings.scale)
@@ -1103,6 +1148,27 @@ function Station:drawTileHighlights()
 		local x, y = self:coordsToCanvasPos(highlight.x, highlight.y)
 		love.graphics.setColor(1, 1, 1, _Utils.mapc(1, 0, 0, 0.4, highlight.t))
 		love.graphics.rectangle("fill", x, y, self.TILE_SIZE, self.TILE_SIZE)
+	end
+end
+
+---Draws the test path, if it exists.
+---@private
+function Station:drawTilePathTest()
+	if not self.pathTest then
+		return
+	end
+	love.graphics.setColor(1, 0, 0)
+	love.graphics.setLineWidth(2)
+	for i, node in ipairs(self.pathTest) do
+		local x, y = self:coordsToCanvasPos(node.tile.x + 0.5, node.tile.y + 0.5)
+		if node.dir1 then
+			local x1, y1 = self:coordsToCanvasPos(node.tile.x + 0.5 + _Dir.DIRS[node.dir1].x * 0.5, node.tile.y + 0.5 + _Dir.DIRS[node.dir1].y * 0.5)
+			love.graphics.line(x1, y1, x, y)
+		end
+		if node.dir2 then
+			local x2, y2 = self:coordsToCanvasPos(node.tile.x + 0.5 + _Dir.DIRS[node.dir2].x * 0.5, node.tile.y + 0.5 + _Dir.DIRS[node.dir2].y * 0.5)
+			love.graphics.line(x, y, x2, y2)
+		end
 	end
 end
 
