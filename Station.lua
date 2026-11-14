@@ -265,6 +265,18 @@ function Station:assertGetHoveredTile()
 	return self:assertGetTile(self.hoverX, self.hoverY)
 end
 
+---Returns the currently active tile, if any.
+---@return Tile?
+function Station:getActiveTile()
+	return self:getTile(self.activeX, self.activeY)
+end
+
+---Returns the currently active tile, or throws an error if no tile is active.
+---@return Tile
+function Station:assertGetActiveTile()
+	return self:assertGetTile(self.activeX, self.activeY)
+end
+
 ---Returns whether the tile at provided coordinates is currently selected.
 ---@param x integer X coordinate of the tile.
 ---@param y integer Y coordinate of the tile.
@@ -755,7 +767,7 @@ function Station:handleRightClick()
 				end
 			elseif self.activeX and self.activeY then
 				if tile:isTargetForMode(self.activeMode) then
-					local track1 = self:assertGetTile(self.activeX, self.activeY):getSemaphorePrevTrackID()
+					local track1 = self:assertGetActiveTile():getSemaphorePrevTrackID()
 					local track2 = tile.trackID
 					self:sync()
 					if track1 and track2 then
@@ -1204,7 +1216,7 @@ function Station:drawFrameActive()
 		return
 	end
 	local color = self.activeMode == PathMode.SHUNT and TileFrameColor.ACTIVE_SHUNT or TileFrameColor.ACTIVE
-	self:setTileFrameColor(self:assertGetTile(self.activeX, self.activeY), color)
+	self:setTileFrameColor(self:assertGetActiveTile(), color)
 end
 
 ---Sets the frame color for the clickable tiles.

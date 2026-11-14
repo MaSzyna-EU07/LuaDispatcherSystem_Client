@@ -129,11 +129,10 @@ end
 
 -- Legacy code
 local verboseValue = 3
-local severityTable = {"INFO", "ERROR", "SUCCESS", "FAIL"}
 
 function _LogWrite(text, severity, weight)
-	if verboseValue >= weight then
-		print("[" .. severityTable[severity] .. "] " .. text)
+	if verboseValue >= (weight or 1) then
+		print("[" .. (severity or Severity.DEBUG) .. "] " .. text)
 	end
 end
 
