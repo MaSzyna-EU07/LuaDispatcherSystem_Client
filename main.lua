@@ -66,11 +66,11 @@ function love.draw()
 	_Notifications:draw()
 	-- Debug
 	if _Debug then
+		love.graphics.setColor(1, 1, 1)
+		love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 820, 740)
 		local station = _Project:getCurrentStation()
 		if station then
 			local tile = station:getHoveredTile()
-			love.graphics.setColor(1, 1, 1)
-			love.graphics.print("UI Focus: " .. tostring(_UI:getFocus()), 820, 740)
 			if tile then
 				love.graphics.print(string.format("Hovered Tile: %s, %s (%s)", tile.x, tile.y, tile.id), 820, 760)
 				love.graphics.print("Current Tile Speed: " .. tostring(tile:getSpeed()), 820, 780)

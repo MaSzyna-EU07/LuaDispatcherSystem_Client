@@ -1,5 +1,6 @@
 local Class = require("class")
-local TraversalPossibility = require("lua.Pathfinder.TraversalPossibility")
+local TrackFollower = require("lua.Pathfinder.TrackFollower")
+local Itinerary = require("lua.Pathfinder.Itinerary")
 
 ---@class Pathfinder : Class
 ---@overload fun(start: Tile, target: Tile): Pathfinder
@@ -15,24 +16,14 @@ function Pathfinder:new(start, target)
     self.mode = PathMode.TRAIN
     self.electrified = false
 
-    -- v1
-
-    ---@type TraversalPossibility[]
-    self.possibilities = {} -- List of traversal possibilities
-    ---@type Itinerary[]
-    self.itineraries = {} -- The list of itineraries corresponding to the winning path.
-
+    -- TODO: Incorporate this for faster lowest cost search?
     self.possibilitySortFn = function(a, b) return a.cost < b.cost end
 
-    -- v2
-
-    -- TODO: Move this to the initial possibility function
-    local dirFrom = assert(self.start:getSemaphoreDirection(), "First tile must be a semaphore")
     -- Total cost is calculated like this: `total = base * speedPenaltyMult + heuristic`
     ---@type table<Tile, {cost: {base: number, speedPenaltyMult: number, heuristic: number, total: number}, explored: boolean, speed: integer, dirFrom: integer}>
-    self.tiles = {
-        [self.start] = {cost = {base = 0, speedPenaltyMult = 1, heuristic = self:getHeuristic(self.start), total = self:getHeuristic(self.start)}, explored = false, speed = math.huge, dirFrom = _Dir.invertDir(dirFrom)}
-    }
+    self.tiles = {}
+
+    self:createInitialPossibility()
 end
 
 ---Sets the dispatching mode for this Pathfinder. This affects the possible paths and the displayed signal.
@@ -118,15 +109,12 @@ end
 ---If this tile is not in the tile list or is marked as already explored, returns without doing anything.
 ---@param tile Tile The tile to be explored.
 function Pathfinder:exploreTile(tile)
-    --print("---- Exploring: " .. tile:getLocation())
     local entry = self.tiles[tile]
     if not entry then
-        --print("No entry found!")
         return
     end
     -- Get all directions we can go towards
     local directions = tile:getPossibleTrackDirections(entry.dirFrom)
-    --print("Directions: " .. table.concat(directions, ", "))
     for i, direction in ipairs(directions) do
         local nextTile = tile:getNeighbor(direction)
         if nextTile and self:canEnterTile(nextTile) then
@@ -226,51 +214,84 @@ function Pathfinder:canEnterTile(tile, prevTile)
     return true
 end
 
----Calculates the path based on the provided start and end point of this Pathfinder. If a path is found, generates itineraries for it.
----Returns `true` if the path has been found, `false` otherwise.
----@return boolean
-function Pathfinder:calculatePath()
-    self:createInitialPossibility()
-    ---@type TraversalPossibility?
-    local winner = nil
-    while #self.possibilities > 0 do
-        -- Get the possibility which has the lowest cost.
-        table.sort(self.possibilities, self.possibilitySortFn)
-        ---@type TraversalPossibility
-        local possibility = table.remove(self.possibilities, 1)
-        if possibility:isWinning() then
-            -- We won!
-            possibility:finalize()
-            possibility:notifyLastSemaphore()
-            winner = possibility
-            break
-        end
-        local newPossibilities = possibility:evaluate()
-        _Utils.tableAddInplace(self.possibilities, newPossibilities)
-    end
-
-    if not winner then
-        _LogWrite("Path not found!", Severity.FAIL, 1)
-        return false
-    end
-
-    _LogWrite("Path found:", Severity.SUCCESS, 1)
-    for i, node in ipairs(winner.path) do
-        _LogWrite(string.format("    %s: pos=%s,%s dirs=%s,%s", i, node.tile.x, node.tile.y, node.dir1, node.dir2), Severity.SUCCESS, 1)
-    end
-    self.itineraries = winner:generateItineraries()
-    return true
-end
-
 ---Creates the initial possibility starting from this Pathfinder's first tile.
 ---@private
 function Pathfinder:createInitialPossibility()
-    local direction = self.start:getSemaphoreDirection()
-    if not direction then
-        -- The first tile is not a semaphore. This is currently a requirement.
-        return
+    assert(_Utils.tableIsEmpty(self.tiles), "Attempted to create initial possibilities for a non-empty pathfinder!")
+    local dirFrom = assert(self.start:getSemaphoreDirection(), "First tile must be a semaphore! (if you're reading this that means it isn't lol)")
+    self.tiles[self.start] = {cost = {base = 0, speedPenaltyMult = 1, heuristic = self:getHeuristic(self.start), total = self:getHeuristic(self.start)}, explored = false, speed = math.huge, dirFrom = _Dir.invertDir(dirFrom)}
+end
+
+---Extends the specified path to the next semaphore.
+---@param path Path The path to be extended.
+function Pathfinder:extendPath(path)
+    local follower = TrackFollower(path[#path].tile, _Dir.invertDir(path[#path].dir1))
+    follower:setPathRecording(true)
+    follower:stepUntil(function(tile) return tile ~= self.start and tile:isSemaphore() and (tile:getSemaphoreDirection() == follower.direction or (self.mode == PathMode.SHUNT and not tile.semaphoreAllowShunt and tile:getSemaphoreDirection() ~= follower.direction)) end)
+    -- Add the traversed tiles to the path.
+    for i, node in ipairs(follower:getPath()) do
+        _LogWrite(string.format("%s : %s,%s", node.tile:getLocation(), node.dir1 or "-", node.dir2 or "-"))
+        if i == 1 then
+            path[#path].dir2 = node.dir2
+        else
+            table.insert(path, node)
+        end
     end
-    table.insert(self.possibilities, TraversalPossibility(self, self.start, direction))
+end
+
+---Generates a list of itineraries based on the specified path.
+---The path should be extended with `:extendPath()` first.
+---@param path Path The path that will be turned into itineraries.
+---@return Itinerary[]
+function Pathfinder:getItineraries(path)
+    ---@type Itinerary[]
+    local itineraries = {}
+    -- Iterate through all tiles.
+    for i, node in ipairs(path) do
+        local boundary = node.tile:isSemaphore() and node.tile:getSemaphoreDirection() == node.dir2 and (self.mode == PathMode.SHUNT or node.tile.semaphoreType ~= SemaphoreType.TM)
+        -- If we are at the end of an itinerary, the previous itinerary gets its next semaphore assigned.
+        if (boundary or i == #path) and i > 1 then
+            itineraries[#itineraries]:setNext(not node.tile.semaphoreOwnShield and node.tile.semaphoreID or (node.tile:isBuffer() and 0 or math.huge))
+            _Com.highlightTile(node.tile.station.shortcut, node.tile.x, node.tile.y, 1)
+        end
+        -- Make a new itinerary if we have crossed an itinerary boundary (a semaphore).
+        if boundary and i < #path then
+            table.insert(itineraries, Itinerary())
+        end
+        local itinerary = assert(itineraries[#itineraries], "First tile is not a valid tile for an itinerary! Must be a semaphore!")
+        -- Determine which tracks should be reserved.
+        if i < #path then
+            local track = node.tile.trackID
+            if track then
+                itinerary:addTrack(track)
+            end
+        end
+        -- Check if we have to consider a switch state on this tile.
+        local switchStates = node.tile:getSwitchStatesForDirections(node.dir1, node.dir2)
+        for suffix, state in pairs(switchStates) do
+            if node.tile.switchID then
+                itinerary:addSwitch(node.tile.switchID .. suffix, state, node.tile.trackID)
+            else
+                _LogWrite(string.format("WARNING: Tile at %s does not have a switch ID - switch skipped!", node.tile:getLocation()))
+            end
+        end
+        -- Check if we are going through a W24 tile.
+        if node.tile.targetW24 then
+            itinerary:setW24(true)
+        end
+        -- First tile determines the semaphore.
+        if boundary then
+            itinerary:setSemaphore(assert(node.tile.semaphoreID, "Missing semaphore on starting tile!"))
+            if self.mode == PathMode.TRAIN then
+                itinerary:setSpeed(node.tile.semaphoreAllowTrain and math.huge or Speed.SZ)
+            elseif self.mode == PathMode.SHUNT then
+                itinerary:setSpeed(Speed.MS2)
+            end
+        end
+        -- Decrease the speed if necessary.
+        itinerary:decreaseSpeed(node.tile:getSpeedForDirections(node.dir1, node.dir2))
+    end
+    return itineraries
 end
 
 return Pathfinder

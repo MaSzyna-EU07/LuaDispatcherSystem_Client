@@ -142,6 +142,13 @@ function Station:update(dt)
 		self.pathTest = self.pathfinderTest:getPath(tile)
 		local result = self.pathfinderTest:findPathStep()
 		if result ~= nil then
+			if result then
+				self.pathfinderTest:extendPath(self.pathTest)
+				local itineraries = self.pathfinderTest:getItineraries(self.pathTest)
+				for i, itinerary in ipairs(itineraries) do
+					itinerary:examine()
+				end
+			end
 			self.pathfinderTest = nil
 			print(result and "SUCCESS" or "FAILURE")
 		end
@@ -641,7 +648,17 @@ function Station:pathfindTest()
 	end
 	local pathfinder = Pathfinder(activeTile, hoveredTile)
 	pathfinder:setMode(self.activeMode)
-	self.pathTest = pathfinder:findPath()
+	local path = pathfinder:findPath()
+	if not path then
+		self.pathTest = nil
+		return
+	end
+	pathfinder:extendPath(path)
+	self.pathTest = path
+	local itineraries = pathfinder:getItineraries(path)
+	for i, itinerary in ipairs(itineraries) do
+		itinerary:examine()
+	end
 end
 
 ---Summons a test pathfinder from the active tile to the hovered tile.
@@ -1160,14 +1177,16 @@ function Station:drawTilePathTest()
 	love.graphics.setColor(1, 0, 0)
 	love.graphics.setLineWidth(2)
 	for i, node in ipairs(self.pathTest) do
-		local x, y = self:coordsToCanvasPos(node.tile.x + 0.5, node.tile.y + 0.5)
-		if node.dir1 then
-			local x1, y1 = self:coordsToCanvasPos(node.tile.x + 0.5 + _Dir.DIRS[node.dir1].x * 0.5, node.tile.y + 0.5 + _Dir.DIRS[node.dir1].y * 0.5)
-			love.graphics.line(x1, y1, x, y)
-		end
-		if node.dir2 then
-			local x2, y2 = self:coordsToCanvasPos(node.tile.x + 0.5 + _Dir.DIRS[node.dir2].x * 0.5, node.tile.y + 0.5 + _Dir.DIRS[node.dir2].y * 0.5)
-			love.graphics.line(x, y, x2, y2)
+		if node.tile.station == self then
+			local x, y = self:coordsToCanvasPos(node.tile.x + 0.5, node.tile.y + 0.5)
+			if node.dir1 then
+				local x1, y1 = self:coordsToCanvasPos(node.tile.x + 0.5 + _Dir.DIRS[node.dir1].x * 0.5, node.tile.y + 0.5 + _Dir.DIRS[node.dir1].y * 0.5)
+				love.graphics.line(x1, y1, x, y)
+			end
+			if node.dir2 then
+				local x2, y2 = self:coordsToCanvasPos(node.tile.x + 0.5 + _Dir.DIRS[node.dir2].x * 0.5, node.tile.y + 0.5 + _Dir.DIRS[node.dir2].y * 0.5)
+				love.graphics.line(x, y, x2, y2)
+			end
 		end
 	end
 end
