@@ -9,12 +9,12 @@ local UIExitUnsavdDialog = Class:derive("UIExitUnsavdDialog")
 function UIExitUnsavdDialog:new(ui)
     self.ui = ui
 
-    self.window = self.ui:createCenteredWindow("eud", "Wyjście", 15, 6)
-	self.ui:addLabel("eud", nil, "Czy chcesz zapisać projekt?", 1, 1, 13, 1)
-	self.ui:addLabel("eud", nil, "Niezapisane zmiany zostaną utracone.", 1, 2, 13, 1)
-	self.ui:addButton("eud", "bYes", "Tak", 2, 4, 3, 1, self, self.saveAndExit)
-	self.ui:addButton("eud", "bNo", "Nie", 6, 4, 3, 1, self, self.dontSaveAndExit)
-	self.ui:addButton("eud", "bCancel", "Anuluj", 10, 4, 3, 1, self, self.cancel)
+    self.window = self.ui:createCenteredWindow("eud", "Wyjście", 18, 6)
+	self.ui:addLabel("eud", nil, "Czy chcesz zapisać projekt?", 2, 1, 14, 1)
+	self.ui:addLabel("eud", nil, "Niezapisane zmiany zostaną utracone.", 2, 2, 14, 1)
+	self.ui:addButton("eud", "bYes", "Zapisz", 2, 4, 4, 1, self, self.saveAndExit)
+	self.ui:addButton("eud", "bNo", "Nie zapisuj", 7, 4, 4, 1, self, self.dontSaveAndExit)
+	self.ui:addButton("eud", "bCancel", "Anuluj", 12, 4, 4, 1, self, self.cancel)
 end
 
 ---Shows this window.

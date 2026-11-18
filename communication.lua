@@ -419,10 +419,10 @@ function com.readCall(name, params, silent)
 		_Obj:setTrackReservationState(trackID, com.timeTicks, params.semaphoreID and com.ids.semaphores[params.semaphoreID])
 	elseif name == "incTrackVehicle" then
 		local trackID = com.ids.tracks[params.trackID]
-		_Obj:incTrackVehicle(trackID, com.timeTicks, params.trackID and com.ids.vehicles[params.vehicleID])
+		_Obj:incTrackVehicle(trackID, com.timeTicks, params.vehicleID and com.ids.vehicles[params.vehicleID])
 	elseif name == "decTrackVehicle" then
 		local trackID = com.ids.tracks[params.trackID]
-		_Obj:decTrackVehicle(trackID, com.timeTicks, params.trackID and com.ids.vehicles[params.vehicleID])
+		_Obj:decTrackVehicle(trackID, com.timeTicks, params.vehicleID and com.ids.vehicles[params.vehicleID])
 	end
 end
 

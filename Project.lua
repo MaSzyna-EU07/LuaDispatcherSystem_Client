@@ -123,6 +123,10 @@ end
 ---@param newShortcut string The new shortcut of the station.
 function Project:renameStation(shortcut, newName, newShortcut)
 	local station = self:getStation(shortcut)
+	if not station then
+		return
+	end
+	assert(not self:getStation(newShortcut), string.format("Attempt to rename station ID `%s` to an already taken ID `%s`", shortcut, newShortcut))
 	station.name = newName
 	station.shortcut = newShortcut
 	if self.currentStationID == shortcut then
@@ -134,7 +138,10 @@ end
 ---Removes the station with the specified shortcut.
 ---@param shortcut string The station shortcut.
 function Project:deleteStation(shortcut)
-	local station = self.stations[shortcut]
+	local station = self:getStation(shortcut)
+	if not station then
+		return
+	end
 	local n = _Utils.iTableGetValueIndex(self.stationIndex, station)
 	if not n then
 		return

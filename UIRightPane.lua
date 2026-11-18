@@ -571,19 +571,19 @@ function UIRightPane:updateSemaphoreFourPhase(checkbox)
 end
 
 function UIRightPane:updateWarp(input)
-	self:forEachTile(function(tile) tile.warp = input.value end)
+	self:forEachTile(function(tile) tile.warp = input.value ~= "" and input.value or nil end)
 end
 
 function UIRightPane:updateWarpID(input)
-	self:forEachTile(function(tile) tile.warpID = input.value end)
+	self:forEachTile(function(tile) tile.warpID = input.value ~= "" and input.value or nil end)
 end
 
 function UIRightPane:updateWarpTargetID(input)
-	self:forEachTile(function(tile) tile.warpTargetID = input.value end)
+	self:forEachTile(function(tile) tile.warpTargetID = input.value ~= "" and input.value or nil end)
 end
 
 function UIRightPane:updateCommand(input)
-	self:forEachTile(function(tile) tile.command = input.value end)
+	self:forEachTile(function(tile) tile.command = input.value ~= "" and input.value or nil end)
 end
 
 return UIRightPane

@@ -70,6 +70,13 @@ end
 
 ---Saves the changes made in the station list to the currently selected station.
 function UIStationList:saveStation()
+	if _Project:getStation(self.id.value) then
+		-- This check exists so that pressing Enter straight away does not display this message.
+		if self.stations.value ~= self.id.value then
+			_Notifications:post(string.format("Skrót stacji `%s` jest już zajęty!", self.id.value), NotificationColor.RED)
+		end
+		return
+	end
 	_Project:renameStation(self.stations.value, self.name.value, self.id.value)
 	-- Select the renamed entry, otherwise an error will appear.
 	self.stations.value = self.id.value

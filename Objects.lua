@@ -38,6 +38,7 @@ function Objects:clear()
 	_Utils.emptyTable(self.blockades)
 	_Utils.emptyTable(self.vehicles)
 	_Utils.emptyTable(self.trackReservations)
+	_Utils.emptyTable(self.trackVehicles)
 end
 
 ---Initializes a station.
@@ -188,7 +189,7 @@ end
 ---@return TrackState?
 function Objects:getTrackState(name, tick)
 	local history = self.tracks[name]
-	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history), tick)] or history.current)
+	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), tick)] or history.current)
 end
 
 ---Returns the switch state at the given tick, or `nil` if the provided switch doesn't exist.
@@ -197,7 +198,7 @@ end
 ---@return SwitchState?
 function Objects:getSwitchState(name, tick)
 	local history = self.switches[name]
-	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history), tick)] or history.current)
+	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), tick)] or history.current)
 end
 
 ---Returns the semaphore state at the given tick, or `nil` if the provided semaphore doesn't exist.
@@ -206,7 +207,7 @@ end
 ---@return SemaphoreState?
 function Objects:getSemaphoreState(name, tick)
 	local history = self.semaphores[name]
-	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history), tick)] or history.current)
+	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), tick)] or history.current)
 end
 
 ---Returns the blockade state at the given tick, or `nil` if the provided blockade doesn't exist.
@@ -215,7 +216,7 @@ end
 ---@return BlockadeState?
 function Objects:getBlockadeState(name, tick)
 	local history = self.blockades[name]
-	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history), tick)] or history.current)
+	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), tick)] or history.current)
 end
 
 ---Returns the track reservation state at the given tick, or `nil` if the provided track doesn't exist.
@@ -224,7 +225,7 @@ end
 ---@return TrackReservationState?
 function Objects:getTrackReservationState(name, tick)
 	local history = self.trackReservations[name]
-	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history), tick)] or history.current)
+	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), tick)] or history.current)
 end
 
 ---Returns the list of vehicles currently on the given track, alongside with counters.

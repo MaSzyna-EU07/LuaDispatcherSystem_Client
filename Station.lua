@@ -938,12 +938,16 @@ function Station:keypressed(key)
 	if _Utils.isShiftPressed() then
 		if key == "left" then
 			self:moveTiles(self.selectedTiles, -1, 0)
+			self:markUnsaved()
 		elseif key == "right" then
 			self:moveTiles(self.selectedTiles, 1, 0)
+			self:markUnsaved()
 		elseif key == "up" then
 			self:moveTiles(self.selectedTiles, 0, -1)
+			self:markUnsaved()
 		elseif key == "down" then
 			self:moveTiles(self.selectedTiles, 0, 1)
+			self:markUnsaved()
 		elseif key == "p" then
 			self:slowPathfindTest()
 		end
@@ -962,6 +966,7 @@ function Station:keypressed(key)
 			self:zoom(-1)
 		elseif key == "delete" then
 			self:clearSelectedTiles()
+			self:markUnsaved()
 		elseif key == "p" then
 			self:pathfindTest()
 		end
