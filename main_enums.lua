@@ -27,15 +27,6 @@ BlockadeDirection = {
 	OFF = 255
 }
 
----@enum Severity
-Severity = {
-	DEBUG = "DEBUG",
-    INFO = "INFO",
-    ERROR = "ERROR",
-    SUCCESS = "SUCCESS",
-    FAIL = "FAIL"
-}
-
 ---@enum TrackColor
 TrackColor = {
 	BASE = {0, 1, 0},

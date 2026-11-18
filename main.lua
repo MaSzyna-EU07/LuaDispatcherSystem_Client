@@ -2,6 +2,8 @@ require("main_enums")
 _Utils = require("lua.core.utils")
 _Time = require("lua.core.Utils.TimeUtils")
 _Dir = require("lua.core.Utils.DirUtils")
+_Log = require("lua.core.Utils.LogUtils")
+-- TODO: Maybe Severity should land here as a global after all?
 _Draw = require("utils.DrawUtils")
 _V = require("vectorutils")
 _Com = require("communication")
@@ -126,18 +128,6 @@ function love.quit()
 	_Settings.station = _Project.currentStationID
 	_Settings:save()
 end
-
--- Legacy code
-local verboseValue = 3
-
-function _LogWrite(text, severity, weight)
-	if verboseValue >= (weight or 1) then
-		print("[" .. (severity or Severity.DEBUG) .. "] " .. text)
-	end
-end
-
--- The shared code in `lua/core` logs through `_Log.write`, like the server does.
-_Log = {write = _LogWrite}
 
 function _GetMaxLessThan(l, v)
 	table.sort(l)

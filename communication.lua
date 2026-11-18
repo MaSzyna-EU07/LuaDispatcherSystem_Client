@@ -1,3 +1,5 @@
+local Severity = require("lua.core.Utils.LogSeverity")
+
 local com = {}
 
 local COM_READ_DELAY = 1
@@ -198,11 +200,11 @@ function com.init(path, findRecent)
 	if findRecent then
 		com.path = com.findMostRecentLogFile(path)
 		if com.path then
-			_LogWrite("[COMMUNICATION] Log file: " .. com.path, Severity.INFO, 1)
+			_Log.write("[COMMUNICATION] Log file: " .. com.path, Severity.INFO, 1)
 			_UI.bottomPane:setStatus("Połączono!", {0, 1, 0}, com.path)
 		else
 			com.fail = true
-			_LogWrite("[COMMUNICATION] Log file: " .. path .. "log.txt does not contain log file information. Are you starting the simulator right now?", Severity.ERROR, 1)
+			_Log.write("[COMMUNICATION] Log file: " .. path .. "log.txt does not contain log file information. Are you starting the simulator right now?", Severity.ERROR, 1)
 			_UI.bottomPane:setStatus("Błąd! (Log)", {1, 0, 0})
 			return
 		end
@@ -266,7 +268,7 @@ function com.readByte(b)
 		-- check if the byte is correct
 		local expectedByte = COM_VALIDATION_KEY[com.readData.byteCounter]
 		if bv ~= expectedByte then
-			_LogWrite("[COMMUNICATION] Verification failed! (" .. bv .. " != " .. expectedByte .. ")", Severity.ERROR, 1)
+			_Log.write("[COMMUNICATION] Verification failed! (" .. bv .. " != " .. expectedByte .. ")", Severity.ERROR, 1)
 			-- Start the file over next time.
 			com.pos = 0
 			com.readData.byteCounter = 0
@@ -274,7 +276,7 @@ function com.readByte(b)
 		end
 		-- end validation once 4 bytes were read
 		if com.readData.byteCounter == 4 then
-			_LogWrite("[COMMUNICATION] Verification successful!", Severity.INFO, 1)
+			_Log.write("[COMMUNICATION] Verification successful!", Severity.INFO, 1)
 			com.readData.step = "version"
 			com.readData.byteCounter = 0
 		end
@@ -283,13 +285,13 @@ function com.readByte(b)
 		com.version[com.readData.byteCounter] = bv
 		-- end once 4 bytes were read
 		if com.readData.byteCounter == 4 then
-			_LogWrite(string.format("[COMMUNICATION] Server version: %s.%s.%s/%s", com.version[1], com.version[2], com.version[3], com.version[4]), Severity.INFO, 1)
+			_Log.write(string.format("[COMMUNICATION] Server version: %s.%s.%s/%s", com.version[1], com.version[2], com.version[3], com.version[4]), Severity.INFO, 1)
 			com.readData.step = "function"
 		end
 	elseif com.readData.step == "function" then
 		local func = COM_FUNCTIONS[bv]
 		if not func then
-			_LogWrite("[COMMUNICATION] Unknown function code: " .. tostring(bv) .. ", skipping to the next byte. Beware, this may break the whole program!", Severity.FAIL, 1)
+			_Log.write("[COMMUNICATION] Unknown function code: " .. tostring(bv) .. ", skipping to the next byte. Beware, this may break the whole program!", Severity.FAIL, 1)
 			return
 		end
 
@@ -354,7 +356,7 @@ function com.readCall(name, params, silent)
 		t = t .. paramN .. "=" .. tostring(param)
 	end
 	if not silent then
-		_LogWrite("[COMMUNICATION] Called function: " .. name .. "(" .. t .. ")", Severity.INFO, 3)
+		_Log.write("[COMMUNICATION] Called function: " .. name .. "(" .. t .. ")", Severity.INFO, 3)
 	end
 
 	if name == "nextTick" then
@@ -449,7 +451,7 @@ function com.sendCommand(command)
 		--_Notifications:post("Command not sent - initialize connection first!", NotificationColor.RED)
 		return
 	end
-	_LogWrite("[COMMUNICATION] Command: " .. command, Severity.INFO, 3)
+	_Log.write("[COMMUNICATION] Command: " .. command, Severity.INFO, 3)
 	local spl = _Utils.strSplit(com.path, "/")
 	spl[#spl] = nil
 	local commandFilePath = _Utils.strJoin(spl, "/") .. "/command.txt"
