@@ -123,7 +123,13 @@ function love.wheelmoved(x, y)
 	_UI:wheelmoved(x, y)
 end
 
+---Executed when LOVE2D is about to quit.
+---@return boolean? abort If `true`, the engine will keep running.
 function love.quit()
+	if _Project:canDisplaySaveReminder() then
+		_UI:showExitUnsavedDialog()
+		return true
+	end
 	_Settings.project = _Project.name
 	_Settings.station = _Project.currentStationID
 	_Settings:save()

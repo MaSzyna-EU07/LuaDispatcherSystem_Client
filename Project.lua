@@ -9,6 +9,7 @@ function Project:new()
 	self.name = nil
 	self.unsaved = false
 	self.synced = true -- Whether the project file is synchronized with the server
+	self.saveDialogBypass = false -- If `true`, allows the editor to close without saving (when the user has been asked already and they've picked "don't save")
 	self.currentStationID = nil
 
 	---@type Station[]
@@ -221,6 +222,18 @@ function Project:sync()
 	if not self.synced then
 		self:export()
 	end
+end
+
+---Returns `true` if the project is unsaved and the user did not choose "don't save" yet.
+---@return boolean
+function Project:canDisplaySaveReminder()
+	return self.unsaved and not self.saveDialogBypass
+end
+
+---Marks this project as not saved, which means the save reminder will not trigger once again.
+---This does NOT prevent `:save()` from saving!
+function Project:doNotSave()
+	self.saveDialogBypass = true
 end
 
 ---Saves this project under the specified name.

@@ -3,6 +3,7 @@ local class = require "lua.core.class"
 local gui = require("Gspot")
 local UIProjectList = require("UIProjectList")
 local UIStationList = require("UIStationList")
+local UIExitUnsavedDialog = require("UIExitUnsavedDialog")
 local UITopPane = require("UITopPane")
 local UIRightPane = require("UIRightPane")
 local UITrainPane = require("UITrainPane")
@@ -291,6 +292,7 @@ function UI:setup()
 
 	self.projectList = UIProjectList(self)
 	self.stationList = UIStationList(self)
+	self.exitUnsavedDialog = UIExitUnsavedDialog(self)
 	self.topPane = UITopPane(self)
 	self.rightPane = UIRightPane(self)
 	self.trainPane = UITrainPane(self)
@@ -303,8 +305,9 @@ end
 --######################################--
 
 function UI:hideWindows()
-	self.stationList:hide()
 	self.projectList:hide()
+	self.stationList:hide()
+	self.exitUnsavedDialog:hide()
 end
 
 function UI:showProjectList()
@@ -315,6 +318,11 @@ end
 function UI:showStationList()
 	self:hideWindows()
 	self.stationList:show()
+end
+
+function UI:showExitUnsavedDialog()
+	self:hideWindows()
+	self.exitUnsavedDialog:show()
 end
 
 function UI:isMouseInUI()

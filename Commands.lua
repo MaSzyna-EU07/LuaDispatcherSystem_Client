@@ -22,4 +22,16 @@ function Commands:syncStation(station)
 	station:sync(true)
 end
 
+---Saves the current project and closes the program.
+function Commands:exitUnsavedSave()
+	_Project:save()
+	love.event.quit()
+end
+
+---Closes the program without saving the current project.
+function Commands:exitUnsavedDontSave()
+	_Project:doNotSave()
+	love.event.quit()
+end
+
 return Commands
