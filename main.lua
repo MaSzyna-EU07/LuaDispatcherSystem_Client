@@ -90,7 +90,7 @@ function love.keypressed(key)
 	end
 	-- Spawn a trainset contained in the clipboard when Ctrl+V is pressed.
 	-- TODO: Contextualize this cute workflow somehow so that it remains cute while not running unnecessarily.
-	if _Utils.isCtrlPressed() and key == "v" then
+	if not _UI:isMouseInUI() and _Utils.isCtrlPressed() and key == "v" then
 		_Com.sendCommand("st " .. _Utils.strJoin(_Utils.strSplit(love.system.getClipboardText(), "\n"), " "))
 		_Notifications:post("Wyslano trainset", NotificationColor.GREEN)
 	end

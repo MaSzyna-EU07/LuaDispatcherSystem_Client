@@ -13,6 +13,13 @@ function UITopPane:new(ui)
 	self.ui:addButton("top", "bSave", "Zapisz", 0, 0, 4, 1, self, self.saveProject)
 	self.ui:addButton("top", "bLoad", "Wczytaj", 4, 0, 4, 1, self, self.loadProject)
 	self.ui:addButton("top", "bReload", "Synchronizuj stację", 8, 0, 8, 1, self, self.syncStation)
+	self.projectLabel = self.ui:addLabel("top", "lProject", "", 16, 0, 20, 1)
+
+	self:update()
+end
+
+function UITopPane:update()
+	self.projectLabel.label = _Project and string.format("Projekt: %s%s", _Project:getSavePath() or "(Bez nazwy)", _Project:isUnsaved() and " *" or "") or "(Brak otwartego projektu)"
 end
 
 function UITopPane:saveProject()

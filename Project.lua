@@ -30,14 +30,22 @@ function Project:update(dt)
 end
 
 ---Returns the path to the project file.
----@return string
+---Returns `nil` if the project is unnamed.
+---@return string?
 function Project:getSavePath()
+	if not self.name then
+		return
+	end
 	return "projects/" .. self.name .. ".json"
 end
 
 ---Returns the path to the project file on the server side.
----@return string
+---Returns `nil` if the project is unnamed.
+---@return string?
 function Project:getServerSavePath()
+	if not self.name then
+		return
+	end
 	return _Settings.simPath .. "scenery/luascript/" .. self.name .. ".json"
 end
 
@@ -189,10 +197,17 @@ function Project:wheelmoved(x, y)
 	end
 end
 
+---Returns whether this project is unsaved.
+---@return boolean
+function Project:isUnsaved()
+	return self.unsaved
+end
+
 ---Marks this project as unsaved and unsynced.
 function Project:markUnsaved()
 	self.unsaved = true
 	self.synced = false
+	_UI.topPane:update()
 end
 
 ---Returns whether this project is synchronized with the server.
@@ -217,8 +232,9 @@ function Project:save(name)
 		return
 	end
 	self.unsaved = false
-	_Utils.saveJson(self:getSavePath(), self:serialize())
+	_Utils.saveJson(assert(self:getSavePath()), self:serialize())
 	_Notifications:post("Zapisano projekt!")
+	_UI.topPane:update()
 end
 
 ---Exports this project to the simulator directory under the current name.
@@ -228,7 +244,7 @@ function Project:export()
 		return
 	end
 	self.synced = true
-	_Utils.saveJson(self:getServerSavePath(), self:serialize())
+	_Utils.saveJson(assert(self:getServerSavePath()), self:serialize())
 	_Notifications:post("Wyeksportowano projekt!")
 end
 
@@ -236,13 +252,14 @@ end
 ---@param name string The project name to be loaded from.
 function Project:load(name)
 	self.name = name
-	local data = _Utils.loadJson(self:getSavePath())
+	local data = _Utils.loadJson(assert(self:getSavePath()))
 	if not data then
 		_Notifications:post("Nie można załadować projektu...", NotificationColor.RED)
 		return
 	end
 	self:deserialize(data)
 	self:setCurrentStation(self.stationIndex[1] and self.stationIndex[1].shortcut)
+	_UI.topPane:update()
 end
 
 ---Serializes this Project's data for saving to a file.
@@ -269,7 +286,7 @@ function Project:deserialize(t)
 	self.stations = {}
 	if t.version == 5 then
 		for shortcut, station in pairs(t.stations) do
-			assert(station.shortcut == shortcut, "Shortcut mismatch in file " .. self:getSavePath())
+			assert(station.shortcut == shortcut, "Shortcut mismatch in file " .. (self:getSavePath() or "<Unnamed project>"))
 			self.stations[shortcut] = Station(station)
 		end
 		for i, shortcut in ipairs(t.stationIndex) do

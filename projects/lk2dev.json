@@ -9235,7 +9235,7 @@
 				},
 				"20,8": {
 					"id": "track-",
-					"trackID": "WPd_K1-652@LK448.1"
+					"trackID": "K1-652@LK448.1"
 				},
 				"20,9": {
 					"id": "arrow7",
@@ -9263,7 +9263,7 @@
 				},
 				"21,8": {
 					"id": "track-",
-					"trackID": "WPd_K1-652@LK448.1"
+					"trackID": "K1-652@LK448.1"
 				},
 				"22,3": {
 					"id": "semaphore7",
@@ -9289,7 +9289,7 @@
 				},
 				"22,8": {
 					"id": "track-",
-					"trackID": "WPd_K1-652@LK448.1"
+					"trackID": "K1-652@LK448.1"
 				},
 				"23,3": {
 					"id": "arrow-",
@@ -9333,7 +9333,7 @@
 				},
 				"23,8": {
 					"id": "arrow3",
-					"trackID": "WPd_K1-652@LK448.1",
+					"trackID": "K1-652@LK448.1",
 					"trainTarget": true,
 					"warp": "WPd-Rem",
 					"warpID": "Rem",
@@ -9357,6 +9357,7 @@
 				},
 				"3,7": {
 					"id": "arrow7",
+					"trackID": "T2-D2@LK448.2",
 					"trainTarget": true,
 					"warp": "WWO",
 					"warpID": "WWO_4M",
@@ -9365,6 +9366,7 @@
 				"3,8": {
 					"id": "arrow3",
 					"targetW24": true,
+					"trackID": "O1-E1@LK448.1",
 					"trainTarget": true,
 					"warp": "WWO",
 					"warpID": "WWO_3M",
@@ -12488,6 +12490,7 @@
 				"43,15": {
 					"id": "arrow7",
 					"targetW24": true,
+					"trackID": "T2-D2@LK448.2",
 					"trainTarget": true,
 					"warp": "WPd",
 					"warpID": "WPd_4M",
@@ -12508,6 +12511,7 @@
 				},
 				"43,19": {
 					"id": "arrow3",
+					"trackID": "O1-E1@LK448.1",
 					"trainTarget": true,
 					"warp": "WPd",
 					"warpID": "WPd_3M",

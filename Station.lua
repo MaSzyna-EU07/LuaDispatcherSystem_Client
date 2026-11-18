@@ -245,6 +245,13 @@ end
 ---@param y integer Y coordinate of the tile.
 function Station:destroyTile(x, y)
 	self:unselectTile(x, y)
+	-- Unmark the destroyed tile.
+	if self.activeX == x and self.activeY == y then
+		self.activeX, self.activeY = nil, nil
+	end
+	if self.dragX == x and self.dragY == y then
+		self.dragX, self.dragY = nil, nil
+	end
 end
 
 ---Sets a tile at provided coordinates. This destroys the tile that was there previously.
