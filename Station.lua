@@ -122,8 +122,8 @@ function Station:update(dt)
 		local text = self:getTileTooltip(hoveredTile)
 		if text then
 			_Tooltip:setText(text)
-			_Tooltip:setPos(self:coordsToPos(hoveredTile.x + 0.5, hoveredTile.y + 1))
-			_Tooltip:setAnchor(0.5, 0)
+			_Tooltip:setPos(self:coordsToPos(hoveredTile.x + 0.5, hoveredTile.y))
+			_Tooltip:setAnchor(0.5, 1)
 		end
 	end
 
@@ -647,7 +647,19 @@ function Station:getTileTooltip(tile)
 		end
 	end
 	if _Debug then
-		table.insert(lines, string.format("DEBUG warp exit: %s", tile:getWarpExitDirection() or "nil"))
+		--table.insert(lines, string.format("DEBUG: %s, %s (%s)", tile.x, tile.y, tile.id))
+		local speed = tile:getSpeed()
+		if speed then
+			--table.insert(lines, "Current Speed: " .. tostring(speed))
+		end
+		local semaphoreDirection = tile:getSemaphoreDirection()
+		if semaphoreDirection then
+			--table.insert(lines, "Semaphore Direction: " .. tostring(semaphoreDirection))
+		end
+		local warpExitDirection = tile:getWarpExitDirection()
+		if warpExitDirection then
+			table.insert(lines, string.format("Warp Exit: %s", warpExitDirection))
+		end
 	end
 	return #lines > 0 and _Utils.strJoin(lines, "\n") or nil
 end
