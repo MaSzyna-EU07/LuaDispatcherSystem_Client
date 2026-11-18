@@ -236,7 +236,8 @@ end
 ---@param y integer Y coordinate of the tile.
 ---@return Tile
 function Station:assertGetTile(x, y)
-	return assert(self:getTile(x, y), string.format("There is no tile at (%s, %s)", x, y))
+	local tile = assert(self:getTile(x, y), string.format("There is no tile at (%s, %s)", x, y))
+	return tile
 end
 
 ---Destroys a tile at provided coordinates. Note that it is not replaced!
@@ -331,11 +332,7 @@ end
 ---@param x integer X coordinate of the tile.
 ---@param y integer Y coordinate of the tile.
 function Station:selectTile(x, y)
-	if self:isTileSelected(x, y) then
-		return
-	end
-	local tile = self:assertGetTile(x, y)
-	self.selectedTiles:insert(tile)
+	self.selectedTiles:insertOnce(self:assertGetTile(x, y))
 	_UI:onSelectedTilesChanged(self.selectedTiles)
 end
 
@@ -344,6 +341,34 @@ end
 ---@param y integer Y coordinate of the tile.
 function Station:unselectTile(x, y)
 	self.selectedTiles:removeFirst(self:assertGetTile(x, y))
+	_UI:onSelectedTilesChanged(self.selectedTiles)
+end
+
+---Selects a rectangle of tiles at provided coordinates.
+---@param x integer X coordinate of the tile at the top left corner.
+---@param y integer Y coordinate of the tile at the top left corner.
+---@param w integer Width of the selection, in tiles.
+---@param h integer Height of the selection, in tiles.
+function Station:selectRectTiles(x, y, w, h)
+	for ox = 0, w - 1 do
+		for oy = 0, h - 1 do
+			self.selectedTiles:insertOnce(self:assertGetTile(x + ox, y + oy))
+		end
+	end
+	_UI:onSelectedTilesChanged(self.selectedTiles)
+end
+
+---Unselects a rectangle of tiles at provided coordinates.
+---@param x integer X coordinate of the tile at the top left corner.
+---@param y integer Y coordinate of the tile at the top left corner.
+---@param w integer Width of the selection, in tiles.
+---@param h integer Height of the selection, in tiles.
+function Station:unselectRectTiles(x, y, w, h)
+	for ox = 0, w - 1 do
+		for oy = 0, h - 1 do
+			self.selectedTiles:removeFirst(self:assertGetTile(x + ox, y + oy))
+		end
+	end
 	_UI:onSelectedTilesChanged(self.selectedTiles)
 end
 
@@ -775,14 +800,12 @@ function Station:handleLeftUnclick()
 	if _Picker.mode == PickerMode.PROPERTIES then
 		if self.dragX and self.dragY then
 			if self.hoverX and self.hoverY and not self:rectSelectIsSingleTile() then
-				for x = math.min(self.dragX, self.hoverX), math.max(self.dragX, self.hoverX) do
-					for y = math.min(self.dragY, self.hoverY), math.max(self.dragY, self.hoverY) do
-						if _Utils.isCtrlPressed() then
-							self:unselectTile(x, y)
-						else
-							self:selectTile(x, y)
-						end
-					end
+				local x1, y1 = assert(math.min(self.dragX, self.hoverX)), assert(math.min(self.dragY, self.hoverY))
+				local x2, y2 = assert(math.max(self.dragX, self.hoverX)), assert(math.max(self.dragY, self.hoverY))
+				if _Utils.isCtrlPressed() then
+					self:unselectRectTiles(x1, y1, x2 - x1 + 1, y2 - y1 + 1)
+				else
+					self:selectRectTiles(x1, y1, x2 - x1 + 1, y2 - y1 + 1)
 				end
 			end
 			self.dragX, self.dragY = nil, nil

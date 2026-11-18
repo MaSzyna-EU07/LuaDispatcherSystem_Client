@@ -30,6 +30,15 @@ function TileList:insert(item, n)
     table.insert(self.items, n or #self.items + 1, item)
 end
 
+---Adds an item to the list, but only if it isn't inside yet.
+---@param item Tile The item to be added to this list.
+---@param n integer? Optional, if provided, the added tile will be `n`-th on the list.
+function TileList:insertOnce(item, n)
+	if not _Utils.isValueInTable(self.items, item) then
+		table.insert(self.items, n or #self.items + 1, item)
+	end
+end
+
 ---Removes an item from the list and returns it.
 ---@param n integer? The item to be removed from the list. If not specified, the last item will be removed.
 ---@return Tile?
