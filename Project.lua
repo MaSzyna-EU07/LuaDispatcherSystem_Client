@@ -1,4 +1,4 @@
-local class = require "class"
+local class = require "lua.core.class"
 local Station = require("Station")
 
 ---@class Project : Class

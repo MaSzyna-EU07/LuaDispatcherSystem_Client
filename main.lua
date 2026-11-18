@@ -1,7 +1,7 @@
 require("main_enums")
-_Utils = require("utils")
-_Time = require("utils.TimeUtils")
-_Dir = require("utils.DirUtils")
+_Utils = require("lua.core.utils")
+_Time = require("lua.core.Utils.TimeUtils")
+_Dir = require("lua.core.Utils.DirUtils")
 _Draw = require("utils.DrawUtils")
 _V = require("vectorutils")
 _Com = require("communication")
@@ -15,7 +15,7 @@ local Tileset = require("Tileset")
 local ProjectManager = require("ProjectManager")
 local Project = require("Project")
 local Picker = require("Picker")
-local TileDatabase = require("lua.TileDatabase")
+local TileDatabase = require("lua.core.TileDatabase")
 
 _WWIDTH, _WHEIGHT = 1600, 900
 _MouseX, _MouseY = 0, 0
@@ -135,6 +135,9 @@ function _LogWrite(text, severity, weight)
 		print("[" .. (severity or Severity.DEBUG) .. "] " .. text)
 	end
 end
+
+-- The shared code in `lua/core` logs through `_Log.write`, like the server does.
+_Log = {write = _LogWrite}
 
 function _GetMaxLessThan(l, v)
 	table.sort(l)
