@@ -1,4 +1,4 @@
-local Class = require("class")
+local Class = require("lua.core.class")
 
 ---Stores all objects existing on the server's simulation and their states over time.
 ---@class Objects : Class

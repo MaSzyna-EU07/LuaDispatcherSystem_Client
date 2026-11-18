@@ -1,4 +1,4 @@
-local class = require "class"
+local class = require "lua.core.class"
 
 ---@class Tileset : Class
 ---@overload fun(imgPath: string, w: integer, h: integer, tileW: integer, tileH: integer, antialiased: boolean?): Tileset

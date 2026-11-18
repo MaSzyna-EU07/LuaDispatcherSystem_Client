@@ -1,8 +1,8 @@
-local class = require "class"
-local Tile = require("Tile")
+local class = require "lua.core.class"
+local Tile = require("lua.core.Tile")
 local TileList = require("TileList")
 local Tooltip = require("Tooltip")
-local Pathfinder = require("lua.Pathfinder.Pathfinder")
+local Pathfinder = require("lua.core.Pathfinder.Pathfinder")
 
 ---@class Station : Class
 ---@overload fun(name, shortcut): Station
@@ -562,6 +562,22 @@ function Station:getTileWithWarpID(warpID)
 			end
 		end
 	end
+end
+
+---Returns another station of this project, or `nil` if there is none with that shortcut.
+---The shared `Tile` code resolves warps through this function.
+---@param shortcut string The station shortcut.
+---@return Station?
+function Station:findSchematic(shortcut)
+	return _Project:getStation(shortcut)
+end
+
+---Returns the exit point tile with the given ID on this station, or `nil` if there is none.
+---The shared `Tile` code resolves warps through this function.
+---@param exitID string The exit point ID.
+---@return Tile?
+function Station:getExitTile(exitID)
+	return self:getTileWithWarpID(exitID)
 end
 
 ---Returns the tooltip text for the specified tile, if any.
@@ -1181,7 +1197,7 @@ function Station:drawTilePathTest()
 	love.graphics.setColor(1, 0, 0)
 	love.graphics.setLineWidth(2)
 	for i, node in ipairs(self.pathTest) do
-		if node.tile.station == self then
+		if node.tile.schematic == self then
 			local x, y = self:coordsToCanvasPos(node.tile.x + 0.5, node.tile.y + 0.5)
 			if node.dir1 then
 				local x1, y1 = self:coordsToCanvasPos(node.tile.x + 0.5 + _Dir.DIRS[node.dir1].x * 0.5, node.tile.y + 0.5 + _Dir.DIRS[node.dir1].y * 0.5)

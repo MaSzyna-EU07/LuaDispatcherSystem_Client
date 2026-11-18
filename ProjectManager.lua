@@ -1,4 +1,4 @@
-local Class = require("class")
+local Class = require("lua.core.class")
 
 ---@class ProjectManager : Class
 ---@overload fun(): ProjectManager
