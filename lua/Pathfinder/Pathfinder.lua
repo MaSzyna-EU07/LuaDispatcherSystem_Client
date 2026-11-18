@@ -294,4 +294,17 @@ function Pathfinder:getItineraries(path)
     return itineraries
 end
 
+---Combines `:findPath()`, `:extendPath()` and `:getItineraries()` into one function.
+---Call this if you want to grab a list of itineraries straight up from this pathfinder.
+---Returns `nil` if the pathfinding fails.
+---@return Itinerary[]?
+function Pathfinder:findPathAndGetItineraries()
+	local path = self:findPath()
+	if not path then
+		return
+	end
+	self:extendPath(path)
+    return self:getItineraries(path)
+end
+
 return Pathfinder

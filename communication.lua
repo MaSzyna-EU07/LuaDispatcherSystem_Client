@@ -68,6 +68,20 @@ local COM_FUNCTIONS = {
 			{name = "semaphoreID", type = "int", bytes = 2}
 		}
 	},
+	[0x24] = {
+		name = "incTrackVehicle",
+		params = {
+			{name = "trackID", type = "int", bytes = 2},
+			{name = "vehicleID", type = "int", bytes = 2}
+		}
+	},
+	[0x25] = {
+		name = "decTrackVehicle",
+		params = {
+			{name = "trackID", type = "int", bytes = 2},
+			{name = "vehicleID", type = "int", bytes = 2}
+		}
+	},
 	[0xF0] = {
 		name = "initStation",
 		params = {
@@ -97,6 +111,12 @@ local COM_FUNCTIONS = {
 		name = "initBlockade",
 		params = {
 			{name = "blockadeN", type = "string"}
+		}
+	},
+	[0xF6] = {
+		name = "initVehicle",
+		params = {
+			{name = "vehicleN", type = "string"}
 		}
 	},
 	[0xFF] = {
@@ -159,9 +179,9 @@ com.readData = {step = "validate", byteCounter = 0}
 ---@type [integer, integer, integer, integer]
 com.version = {0, 0, 0, 0} -- Version data as read from the log file
 ---@alias ComIDToName table<integer, string>
----@type {stations: ComIDToName, tracks: ComIDToName, switches: ComIDToName, semaphores: ComIDToName, blockades: ComIDToName}
-com.ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}, blockades = {}} -- Maps IDs to object names
----@type {stations: integer, tracks: integer, switches: integer, semaphores: integer}
+---@type {stations: ComIDToName, tracks: ComIDToName, switches: ComIDToName, semaphores: ComIDToName, blockades: ComIDToName, vehicles: ComIDToName}
+com.ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}, blockades = {}, vehicles = {}} -- Maps IDs to object names
+---@type {stations: integer, tracks: integer, switches: integer, semaphores: integer, blockades: integer, vehicles: integer}
 com.counters = {} -- How many objects of each type have been initialized
 
 ---Initializes the communication with the server.
@@ -171,7 +191,7 @@ function com.init(path, findRecent)
 	_Obj:clear()
 	com.pos = 0
 	com.readData = {step = "validate", byteCounter = 0}
-	com.ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}, blockades = {}}
+	com.ids = {stations = {}, tracks = {}, switches = {}, semaphores = {}, blockades = {}, vehicles = {}}
 	com.counters = {}
 	com.timeTicks = 0
 	com.fail = false
@@ -369,6 +389,9 @@ function com.readCall(name, params, silent)
 	elseif name == "initBlockade" then
 		com.initObject(com.ids.blockades, "blockade", params.blockadeN)
 		_Obj:initBlockade(params.blockadeN)
+	elseif name == "initVehicle" then
+		com.initObject(com.ids.vehicles, "vehicle", params.vehicleN)
+		_Obj:initVehicle(params.vehicleN)
 	elseif name == "setTrack" then
 		local trackID = com.ids.tracks[params.trackID]
 		_Obj:setTrackState(trackID, com.timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
@@ -384,6 +407,12 @@ function com.readCall(name, params, silent)
 	elseif name == "setTrackReservation" then
 		local trackID = com.ids.tracks[params.trackID]
 		_Obj:setTrackReservationState(trackID, com.timeTicks, params.semaphoreID and com.ids.semaphores[params.semaphoreID])
+	elseif name == "incTrackVehicle" then
+		local trackID = com.ids.tracks[params.trackID]
+		_Obj:incTrackVehicle(trackID, com.timeTicks, params.trackID and com.ids.vehicles[params.vehicleID])
+	elseif name == "decTrackVehicle" then
+		local trackID = com.ids.tracks[params.trackID]
+		_Obj:decTrackVehicle(trackID, com.timeTicks, params.trackID and com.ids.vehicles[params.vehicleID])
 	end
 end
 

@@ -20,9 +20,13 @@ function Objects:new()
 	---@alias BlockadeState {direction: boolean?}
 	---@type table<string, {current: BlockadeState, history: table<integer, BlockadeState>}>
 	self.blockades = {}
+	---@type table<string, {}>
+	self.vehicles = {}
 	---@alias TrackReservationState {semaphoreID: string?}
 	---@type table<string, {current: TrackReservationState, history: table<integer, TrackReservationState>}>
 	self.trackReservations = {}
+	---@type table<string, table<string, integer>>
+	self.trackVehicles = {} -- TODO: Cover this by history?
 end
 
 ---Removes all data from the simulation.
@@ -32,6 +36,7 @@ function Objects:clear()
 	_Utils.emptyTable(self.switches)
 	_Utils.emptyTable(self.semaphores)
 	_Utils.emptyTable(self.blockades)
+	_Utils.emptyTable(self.vehicles)
 	_Utils.emptyTable(self.trackReservations)
 end
 
@@ -71,6 +76,12 @@ end
 function Objects:initBlockade(name)
 	local initialState = {direction = false}
 	self.blockades[name] = {current = initialState, history = {[0] = initialState}}
+end
+
+---Initializes a vehicle.
+---@param name string The full vehicle ID.
+function Objects:initVehicle(name)
+	self.vehicles[name] = {}
 end
 
 ---Initializes a track reservation slot.
@@ -148,6 +159,29 @@ function Objects:setTrackReservationState(trackID, tick, semaphoreID)
     print(string.format("[t=%s] %s : reserved by semaphoreID=%s", tick, trackID, semaphoreID))
 end
 
+---Increases the vehicle counter for the specified track and the specified vehicle.
+---@param trackID string The full track ID.
+---@param tick integer The tick on which this state is set. This state is valid until the next change.
+---@param vehicleID string The vehicle ID to increment.
+function Objects:incTrackVehicle(trackID, tick, vehicleID)
+	self.trackVehicles[trackID] = self.trackVehicles[trackID] or {}
+	self.trackVehicles[trackID][vehicleID] = (self.trackVehicles[trackID][vehicleID] or 0) + 1
+    print(string.format("[t=%s] %s : incremented vehicle %s", tick, trackID, vehicleID))
+end
+
+---Decreases the vehicle counter for the specified track and the specified vehicle.
+---@param trackID string The full track ID.
+---@param tick integer The tick on which this state is set. This state is valid until the next change.
+---@param vehicleID string The vehicle ID to decrease.
+function Objects:decTrackVehicle(trackID, tick, vehicleID)
+	self.trackVehicles[trackID] = self.trackVehicles[trackID] or {}
+	self.trackVehicles[trackID][vehicleID] = (self.trackVehicles[trackID][vehicleID] or 0) - 1
+	if self.trackVehicles[trackID][vehicleID] == 0 then
+		self.trackVehicles[trackID][vehicleID] = nil
+	end
+    print(string.format("[t=%s] %s : decremented vehicle %s", tick, trackID, vehicleID))
+end
+
 ---Returns the track state at the given tick, or `nil` if the provided track doesn't exist.
 ---@param name string The full track ID.
 ---@param tick integer? The tick for which the state should be returned. If not specified, the current state will be returned.
@@ -191,6 +225,16 @@ end
 function Objects:getTrackReservationState(name, tick)
 	local history = self.trackReservations[name]
 	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history), tick)] or history.current)
+end
+
+---Returns the list of vehicles currently on the given track, alongside with counters.
+---If there are no vehicles, returns an empty table.
+---@param name string The track ID to fetch the vehicle list from.
+---@return table<string, integer>?
+function Objects:getTrackVehicleState(name)
+	-- Prepend an empty table once.
+	self.trackVehicles[name] = self.trackVehicles[name] or {}
+	return self.trackVehicles[name]
 end
 
 return Objects

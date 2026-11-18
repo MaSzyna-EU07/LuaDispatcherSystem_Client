@@ -600,7 +600,7 @@ function Station:getTileTooltip(tile)
 	end
 	if tile.warp then
 		local station = _Project:getStation(tile.warp)
-		table.insert(lines, string.format("-> %s (%s)", station and station.name or "<Nieznana stacja>", tile.warp))
+		table.insert(lines, string.format("-> %s (%s) [%s] -> [%s]", station and station.name or "<Nieznana stacja>", tile.warp, tile.warpID or "???", tile.warpTargetID or "???"))
 	end
 	if tile:isTrack() and tile.trackID then
 		table.insert(lines, "Tor: " .. tile.trackID)
@@ -613,6 +613,13 @@ function Station:getTileTooltip(tile)
 				table.insert(lines, "    Zarezerwowany (" .. reservationState.semaphoreID .. ")")
 			else
 				table.insert(lines, "    Zarezerwowany")
+			end
+		end
+		local vehicles = tile:getTrackVehicleState()
+		if vehicles and not _Utils.tableIsEmpty(vehicles) then
+			table.insert(lines, "Pojazdy:")
+			for i, vehicle in ipairs(_Utils.tableGetSortedKeys(vehicles)) do
+				table.insert(lines, string.format("  - %s (%s)", vehicle, vehicles[vehicle]))
 			end
 		end
 	end
@@ -648,14 +655,11 @@ function Station:pathfindTest()
 	end
 	local pathfinder = Pathfinder(activeTile, hoveredTile)
 	pathfinder:setMode(self.activeMode)
-	local path = pathfinder:findPath()
-	if not path then
+	local itineraries = pathfinder:findPathAndGetItineraries()
+	if not itineraries then
 		self.pathTest = nil
 		return
 	end
-	pathfinder:extendPath(path)
-	self.pathTest = path
-	local itineraries = pathfinder:getItineraries(path)
 	for i, itinerary in ipairs(itineraries) do
 		itinerary:examine()
 	end
@@ -799,14 +803,14 @@ function Station:handleRightClick()
 					end
 				end
 			elseif tile:isSemaphore() then
-				if tile:isTrackReserved() then
-					tile:sendSemaphoreUnreserve()
-				elseif tile:isSemaphoreStop() == false then
-					tile:sendSemaphoreStop()
-				else
-					local allowTrain = tile.semaphoreAllowTrain or tile.semaphoreAllowSz
-					local allowShunt = tile.semaphoreAllowShunt
-					if allowTrain or allowShunt then
+				local allowTrain = tile.semaphoreAllowTrain or tile.semaphoreAllowSz
+				local allowShunt = tile.semaphoreAllowShunt
+				if allowTrain or allowShunt then
+					if tile:isTrackReserved() then
+						tile:sendSemaphoreUnreserve()
+					elseif tile:isSemaphoreStop() == false then
+						tile:sendSemaphoreStop()
+					else
 						self.activeX, self.activeY = self.hoverX, self.hoverY
 						-- If only one mode is available, select it. Otherwise, Shift will force shunting mode.
 						self.activeMode = PathMode.TRAIN
