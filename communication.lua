@@ -249,14 +249,12 @@ function com.readBytes()
 		print("Log file not found, trying again next time")
 		return
 	end
-	io.input(file)
 	local length = file:seek("end")
 	file:seek("set", com.pos) -- Start from where the file ended previously
 	for i = com.pos, length - 1 do
-		com.readByte(io.read(1))
+		com.readByte(file:read(1))
 	end
-
-	io.close(file)
+	file:close()
 	com.pos = length
 end
 
