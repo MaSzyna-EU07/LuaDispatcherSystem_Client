@@ -1,4 +1,4 @@
-local Class = require("class")
+local Class = require("lua.core.class")
 local PickerButton = require("PickerButton")
 
 ---@class Picker : Class

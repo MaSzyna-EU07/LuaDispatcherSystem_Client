@@ -1,4 +1,4 @@
-local Class = require("class")
+local Class = require("lua.core.class")
 
 ---@class PickerButton : Class
 ---@overload fun(data): PickerButton

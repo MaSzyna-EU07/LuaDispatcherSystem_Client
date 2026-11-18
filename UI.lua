@@ -1,4 +1,4 @@
-local class = require "class"
+local class = require "lua.core.class"
 ---@type Gspot
 local gui = require("Gspot")
 local UIProjectList = require("UIProjectList")

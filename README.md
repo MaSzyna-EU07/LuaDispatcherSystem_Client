@@ -7,6 +7,11 @@ It is not necessary for playing the scenarios which use the Lua Dispatcher Syste
 
 # How to run
 
+The code shared with the server is in the `lua/core` directory, which is a git submodule
+([LuaDispatcherSystem_CORE](https://github.com/MaSzyna-EU07/LuaDispatcherSystem_CORE)).
+Clone this repository with `git clone --recurse-submodules`, or run `git submodule update --init` in an existing clone.
+Without it the `lua/core` directory is empty and the application does not start.
+
 You must install LOVE2D (tested against 11.5): https://love2d.org/
 
 Next, run this application like any other LOVE2D application from its main directory from the command line.
