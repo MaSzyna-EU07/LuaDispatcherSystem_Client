@@ -2,8 +2,6 @@ local Severity = require("lua.core.Utils.LogSeverity")
 
 local com = {}
 
-local COM_READ_DELAY = 1
-
 ---@type [integer, integer, integer, integer]
 local COM_VALIDATION_KEY = {0x70, 0xA0, 0xE0, 0x07}
 
@@ -163,9 +161,10 @@ local COM_BLOCKADES = {
 
 ---@type string?
 com.path = nil -- Full path to the log file that is being read
+---@type file*?
+com.file = nil -- The file handle to the current log file
 com.fail = false -- `true` if in failure state
 com.pos = 0 -- Total amount of read bytes
-com.readTime = 0 -- Time since last read
 com.timeTicks = 0 -- How many ticks have elapsed since the beginning of the log file
 
 ---Contains all byte parsing state.
@@ -211,7 +210,12 @@ function com.init(path, findRecent)
 	else
 		com.path = path
 	end
-	com.readBytes()
+	-- Close the previously opened log file.
+	if com.file then
+		com.file:close()
+		com.file = nil
+	end
+	com.readBytesFromLog()
 	_UI:onComInit()
 end
 
@@ -219,17 +223,21 @@ function com.update(dt)
 	if com.fail then
 		return
 	end
-	com.readTime = com.readTime + dt
-	if com.readTime >= COM_READ_DELAY then
-		com.readTime = 0
-		com.readBytes()
-		_UI:onComUpdated()
-	end
+	com.readBytesFromLog()
+	_UI:onComUpdated()
 end
 
+---Returns the path to the log file based on what's in the `log.txt` file in the main simulator directory.
+---If the log doesn't exist or has no traces of Lua Dispatcher running, returns `nil`.
+---@param path string Path to the main simulator directory.
+---@return string?
 function com.findMostRecentLogFile(path)
 	local log = _Utils.loadFile(path .. "log.txt")
-	assert(log, "File not found: " .. path .. "log.txt")
+	if not log then
+		-- Possibly incorrect simulator path (or the simulator has never been started yet).
+		_Log.write("File not found: " .. path .. "log.txt", Severity.FAIL, 3)
+		return
+	end
 	local line = _Utils.strFindLine(log, "lua: log: LuaDispatcher -> [INFO] [COMMUNICATION] File Name:")
 	if line then
 		local s = _Utils.strSplit(line, " ")
@@ -240,22 +248,24 @@ function com.findMostRecentLogFile(path)
 		end
 		return path .. filename
 	end
+	_Log.write("File " .. path .. "log.txt doesn't appear to have launched Lua Dispatcher!", Severity.FAIL, 3)
 end
 
-function com.readBytes()
+function com.readBytesFromLog()
 	assert(com.path, "Call `com.init()` first.")
-	local file = io.open(com.path, "rb")
-	if not file then
-		print("Log file not found, trying again next time")
+	if not com.file then
+		-- Attempt to open the file.
+		com.file = io.open(com.path, "rb")
+		_Log.write("[COMMUNICATION] Log file not found, trying again next time", Severity.FAIL, 3)
 		return
 	end
-	local length = file:seek("end")
-	file:seek("set", com.pos) -- Start from where the file ended previously
-	for i = com.pos, length - 1 do
-		com.readByte(file:read(1))
+	local bytes = com.file:read("*a")
+	for i = 1, #bytes do
+		com.readByte(bytes:sub(i, i))
 	end
-	file:close()
-	com.pos = length
+	if #bytes > 0 then
+		_Log.write("[COMMUNICATION] Read " .. #bytes .. " bytes", Severity.INFO, 1)
+	end
 end
 
 function com.readByte(b)
