@@ -467,7 +467,7 @@ function UIRightPane:confirmSemaphoreID(input)
 end
 
 function UIRightPane:updateBlockadeID(input)
-	self:forEachTile(function(tile) tile.blockadeID = input.value end)
+	self:forEachTile(function(tile) tile.blockadeID = input.value ~= "" and input.value or nil end)
 end
 
 function UIRightPane:updateStationName(input)

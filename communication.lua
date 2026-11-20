@@ -200,11 +200,11 @@ function com.init(path, findRecent)
 		com.path = com.findMostRecentLogFile(path)
 		if com.path then
 			_Log.write("[COMMUNICATION] Log file: " .. com.path, Severity.INFO, 1)
-			_UI.bottomPane:setStatus("Połączono!", {0, 1, 0}, com.path)
+			_UI.bottomPane:setStatus("Połączono!", {0, 1, 0}, "Plik: `" .. com.path .. "`")
 		else
 			com.fail = true
 			_Log.write("[COMMUNICATION] Log file: " .. path .. "log.txt does not contain log file information. Are you starting the simulator right now?", Severity.ERROR, 1)
-			_UI.bottomPane:setStatus("Błąd! (Log)", {1, 0, 0})
+			_UI.bottomPane:setStatus("Błąd! (Log)", {1, 0, 0}, "Brak pliku `" .. path .. "log.txt`")
 			return
 		end
 	else
@@ -223,8 +223,10 @@ function com.update(dt)
 	if com.fail then
 		return
 	end
-	com.readBytesFromLog()
-	_UI:onComUpdated()
+	if com.path then
+		com.readBytesFromLog()
+		_UI:onComUpdated()
+	end
 end
 
 ---Returns the path to the log file based on what's in the `log.txt` file in the main simulator directory.

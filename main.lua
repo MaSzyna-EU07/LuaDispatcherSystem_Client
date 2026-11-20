@@ -40,7 +40,9 @@ _TileDB = TileDatabase()
 function love.load()
 	_Settings:load()
 	_UI:setup()
-	_Com.init(_Settings.simPath, true)
+	if _Settings.simPath then
+		_Com.init(_Settings.simPath, true)
+	end
 	if _Settings.project then
 		_Project:load(_Settings.project)
 	end
