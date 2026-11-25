@@ -1,5 +1,6 @@
 local Class = require("lua.core.class")
 local PickerButton = require("PickerButton")
+local SemaphoreType = require("lua.core.Enums.SemaphoreType")
 
 ---@class Picker : Class
 ---@overload fun(): Picker

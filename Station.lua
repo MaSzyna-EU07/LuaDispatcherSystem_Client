@@ -4,6 +4,7 @@ local TileList = require("TileList")
 local Tooltip = require("Tooltip")
 local RailTool = require("PickerModes.RailTool")
 local Pathfinder = require("lua.core.Pathfinder.Pathfinder")
+local PathMode = require("lua.core.Enums.PathMode")
 
 ---@class Station : Class
 ---@overload fun(name, shortcut): Station
@@ -793,10 +794,13 @@ function Station:handleRightClick()
 					end
 				end
 			elseif tile:isBlockadeGenerator() then
-				if _Utils.isShiftPressed() then
-					tile:sendBlockadeDirection(tile:getBlockadeState().direction == nil or nil)
-				else
-					tile:sendBlockadeDirection(tile:getBlockadeState().direction == false)
+				local blockadeState = tile:getBlockadeState()
+				if blockadeState then
+					if _Utils.isShiftPressed() then
+						tile:sendBlockadeDirection(blockadeState.direction == nil or nil)
+					else
+						tile:sendBlockadeDirection(blockadeState.direction == false)
+					end
 				end
 			elseif self.activeX and self.activeY then
 				if tile:isTargetForMode(self.activeMode) then

@@ -143,7 +143,9 @@ function UIRightPane:addSemaphoreSettings()
 	self.uiGenY = self.uiGenY + 1
 
 	self.widgets.semaphoreNoW24 = self.ui:addCheckbox("right", "semaphoreNoW24", "Brak W24", 0, self.uiGenY, 1, 1, self, self.updateSemaphoreNoW24)
-	self.widgets.semaphoreNoW24.tip = "Odnosi się do semafora.\nOznacza, że dany semafor NIE posiada wskaźnika W24.\nTaki semafor nie może podać przebiegu wymagającego wyświetlenia tego wskaźnika."
+	self.widgets.semaphoreNoW24.tip = "Oznacza, że dany semafor NIE posiada wskaźnika W24.\nTaki semafor nie może podać przebiegu wymagającego wyświetlenia tego wskaźnika."
+	self.widgets.semaphoreFake = self.ui:addCheckbox("right", "semaphoreFake", "Atrapa", 7, self.uiGenY, 1, 1, self, self.updateSemaphoreFake)
+	self.widgets.semaphoreFake.tip = "Oznacza ten semafor jako podglądowy. Oznacza to, że nie da się z niego nastawić przebiegu i nie bierze udziału w skanowaniu schematu.\nPrzykładem takiego zachowania mogą być podglądowe semafory wjazdowe na szlakach.\nJest to ważne, ponieważ w przeciwnym wypadku szlaki będą próbowały podać taki semafor."
 	self.uiGenY = self.uiGenY + 1
 
 	self.widgets.semaphoreShortSpeed_l = self.ui:addLabel("right", nil, "V dla skr. drogi ham.", 0, self.uiGenY, 8, 1)
@@ -303,6 +305,7 @@ function UIRightPane:setValuesForTiles(tiles)
 		self:prependValue(self.widgets.semaphoreID, tiles, "semaphoreID", "string")
 		self:prependValue(self.widgets.semaphoreType, tiles, "semaphoreType", "semaphoreType")
 		self:prependValue(self.widgets.semaphoreNoW24, tiles, "semaphoreNoW24", "boolean")
+		self:prependValue(self.widgets.semaphoreFake, tiles, "semaphoreFake", "boolean")
 		self:prependValue(self.widgets.semaphoreShortSpeed, tiles, "semaphoreShortSpeed", "shortSpeed")
 		self:prependValue(self.widgets.semaphoreAllowTrain, tiles, "semaphoreAllowTrain", "boolean")
 		self:prependValue(self.widgets.semaphoreAllowShunt, tiles, "semaphoreAllowShunt", "boolean")
@@ -504,6 +507,10 @@ end
 
 function UIRightPane:updateSemaphoreNoW24(checkbox)
 	self:forEachTile(function(tile) tile.semaphoreNoW24 = checkbox.value end)
+end
+
+function UIRightPane:updateSemaphoreFake(checkbox)
+	self:forEachTile(function(tile) tile.semaphoreFake = checkbox.value end)
 end
 
 function UIRightPane:updateSemaphoreNoDanger(checkbox)

@@ -1,4 +1,6 @@
 local Class = require("lua.core.class")
+local SemaphoreType = require("lua.core.Enums.SemaphoreType")
+local Speed = require("lua.core.Enums.Speed")
 
 ---Stores all objects existing on the server's simulation and their states over time.
 ---@class Objects : Class
