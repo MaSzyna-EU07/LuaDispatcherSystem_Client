@@ -11,21 +11,21 @@ function Objects:new()
 	---@type table<string, {}>
 	self.stations = {}
 	---@alias TrackState {occupied: boolean, reserved: boolean}
-	---@type table<string, {current: TrackState, history: table<integer, TrackState>}>
+	---@type table<string, TrackState>
 	self.tracks = {}
 	---@alias SwitchState {state: boolean, forced: boolean}
-	---@type table<string, {current: SwitchState, history: table<integer, SwitchState>}>
+	---@type table<string, SwitchState>
 	self.switches = {}
 	---@alias SemaphoreState {speed: Speed, nextSpeed: Speed, image: string}
-	---@type table<string, {current: SemaphoreState, history: table<integer, SemaphoreState>}>
+	---@type table<string, SemaphoreState>
 	self.semaphores = {}
 	---@alias BlockadeState {direction: boolean?}
-	---@type table<string, {current: BlockadeState, history: table<integer, BlockadeState>}>
+	---@type table<string, BlockadeState>
 	self.blockades = {}
 	---@type table<string, {}>
 	self.vehicles = {}
 	---@alias TrackReservationState {semaphoreID: string?}
-	---@type table<string, {current: TrackReservationState, history: table<integer, TrackReservationState>}>
+	---@type table<string, TrackReservationState>
 	self.trackReservations = {}
 	---@type table<string, table<string, integer>>
 	self.trackVehicles = {} -- TODO: Cover this by history?
@@ -52,17 +52,15 @@ end
 ---Initializes a track.
 ---@param name string The full track ID.
 function Objects:initTrack(name)
-	local initialState = {occupied = false, reserved = false}
-	self.tracks[name] = {current = initialState, history = {[0] = initialState}}
-	-- TODO: Merge track and track reservation state by adding partial state update support.
+	self.tracks[name] = {occupied = false, reserved = false}
+	-- TODO: Merge track and track reservation state.
 	self:initTrackReservation(name)
 end
 
 ---Initializes a switch.
 ---@param name string The full switch ID.
 function Objects:initSwitch(name)
-	local initialState = {state = false}
-	self.switches[name] = {current = initialState, history = {[0] = initialState}}
+	self.switches[name] = {state = false}
 end
 
 ---Initializes a semaphore.
@@ -70,15 +68,13 @@ end
 ---@param type SemaphoreType The semaphore type.
 function Objects:initSemaphore(name, type)
     local startingImage = type == SemaphoreType.TM and "ms1" or "s1"
-	local initialState = {speed = Speed.STOP, nextSpeed = Speed.STOP, image = startingImage}
-	self.semaphores[name] = {current = initialState, history = {[0] = initialState}}
+	self.semaphores[name] = {speed = Speed.STOP, nextSpeed = Speed.STOP, image = startingImage}
 end
 
 ---Initializes a blockade.
 ---@param name string The full blockade ID.
 function Objects:initBlockade(name)
-	local initialState = {direction = false}
-	self.blockades[name] = {current = initialState, history = {[0] = initialState}}
+	self.blockades[name] = {direction = false}
 end
 
 ---Initializes a vehicle.
@@ -90,144 +86,107 @@ end
 ---Initializes a track reservation slot.
 ---@param name string The full track ID.
 function Objects:initTrackReservation(name)
-	local initialState = {}
-	self.trackReservations[name] = {current = initialState, history = {[0] = initialState}}
-end
-
----Sets a new state for the specified history type.
----@private
----@generic T
----@param history {current: T, history: table<integer, T>} The history table for an object to be used.
----@param tick integer The tick on which this state is set. This state is valid until the next change.
----@param state T New state to be applied.
-function Objects:updateHistory(history, tick, state)
-	history.history[tick] = state
-	-- Update the current state if the newly provided timestamp is the most recent one.
-	if _GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), 999999999) == tick then
-		history.current = state
-	end
+	self.trackReservations[name] = {}
 end
 
 ---Sets a new state for the specified track.
 ---@param trackID string The full track ID.
----@param tick integer The tick on which this state is set. This state is valid until the next change.
 ---@param occupied boolean Whether this track is occupied.
 ---@param reserved boolean Whether this track is reserved.
-function Objects:setTrackState(trackID, tick, occupied, reserved)
-	local newState = {occupied = occupied, reserved = reserved}
-	self:updateHistory(self.tracks[trackID], tick, newState)
-    print(string.format("[t=%s] %s : occupied=%s reserved=%s", tick, trackID, occupied, reserved))
+function Objects:setTrackState(trackID, occupied, reserved)
+	self.tracks[trackID] = {occupied = occupied, reserved = reserved}
+    print(string.format("%s : occupied=%s reserved=%s", trackID, occupied, reserved))
 end
 
 ---Sets a new state for the specified switch.
 ---@param switchID string The full switch ID.
----@param tick integer The tick on which this state is set. This state is valid until the next change.
 ---@param state boolean If `true`, "+", otherwise - "-".
 ---@param forced boolean Whether the switch has been forcefully switched ("rozprucie rozjazdu").
-function Objects:setSwitchState(switchID, tick, state, forced)
-	local newState = {state = state, forced = forced}
-	self:updateHistory(self.switches[switchID], tick, newState)
-    print(string.format("[t=%s] %s : state=%s forced=%s", tick, switchID, state, forced))
+function Objects:setSwitchState(switchID, state, forced)
+	self.switches[switchID] = {state = state, forced = forced}
+    print(string.format("%s : state=%s forced=%s", switchID, state, forced))
 end
 
 ---Sets a new state for the specified semaphore.
 ---@param semaphoreID string The full semaphore ID.
----@param tick integer The tick on which this state is set. This state is valid until the next change.
 ---@param speed Speed The current speed on the semaphore.
 ---@param nextSpeed Speed The next speed on the semaphore.
 ---@param image string The image on the semaphore.
-function Objects:setSemaphoreState(semaphoreID, tick, speed, nextSpeed, image)
-	local newState = {speed = speed, nextSpeed = nextSpeed, image = image}
-	self:updateHistory(self.semaphores[semaphoreID], tick, newState)
-    print(string.format("[t=%s] %s : speed=%s nextSpeed=%s image=%s", tick, semaphoreID, speed, nextSpeed, image))
+function Objects:setSemaphoreState(semaphoreID, speed, nextSpeed, image)
+	self.semaphores[semaphoreID] = {speed = speed, nextSpeed = nextSpeed, image = image}
+    print(string.format("%s : speed=%s nextSpeed=%s image=%s", semaphoreID, speed, nextSpeed, image))
 end
 
 ---Sets a new state for the specified blockade.
 ---@param blockadeID string The full blockade ID.
----@param tick integer The tick on which this state is set. This state is valid until the next change.
 ---@param direction boolean? The new blockade direction.
-function Objects:setBlockadeState(blockadeID, tick, direction)
-	local newState = {direction = direction}
-	self:updateHistory(self.blockades[blockadeID], tick, newState)
-    print(string.format("[t=%s] %s : direction=%s", tick, blockadeID, direction))
+function Objects:setBlockadeState(blockadeID, direction)
+	self.blockades[blockadeID] = {direction = direction}
+    print(string.format("%s : direction=%s", blockadeID, direction))
 end
 
 ---Sets a new "reserved by" state for the specified track.
 ---@param trackID string The full track ID.
----@param tick integer The tick on which this state is set. This state is valid until the next change.
 ---@param semaphoreID string? The new semaphore (or lack thereof) by which this track is reserved.
-function Objects:setTrackReservationState(trackID, tick, semaphoreID)
-	local newState = {semaphoreID = semaphoreID}
-	self:updateHistory(self.trackReservations[trackID], tick, newState)
-    print(string.format("[t=%s] %s : reserved by semaphoreID=%s", tick, trackID, semaphoreID))
+function Objects:setTrackReservationState(trackID, semaphoreID)
+	self.trackReservations[trackID] = {semaphoreID = semaphoreID}
+    print(string.format("%s : reserved by semaphoreID=%s", trackID, semaphoreID))
 end
 
 ---Increases the vehicle counter for the specified track and the specified vehicle.
 ---@param trackID string The full track ID.
----@param tick integer The tick on which this state is set. This state is valid until the next change.
 ---@param vehicleID string The vehicle ID to increment.
-function Objects:incTrackVehicle(trackID, tick, vehicleID)
+function Objects:incTrackVehicle(trackID, vehicleID)
 	self.trackVehicles[trackID] = self.trackVehicles[trackID] or {}
 	self.trackVehicles[trackID][vehicleID] = (self.trackVehicles[trackID][vehicleID] or 0) + 1
-    print(string.format("[t=%s] %s : incremented vehicle %s", tick, trackID, vehicleID))
+    print(string.format("%s : incremented vehicle %s", trackID, vehicleID))
 end
 
 ---Decreases the vehicle counter for the specified track and the specified vehicle.
 ---@param trackID string The full track ID.
----@param tick integer The tick on which this state is set. This state is valid until the next change.
 ---@param vehicleID string The vehicle ID to decrease.
-function Objects:decTrackVehicle(trackID, tick, vehicleID)
+function Objects:decTrackVehicle(trackID, vehicleID)
 	self.trackVehicles[trackID] = self.trackVehicles[trackID] or {}
 	self.trackVehicles[trackID][vehicleID] = (self.trackVehicles[trackID][vehicleID] or 0) - 1
 	if self.trackVehicles[trackID][vehicleID] == 0 then
 		self.trackVehicles[trackID][vehicleID] = nil
 	end
-    print(string.format("[t=%s] %s : decremented vehicle %s", tick, trackID, vehicleID))
+    print(string.format("%s : decremented vehicle %s", trackID, vehicleID))
 end
 
 ---Returns the track state at the given tick, or `nil` if the provided track doesn't exist.
 ---@param name string The full track ID.
----@param tick integer? The tick for which the state should be returned. If not specified, the current state will be returned.
 ---@return TrackState?
-function Objects:getTrackState(name, tick)
-	local history = self.tracks[name]
-	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), tick)] or history.current)
+function Objects:getTrackState(name)
+	return self.tracks[name]
 end
 
 ---Returns the switch state at the given tick, or `nil` if the provided switch doesn't exist.
 ---@param name string The full switch ID.
----@param tick integer? The tick for which the state should be returned. If not specified, the current state will be returned.
 ---@return SwitchState?
-function Objects:getSwitchState(name, tick)
-	local history = self.switches[name]
-	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), tick)] or history.current)
+function Objects:getSwitchState(name)
+	return self.switches[name]
 end
 
 ---Returns the semaphore state at the given tick, or `nil` if the provided semaphore doesn't exist.
 ---@param name string The full semaphore ID.
----@param tick integer? The tick for which the state should be returned. If not specified, the current state will be returned.
 ---@return SemaphoreState?
-function Objects:getSemaphoreState(name, tick)
-	local history = self.semaphores[name]
-	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), tick)] or history.current)
+function Objects:getSemaphoreState(name)
+	return self.semaphores[name]
 end
 
 ---Returns the blockade state at the given tick, or `nil` if the provided blockade doesn't exist.
 ---@param name string The full blockade ID.
----@param tick integer? The tick for which the state should be returned. If not specified, the current state will be returned.
 ---@return BlockadeState?
-function Objects:getBlockadeState(name, tick)
-	local history = self.blockades[name]
-	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), tick)] or history.current)
+function Objects:getBlockadeState(name)
+	return self.blockades[name]
 end
 
 ---Returns the track reservation state at the given tick, or `nil` if the provided track doesn't exist.
 ---@param name string The full blockade ID.
----@param tick integer? The tick for which the state should be returned. If not specified, the current state will be returned.
 ---@return TrackReservationState?
-function Objects:getTrackReservationState(name, tick)
-	local history = self.trackReservations[name]
-	return history and (tick and history.history[_GetMaxLessThan(_Utils.tableGetSortedKeys(history.history), tick)] or history.current)
+function Objects:getTrackReservationState(name)
+	return self.trackReservations[name]
 end
 
 ---Returns the list of vehicles currently on the given track, alongside with counters.
@@ -235,8 +194,6 @@ end
 ---@param name string The track ID to fetch the vehicle list from.
 ---@return table<string, integer>?
 function Objects:getTrackVehicleState(name)
-	-- Prepend an empty table once.
-	self.trackVehicles[name] = self.trackVehicles[name] or {}
 	return self.trackVehicles[name]
 end
 

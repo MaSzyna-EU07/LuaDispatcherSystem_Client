@@ -406,25 +406,25 @@ function com.readCall(name, params, silent)
 		_Obj:initVehicle(params.vehicleN)
 	elseif name == "setTrack" then
 		local trackID = com.ids.tracks[params.trackID]
-		_Obj:setTrackState(trackID, com.timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
+		_Obj:setTrackState(trackID, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
 	elseif name == "setSwitch" then
 		local switchID = com.ids.switches[params.switchID]
-		_Obj:setSwitchState(switchID, com.timeTicks, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 5))
+		_Obj:setSwitchState(switchID, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 5))
 	elseif name == "setSemaphore" then
 		local semaphoreID = com.ids.semaphores[params.semaphoreID]
-		_Obj:setSemaphoreState(semaphoreID, com.timeTicks, params.speed, params.nextSpeed, COM_IMAGES[params.state])
+		_Obj:setSemaphoreState(semaphoreID, params.speed, params.nextSpeed, COM_IMAGES[params.state])
 	elseif name == "setBlockade" then
 		local blockadeID = com.ids.blockades[params.blockadeID]
-		_Obj:setBlockadeState(blockadeID, com.timeTicks, com.blockadeDirFromHex(params.direction))
+		_Obj:setBlockadeState(blockadeID, com.blockadeDirFromHex(params.direction))
 	elseif name == "setTrackReservation" then
 		local trackID = com.ids.tracks[params.trackID]
-		_Obj:setTrackReservationState(trackID, com.timeTicks, params.semaphoreID and com.ids.semaphores[params.semaphoreID])
+		_Obj:setTrackReservationState(trackID, params.semaphoreID and com.ids.semaphores[params.semaphoreID])
 	elseif name == "incTrackVehicle" then
 		local trackID = com.ids.tracks[params.trackID]
-		_Obj:incTrackVehicle(trackID, com.timeTicks, params.vehicleID and com.ids.vehicles[params.vehicleID])
+		_Obj:incTrackVehicle(trackID, params.vehicleID and com.ids.vehicles[params.vehicleID])
 	elseif name == "decTrackVehicle" then
 		local trackID = com.ids.tracks[params.trackID]
-		_Obj:decTrackVehicle(trackID, com.timeTicks, params.vehicleID and com.ids.vehicles[params.vehicleID])
+		_Obj:decTrackVehicle(trackID, params.vehicleID and com.ids.vehicles[params.vehicleID])
 	end
 end
 
