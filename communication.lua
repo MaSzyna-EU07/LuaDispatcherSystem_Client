@@ -1,4 +1,5 @@
 local Severity = require("lua.core.Utils.LogSeverity")
+local BlockadeDirection = require("lua.core.Enums.BlockadeDirection")
 
 local com = {}
 
@@ -154,9 +155,15 @@ local COM_IMAGES = {
 }
 
 local COM_BLOCKADES = {
-	[0x00] = false,
-	[0x01] = true,
-	[0xFF] = nil
+	[0x00] = BlockadeDirection.FORWARD,
+	[0x01] = BlockadeDirection.BACKWARD,
+	[0xFF] = BlockadeDirection.OFF
+}
+
+local COM_BLOCKADES_TO_HEX = {
+	[BlockadeDirection.FORWARD] = 0x00,
+	[BlockadeDirection.BACKWARD] = 0x01,
+	[BlockadeDirection.OFF] = 0xFF
 }
 
 ---@type string?
@@ -388,43 +395,64 @@ function com.readCall(name, params, silent)
 		end
 	elseif name == "initStation" then
 		com.initObject(com.ids.stations, "station", params.stationN)
-		_Obj:initStation(params.stationN)
+		_Obj:addStation(params.stationN)
 	elseif name == "initTrack" then
 		com.initObject(com.ids.tracks, "track", params.trackN)
-		_Obj:initTrack(params.trackN)
+		_Obj:addTrack(params.trackN)
 	elseif name == "initSwitch" then
 		com.initObject(com.ids.switches, "switch", params.switchN)
-		_Obj:initSwitch(params.switchN)
+		_Obj:addSwitch(params.switchN)
 	elseif name == "initSemaphore" then
 		com.initObject(com.ids.semaphores, "semaphore", params.semaphoreN)
-		_Obj:initSemaphore(params.semaphoreN, params.type)
+		_Obj:addSemaphore(params.semaphoreN, {type = params.type})
 	elseif name == "initBlockade" then
 		com.initObject(com.ids.blockades, "blockade", params.blockadeN)
-		_Obj:initBlockade(params.blockadeN)
+		_Obj:addBlockade(params.blockadeN, {}) -- TODO: Fill in the blockade data?
 	elseif name == "initVehicle" then
 		com.initObject(com.ids.vehicles, "vehicle", params.vehicleN)
-		_Obj:initVehicle(params.vehicleN)
+		_Obj:addVehicle(params.vehicleN)
 	elseif name == "setTrack" then
-		local trackID = com.ids.tracks[params.trackID]
-		_Obj:setTrackState(trackID, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 2))
+		local track = _Obj:getTrack(com.ids.tracks[params.trackID])
+		if track then
+			track:setOccupied(_Utils.getBit(params.state, 1))
+			track:setReserved(_Utils.getBit(params.state, 2))
+		end
 	elseif name == "setSwitch" then
-		local switchID = com.ids.switches[params.switchID]
-		_Obj:setSwitchState(switchID, _Utils.getBit(params.state, 1), _Utils.getBit(params.state, 5))
+		local switch = _Obj:getSwitch(com.ids.switches[params.switchID])
+		if switch then
+			switch:setState(_Utils.getBit(params.state, 1))
+			switch:setForced(_Utils.getBit(params.state, 5))
+		end
 	elseif name == "setSemaphore" then
-		local semaphoreID = com.ids.semaphores[params.semaphoreID]
-		_Obj:setSemaphoreState(semaphoreID, params.speed, params.nextSpeed, COM_IMAGES[params.state])
+		local semaphore = _Obj:getSemaphore(com.ids.semaphores[params.semaphoreID])
+		if semaphore then
+			semaphore:setSpeed(params.speed)
+			semaphore:setNext(params.nextSpeed)
+			semaphore:setImage(COM_IMAGES[params.state])
+		end
 	elseif name == "setBlockade" then
-		local blockadeID = com.ids.blockades[params.blockadeID]
-		_Obj:setBlockadeState(blockadeID, com.blockadeDirFromHex(params.direction))
+		local blockade = _Obj:getBlockade(com.ids.blockades[params.blockadeID])
+		if blockade then
+			blockade:setDirection(com.blockadeDirFromHex(params.direction))
+		end
 	elseif name == "setTrackReservation" then
-		local trackID = com.ids.tracks[params.trackID]
-		_Obj:setTrackReservationState(trackID, params.semaphoreID and com.ids.semaphores[params.semaphoreID])
+		local track = _Obj:getTrack(com.ids.tracks[params.trackID])
+		local semaphore = params.semaphoreID and com.ids.semaphores[params.semaphoreID] and _Obj:getSemaphore(com.ids.semaphores[params.semaphoreID])
+		if track and semaphore then
+			track:setSemaphore(semaphore)
+		end
 	elseif name == "incTrackVehicle" then
-		local trackID = com.ids.tracks[params.trackID]
-		_Obj:incTrackVehicle(trackID, params.vehicleID and com.ids.vehicles[params.vehicleID])
+		local track = _Obj:getTrack(com.ids.tracks[params.trackID])
+		local vehicleN = params.vehicleID and com.ids.vehicles[params.vehicleID]
+		if track and vehicleN then
+			track:incVehicle(vehicleN)
+		end
 	elseif name == "decTrackVehicle" then
-		local trackID = com.ids.tracks[params.trackID]
-		_Obj:decTrackVehicle(trackID, params.vehicleID and com.ids.vehicles[params.vehicleID])
+		local track = _Obj:getTrack(com.ids.tracks[params.trackID])
+		local vehicleN = params.vehicleID and com.ids.vehicles[params.vehicleID]
+		if track and vehicleN then
+			track:decVehicle(vehicleN)
+		end
 	end
 end
 
@@ -437,12 +465,18 @@ function com.initObject(idTable, counter, name)
 	idTable[com.counters[counter]] = name
 end
 
+---Returns the blockade direction from its hex code.
+---@param direction integer The direction code.
+---@return BlockadeDirection
 function com.blockadeDirFromHex(direction)
 	return COM_BLOCKADES[direction]
 end
 
+---Returns the blockade hex code from its direction.
+---@param direction BlockadeDirection The blockade direction.
+---@return integer
 function com.blockadeDirToHex(direction)
-	return direction and 0x01 or (direction == false and 0x00 or 0xFF)
+	return COM_BLOCKADES_TO_HEX[direction]
 end
 
 function com.highlightTile(stationID, x, y, type)

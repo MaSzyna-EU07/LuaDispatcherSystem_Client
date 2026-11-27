@@ -1,6 +1,7 @@
 local Class = require("lua.core.class")
 local PickerButton = require("PickerButton")
 local SemaphoreType = require("lua.core.Enums.SemaphoreType")
+local BlockadeDirection = require("lua.core.Enums.BlockadeDirection")
 
 ---@class Picker : Class
 ---@overload fun(): Picker
@@ -292,7 +293,7 @@ function Picker:draw()
 			love.graphics.rectangle("line", tx, ty, size, size)
 		else
 			local image = category.display and category.display.image
-			_Draw.drawTile(x + self.tileMargin, y + self.tileMargin, categoryTile, _Picker.electrified, false, false, false, 0, image, true, self.tileScale)
+			_Draw.drawTile(x + self.tileMargin, y + self.tileMargin, categoryTile, _Picker.electrified, false, false, false, 0, image, BlockadeDirection.FORWARD, self.tileScale)
 		end
 	end
 

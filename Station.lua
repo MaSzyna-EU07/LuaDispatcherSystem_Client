@@ -5,6 +5,7 @@ local Tooltip = require("Tooltip")
 local RailTool = require("PickerModes.RailTool")
 local Pathfinder = require("lua.core.Pathfinder.Pathfinder")
 local PathMode = require("lua.core.Enums.PathMode")
+local BlockadeDirection = require("lua.core.Enums.BlockadeDirection")
 
 ---@class Station : Class
 ---@overload fun(name, shortcut): Station
@@ -560,12 +561,12 @@ function Station:getTileTooltip(tile)
 	end
 	if tile:isBlockadeGenerator() and tile.blockadeID then
 		table.insert(lines, "Blokada: " .. tile.blockadeID)
-		local state = tile:getBlockadeState()
-		if state then
-			if state.direction then
-				table.insert(lines, "    Kierunek: N")
-			elseif state.direction == false then
+		local blockade = tile:getBlockade()
+		if blockade then
+			if blockade.direction == BlockadeDirection.FORWARD then
 				table.insert(lines, "    Kierunek: P")
+			elseif blockade.direction == BlockadeDirection.BACKWARD then
+				table.insert(lines, "    Kierunek: N")
 			else
 				table.insert(lines, "    Kierunek: X")
 			end
@@ -581,18 +582,18 @@ function Station:getTileTooltip(tile)
 			table.insert(lines, "    Zajęty")
 		end
 		if tile:isTrackReserved() then
-			local reservationState = tile:getTrackReservationState()
-			if reservationState and reservationState.semaphoreID then
-				table.insert(lines, "    Zarezerwowany (" .. reservationState.semaphoreID .. ")")
+			local track = tile:getTrack()
+			if track and track.semaphore then
+				table.insert(lines, "    Zarezerwowany (" .. track.semaphore.id .. ")")
 			else
 				table.insert(lines, "    Zarezerwowany")
 			end
 		end
-		local vehicles = tile:getTrackVehicleState()
-		if vehicles and not _Utils.tableIsEmpty(vehicles) then
+		local track = tile:getTrack()
+		if track and not _Utils.tableIsEmpty(track.vehicles) then
 			table.insert(lines, "Pojazdy:")
-			for i, vehicle in ipairs(_Utils.tableGetSortedKeys(vehicles)) do
-				table.insert(lines, string.format("  - %s (%s)", vehicle, vehicles[vehicle]))
+			for i, vehicle in ipairs(_Utils.tableGetSortedKeys(track.vehicles)) do
+				table.insert(lines, string.format("  - %s (%s)", vehicle, track.vehicles[vehicle]))
 			end
 		end
 	end
@@ -769,9 +770,9 @@ function Station:handleRightClick()
 					if tile:isDoubleSwitch() then
 						suffix = _Utils.isShiftPressed() and "cd" or "ab"
 					end
-					local state = tile:getSwitchState(suffix)
-					if state then
-						tile:sendSwitchState(not state.state, suffix)
+					local switch = tile:getSwitch(suffix)
+					if switch then
+						tile:sendSwitchState(not switch.state, suffix)
 						self:sync()
 					end
 				end
@@ -794,12 +795,12 @@ function Station:handleRightClick()
 					end
 				end
 			elseif tile:isBlockadeGenerator() then
-				local blockadeState = tile:getBlockadeState()
-				if blockadeState then
+				local blockade = tile:getBlockade()
+				if blockade then
 					if _Utils.isShiftPressed() then
-						tile:sendBlockadeDirection(blockadeState.direction == nil or nil)
+						tile:sendBlockadeDirection(blockade.direction == nil or nil)
 					else
-						tile:sendBlockadeDirection(blockadeState.direction == false)
+						tile:sendBlockadeDirection(blockade.direction == false)
 					end
 				end
 			elseif self.activeX and self.activeY then
@@ -1050,7 +1051,7 @@ function Station:drawTileGhost()
 	local x, y = self:coordsToCanvasPos(self.hoverX, self.hoverY)
 	local category = _Picker:getSelectedCategory()
 	local image = category.display and category.display.image or "s1"
-	_Draw.drawTile(x, y, _Picker:getSelectedTileID(), _Picker.electrified, false, false, false, 0, image, true, 1, 0.5)
+	_Draw.drawTile(x, y, _Picker:getSelectedTileID(), _Picker.electrified, false, false, false, 0, image, BlockadeDirection.FORWARD, 1, 0.5)
 end
 
 ---Draws hover helpers when adding/removing rows.
@@ -1302,9 +1303,9 @@ function Station:drawTile(tile)
 	local occupied = visible and tile:isTrackOccupied()
 	local reserved = visible and tile:isTrackReserved()
 	local forced = tile:isSwitchForced()
-	local semState = tile:getSemaphoreState()
-	local blkState = tile:getBlockadeState()
-	_Draw.drawTile(x + tile.offset, y + tile.offset, tile.id, tile.electrified, occupied, reserved, forced, switchDimBits, semState, blkState)
+	local semaphore = tile:getSemaphore()
+	local blockade = tile:getBlockade()
+	_Draw.drawTile(x + tile.offset, y + tile.offset, tile.id, tile.electrified, occupied, reserved, forced, switchDimBits, semaphore, blockade)
 end
 
 ---Draws the specified Tile's background.

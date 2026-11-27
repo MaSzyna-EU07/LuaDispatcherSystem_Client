@@ -1,4 +1,5 @@
 local Tileset = require("Tileset")
+local BlockadeDirection = require("lua.core.Enums.BlockadeDirection")
 
 ---Functions for dealing with tile drawing.
 local DrawUtils = {}
@@ -23,16 +24,18 @@ function DrawUtils.getTrackColor(electrified, occupied, reserved, alarm)
 end
 
 ---Turns the blockade state into the blockade color to be displayed on the tile.
----@param blockadeState BlockadeState|boolean? The blockade state to be displayed.
+---@param blockadeState Blockade|BlockadeDirection? The blockade state to be displayed.
 ---@return BlockadeColor
 function DrawUtils.getBlockadeColor(blockadeState)
 	if not blockadeState then
 		return BlockadeColor.NONE
-	elseif blockadeState == true then
-		return BlockadeColor.FORWARD
-	elseif blockadeState.direction then
+	elseif blockadeState == BlockadeDirection.BACKWARD then
 		return BlockadeColor.BACKWARD
-	elseif blockadeState.direction == false then
+	elseif blockadeState == BlockadeDirection.FORWARD then
+		return BlockadeColor.FORWARD
+	elseif blockadeState.direction == BlockadeDirection.BACKWARD then
+		return BlockadeColor.BACKWARD
+	elseif blockadeState.direction == BlockadeDirection.FORWARD then
 		return BlockadeColor.FORWARD
 	end
 	return BlockadeColor.OFF
@@ -47,11 +50,11 @@ end
 ---@param reserved boolean? Whether the track is reserved.
 ---@param alarm boolean? Whether the track should flash red (for example when a switch is forced).
 ---@param switchDimBits integer Bitmask of directions which should be dark on track tiles.
----@param semaphoreState SemaphoreState|string? State of the semaphore, or its image directly.
----@param blockadeState BlockadeState|boolean? State of the blockade.
+---@param semaphore Semaphore|string? Semaphore, or its image directly.
+---@param blockade Blockade|BlockadeDirection? Blockade, or its state directly.
 ---@param scale number? Tile scale.
 ---@param opacity number? Tile opacity, from 0 to 1.
-function DrawUtils.drawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBits, semaphoreState, blockadeState, scale, opacity)
+function DrawUtils.drawTile(x, y, id, electrified, occupied, reserved, alarm, switchDimBits, semaphore, blockade, scale, opacity)
 	local data = _TileDB:getTile(id)
 	-- Background
 	love.graphics.setColor(1, 1, 1, opacity)
@@ -76,7 +79,7 @@ function DrawUtils.drawTile(x, y, id, electrified, occupied, reserved, alarm, sw
 	end
 	-- Blockade
 	if data.blockade then
-		local blockadeColor = DrawUtils.getBlockadeColor(blockadeState)
+		local blockadeColor = DrawUtils.getBlockadeColor(blockade)
 		love.graphics.setColor(blockadeColor[1], blockadeColor[2], blockadeColor[3], opacity)
 		DrawUtils.tracks:drawTile(data.blockade, 10, x, y, scale)
 	end
@@ -105,7 +108,7 @@ function DrawUtils.drawTile(x, y, id, electrified, occupied, reserved, alarm, sw
 	-- Semaphore
 	if data.semaphore then
 		DrawUtils.tracks:drawTile(data.semaphore, 4, x, y, scale)
-		local image = semaphoreState and SemaphoreImage[type(semaphoreState) == "string" and semaphoreState or semaphoreState.image]
+		local image = semaphore and SemaphoreImage[type(semaphore) == "string" and semaphore or semaphore.image]
 		if image then
 			if image.color1 and (not image.blink1 or _T % 1 < 0.5) then
 				love.graphics.setColor(image.color1[1], image.color1[2], image.color1[3], opacity)

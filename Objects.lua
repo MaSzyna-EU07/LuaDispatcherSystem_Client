@@ -1,6 +1,11 @@
 local Class = require("lua.core.class")
-local SemaphoreType = require("lua.core.Enums.SemaphoreType")
-local Speed = require("lua.core.Enums.Speed")
+local Blockade = require("lua.Blockade")
+local Station = require("Station") -- TODO: Rename stations to schematics in the client
+local Timetable = require("lua.Timetable")
+local Track = require("lua.Track")
+local Switch = require("lua.Switch")
+local Semaphore = require("lua.Semaphore")
+local Vehicle = require("lua.Vehicle")
 
 ---Stores all objects existing on the server's simulation and their states over time.
 ---@class Objects : Class
@@ -8,193 +13,246 @@ local Speed = require("lua.core.Enums.Speed")
 local Objects = Class:derive("Objects")
 
 function Objects:new()
-	---@type table<string, {}>
-	self.stations = {}
-	---@alias TrackState {occupied: boolean, reserved: boolean}
-	---@type table<string, TrackState>
-	self.tracks = {}
-	---@alias SwitchState {state: boolean, forced: boolean}
-	---@type table<string, SwitchState>
-	self.switches = {}
-	---@alias SemaphoreState {speed: Speed, nextSpeed: Speed, image: string}
-	---@type table<string, SemaphoreState>
-	self.semaphores = {}
-	---@alias BlockadeState {direction: boolean?}
-	---@type table<string, BlockadeState>
-	self.blockades = {}
-	---@type table<string, {}>
+    ---@type table<string, Blockade>
+    self.blockades = {}
+    ---@type table<string, Station>
+    self.stations = {}
+    ---@type table<string, Timetable>
+    self.timetables = {}
+    -- Keys for `tracks`, `switches` and `semaphores` are guaranteed to be lowercase.
+    ---@type table<string, Track>
+    self.tracks = {}
+    ---@type table<string, Switch>
+    self.switches = {}
+    ---@type table<string, Semaphore>
+    self.semaphores = {}
+	---@type table<string, Vehicle>
 	self.vehicles = {}
-	---@alias TrackReservationState {semaphoreID: string?}
-	---@type table<string, TrackReservationState>
-	self.trackReservations = {}
-	---@type table<string, table<string, integer>>
-	self.trackVehicles = {} -- TODO: Cover this by history?
 end
 
 ---Removes all data from the simulation.
 function Objects:clear()
+	_Utils.emptyTable(self.blockades)
 	_Utils.emptyTable(self.stations)
+	_Utils.emptyTable(self.timetables)
 	_Utils.emptyTable(self.tracks)
 	_Utils.emptyTable(self.switches)
 	_Utils.emptyTable(self.semaphores)
-	_Utils.emptyTable(self.blockades)
 	_Utils.emptyTable(self.vehicles)
-	_Utils.emptyTable(self.trackReservations)
-	_Utils.emptyTable(self.trackVehicles)
 end
 
----Initializes a station.
----@param name string The station name.
-function Objects:initStation(name)
-	self.stations[name] = {}
+---Adds a blockade to the blockade list. The index is the blockade name, e.g. "Eb-Tp".
+---Returns the created object.
+---@param id string The blockade ID (shortcut).
+---@param data table The blockade data.
+---@return Blockade
+function Objects:addBlockade(id, data)
+    self.blockades[id] = Blockade(id, data)
+    return self.blockades[id]
 end
 
----Initializes a track.
----@param name string The full track ID.
-function Objects:initTrack(name)
-	self.tracks[name] = {occupied = false, reserved = false}
-	-- TODO: Merge track and track reservation state.
-	self:initTrackReservation(name)
+---Adds a station to the station list. The index is the station name, e.g. "Sulejówek Miłosna".
+---Returns the created object.
+---@param id string The station ID (its full name).
+---@return Station
+function Objects:addStation(id)
+    self.stations[id] = Station(id)
+    return self.stations[id]
 end
 
----Initializes a switch.
----@param name string The full switch ID.
-function Objects:initSwitch(name)
-	self.switches[name] = {state = false}
+---Adds a timetable to the timetable list. The index is the timetable name, e.g. "ROJ55101".
+---Returns the created object.
+---@param id string The timetable ID (its full name).
+---@param data table The timetable data.
+---@param startTime string The starting timetable time, e.g. `"10:30"`. Fractions are allowed, like `"10:30.5"`.
+---@return Timetable
+function Objects:addTimetable(id, data, startTime)
+    self.timetables[id] = Timetable(id, data, startTime)
+    return self.timetables[id]
 end
 
----Initializes a semaphore.
----@param name string The full semaphore ID.
----@param type SemaphoreType The semaphore type.
-function Objects:initSemaphore(name, type)
-    local startingImage = type == SemaphoreType.TM and "ms1" or "s1"
-	self.semaphores[name] = {speed = Speed.STOP, nextSpeed = Speed.STOP, image = startingImage}
+---Adds a track to the track list. The index is the track ID, converted to lowercase, e.g. "Eb_It2" -> "eb_it2".
+---Returns the created object.
+---@param id string The track ID.
+---@return Track
+function Objects:addTrack(id)
+    self.tracks[string.lower(id)] = Track(id)
+    return self.tracks[string.lower(id)]
 end
 
----Initializes a blockade.
----@param name string The full blockade ID.
-function Objects:initBlockade(name)
-	self.blockades[name] = {direction = false}
+---Adds a switch to the switch list. The index is the switch ID, converted to lowercase, e.g. "Eb_25ab" -> "eb_25ab".
+---Returns the created object.
+---@param id string The switch ID.
+---@return Switch
+function Objects:addSwitch(id)
+    self.switches[string.lower(id)] = Switch(id)
+    return self.switches[string.lower(id)]
 end
 
----Initializes a vehicle.
----@param name string The full vehicle ID.
-function Objects:initVehicle(name)
-	self.vehicles[name] = {}
+---Adds a semaphore to the semaphore list. The index is the semaphore ID, converted to lowercase, e.g. "Eb_A" -> "eb_a".
+---Returns the created object.
+---@param id string The semaphore ID.
+---@param data table The semaphore data.
+---@return Semaphore
+function Objects:addSemaphore(id, data)
+    self.semaphores[string.lower(id)] = Semaphore(id, data)
+    return self.semaphores[string.lower(id)]
 end
 
----Initializes a track reservation slot.
----@param name string The full track ID.
-function Objects:initTrackReservation(name)
-	self.trackReservations[name] = {}
+---Adds a vehicle to the vehicle list. The index is the vehicle name, e.g. "EN76-049a".
+---Returns the created object.
+---@param id string The vehicle ID.
+---@return Vehicle
+function Objects:addVehicle(id)
+    self.vehicles[id] = Vehicle(id)
+    return self.vehicles[id]
 end
 
----Sets a new state for the specified track.
----@param trackID string The full track ID.
----@param occupied boolean Whether this track is occupied.
----@param reserved boolean Whether this track is reserved.
-function Objects:setTrackState(trackID, occupied, reserved)
-	self.tracks[trackID] = {occupied = occupied, reserved = reserved}
-    print(string.format("%s : occupied=%s reserved=%s", trackID, occupied, reserved))
-end
-
----Sets a new state for the specified switch.
----@param switchID string The full switch ID.
----@param state boolean If `true`, "+", otherwise - "-".
----@param forced boolean Whether the switch has been forcefully switched ("rozprucie rozjazdu").
-function Objects:setSwitchState(switchID, state, forced)
-	self.switches[switchID] = {state = state, forced = forced}
-    print(string.format("%s : state=%s forced=%s", switchID, state, forced))
-end
-
----Sets a new state for the specified semaphore.
----@param semaphoreID string The full semaphore ID.
----@param speed Speed The current speed on the semaphore.
----@param nextSpeed Speed The next speed on the semaphore.
----@param image string The image on the semaphore.
-function Objects:setSemaphoreState(semaphoreID, speed, nextSpeed, image)
-	self.semaphores[semaphoreID] = {speed = speed, nextSpeed = nextSpeed, image = image}
-    print(string.format("%s : speed=%s nextSpeed=%s image=%s", semaphoreID, speed, nextSpeed, image))
-end
-
----Sets a new state for the specified blockade.
----@param blockadeID string The full blockade ID.
----@param direction boolean? The new blockade direction.
-function Objects:setBlockadeState(blockadeID, direction)
-	self.blockades[blockadeID] = {direction = direction}
-    print(string.format("%s : direction=%s", blockadeID, direction))
-end
-
----Sets a new "reserved by" state for the specified track.
----@param trackID string The full track ID.
----@param semaphoreID string? The new semaphore (or lack thereof) by which this track is reserved.
-function Objects:setTrackReservationState(trackID, semaphoreID)
-	self.trackReservations[trackID] = {semaphoreID = semaphoreID}
-    print(string.format("%s : reserved by semaphoreID=%s", trackID, semaphoreID))
-end
-
----Increases the vehicle counter for the specified track and the specified vehicle.
----@param trackID string The full track ID.
----@param vehicleID string The vehicle ID to increment.
-function Objects:incTrackVehicle(trackID, vehicleID)
-	self.trackVehicles[trackID] = self.trackVehicles[trackID] or {}
-	self.trackVehicles[trackID][vehicleID] = (self.trackVehicles[trackID][vehicleID] or 0) + 1
-    print(string.format("%s : incremented vehicle %s", trackID, vehicleID))
-end
-
----Decreases the vehicle counter for the specified track and the specified vehicle.
----@param trackID string The full track ID.
----@param vehicleID string The vehicle ID to decrease.
-function Objects:decTrackVehicle(trackID, vehicleID)
-	self.trackVehicles[trackID] = self.trackVehicles[trackID] or {}
-	self.trackVehicles[trackID][vehicleID] = (self.trackVehicles[trackID][vehicleID] or 0) - 1
-	if self.trackVehicles[trackID][vehicleID] == 0 then
-		self.trackVehicles[trackID][vehicleID] = nil
-	end
-    print(string.format("%s : decremented vehicle %s", trackID, vehicleID))
-end
-
----Returns the track state at the given tick, or `nil` if the provided track doesn't exist.
----@param name string The full track ID.
----@return TrackState?
-function Objects:getTrackState(name)
-	return self.tracks[name]
-end
-
----Returns the switch state at the given tick, or `nil` if the provided switch doesn't exist.
----@param name string The full switch ID.
----@return SwitchState?
-function Objects:getSwitchState(name)
-	return self.switches[name]
-end
-
----Returns the semaphore state at the given tick, or `nil` if the provided semaphore doesn't exist.
----@param name string The full semaphore ID.
----@return SemaphoreState?
-function Objects:getSemaphoreState(name)
-	return self.semaphores[name]
-end
-
----Returns the blockade state at the given tick, or `nil` if the provided blockade doesn't exist.
----@param name string The full blockade ID.
----@return BlockadeState?
-function Objects:getBlockadeState(name)
+---Returns a Blockade based on its simulation name, or `nil` if it's not found.
+---@param name string Blockade ID.
+---@return Blockade?
+function Objects:getBlockade(name)
 	return self.blockades[name]
 end
 
----Returns the track reservation state at the given tick, or `nil` if the provided track doesn't exist.
----@param name string The full blockade ID.
----@return TrackReservationState?
-function Objects:getTrackReservationState(name)
-	return self.trackReservations[name]
+---Returns a Blockade based on its simulation name, or throws an error if it's not found.
+---@param name string Blockade ID.
+---@return Blockade
+function Objects:assertGetBlockade(name)
+	local blockade = assert(self:getBlockade(name), "Tried to access a nonexistent blockade: " .. tostring(name))
+    return blockade
 end
 
----Returns the list of vehicles currently on the given track, alongside with counters.
----If there are no vehicles, returns an empty table.
----@param name string The track ID to fetch the vehicle list from.
----@return table<string, integer>?
-function Objects:getTrackVehicleState(name)
-	return self.trackVehicles[name]
+---Returns a Station based on its simulation name, or `nil` if it's not found.
+---@param name string Station ID.
+---@return Station?
+function Objects:getStation(name)
+	return self.stations[name]
+end
+
+---Returns a Station based on its simulation name, or throws an error if it's not found.
+---@param name string Station ID.
+---@return Station
+function Objects:assertGetStation(name)
+	local station = assert(self:getStation(name), "Tried to access a nonexistent station: " .. tostring(name))
+    return station
+end
+
+---Returns a Timetable based on its name (number), or `nil` if it's not found.
+---@param name string Timetable shortcut.
+---@return Timetable?
+function Objects:getTimetable(name)
+	return self.timetables[name]
+end
+
+---Returns a Timetable based on its name (number), or throws an error if it's not found.
+---@param name string Timetable shortcut.
+---@return Timetable
+function Objects:assertGetTimetable(name)
+    local timetable = assert(self:getTimetable(name), "Tried to access a nonexistent timetable: " .. tostring(name))
+    return timetable
+end
+
+---Returns a Track based on its simulation name, or `nil` if it is not found.
+---@param name string For example: `"Eb_It2"`. Case-insensitive.
+---@return Track?
+function Objects:getTrack(name)
+	return self.tracks[string.lower(name)]
+end
+
+---Returns a Track based on its simulation name, or throws an error if it is not found.
+---@param name string For example: `"Eb_It2"`. Case-insensitive.
+---@return Track
+function Objects:assertGetTrack(name)
+	local track = assert(self:getTrack(name), "Tried to access an invalid track: " .. tostring(name):lower())
+    return track
+end
+
+---Returns a Switch based on its simulation name, or `nil` if it is not found.
+---@param name string For example: `"Eb_39"`. Case-insensitive.
+---@return Switch?
+function Objects:getSwitch(name)
+	return self.switches[string.lower(name)]
+end
+
+---Returns a Switch based on its simulation name, or throws an error if it is not found.
+---@param name string For example: `"Eb_39"`. Case-insensitive.
+---@return Switch
+function Objects:assertGetSwitch(name)
+	local switch = assert(self:getSwitch(name), "Tried to access an invalid switch: " .. tostring(name):lower())
+    return switch
+end
+
+---Returns a Semaphore based on its simulation name, or `nil` if it is not found.
+---@param name string For example: `"Eb_A"`. Case-insensitive.
+---@return Semaphore?
+function Objects:getSemaphore(name)
+	return self.semaphores[string.lower(name)]
+end
+
+---Returns a Semaphore based on its simulation name, or throws an error if it is not found.
+---@param name string For example: `"Eb_A"`. Case-insensitive.
+---@return Semaphore
+function Objects:assertGetSemaphore(name)
+	local semaphore = assert(self:getSemaphore(name), "Tried to access an invalid semaphore: " .. tostring(name):lower())
+    return semaphore
+end
+
+---Returns a Vehicle based on its simulation name, or `nil` if it is not found.
+---@param name string For example: `"EN76-049a"`.
+---@return Vehicle?
+function Objects:getVehicle(name)
+	return self.vehicles[string.lower(name)]
+end
+
+---Returns a Vehicle based on its simulation name, or throws an error if it is not found.
+---@param name string For example: `"EN76-049a"`.
+---@return Vehicle
+function Objects:assertGetVehicle(name)
+	local vehicle = assert(self:getVehicle(name), "Tried to access an invalid vehicle: " .. tostring(name))
+    return vehicle
+end
+
+---Returns a list of blockade IDs, sorted alphabetically.
+---@return string[]
+function Objects:getBlockadeList()
+	return _Utils.tableGetSortedKeys(self.blockades)
+end
+
+---Returns a list of station IDs, sorted alphabetically.
+---@return string[]
+function Objects:getStationList()
+	return _Utils.tableGetSortedKeys(self.stations)
+end
+
+---Returns a list of timetable IDs, sorted alphabetically.
+---@return string[]
+function Objects:getTimetableList()
+	return _Utils.tableGetSortedKeys(self.timetables)
+end
+
+---Returns a list of track IDs, sorted alphabetically.
+---@return string[]
+function Objects:getTrackList()
+	return _Utils.tableGetSortedKeys(self.tracks)
+end
+
+---Returns a list of switch IDs, sorted alphabetically.
+---@return string[]
+function Objects:getSwitchList()
+	return _Utils.tableGetSortedKeys(self.switches)
+end
+
+---Returns a list of semaphore IDs, sorted alphabetically.
+---@return string[]
+function Objects:getSemaphoreList()
+	return _Utils.tableGetSortedKeys(self.semaphores)
+end
+
+---Returns a list of vehicle IDs, sorted alphabetically.
+---@return string[]
+function Objects:getVehicleList()
+	return _Utils.tableGetSortedKeys(self.vehicles)
 end
 
 return Objects
